@@ -1,0 +1,157 @@
+"""Setup diagnosis is bounded and does not create/start/repair a session."""
+
+import json
+import sys
+from pathlib import Path
+
+import pytest
+
+from inkscape_mcp.live import macos_diagnostics as diag
+from inkscape_mcp.live import macos_launcher
+
+
+@pytest.fixture
+def environment(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
+    monkeypatch.setattr(diag.sys, "platform", "darwin")
+    binary = tmp_path / "Inkscape.app/Contents/MacOS/inkscape"
+    vendor = binary.parent.parent / "Resources/share/inkscape/extensions/inkex"
+    vendor.mkdir(parents=True)
+    data = tmp_path / "profile"
+    (data / "extensions").mkdir(parents=True)
+    monkeypatch.setattr(
+        diag.shutil, "which", lambda name: str(binary) if name == "inkscape" else name
+    )
+    monkeypatch.setattr(diag.importlib.util, "find_spec", lambda name: object())
+    monkeypatch.setattr(
+        diag,
+        "_stdout",
+        lambda argv: "Inkscape 1.4.3" if argv[-1] == "--version" else str(data),
+    )
+    monkeypatch.setattr(macos_launcher, "_read_session", lambda root: None)
+    return tmp_path / "session"
+
+
+def test_fresh_setup_is_ready_and_creates_nothing(environment: Path) -> None:
+    before = sorted(environment.parent.rglob("*"))
+    report = diag.diagnose_macos(environment)
+    assert report.ready and report.state == "ready_to_launch"
+    assert report.inkscape_version == "Inkscape 1.4.3"
+    assert report.helper_installed is False
+    assert sorted(environment.parent.rglob("*")) == before
+
+
+def test_missing_dependencies_do_not_probe_a_session(
+    environment: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(diag.shutil, "which", lambda name: None)
+    monkeypatch.setattr(diag, "_stdout", lambda argv: pytest.fail("must not run CLI"))
+    report = diag.diagnose_macos(environment)
+    assert not report.ready and report.state == "missing_dependencies"
+    assert any("brew install" in step for step in report.next_steps)
+
+
+@pytest.mark.skipif(sys.platform == "win32", reason="POSIX ownership/permissions")
+@pytest.mark.parametrize("unsafe", ["public", "symlink"])
+def test_unsafe_directory_is_not_read_or_repaired(
+    environment: Path, monkeypatch: pytest.MonkeyPatch, unsafe: str
+) -> None:
+    if unsafe == "public":
+        environment.mkdir(mode=0o755)
+    else:
+        environment.symlink_to(environment.parent, target_is_directory=True)
+    monkeypatch.setattr(
+        macos_launcher, "_read_session", lambda root: pytest.fail("unsafe root must not be read")
+    )
+    report = diag.diagnose_macos(environment)
+    assert not report.ready and report.state == "unsafe_session"
+    assert (
+        environment.is_symlink()
+        if unsafe == "symlink"
+        else environment.stat().st_mode & 0o777 == 0o755
+    )
+
+
+@pytest.mark.skipif(sys.platform == "win32", reason="POSIX ownership/permissions")
+def test_unreachable_session_is_preserved(environment: Path) -> None:
+    environment.mkdir(mode=0o700)
+    manifest = environment / "session.json"
+    manifest.write_text("stale metadata")
+    report = diag.diagnose_macos(environment)
+    assert report.state == "session_unavailable" and not report.ready
+    assert manifest.read_text() == "stale metadata"
+    assert any("Save and close" in step for step in report.next_steps)
+
+
+@pytest.mark.skipif(sys.platform == "win32", reason="POSIX ownership/permissions")
+@pytest.mark.parametrize("enabled", [True, False])
+def test_running_session_checks_the_native_helper(
+    environment: Path, monkeypatch: pytest.MonkeyPatch, enabled: bool
+) -> None:
+    environment.mkdir(mode=0o700)
+    (environment / "inkscape.stdout.log").write_text("")
+    monkeypatch.setattr(
+        macos_launcher, "_read_session", lambda root: {"address": "private-test-bus"}
+    )
+    cli = diag._stdout
+    monkeypatch.setattr(
+        diag,
+        "_stdout",
+        lambda argv: (
+            f"(({str(enabled).lower()}, signature '', @av []),)"
+            if "--address" in argv
+            else cli(argv)
+        ),
+    )
+    report = diag.diagnose_macos(environment)
+    assert report.ready is enabled and report.insertion_available is enabled
+    assert report.state == ("running" if enabled else "running_helper_unavailable")
+
+
+@pytest.mark.skipif(sys.platform == "win32", reason="POSIX ownership/permissions")
+def test_missing_selection_output_is_not_reported_ready(
+    environment: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    environment.mkdir(mode=0o700)
+    monkeypatch.setattr(
+        macos_launcher, "_read_session", lambda root: {"address": "private-test-bus"}
+    )
+    report = diag.diagnose_macos(environment)
+    assert report.state == "session_unavailable" and not report.ready
+    assert any("selection output is missing" in step for step in report.next_steps)
+
+
+def test_file_access_fault_is_structured(
+    environment: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    def denied(argv: list[str]) -> str:
+        raise PermissionError("private host path")
+
+    monkeypatch.setattr(diag, "_stdout", denied)
+    report = diag.diagnose_macos(environment)
+    assert report.state == "diagnosis_failed"
+    assert "private host path" not in report.model_dump_json()
+
+
+def test_unsupported_platform_does_not_inspect_setup(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(diag.sys, "platform", "win32")
+    monkeypatch.setattr(diag.shutil, "which", lambda name: pytest.fail("must not inspect"))
+    assert diag.diagnose_macos(tmp_path).state == "unsupported_platform"
+
+
+def test_doctor_cli_never_launches_and_returns_readiness_exit_code(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    monkeypatch.setattr(sys, "argv", ["inkscape-mcp-macos", "--doctor"])
+    monkeypatch.setenv("PATH", "")
+    monkeypatch.setattr(
+        diag, "diagnose_macos", lambda root: diag.MacOSDiagnosis(state="missing_dependencies")
+    )
+    monkeypatch.setattr(
+        macos_launcher, "ensure_session", lambda *args: pytest.fail("must not launch")
+    )
+    with pytest.raises(SystemExit) as result:
+        macos_launcher.main()
+    assert result.value.code == 1
+    assert json.loads(capsys.readouterr().out)["state"] == "missing_dependencies"

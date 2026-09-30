@@ -56,7 +56,8 @@ class LiveSession(BaseModel):
         default_factory=list, description="Transports reported available on this host right now."
     )
     active_document: LiveDocumentRef | None = Field(
-        default=None, description="Identity of the live document at connect time."
+        default=None,
+        description="Current managed macOS document; connect-time document on other transports.",
     )
     connected_at: str | None = Field(default=None, description="UTC ISO-8601 connect timestamp.")
     notes: list[str] = Field(default_factory=list, description="Clean human-readable status notes.")
@@ -124,12 +125,21 @@ class LiveSessionManager:
                 )
             if not available:
                 notes.append("no live transport available on this host")
+            document = self._active_document if connected else None
+            if connected and self._transport and self._transport.name == "managed-dbus":
+                try:
+                    document = self._transport.get_active_document()
+                except LiveError:
+                    document = None
+                    notes.append("active document unavailable; activate a drawing and retry")
+            elif self._transport is not None and not connected:
+                notes.append("connection unavailable; call live_connect to reconnect")
             return LiveSession(
                 enabled=self._settings.live_enabled,
                 connected=connected,
                 transport=self._transport.name if connected and self._transport else None,
                 available_transports=available,
-                active_document=self._active_document if connected else None,
+                active_document=document,
                 connected_at=self._connected_at if connected else None,
                 notes=notes,
             )

@@ -339,6 +339,9 @@ def live_status() -> LiveSession:
     When to use: checking whether a session is live before issuing live tools. For per-host
     transport detail use `check_live_support`.
 
+    Managed macOS refreshes the current drawing name and probes bus liveness. Other transports
+    retain the document observed at connect time. A filename is not a unique document identity.
+
     Key params: none. Never raises — reports "not connected" / "none available" cleanly.
 
     Return shape: `LiveSession` — `enabled`, `connected`, active transport, available transports.

@@ -44,6 +44,25 @@ def test_selection_requires_complete_fence() -> None:
     assert parse_selection_reply("-1.3e+2\n") == []
 
 
+def test_connection_flag_requires_a_bounded_live_bus_probe(monkeypatch: pytest.MonkeyPatch) -> None:
+    transport = ManagedDBusTransport(Settings(process_timeout_s=60))
+    transport._connected = True
+    timeouts: list[float] = []
+    def unavailable(timeout: float) -> bool:
+        timeouts.append(timeout)
+        return False
+    monkeypatch.setattr(transport, "_actions_list_reachable", unavailable)
+    assert transport.is_connected() is False
+    assert timeouts == [2.0]
+
+
+def test_active_document_parse_failure_is_a_live_error(monkeypatch: pytest.MonkeyPatch) -> None:
+    transport = ManagedDBusTransport(Settings())
+    monkeypatch.setattr(transport, "get_document_svg", lambda: "not SVG")
+    with pytest.raises(LiveError, match="active document export is invalid"):
+        transport.get_active_document()
+
+
 def test_selection_supports_multiple_and_unicode_ids() -> None:
     text = "山 cloned: false ref: 2 href: 1 total href: 1\n"
     text += "tree cloned: true ref: 1 href: 0 total href: 0\n"

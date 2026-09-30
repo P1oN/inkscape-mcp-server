@@ -47,6 +47,14 @@ DRAWABLE = frozenset(
 NON_RENDERED = frozenset({"defs", "clipPath", "mask", "pattern", "symbol", "metadata"})
 
 
+def document_ref(root: etree._Element) -> LiveDocumentRef:
+    """Use Inkscape's actual sodipodi namespace; never infer an on-disk path."""
+    return LiveDocumentRef(
+        name=root.get("{http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd}docname"),
+        object_count=sum(1 for e in root.iter() if isinstance(e.tag, str)) - 1,
+    )
+
+
 def object_info(elem: etree._Element) -> ObjectInfo:
     parents = list(elem.iterancestors())
     bbox = None if any(p.get("transform") for p in parents) else _bbox_of(elem)
@@ -120,10 +128,7 @@ def scene_from_svg(svg: str, selected: list[str]) -> LiveScene:
         viewbox=vb,
     )
     return LiveScene(
-        active_document=LiveDocumentRef(
-            name=root.get("{http://sodipodi.sourceforge.net/DTD/sodipodi-0.0.dtd}docname"),
-            object_count=len(elems) - 1,
-        ),
+        active_document=document_ref(root),
         selection=selection,
         selection_count=len(selection),
         canvas=canvas,
