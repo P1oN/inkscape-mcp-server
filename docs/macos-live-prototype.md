@@ -121,10 +121,10 @@ also passed through a real FastMCP STDIO client, including before/after PNG oper
 Two STDIO connections reused the same GUI PID after their server processes stopped.
 Keyboard Undo shortcuts were not verified.
 
-Final automated suite on the locked install: 1021 passed, 74 skipped and one failure in the
+Final automated suite on the locked install: 1027 passed, 74 skipped and one failure in the
 pre-existing intermittent `test_unknown_action_surfaces_engine_action_error` (also reproduced
 on unchanged upstream). The earlier stage-2 full run passed 1020 tests before the last two
-capability regression cases were added. All 29 focused scene/insertion/transport tests pass.
+capability regression cases were added. All 35 focused scene/insertion/transport tests pass.
 `uv sync --frozen`, full MCP surface smoke and strict mypy (107 source files) passed.
 Focused Ruff checks passed; the repository-wide lint still has 22 pre-existing long-line findings.
 The CLI engine framing failure is outside this managed-session change.
@@ -139,3 +139,12 @@ the exported SVG drawing-content fingerprint matched the pre-insertion state. On
 the group, definition and references; the fingerprint matched the post-insertion state. The user
 also observed the gradient reappear. Previously existing objects were preserved. This branch
 remains experimental pending save/reopen, document-switch and failure acceptance checks.
+
+Native Save As (Inkscape SVG) and File → Revert also passed: both the saved file and the
+reloaded live SVG drawing-content fingerprint matched the post-insertion state, preserving
+the gradient definition/references and original objects. Close/reopen remains a separate check.
+
+Six simulated native-effect failure cases cover timeout, malformed/non-object reply, stale
+nonce, refusal and action failure. Each verifies request/reply cleanup and a subsequent
+successful insertion. Malformed replies now produce a stable LiveError. These are automated
+transport checks, not a native GUI failure acceptance test.

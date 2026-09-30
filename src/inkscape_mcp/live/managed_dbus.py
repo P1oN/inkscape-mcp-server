@@ -247,7 +247,16 @@ class ManagedDBusTransport(DBusTransport):
                     if reply.is_file():
                         if reply.stat().st_size > 1024 * 1024:
                             raise LiveError("insertion reply exceeds size cap")
-                        result = json.loads(reply.read_text())
+                        try:
+                            result = json.loads(reply.read_text())
+                        except (ValueError, OSError) as exc:
+                            raise LiveError(
+                                "invalid insertion reply; inspect Inkscape before retrying"
+                            ) from exc
+                        if not isinstance(result, dict):
+                            raise LiveError(
+                                "invalid insertion reply; inspect Inkscape before retrying"
+                            )
                         if result.get("nonce") != nonce or not result.get("ok"):
                             raise LiveError("Inkscape refused insertion; document context changed")
                         if nonce in self.get_document_svg():
