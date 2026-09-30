@@ -160,3 +160,7 @@ retrying. The corrected path was verified with the real helper and a 2-second te
 
 After the corrected refusal path, the live SVG fingerprint still matched the saved drawing.
 Two new actual FastMCP STDIO connections read the scene and reused the same Inkscape PID.
+
+The repeated refusal dialog was closed through native UI automation. Pressing 5 then changed
+the page zoom from 25% to 60%, confirming canvas interaction; the drawing-content fingerprint
+remained unchanged. The milestone-2 acceptance checklist is complete for the tested fixtures.
