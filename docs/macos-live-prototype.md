@@ -121,13 +121,13 @@ also passed through a real FastMCP STDIO client, including before/after PNG oper
 Two STDIO connections reused the same GUI PID after their server processes stopped.
 Keyboard Undo shortcuts were not verified.
 
-Final automated suite on the locked install: 1027 passed, 74 skipped and one failure in the
-pre-existing intermittent `test_unknown_action_surfaces_engine_action_error` (also reproduced
-on unchanged upstream). The earlier stage-2 full run passed 1020 tests before the last two
-capability regression cases were added. All 35 focused scene/insertion/transport tests pass.
-`uv sync --frozen`, full MCP surface smoke and strict mypy (107 source files) passed.
-Focused Ruff checks passed; the repository-wide lint still has 22 pre-existing long-line findings.
-The CLI engine framing failure is outside this managed-session change.
+Final automated suite on the locked install: 1029 passed, 74 skipped (Inkscape CLI absent
+from test PATH). All 36 focused scene/insertion/transport tests pass. Strict mypy (107 source
+files) and focused Ruff passed; `uv sync --frozen`, full MCP surface smoke and wheel contents
+were also verified during this milestone. Repository-wide lint has 22 pre-existing long-line
+findings. Earlier full runs hit the pre-existing intermittent
+`test_unknown_action_surfaces_engine_action_error`, reproduced on unchanged upstream; the
+final run passed without changing that engine code.
 
 Milestone 2 also passed actual FastMCP STDIO insertion of a gradient rectangle and circle into
 the live macOS fixture, with before/after PNGs and a subsequent connection observing the same
@@ -138,13 +138,22 @@ and text. One Undo removed the entire inserted group (including its gradient def
 the exported SVG drawing-content fingerprint matched the pre-insertion state. One Redo restored
 the group, definition and references; the fingerprint matched the post-insertion state. The user
 also observed the gradient reappear. Previously existing objects were preserved. This branch
-remains experimental pending save/reopen, document-switch and failure acceptance checks.
+remains experimental; see the remaining acceptance checklist in [ROADMAP.md](ROADMAP.md).
 
 Native Save As (Inkscape SVG) and File → Revert also passed: both the saved file and the
 reloaded live SVG drawing-content fingerprint matched the post-insertion state, preserving
-the gradient definition/references and original objects. Close/reopen remains a separate check.
+the gradient definition/references and original objects. The saved drawing also passed closing its window and reopening the SVG while another managed
+window remained open; the live drawing-content fingerprint again matched the saved state.
+The MCP scene read followed the active document to window B and back to the reopened drawing.
 
-Six simulated native-effect failure cases cover timeout, malformed/non-object reply, stale
-nonce, refusal and action failure. Each verifies request/reply cleanup and a subsequent
+Seven simulated native-effect failure cases cover timeout, malformed/non-object reply, stale
+nonce, refusal, action failure and a refusal reply arriving before a D-Bus failure. Each verifies request/reply cleanup and a subsequent
 successful insertion. Malformed replies now produce a stable LiveError. These are automated
 transport checks, not a native GUI failure acceptance test.
+
+A controlled stale-fingerprint request exercised refusal in the real native helper. The user
+closed its “Insertion refused” dialog; the drawing-content fingerprint remained unchanged.
+The dialog initially caused the D-Bus activation call to time out. The server now reconciles
+an existing helper reply after an activation failure, reporting explicit refusal when available;
+without a reply it reports uncertain completion and asks the client to inspect Inkscape before
+retrying. The corrected path was verified with the real helper and a 2-second test timeout.

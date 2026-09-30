@@ -241,7 +241,16 @@ class ManagedDBusTransport(DBusTransport):
             pending.chmod(0o600)
             pending.replace(request)
             try:
-                self._activate(INSERT_ACTION, _variant_empty())
+                try:
+                    self._activate(INSERT_ACTION, _variant_empty())
+                except LiveConnectionError as exc:
+                    # A native error dialog can outlive the D-Bus call. The helper may
+                    # already have reported refusal; reconcile that reply below.
+                    if not reply.is_file():
+                        raise LiveConnectionError(
+                            "insertion activation did not complete; "
+                            "inspect Inkscape before retrying"
+                        ) from exc
                 deadline = time.monotonic() + self._settings.process_timeout_s
                 while time.monotonic() < deadline:
                     if reply.is_file():

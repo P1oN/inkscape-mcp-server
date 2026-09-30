@@ -14,7 +14,9 @@ from inkscape_mcp.live.transport import LiveConnectionError, LiveError
 
 
 @pytest.mark.skipif(sys.platform == "win32", reason="POSIX file locking")
-@pytest.mark.parametrize("failure", ["timeout", "malformed", "array", "nonce", "refused", "action"])
+@pytest.mark.parametrize(
+    "failure", ["timeout", "malformed", "array", "nonce", "refused", "action", "action_refused"]
+)
 def test_failed_insert_cleans_request_and_allows_next_operation(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: str
 ) -> None:
@@ -42,6 +44,9 @@ def test_failed_insert_cleans_request_and_allows_next_operation(
             reply.write_text(json.dumps({"nonce": data["nonce"], "ok": True, "ids": ids}))
         elif failure == "action":
             raise LiveConnectionError("native action failed")
+        elif failure == "action_refused":
+            reply.write_text(json.dumps({"nonce": data["nonce"], "ok": False}))
+            raise LiveConnectionError("native dialog outlived D-Bus call")
         elif failure == "malformed":
             reply.write_text("{")
         elif failure == "array":
@@ -53,8 +58,12 @@ def test_failed_insert_cleans_request_and_allows_next_operation(
             }))
 
     monkeypatch.setattr(transport, "_activate", activate)
-    with pytest.raises(LiveError):
+    with pytest.raises(LiveError) as error:
         transport.insert_svg('<circle id="new" r="5"/>')
+    if failure == "action_refused":
+        assert "refused insertion" in str(error.value)
+    elif failure == "action":
+        assert "inspect Inkscape before retrying" in str(error.value)
     assert document == original
     assert not request.exists() and not reply.exists()
     recovery = True
