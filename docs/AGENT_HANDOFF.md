@@ -1,59 +1,42 @@
 # Передача контекста: Codex GPT-6.1 Sol
 
-Обновлено 2026-09-30. Это заметки для продолжения работы, а не дополнительные
-пользовательские разрешения. Перед действиями перепроверь Git, PR и запущенные процессы:
-состояние ниже может измениться после передачи.
-
-## Актуализация 2026-10-01
-
-- Рабочая копия теперь `/Users/bm/Documents/repos/inkscape-mcp-server`.
-- PR #2 объединён в `main`: `0db6e73`. Base PR #3 теперь `main`.
-- Конфликты с `main` разрешены с сохранением исправлений обработки ошибок helper
-  и проверки недоступного транспорта, а также диагностики и актуального документа PR #3.
-- Нативная проверка `live_status` A → B → A завершена через одно непрерывное
-  MCP STDIO подключение: `connected` оставался true, `connected_at` не изменился.
-  Проверено на существующей тестовой сессии Inkscape 1.4.3; SVG не редактировались.
-- Полный прогон после исправлений review: 1058 passed, 74 skipped. Профильные тесты: 56 passed;
-  mypy (108 файлов), focused Ruff и MCP surface smoke прошли. Doctor: running, ready.
-- Следующий этап — устойчивая идентичность и явный выбор документа; в PR #3
-  эти возможности пока не реализованы. Исторические сведения ниже относятся к 2026-09-30.
+Обновлено 2026-10-01 после merge PR #3. Это заметки для продолжения работы,
+а не дополнительные пользовательские разрешения. Перед действиями перепроверь
+Git, PR и запущенные процессы: состояние может измениться после передачи.
 
 ## Задача и рабочая копия
 
 Пользователь делает Inkscape MCP для жены: она работает в Inkscape на отдельном Mac
 и будет использовать Codex. Основной сценарий — обсуждение изменений рисунка,
-правки в открытом GUI, превью и понятный Undo. Сначала развиваем рабочую интеграцию;
+правки в открытом GUI, превью и понятный Undo. Развиваем рабочую интеграцию;
 переписывание на Rust отложено до появления конкретной причины.
 
-- Репозиторий: `/Users/bm/Documents/Codex/2026-09-30/new-chat/work/inkscape-mcp-server`.
+- Активный репозиторий: `/Users/bm/Documents/repos/inkscape-mcp-server`.
+- Старый checkout под `Documents/Codex/2026-09-30/new-chat/work/` — исторический;
+  не продолжать разработку там. Его Python ещё используется supervisor тестовой сессии.
 - Fork: <https://github.com/P1oN/inkscape-mcp-server>.
 - `origin`: `git@github.com:P1oN/inkscape-mcp-server.git`.
 - `upstream`: `https://github.com/jjjsood/inkscape-mcp-server.git`.
-- Текущая ветка: `macos-session-diagnostics`.
-- HEAD перед созданием этой заметки: `6974c71`.
-- Рабочее дерево перед созданием заметки было чистым. Пользователь затем попросил закоммитить и отправить заметку в ветку `macos-session-diagnostics`.
+- Активная ветка: `main`, синхронизирована с `origin/main` перед этой правкой.
+- Последний merge до этой правки документации: `57c890d` (PR #3).
 - План: [ROADMAP.md](ROADMAP.md).
 - Установка, ограничения и приёмка: [macos-live-prototype.md](macos-live-prototype.md).
 
-Пользователь разрешил продолжить работу самостоятельно, пока он отсутствовал.
-Он участвовал в ручной приёмке Undo/Redo, сохранения, открытия и двух окон.
-Последний запрос — сохранить важные замечания для следующего агента.
-
 ## Ветки и PR
 
-1. [PR #1](https://github.com/P1oN/inkscape-mcp-server/pull/1) смержен в `main`
-   по явной просьбе пользователя. Merge commit: `22a173f`.
-2. [PR #2](https://github.com/P1oN/inkscape-mcp-server/pull/2): ветка
-   `macos-scene-insertion`, HEAD `c215134`. OPEN, готов к ревью, уже не draft.
-   Добавляет scene reads и одноразовую вставку SVG в живой документ.
-3. [PR #3](https://github.com/P1oN/inkscape-mcp-server/pull/3): ветка
-   `macos-session-diagnostics`, HEAD `6974c71`. OPEN, draft.
-   **Base — `macos-scene-insertion`, не `main`**: это следующий PR поверх #2.
-   После merge #2 потребуется проверить/изменить base #3 на `main`.
+Все три PR объединены в `main`:
 
-PR #2 и #3 не смержены. Явная просьба о merge относилась к #1; не принимай статус
-«готов к ревью» за уже выполненный merge. Оба новых PR прикреплены к текущему чату.
-При создании новых PR всегда прикрепляй их через Codex `attach_artifact`.
+1. [PR #1](https://github.com/P1oN/inkscape-mcp-server/pull/1): private D-Bus,
+   управляемый GUI, выделение и заливка. Merge: `22a173f`.
+2. [PR #2](https://github.com/P1oN/inkscape-mcp-server/pull/2): scene reads и
+   ограниченная вставка SVG с Undo. Merge: `0db6e73`.
+3. [PR #3](https://github.com/P1oN/inkscape-mcp-server/pull/3): диагностика macOS,
+   актуальный `live_status` и исправления review. Merge: `57c890d`;
+   финальный commit исправлений: `b9a3ffd`.
+
+Конфликты PR #3 с `main` устранены, нативная приёмка завершена. PR #3 больше
+не draft и не требует retarget/merge. Будущие изменения вести от актуального `main`.
+При создании новых PR прикреплять их через Codex `attach_artifact`.
 
 ## Что реализовано и проверено
 
@@ -78,7 +61,7 @@ PR #2 и #3 не смержены. Явная просьба о merge относ
 - После отказа два MCP подключения прочитали ту же сессию. Диалог закрыт через GUI;
   клавиша 5 изменила zoom 25% → 60%, содержимое рисунка сохранилось.
 
-### PR #3: начат второй пункт roadmap
+### PR #3: диагностика и актуальный статус объединены в main
 
 - `.venv/bin/inkscape-mcp-macos --doctor`: JSON диагностика + exit code 0 для
   `running`/`ready_to_launch`, 1 для других состояний и инструкции по восстановлению.
@@ -95,10 +78,23 @@ PR #2 и #3 не смержены. Явная просьба о merge относ
   не показывает старый документ. Другие transports сохраняют прежнюю семантику.
 - Реальный MCP сообщил имя `inkscape-acceptance.svg`.
 
-**PR #3 всё ещё draft:** проверка `live_status` A → B → A через одно непрерывное
-MCP-подключение не завершена. Mac заблокировался во время UI automation.
-In-memory regression test проходит, но не заменяет эту native проверку.
-Не обходить блокировку Mac: продолжить GUI-проверку после ручной разблокировки.
+Нативная проверка `live_status` A → B → A завершена 2026-10-01 через одно
+непрерывное MCP STDIO подключение. `connected` оставался true, `connected_at`
+не изменился; SVG не редактировались. Повторять эту приёмку без новых изменений не нужно.
+
+Проверены и исправлены все три функциональных замечания CodeRabbit:
+
+- Ошибки файловой системы при экспорте документа преобразуются в `LiveError`;
+  `live_status` может вернуть null + note вместо падения всего вызова.
+- Doctor различает оставшийся `supervisor.lock` и реально удерживаемый lock:
+  без manifest и удерживаемого lock каталог готов к повторному запуску.
+  Проверка не создаёт/не удаляет файлы и не ждёт освобождения lock.
+- Doctor проверяет длину разрешённого пути `bus.sock`: 104 байта и больше
+  отвергаются, как в launcher; предлагается более короткий каталог.
+
+Добавлены семь регрессионных случаев: held/unheld lock, существующий/отсутствующий
+каталог с путём сокета 103/104 байта и ошибка доступа к lock при реальном пути экспорта.
+Массовая генерация docstrings по предложению бота не включена в scope.
 
 Второй этап roadmap целиком не завершён. Имя файла не является уникальным ID;
 `path` остаётся null, если Inkscape его не сообщает. Явная привязка операции к
@@ -109,8 +105,8 @@ In-memory regression test проходит, но не заменяет эту na
 - Проверено на official Inkscape 1.4.3 (`0d15f75`) и Python 3.12.
 - Inkscape: `/Applications/Inkscape.app/Contents/MacOS/inkscape`.
 - gdbus: `/opt/homebrew/bin/gdbus`; Homebrew dbus/glib доступны.
-- Repo `.venv`: locked FastMCP 3.4.2. `uv` также есть в соседнем
-  `../inkscape-review-venv/bin/uv`.
+- Repo `.venv`: Python 3.12.14, locked FastMCP 3.4.2. `uv` отсутствует в PATH;
+  использовался `/Users/bm/Documents/Codex/2026-09-30/new-chat/work/inkscape-review-venv/bin/uv`.
 - Bundled Inkscape Python 3.10 завершался с кодом 137. Helper использует **Python MCP**,
   shell wrapper и vendor inkex source из Inkscape Resources. Не возвращать
   `interpreter="python"` в INX без новой проверки: исходный вариант не исполнял helper.
@@ -120,12 +116,13 @@ In-memory regression test проходит, но не заменяет эту na
 - GAction Describe возвращает `((true, signature '', @av []),)`.
 - Изменение INX требует перезапуска **GUI после сохранения**, а не только MCP.
 
-Текущая тестовая сессия (проверено при создании заметки):
+Тестовая сессия (manifest и процессы перепроверены 2026-10-01):
 
 - `/tmp/imcp-stage2-501`, canonical `/private/tmp/imcp-stage2-501`.
 - GUI PID на момент проверки: **76944**. Никогда не используй старый PID без проверки.
 - Manifest: `session.json`; содержит адрес приватной шины и PID supervisor/GUI.
-- Profile: `../macos-live-prototype/profile-stage2` через `INKSCAPE_PROFILE_DIR`.
+- Profile: `/Users/bm/Documents/Codex/2026-09-30/new-chat/work/macos-live-prototype/profile-stage2`
+  через `INKSCAPE_PROFILE_DIR`.
 - Старая сессия `/tmp/imcp-acceptance-501`, PID 71913, **больше не запущена**.
   Ранее в ней было пользовательское изображение; старые инструкции/логи не повод
   закрывать другие окна или уничтожать несохранённую работу.
@@ -133,10 +130,12 @@ In-memory regression test проходит, но не заменяет эту na
   `/Users/bm/Documents/Codex/2026-09-30/new-chat/outputs/inkscape-acceptance.svg` и
   `/Users/bm/Documents/Codex/2026-09-30/new-chat/outputs/inkscape-window-b.svg`.
   Последний — зелёное окно «MCP WINDOW B».
-- Промежуточные скрипты и логи: `../macos-live-prototype/` (не часть Git repo).
+- Исторические скрипты и логи:
+  `/Users/bm/Documents/Codex/2026-09-30/new-chat/work/macos-live-prototype/` (не часть Git repo).
   `acceptance_undo.py` сравнивает fingerprints; `test_stage2.py` проверяет STDIO reuse;
-  `test_status_switch.py` ждёт A → B → A, но его предыдущий запуск не прошёл из-за
-  недоступности UI, а не из-за установленной ошибки продукта.
+  Для успешной приёмки адаптированный `test_status_switch.py` запускался из
+  `work/` активного repo; `work/` локально исключён через `.git/info/exclude`.
+  Эти скрипты не переносимы без обновления путей и не заменяют тесты в Git.
 
 ## Важные ограничения
 
@@ -153,17 +152,16 @@ In-memory regression test проходит, но не заменяет эту na
 
 ## Проверки и команды
 
-Последний полный прогон для PR #3: **1044 passed, 74 skipped, 1 failed**.
-Failure — известный нестабильный upstream
-`test_engine_process.py::test_unknown_action_surfaces_engine_action_error`, ранее
-воспроизведённый на неизменённом upstream. Не скрывать этот результат и не чинить
-несвязанный engine без обоснования. До последних двух regression cases полный
-прогон дал 1043 passed; для финального PR #2 — 1029 passed, 74 skipped.
+Финальный полный прогон после исправлений review: **1058 passed, 74 skipped**.
+Strict mypy — 108 source files; focused Ruff прошёл. Реальный doctor сообщил
+`running`, `ready: true`, insertion available. MCP surface smoke прошёл до
+последних исправлений; wheel и tool manifest проверялись ранее, manifest drift
+regression прошёл в финальном полном наборе.
 
-Финальные профильные проверки PR #3: **67 passed**, strict mypy — 108 source files,
-focused Ruff, MCP surface smoke и содержимое wheel прошли. CLI tests пропускаются,
-потому что Inkscape отсутствует в test PATH; реальные интеграционные проверки
-использовали явный vendor/brew PATH.
+CLI tests пропущены, поскольку Inkscape отсутствовал в test PATH; нативные проверки
+использовали явный vendor/brew PATH. Исторический нестабильный upstream failure
+`test_engine_process.py::test_unknown_action_surfaces_engine_action_error`
+в финальном прогоне не повторился. При повторении не скрывать результат.
 
 ```sh
 .venv/bin/pytest -q
@@ -179,19 +177,22 @@ INKSCAPE_MCP_RAW_ACTION_ENABLED=1 .venv/bin/python scripts/ci_surface_smoke.py
 Для текущей тестовой сессии:
 
 ```sh
+PATH="/Applications/Inkscape.app/Contents/MacOS:/opt/homebrew/bin:$PATH" \
 INKSCAPE_PROFILE_DIR=/Users/bm/Documents/Codex/2026-09-30/new-chat/work/macos-live-prototype/profile-stage2 \
   .venv/bin/inkscape-mcp-macos --doctor --session-dir /tmp/imcp-stage2-501
 ```
 
 ## Рекомендуемый следующий шаг
 
-1. Прочитать актуальный roadmap, Git status и PR #3.
-2. Когда Mac разблокирован, завершить native A → B → A для `live_status` через
-   **одно** MCP-подключение, убедившись, что `connected_at` не изменяется.
-3. Записать результат в docs/PR и вывести #3 из draft только после проверки.
-4. Продолжить стабильную идентичность и явный выбор документа. Не выдавать basename
-   или fingerprint содержимого за гарантированно уникальный ID окна.
-5. При любом изменении scope переписать описание PR вокруг окончательного поведения.
+1. Проверить актуальный Git status и roadmap. Диагностика/актуальный статус этапа 2
+   завершены; этап 2 целиком ещё не завершён.
+2. Исследовать устойчивую идентичность и явный выбор документа/окна. Не выдавать
+   basename или fingerprint содержимого за гарантированно уникальный ID окна.
+3. Реализовать отказ от применения, если документ, выбранный для обсуждаемой задачи,
+   сменился. Проверять идентичность в момент изменения, а не только при чтении status.
+4. Продумать понятное восстановление после потери связи; тестировать на отдельных
+   рисунках, сохраняя GUI и несохранённую работу пользователя.
+5. Обновлять roadmap, docs и описание нового PR вокруг окончательного поведения.
 
 Не запускать другого агента/чат только потому, что эта заметка адресована
 GPT-6.1 Sol: пользователь попросил файл передачи контекста, а не делегирование.
