@@ -107,7 +107,8 @@ not a screenshot of the current pan/zoom, and changes the GUI's persistent expor
 Do not change the selection or switch documents while an edit is executing. Locks serialize
 our action sequences across MCP processes; they cannot lock out human input.
 
-Next: verify insertion Undo in the macOS UI, add existing-text changes as native transactions,
+Next: complete save/reopen, document-switch and failure acceptance checks; add existing-text
+changes as native transactions,
 then test realistic illustrations and package a simpler installer. Rust would not by itself
 solve Inkscape's selection/transaction integration; the working transport is the first thing
 to validate.
@@ -131,7 +132,10 @@ The CLI engine framing failure is outside this managed-session change.
 Milestone 2 also passed actual FastMCP STDIO insertion of a gradient rectangle and circle into
 the live macOS fixture, with before/after PNGs and a subsequent connection observing the same
 GUI PID and added objects. The content-fingerprint check passed with the real inkex input.
-The one-shot effect appends all nodes in one normal extension transaction. **Native UI Undo
-for insertion remains unverified**: automation currently selects another Inkscape process
-containing a user drawing, which has been left open pending permission. This branch remains
-experimental until that acceptance check is complete.
+Native Edit → Undo/Redo was verified with user assistance on 2026-09-30 for both a simple
+rectangle/circle/text fragment and a fragment containing a linear gradient, rectangle, circle
+and text. One Undo removed the entire inserted group (including its gradient definition), and
+the exported SVG drawing-content fingerprint matched the pre-insertion state. One Redo restored
+the group, definition and references; the fingerprint matched the post-insertion state. The user
+also observed the gradient reappear. Previously existing objects were preserved. This branch
+remains experimental pending save/reopen, document-switch and failure acceptance checks.
