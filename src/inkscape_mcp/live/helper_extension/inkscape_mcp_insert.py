@@ -15,12 +15,13 @@ class InsertOnce(inkex.EffectExtension):
             raise inkex.AbortExtension("Start a managed MCP session before inserting.")
         root = Path(directory)
         request_path = root / "insert-request.json"
-        if request_path.stat().st_size > 2 * 1024 * 1024:
-            raise inkex.AbortExtension("Insertion request is too large.")
-        request = json.loads(request_path.read_text())
-        nonce = request["nonce"]
-        result = {"nonce": nonce, "ok": False}
+        result = {"nonce": None, "ok": False}
         try:
+            if request_path.stat().st_size > 2 * 1024 * 1024:
+                raise inkex.AbortExtension("Insertion request is too large.")
+            request = json.loads(request_path.read_text())
+            nonce = request["nonce"]
+            result["nonce"] = nonce
             payload, ids = prepare_fragment(request["fragment"], nonce)
             existing = {elem.get("id") for elem in self.svg.iter() if elem.get("id")}
             if existing != set(request["expected_ids"]):

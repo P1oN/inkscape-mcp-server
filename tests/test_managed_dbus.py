@@ -6,15 +6,41 @@ from pathlib import Path
 import pytest
 
 from inkscape_mcp.config import Settings
-from inkscape_mcp.live import managed_dbus
+from inkscape_mcp.live import dbus_backend, managed_dbus
 from inkscape_mcp.live.macos_launcher import ensure_session, secure_directory
 from inkscape_mcp.live.managed_dbus import (
     ENV_STDOUT,
     ManagedDBusTransport,
     parse_selection_reply,
 )
+from inkscape_mcp.live.protocol import LiveCommand
 from inkscape_mcp.live.transport import LiveConnectionError, LiveError, LiveSelection
 from inkscape_mcp.workspace.subprocess_exec import ProcessResult
+
+
+@pytest.mark.parametrize("bus_available,stream_available", [(False, True), (True, False)])
+def test_unavailable_probe_skips_insertion_check(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+    bus_available: bool, stream_available: bool,
+) -> None:
+    stream = tmp_path / "stdout.log"
+    if stream_available:
+        stream.write_text("")
+    monkeypatch.setenv(ENV_STDOUT, str(stream))
+    monkeypatch.setenv(managed_dbus.ENV_DIR, str(tmp_path))
+    monkeypatch.setattr(managed_dbus.sys, "platform", "darwin")
+    monkeypatch.setattr(dbus_backend, "_session_bus_present", lambda: True)
+    monkeypatch.setattr(dbus_backend, "_gdbus", lambda: "gdbus")
+    monkeypatch.setattr(
+        ManagedDBusTransport, "_actions_list_reachable", lambda timeout: bus_available
+    )
+    monkeypatch.setattr(
+        ManagedDBusTransport, "_insert_available",
+        lambda timeout: pytest.fail("unavailable transport must not check insertion"),
+    )
+    probe = ManagedDBusTransport.probe(Settings())
+    assert not probe.available
+    assert LiveCommand.INSERT_SVG.value not in probe.supported_commands
 
 
 @pytest.mark.parametrize("enabled", [True, False])

@@ -107,9 +107,8 @@ not a screenshot of the current pan/zoom, and changes the GUI's persistent expor
 Do not change the selection or switch documents while an edit is executing. Locks serialize
 our action sequences across MCP processes; they cannot lock out human input.
 
-Next: complete save/reopen, document-switch and failure acceptance checks; add existing-text
-changes as native transactions,
-then test realistic illustrations and package a simpler installer. Rust would not by itself
+Next: add existing-text changes as native transactions, then test realistic illustrations
+and package a simpler installer. Rust would not by itself
 solve Inkscape's selection/transaction integration; the working transport is the first thing
 to validate.
 
@@ -138,7 +137,7 @@ and text. One Undo removed the entire inserted group (including its gradient def
 the exported SVG drawing-content fingerprint matched the pre-insertion state. One Redo restored
 the group, definition and references; the fingerprint matched the post-insertion state. The user
 also observed the gradient reappear. Previously existing objects were preserved. This branch
-remains experimental; see the remaining acceptance checklist in [ROADMAP.md](ROADMAP.md).
+remains experimental; see the completed acceptance checklist in [ROADMAP.md](ROADMAP.md).
 
 Native Save As (Inkscape SVG) and File → Revert also passed: both the saved file and the
 reloaded live SVG drawing-content fingerprint matched the post-insertion state, preserving
