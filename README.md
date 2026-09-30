@@ -1,5 +1,10 @@
 # inkscape-mcp
 
+**This fork adds an experimental interactive macOS session for Codex.** It reads the current
+GUI selection, changes its fill with native Undo, and keeps the drawing open across MCP restarts.
+See [macOS setup and verified limits](docs/macos-live-prototype.md). Live edits change the open
+document; the working-copy guarantees described below apply to headless editing.
+
 > A Model Context Protocol (MCP) server that makes Inkscape / SVG documents **agent-ready** —
 > inspect, edit safely, validate, render, and export vector graphics from any MCP client.
 

@@ -37,6 +37,7 @@ Changelog = "https://github.com/jjjsood/inkscape-mcp/blob/main/CHANGELOG.md"
 
 [project.scripts]
 inkscape-mcp = "inkscape_mcp.server:main"
+inkscape-mcp-macos = "inkscape_mcp.live.macos_launcher:main"
 
 [dependency-groups]
 dev = [
