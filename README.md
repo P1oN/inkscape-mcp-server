@@ -6,6 +6,7 @@ one-shot effect, and keeps the drawing open across MCP restarts. Fill Undo is ve
 insertion Undo still needs a native UI acceptance check.
 See [macOS setup and verified limits](docs/macos-live-prototype.md). Live edits change the open
 document; the working-copy guarantees described below apply to headless editing.
+Development priorities and acceptance criteria: [macOS roadmap](docs/ROADMAP.md).
 
 > A Model Context Protocol (MCP) server that makes Inkscape / SVG documents **agent-ready** —
 > inspect, edit safely, validate, render, and export vector graphics from any MCP client.
