@@ -21,7 +21,7 @@ from typing import ClassVar
 from pydantic import BaseModel, Field
 
 from inkscape_mcp.config import Settings
-from inkscape_mcp.document.inspect import ObjectInfo
+from inkscape_mcp.document.inspect import ObjectInfo, TreeNode
 from inkscape_mcp.live.protocol import LiveCommand
 
 
@@ -164,6 +164,7 @@ class SceneCanvas(BaseModel):
     units: str | None = Field(
         default=None, description="Declared document unit (e.g. mm/px), if any."
     )
+    viewbox: list[float] | None = None
 
 
 class LiveScene(BaseModel):
@@ -193,6 +194,8 @@ class LiveScene(BaseModel):
         description="Compact summary of visible objects (headless ObjectInfo shape).",
     )
     object_count: int = Field(default=0, description="Number of summarized visible objects.")
+    tree: TreeNode | None = Field(default=None, description="Document hierarchy, when available.")
+    notes: list[str] = Field(default_factory=list)
 
 
 # --- Change-detection models ----------------------------------------

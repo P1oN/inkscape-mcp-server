@@ -24,6 +24,10 @@ dependencies = [
     # Focused visual before/after diff (E8-04): load before/after PNGs, compute the
     # changed-region bbox (ImageChops.difference(...).getbbox()), draw the annotation overlay.
     "pillow>=10.0",
+    # The one-shot macOS effect uses the MCP interpreter with vendor inkex source.
+    "numpy>=1.24; sys_platform == 'darwin'",
+    "cssselect>=1.2; sys_platform == 'darwin'",
+    "tinycss2>=1.2; sys_platform == 'darwin'",
 ]
 
 [project.urls]

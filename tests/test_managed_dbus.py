@@ -6,13 +6,59 @@ from pathlib import Path
 import pytest
 
 from inkscape_mcp.config import Settings
+from inkscape_mcp.live import dbus_backend, managed_dbus
 from inkscape_mcp.live.macos_launcher import ensure_session, secure_directory
 from inkscape_mcp.live.managed_dbus import (
     ENV_STDOUT,
     ManagedDBusTransport,
     parse_selection_reply,
 )
+from inkscape_mcp.live.protocol import LiveCommand
 from inkscape_mcp.live.transport import LiveConnectionError, LiveError, LiveSelection
+from inkscape_mcp.workspace.subprocess_exec import ProcessResult
+
+
+@pytest.mark.parametrize("bus_available,stream_available", [(False, True), (True, False)])
+def test_unavailable_probe_skips_insertion_check(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+    bus_available: bool, stream_available: bool,
+) -> None:
+    stream = tmp_path / "stdout.log"
+    if stream_available:
+        stream.write_text("")
+    monkeypatch.setenv(ENV_STDOUT, str(stream))
+    monkeypatch.setenv(managed_dbus.ENV_DIR, str(tmp_path))
+    monkeypatch.setattr(managed_dbus.sys, "platform", "darwin")
+    monkeypatch.setattr(dbus_backend, "_session_bus_present", lambda: True)
+    monkeypatch.setattr(dbus_backend, "_gdbus", lambda: "gdbus")
+    monkeypatch.setattr(
+        ManagedDBusTransport, "_actions_list_reachable", lambda timeout: bus_available
+    )
+    monkeypatch.setattr(
+        ManagedDBusTransport, "_insert_available",
+        lambda timeout: pytest.fail("unavailable transport must not check insertion"),
+    )
+    probe = ManagedDBusTransport.probe(Settings())
+    assert not probe.available
+    assert LiveCommand.INSERT_SVG.value not in probe.supported_commands
+
+
+@pytest.mark.parametrize("enabled", [True, False])
+def test_insert_capability_requires_enabled_gaction(
+    enabled: bool, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv(managed_dbus.ENV_DIR, "/private/test-session")
+    monkeypatch.setattr(ManagedDBusTransport, "_actions_call_argv", lambda *args: ["gdbus"])
+    monkeypatch.setattr(
+        managed_dbus,
+        "run_process",
+        lambda *args, **kwargs: ProcessResult(
+            args=["gdbus"], returncode=0,
+            stdout=f"(({str(enabled).lower()}, signature '', @av []),)\n", stderr="",
+            duration_s=0.001, timed_out=False,
+        ),
+    )
+    assert ManagedDBusTransport._insert_available(1) is enabled
 
 
 def test_selection_requires_complete_fence() -> None:
@@ -28,6 +74,7 @@ def test_selection_supports_multiple_and_unicode_ids() -> None:
     text = "山 cloned: false ref: 2 href: 1 total href: 1\n"
     text += "tree cloned: true ref: 1 href: 0 total href: 0\n"
     assert parse_selection_reply(text + "0\n") == ["山", "tree"]
+    assert parse_selection_reply(text + "12.5,-1.3e+2\n") == ["山", "tree"]
 
 
 def test_unrecognized_reply_is_never_an_empty_selection() -> None:
