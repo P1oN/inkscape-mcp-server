@@ -157,3 +157,6 @@ The dialog initially caused the D-Bus activation call to time out. The server no
 an existing helper reply after an activation failure, reporting explicit refusal when available;
 without a reply it reports uncertain completion and asks the client to inspect Inkscape before
 retrying. The corrected path was verified with the real helper and a 2-second test timeout.
+
+After the corrected refusal path, the live SVG fingerprint still matched the saved drawing.
+Two new actual FastMCP STDIO connections read the scene and reused the same Inkscape PID.
