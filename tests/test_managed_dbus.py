@@ -190,3 +190,17 @@ def test_reconnect_reuses_existing_session_without_spawning(
     assert ensure_session(tmp_path) == session
     with pytest.raises(RuntimeError, match="already running"):
         ensure_session(tmp_path, Path("drawing.svg"))
+
+
+@pytest.mark.skipif(sys.platform == "win32", reason="POSIX file locking")
+def test_active_document_lock_failure_is_a_live_error(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    stream = tmp_path / "stdout.log"
+    stream.write_text("")
+    stream.with_suffix(".lock").mkdir()
+    monkeypatch.setenv(ENV_STDOUT, str(stream))
+    transport = ManagedDBusTransport(Settings())
+    with pytest.raises(LiveError, match="active document export is unavailable") as result:
+        transport.get_active_document()
+    assert isinstance(result.value.__cause__, OSError)

@@ -44,6 +44,23 @@ def _stdout(argv: list[str]) -> str | None:
     return result.stdout.strip() if result.returncode == 0 else None
 
 
+def _supervisor_lock_held(root: Path) -> bool:
+    """Probe an existing lock without creating files or waiting for the supervisor."""
+    import fcntl
+
+    try:
+        lock = (root / "supervisor.lock").open("rb")
+    except FileNotFoundError:
+        return False
+    with lock:
+        try:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            return True
+        fcntl.flock(lock, fcntl.LOCK_UN)
+    return False
+
+
 def diagnose_macos(root: Path) -> MacOSDiagnosis:
     try:
         return _diagnose_macos(root)
@@ -100,6 +117,10 @@ def _diagnose_macos(root: Path) -> MacOSDiagnosis:
         report.state = "unsafe_session"
         report.next_steps = ["Choose a private session directory that is not a symlink."]
         return report
+    if len(os.fsencode(root.resolve() / "bus.sock")) >= 104:
+        report.state = "unsafe_session"
+        report.next_steps = ["Use a shorter session directory for the macOS Unix socket."]
+        return report
     if not root.exists():
         report.state = "ready_to_launch"
         report.ready = True
@@ -117,7 +138,7 @@ def _diagnose_macos(root: Path) -> MacOSDiagnosis:
 
     session = _read_session(root.resolve())
     if session is None:
-        if not (root / "session.json").exists() and not (root / "supervisor.lock").exists():
+        if not (root / "session.json").exists() and not _supervisor_lock_held(root):
             report.state = "ready_to_launch"
             report.ready = True
             report.next_steps = ["Start inkscape-mcp-macos to create a managed session."]

@@ -109,7 +109,7 @@ STDIO connection reported `inkscape-acceptance.svg` through `live_status`. Nativ
 continuous MCP STDIO connection, with `connected` remaining true and `connected_at` unchanged.
 An in-memory session test also covers recovery from a failed document read.
 
-After merging main on 2026-10-01, the full suite passed: **1051 passed, 74 skipped**
+After merging main on 2026-10-01, the full suite passed: **1058 passed, 74 skipped**
 (Inkscape CLI absent from the test PATH). The previously observed intermittent upstream CLI
 engine framing failure did not recur. The focused transport/session/scene/diagnosis suite passed
 56 tests; strict mypy (108 source files), focused Ruff and MCP surface smoke also passed.
@@ -211,3 +211,10 @@ Two new actual FastMCP STDIO connections read the scene and reused the same Inks
 The repeated refusal dialog was closed through native UI automation. Pressing 5 then changed
 the page zoom from 25% to 60%, confirming canvas interaction; the drawing-content fingerprint
 remained unchanged. The milestone-2 acceptance checklist is complete for the tested fixtures.
+
+Review follow-up (2026-10-01): diagnosis now probes whether a persistent supervisor lock
+is actually held without creating/removing files, and rejects resolved socket paths at the
+launcher's 104-byte limit. Active-document refresh maps filesystem export failures to
+`LiveError`, so status can report an unavailable document instead of failing the entire call.
+Regression cases include held/unheld locks, existing/missing directories at 103/104 bytes,
+and a real managed export lock-path failure.

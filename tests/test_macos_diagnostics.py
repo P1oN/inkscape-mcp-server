@@ -2,6 +2,8 @@
 
 import json
 import sys
+import tempfile
+from collections.abc import Iterator
 from pathlib import Path
 
 import pytest
@@ -11,7 +13,17 @@ from inkscape_mcp.live import macos_launcher
 
 
 @pytest.fixture
-def environment(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
+def short_directory() -> Iterator[Path]:
+    # macOS pytest paths often already exceed the Unix socket limit.
+    with tempfile.TemporaryDirectory(
+        prefix="imcp-", dir="/tmp" if Path("/tmp").is_dir() else None
+    ) as directory:
+        yield Path(directory)
+
+
+@pytest.fixture
+def environment(short_directory: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
+    tmp_path = short_directory
     monkeypatch.setattr(diag.sys, "platform", "darwin")
     binary = tmp_path / "Inkscape.app/Contents/MacOS/inkscape"
     vendor = binary.parent.parent / "Resources/share/inkscape/extensions/inkex"
@@ -155,3 +167,45 @@ def test_doctor_cli_never_launches_and_returns_readiness_exit_code(
         macos_launcher.main()
     assert result.value.code == 1
     assert json.loads(capsys.readouterr().out)["state"] == "missing_dependencies"
+
+
+@pytest.mark.skipif(sys.platform == "win32", reason="POSIX file locking")
+@pytest.mark.parametrize("held", [False, True])
+def test_existing_supervisor_lock_is_probed_without_changing_files(
+    environment: Path, held: bool
+) -> None:
+    import fcntl
+
+    environment.mkdir(mode=0o700)
+    lock_path = environment / "supervisor.lock"
+    lock_path.write_text("preserved")
+    before = sorted(environment.rglob("*"))
+    with lock_path.open("rb") as lock:
+        if held:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        report = diag.diagnose_macos(environment)
+        assert report.ready is (not held)
+        assert report.state == ("session_unavailable" if held else "ready_to_launch")
+    assert lock_path.read_text() == "preserved"
+    assert sorted(environment.rglob("*")) == before
+
+
+@pytest.mark.parametrize("exists", [False, True])
+@pytest.mark.parametrize("socket_bytes", [103, 104])
+def test_socket_path_limit_prevents_false_readiness(
+    environment: Path, exists: bool, socket_bytes: int
+) -> None:
+    import os
+
+    parent = environment.parent.resolve()
+    padding = socket_bytes - len(os.fsencode(parent / "bus.sock")) - 1
+    root = parent / ("s" * padding)
+    assert len(os.fsencode(root / "bus.sock")) == socket_bytes
+    if exists:
+        root.mkdir(mode=0o700)
+    report = diag.diagnose_macos(root)
+    assert report.ready is (socket_bytes < 104)
+    assert report.state == ("ready_to_launch" if socket_bytes < 104 else "unsafe_session")
+    if socket_bytes >= 104:
+        assert any("shorter" in step for step in report.next_steps)
+    assert root.exists() is exists

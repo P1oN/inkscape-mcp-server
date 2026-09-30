@@ -139,6 +139,8 @@ class ManagedDBusTransport(DBusTransport):
             root = parse_svg_bytes(self.get_document_svg().encode()).getroot()
         except UnsafeXMLError as exc:
             raise LiveError("active document export is invalid") from exc
+        except OSError as exc:
+            raise LiveError("active document export is unavailable") from exc
         return document_ref(root)
 
     @contextmanager
