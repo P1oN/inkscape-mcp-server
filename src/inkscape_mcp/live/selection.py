@@ -6,22 +6,26 @@ probe — returning the FULL set of available transports rather than one assumed
 ``select_transport`` ranks the available ones (filtered to those that support the required
 semantic commands) and returns the best-ranked instance.
 
-The project live-mode rule, restated and enforced here: the extension-socket bridge is primary on
-all OS (it serves the full read surface, so it outranks DBus for reads); DBus is an optional
-Linux fast-path limited to the action surface; ``--app-id-tag`` is NOT a control API and is never
-used as one.
+The extension-socket bridge supplies the full read surface. The experimental macOS managed
+session ranks above it to keep the GUI interactive while reading the current selection.
+Ordinary DBus remains an action-only fast path. ``--app-id-tag`` is not used as a control API.
 """
 
 from __future__ import annotations
 
 from inkscape_mcp.config import Settings, get_settings
 from inkscape_mcp.live.dbus_backend import DBusTransport
+from inkscape_mcp.live.managed_dbus import ManagedDBusTransport
 from inkscape_mcp.live.protocol import LiveCommand
 from inkscape_mcp.live.socket_backend import ExtensionSocketTransport
 from inkscape_mcp.live.transport import LiveTransport, TransportProbe
 
 #: Registered backend classes (the plug-in seam). Order is irrelevant — ranking decides.
-_BACKENDS: tuple[type[LiveTransport], ...] = (ExtensionSocketTransport, DBusTransport)
+_BACKENDS: tuple[type[LiveTransport], ...] = (
+    ExtensionSocketTransport,
+    DBusTransport,
+    ManagedDBusTransport,
+)
 
 #: The semantic read commands the live read tools require. A transport must support all of
 #: these to be eligible for a read-mode connection; this is what keeps DBus (action-only) from
@@ -35,10 +39,9 @@ READ_REQUIRED: frozenset[LiveCommand] = frozenset(
 )
 
 #: Minimum command surface for a no-freeze connection: only the export-based active-document
-#: read, which the Linux DBus path can serve without freezing the GUI. A no-freeze connect also
-#: filters to transports whose `no_freeze` flag is set, so it selects the DBus action path (Linux)
-#: rather than the modal socket bridge; selection-id reads are unavailable in this mode (honest
-#: trade-off — the action surface returns no selection ids).
+#: read. A no-freeze connect also filters to transports whose `no_freeze` flag is set.
+#: The managed macOS path additionally serves selection ids through captured process stdout;
+#: ordinary DBus has no selection-id reads.
 NO_FREEZE_REQUIRED: frozenset[LiveCommand] = frozenset({LiveCommand.GET_ACTIVE_DOCUMENT})
 
 
@@ -76,7 +79,7 @@ def best_available(
 
     `required` defaults to the read surface (`READ_REQUIRED`); pass an empty set to pick the best
     available transport regardless of read capability (e.g. liveness only). When `no_freeze` is set,
-    only transports that drive the GUI without freezing it (the Linux DBus path) are
+    only transports that drive the GUI without freezing it are
     considered.
     """
     req = READ_REQUIRED if required is None else required
@@ -109,6 +112,8 @@ def select_transport(
         return ExtensionSocketTransport(s)
     if chosen.name == DBusTransport.name:
         return DBusTransport(s)
+    if chosen.name == ManagedDBusTransport.name:
+        return ManagedDBusTransport(s)
     return None  # pragma: no cover - chosen always corresponds to a registered backend
 
 

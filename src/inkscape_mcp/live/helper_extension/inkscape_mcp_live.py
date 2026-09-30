@@ -395,7 +395,11 @@ class InkscapeMcpLive(inkex.EffectExtension):  # type: ignore[misc]
         mode = params.get("mode")
         if mode not in _VIEWPORT_MODES:
             raise ValueError("unknown viewport mode")
-        return {"mode": mode, "applied": True}
+        return {
+            "mode": mode,
+            "applied": False,
+            "detail": "The modal extension cannot control the live viewport.",
+        }
 
     def _get_scene(self) -> dict[str, Any]:
         """Build the structured scene: selection bboxes + canvas + visible-object summary.
