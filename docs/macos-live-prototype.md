@@ -120,12 +120,13 @@ also passed through a real FastMCP STDIO client, including before/after PNG oper
 Two STDIO connections reused the same GUI PID after their server processes stopped.
 Keyboard Undo shortcuts were not verified.
 
-Automated suite on the locked install: 1022 passed, 74 skipped (Inkscape CLI absent from test PATH).
+Final automated suite on the locked install: 1021 passed, 74 skipped and one failure in the
+pre-existing intermittent `test_unknown_action_surfaces_engine_action_error` (also reproduced
+on unchanged upstream). The earlier stage-2 full run passed 1020 tests before the last two
+capability regression cases were added. All 29 focused scene/insertion/transport tests pass.
 `uv sync --frozen`, full MCP surface smoke and strict mypy (107 source files) passed.
 Focused Ruff checks passed; the repository-wide lint still has 22 pre-existing long-line findings.
-An earlier run
-hit an intermittent `test_unknown_action_surfaces_engine_action_error` failure; it also
-reproduced on unchanged upstream. The subsequent complete suite passed.
+The CLI engine framing failure is outside this managed-session change.
 
 Milestone 2 also passed actual FastMCP STDIO insertion of a gradient rectangle and circle into
 the live macOS fixture, with before/after PNGs and a subsequent connection observing the same
