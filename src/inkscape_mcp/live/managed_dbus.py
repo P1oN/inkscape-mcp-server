@@ -103,7 +103,7 @@ class ManagedDBusTransport(DBusTransport):
             probe.detail = (
                 "managed Inkscape: current selection and undoable edits, no modal session"
             )
-        if not cls._insert_available(settings.process_timeout_s):
+        if not probe.available or not cls._insert_available(settings.process_timeout_s):
             probe.supported_commands.remove(LiveCommand.INSERT_SVG.value)
         return probe
 

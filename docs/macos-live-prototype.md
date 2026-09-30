@@ -104,14 +104,17 @@ stage 2; this change does not claim to pin future edits to a chosen window.
 
 The actual launcher entry point reported `running` for the managed Inkscape 1.4.3 session and
 `ready_to_launch` for a nonexistent session directory without creating it. A real FastMCP
-STDIO connection reported `inkscape-acceptance.svg` through `live_status`. Continuous native
-A → B → A status acceptance is pending because the Mac locked during UI automation; an
-in-memory session test covers that transition and recovery from a failed document read.
+STDIO connection reported `inkscape-acceptance.svg` through `live_status`. Native acceptance completed on 2026-10-01: switching the active window from
+`inkscape-acceptance.svg` to `inkscape-window-b.svg` and back updated `live_status` in one
+continuous MCP STDIO connection, with `connected` remaining true and `connected_at` unchanged.
+An in-memory session test also covers recovery from a failed document read.
 
-67 focused diagnosis/session/insertion/manifest tests passed, along with strict mypy (108 source
-files), focused Ruff, full MCP surface smoke and wheel module verification. The final full run
-had 1044 passed, 74 skipped and the known intermittent upstream CLI engine framing failure
-`test_unknown_action_surfaces_engine_action_error`. The generated tool manifest was refreshed.
+After merging main on 2026-10-01, the full suite passed: **1051 passed, 74 skipped**
+(Inkscape CLI absent from the test PATH). The previously observed intermittent upstream CLI
+engine framing failure did not recur. The focused transport/session/scene/diagnosis suite passed
+56 tests; strict mypy (108 source files), focused Ruff and MCP surface smoke also passed.
+The real launcher still reported `running`, `ready: true` and insertion available for the native
+session. The generated tool manifest was refreshed before this acceptance.
 
 ## First user trial
 
@@ -152,9 +155,8 @@ not a screenshot of the current pan/zoom, and changes the GUI's persistent expor
 Do not change the selection or switch documents while an edit is executing. Locks serialize
 our action sequences across MCP processes; they cannot lock out human input.
 
-Next: complete save/reopen, document-switch and failure acceptance checks; add existing-text
-changes as native transactions,
-then test realistic illustrations and package a simpler installer. Rust would not by itself
+Next: add existing-text changes as native transactions, then test realistic illustrations
+and package a simpler installer. Rust would not by itself
 solve Inkscape's selection/transaction integration; the working transport is the first thing
 to validate.
 
@@ -183,7 +185,7 @@ and text. One Undo removed the entire inserted group (including its gradient def
 the exported SVG drawing-content fingerprint matched the pre-insertion state. One Redo restored
 the group, definition and references; the fingerprint matched the post-insertion state. The user
 also observed the gradient reappear. Previously existing objects were preserved. This branch
-remains experimental; see the remaining acceptance checklist in [ROADMAP.md](ROADMAP.md).
+remains experimental; see the completed acceptance checklist in [ROADMAP.md](ROADMAP.md).
 
 Native Save As (Inkscape SVG) and File → Revert also passed: both the saved file and the
 reloaded live SVG drawing-content fingerprint matched the post-insertion state, preserving
