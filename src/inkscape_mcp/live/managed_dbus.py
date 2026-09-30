@@ -28,11 +28,12 @@ from inkscape_mcp.live.dbus_backend import (
     _variant_string,
 )
 from inkscape_mcp.live.insert_payload import document_fingerprint, prepare_fragment
-from inkscape_mcp.live.managed_scene import object_info, scene_from_svg
+from inkscape_mcp.live.managed_scene import document_ref, object_info, scene_from_svg
 from inkscape_mcp.live.protocol import LiveCommand
 from inkscape_mcp.live.transport import (
     LiveCapabilityUnsupported,
     LiveConnectionError,
+    LiveDocumentRef,
     LiveError,
     LiveMutationResult,
     LiveScene,
@@ -41,7 +42,7 @@ from inkscape_mcp.live.transport import (
     TransportProbe,
 )
 from inkscape_mcp.workspace.subprocess_exec import ProcessError, run_process
-from inkscape_mcp.workspace.xml_safety import parse_svg_bytes
+from inkscape_mcp.workspace.xml_safety import UnsafeXMLError, parse_svg_bytes
 
 ENV_STDOUT = "INKSCAPE_MCP_MANAGED_STDOUT"
 ENV_DIR = "INKSCAPE_MCP_MANAGED_DIR"
@@ -126,6 +127,21 @@ class ManagedDBusTransport(DBusTransport):
         if command == LiveCommand.INSERT_SVG:
             return self._insert_available(self._settings.process_timeout_s)
         return super().supports(command)
+
+    def is_connected(self) -> bool:
+        """Do not report a vanished managed bus as connected from a cached flag."""
+        return self._connected and self._actions_list_reachable(
+            min(self._settings.process_timeout_s, 2.0)
+        )
+
+    def get_active_document(self) -> LiveDocumentRef:
+        try:
+            root = parse_svg_bytes(self.get_document_svg().encode()).getroot()
+        except UnsafeXMLError as exc:
+            raise LiveError("active document export is invalid") from exc
+        except OSError as exc:
+            raise LiveError("active document export is unavailable") from exc
+        return document_ref(root)
 
     @contextmanager
     def _operation(self) -> Iterator[Path]:

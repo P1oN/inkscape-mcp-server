@@ -231,9 +231,12 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Experimental macOS Inkscape + Codex session")
     parser.add_argument("--session-dir", type=Path)
     parser.add_argument("--document", type=Path, help="initial drawing, only for a new session")
+    parser.add_argument(
+        "--doctor", action="store_true", help="print read-only setup/session diagnosis"
+    )
     parser.add_argument("--supervise", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args()
-    if sys.platform != "darwin":
+    if sys.platform != "darwin" and not args.doctor:
         parser.error("this launcher currently supports macOS only")
     # Desktop MCP hosts often start with a minimal PATH. Include vendor/brew
     # binary directories explicitly; no shell evaluation or sudo is required.
@@ -245,7 +248,13 @@ def main() -> None:
             os.environ.get("PATH", ""),
         ]
     )
-    root = args.session_dir or Path(f"/tmp/inkscape-mcp-{os.getuid()}")  # noqa: S108
+    root = args.session_dir or Path(f"/tmp/inkscape-mcp-{getattr(os, 'getuid', lambda: 0)()}")  # noqa: S108
+    if args.doctor:
+        from inkscape_mcp.live.macos_diagnostics import diagnose_macos
+
+        report = diagnose_macos(root)
+        print(report.model_dump_json(indent=2))
+        parser.exit(0 if report.ready else 1)
     document = args.document.resolve() if args.document else None
     if document is not None and (not document.is_file() or document.suffix.lower() != ".svg"):
         parser.error("--document must point to an existing SVG")

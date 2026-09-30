@@ -31,7 +31,7 @@ Install official Inkscape in `/Applications/Inkscape.app` and Homebrew first. Th
 
 ```sh
 brew install dbus glib uv
-git clone --branch macos-scene-insertion https://github.com/P1oN/inkscape-mcp-server.git
+git clone --branch macos-session-diagnostics https://github.com/P1oN/inkscape-mcp-server.git
 cd inkscape-mcp-server
 uv sync --python 3.12 --frozen
 ```
@@ -67,6 +67,54 @@ The server uses a private session directory `/tmp/inkscape-mcp-<uid>` (0700). It
 login service. Closing Inkscape ends its supervisor and private bus. A stalled bus while the
 GUI remains open causes restart to refuse: save and close that window before trying again.
 Logs are `supervisor.log`, `inkscape.stderr.log`, `bus.log` inside the session directory.
+
+## Setup and connection diagnosis
+
+Run this before configuring Codex, or when a managed session fails:
+
+```sh
+.venv/bin/inkscape-mcp-macos --doctor
+```
+
+For a custom session directory, add `--session-dir /absolute/path/to/session`. Keep any
+`INKSCAPE_PROFILE_DIR` override the same as the managed session. The command emits JSON and
+exits 0 for `ready_to_launch` or `running`; other states exit 1 with suggested next steps.
+It checks Inkscape, private-bus tools, the MCP interpreter/dependencies, vendor inkex,
+helper files, existing private-session metadata, captured selection output and the live
+insertion action. `ready_to_launch` means prerequisites are present, not that a GUI is running.
+`helper_installed` describes the current CLI profile; `insertion_available` probes the live
+native action. Neither is a guarantee that every drawing/edit will succeed.
+
+Diagnosis does not create a session directory, install/repair the helper, start or close a GUI,
+or discard stale metadata. A broken session advises saving and closing its managed drawing
+before restarting. Existing logs remain available for inspection. A filesystem/access failure
+is reported as `diagnosis_failed` without echoing raw exception details.
+
+For connected managed macOS sessions, `live_status` now reads the current drawing rather than
+retaining the connect-time drawing. The real Inkscape `sodipodi:docname` namespace is used in
+both status and scene reports. Missing/unreadable active documents are reported as null with
+a note; a vanished bus is reported as disconnected. Use `live_connect` to reconnect. Other
+transports keep their existing connect-time document semantics.
+
+A filename is not a unique window/document identity, and paths remain null when the transport
+cannot report them. Explicit document binding and stable identity are the next part of roadmap
+stage 2; this change does not claim to pin future edits to a chosen window.
+
+### Diagnosis verification (2026-09-30)
+
+The actual launcher entry point reported `running` for the managed Inkscape 1.4.3 session and
+`ready_to_launch` for a nonexistent session directory without creating it. A real FastMCP
+STDIO connection reported `inkscape-acceptance.svg` through `live_status`. Native acceptance completed on 2026-10-01: switching the active window from
+`inkscape-acceptance.svg` to `inkscape-window-b.svg` and back updated `live_status` in one
+continuous MCP STDIO connection, with `connected` remaining true and `connected_at` unchanged.
+An in-memory session test also covers recovery from a failed document read.
+
+After merging main on 2026-10-01, the full suite passed: **1058 passed, 74 skipped**
+(Inkscape CLI absent from the test PATH). The previously observed intermittent upstream CLI
+engine framing failure did not recur. The focused transport/session/scene/diagnosis suite passed
+56 tests; strict mypy (108 source files), focused Ruff and MCP surface smoke also passed.
+The real launcher still reported `running`, `ready: true` and insertion available for the native
+session. The generated tool manifest was refreshed before this acceptance.
 
 ## First user trial
 
@@ -163,3 +211,10 @@ Two new actual FastMCP STDIO connections read the scene and reused the same Inks
 The repeated refusal dialog was closed through native UI automation. Pressing 5 then changed
 the page zoom from 25% to 60%, confirming canvas interaction; the drawing-content fingerprint
 remained unchanged. The milestone-2 acceptance checklist is complete for the tested fixtures.
+
+Review follow-up (2026-10-01): diagnosis now probes whether a persistent supervisor lock
+is actually held without creating/removing files, and rejects resolved socket paths at the
+launcher's 104-byte limit. Active-document refresh maps filesystem export failures to
+`LiveError`, so status can report an unavailable document instead of failing the entire call.
+Regression cases include held/unheld locks, existing/missing directories at 103/104 bytes,
+and a real managed export lock-path failure.

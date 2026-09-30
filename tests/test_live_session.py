@@ -12,6 +12,8 @@ from inkscape_mcp.live.records import list_live_operations, new_live_operation
 from inkscape_mcp.live.session import LiveSessionManager
 from inkscape_mcp.live.transport import (
     LiveDisabled,
+    LiveDocumentRef,
+    LiveError,
     LiveNotAvailable,
     TransportProbe,
 )
@@ -64,6 +66,47 @@ def test_connect_records_transport_and_active_document(
 
     # require_transport hands back the live transport for the read tools.
     assert mgr.require_transport().is_connected()
+
+
+def test_managed_status_follows_document_switch_without_reconnecting(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    transport = FakeTransport()
+    monkeypatch.setattr(transport, "name", "managed-dbus")
+    current = LiveDocumentRef(name="first.svg")
+    monkeypatch.setattr(transport, "get_active_document", lambda: current)
+    monkeypatch.setattr(session_mod, "select_transport", lambda *args, **kwargs: transport)
+    mgr = LiveSessionManager(_settings(tmp_path, enabled=True))
+    mgr.connect()
+    current = LiveDocumentRef(name="second.svg")
+    status = mgr.status()
+    assert status.active_document is not None and status.active_document.name == "second.svg"
+
+    def unavailable() -> LiveDocumentRef:
+        raise LiveError("no active drawing")
+
+    monkeypatch.setattr(transport, "get_active_document", unavailable)
+    status = mgr.status()
+    assert status.active_document is None and status.connected
+    assert any("activate a drawing" in note for note in status.notes)
+    monkeypatch.setattr(transport, "get_active_document", lambda: current)
+    assert mgr.status().active_document == current
+
+
+def test_managed_status_does_not_expose_stale_document_on_connection_loss(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    transport = FakeTransport()
+    monkeypatch.setattr(transport, "name", "managed-dbus")
+    monkeypatch.setattr(session_mod, "select_transport", lambda *args, **kwargs: transport)
+    mgr = LiveSessionManager(_settings(tmp_path, enabled=True))
+    mgr.connect()
+    transport.disconnect()
+    status = mgr.status()
+    assert not status.connected and status.active_document is None
+    assert any("reconnect" in note for note in status.notes)
+    with pytest.raises(LiveNotAvailable):
+        mgr.require_transport()
 
 
 def test_connect_with_no_transport_is_clean_not_available(
