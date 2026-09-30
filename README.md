@@ -1,7 +1,9 @@
 # inkscape-mcp
 
 **This fork adds an experimental interactive macOS session for Codex.** It reads the current
-GUI selection, changes its fill with native Undo, and keeps the drawing open across MCP restarts.
+GUI selection and scene hierarchy, changes fill, inserts bounded vector fragments through a
+one-shot effect, and keeps the drawing open across MCP restarts. Fill Undo is verified;
+insertion Undo still needs a native UI acceptance check.
 See [macOS setup and verified limits](docs/macos-live-prototype.md). Live edits change the open
 document; the working-copy guarantees described below apply to headless editing.
 

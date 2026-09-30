@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shlex
 import shutil
 import stat
 import subprocess
@@ -18,7 +19,38 @@ import time
 from pathlib import Path
 from typing import Any
 
-from inkscape_mcp.live.managed_dbus import ENV_STDOUT
+from inkscape_mcp.live.managed_dbus import ENV_DIR, ENV_STDOUT
+
+
+def install_insertion_helper() -> None:
+    """Install a fixed one-shot effect before Inkscape scans extensions at startup."""
+    result = subprocess.run(
+        [_binary("inkscape"), "--user-data-directory"],
+        capture_output=True,
+        text=True,
+        check=True,
+        timeout=10,
+    )
+    directory = result.stdout.strip()
+    if not directory or not Path(directory).is_absolute():
+        raise RuntimeError("Inkscape did not report its user data directory")
+    target = Path(directory) / "extensions"
+    target.mkdir(parents=True, exist_ok=True)
+    source = Path(__file__).parent
+    for name in ("inkscape_mcp_insert.py", "inkscape_mcp_insert.inx"):
+        shutil.copyfile(source / "helper_extension" / name, target / name)
+    shutil.copyfile(source / "insert_payload.py", target / "inkscape_mcp_insert_payload.py")
+    vendor = Path(_binary("inkscape")).resolve().parents[1] / "Resources/share/inkscape/extensions"
+    if not (vendor / "inkex").is_dir():
+        raise RuntimeError("official Inkscape inkex source is unavailable")
+    wrapper = target / "inkscape_mcp_insert_run.sh"
+    wrapper.write_text(
+        "#!/bin/sh\nunset PYTHONHOME PYTHONPATH\n"
+        f"export PYTHONPATH={shlex.quote(str(vendor))}\n"
+        f"exec {shlex.quote(sys.executable)} "
+        f'{shlex.quote(str(target / "inkscape_mcp_insert.py"))} "$@"\n'
+    )
+    wrapper.chmod(0o700)
 
 
 def secure_directory(path: Path) -> Path:
@@ -142,6 +174,7 @@ def ensure_session(root: Path, document: Path | None = None) -> dict[str, Any]:
 
 def supervise(root: Path, document: Path | None) -> None:
     root = secure_directory(root)
+    install_insertion_helper()
     daemon = _binary("dbus-daemon")
     inkscape = _binary("inkscape")
     (root / "bus.sock").unlink(missing_ok=True)
@@ -171,6 +204,7 @@ def supervise(root: Path, document: Path | None) -> None:
                 raise RuntimeError("private D-Bus did not start")
             env = os.environ.copy()
             env["DBUS_SESSION_BUS_ADDRESS"] = address
+            env[ENV_DIR] = str(root)
             argv = [inkscape, "--with-gui"]
             if document is not None:
                 argv.append(str(document))
@@ -229,6 +263,7 @@ def main() -> None:
         parser.exit(1, f"{exc}\n")
     os.environ["DBUS_SESSION_BUS_ADDRESS"] = data["address"]
     os.environ[ENV_STDOUT] = str(root.resolve() / "inkscape.stdout.log")
+    os.environ[ENV_DIR] = str(root.resolve())
     from inkscape_mcp.server import main as run_server
 
     run_server()

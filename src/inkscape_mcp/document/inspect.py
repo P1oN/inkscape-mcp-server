@@ -172,6 +172,7 @@ class TreeNode(BaseModel):
     is_leaf: bool
     bbox: BBox | None
     children: list[TreeNode]
+    transform: str | None = None
 
 
 class DocTree(BaseModel):
@@ -595,6 +596,7 @@ def _build_node(elem: etree._Element) -> TreeNode:
         is_leaf=not children,
         bbox=_bbox_of(elem),
         children=children,
+        transform=elem.get("transform"),
     )
 
 

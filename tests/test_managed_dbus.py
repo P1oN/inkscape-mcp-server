@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 
 from inkscape_mcp.config import Settings
+from inkscape_mcp.live import managed_dbus
 from inkscape_mcp.live.macos_launcher import ensure_session, secure_directory
 from inkscape_mcp.live.managed_dbus import (
     ENV_STDOUT,
@@ -13,6 +14,25 @@ from inkscape_mcp.live.managed_dbus import (
     parse_selection_reply,
 )
 from inkscape_mcp.live.transport import LiveConnectionError, LiveError, LiveSelection
+from inkscape_mcp.workspace.subprocess_exec import ProcessResult
+
+
+@pytest.mark.parametrize("enabled", [True, False])
+def test_insert_capability_requires_enabled_gaction(
+    enabled: bool, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv(managed_dbus.ENV_DIR, "/private/test-session")
+    monkeypatch.setattr(ManagedDBusTransport, "_actions_call_argv", lambda *args: ["gdbus"])
+    monkeypatch.setattr(
+        managed_dbus,
+        "run_process",
+        lambda *args, **kwargs: ProcessResult(
+            args=["gdbus"], returncode=0,
+            stdout=f"(({str(enabled).lower()}, signature '', @av []),)\n", stderr="",
+            duration_s=0.001, timed_out=False,
+        ),
+    )
+    assert ManagedDBusTransport._insert_available(1) is enabled
 
 
 def test_selection_requires_complete_fence() -> None:
@@ -28,6 +48,7 @@ def test_selection_supports_multiple_and_unicode_ids() -> None:
     text = "山 cloned: false ref: 2 href: 1 total href: 1\n"
     text += "tree cloned: true ref: 1 href: 0 total href: 0\n"
     assert parse_selection_reply(text + "0\n") == ["山", "tree"]
+    assert parse_selection_reply(text + "12.5,-1.3e+2\n") == ["山", "tree"]
 
 
 def test_unrecognized_reply_is_never_an_empty_selection() -> None:
