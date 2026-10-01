@@ -14,7 +14,7 @@
 
 - Ветка: `codex/document-context-guard`, база `main` (`9f58b16`).
 - Origin: `https://github.com/P1oN/inkscape-mcp-server`.
-- Один draft PR: [#4](https://github.com/P1oN/inkscape-mcp-server/pull/4).
+- Один PR: [#4](https://github.com/P1oN/inkscape-mcp-server/pull/4).
   Продолжать в нем; не создавать второй PR.
 - Реализованы `live_list_documents` / `live_select_document`, UUID живых GTK
   объектов окна/документа, выбор рисунка для задачи и guard внутри GUI перед GAction.
@@ -37,19 +37,19 @@
   нестабильный `test_engine_process.py::test_unknown_action_surfaces_engine_action_error`.
   Он использует fake shell, а не Inkscape. Отдельный повтор прошел; ошибка полного
   прогона остается зафиксированной. Не скрывать этот результат.
-- Реальный MCP подтвердил заливку, вставку, runtime IDs и отказ после смены рисунка.
-  Полный финальный native acceptance не прошел: Mac заблокирован. CUA прямо
-  потребовал ручную разблокировку; пользователь уже получил этот запрос.
+- Финальная native acceptance прошла 2026-10-01 на official Inkscape 1.4.3
+  (`0d15f75`) через настоящий MCP STDIO в новой disposable session.
+  Проверены разные ID одинаковых SVG, явный выбор, Undo/Redo заливки и вставки,
+  native dispatch race refusal без изменения B, stale-binding refusal и повторное
+  подключение с тем же GUI/ID и сбросом выбора. Только два тестовых окна закрыты.
 - Во время lock Inkscape попадал в crash handler при primary-monitor initialization.
-  Теперь module отказывает до загрузки рисунка при отсутствии primary monitor.
-  Отказ startup guard на заблокированном Mac подтвержден; успешный запуск и
-  Cocoa activation еще требуют проверки после unlock.
-- Следующее действие после unlock:
-  `.venv/bin/python scripts/accept_document_context.py`.
-  Скрипт сам создает новую disposable session и два SVG; не передавай ему пользовательские
-  рисунки. Проверяет идентичность одинаковых SVG, Undo/Redo, race refusal и STDIO reuse.
-- Затем обновить результаты docs/roadmap и этот индекс, закончить тот же PR.
-  Не объявлять этап 2 завершенным до финальной native acceptance.
+  Module теперь отказывает до загрузки рисунка при отсутствии primary monitor.
+  Отказ на locked Mac и успешный новый запуск после unlock проверены.
+- Локальное доказательство: `work/context-probe/acceptance-resume.log` и
+  `/private/tmp/imcp-context-xyxqexpl/acceptance.json` (`passed: true`).
+  Воспроизводимая команда: `.venv/bin/python scripts/accept_document_context.py`.
+- Объем этого PR реализован и проверен. Следующий функциональный объем — этап 3
+  roadmap; он не входит в текущий запрос. Перед новой работой сверить состояние PR.
 
 ## Сессии
 

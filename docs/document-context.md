@@ -2,8 +2,8 @@
 
 The managed GTK 3 session can identify and select a drawing window, then check that
 identity inside Inkscape immediately before dispatching an action. This is the remaining
-implementation scope from roadmap stage 2. **Final native acceptance is pending an unlocked
-Mac; this change is not yet release-ready.**
+implementation scope from roadmap stage 2. **Native acceptance passed on 2026-10-01 with
+official Inkscape 1.4.3 (0d15f75). The integration remains experimental.**
 
 ## Workflow
 
@@ -56,7 +56,7 @@ New sessions require official GTK 3 Inkscape, Apple command line tools (`clang`,
 and Homebrew glib development headers. `--doctor` checks these before advertising launch readiness.
 The module is compiled and the copy prepared on first launch; a content hash invalidates the
 cache after source or executable changes. Updating Inkscape's resource bundle requires saving
-and restarting a managed GUI before use. Cold-launch timeout still needs native acceptance.
+and restarting a managed GUI before use. A fresh session launch passed native acceptance.
 
 A GUI started by an older version is reused with its existing behavior and an explicit
 legacy-session note: `document_guard_available` / `ready_to_edit` are false and the new
@@ -66,7 +66,7 @@ the module. Restarting MCP alone never upgrades a running GUI's native module.
 Inkscape 1.4.3 was observed crashing during primary-monitor initialization while the Mac was
 locked. The module now refuses startup before loading any drawing when no primary monitor
 is available, with an unlock-and-retry message in `inkscape.stderr.log`. The locked-Mac refusal
-has been observed in a native run; startup and full acceptance on an unlocked Mac remain pending.
+has been observed in a native run; startup and full acceptance also passed after unlocking the Mac.
 
 ## Validation
 
@@ -76,7 +76,12 @@ lock cleanup, explicit binding, connection-loss guidance, bridge diagnosis witho
 and private-copy build/cache behavior. Strict mypy (110 source files), focused Ruff, MCP surface smoke (101 tools) and wheel
 build pass. Latest full pytest: 1078 passed, 74 skipped, 1 failed — the previously documented
 intermittent fake-shell `test_unknown_action_surfaces_engine_action_error`; an isolated repeat
-passed. Final native acceptance is still pending.
+passed. Native acceptance passed through actual MCP STDIO on 2026-10-01: two identical
+SVGs received distinct live identities, edits required explicit choice, fill and insertion
+returned to exact before/after content fingerprints with native Undo/Redo, a switch between
+context read and dispatch was refused without changing drawing B, and a new STDIO client
+reused the GUI and IDs while clearing the task binding. The fresh test GUI was closed only
+after verifying both synthetic drawing identities. The report recorded `passed: true`.
 
 ```sh
 .venv/bin/pytest -q
