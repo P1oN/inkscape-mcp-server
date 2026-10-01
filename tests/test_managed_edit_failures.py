@@ -94,3 +94,67 @@ def test_edit_failure_cleanup_and_recovery(
 
 def test_refusal_mapping_does_not_expose_generic_internal_errors() -> None:
     assert str(_map_live_error(LiveError("/private/secret"))) == "live operation failed"
+
+
+@pytest.mark.parametrize("failure", ["write", "chmod", "replace", "cleanup"])
+def test_edit_filesystem_errors_are_typed_and_cleanup_is_attempted(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: str
+) -> None:
+    stream = tmp_path / "stdout.log"
+    stream.touch()
+    monkeypatch.setenv(ENV_DIR, str(tmp_path))
+    monkeypatch.setenv(ENV_STDOUT, str(stream))
+    transport = ManagedDBusTransport(Settings(process_timeout_s=0.01))
+    monkeypatch.setattr(transport, "_effect_available", lambda *args: True)
+    monkeypatch.setattr(
+        transport, "get_selection", lambda: LiveSelection(object_ids=["a"], count=1)
+    )
+    document = '<svg xmlns="http://www.w3.org/2000/svg"><rect id="a"/></svg>'
+    monkeypatch.setattr(transport, "get_document_svg", lambda: document)
+    activated = False
+    request = tmp_path / "insert-request.json"
+    pending = tmp_path / "insert-request.tmp"
+    reply = tmp_path / "insert-result.json"
+
+    def activate(*args: object) -> None:
+        nonlocal activated
+        activated = True
+        data = json.loads(request.read_text())
+        reply.write_text(
+            json.dumps(
+                dict(
+                    nonce=data["nonce"],
+                    ok=True,
+                    ids=["a"],
+                    fingerprint=document_fingerprint(etree.fromstring(document.encode())),
+                )
+            )
+        )
+
+    monkeypatch.setattr(transport, "_activate", activate)
+    method = {"write": "write_text", "chmod": "chmod", "replace": "replace", "cleanup": "unlink"}[
+        failure
+    ]
+    original = getattr(Path, method)
+    cleaned: list[Path] = []
+
+    def failing(path: Path, *args: object, **kwargs: object) -> object:
+        if (failure == "cleanup" and path == request) or (failure != "cleanup" and path == pending):
+            if failure == "write":
+                original(path, "partial")
+            raise OSError("/private/sensitive exchange error")
+        if method == "unlink":
+            cleaned.append(path)
+        return original(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, method, failing)
+    expected = LiveMutationUncertain if failure == "cleanup" else LiveError
+    with pytest.raises(expected) as caught:
+        transport._edit_selection("style", style={"fill": "blue"})
+    assert activated == (failure == "cleanup")
+    assert "/private" not in str(caught.value)
+    assert not pending.exists() and not reply.exists()
+    if failure == "cleanup":
+        assert pending in cleaned and reply in cleaned
+    else:
+        assert not request.exists()

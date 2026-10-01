@@ -40,6 +40,8 @@ leaves drawing content unchanged adds no Undo entry; Undo then affects the previ
 
 The native dispatch guard rejects window/document switches. Validation refusal returns the
 unchanged document and an allowlisted, path-free reason; it does not open an error dialog.
+Request preparation failures refuse before dispatch and attempt removal of temporary files.
+A cleanup failure after dispatch reports uncertain completion instead of success.
 Timeouts, malformed replies and unconfirmed result fingerprints report **uncertain completion**:
 inspect the chosen task drawing before retrying. An uncertain operation record is not evidence
 of rollback. MCP client locks do not prevent a person from editing during an operation.
@@ -48,7 +50,8 @@ of rollback. MCP client locks do not prevent a person from editing during an ope
 
 `tests/test_managed_everyday_edits.py` uses installed vendor inkex for actual edit planning;
 it skips when vendor inkex is unavailable. Tests cover transformed parents, parent/child
-selection, locks, reference remapping/deletion, sibling order, group geometry and text formatting.
+selection, locks, reference remapping/deletion, sibling order across rendered SVG containers,
+stylesheet transform refusal, group geometry and text formatting.
 `tests/test_managed_edit_failures.py` covers reply/activation failures, cleanup and subsequent
 successful calls. Existing policy/record tests cover the approval boundary.
 

@@ -28,12 +28,17 @@ Origin: https://github.com/P1oN/inkscape-mcp-server.
 
 ## Проверки
 
-- Полный pytest: 1105 passed, 74 skipped; прежний нестабильный тест теперь проходит.
+- Полный pytest: 1133 passed, 74 skipped; прежний нестабильный тест теперь проходит.
+- Ревью PR #5 исправило декодирование UTF-8 между чтениями stdout/stderr, stacking рядом
+  с другими SVG-контейнерами, отказ CSS transforms из stylesheet и ошибки файлового обмена.
 - Полные Ruff и format check, strict mypy (111 source files), full-surface smoke
   (102 tools) и STDIO boot smoke проходят.
 - Wheel построен на Python 3.12; проверены edit helper, INX, карта отказов и native source
   в архиве. Build tools находятся только в `/tmp/imcp-stage3-build-tools`.
-- Native acceptance прошла на official Inkscape 1.4.3 через настоящий MCP STDIO.
+- Повторный native прогон после ревью остановился до подключения MCP: macOS не предоставила
+  основной монитор (`MCP startup refused: no primary monitor; unlock the Mac and retry`).
+  Логи: `/private/tmp/imcp-context-jj8tlkv3/inkscape.stderr.log`.
+- Native acceptance до исправлений ревью прошла на official Inkscape 1.4.3 через настоящий MCP STDIO.
   Проверены все семейства правок, точные отпечатки Undo/Redo, неизменяющий вызов,
   блокировки/неверный выбор текста, guard/race/stale-binding и STDIO reuse.
 - Доказательство: `/private/tmp/imcp-context-use24ftg/acceptance.json` (`passed: true`),

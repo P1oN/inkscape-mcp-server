@@ -455,12 +455,15 @@ class ManagedDBusTransport(DBusTransport):
                 **params,
             }
             pending = root / "insert-request.tmp"
-            reply.unlink(missing_ok=True)
-            pending.write_text(json.dumps(payload))
-            pending.chmod(0o600)
-            pending.replace(request)
+            activated = False
+            failed = False
             try:
+                reply.unlink(missing_ok=True)
+                pending.write_text(json.dumps(payload))
+                pending.chmod(0o600)
+                pending.replace(request)
                 try:
+                    activated = True
                     self._activate(EDIT_ACTION, _variant_empty())
                 except LiveConnectionError as exc:
                     if not reply.is_file():
@@ -494,10 +497,27 @@ class ManagedDBusTransport(DBusTransport):
                 raise LiveMutationUncertain(
                     "edit result not confirmed; inspect the task drawing before retrying"
                 )
+            except OSError as exc:
+                failed = True
+                if activated:
+                    raise LiveMutationUncertain(
+                        "edit exchange failed; inspect the task drawing before retrying"
+                    ) from exc
+                raise LiveError("could not prepare managed edit request") from exc
+            except BaseException:
+                failed = True
+                raise
             finally:
-                request.unlink(missing_ok=True)
-                reply.unlink(missing_ok=True)
-                pending.unlink(missing_ok=True)
+                cleanup_failed = False
+                for path in (request, reply, pending):
+                    try:
+                        path.unlink(missing_ok=True)
+                    except OSError:
+                        cleanup_failed = True
+                if cleanup_failed and not failed:
+                    raise LiveMutationUncertain(
+                        "edit cleanup failed; inspect the task drawing before retrying"
+                    )
 
     @staticmethod
     def _read_edit_reply(reply: Path, nonce: str) -> dict[str, Any]:

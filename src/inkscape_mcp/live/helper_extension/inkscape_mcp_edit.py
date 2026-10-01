@@ -14,6 +14,9 @@ SODIPODI = "http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
 OPS = {"style", "text", "duplicate", "delete", "group", "ungroup", "raise", "lower", "front", "back"}
 DRAWABLE = {"g", "rect", "circle", "ellipse", "path", "line", "polygon", "polyline", "text", "use", "image"}
 
+# Rendered siblings count in stacking even when selecting them is unsupported.
+PAINTABLE = DRAWABLE | {"svg", "a", "switch", "foreignObject", "flowRoot"}
+
 
 def local(node):
     return node.tag.rsplit("}", 1)[-1] if isinstance(node.tag, str) else ""
@@ -79,7 +82,7 @@ def plan_edit(svg, request):
             node.style.update(style)
             if transform:
                 if any(local(a) == "svg" and a is not root for a in node.iterancestors()) or any(
-                    "transform" in a.style for a in [node, *node.iterancestors()]
+                    "transform" in a.cascaded_style() for a in [node, *node.iterancestors()]
                 ):
                     raise ValueError("CSS transforms and nested SVG viewports are unsupported")
                 parent = node.getparent().composed_transform()
@@ -165,7 +168,7 @@ def plan_edit(svg, request):
         for parent in parents:
             ordered = [e for e in parent if e in chosen]
             if operation in {"front", "back"}:
-                siblings = [e for e in parent if local(e) in DRAWABLE]
+                siblings = [e for e in parent if local(e) in PAINTABLE]
                 anchor = siblings[-1] if operation == "front" else siblings[0]
                 # Stable relative order within the selection and no cross-layer moves.
                 if operation == "front":
@@ -181,7 +184,7 @@ def plan_edit(svg, request):
             else:
                 for node in reversed(ordered) if operation == "raise" else ordered:
                     sibling = node.getnext() if operation == "raise" else node.getprevious()
-                    while sibling is not None and local(sibling) not in DRAWABLE:
+                    while sibling is not None and local(sibling) not in PAINTABLE:
                         sibling = sibling.getnext() if operation == "raise" else sibling.getprevious()
                     if sibling is not None and sibling not in chosen:
                         sibling.addnext(node) if operation == "raise" else sibling.addprevious(node)

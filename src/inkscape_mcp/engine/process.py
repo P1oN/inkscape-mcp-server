@@ -14,8 +14,8 @@ output lines always end in ``\\n``; the prompt is the only token that does not â
 one command is "everything up to and including the next ``\\n> ``". This module reads stdout in a
 background thread and frames each command on that ``"\\n> "`` sentinel (plus the banner prompt at
 startup). Action errors do NOT appear on stdout: an unknown action prints
-``InkscapeApplication::parse_actions: could not find action for: <X>`` to STDERR, so a second reader
-thread captures stderr and :func:`EngineProcess.execute` maps that line to a clean, host-path-free
+``InkscapeApplication::parse_actions: could not find action for: <X>`` to STDERR, so one reader
+thread captures both pipes and :func:`EngineProcess.execute` maps that line to a clean, host-path-free
 error.
 
 SECURITY (sec.12 / X1): the worker is spawned as an ARG LIST with ``shell=False`` (no shell string
@@ -28,6 +28,7 @@ hung engine can never block the server. The worker is reaped on idle-timeout and
 
 from __future__ import annotations
 
+import codecs
 import os
 import re
 import selectors
@@ -166,6 +167,7 @@ class EngineProcess:
             return
         stdout_fd, stderr_fd = proc.stdout.fileno(), proc.stderr.fileno()
         active = {stdout_fd, stderr_fd}
+        decoders = {fd: codecs.getincrementaldecoder("utf-8")(errors="replace") for fd in active}
         with ExitStack() as stack:
             # Python >=3.12 supports nonblocking Windows pipes, but Windows selectors
             # support sockets only. Poll the same single-reader path there.
@@ -204,8 +206,12 @@ class EngineProcess:
                             break
                 if chunks:
                     with self._cond:
-                        self._err += chunks.get(stderr_fd, b"").decode("utf-8", errors="replace")
-                        self._out += chunks.get(stdout_fd, b"").decode("utf-8", errors="replace")
+                        for fd, chunk in chunks.items():
+                            decoded = decoders[fd].decode(chunk, final=fd not in active)
+                            if fd == stderr_fd:
+                                self._err += decoded
+                            else:
+                                self._out += decoded
                         if stdout_fd not in active:
                             self._eof = True
                         self._cond.notify_all()

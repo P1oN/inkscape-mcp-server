@@ -173,3 +173,29 @@ def test_stylesheet_grouping_and_nested_viewport_transform_refuse(planner: Any) 
     root = drawing('<svg viewBox="0 0 10 10" width="100"><rect id="a"/></svg>')
     with pytest.raises(ValueError, match="nested SVG"):
         edit(planner, root, "style", ["a"], transform="translate(5,0)")
+
+
+@pytest.mark.parametrize("container", ["a", "svg", "switch", "foreignObject", "flowRoot"])
+@pytest.mark.parametrize("operation", ["front", "back", "raise", "lower"])
+def test_stacking_counts_other_rendered_containers(
+    planner: Any, container: str, operation: str
+) -> None:
+    sibling = f'<{container} id="b"><rect id="inside"/></{container}>'
+    rect = '<rect id="a"/>'
+    forward = operation in {"front", "raise"}
+    root = drawing(rect + sibling if forward else sibling + rect)
+    result, _ = edit(planner, root, operation, ["a"])
+    assert [e.get("id") for e in result] == (["b", "a"] if forward else ["a", "b"])
+
+
+@pytest.mark.parametrize("target", ["node", "parent"])
+def test_stylesheet_transform_refuses_without_mutating_document(planner: Any, target: str) -> None:
+    root = drawing(
+        "<style>.moved {transform: translate(10px, 0)}</style>"
+        f'<g class="{"moved" if target == "parent" else ""}">'
+        f'<rect id="a" class="{"moved" if target == "node" else ""}"/></g>'
+    )
+    before = document_fingerprint(root)
+    with pytest.raises(ValueError, match="CSS transforms"):
+        edit(planner, root, "style", ["a"], transform="translate(5,0)")
+    assert document_fingerprint(root) == before
