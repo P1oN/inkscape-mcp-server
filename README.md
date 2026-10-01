@@ -6,6 +6,7 @@ one-shot effect, and keeps the drawing open across MCP restarts. Fill Undo and i
 Undo/Redo (including a gradient fragment) are verified in the native UI.
 See [macOS setup and verified limits](docs/macos-live-prototype.md). Live edits change the open
 document; the working-copy guarantees described below apply to headless editing.
+Everyday live edits and Undo: [supported operations](docs/everyday-edits.md).
 Document choice and native dispatch guard: [current implementation and acceptance status](docs/document-context.md).
 Development priorities and acceptance criteria: [macOS roadmap](docs/ROADMAP.md).
 
@@ -565,6 +566,7 @@ on this loop.
 | `live_sync_to_workspace` | `(dest_path)` | medium | Save the live document as a **new** tracked workspace document (atomic write, never overwrites; Operation Record + snapshot). |
 | `live_apply_to_selection` | `(approval_token, fill?, stroke?, stroke_width?, opacity?, dx?, dy?, scale?, rotate?)` | **high** | Apply a validated style and/or simple transform to the live selection (reuses semantics). Approval-gated; Live Operation Record + before/after render. |
 | `live_insert_svg` | `(svg_fragment, approval_token)` | **high** | Insert a safe-parsed SVG fragment into the running document. Approval-gated; recorded + rendered. |
+| `live_edit_selection` | `(operation, approval_token)` | **high** | Managed macOS: duplicate, delete, group, ungroup, raise/lower/front/back. Locked/reference-sensitive cases refuse; each changed call is one native Undo step. |
 | `live_set_selected_text` | `(text, approval_token)` | **high** | Replace the selected text object's content (length/control-char guarded). Approval-gated; recorded + rendered. |
 | `live_export_selection` | `()` | low | Export just the current live selection to a PNG under the live artifacts dir (read-only feedback, no record). |
 | `live_diff_view` | `(operation_id)` | low | Produce a FOCUSED, annotated before/after visual diff of a live op — not two raw window screenshots. REUSES the op's `preview_before`/`preview_after` frames (resolved via the operation id, sandbox-validated), pixel-diffs them (`ImageChops.difference(...).getbbox()`) to a changed-region bbox, and emits ONE overlay (changed bbox + selection outline from the `LiveScene`). Server-minted PNG under the live artifacts dir; returns the workspace-relative path + the pixel changed bbox; linked back to the Live Operation Record (`diff_artifacts`). Artifact-only — no mutation, no record, no approval. |

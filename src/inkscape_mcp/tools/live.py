@@ -15,7 +15,7 @@ from __future__ import annotations
 import contextlib
 import platform
 from pathlib import Path
-from typing import Annotated
+from typing import Annotated, Literal
 
 from fastmcp.exceptions import ToolError
 from pydantic import BaseModel, Field
@@ -60,6 +60,7 @@ from inkscape_mcp.live.transport import (
     LiveContextError,
     LiveDisabled,
     LiveDocumentRef,
+    LiveEditRefused,
     LiveError,
     LiveMutationResult,
     LiveMutationUncertain,
@@ -231,7 +232,7 @@ def _map_live_error(exc: Exception) -> ToolError:
             "the active live transport does not support this operation; "
             "call check_live_support to see which transport supports it"
         )
-    if isinstance(exc, LiveContextError):
+    if isinstance(exc, (LiveContextError, LiveEditRefused)):
         return ToolError(str(exc))
     if isinstance(exc, LiveMutationUncertain):
         return ToolError("edit completion is uncertain; inspect the task drawing before retrying")
@@ -299,7 +300,9 @@ def live_connect(prefer: str = "read") -> LiveSession:
     path): the export-based active-doc read, `live_render_view`, `live_set_viewport`, and
     `live_apply_to_selection` are no-freeze; selection-id reads (`live_get_selection` /
     `live_inspect_selection`) and `live_insert_svg` / `live_set_selected_text` are NOT available
-    over DBus and stay modal. Requires the master gate (`INKSCAPE_MCP_LIVE_ENABLED`). With no
+    over plain DBus and stay modal. Managed macOS adds no-freeze selection, insertion,
+    single-run text, style/transform and structural edits through the one-shot helper.
+    Requires the master gate (`INKSCAPE_MCP_LIVE_ENABLED`). With no
     transport available it fails cleanly without affecting headless tools.
 
     Return shape: `LiveSession` — the chosen `transport`, active document, and connection state.
@@ -848,6 +851,9 @@ def live_apply_to_selection(
     Key params: reuses the headless safe-edit semantics — `fill`/`stroke` colour-validated,
     `stroke_width` a CSS length, `opacity` in [0, 1], transform composed from `dx`/`dy` (both
     required together), `scale` (positive), `rotate` (degrees); at least one input required.
+    Managed macOS edits use document SVG user units, with scale/rotation about document origin;
+    parent transforms are accounted for. A changed call is one Undo step even with several
+    properties or objects. Locked selections refuse. CSS transforms/nested SVG viewports refuse.
     Semantic-only — no arbitrary code, no raw Action (ADR-003). Mutating a running user session is
     HIGH risk: REQUIRES an explicit `approval_token` (refused without one).
 
@@ -927,6 +933,8 @@ def live_set_selected_text(text: str, approval_token: str | None = None) -> Live
 
     Key params: `text` is length-bounded and control-character-rejected (the same guard as the
     headless `replace_text`); it is stored as a text node, so no markup injection is possible.
+    Managed macOS supports single-run, single-line text and preserves the run's formatting
+    and position; multiple runs, flowed text and text paths refuse. One changed call is one Undo.
     Editing a running user session is HIGH risk: REQUIRES an explicit `approval_token` (refused
     without one).
 
@@ -954,6 +962,46 @@ def live_set_selected_text(text: str, approval_token: str | None = None) -> Live
         _logger.error("live_set_selected_text failed", extra={"detail": str(exc)})
         raise _map_live_error(exc) from exc
     return result
+
+
+@mcp.tool
+def live_edit_selection(
+    operation: Literal[
+        "duplicate", "delete", "group", "ungroup", "raise", "lower", "front", "back"
+    ],
+    approval_token: str | None = None,
+) -> LiveEditResult:
+    """Duplicate, delete, group, ungroup or reorder selected objects in managed macOS Inkscape.
+
+    When to use: everyday structural edits in the selected task drawing. Requires the new
+    managed helper; other transports refuse. Respects locked objects/layers. Reordering stays
+    within each parent; grouping requires consecutive siblings in one parent. Ungrouping
+    supports plain groups without inherited style/effects. Deleting referenced objects refuses.
+    Each changed call is one native Undo step; an unchanged call adds no Undo entry.
+    Duplicate returns fresh object ids and remaps internal references. Re-select objects in
+    Inkscape after structural edits before making the next edit.
+
+    Key params: a fixed operation; approval_token is required by the live edit policy.
+    Return shape: LiveEditResult with affected ids and before/after previews.
+    Example: live_edit_selection(operation="duplicate", approval_token="ok").
+    Risk class: high (approval-gated).
+    """
+
+    def op(transport: LiveTransport) -> LiveMutationResult:
+        if not isinstance(transport, ManagedDBusTransport):
+            raise LiveCapabilityUnsupported("structural edits require managed macOS Inkscape")
+        return transport.edit_selection(operation)
+
+    try:
+        return run_live_mutation(
+            tool="live_edit_selection",
+            params={"operation": operation},
+            required_command=LiveCommand.APPLY_TO_SELECTION,
+            op=op,
+            approval_token=approval_token,
+        )
+    except (PolicyViolation, EditError, LiveError) as exc:
+        raise _map_live_error(exc) from exc
 
 
 @mcp.tool

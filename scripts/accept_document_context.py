@@ -31,7 +31,17 @@ from inkscape_mcp.workspace.xml_safety import parse_svg_bytes
 
 SVG = (
     '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100">'
-    '<rect id="box" width="80" height="80" fill="red"/></svg>'
+    '<rect id="box" width="30" height="30" fill="red"/>'
+    '<rect id="second" x="40" width="20" height="20" fill="green"/>'
+    '<rect id="third" x="70" width="20" height="20" fill="blue"/>'
+    '<g id="transformed" transform="translate(5,40) scale(2)">'
+    '<rect id="nested" width="10" height="10"/></g>'
+    '<g id="plain" transform="translate(10,70)"><circle id="inside" r="5"/></g>'
+    '<text id="words" x="40" y="70" style="font-size:10px">'
+    '<tspan id="run" x="40" y="70" style="font-weight:bold">Before</tspan></text>'
+    '<g id="locked" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" '
+    'sodipodi:insensitive="true"><rect id="locked-box" width="2" height="2"/></g>'
+    "</svg>"
 )
 
 
@@ -114,12 +124,66 @@ async def accept(root: Path, keep_gui: bool) -> dict[str, object]:
         await call("live_apply_to_selection", fill="#123456", approval_token="requested")
         after_fill = fingerprint()
         assert before_fill != after_fill
+        # Reapplying the identical style must not add an empty native Undo entry.
+        await call("live_apply_to_selection", fill="#123456", approval_token="requested")
+        assert fingerprint() == after_fill
         # A is the first window in this newly created GUI. Undo/Redo are native document actions.
         doc_path = "/org/inkscape/Inkscape/document/1"
         raw._activate("undo", _variant_empty(), object_path=doc_path)
         assert fingerprint() == before_fill
         raw._activate("redo", _variant_empty(), object_path=doc_path)
         assert fingerprint() == after_fill
+
+        async def check_edit(name: str, ids: str, **params: object) -> dict:
+            raw._activate("select-clear", _variant_empty())
+            raw._activate("select-by-id", _variant_string(ids))
+            before = fingerprint()
+            outcome = await call(name, approval_token="requested", **params)
+            assert outcome["undo_friendly"]
+            after_svg = native.get_document_svg()
+            label = str(params.get("operation", name))
+            (root / f"stage3-{label}.svg").write_text(after_svg)
+            after = fingerprint()
+            assert after != before, (name, params, outcome)
+            raw._activate("undo", _variant_empty(), object_path=doc_path)
+            assert fingerprint() == before, ("Undo", name, params)
+            raw._activate("redo", _variant_empty(), object_path=doc_path)
+            assert fingerprint() == after, ("Redo", name, params)
+            raw._activate("undo", _variant_empty(), object_path=doc_path)
+            assert fingerprint() == before
+            return outcome
+
+        await check_edit(
+            "live_apply_to_selection",
+            "box,second",
+            fill="#abcdef",
+            stroke="#123456",
+            stroke_width="2",
+            opacity=0.4,
+        )
+        await check_edit("live_apply_to_selection", "nested", dx=6, dy=8, scale=1.5, rotate=20)
+        await check_edit("live_set_selected_text", "words", text="Новый & текст")
+        for operation, ids in [
+            ("duplicate", "box,second"),
+            ("delete", "box,second"),
+            ("group", "box,second"),
+            ("ungroup", "plain"),
+            ("raise", "box"),
+            ("lower", "third"),
+            ("front", "box"),
+            ("back", "third"),
+        ]:
+            await check_edit("live_edit_selection", ids, operation=operation)
+        raw._activate("select-clear", _variant_empty())
+        raw._activate("select-by-id", _variant_string("locked-box"))
+        locked_before = fingerprint()
+        await refuses("live_apply_to_selection", fill="blue", approval_token="requested")
+        assert fingerprint() == locked_before
+        # Refusal of mixed text/shape selection is transactional.
+        raw._activate("select-clear", _variant_empty())
+        raw._activate("select-by-id", _variant_string("words,box"))
+        await refuses("live_set_selected_text", text="bad", approval_token="requested")
+        assert fingerprint() == locked_before
 
         fragment = '<circle id="test" cx="50" cy="50" r="10" fill="blue"/>'
         await call("live_insert_svg", svg_fragment=fragment, approval_token="requested")
@@ -187,6 +251,8 @@ async def accept(root: Path, keep_gui: bool) -> dict[str, object]:
             "identical SVG identities",
             "explicit choice",
             "fill and insert Undo/Redo",
+            "style/text/transform/structural edits: one-step Undo/Redo",
+            "locked-layer and invalid-text refusals",
             "native dispatch race refusal",
             "stale binding refusal",
             "A/B selection",

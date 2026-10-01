@@ -119,3 +119,66 @@ def test_execute_before_start_raises_crash() -> None:
     p = _proc()
     with pytest.raises(EngineCrash):
         p.execute("query-x")
+
+
+@pytest.mark.parametrize("polling", [False, True])
+def test_action_error_never_bleeds_into_next_command(
+    monkeypatch: pytest.MonkeyPatch, polling: bool
+) -> None:
+    from inkscape_mcp.engine import process
+
+    if sys.platform == "win32" and not polling:
+        pytest.skip("Windows selectors cannot monitor pipes")
+    monkeypatch.setattr(process, "_POLL_PIPES", polling)
+    p = _proc()
+    p.start()
+    try:
+        for i in range(100):
+            with pytest.raises(EngineActionError, match=f"unknown-{i}"):
+                p.execute(f"unknown-{i}")
+            assert p.execute("query-x").output_lines == ["10"]
+    finally:
+        p.shutdown()
+
+
+@pytest.mark.parametrize("polling", [False, True])
+def test_reader_preserves_split_utf8_and_flushes_incomplete_eof(
+    monkeypatch: pytest.MonkeyPatch, polling: bool
+) -> None:
+    import os
+    import subprocess
+
+    from inkscape_mcp.engine import process
+
+    if sys.platform == "win32" and not polling:
+        pytest.skip("Windows selectors cannot monitor pipes")
+    monkeypatch.setattr(process, "_POLL_PIPES", polling)
+    data = "Кириллица 😀".encode() + b"\xe2"
+    p = _proc()
+    child = subprocess.Popen(
+        [sys.executable, "-c", f"import os; os.write(1,{data!r}); os.write(2,{data!r})"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    assert child.stderr is not None
+    stderr_fd = child.stderr.fileno()
+    original_read = os.read
+    pause_stderr = False
+
+    def read_one(fd: int, size: int) -> bytes:
+        nonlocal pause_stderr
+        # Force a publication boundary after each stderr byte as well as stdout.
+        if fd == stderr_fd:
+            pause_stderr = not pause_stderr
+            if not pause_stderr:
+                raise BlockingIOError
+        return original_read(fd, 1)
+
+    monkeypatch.setattr(process.os, "read", read_one)
+    p._proc = child
+    try:
+        p._read_output()
+        assert p._out == p._err == "Кириллица 😀\ufffd"
+    finally:
+        child.wait(timeout=5)
+        p.shutdown()

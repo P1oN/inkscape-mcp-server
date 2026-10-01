@@ -45,12 +45,16 @@ def test_request_failure_writes_refusal_and_helper_can_recover(
     assert not (tmp_path / "insert-result.tmp").exists()
 
     nonce = "mcp_" + "a" * 32
-    request.write_text(json.dumps({
-        "nonce": nonce,
-        "fragment": '<circle id="new" r="5"/>',
-        "expected_ids": ["old"],
-        "expected_fingerprint": insert_payload.document_fingerprint(helper.svg),
-    }))
+    request.write_text(
+        json.dumps(
+            {
+                "nonce": nonce,
+                "fragment": '<circle id="new" r="5"/>',
+                "expected_ids": ["old"],
+                "expected_fingerprint": insert_payload.document_fingerprint(helper.svg),
+            }
+        )
+    )
     helper.effect()
     result = json.loads(reply.read_text())
     assert result["nonce"] == nonce and result["ok"] is True

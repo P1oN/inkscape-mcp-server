@@ -10,6 +10,16 @@ First public release. A Model Context Protocol (MCP) server that makes Inkscape 
 agent-ready over STDIO.
 
 ### Added
+- Managed macOS everyday edits: multi-property fill/stroke/opacity, document-space transforms,
+  single-run text and `live_edit_selection` for duplication/deletion/grouping/stacking, each
+  with one native Undo transaction and explicit refusal for locked or unsupported structures.
+- Native acceptance covers every managed edit family, Undo/Redo and unchanged-call behavior.
+
+### Fixed
+- Shell responses now collect stderr before publishing the stdout prompt, preventing
+  unknown-action errors from being silently missed or attributed to the following command.
+
+### Original release surface
 - **Headless document lifecycle** — `open_document` / `create_document` into tracked working copies
   keyed by an opaque `doc_id`; originals are never mutated.
 - **Read & inspect** — `inspect_document`, `find_objects`, `validate_document`, `quality_report`

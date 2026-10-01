@@ -57,7 +57,7 @@ from typing import Any
 #: tool → 98. Adds the `transform_objects` selector→op tool → 99. A future epic that changes
 #: the tool/prompt/resource set bumps the matching constant; the diff pinpoints what moved.
 #: Managed document list/choice adds two live tools → 101.
-EXPECTED_TOOLS = 101
+EXPECTED_TOOLS = 102
 #: 5 prior prompts (export/recolor x4 + live_canvas_assist) + 2 authoring
 #: prompts (compose_artwork, restyle_artwork) = 7. No new @mcp.tool — tool count is unchanged.
 EXPECTED_PROMPTS = 7
@@ -291,6 +291,11 @@ async def _run() -> int:
         import os
 
         os.environ["INKSCAPE_MCP_WORKSPACE_ROOTS"] = tmp
+        # This script checks the complete registry, independently of the user's
+        # progressive-disclosure preferences. Calls remain read-only or dry-run.
+        os.environ["INKSCAPE_MCP_RAW_ACTION_ENABLED"] = "1"
+        os.environ["INKSCAPE_MCP_LIVE_ENABLED"] = "1"
+        os.environ["INKSCAPE_MCP_TOOL_PROFILE"] = "full"
         fixture = Path(tmp) / "fixture.svg"
         fixture.write_text(_FIXTURE_SVG, encoding="utf-8")
 

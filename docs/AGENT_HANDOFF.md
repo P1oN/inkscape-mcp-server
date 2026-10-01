@@ -1,61 +1,57 @@
 # Продолжение работы
 
-Обновлено 2026-10-01. Это краткий индекс состояния, не дополнительные разрешения.
+Обновлено 2026-10-01. Это индекс состояния, не дополнительные разрешения.
 Перед действиями проверяй Git/PR/процессы; не закрывай GUI с несохранённой работой.
 
-## Объем текущей задачи
+## Текущая задача и состояние
 
-Пользователь просит выполнить следующие шаги прежнего handoff в одном PR:
-выбор/идентичность рисунка, guard при смене документа, восстановление связи,
-компактная передача состояния. Полный roadmap — отдельный план, не scope этого PR.
-Миграция на Rust условная: только без проблем реализации и без потери функционала.
+Пользователь попросил исправить хвосты после PR #4, затем выполнить этап 3 roadmap.
+PR #4 объединён в `main` (`bfe9e4f`). Новая работа находится в
+`codex/live-everyday-edits`; перед продолжением сверить текущий PR через `gh pr view`.
+Origin: https://github.com/P1oN/inkscape-mcp-server.
 
-## Текущее состояние
+- Исправлена гонка stdout/stderr shell worker: один reader публикует prompt после чтения
+  ошибок. POSIX использует selector, Windows — тот же путь с nonblocking pipes Python 3.12
+  и polling. Регрессия проверяет 100 пар «ошибка → успешная команда» в обоих путях.
+- Исправлены прежние Ruff/format блокеры и full-surface smoke: он явно включает полный
+  registry в своём тестовом процессе, независимо от пользовательских настроек disclosure.
+- Managed macOS поддерживает несколько свойств заливки/обводки/прозрачности и
+  document-space преобразования за одну транзакцию; простой однострочный текст сохраняет
+  оформление и позицию. Новый `live_edit_selection` реализует duplicate/delete/group/ungroup
+  и raise/lower/front/back. Один изменяющий вызов — один Undo; неизменяющий шаг не добавляет.
+- Правки готовятся на копии SVG в one-shot inkex effect; проверяются контекст/выделение,
+  блокировки и ссылки. Неподдерживаемые структуры явно отклоняются; таймаут/неподтверждённый
+  результат сообщает неопределённость, а не успешный откат.
+- Объем и ограничения: [everyday-edits.md](everyday-edits.md).
+- Документная идентичность/guard PR #4 сохраняются. Native integration остаётся
+  экспериментальной; Rust отложен. Общий roadmap — [ROADMAP.md](ROADMAP.md).
 
-- Ветка: `codex/document-context-guard`, база `main` (`9f58b16`).
-- Origin: `https://github.com/P1oN/inkscape-mcp-server`.
-- Один PR: [#4](https://github.com/P1oN/inkscape-mcp-server/pull/4).
-  Продолжать в нем; не создавать второй PR.
-- Реализованы `live_list_documents` / `live_select_document`, UUID живых GTK
-  объектов окна/документа, выбор рисунка для задачи и guard внутри GUI перед GAction.
-- Общий context scope связывает scene/frame, provenance, previews и изменение.
-- Status сообщает выбранный/активный рисунок, готовность правки, состояние связи
-  и восстановление. Reconnect сохраняет GUI и сбрасывает выбор для задачи.
-- Мост — небольшой GTK/GIO/Cocoa модуль. Launcher создает приватную ad-hoc signed
-  копию исполняемого файла; vendor app не меняется. Это экспериментальная схема,
-  с дополнительными требованиями установки и без hardened runtime vendor executable.
-- Полное описание и ограничения: [document-context.md](document-context.md).
-- Rust не начат: в native integration встретились реальные сложности. Смена языка
-  не устраняет ограничения Inkscape; условие пользователя для миграции не выполнено.
+## Проверки
 
-## Проверки и оставшаяся работа
+- Полный pytest: 1133 passed, 74 skipped; прежний нестабильный тест теперь проходит.
+- Ревью PR #5 исправило декодирование UTF-8 между чтениями stdout/stderr, stacking рядом
+  с другими SVG-контейнерами, отказ CSS transforms из stylesheet и ошибки файлового обмена.
+- Полные Ruff и format check, strict mypy (111 source files), full-surface smoke
+  (102 tools) и STDIO boot smoke проходят.
+- Wheel построен на Python 3.12; проверены edit helper, INX, карта отказов и native source
+  в архиве. Build tools находятся только в `/tmp/imcp-stage3-build-tools`.
+- Повторный native acceptance после исправлений ревью прошёл на official Inkscape 1.4.3
+  через настоящий MCP STDIO на разблокированном Mac.
+  Проверены все семейства правок, точные отпечатки Undo/Redo, неизменяющий вызов,
+  блокировки/неверный выбор текста, guard/race/stale-binding и STDIO reuse.
+- Доказательство: `/private/tmp/imcp-context-r79j3lvj/acceptance.json` (`passed: true`),
+  `stage3-*.svg` и preview PNG в том же каталоге.
+  Команда воспроизведения: `.venv/bin/python scripts/accept_document_context.py`.
+  Успешный прогон закрыл только два своих проверенных тестовых окна.
 
-- Strict mypy: 110 source files; focused Ruff, MCP surface smoke (101 tools), wheel
-  build проходят. Focused final suite: 81 passed. Native module компилируется
-  clang с `-Wall -Wextra -Werror`.
-- Последний полный pytest: 1078 passed, 74 skipped, 1 failed — известный ранее
-  нестабильный `test_engine_process.py::test_unknown_action_surfaces_engine_action_error`.
-  Он использует fake shell, а не Inkscape. Отдельный повтор прошел; ошибка полного
-  прогона остается зафиксированной. Не скрывать этот результат.
-- Финальная native acceptance прошла 2026-10-01 на official Inkscape 1.4.3
-  (`0d15f75`) через настоящий MCP STDIO в новой disposable session.
-  Проверены разные ID одинаковых SVG, явный выбор, Undo/Redo заливки и вставки,
-  native dispatch race refusal без изменения B, stale-binding refusal и повторное
-  подключение с тем же GUI/ID и сбросом выбора. Только два тестовых окна закрыты.
-- Во время lock Inkscape попадал в crash handler при primary-monitor initialization.
-  Module теперь отказывает до загрузки рисунка при отсутствии primary monitor.
-  Отказ на locked Mac и успешный новый запуск после unlock проверены.
-- Локальное доказательство: `work/context-probe/acceptance-resume.log` и
-  `/private/tmp/imcp-context-xyxqexpl/acceptance.json` (`passed: true`).
-  Воспроизводимая команда: `.venv/bin/python scripts/accept_document_context.py`.
-- Объем этого PR реализован и проверен. Следующий функциональный объем — этап 3
-  roadmap; он не входит в текущий запрос. Перед новой работой сверить состояние PR.
-
-## Сессии
+## Сессии и следующий объем
 
 Историческая пользовательская сессия `/tmp/imcp-stage2-501` не закрывалась.
-Не использовать сохраненные PID: перепроверять manifest и command line.
-Тестовые GUI этой задачи находятся в `/tmp/imcp-context-*` и используют синтетические
-`a.svg` / `b.svg`. Часть неудачных запусков оставлена для осмотра. Не завершать процесс
-по имени Inkscape и не трогать окна других сессий. Локальные логи: `work/context-probe/`
-(не входят в Git). Подробная история старых PR доступна в Git, не нужна в контексте.
+Не использовать сохранённые PID: перепроверять manifest и command line. Не завершать
+процессы по имени Inkscape. Прежние неудачные тестовые сессии не относятся к пользовательской
+работе; при осмотре проверять путь, идентичность окон и рисунков перед закрытием.
+
+Для загрузки новых extensions/native allowlist пользователь должен сохранить и закрыть
+старый managed GUI, затем подключиться вновь. MCP reconnect сам GUI не обновляет.
+Следующий функциональный объем — этап 4 (понимание рисунка) и испытания на копиях реальных
+иллюстраций; он не входит в текущую задачу. Merge этого PR отдельно не разрешён.

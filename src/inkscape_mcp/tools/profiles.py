@@ -153,7 +153,8 @@ def export_web_profile(
 ) -> ProfileExportResult:
     """Export a web-oriented asset set: a responsive PNG set plus one plain SVG.
 
-       When to use: producing a web-ready asset bundle. For a print PDF use `export_print_profile`; for
+       When to use: producing a web-ready asset bundle. For a print PDF use `export_print_profile`;
+       for
        a square icon set use `create_icon_set`; for a single export use `export_document`.
 
        Key params: PNG widths resolve as — explicit `widths` (each a PNG); else density `scales`
@@ -207,10 +208,12 @@ def create_icon_set(
 ) -> ProfileExportResult:
     """Export a multi-size square PNG icon set from the source document.
 
-       When to use: producing a standard square icon set in one call. For a responsive web bundle use
+       When to use: producing a standard square icon set in one call. For a responsive web bundle
+       use
        `export_web_profile`; for arbitrary batch specs use `export_batch`.
 
-       Key params: `sizes` is the list of square px sizes (defaults to 16, 32, 48, 64, 128, 256). Each
+       Key params: `sizes` is the list of square px sizes (defaults to 16, 32, 48, 64, 128, 256).
+       Each
        must be a positive integer no greater than the configured pixel cap; an out-of-range or
        non-positive size is rejected before Inkscape runs and no partial set is written. `out_dir`
     writes the set into a caller-chosen dir — a relative `out_dir` anchors to the

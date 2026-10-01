@@ -66,6 +66,7 @@ DESTRUCTIVE_TOOLS: frozenset[str] = frozenset(
         "run_raw_action",
         # live: replace / arbitrary-step against the running instance
         "live_set_selected_text",
+        "live_edit_selection",
         "live_session_step",
     }
 )

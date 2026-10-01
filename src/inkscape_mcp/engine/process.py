@@ -14,9 +14,9 @@ output lines always end in ``\\n``; the prompt is the only token that does not â
 one command is "everything up to and including the next ``\\n> ``". This module reads stdout in a
 background thread and frames each command on that ``"\\n> "`` sentinel (plus the banner prompt at
 startup). Action errors do NOT appear on stdout: an unknown action prints
-``InkscapeApplication::parse_actions: could not find action for: <X>`` to STDERR, so a second reader
-thread captures stderr and :func:`EngineProcess.execute` maps that line to a clean, host-path-free
-error.
+``InkscapeApplication::parse_actions: could not find action for: <X>`` to STDERR, so one reader
+thread captures both pipes and :func:`EngineProcess.execute` maps that line to a clean,
+host-path-free error.
 
 SECURITY (sec.12 / X1): the worker is spawned as an ARG LIST with ``shell=False`` (no shell string
 is ever built); the spawn argv is fixed (``[inkscape, "--shell"]``) â€” no client value in it. Every
@@ -28,12 +28,15 @@ hung engine can never block the server. The worker is reaped on idle-timeout and
 
 from __future__ import annotations
 
+import codecs
 import os
 import re
+import selectors
 import shutil
 import subprocess
 import threading
 import time
+from contextlib import ExitStack
 
 from pydantic import BaseModel
 
@@ -47,6 +50,7 @@ _logger = get_logger("engine.process")
 #: newline; only the prompt does not). Framing reads stdout until it ends with ``"\n" + PROMPT`` (a
 #: command's echo line always precedes it) or equals the lone banner prompt.
 PROMPT = "> "
+_POLL_PIPES = os.name == "nt"
 
 #: The plaintext stderr line Inkscape prints for an unknown/misspelled action. Detected and
 #: surfaced as a clean :class:`EngineActionError` (mirrors the "action_absent"
@@ -148,10 +152,8 @@ class EngineProcess:
         except (OSError, ValueError) as exc:
             raise EngineUnavailable(f"could not spawn shell worker: {exc}") from exc
 
-        self._readers = [
-            threading.Thread(target=self._read_stdout, daemon=True),
-            threading.Thread(target=self._read_stderr, daemon=True),
-        ]
+        # Publish stdout only after collecting stderr written before its ready prompt.
+        self._readers = [threading.Thread(target=self._read_output, daemon=True)]
         for t in self._readers:
             t.start()
 
@@ -159,38 +161,60 @@ class EngineProcess:
         self._wait_for_prompt(self._settings.process_timeout_s, draining_banner=True)
         self._last_used = time.monotonic()
 
-    def _read_stdout(self) -> None:
-        if self._proc is None or self._proc.stdout is None:  # pragma: no cover - set before start
+    def _read_output(self) -> None:
+        proc = self._proc
+        if proc is None or proc.stdout is None or proc.stderr is None:
             return
-        fd = self._proc.stdout.fileno()
-        while True:
-            try:
-                chunk = os.read(fd, 65536)
-            except OSError:
-                chunk = b""
-            if not chunk:
-                with self._cond:
-                    self._eof = True
-                    self._cond.notify_all()
-                return
-            with self._cond:
-                self._out += chunk.decode("utf-8", errors="replace")
-                self._cond.notify_all()
-
-    def _read_stderr(self) -> None:
-        if self._proc is None or self._proc.stderr is None:  # pragma: no cover - set before start
-            return
-        fd = self._proc.stderr.fileno()
-        while True:
-            try:
-                chunk = os.read(fd, 65536)
-            except OSError:
-                chunk = b""
-            if not chunk:
-                return
-            with self._cond:
-                self._err += chunk.decode("utf-8", errors="replace")
-                self._cond.notify_all()
+        stdout_fd, stderr_fd = proc.stdout.fileno(), proc.stderr.fileno()
+        active = {stdout_fd, stderr_fd}
+        decoders = {fd: codecs.getincrementaldecoder("utf-8")(errors="replace") for fd in active}
+        with ExitStack() as stack:
+            # Python >=3.12 supports nonblocking Windows pipes, but Windows selectors
+            # support sockets only. Poll the same single-reader path there.
+            selector = None if _POLL_PIPES else stack.enter_context(selectors.DefaultSelector())
+            for fd in active:
+                os.set_blocking(fd, False)
+                if selector is not None:
+                    selector.register(fd, selectors.EVENT_READ)
+            while active:
+                if selector is None:
+                    time.sleep(0.005)
+                else:
+                    selector.select()
+                chunks: dict[int, bytes] = {}
+                # Read stdout first, then drain stderr before publishing either. The
+                # child writes synchronous action errors before its stdout prompt.
+                for fd in (stdout_fd, stderr_fd):
+                    if fd not in active:
+                        continue
+                    while True:
+                        try:
+                            chunk = os.read(fd, 65536)
+                        except BlockingIOError:
+                            break
+                        except OSError as exc:
+                            if getattr(exc, "winerror", None) == 232:  # ERROR_NO_DATA
+                                break
+                            chunk = b""
+                        chunks[fd] = chunks.get(fd, b"") + chunk
+                        if not chunk:
+                            active.remove(fd)
+                            if selector is not None:
+                                selector.unregister(fd)
+                            break
+                        if fd == stdout_fd:
+                            break
+                if chunks:
+                    with self._cond:
+                        for fd, chunk in chunks.items():
+                            decoded = decoders[fd].decode(chunk, final=fd not in active)
+                            if fd == stderr_fd:
+                                self._err += decoded
+                            else:
+                                self._out += decoded
+                        if stdout_fd not in active:
+                            self._eof = True
+                        self._cond.notify_all()
 
     def is_alive(self) -> bool:
         """True iff the worker process is spawned and has not exited."""
@@ -234,6 +258,8 @@ class EngineProcess:
         proc = self._proc
         if proc is None:
             return
+        for reader in self._readers:
+            reader.join(timeout=2)
         for stream in (proc.stdin, proc.stdout, proc.stderr):
             try:
                 if stream is not None:

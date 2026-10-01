@@ -39,9 +39,15 @@ def install_insertion_helper() -> None:
     target = Path(directory) / "extensions"
     target.mkdir(parents=True, exist_ok=True)
     source = Path(__file__).parent
-    for name in ("inkscape_mcp_insert.py", "inkscape_mcp_insert.inx"):
+    for name in (
+        "inkscape_mcp_insert.py",
+        "inkscape_mcp_insert.inx",
+        "inkscape_mcp_edit.py",
+        "inkscape_mcp_edit.inx",
+    ):
         shutil.copyfile(source / "helper_extension" / name, target / name)
     shutil.copyfile(source / "insert_payload.py", target / "inkscape_mcp_insert_payload.py")
+    shutil.copyfile(source / "edit_errors.py", target / "inkscape_mcp_edit_errors.py")
     vendor = Path(_binary("inkscape")).resolve().parents[1] / "Resources/share/inkscape/extensions"
     if not (vendor / "inkex").is_dir():
         raise RuntimeError("official Inkscape inkex source is unavailable")

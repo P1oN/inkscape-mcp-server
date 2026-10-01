@@ -9,7 +9,7 @@
 
 inkscape-mcp — an MCP server that makes Inkscape/SVG documents agent-ready: inspect, edit safely (reversible), validate, render, and export.
 
-Surface: 101 tools, 7 prompts, 16 resources.
+Surface: 102 tools, 7 prompts, 16 resources.
 
 ## Run & transport
 Transport: STDIO only (local). No HTTP.
@@ -1346,7 +1346,8 @@ Description:
         Key params: `series` (sanitized; defaults to `run`) groups frames into a folder under
         `artifacts/frames/<series>/`; the index is derived from the filesystem (highest existing
         `frame-NNN` + 1) — monotonic, survives a restart, never clobbers. `label` is folded into the
-        frame name. Renders the whole canvas exactly like `render_preview` (no UI chrome). INLINE RASTER
+        frame name. Renders the whole canvas exactly like `render_preview` (no UI chrome). INLINE
+        RASTER
     : the PNG is returned inline by default (gated by `max_output_bytes`); `inline=False`
         returns only the structured result. Do NOT `Read` the returned path — view the inline image
         (the path is server-side, workspace-relative, not on your filesystem).
@@ -1366,10 +1367,12 @@ Key params: doc_id: string, sizes: array | null, out_dir: string | null, name_pr
 Description:
     Export a multi-size square PNG icon set from the source document.
 
-       When to use: producing a standard square icon set in one call. For a responsive web bundle use
+       When to use: producing a standard square icon set in one call. For a responsive web bundle
+       use
        `export_web_profile`; for arbitrary batch specs use `export_batch`.
 
-       Key params: `sizes` is the list of square px sizes (defaults to 16, 32, 48, 64, 128, 256). Each
+       Key params: `sizes` is the list of square px sizes (defaults to 16, 32, 48, 64, 128, 256).
+       Each
        must be a positive integer no greater than the configured pixel cap; an out-of-range or
        non-positive size is rejected before Inkscape runs and no partial set is written. `out_dir`
     writes the set into a caller-chosen dir — a relative `out_dir` anchors to the
@@ -1393,11 +1396,13 @@ Description:
        When to use: exporting many sizes/formats/objects in one call. For a single export use
        `export_document` / `export_object`; for a standard icon set use `create_icon_set`.
 
-       Key params: `specs` is a typed list (each: `format` png/pdf/svg, optional `width_px`, optional
+       Key params: `specs` is a typed list (each: `format` png/pdf/svg, optional `width_px`,
+       optional
        `object_id` for a single object). Bounded: at most a fixed number of specs per call and a
        total-output byte budget (`byte_budget`, default: the per-document artifact budget).
        `dry_run=True` (DEFAULT) validates and returns the plan + projected sizes + `within_budget`,
-       writing nothing; `dry_run=False` refuses cleanly if the projection exceeds the budget. `out_dir`
+       writing nothing; `dry_run=False` refuses cleanly if the projection exceeds the budget.
+       `out_dir`
     writes into a caller-chosen dir — relative anchors to the workspace ROOT,
        sandbox-checked (out-of-workspace rejected "path rejected: outside workspace"); `name_prefix`
        tags each file.
@@ -1518,7 +1523,8 @@ Key params: doc_id: string, width_px: integer, widths: array | null, scales: arr
 Description:
     Export a web-oriented asset set: a responsive PNG set plus one plain SVG.
 
-       When to use: producing a web-ready asset bundle. For a print PDF use `export_print_profile`; for
+       When to use: producing a web-ready asset bundle. For a print PDF use `export_print_profile`;
+       for
        a square icon set use `create_icon_set`; for a single export use `export_document`.
 
        Key params: PNG widths resolve as — explicit `widths` (each a PNG); else density `scales`
@@ -1561,10 +1567,12 @@ Key params: doc_id: string, width_px: integer | null, name: string | null, inlin
 Description:
     Render a PNG preview of the whole document into the artifacts dir.
 
-        When to use: a quick visual check of the whole document. For a final file use `export_document`;
+        When to use: a quick visual check of the whole document. For a final file use
+        `export_document`;
         for one object use `export_object`; for an ordered run series use `capture_frame`.
 
-        Key params: `width_px` scales the raster (height follows the document aspect ratio); omit for
+        Key params: `width_px` scales the raster (height follows the document aspect ratio); omit
+        for
         intrinsic size. Oversized requests are rejected before Inkscape runs. `name` tags the file
         (successive calls do NOT clobber, — each render gets a unique frame name). INLINE RASTER
     : by default the PNG is also returned as an MCP image block so the agent SEES it without
@@ -1572,7 +1580,8 @@ Description:
         filesystem); gated by `max_output_bytes` (~5 MiB default) and skipped for an oversized
         render; `inline=False` returns only the structured result.
 
-        Return shape: `PreviewResult` — `artifact_path` / `workspace_relative_path` (same root-relative
+        Return shape: `PreviewResult` — `artifact_path` / `workspace_relative_path` (same
+        root-relative
         value), `format`, `width_px`/`height_px` (TRUE on-disk size), `stale`. With an inline
         image, a `ToolResult` carrying the same structured fields plus the image block.
 
@@ -1677,6 +1686,9 @@ Description:
     Key params: reuses the headless safe-edit semantics — `fill`/`stroke` colour-validated,
     `stroke_width` a CSS length, `opacity` in [0, 1], transform composed from `dx`/`dy` (both
     required together), `scale` (positive), `rotate` (degrees); at least one input required.
+    Managed macOS edits use document SVG user units, with scale/rotation about document origin;
+    parent transforms are accounted for. A changed call is one Undo step even with several
+    properties or objects. Locked selections refuse. CSS transforms/nested SVG viewports refuse.
     Semantic-only — no arbitrary code, no raw Action (ADR-003). Mutating a running user session is
     HIGH risk: REQUIRES an explicit `approval_token` (refused without one).
 
@@ -1728,7 +1740,9 @@ Description:
     path): the export-based active-doc read, `live_render_view`, `live_set_viewport`, and
     `live_apply_to_selection` are no-freeze; selection-id reads (`live_get_selection` /
     `live_inspect_selection`) and `live_insert_svg` / `live_set_selected_text` are NOT available
-    over DBus and stay modal. Requires the master gate (`INKSCAPE_MCP_LIVE_ENABLED`). With no
+    over plain DBus and stay modal. Managed macOS adds no-freeze selection, insertion,
+    single-run text, style/transform and structural edits through the one-shot helper.
+    Requires the master gate (`INKSCAPE_MCP_LIVE_ENABLED`). With no
     transport available it fails cleanly without affecting headless tools.
 
     Return shape: `LiveSession` — the chosen `transport`, active document, and connection state.
@@ -1780,6 +1794,25 @@ Description:
     Example: `live_disconnect()`
 
     Risk class: low (tears down the transport; no document mutation).
+
+#### live_edit_selection
+Risk class: high
+Key params: operation: string, approval_token: string | null
+Description:
+    Duplicate, delete, group, ungroup or reorder selected objects in managed macOS Inkscape.
+
+    When to use: everyday structural edits in the selected task drawing. Requires the new
+    managed helper; other transports refuse. Respects locked objects/layers. Reordering stays
+    within each parent; grouping requires consecutive siblings in one parent. Ungrouping
+    supports plain groups without inherited style/effects. Deleting referenced objects refuses.
+    Each changed call is one native Undo step; an unchanged call adds no Undo entry.
+    Duplicate returns fresh object ids and remaps internal references. Re-select objects in
+    Inkscape after structural edits before making the next edit.
+
+    Key params: a fixed operation; approval_token is required by the live edit policy.
+    Return shape: LiveEditResult with affected ids and before/after previews.
+    Example: live_edit_selection(operation="duplicate", approval_token="ok").
+    Risk class: high (approval-gated).
 
 #### live_export_selection
 Risk class: low
@@ -2010,6 +2043,8 @@ Description:
 
     Key params: `text` is length-bounded and control-character-rejected (the same guard as the
     headless `replace_text`); it is stored as a text node, so no markup injection is possible.
+    Managed macOS supports single-run, single-line text and preserves the run's formatting
+    and position; multiple runs, flowed text and text paths refuse. One changed call is one Undo.
     Editing a running user session is HIGH risk: REQUIRES an explicit `approval_token` (refused
     without one).
 
@@ -2161,18 +2196,21 @@ Description:
        implicitly — it is an explicit maintenance sweep.
 
        Key params: none beyond `doc_id`. Retains the last N snapshots and all within the keep-days
-       window (configurable), bounded by absolute hard caps on count and bytes; deletes the rest plus
+       window (configurable), bounded by absolute hard caps on count and bytes; deletes the rest
+       plus
        orphaned Operation Records. In the SAME pass it prunes the doc root's loop/live render frames
     by age + byte budget, never deleting a frame still referenced by a Live Operation
        Record. The current working copy and original are never touched, so the restore chain stays
        intact.
 
-       Return shape: `PruneResult` — `pruned_snapshot_ids`, `pruned_operation_ids`, and `live_frames`
+       Return shape: `PruneResult` — `pruned_snapshot_ids`, `pruned_operation_ids`, and
+       `live_frames`
        (the frame pruning stats).
 
        Example: `prune_snapshots(doc_id)`
 
-       Risk class: low (deletes only disposable, superseded server state under a deterministic policy;
+       Risk class: low (deletes only disposable, superseded server state under a deterministic
+       policy;
        authoritative current state is never affected).
 
 #### restore_snapshot

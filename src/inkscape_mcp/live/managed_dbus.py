@@ -17,7 +17,7 @@ from collections.abc import Iterator
 from contextlib import contextmanager
 from pathlib import Path
 from threading import RLock, local
-from typing import ClassVar
+from typing import Any, ClassVar
 from uuid import uuid4
 
 from inkscape_mcp.config import Settings
@@ -34,6 +34,7 @@ from inkscape_mcp.live.dbus_backend import (
     _variant_empty,
     _variant_string,
 )
+from inkscape_mcp.live.edit_errors import EDIT_REFUSALS
 from inkscape_mcp.live.insert_payload import document_fingerprint, prepare_fragment
 from inkscape_mcp.live.managed_scene import document_ref, object_info, scene_from_svg
 from inkscape_mcp.live.protocol import LiveCommand
@@ -42,6 +43,7 @@ from inkscape_mcp.live.transport import (
     LiveConnectionError,
     LiveContextError,
     LiveDocumentRef,
+    LiveEditRefused,
     LiveError,
     LiveMutationResult,
     LiveMutationUncertain,
@@ -56,6 +58,7 @@ from inkscape_mcp.workspace.xml_safety import UnsafeXMLError, parse_svg_bytes
 ENV_STDOUT = "INKSCAPE_MCP_MANAGED_STDOUT"
 ENV_DIR = "INKSCAPE_MCP_MANAGED_DIR"
 INSERT_ACTION = "org.inkscape-mcp.insert.noprefs"
+EDIT_ACTION = "org.inkscape-mcp.edit.noprefs"
 _NUMBER = re.compile(r"^-?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$")
 _SELECTION_LINE = re.compile(r"^(\S+) cloned: (?:true|false) ref: \d+ href: \d+ total href: \d+$")
 _LOCK = RLock()
@@ -152,7 +155,7 @@ class ManagedDBusTransport(DBusTransport):
                 super()._activate(action, parameter, object_path=object_path)
 
         except LiveConnectionError as exc:
-            if action in {"object-set-property", INSERT_ACTION}:
+            if action in {"object-set-property", INSERT_ACTION, EDIT_ACTION}:
                 raise LiveMutationUncertain(
                     "edit completion uncertain; inspect the task drawing before retrying"
                 ) from exc
@@ -173,6 +176,7 @@ class ManagedDBusTransport(DBusTransport):
             LiveCommand.APPLY_TO_SELECTION,
             LiveCommand.GET_SCENE,
             LiveCommand.INSERT_SVG,
+            LiveCommand.SET_SELECTED_TEXT,
         }
     )
 
@@ -190,16 +194,22 @@ class ManagedDBusTransport(DBusTransport):
             )
         if not probe.available or not cls._insert_available(settings.process_timeout_s):
             probe.supported_commands.remove(LiveCommand.INSERT_SVG.value)
+        if not probe.available or not cls._effect_available(
+            settings.process_timeout_s, EDIT_ACTION
+        ):
+            probe.supported_commands.remove(LiveCommand.SET_SELECTED_TEXT.value)
         return probe
 
     @classmethod
     def _insert_available(cls, timeout: float) -> bool:
+        return cls._effect_available(timeout, INSERT_ACTION)
+
+    @classmethod
+    def _effect_available(cls, timeout: float, action: str) -> bool:
         if not os.environ.get(ENV_DIR):
             return False
         try:
-            result = run_process(
-                cls._actions_call_argv("Describe", INSERT_ACTION), timeout_s=timeout
-            )
+            result = run_process(cls._actions_call_argv("Describe", action), timeout_s=timeout)
             return (
                 result.returncode == 0
                 and not result.timed_out
@@ -211,6 +221,8 @@ class ManagedDBusTransport(DBusTransport):
     def supports(self, command: LiveCommand) -> bool:
         if command == LiveCommand.INSERT_SVG:
             return self._insert_available(self._settings.process_timeout_s)
+        if command == LiveCommand.SET_SELECTED_TEXT:
+            return self._effect_available(self._settings.process_timeout_s, EDIT_ACTION)
         return super().supports(command)
 
     def is_connected(self) -> bool:
@@ -417,13 +429,130 @@ class ManagedDBusTransport(DBusTransport):
                 request.unlink(missing_ok=True)
                 reply.unlink(missing_ok=True)
 
+    def _edit_selection(self, operation: str, **params: object) -> LiveMutationResult:
+        if not self._effect_available(self._settings.process_timeout_s, EDIT_ACTION):
+            raise LiveCapabilityUnsupported(
+                "save and restart managed Inkscape to load everyday edits"
+            )
+        directory = os.environ.get(ENV_DIR)
+        if not directory:
+            raise LiveConnectionError("managed edit directory is unavailable")
+        root = Path(directory)
+        request, reply = root / "insert-request.json", root / "insert-result.json"
+        nonce = "mcp_" + uuid4().hex
+        with self._operation():
+            self._require_selected()
+            selected = self.get_selection()
+            if not selected.object_ids:
+                raise LiveError("select an object in the managed Inkscape window first")
+            doc = parse_svg_bytes(self.get_document_svg().encode()).getroot()
+            payload = {
+                "nonce": nonce,
+                "operation": operation,
+                "selection": selected.object_ids,
+                "expected_ids": [e.get("id") for e in doc.iter() if e.get("id")],
+                "expected_fingerprint": document_fingerprint(doc),
+                **params,
+            }
+            pending = root / "insert-request.tmp"
+            activated = False
+            failed = False
+            try:
+                reply.unlink(missing_ok=True)
+                pending.write_text(json.dumps(payload))
+                pending.chmod(0o600)
+                pending.replace(request)
+                try:
+                    activated = True
+                    self._activate(EDIT_ACTION, _variant_empty())
+                except LiveConnectionError as exc:
+                    if not reply.is_file():
+                        raise LiveMutationUncertain(
+                            "edit activation did not complete; "
+                            "inspect the task drawing before retrying"
+                        ) from exc
+                deadline = time.monotonic() + self._settings.process_timeout_s
+                while time.monotonic() < deadline:
+                    if reply.is_file():
+                        result = self._read_edit_reply(reply, nonce)
+                        if not result["ok"]:
+                            reason = result.get("error", "")
+                            if reason not in EDIT_REFUSALS:
+                                reason = "invalid document or selection"
+                            raise LiveEditRefused("Inkscape refused edit: " + reason)
+                        try:
+                            current = parse_svg_bytes(self.get_document_svg().encode()).getroot()
+                        except (LiveError, OSError, UnsafeXMLError) as exc:
+                            raise LiveMutationUncertain(
+                                "edit may have applied; inspect the task drawing before retrying"
+                            ) from exc
+                        if document_fingerprint(current) == result["fingerprint"]:
+                            return LiveMutationResult(
+                                affected_ids=result["ids"],
+                                count=len(result["ids"]),
+                                detail=f"{operation}: one Undo step; unchanged calls add no step",
+                                undo_friendly=True,
+                            )
+                    time.sleep(0.05)
+                raise LiveMutationUncertain(
+                    "edit result not confirmed; inspect the task drawing before retrying"
+                )
+            except OSError as exc:
+                failed = True
+                if activated:
+                    raise LiveMutationUncertain(
+                        "edit exchange failed; inspect the task drawing before retrying"
+                    ) from exc
+                raise LiveError("could not prepare managed edit request") from exc
+            except BaseException:
+                failed = True
+                raise
+            finally:
+                cleanup_failed = False
+                for path in (request, reply, pending):
+                    try:
+                        path.unlink(missing_ok=True)
+                    except OSError:
+                        cleanup_failed = True
+                if cleanup_failed and not failed:
+                    raise LiveMutationUncertain(
+                        "edit cleanup failed; inspect the task drawing before retrying"
+                    )
+
+    @staticmethod
+    def _read_edit_reply(reply: Path, nonce: str) -> dict[str, Any]:
+        try:
+            if reply.stat().st_size > 1024 * 1024:
+                raise ValueError("oversized reply")
+            result = json.loads(reply.read_text())
+            if not isinstance(result, dict) or result.get("nonce") != nonce:
+                raise ValueError("stale reply")
+            if type(result.get("ok")) is not bool:
+                raise ValueError("invalid discriminator")
+            if result["ok"] and (
+                not isinstance(result.get("fingerprint"), str)
+                or not isinstance(result.get("ids"), list)
+                or any(not isinstance(oid, str) for oid in result["ids"])
+            ):
+                raise ValueError("invalid result")
+            if not result["ok"] and not isinstance(result.get("error", ""), str):
+                raise ValueError("invalid refusal")
+        except (OSError, ValueError, TypeError) as exc:
+            raise LiveMutationUncertain(
+                "invalid edit reply; inspect the task drawing before retrying"
+            ) from exc
+        return result
+
     def apply_to_selection(
         self, *, style: dict[str, str], transform: str | None
     ) -> LiveMutationResult:
-        # This first milestone intentionally supports one fill edit = one native Undo
-        # entry. Do not pretend several separate GActions form an atomic transaction.
+        if self._effect_available(self._settings.process_timeout_s, EDIT_ACTION):
+            return self._edit_selection("style", style=style, transform=transform)
+        # Preserve fill support in an already running pre-stage-3 GUI.
         if set(style) != {"fill"} or transform is not None:
-            raise LiveError("managed prototype supports a single fill change only")
+            raise LiveCapabilityUnsupported(
+                "save and restart managed Inkscape to load everyday edits"
+            )
         with self._operation():
             self._require_selected()
             selected = self.get_selection()
@@ -434,3 +563,20 @@ class ManagedDBusTransport(DBusTransport):
         result.count = selected.count
         result.detail = "changed fill on the current selection; use Inkscape Undo to revert"
         return result
+
+    def set_selected_text(self, text: str) -> LiveMutationResult:
+        return self._edit_selection("text", text=text)
+
+    def edit_selection(self, operation: str) -> LiveMutationResult:
+        if operation not in {
+            "duplicate",
+            "delete",
+            "group",
+            "ungroup",
+            "raise",
+            "lower",
+            "front",
+            "back",
+        }:
+            raise LiveError("unsupported selection operation")
+        return self._edit_selection(operation)
