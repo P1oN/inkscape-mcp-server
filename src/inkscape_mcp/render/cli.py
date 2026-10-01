@@ -543,7 +543,7 @@ def _finalize_output(
         doc_id=doc_id,
         artifact_path=artifact_rel,
         workspace_relative_path=ws_rel,
-        artifact=artifact_link(out),
+        artifact=artifact_link(out, settings),
         format=fmt,
         width_px=width_px,
         height_px=height_px,

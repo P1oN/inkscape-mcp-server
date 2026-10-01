@@ -14,7 +14,9 @@ from contextlib import ExitStack, contextmanager
 from pathlib import Path
 
 
-def _open_handle(path: Path, *, directory: bool, exclusive: bool = False) -> int:
+def _open_handle(
+    path: Path, *, directory: bool, exclusive: bool = False, read_only: bool = False
+) -> int:
     if sys.platform != "win32":
         raise RuntimeError("Windows file handles require Windows")
     import ctypes
@@ -45,10 +47,10 @@ def _open_handle(path: Path, *, directory: bool, exclusive: bool = False) -> int
     # OPEN_ALWAYS. Never truncate until the opened handle has passed the reparse check.
     handle = create(
         str(path),
-        0x80000000 if directory else 0x40000000,
+        0x80000000 if directory or read_only else 0x40000000,
         0x00000003 if directory else 0,
         None,
-        3 if directory else (1 if exclusive else 4),
+        3 if directory or read_only else (1 if exclusive else 4),
         0x00200000 | (0x02000000 if directory else 0),
         None,
     )
@@ -127,6 +129,27 @@ def write_fd(path: Path, *, exclusive: bool = False) -> Iterator[int]:
             raise
         try:
             os.ftruncate(fd, 0)
+            yield fd
+        finally:
+            os.close(fd)
+
+
+@contextmanager
+def read_fd(path: Path) -> Iterator[int]:
+    """Open an existing non-reparse file while ancestors are held against renames."""
+    if sys.platform != "win32":
+        raise RuntimeError("Windows file handles require Windows")
+    import msvcrt
+
+    with ExitStack() as stack:
+        _lock_ancestors(stack, path.parent)
+        handle = _open_handle(path, directory=False, read_only=True)
+        try:
+            fd = msvcrt.open_osfhandle(handle, os.O_RDONLY | os.O_BINARY)
+        except BaseException:
+            _close_handle(handle)
+            raise
+        try:
             yield fd
         finally:
             os.close(fd)

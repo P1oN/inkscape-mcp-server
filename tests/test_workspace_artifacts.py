@@ -88,3 +88,124 @@ def test_mcp_resource_save_and_root_selection(
         asyncio.run(run())
     finally:
         get_settings.cache_clear()
+
+
+def test_artifact_read_uses_output_limit_and_keeps_import_limit(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from inkscape_mcp.config import Settings
+    from inkscape_mcp.workspace import artifacts
+    from inkscape_mcp.workspace.limits import LimitExceeded, check_input_size
+
+    settings = Settings(workspace_roots=[tmp_path.resolve()], max_input_bytes=4, max_output_bytes=8)
+    monkeypatch.setattr(artifacts, "get_settings", lambda: settings)
+    file = tmp_path / "export.bin"
+    file.write_bytes(b"12345678")
+    link = artifact_link(file, settings)
+    token = link.uri.rsplit("/", 1)[1]
+    assert read_artifact(link.root_id, token) == b"12345678"
+    with pytest.raises(LimitExceeded):
+        check_input_size(file, settings)
+    file.write_bytes(b"123456789")
+    with pytest.raises(LimitExceeded):
+        read_artifact(link.root_id, token)
+
+
+@pytest.mark.parametrize("replacement", ["file", "parent", "root"])
+def test_artifact_rejects_symlink_swap_after_path_validation(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, replacement: str
+) -> None:
+    from inkscape_mcp.config import Settings
+    from inkscape_mcp.workspace import artifacts
+
+    root = tmp_path / "workspace"
+    (root / "sub").mkdir(parents=True)
+    file = root / "sub" / "image.bin"
+    file.write_bytes(b"safe")
+    outside = tmp_path / "outside"
+    (outside / "sub").mkdir(parents=True)
+    (outside / "image.bin").write_bytes(b"secret")
+    (outside / "sub" / "image.bin").write_bytes(b"secret")
+    settings = Settings(workspace_roots=[root.resolve()])
+    monkeypatch.setattr(artifacts, "get_settings", lambda: settings)
+    link = artifact_link(file, settings)
+    resolve = artifacts.resolve_read_path
+
+    def swapped(path, settings):
+        resolved = resolve(path, settings)
+        target = (
+            file if replacement == "file" else (file.parent if replacement == "parent" else root)
+        )
+        target.rename(target.with_name(target.name + "-original"))
+        target.symlink_to(
+            outside / "image.bin" if replacement == "file" else outside,
+            target_is_directory=replacement != "file",
+        )
+        return resolved
+
+    monkeypatch.setattr(artifacts, "resolve_read_path", swapped)
+    with pytest.raises(OSError):
+        read_artifact(link.root_id, link.uri.rsplit("/", 1)[1])
+
+
+@pytest.mark.skipif(os.name == "nt", reason="Windows read handle denies concurrent writes")
+def test_artifact_growth_after_fstat_remains_bounded(tmp_path: Path, monkeypatch) -> None:
+    from inkscape_mcp.config import Settings
+    from inkscape_mcp.workspace import artifacts
+    from inkscape_mcp.workspace.limits import LimitExceeded
+
+    settings = Settings(workspace_roots=[tmp_path.resolve()], max_output_bytes=4)
+    monkeypatch.setattr(artifacts, "get_settings", lambda: settings)
+    file = tmp_path / "image.bin"
+    file.write_bytes(b"safe")
+    link = artifact_link(file, settings)
+    fstat = os.fstat
+
+    def grow(fd):
+        info = fstat(fd)
+        file.write_bytes(b"larger than the cap")
+        return info
+
+    monkeypatch.setattr(artifacts.os, "fstat", grow)
+    with pytest.raises(LimitExceeded):
+        read_artifact(link.root_id, link.uri.rsplit("/", 1)[1])
+
+
+@pytest.mark.skipif(os.name == "nt", reason="Windows read handle prevents replacement")
+def test_artifact_reads_the_opened_file_after_path_replacement(tmp_path: Path, monkeypatch) -> None:
+    from inkscape_mcp.config import Settings
+    from inkscape_mcp.workspace import artifacts
+
+    root = tmp_path / "workspace"
+    root.mkdir()
+    file = root / "image.bin"
+    file.write_bytes(b"safe")
+    outside = tmp_path / "secret.bin"
+    outside.write_bytes(b"secret")
+    settings = Settings(workspace_roots=[root.resolve()])
+    monkeypatch.setattr(artifacts, "get_settings", lambda: settings)
+    link = artifact_link(file, settings)
+    fstat = os.fstat
+
+    def swap_opened_file(fd):
+        info = fstat(fd)
+        file.rename(root / "original.bin")
+        file.symlink_to(outside)
+        return info
+
+    monkeypatch.setattr(artifacts.os, "fstat", swap_opened_file)
+    assert read_artifact(link.root_id, link.uri.rsplit("/", 1)[1]) == b"safe"
+
+
+@pytest.mark.skipif(os.name == "nt", reason="POSIX named pipe")
+def test_artifact_rejects_named_pipe_without_blocking(tmp_path: Path, monkeypatch) -> None:
+    from inkscape_mcp.config import Settings
+    from inkscape_mcp.workspace import artifacts
+
+    settings = Settings(workspace_roots=[tmp_path.resolve()])
+    monkeypatch.setattr(artifacts, "get_settings", lambda: settings)
+    pipe = tmp_path / "pipe"
+    os.mkfifo(pipe)
+    link = artifact_link(pipe, settings)
+    with pytest.raises(ValueError, match="regular file"):
+        read_artifact(link.root_id, link.uri.rsplit("/", 1)[1])

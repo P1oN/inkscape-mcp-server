@@ -204,7 +204,8 @@ For an outside-workspace error, choose a relative destination such as `output/fi
 that anchor. Absolute host paths remain private. Save and export results now include an
 `artifact` with a root-qualified `inkscape://artifact/{root_key}/{token}` URI. Read that URI using
 MCP resources, including when the server is remote. Existing relative path fields keep their
-meaning. Resource reads recheck containment, symlinks and input-size limits; artifacts may
+meaning. Resource reads enforce containment, no-follow access and the artifact `max_output_bytes` limit
+on the opened file; SVG imports retain their separate `max_input_bytes` limit. Artifacts may
 become unavailable after deletion/pruning. A resource URI is not a public HTTP download URL.
 
 ## Group/layer organization (headless working copies)

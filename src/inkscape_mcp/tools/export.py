@@ -33,6 +33,7 @@ from inkscape_mcp.registry import DocEntry, get_registry
 from inkscape_mcp.render.cli import (
     InvalidObjectId,
     RenderError,
+    _unique_token,
     is_safe_object_id,
 )
 from inkscape_mcp.render.cli import (
@@ -379,7 +380,13 @@ def render_preview(
                 doc_id, region, width_px if width_px is not None else 512, background
             )
         elif object_id is not None:
-            result = _export_object(doc_id, object_id, "png", width_px=width_px)
+            result = _export_object(
+                doc_id,
+                object_id,
+                "png",
+                width_px=width_px,
+                name_prefix=f"preview-{_unique_token()}",
+            )
         else:
             result = _render_preview(doc_id, width_px=width_px, name=name)
     except (EditError, InvalidObjectId, UnsafeXMLError) as exc:

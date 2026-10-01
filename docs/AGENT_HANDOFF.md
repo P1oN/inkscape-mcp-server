@@ -157,3 +157,20 @@ framing and path separator issues; shell frames normalize CRLF, registry source 
 use portable forward slashes, and DBus export filenames use forward slashes before
 GVariant validation. macOS tests requiring actual POSIX ownership/locking are explicitly
 platform-gated; the launch-policy fake uses the same socket path construction as production.
+
+## PR #7 review corrections
+
+Roadmap repetition scope explicitly names polylines and rectangles. Linked repeats set
+both SVG2 href and legacy XLink href. Render artifacts use the caller's settings, and
+object previews reuse unique preview tokens to preserve before/after files. Engine-routing
+test settings retain their configured workspace roots instead of constructing rootless settings.
+Artifact resources apply max_output_bytes independently of SVG imports. POSIX reads traverse
+with no-follow directory descriptors; Windows reads reuse native no-reparse handles with
+ancestor rename protection. Size/type validation and bounded reading use the opened file.
+Regression coverage includes file/parent/root symlink swaps, post-open replacement, size growth,
+non-regular files, explicit roots and repeated object preview preservation. GUI acceptance
+is unchanged; these fixes require the usual MCP reconnect to load new code.
+
+Local validation after these review corrections: 1286 passed, 12 skipped with Inkscape
+1.4.3; ruff lint/format, strict mypy for macOS and Windows, diff check, MCP surface smoke
+and fresh STDIO boot smoke passed. Native Windows read-handle tests run in CI.

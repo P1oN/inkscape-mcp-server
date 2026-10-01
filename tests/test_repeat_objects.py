@@ -89,6 +89,7 @@ def test_apply_dry_run_refs_coordinates_and_single_snapshot(doc, mode):
                 matrix, parse_transform(root.xpath('//*[@id="leaf"]')[0].get("transform"))
             )
             assert clone.get("href") == "#leaf"
+            assert clone.get("{http://www.w3.org/1999/xlink}href") == "#leaf"
         else:
             assert clone.get("id") != "leaf"
             assert references(clone[-1]) == {clone[0][0].get("id")}

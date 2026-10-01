@@ -61,3 +61,21 @@ def test_open_parent_cannot_be_renamed_during_write(tmp_path: Path) -> None:
             parent.rename(tmp_path / "moved")
         os.write(fd, b"safe")
     assert (parent / "out.svg").read_bytes() == b"safe"
+
+
+def test_read_handle_rejects_links_and_holds_parent(tmp_path: Path) -> None:
+    from inkscape_mcp.workspace.windows_io import read_fd
+
+    parent = tmp_path / "parent"
+    parent.mkdir()
+    target = parent / "image.bin"
+    target.write_bytes(b"safe")
+    with read_fd(target) as fd:
+        with pytest.raises(OSError):
+            parent.rename(tmp_path / "moved")
+        assert os.read(fd, 10) == b"safe"
+    link = parent / "link.bin"
+    link.symlink_to(target)
+    with pytest.raises(OSError), read_fd(link):
+        pytest.fail("symlink opened for read")
+    assert target.read_bytes() == b"safe"

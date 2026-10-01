@@ -10,6 +10,7 @@ from lxml import etree
 from pydantic import BaseModel, ConfigDict, Field, TypeAdapter, ValidationError
 
 from inkscape_mcp.config import get_settings
+from inkscape_mcp.document.inspect import XLINK_NS
 from inkscape_mcp.edit.dom import (
     SAFE_ID_RE,
     SVG_NS,
@@ -270,6 +271,7 @@ def make_repeat(
                     raise EditError("generated linked instance ID conflicts with document")
                 existing_ids.add(new_id)
                 clone = etree.Element(f"{{{SVG_NS}}}use", id=new_id, href=f"#{object_id}")
+                clone.set(f"{{{XLINK_NS}}}href", f"#{object_id}")
                 clone.set("transform", matrix_text(compensation))
             group.append(clone)
         # Validate the complete disposable tree before any snapshot/write by the pipeline.

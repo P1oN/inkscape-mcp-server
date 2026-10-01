@@ -4,12 +4,17 @@ from __future__ import annotations
 
 import base64
 import hashlib
+import os
+import stat
+import sys
+from collections.abc import Iterator
+from contextlib import ExitStack, contextmanager
 from pathlib import Path
 
 from pydantic import BaseModel
 
 from inkscape_mcp.config import Settings, get_settings
-from inkscape_mcp.workspace.limits import check_input_size
+from inkscape_mcp.workspace.limits import LimitExceeded
 from inkscape_mcp.workspace.paths import SandboxViolation, owning_root, resolve_read_path
 
 
@@ -56,8 +61,43 @@ def read_artifact(root_key: str, token: str) -> bytes:
     resolved = resolve_read_path(roots[root_key] / candidate, settings)
     if owning_root(resolved, settings.workspace_roots) != roots[root_key]:
         raise ValueError("artifact root does not match")
-    check_input_size(resolved, settings)
-    return resolved.read_bytes()
+    root = roots[root_key]
+    with _artifact_fd(root, resolved.relative_to(root)) as fd:
+        info = os.fstat(fd)
+        if not stat.S_ISREG(info.st_mode):
+            raise ValueError("artifact is not a regular file")
+        cap = settings.max_output_bytes
+        if info.st_size > cap:
+            raise LimitExceeded("artifact exceeds max output size")
+        # Reading at most cap+1 also catches growth after fstat without allocating an
+        # unbounded buffer. No validated pathname is reopened.
+        with os.fdopen(os.dup(fd), "rb") as handle:
+            data = handle.read(cap + 1)
+        if len(data) > cap:
+            raise LimitExceeded("artifact exceeds max output size")
+        return data
+
+
+@contextmanager
+def _artifact_fd(root: Path, relative: Path) -> Iterator[int]:
+    if sys.platform == "win32":
+        from inkscape_mcp.workspace.windows_io import read_fd
+
+        with read_fd(root / relative) as fd:
+            yield fd
+        return
+    with ExitStack() as stack:
+        # Pin the configured canonical root without following replaced ancestors.
+        # Descend from the filesystem anchor, then keep every directory fd alive.
+        flags = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW
+        directory = os.open(root.anchor, flags)
+        stack.callback(os.close, directory)
+        for part in (*root.parts[1:], *relative.parts[:-1]):
+            directory = os.open(part, flags, dir_fd=directory)
+            stack.callback(os.close, directory)
+        fd = os.open(relative.name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=directory)
+        stack.callback(os.close, fd)
+        yield fd
 
 
 def workspace_info() -> dict[str, object]:
