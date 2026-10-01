@@ -15,8 +15,8 @@ one command is "everything up to and including the next ``\\n> ``". This module 
 background thread and frames each command on that ``"\\n> "`` sentinel (plus the banner prompt at
 startup). Action errors do NOT appear on stdout: an unknown action prints
 ``InkscapeApplication::parse_actions: could not find action for: <X>`` to STDERR, so one reader
-thread captures both pipes and :func:`EngineProcess.execute` maps that line to a clean, host-path-free
-error.
+thread captures both pipes and :func:`EngineProcess.execute` maps that line to a clean,
+host-path-free error.
 
 SECURITY (sec.12 / X1): the worker is spawned as an ARG LIST with ``shell=False`` (no shell string
 is ever built); the spawn argv is fixed (``[inkscape, "--shell"]``) — no client value in it. Every
