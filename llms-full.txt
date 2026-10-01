@@ -9,7 +9,7 @@
 
 inkscape-mcp — an MCP server that makes Inkscape/SVG documents agent-ready: inspect, edit safely (reversible), validate, render, and export.
 
-Surface: 103 tools, 7 prompts, 16 resources.
+Surface: 105 tools, 7 prompts, 16 resources.
 
 ## Run & transport
 Transport: STDIO only (local). No HTTP.
@@ -1833,6 +1833,29 @@ Description:
 
     Risk class: low (render to artifact dir).
 
+#### live_find_objects
+Risk class: low
+Key params: label: string | null, layer: string | null, text: string | null, tag: string | null, id_prefix: string | null, limit: integer
+Description:
+    Find visible live objects by layer, label, text, tag or id prefix, with engine bounds.
+
+    When to use: identify candidate elements before an artistic edit. Combine filters with AND;
+    label, layer label and text use case-insensitive substring matching. Layer also matches an
+    exact layer id; tag and id_prefix are case-sensitive. Omitted filters list visible objects.
+    Confirm ambiguous candidates with live_preview_object rather than guessing from ids.
+
+    Key params: limit is 1..1000, default 100. Requires a connected live session and Inkscape CLI.
+    Works on one exported snapshot; it never changes the selection or drawing. Self-contained
+    PNG/JPEG images are supported; external assets and stylesheets require preparation.
+
+    Return shape: active_document, fingerprint, objects (ids, labels, layer, text, locked, bbox
+    in DOCUMENT USER UNITS), total_matches and truncated. Paint remains explicit, not computed.
+    A null bbox means the engine did not report this object; no approximate bounds are invented.
+
+    Example: live_find_objects(layer="Hills", tag="path")
+
+    Risk class: low (read-only snapshot search; no Undo step or approval).
+
 #### live_get_active_document
 Risk class: low
 Key params: (none)
@@ -1980,6 +2003,28 @@ Description:
     Return shape: documents containing window_id, document_id and window title.
     Example: live_list_documents()
     Risk class: low (read-only).
+
+#### live_preview_object
+Risk class: low
+Key params: object_id: string, expected_fingerprint: string, width: integer
+Description:
+    Render one found live object in isolation without changing the GUI selection.
+
+    When to use: confirm which hill, tree or other candidate live_find_objects found before editing.
+    Uses a fresh exported snapshot and refuses if its drawing fingerprint differs from discovery.
+    The preview preserves the object's ancestors, styles and referenced definitions through
+    Inkscape's isolated export. The GUI selection and Undo history are untouched.
+
+    Key params: object_id and expected_fingerprint from live_find_objects; width is a positive
+    pixel width within the configured export cap. Requires Inkscape CLI and a workspace root.
+    Comma, semicolon, whitespace or control characters in ids are unsupported by isolated export.
+
+    Return shape: LiveRenderResult with workspace-relative PNG artifact_path and size_bytes.
+    If the drawing changed, find again. This preview verifies appearance, not permission to edit.
+
+    Example: live_preview_object(object_id="hill", expected_fingerprint="<discovery fingerprint>")
+
+    Risk class: low (read-only snapshot render; no Undo step or approval).
 
 #### live_render_view
 Risk class: low

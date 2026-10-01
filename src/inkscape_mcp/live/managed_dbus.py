@@ -35,6 +35,7 @@ from inkscape_mcp.live.dbus_backend import (
     _variant_string,
 )
 from inkscape_mcp.live.edit_errors import EDIT_REFUSALS
+from inkscape_mcp.live.geometry import root_mapping
 from inkscape_mcp.live.insert_payload import document_fingerprint, prepare_fragment
 from inkscape_mcp.live.managed_scene import document_ref, object_info, scene_from_svg
 from inkscape_mcp.live.protocol import LiveCommand
@@ -50,6 +51,7 @@ from inkscape_mcp.live.transport import (
     LiveScene,
     LiveSelection,
     LiveSelectionInspection,
+    RenderRegion,
     TransportProbe,
 )
 from inkscape_mcp.workspace.subprocess_exec import ProcessError, run_process
@@ -348,6 +350,23 @@ class ManagedDBusTransport(DBusTransport):
                 scene.active_document.window_id = context.window_id
                 scene.active_document.document_id = context.document_id
             return scene
+
+    def render_view(self, region: RenderRegion | None = None, scale: float | None = None) -> bytes:
+        """Map document user units to the pixel coordinates required by export-area."""
+        with self._operation():
+            if region is not None:
+                try:
+                    root = parse_svg_bytes(self.get_document_svg().encode()).getroot()
+                except UnsafeXMLError as exc:
+                    raise LiveError("render region document could not be parsed safely") from exc
+                sx, sy, tx, ty = root_mapping(root)
+                region = RenderRegion(
+                    x=region.x * sx + tx,
+                    y=region.y * sy + ty,
+                    width=region.width * sx,
+                    height=region.height * sy,
+                )
+            return super().render_view(region=region, scale=scale)
 
     def insert_svg(self, svg_fragment: str) -> LiveMutationResult:
         nonce = "mcp_" + uuid4().hex

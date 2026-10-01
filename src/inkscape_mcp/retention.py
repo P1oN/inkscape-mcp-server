@@ -272,7 +272,7 @@ def prune_document(
     return result
 
 
-#: Glob for the rasterized loop/perceive frames `render_live_view` mints. Only these are
+#: Glob for ephemeral loop/perceive and isolated object-preview frames. Only these are
 #: pruned by live-frame retention; other live artifacts (diff overlays, selection exports) are left
 #: alone, and any frame still referenced by a Live Operation Record is excluded so a record's
 #: before/after preview is never orphaned by the sweep.

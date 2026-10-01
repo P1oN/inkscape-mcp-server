@@ -517,6 +517,11 @@ opt-in, OFF-by-default advanced-mode switch (`INKSCAPE_MCP_RAW_ACTION_ENABLED`).
 
 ### Live mode (read / write / view loop) — *on by default (operator-chosen)*
 
+For finding objects in existing artwork, `live_find_objects` searches layers, labels and text
+with engine bounds in document user units; `live_preview_object` confirms a candidate in isolation
+with a drawing-fingerprint check. Managed macOS region previews accept those same coordinates.
+See [workflow, limits and the real-illustration pilot](docs/live-discovery.md).
+
 Control of a **running** Inkscape, cross-platform via a transport abstraction (extension-socket
 bridge on any OS; DBus `org.gtk.Actions` an optional Linux fast-path). Gated by
 `INKSCAPE_MCP_LIVE_ENABLED` (default on; set falsy to opt out); absent/unsupported transports are
