@@ -59,8 +59,9 @@ INKSCAPE_MCP_WORKSPACE_ROOTS = "/Users/yourname/Documents/Drawings"
 
 New managed sessions also build the [native context bridge](document-context.md) and a private
 ad-hoc signed executable copy. The original vendor application stays unchanged; the copy does not
-retain its vendor signature or hardened runtime. This experimental change still awaits final native
-acceptance on an unlocked Mac. Existing legacy sessions are reused with a guard-unavailable note.
+retain its vendor signature or hardened runtime. Native acceptance passed on 2026-10-01;
+see the [recorded results](document-context.md#validation). The integration remains experimental.
+Existing legacy sessions are reused with a guard-unavailable note.
 
 Create that drawing directory first. It contains preview artifacts and snapshots. This root
 restricts the server's file operations, but is not a jail for the GUI: the user can open other
@@ -106,7 +107,7 @@ A filename is not a unique window/document identity, and paths remain null when 
 cannot report them. New managed sessions provide runtime window/document UUIDs through
 `live_list_documents`; `live_select_document` activates and binds the drawing for the task.
 The native module rejects actions after a window/document change. Reconnect clears that binding.
-See [implementation and pending acceptance](document-context.md) before using this experimental
+See [implementation and acceptance results](document-context.md) before using this experimental
 version. `live_status` exposes `document_guard_available`, `ready_to_edit`, `connection_state`
 and `recovery_actions`. Legacy sessions have no document guard.
 
