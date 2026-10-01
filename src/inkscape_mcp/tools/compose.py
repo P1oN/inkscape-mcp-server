@@ -28,6 +28,7 @@ high-risk message; policy refusal → its safe message.
 from __future__ import annotations
 
 from collections.abc import Callable
+from typing import Literal
 
 from fastmcp.exceptions import ToolError
 from lxml import etree
@@ -520,4 +521,35 @@ def place_document(
         target_doc_id=target_doc_id,
         placed_id=placed_id,
         source=label,
+    )
+
+
+@mcp.tool
+def replace_svg_fragment(
+    doc_id: str,
+    object_id: str,
+    svg: str,
+    reference_policy: Literal["reject_changes", "allow_retained"] = "reject_changes",
+    approval_token: str | None = None,
+) -> ComposeResult:
+    """Replace one selected SVG subtree atomically, retaining its container ID and qualified tag.
+
+    Pass a complete allowlisted element with matching root ID or no root ID. Internal IDs
+    survive only when explicitly included. Conflicting/duplicate IDs, unresolved references
+    and external references to removed IDs always refuse before write. Stylesheets require
+    preparation. Default reject_changes refuses updates to externally referenced subtrees;
+    allow_retained explicitly accepts changed appearance of references to surviving IDs.
+    Rest of the scene is preserved structurally; XML serialization may normalize formatting.
+    One snapshot and Operation Record; high-risk approval gate matches existing SVG adoption.
+    Risk class: high (allowlisted fragment adoption, approval-gated and reversible).
+    """
+    from inkscape_mcp.edit.fragment import make_replace_fragment
+
+    return _adopt(
+        doc_id,
+        "replace_svg_fragment",
+        {"object_id": object_id, "reference_policy": reference_policy},
+        lambda: make_replace_fragment(object_id, svg, reference_policy),
+        raw_svg=svg,
+        approval_token=approval_token,
     )

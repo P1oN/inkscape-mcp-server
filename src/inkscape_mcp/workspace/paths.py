@@ -340,3 +340,14 @@ def resolve_write_path(raw: str | Path, settings: Settings | None = None) -> Pat
             )
 
     return final_path
+
+
+def public_path_error(exc: SandboxViolation) -> str:
+    """Keep the stable error prefix and add actionable, host-path-free tool guidance."""
+    message = str(exc.args[0])
+    if message == "path rejected: outside workspace":
+        return (
+            message + "; call get_workspace_info and choose a relative path under a configured "
+            "server root (relative paths default to the first root)"
+        )
+    return message

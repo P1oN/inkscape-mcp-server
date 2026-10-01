@@ -318,3 +318,16 @@ def stat_artifacts(paths: list[str]) -> ArtifactStatSet:
     total = sum(s.bytes for s in stats)
     log_file_io(_logger, action="stat_artifacts", count=len(stats), total_bytes=total)
     return ArtifactStatSet(artifacts=stats, total_bytes=total, count=len(stats))
+
+
+@mcp.tool
+def get_workspace_info() -> dict[str, object]:
+    """Discover configured server workspace roots and portable artifact access.
+
+    Relative paths retain their first-root anchor; opaque root IDs and names identify
+    roots without exposing host absolute paths. Read artifact URIs through MCP resources.
+    Risk class: low (read-only).
+    """
+    from inkscape_mcp.workspace.artifacts import workspace_info
+
+    return workspace_info()

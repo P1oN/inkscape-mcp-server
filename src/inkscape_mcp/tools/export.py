@@ -26,6 +26,8 @@ from pydantic import BaseModel
 
 from inkscape_mcp.config import get_settings
 from inkscape_mcp.document.inspect import DocumentNotFound, InspectionError, inspect_objects
+from inkscape_mcp.edit.dom import EditError
+from inkscape_mcp.live.geometry import LiveGeometryError, root_mapping
 from inkscape_mcp.logging_setup import get_logger, log_tool_call
 from inkscape_mcp.registry import DocEntry, get_registry
 from inkscape_mcp.render.cli import (
@@ -48,10 +50,14 @@ from inkscape_mcp.render.cli import (
 from inkscape_mcp.render.cli import (
     render_preview as _render_preview,
 )
+from inkscape_mcp.render.detail import PreviewRegion, render_region, source_path
 from inkscape_mcp.server import mcp
+from inkscape_mcp.snapshots import SnapshotNotFound
+from inkscape_mcp.workspace.artifacts import ArtifactLink
 from inkscape_mcp.workspace.limits import LimitExceeded
-from inkscape_mcp.workspace.paths import SandboxViolation
+from inkscape_mcp.workspace.paths import SandboxViolation, public_path_error
 from inkscape_mcp.workspace.subprocess_exec import ProcessError
+from inkscape_mcp.workspace.xml_safety import UnsafeXMLError, parse_svg_file
 
 _logger = get_logger("tools.export")
 
@@ -190,6 +196,7 @@ class PreviewResult(BaseModel):
     doc_id: str
     artifact_path: str
     workspace_relative_path: str
+    artifact: ArtifactLink | None = None
     format: str
     width_px: int
     height_px: int
@@ -217,6 +224,7 @@ class FrameResult(BaseModel):
     doc_id: str
     artifact_path: str
     workspace_relative_path: str
+    artifact: ArtifactLink | None = None
     format: str
     width_px: int
     height_px: int
@@ -234,6 +242,7 @@ class FrameInfo(BaseModel):
     frame_index: int
     artifact_path: str
     workspace_relative_path: str
+    artifact: ArtifactLink | None = None
 
 
 class FrameListResult(BaseModel):
@@ -262,6 +271,7 @@ class ExportResult(BaseModel):
     doc_id: str
     artifact_path: str
     workspace_relative_path: str
+    artifact: ArtifactLink | None = None
     format: str
     width_px: int | None
     height_px: int | None
@@ -305,7 +315,7 @@ def _map_failure(exc: Exception) -> ToolError:
         return ToolError("document id not found")
     if isinstance(exc, SandboxViolation):
         # Already a SAFE public message (no host path) — e.g. "path rejected: outside workspace".
-        return ToolError(str(exc))
+        return ToolError(public_path_error(exc))
     if isinstance(exc, LimitExceeded):
         return ToolError("export exceeds the configured size or dimension limit")
     if isinstance(exc, InvalidObjectId):
@@ -330,12 +340,18 @@ def render_preview(
     name: str | None = None,
     inline: bool = True,
     max_output_bytes: int | None = None,
+    object_id: str | None = None,
+    region: PreviewRegion | None = None,
+    background: str = "transparent",
 ) -> PreviewResult | ToolResult:
     """Render a PNG preview of the whole document into the artifacts dir.
 
         When to use: a quick visual check of the whole document. For a final file use
         `export_document`;
         for one object use `export_object`; for an ordered run series use `capture_frame`.
+
+        Optional `object_id` reuses export_object; `region={x,y,width,height}` crops in document
+        user units. Choose one. Region background defaults transparent; width defaults to 512.
 
         Key params: `width_px` scales the raster (height follows the document aspect ratio); omit
         for
@@ -356,7 +372,18 @@ def render_preview(
         Risk class: low (render/export to artifact dir; no original overwrite).
     """
     try:
-        result = _render_preview(doc_id, width_px=width_px, name=name)
+        if object_id is not None and region is not None:
+            raise EditError("choose object_id or region, not both")
+        if region is not None:
+            result = render_region(
+                doc_id, region, width_px if width_px is not None else 512, background
+            )
+        elif object_id is not None:
+            result = _export_object(doc_id, object_id, "png", width_px=width_px)
+        else:
+            result = _render_preview(doc_id, width_px=width_px, name=name)
+    except (EditError, InvalidObjectId, UnsafeXMLError) as exc:
+        raise ToolError(str(exc)) from exc
     except (KeyError, DocumentNotFound, LimitExceeded, RenderError, ProcessError) as exc:
         _logger.error("render_preview failed", extra={"doc_id": doc_id, "detail": str(exc)})
         raise _map_failure(exc) from exc
@@ -366,6 +393,7 @@ def render_preview(
         doc_id=result.doc_id,
         artifact_path=result.artifact_path,
         workspace_relative_path=result.workspace_relative_path,
+        artifact=result.artifact,
         format=result.format,
         width_px=result.width_px if result.width_px is not None else 0,
         height_px=result.height_px if result.height_px is not None else 0,
@@ -426,6 +454,7 @@ def capture_frame(
         doc_id=result.doc_id,
         artifact_path=result.artifact_path,
         workspace_relative_path=result.workspace_relative_path,
+        artifact=result.artifact,
         format=result.format,
         width_px=result.width_px if result.width_px is not None else 0,
         height_px=result.height_px if result.height_px is not None else 0,
@@ -538,6 +567,7 @@ def export_document(
         doc_id=result.doc_id,
         artifact_path=result.artifact_path,
         workspace_relative_path=result.workspace_relative_path,
+        artifact=result.artifact,
         format=result.format,
         width_px=result.width_px,
         height_px=result.height_px,
@@ -630,6 +660,7 @@ def export_object(
         doc_id=result.doc_id,
         artifact_path=result.artifact_path,
         workspace_relative_path=result.workspace_relative_path,
+        artifact=result.artifact,
         format=result.format,
         width_px=result.width_px,
         height_px=result.height_px,
@@ -647,3 +678,68 @@ def export_object(
         max_output_bytes=max_output_bytes,
     )
     return _with_inline(export, image)
+
+
+class RegionComparison(BaseModel):
+    doc_id: str
+    snapshot_id: str
+    region: PreviewRegion
+    width_px: int
+    background: str
+    before: ArtifactLink | None
+    after: ArtifactLink | None
+    note: str = "Same region, scale and background; no artistic quality score."
+
+
+@mcp.tool(output_schema=_model_output_schema(RegionComparison))
+def compare_region(
+    doc_id: str,
+    snapshot_id: str,
+    region: PreviewRegion,
+    width_px: int = 512,
+    background: str = "transparent",
+    inline: bool = True,
+) -> RegionComparison | ToolResult:
+    """Render the same fixed region from a pre-edit snapshot and the current working copy.
+
+    Use an EditResult.snapshot_id for before/after inspection of a detail. Explicit region
+    bounds, width and background apply identically to both images. Does not restore or edit
+    the document and does not assess artistic quality. Returns portable artifact URIs.
+    Risk class: low (read-only sources, bounded PNG artifact exports).
+    """
+    try:
+        before_root = parse_svg_file(source_path(doc_id, snapshot_id)).getroot()
+        after_root = parse_svg_file(source_path(doc_id, None)).getroot()
+        if root_mapping(before_root) != root_mapping(after_root):
+            raise EditError("canvas mapping differs; fixed-scale comparison refused")
+        before = render_region(doc_id, region, width_px, background, snapshot_id)
+        after = render_region(doc_id, region, width_px, background)
+    except (EditError, LiveGeometryError, SnapshotNotFound, UnsafeXMLError) as exc:
+        raise ToolError(str(exc)) from exc
+    except (KeyError, DocumentNotFound, LimitExceeded, RenderError, ProcessError) as exc:
+        raise _map_failure(exc) from exc
+    result = RegionComparison(
+        doc_id=doc_id,
+        snapshot_id=snapshot_id,
+        region=region,
+        width_px=width_px,
+        background=background,
+        before=before.artifact,
+        after=after.artifact,
+    )
+    if not inline:
+        return result
+    content: list[mcp_types.ContentBlock] = [
+        mcp_types.TextContent(type="text", text=result.model_dump_json())
+    ]
+    for label, frame in (("before", before), ("after", after)):
+        img = _inline_image(
+            doc_id=doc_id,
+            workspace_relative_path=frame.workspace_relative_path,
+            fmt="png",
+            inline=True,
+            max_output_bytes=None,
+        )
+        if img is not None:
+            content.extend([mcp_types.TextContent(type="text", text=label), img.to_image_content()])
+    return ToolResult(content=content, structured_content=result.model_dump())

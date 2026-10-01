@@ -374,7 +374,12 @@ def rewrite_references(root: etree._Element, mapping: dict[str, str]) -> None:
     for elem in root.iter():
         if not _is_element(elem):
             continue
-        for attr in (_XLINK_HREF, "href"):
+        for attr in (
+            _XLINK_HREF,
+            "href",
+            f"{{{INKSCAPE_NS}}}connection-start",
+            f"{{{INKSCAPE_NS}}}connection-end",
+        ):
             href = elem.get(attr)
             if href and href.startswith("#") and href[1:] in mapping:
                 elem.set(attr, f"#{mapping[href[1:]]}")

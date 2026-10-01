@@ -28,7 +28,7 @@ message. Every tool is medium risk (write-new on the working copy, reversible).
 from __future__ import annotations
 
 from collections.abc import Callable
-from typing import Any
+from typing import Any, Literal
 
 from fastmcp.exceptions import ToolError
 from pydantic import BaseModel
@@ -739,13 +739,16 @@ def create_group(
     doc_id: str,
     parent_id: str | None = None,
     object_id: str | None = None,
+    label: str | None = None,
+    mode: Literal["group", "layer"] = "group",
 ) -> CreateResult:
     """Create an empty `<g>` group inside `parent_id` (must exist) or the document default parent.
 
     When to use: making an EMPTY group to populate later. To wrap EXISTING objects in a new group
     use `group_objects`; to move one object into an existing group use `reparent_object`.
 
-    Key params: `parent_id` (must exist) or the document default parent; `object_id` to pin the id.
+    Key params: `parent_id` or default parent; `object_id` pins the stable ID; `label` supplies a
+    readable name; `mode` is group (default) or layer on the same SVG g container.
 
     Return shape: `CreateResult` — `object_id` is the new group id, `bbox=None` (empty), plus the
     pipeline fields (`operation_id`, `snapshot_id`, `changed`, preview).
@@ -760,8 +763,8 @@ def create_group(
     result = _apply_create(
         doc_id,
         "create_group",
-        {"parent_id": parent_id},
-        lambda: make_create_group(parent_id=parent_id, object_id=object_id),
+        {"parent_id": parent_id, "object_id": object_id, "label": label, "mode": mode},
+        lambda: make_create_group(parent_id=parent_id, object_id=object_id, label=label, mode=mode),
         None,
     )
     log_tool_call(
@@ -820,6 +823,7 @@ def reparent_object(
     doc_id: str,
     object_id: str,
     new_parent_id: str,
+    preserve_appearance: bool = False,
 ) -> CreateResult:
     """Move an object (`object_id`) under a new parent (`new_parent_id`); both must exist.
 
@@ -829,6 +833,11 @@ def reparent_object(
     Key params: `object_id` and `new_parent_id` both must exist; rejected if the new parent is the
     object itself or one of its descendants. NOTE: re-parenting changes the inherited coordinate
     space — the object's visual position can shift if old/new parents carry different transforms.
+
+    Set `preserve_appearance=True` for compensated document-space transforms and unchanged
+    paint order. Refuses stylesheets, effects/inherited styles on changed ancestors, nested
+    viewports, external subtree references, singular transforms and changed paint order.
+    Default False retains the legacy XML-only move contract.
 
     Return shape: `CreateResult` — `object_id` echoes the moved object, `bbox=None`, plus the
     pipeline fields (`operation_id`, `snapshot_id`, `changed`, preview).
@@ -843,8 +852,12 @@ def reparent_object(
     result = _apply_create(
         doc_id,
         "reparent_object",
-        {"object_id": object_id, "new_parent_id": new_parent_id},
-        lambda: make_reparent_object(object_id, new_parent_id),
+        {
+            "object_id": object_id,
+            "new_parent_id": new_parent_id,
+            "preserve_appearance": preserve_appearance,
+        },
+        lambda: make_reparent_object(object_id, new_parent_id, preserve_appearance),
         None,
     )
     # reparent moves an existing object (no new id is minted), so echo the moved object's id.
@@ -908,3 +921,29 @@ def create_use(
         operation_id=result.operation_id,
     )
     return result
+
+
+@mcp.tool
+def set_group_mode(doc_id: str, object_id: str, mode: Literal["group", "layer"]) -> EditResult:
+    """Convert the same g between ordinary group and layer; preserve ID and all other attributes.
+
+    Children, styles, visibility, locks, transform and sibling order remain intact.
+    For a readable name without changing ID use rename_object(label=...).
+    Stylesheets that might select editor metadata require preparation.
+    Risk class: medium (reversible metadata edit through the shared pipeline).
+    """
+    from inkscape_mcp.edit.structure import make_group_mode
+
+    try:
+        return apply_edit(
+            doc_id,
+            "set_group_mode",
+            {"object_id": object_id, "mode": mode},
+            make_group_mode(object_id, mode),
+        )
+    except (EditError, TargetNotFound) as exc:
+        raise ToolError(str(exc)) from exc
+    except (EditApplyError, DocumentNotFound, KeyError) as exc:
+        raise ToolError("document id not found") from exc
+    except InspectionError as exc:
+        raise ToolError("document could not be parsed safely") from exc

@@ -26,6 +26,7 @@ from inkscape_mcp.document.inspect import (
     inspect_summary,
 )
 from inkscape_mcp.edit.optimize import DEFAULT_PRECISION, analyze_optimizations
+from inkscape_mcp.editability import EditabilityOptions, EditabilityReport, analyze_editability
 from inkscape_mcp.logging_setup import get_logger
 from inkscape_mcp.registry import Registry, get_registry
 from inkscape_mcp.validate import (
@@ -146,6 +147,7 @@ class QualityReport(BaseModel):
     warning_count: int
     metrics: QualityMetrics
     opportunities: list[OptimizationOpportunity]
+    editability: EditabilityReport | None = None
 
 
 def _font_coverage(doc_id: str) -> FontCoverage:
@@ -223,6 +225,7 @@ def quality_report(
     doc_id: str,
     precision: int = DEFAULT_PRECISION,
     registry: Registry | None = None,
+    editability: EditabilityOptions | None = None,
 ) -> QualityReport:
     """Build the structured quality report for a document (read-only).
 
@@ -291,4 +294,5 @@ def quality_report(
         warning_count=report.warning_count,
         metrics=metrics,
         opportunities=opportunities,
+        editability=analyze_editability(root, editability or EditabilityOptions()),
     )

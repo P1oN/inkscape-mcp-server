@@ -7,7 +7,8 @@
 
 PR #4 (document context, `bfe9e4f`) и PR #5 (everyday edits, `e6e4e80`) объединены в `main`.
 Коммит `d948a25` добавил явный запуск Inkscape и переносимое определение session directory;
-текущий HEAD при проверке — `6d7088a` (Require Explicit macOS GUI Launch).
+текущий HEAD при начале этой задачи — `852c73e` (Add agent guidance and vector authoring rules).
+PR #6 (`0f1a766`) добавил live discovery и fingerprinted previews.
 Это ориентир, а не требование откатывать более новые изменения.
 Origin: https://github.com/P1oN/inkscape-mcp-server.
 
@@ -28,7 +29,7 @@ Origin: https://github.com/P1oN/inkscape-mcp-server.
   проверить рисунок перед повтором. Native integration остаётся экспериментальной.
 - Инструкции: [macOS setup](macos-live-prototype.md), [document context](document-context.md),
   [everyday edits](everyday-edits.md). Актуальный полный manifest: [llms.txt](../llms.txt)
-  (103 инструмента; видимая поверхность зависит от gates).
+  (110 инструментов, 7 prompts, 18 resources; видимость зависит от gates).
 
 ## Проверки и доказательства
 
@@ -61,7 +62,7 @@ acceptance в этой проверке не перезапускались; р�
 перепроверять manifest и command line. Не завершать процессы по имени Inkscape.
 
 Этап 3 уже объединён. Пользователь выбрал следующий объем: шесть улучшений ниже,
-последовательно в указанном порядке. Это ближайшая задача; общий этап 4 и остальные
+последовательно в указанном порядке; реализация завершена для рабочих копий. Общий этап 4 и остальные
 долгосрочные цели остаются в [ROADMAP.md](ROADMAP.md).
 
 ## Перед началом новой задачи
@@ -83,36 +84,60 @@ acceptance в этой проверке не перезапускались; р�
 детектор трассировки. Работающий MCP читает overview при старте: после изменения инструкции
 нужен перезапуск сервера, без закрытия пользовательского GUI.
 
-## Следующая задача: шесть улучшений (пока не реализованы)
+## Шесть улучшений: реализованы для рабочих копий
 
-1. **Workspace и артефакты.** Дать агенту однозначную информацию о workspace roots и
-   способ открыть результат. Учитывать несколько roots и удаленный сервер: серверный
-   относительный путь не является локальным путем клиента. Сохранить sandbox и запрет
-   утечки абсолютных host paths; не советовать искать файлы вслепую.
-2. **Именованные группы и слои.** Типизированное создание, отдельное изменение label
-   без смены ID, конвертация group/layer на том же `<g>`. Безопасное перемещение между
-   родителями должно сохранять видимую позицию, стиль и порядок либо явно отказывать
-   до изменения. Не обещать это для нынешнего headless `reparent_object`: он лишь
-   перемещает XML-узел. Live и headless имеют разные ограничения.
-3. **Проверка редактируемости.** Расширить существующий `quality_report` настраиваемыми
-   проверками структуры и сложности; отделить ошибки SVG от эвристических предупреждений.
-   Не заявлять, что число узлов достоверно определяет трассировку или качество рисунка.
-4. **Прицельный preview.** Просмотр объекта или области с масштабированием и сопоставимые
-   before/after с одинаковыми bounds/scale. Использовать существующие render/export
-   механизмы, включая `export_object`, без дублирования возможностей.
-5. **Безопасное обновление поддерева.** Сохранение ID контейнера и удерживаемых дочерних
-   ID; проверка конфликтов и внешних ссылок до изменения, атомарный отказ. Не менять
-   остальной рисунок. Применять существующие snapshots, Operation Records и no-op semantics.
-6. **Повторение объектов.** Декларативное размещение по линии, пути или области:
-   count/spacing/orientation, ограниченный jitter с seed, явные clones/copies, переназначение
-   ID и ссылок, лимиты и dry-run. Не добавлять исполнение произвольного кода или shell.
+Реализованы 2026-10-02; текущее состояние публикации проверяй в Git/PR.
+Существующие инструкции о семантических группах и запрете трассировки сохранены.
 
-Для каждого пункта: исследуй существующие модели и ограничения, реализуй минимальный
-полный инструмент/расширение, проверь полезные сценарии и отказ без мутации, обнови
-документацию и при изменении поверхности сгенерируй manifests. После этого переходи
-к следующему пункту. Headless edits проходят через edit pipeline; live edits сохраняют
-context guard, блокировки и один изменяющий вызов — один native Undo. Не ослабляй gates.
+1. **Workspace и артефакты.** `get_workspace_info`, `inkscape://workspace`, root-qualified
+   artifact URIs и read-only ресурс чтения с sandbox/size проверками. `open_document` и
+   `save_document_as` принимают optional `root_id`; относительные пути по умолчанию по-прежнему
+   используют первый root. Абсолютные server paths не выдаются за client paths. Ошибки вне
+   workspace указывают на discovery; сохранение во второй root и чтение через MCP Client проверены.
+2. **Группы/слои.** `create_group(label, mode)`, существующий label-only `rename_object`,
+   `set_group_mode` на том же g и `reparent_object(preserve_appearance=True)`. Последний
+   компенсирует affine transforms и требует неизменного глобального paint order. Отказывает
+   при stylesheets, CSS transforms, singular transforms, nested viewports, внешних ссылках
+   и непустом оформлении/effects/locks на изменяемой цепочке родителей. Legacy default False
+   сохранён и не обещает сохранение вида. Batch-параметры и операции синхронизированы.
+3. **Редактируемость.** `quality_report(editability=...)` возвращает отдельные optional
+   рекомендации и factual observations; не меняет SVG validity/score. Семантические ID задаются
+   явно; thresholds настраиваются, советы отключаются и ограничены 200. Это не детектор трассировки.
+4. **Детали.** `render_preview(object_id/region)` переиспользует object export или рендерит
+   прямоугольник в document user units. `compare_region(snapshot_id, region)` рендерит фиксированные
+   bounds/scale/background без restore; разные canvas mappings отклоняются. Resource URIs и
+   inline PNG доступны; artistic score не вычисляется.
+5. **Фрагменты.** HIGH-risk `replace_svg_fragment` через существующий parser/allowlist и
+   approval gate. Корневые ID/tag сохраняются; внутренние ID только при явном включении.
+   Конфликты/duplicate IDs, unresolved refs и удаление внешне используемых ID отклоняются.
+   `allow_retained` явно разрешает изменение вида surviving references; default отвергает такие
+   изменения. Один snapshot/record, no-op без записи; есть соответствующий batch member.
+6. **Повторение.** `repeat_objects` по explicit polyline (два пункта — линия) или rectangle grid.
+   Count/spacing, fixed/tangent orientation, ограниченные jitter/scale/rotation и seed.
+   Linked use и независимые copies различаются; copies переиспользуют remap duplicate engine.
+   Dry-run по умолчанию проверяет полную disposable expansion без записи. Max 1024 и предварительный
+   size budget; ID group задаётся явно. Anchor — local source point в document user units;
+   copies могут совместно использовать внешние defs. SVG curves/path strings не поддерживаются.
 
-В финале перечисли реализованное, проверки и оставшиеся ограничения. Автоматические
-тесты с fake transport не заменяют нативную приемку GUI; не заявляй о ней без запуска.
-Не создавай коммиты, PR и не запускай/закрывай пользовательский Inkscape без запроса.
+Новые изменения относятся к tracked working copies, не к native live mutation protocol.
+Автоматические проверки не подтверждают новый GUI Undo; GUI acceptance в этой задаче не запускался.
+Для headless edits Undo обеспечен существующим snapshot/restore pipeline.
+
+### Проверки реализации
+
+- Итоговый полный pytest с Inkscape **1.4.3 (0d15f75)** в PATH: **1275 passed, 6 skipped**.
+  Команда: `PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" .venv/bin/pytest -q`.
+- Ruff check, format check (226 files), strict mypy (121 source files), manifest regeneration
+  и `git diff --check` прошли. CI surface smoke обновлён до 110/7/18 и прошёл. Discovery eval: **41/41**, 100% accuracy.
+- Реальные PNG проверяют cropped red→blue snapshot, совпадение всех RGBA каналов после
+  safe reparent/group-layer conversion и между linked/copies. Это настоящие CLI рендеры,
+  не GUI acceptance. Контейнеры/ссылки/отказы/seed/snapshot restore проверены автоматически.
+- MCP Client проверил roots, сохранение во второй root, бинарное чтение resource URI и отказ
+  после удаления артефакта. Отдельный свежий процесс через `.venv/bin/inkscape-mcp` проверил
+  настоящий STDIO: **110 tools**, create/save/resource readback на synthetic workspace.
+- Новую native GUI acceptance и native GUI Undo/Redo не запускали. Пользовательские окна
+  не запускали/не закрывали; существующий live bridge не изменяли.
+- Контракты и границы: [agent usage guide](agent-usage-guide.md).
+
+MCP нужно перезапустить/переподключить для загрузки новых tools/resources/instructions.
+Не закрывать пользовательский GUI: startup/reconnect по-прежнему не запускают окно.

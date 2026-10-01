@@ -2,8 +2,8 @@
 
 How to drive this server from an LLM agent: the core create→render→export loop, the
 working-copy + snapshot reversibility model, the risk classes and the approval-token gate for
-HIGH-risk tools, and how to pick the right tool. The full surface is **103 small typed tools / 7 prompts /
-16 resources** — deliberately *not* a portmanteau `run_action(string)` / `do_task(prompt)` design
+HIGH-risk tools, and how to pick the right tool. The full surface is **110 small typed tools / 7 prompts /
+18 resources** — deliberately *not* a portmanteau `run_action(string)` / `do_task(prompt)` design
 (ADR-002/003). The trade-off: more tools to navigate, but each is explicit, typed, and risk-classed.
 Use the discovery tools below instead of grepping the list; gates may narrow the visible surface.
 The generated [manifest](../llms.txt) is the authoritative full catalog.
@@ -194,3 +194,101 @@ unhappy.
 (this is a vector/SVG server), arbitrary Inkscape Actions / extensions / scripts (ADR-003 — no
 free-text escape hatch in the MVP surface), network/URL fetch (offline by policy, sec.12), and
 arbitrary code execution (restricted). Provide local workspace files; use the typed tools.
+
+## Workspace discovery and portable artifacts
+
+Call `get_workspace_info` or read `inkscape://workspace` before choosing paths. Each configured
+server root has an opaque `root_id` and a readable directory name; `relative_path_root_id`
+identifies the existing first-root anchor. These are server roots, not client filesystem paths.
+For an outside-workspace error, choose a relative destination such as `output/final.svg` under
+that anchor. Absolute host paths remain private. Save and export results now include an
+`artifact` with a root-qualified `inkscape://artifact/{root_key}/{token}` URI. Read that URI using
+MCP resources, including when the server is remote. Existing relative path fields keep their
+meaning. Resource reads recheck containment, symlinks and input-size limits; artifacts may
+become unavailable after deletion/pruning. A resource URI is not a public HTTP download URL.
+
+## Group/layer organization (headless working copies)
+
+`create_group(..., object_id="cat", label="Cat", mode="group" | "layer")` creates named
+containers. `rename_object(doc_id, "cat", label="Sleeping cat")` already changes only the label.
+`set_group_mode` changes only `inkscape:groupmode` on the same `<g>` and treats matching mode as
+a no-op. IDs, children, sibling position, style, visibility and locks remain intact.
+
+For `reparent_object`, explicitly set `preserve_appearance=True`. This compensates affine
+parent transforms at floating-point precision and requires unchanged global paint order.
+Changed ancestors must be plain groups carrying only ID/transform/label/groupmode. Inherited
+styles, effects, locks, CSS stylesheets/transforms, nested viewports, singular transforms and
+external references to moved or changed ancestor containers cause refusal before disk mutation.
+This conservative scope cannot safely reorganize arbitrary overlapping artwork. The default
+False keeps the legacy XML-only behavior for compatibility; it promises no visual preservation.
+The new creation fields and safe reparent flag also work in `apply_edits`. These additions apply
+to tracked working copies; they do not extend the native live command protocol.
+
+## Editability advice
+
+`quality_report(doc_id, editability={...})` adds a separate structural report. Configure
+`check_labels`, explicit `semantic_group_ids`, `layer_advisory_threshold`, `max_group_depth`
+and `fragmentation_threshold`; `enabled=False` disables advice. Style/effect and stylesheet
+risks are factual observations. Missing labels, depth, single-child wrappers and layer counts
+are optional recommendations; they do not affect `ok`, validation counts or the quality score.
+Only explicitly supplied semantic IDs produce semantic-layer advice. Counts and names cannot
+establish object meaning, tracing provenance or artistic quality. Output advice is capped at 200.
+
+## Focused previews and comparison
+
+`render_preview(doc_id, object_id="paw", width_px=800)` delegates to existing `export_object`.
+For a detail including nearby artwork, pass `region={"x":2,"y":7,"width":2,"height":2}` in
+root SVG user units; `width_px` controls resolution and `background` controls the region PNG.
+Root dimensions/viewBox mapping is accounted for; unsupported root CSS sizing/transforms
+fail rather than guessing. Whole-document defaults remain intact.
+
+`compare_region(doc_id, snapshot_id, region, width_px=800, background="white")` renders the
+pre-edit snapshot and current working copy without restoring or mutating either. Use the
+snapshot ID from an edit result. Both PNGs share explicit bounds, resolution and background;
+results include resource URIs and inline before/after images where size permits. This is a
+visual inspection aid, not an artistic score. Snapshot and artifact retention still apply.
+
+## Replace a fragment with stable IDs
+
+`replace_svg_fragment(doc_id, object_id="paw", svg='<g xmlns="http://www.w3.org/2000/svg">…</g>',
+approval_token=...)` adopts one complete element through the existing safe parser/allowlist and
+HIGH-risk gate. The selected root's qualified tag and ID must survive (omit its ID or repeat it).
+The new fragment supplies all other root attributes and children; internal IDs survive only
+when explicitly present. Duplicate/conflicting IDs and new dangling references are rejected.
+External references to removed IDs always reject. Default `reference_policy="reject_changes"`
+refuses a changed subtree that is referenced from outside; `"allow_retained"` explicitly accepts
+that references to surviving IDs may show the new artwork. Stylesheets require preparation.
+One successful change produces one snapshot and Operation Record; identical content is a no-op.
+The rest of the scene remains structurally intact; serialization can normalize XML formatting.
+The corresponding HIGH-risk `replace_svg_fragment` batch member uses the same checks.
+
+## Declarative repetition
+
+`repeat_objects(doc_id, "leaf", group_id="garland", placement={"kind":"polyline",
+"points":[{"x":10,"y":20},{"x":90,"y":20}],"count":12})` validates a plan without writing
+by default. Apply with `dry_run=False`. Two points define a line; additional points define an
+explicit piecewise-linear path. Curved SVG path strings/IDs are not supported. A polyline takes
+exactly one of `count` or `spacing`; count spans endpoints (count=1 starts at the first point),
+spacing starts at distance zero and includes the endpoint only when the step reaches it.
+Rectangle placement takes x/y/width/height and count/optional columns, or spacing_x/spacing_y.
+It places grid cell centers inside the area; jitter can extend outside it and does not clip shapes.
+
+Coordinates describe placement of `anchor` (default source local origin) in document user units.
+`orientation="tangent"` follows polyline segments; rectangles use fixed orientation. Seeded
+`variation` bounds offsets (0..1000 units), scale variation (0..0.5 around 1) and rotation variation
+(0..180 degrees). The seed reproduces geometry, not opaque copy IDs. `mode="linked"` uses `<use>`
+references to the source; `"copies"` creates independent trees with remapped IDs/internal refs,
+reusing the duplicate engine. Source and inherited parent styling remain in place; the new named
+ordinary group is inserted immediately after it. Copies continue to share any external defs.
+Maximum 1024 instances; conservative projected and actual SVG size checks prevent oversized
+expansion. Stylesheets, locks, animations and nested viewports require preparation. Dry-run
+checks source/IDs/transforms and full expansion on a disposable tree, without snapshots or
+Operation Records. Apply uses one shared edit transaction; `apply_edits` also supports it.
+For a simple existing local grid use `tile`; `compose_grid` remains for cross-document layout.
+
+For multiple roots, `open_document(path, root_id=...)` and
+`save_document_as(doc_id, dest_path, root_id=...)` select the root returned by workspace discovery.
+The explicit-root path must be relative without `..`; the sandbox still checks the resolved path.
+Outside-workspace tool errors retain their stable prefix and now point to workspace discovery.
+Fixed-scale comparison refuses snapshots whose canvas coordinate mapping differs from the current
+canvas; choose a snapshot from before a local edit with the same canvas setup.

@@ -58,7 +58,8 @@ from typing import Any
 #: the tool/prompt/resource set bumps the matching constant; the diff pinpoints what moved.
 #: Managed document list/choice adds two live tools → 101.
 # Explicit launch adds one; snapshot discovery and isolated preview add two.
-EXPECTED_TOOLS = 105
+# Six authoring improvements add five tools.
+EXPECTED_TOOLS = 110
 #: 5 prior prompts (export/recolor x4 + live_canvas_assist) + 2 authoring
 #: prompts (compose_artwork, restyle_artwork) = 7. No new @mcp.tool — tool count is unchanged.
 EXPECTED_PROMPTS = 7
@@ -66,9 +67,10 @@ EXPECTED_PROMPTS = 7
 #: assert their SUM (a template registered as a plain resource, or vice-versa, still has to add up).
 #: adds the static `inkscape://runtime/intents` resource; adds the static
 #: `inkscape://prompts` index resource → 9 static + 7 templates = 16.
-EXPECTED_RESOURCES = 16
+# Workspace discovery and artifact readback add one static resource and one template.
+EXPECTED_RESOURCES = 18
 
-#: The 8 static resource URIs (no ``{placeholder}``) — read directly.
+#: The 10 static resource URIs (no ``{placeholder}``) — read directly.
 STATIC_RESOURCE_URIS = (
     "inkscape://runtime/capabilities",
     "inkscape://runtime/intents",
@@ -78,6 +80,8 @@ STATIC_RESOURCE_URIS = (
     "inkscape://live/events",
     "inkscape://live/operations",
     "inkscape://documents",
+    "inkscape://prompts",
+    "inkscape://workspace",
 )
 
 #: The 7 templated document resource suffixes — read with a real ``doc_id`` from a fixture doc.

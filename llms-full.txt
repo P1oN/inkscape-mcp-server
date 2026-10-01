@@ -9,7 +9,7 @@
 
 inkscape-mcp — an MCP server that makes Inkscape/SVG documents agent-ready: inspect, edit safely (reversible), validate, render, and export.
 
-Surface: 105 tools, 7 prompts, 16 resources.
+Surface: 110 tools, 7 prompts, 18 resources.
 
 ## Run & transport
 Transport: STDIO only (local). No HTTP.
@@ -202,14 +202,15 @@ Description:
 
 #### create_group
 Risk class: medium
-Key params: doc_id: string, parent_id: string | null, object_id: string | null
+Key params: doc_id: string, parent_id: string | null, object_id: string | null, label: string | null, mode: string
 Description:
     Create an empty `<g>` group inside `parent_id` (must exist) or the document default parent.
 
     When to use: making an EMPTY group to populate later. To wrap EXISTING objects in a new group
     use `group_objects`; to move one object into an existing group use `reparent_object`.
 
-    Key params: `parent_id` (must exist) or the document default parent; `object_id` to pin the id.
+    Key params: `parent_id` or default parent; `object_id` pins the stable ID; `label` supplies a
+    readable name; `mode` is group (default) or layer on the same SVG g container.
 
     Return shape: `CreateResult` — `object_id` is the new group id, `bbox=None` (empty), plus the
     pipeline fields (`operation_id`, `snapshot_id`, `changed`, preview).
@@ -471,7 +472,7 @@ Description:
 
 #### open_document
 Risk class: low
-Key params: path: string
+Key params: path: string, root_id: string | null
 Description:
     Open an SVG into a tracked workspace document and return its id + summary.
 
@@ -482,7 +483,8 @@ Description:
     Key params: `path` may be workspace-RELATIVE (anchored to the first workspace root, NOT the
     server CWD — matching `save_document_as` / `live_sync_to_workspace`) or absolute; either is
     sandbox-validated and a `../`-escape, an absolute path outside the workspace, or a symlink whose
-    target leaves the sandbox is rejected with `path rejected: outside workspace`.
+    target leaves the sandbox is rejected with `path rejected: outside workspace`. Optional
+    `root_id` from get_workspace_info selects a configured root for a relative path.
     WORKING-COPY MODEL: opening copies your source SVG byte-for-byte into a per-document workspace
     as an immutable `original.svg` and seeds a single live WORKING COPY. The returned `doc_id`
     addresses that copy; EVERY subsequent tool operates on it, and your ORIGINAL is NEVER mutated.
@@ -549,7 +551,7 @@ Description:
 
 #### reparent_object
 Risk class: medium
-Key params: doc_id: string, object_id: string, new_parent_id: string
+Key params: doc_id: string, object_id: string, new_parent_id: string, preserve_appearance: boolean
 Description:
     Move an object (`object_id`) under a new parent (`new_parent_id`); both must exist.
 
@@ -560,6 +562,11 @@ Description:
     object itself or one of its descendants. NOTE: re-parenting changes the inherited coordinate
     space — the object's visual position can shift if old/new parents carry different transforms.
 
+    Set `preserve_appearance=True` for compensated document-space transforms and unchanged
+    paint order. Refuses stylesheets, effects/inherited styles on changed ancestors, nested
+    viewports, external subtree references, singular transforms and changed paint order.
+    Default False retains the legacy XML-only move contract.
+
     Return shape: `CreateResult` — `object_id` echoes the moved object, `bbox=None`, plus the
     pipeline fields (`operation_id`, `snapshot_id`, `changed`, preview).
 
@@ -569,6 +576,21 @@ Description:
     and inspect the result before relying on it; `restore_snapshot` reverts it if it is wrong.
 
     Risk class: medium (reversible edit on the working copy; original untouched).
+
+#### replace_svg_fragment
+Risk class: high
+Key params: doc_id: string, object_id: string, svg: string, reference_policy: string, approval_token: string | null
+Description:
+    Replace one selected SVG subtree atomically, retaining its container ID and qualified tag.
+
+    Pass a complete allowlisted element with matching root ID or no root ID. Internal IDs
+    survive only when explicitly included. Conflicting/duplicate IDs, unresolved references
+    and external references to removed IDs always refuse before write. Stylesheets require
+    preparation. Default reject_changes refuses updates to externally referenced subtrees;
+    allow_retained explicitly accepts changed appearance of references to surviving IDs.
+    Rest of the scene is preserved structurally; XML serialization may normalize formatting.
+    One snapshot and Operation Record; high-risk approval gate matches existing SVG adoption.
+    Risk class: high (allowlisted fragment adoption, approval-gated and reversible).
 
 #### set_document_svg
 Risk class: high
@@ -597,6 +619,17 @@ Description:
 
     Risk class: HIGH — requires a non-empty `approval_token`; without it the op is refused and
     nothing is written.
+
+#### set_group_mode
+Risk class: medium
+Key params: doc_id: string, object_id: string, mode: string
+Description:
+    Convert the same g between ordinary group and layer; preserve ID and all other attributes.
+
+    Children, styles, visibility, locks, transform and sibling order remain intact.
+    For a readable name without changing ID use rename_object(label=...).
+    Stylesheets that might select editor metadata require preparation.
+    Risk class: medium (reversible metadata edit through the shared pipeline).
 
 ### Inspect
 
@@ -635,7 +668,7 @@ Description:
 
 #### quality_report
 Risk class: low
-Key params: doc_id: string
+Key params: doc_id: string, editability: object | null
 Description:
     Build a machine-readable quality report for a document: validation findings plus metrics.
 
@@ -643,7 +676,9 @@ Description:
     correctness only use `validate_document`; to actually strip the opportunities use
     `svg_web_optimize`.
 
-    Key params: none beyond `doc_id`.
+    Key params: optional `editability` configures labels, explicitly designated semantic group IDs,
+    layer/depth/fragmentation advisory thresholds, or disables advice. Recommendations never
+    affect SVG validity or score and cannot identify tracing provenance.
 
     Return shape: `QualityReport` — `ok`, the `validate_document` findings (missing fonts, external
     assets, large rasters, id problems, viewBox sanity), quantitative metrics (object/node/layer
@@ -916,6 +951,22 @@ Description:
     and inspect the result before relying on it; `restore_snapshot` reverts it if it is wrong.
 
     Risk class: medium (reversible edit on the working copy; original untouched).
+
+#### repeat_objects
+Risk class: medium
+Key params: doc_id: string, object_id: string, placement: any, group_id: string, mode: string, label: string, orientation: string, variation: object | null, anchor: object | null, dry_run: boolean
+Description:
+    Place editable instances along a polyline (two points = line) or in a rectangle.
+
+    Polyline uses count OR spacing; rectangle uses count/columns OR spacing_x/spacing_y.
+    Coordinates are root document user units; anchor is a point in the source's local coordinates
+    (default local origin). Fixed/tangent orientation and bounded seeded jitter are declarative.
+    Linked mode creates use references; copies reuse duplicate ID/internal-reference remapping.
+    Source stays intact; results live in a named ordinary group beside it. No arbitrary paths,
+    curves or execution; max 1024 instances and bounded resulting document size. Dry-run defaults
+    to True and validates the full plan without snapshots/records/writes. Stylesheets, locked
+    source/ancestors and unsupported viewport/animation contexts refuse before disk mutation.
+    Risk class: medium (one reversible edit through the shared pipeline on apply).
 
 #### replace_color
 Risk class: medium
@@ -1361,6 +1412,17 @@ Description:
         Risk class: low (render to the managed artifacts dir; no original overwrite, no Operation
         Record).
 
+#### compare_region
+Risk class: low
+Key params: doc_id: string, snapshot_id: string, region: object, width_px: integer, background: string, inline: boolean
+Description:
+    Render the same fixed region from a pre-edit snapshot and the current working copy.
+
+    Use an EditResult.snapshot_id for before/after inspection of a detail. Explicit region
+    bounds, width and background apply identically to both images. Does not restore or edit
+    the document and does not assess artistic quality. Returns portable artifact URIs.
+    Risk class: low (read-only sources, bounded PNG artifact exports).
+
 #### create_icon_set
 Risk class: low
 Key params: doc_id: string, sizes: array | null, out_dir: string | null, name_prefix: string | null
@@ -1563,13 +1625,16 @@ Description:
 
 #### render_preview
 Risk class: low
-Key params: doc_id: string, width_px: integer | null, name: string | null, inline: boolean, max_output_bytes: integer | null
+Key params: doc_id: string, width_px: integer | null, name: string | null, inline: boolean, max_output_bytes: integer | null, object_id: string | null, region: object | null, background: string
 Description:
     Render a PNG preview of the whole document into the artifacts dir.
 
         When to use: a quick visual check of the whole document. For a final file use
         `export_document`;
         for one object use `export_object`; for an ordered run series use `capture_frame`.
+
+        Optional `object_id` reuses export_object; `region={x,y,width,height}` crops in document
+        user units. Choose one. Region background defaults transparent; width defaults to 512.
 
         Key params: `width_px` scales the raster (height follows the document aspect ratio); omit
         for
@@ -2361,6 +2426,16 @@ Description:
 
     Risk class: low (read-only).
 
+#### get_workspace_info
+Risk class: low
+Key params: (none)
+Description:
+    Discover configured server workspace roots and portable artifact access.
+
+    Relative paths retain their first-root anchor; opaque root IDs and names identify
+    roots without exposing host absolute paths. Read artifact URIs through MCP resources.
+    Risk class: low (read-only).
+
 #### list_actions
 Risk class: low
 Key params: include_all_actions: boolean
@@ -2455,7 +2530,7 @@ Description:
 
 #### save_document_as
 Risk class: medium
-Key params: doc_id: string, dest_path: string, overwrite: boolean, approval_token: string | null
+Key params: doc_id: string, dest_path: string, overwrite: boolean, approval_token: string | null, root_id: string | null
 Description:
     Save a document's current working-copy state to a NEW file in the workspace.
 
@@ -2464,7 +2539,8 @@ Description:
     and source files are never touched.
 
     Key params: `dest_path` may be RELATIVE or absolute — relative anchors to the FIRST configured
-    workspace root (NOT the server CWD); absolute must resolve inside a configured root. A dest into
+    workspace root (NOT the server CWD); absolute must resolve inside a configured root. Optional
+    `root_id` from get_workspace_info selects a root explicitly with a relative dest. A dest into
     a not-yet-existing SUBFOLDER (e.g. `"output/final.svg"`) is supported: missing parents are
     created only after proving they resolve INSIDE the workspace (a `..`-escaping / out-of-sandbox
     dest creates nothing and is rejected with `path rejected: outside workspace`). The dest is
@@ -2734,6 +2810,12 @@ escape hatch (ADR-003). Host-independent (not probed), so it needs no Inkscape b
 Use this when you want just the discovery map without the heavier runtime probe matrix.
 
 Risk class: low (read-only).
+
+#### inkscape://workspace
+Description: Configured server roots as opaque identifiers and the relative-path anchor rule.
+
+#### inkscape://artifact/{root_key}/{token}
+Description: Read a root-qualified artifact; sandbox and size limits apply on every read.
 
 #### inkscape://document/{doc_id}/assets
 Description: Referenced assets (images, uses, external url() refs) for one document.

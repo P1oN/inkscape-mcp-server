@@ -65,7 +65,7 @@ argument lists — never shell strings.
 
 ## Highlights
 
-- **103 typed tools** across read, validate, render, export, optimize, safe-edit, element-creation,
+- **110 typed tools** across read, validate, render, export, optimize, safe-edit, element-creation,
   defs/grouping, path-geometry, snapshot, save, and live groups.
 - **Headless-first.** No GUI required; the Inkscape binary is used only for render / export /
   geometry, and the server probes the runtime instead of assuming a version.
@@ -80,6 +80,11 @@ argument lists — never shell strings.
   extension execution.
 - **MCP resources** expose document structure (summary / tree / layers / objects / styles / fonts /
   assets) and the runtime capability matrix as addressable URIs.
+
+Working-copy authoring now includes [portable workspace/artifact discovery, named group/layer
+organization, editability advice, focused snapshot comparison, safe fragment replacement and seeded
+repetition](docs/agent-usage-guide.md#workspace-discovery-and-portable-artifacts). These typed tools
+reuse the existing sandbox and edit transactions. They do not extend the native live edit protocol.
 
 ## How it works
 
@@ -166,7 +171,7 @@ uv run mypy src
 + mypy + pytest on Linux/macOS/Windows (headless + the cross-platform live-transport suite), the
 full suite incl. real-Inkscape tests on Linux, and a packaged `pipx`-install STDIO boot smoke on all
 three OSes, plus a full-surface MCP smoke (`ci_surface_smoke.py`) that asserts the registered
-primitive counts (**103 tools / 7 prompts / 16 resources**) and reads every resource over an in-memory
+primitive counts (**110 tools / 7 prompts / 18 resources**) and reads every resource over an in-memory
 client. CI helper scripts live in [`scripts/`](scripts/) (`ci_diagnostics.py`, `ci_boot_smoke.py`,
 `ci_surface_smoke.py`).
 
@@ -302,7 +307,7 @@ widen it):
 
 The **default** surface has live on and advanced off. Turn advanced mode on to add the
 `paths`/`actions` geometry and Action surface, or turn live off to hide the live group.
-The full catalog currently has 103 tools; use runtime discovery for the active count. The self-describing `list_capabilities.tool_count` / `tools[]`
+The full catalog currently has 110 tools; use runtime discovery for the active count. The self-describing `list_capabilities.tool_count` / `tools[]`
 report the **active** post-filter surface, since they read the same `mcp.list_tools()` the transforms
 filter. The generated `llms.txt` manifest still documents the FULL catalog (generated with both flags
 forced on).

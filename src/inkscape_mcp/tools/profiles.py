@@ -38,6 +38,7 @@ from inkscape_mcp.render.profiles import (
     export_web_profile as _export_web_profile,
 )
 from inkscape_mcp.server import mcp
+from inkscape_mcp.workspace.artifacts import ArtifactLink
 from inkscape_mcp.workspace.limits import LimitExceeded
 from inkscape_mcp.workspace.paths import SandboxViolation
 from inkscape_mcp.workspace.subprocess_exec import ProcessError
@@ -61,6 +62,7 @@ class ArtifactRef(BaseModel):
 
     path: str
     workspace_relative_path: str
+    artifact: ArtifactLink | None = None
     format: str
     width_px: int | None
     height_px: int | None
@@ -125,6 +127,7 @@ def _to_result(result: ProfileResult) -> ProfileExportResult:
             ArtifactRef(
                 path=a.path,
                 workspace_relative_path=a.workspace_relative_path,
+                artifact=a.artifact,
                 format=a.format,
                 width_px=a.width_px,
                 height_px=a.height_px,

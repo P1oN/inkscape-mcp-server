@@ -12,6 +12,7 @@ from fastmcp.exceptions import ToolError
 from pydantic import BaseModel
 
 from inkscape_mcp.edit.collection import ConsistencyVerdict
+from inkscape_mcp.editability import EditabilityOptions
 from inkscape_mcp.logging_setup import get_logger, log_tool_call
 from inkscape_mcp.quality import (
     DocumentNotFound,
@@ -28,14 +29,16 @@ _logger = get_logger("tools.quality")
 
 
 @mcp.tool
-def quality_report(doc_id: str) -> QualityReport:
+def quality_report(doc_id: str, editability: EditabilityOptions | None = None) -> QualityReport:
     """Build a machine-readable quality report for a document: validation findings plus metrics.
 
     When to use: assessing a document's health and what optimizing would save. For pass/fail
     correctness only use `validate_document`; to actually strip the opportunities use
     `svg_web_optimize`.
 
-    Key params: none beyond `doc_id`.
+    Key params: optional `editability` configures labels, explicitly designated semantic group IDs,
+    layer/depth/fragmentation advisory thresholds, or disables advice. Recommendations never
+    affect SVG validity or score and cannot identify tracing provenance.
 
     Return shape: `QualityReport` — `ok`, the `validate_document` findings (missing fonts, external
     assets, large rasters, id problems, viewBox sanity), quantitative metrics (object/node/layer
@@ -48,7 +51,7 @@ def quality_report(doc_id: str) -> QualityReport:
     Risk class: low (read-only; document unchanged).
     """
     try:
-        report = _quality_report(doc_id)
+        report = _quality_report(doc_id, editability=editability)
     except (DocumentNotFound, KeyError) as exc:
         raise ToolError("document id not found") from exc
     except InspectionError as exc:

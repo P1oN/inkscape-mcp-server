@@ -48,6 +48,7 @@ DESTRUCTIVE_TOOLS: frozenset[str] = frozenset(
         # overwrite / replace whole-or-part document content
         "save_document_as",
         "set_document_svg",
+        "replace_svg_fragment",
         "replace_color",
         "apply_palette",
         "replace_text",
@@ -96,6 +97,7 @@ IDEMPOTENT_TOOLS: frozenset[str] = frozenset(
         "rename_object",
         "resize_canvas",
         "set_document_svg",
+        "replace_svg_fragment",
         "live_set_viewport",
         "live_disconnect",
     }
@@ -109,6 +111,7 @@ _HOST_PROBE_TOOLS: frozenset[str] = frozenset(
     {
         "diagnose_runtime",
         "list_capabilities",
+        "get_workspace_info",
         "check_live_support",
         "discover_extensions",
         "list_actions",
@@ -133,6 +136,7 @@ READ_ONLY_TOOLS: frozenset[str] = frozenset(
         # system / discovery probes (read-only)
         "diagnose_runtime",
         "list_capabilities",
+        "get_workspace_info",
         "check_live_support",
         "discover_extensions",
         "list_actions",
@@ -148,6 +152,7 @@ READ_ONLY_TOOLS: frozenset[str] = frozenset(
         "quality_report_set",
         # render / export (read the document, write only sandboxed artifacts — read-only w.r.t. doc)
         "render_preview",
+        "compare_region",
         "export_document",
         "export_object",
         "export_batch",

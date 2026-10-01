@@ -69,7 +69,8 @@ OUT_OF_SCOPE_RULES: tuple[OutOfScopeRule, ...] = (
         label="raster/photo pixel editing",
         reason=(
             "This is a vector/SVG server — it cannot edit raster/photo PIXELS (JPEG/PNG/GIF/"
-            "bitmap). It can embed or trace a raster, and it exports SVG to PNG, but pixel editing "
+            "bitmap). Use raster images only as visual references; deliberately author vectors. "
+            "Pixel editing "
             "(retouch/filter/crop photo content) is out of scope."
         ),
         keywords=[
@@ -161,6 +162,41 @@ OUT_OF_SCOPE_RULES: tuple[OutOfScopeRule, ...] = (
 INTENT_MAP: tuple[IntentEntry, ...] = (
     # --- create / draw ---
     IntentEntry(
+        goal_pattern="Discover workspace roots and open server artifacts",
+        tools=["get_workspace_info"],
+        how_to="Call get_workspace_info; read returned artifact resource URIs through MCP.",
+        group="inspect",
+        keywords=["workspace", "artifact uri", "where saved", "find saved file"],
+    ),
+    IntentEntry(
+        goal_pattern="Convert ordinary groups and layers without changing geometry",
+        tools=["set_group_mode", "create_group", "rename_object"],
+        how_to="Use set_group_mode; create_group(mode/label); rename_object(label=...) keeps ID.",
+        group="edit",
+        keywords=["convert layer", "layer to group", "group to layer", "named group"],
+    ),
+    IntentEntry(
+        goal_pattern="Preview a detail or compare a fixed region before and after",
+        tools=["render_preview", "compare_region"],
+        how_to="render_preview(object_id/region); compare_region(region, snapshot_id).",
+        group="export",
+        keywords=["detail preview", "preview region", "compare region", "before after"],
+    ),
+    IntentEntry(
+        goal_pattern="Replace one SVG fragment preserving its root ID",
+        tools=["replace_svg_fragment"],
+        how_to="Pass a same-tag fragment; ID/reference checks apply; approval_token required.",
+        group="edit",
+        keywords=["replace fragment", "update subtree", "replace subtree", "edit fragment"],
+    ),
+    IntentEntry(
+        goal_pattern="Repeat editable objects along a line or inside an area",
+        tools=["repeat_objects"],
+        how_to="Plan polyline/rectangle, count/spacing, linked/copies and seeded variation.",
+        group="transform",
+        keywords=["repeat objects", "along line", "along path", "garland", "stitches"],
+    ),
+    IntentEntry(
         goal_pattern="Draw a rectangle / square",
         tools=["create_rect"],
         how_to="Call create_rect with x, y, width, height (and rx/ry for rounded corners).",
@@ -219,7 +255,7 @@ INTENT_MAP: tuple[IntentEntry, ...] = (
     IntentEntry(
         goal_pattern="Move an object into another group / reparent",
         tools=["reparent_object"],
-        how_to="Call reparent_object with the object id and the target parent group id.",
+        how_to="Call reparent_object with preserve_appearance=True for checked preservation.",
         group="create",
         keywords=["reparent", "move into group", "change parent", "nest object"],
     ),

@@ -48,10 +48,12 @@ from inkscape_mcp.registry import DocEntry, Registry, get_registry
 from inkscape_mcp.server import mcp
 from inkscape_mcp.validate import ValidationReport, validate_document
 from inkscape_mcp.workspace import sandbox
+from inkscape_mcp.workspace.artifacts import ArtifactLink, artifact_link, qualified_workspace_path
 from inkscape_mcp.workspace.paths import (
     SandboxViolation,
     is_contained,
     owning_root,
+    public_path_error,
     resolve_write_path,
 )
 from inkscape_mcp.workspace.risk import PolicyViolation, RiskClass
@@ -70,6 +72,7 @@ class SaveResult(BaseModel):
     """
 
     doc_id: str
+    artifact: ArtifactLink | None = None
     saved_path: str
     operation_id: str
     overwritten: bool
@@ -250,6 +253,7 @@ def save_document_as(
     dest_path: str,
     overwrite: bool = False,
     approval_token: str | None = None,
+    root_id: str | None = None,
 ) -> SaveResult:
     """Save a document's current working-copy state to a NEW file in the workspace.
 
@@ -258,7 +262,8 @@ def save_document_as(
     and source files are never touched.
 
     Key params: `dest_path` may be RELATIVE or absolute — relative anchors to the FIRST configured
-    workspace root (NOT the server CWD); absolute must resolve inside a configured root. A dest into
+    workspace root (NOT the server CWD); absolute must resolve inside a configured root. Optional
+    `root_id` from get_workspace_info selects a root explicitly with a relative dest. A dest into
     a not-yet-existing SUBFOLDER (e.g. `"output/final.svg"`) is supported: missing parents are
     created only after proving they resolve INSIDE the workspace (a `..`-escaping / out-of-sandbox
     dest creates nothing and is rejected with `path rejected: outside workspace`). The dest is
@@ -293,8 +298,12 @@ def save_document_as(
     #    inside a configured root. A containment failure in EITHER step raises SandboxViolation,
     #    which is mapped to the safe, host-path-free ToolError below — and the parent-creation
     #    step proves containment BEFORE any mkdir, so a rejected dest creates nothing.
-    anchored_dest = _anchor_dest(dest_path)
     try:
+        anchored_dest = (
+            qualified_workspace_path(dest_path, root_id)
+            if root_id is not None
+            else _anchor_dest(dest_path)
+        )
         _ensure_parent_dir(anchored_dest)
         resolved_dest = resolve_write_path(anchored_dest)
     except SandboxViolation as exc:
@@ -302,7 +311,7 @@ def save_document_as(
         # Use exc.args[0] explicitly: it is the SAFE public message (no host path). `str(exc)`
         # would happen to resolve to the same value today, but reading args[0] keeps the safe
         # field pinned even if SandboxViolation's str form ever changes.
-        raise ToolError(exc.args[0]) from exc
+        raise ToolError(public_path_error(exc)) from exc
 
     # 3. Never overwrite a managed document file (independent of the `overwrite` flag).
     if _safe_resolve(resolved_dest) in _managed_paths(registry):
@@ -410,6 +419,7 @@ def save_document_as(
     return SaveResult(
         doc_id=doc_id,
         saved_path=rel_saved,
+        artifact=artifact_link(resolved_dest),
         operation_id=record.operation_id,
         overwritten=overwritten,
         pre_validation=pre_report,
