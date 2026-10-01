@@ -9,7 +9,7 @@
 
 inkscape-mcp — an MCP server that makes Inkscape/SVG documents agent-ready: inspect, edit safely (reversible), validate, render, and export.
 
-Surface: 101 tools, 7 prompts, 16 resources.
+Surface: 102 tools, 7 prompts, 16 resources.
 
 ## Run & transport
 Transport: STDIO only (local). No HTTP.
@@ -130,6 +130,7 @@ Operator-tunable limits / gates (all optional, env-overridable):
 - live_connect [risk: medium] — Connect to a running Inkscape over the best-ranked available transport (enables live).
 - live_diff_view [risk: low] — Produce a FOCUSED, annotated before/after visual diff of a live operation.
 - live_disconnect [risk: low] — Disconnect the current live session (the X1 disable switch). Idempotent.
+- live_edit_selection [risk: high] — Duplicate, delete, group, ungroup or reorder selected objects in managed macOS Inkscape.
 - live_export_selection [risk: low] — Export just the current live selection to a PNG under the live artifacts dir.
 - live_get_active_document [risk: low] — Identify the document open in the connected live instance (read-only).
 - live_get_scene [risk: low] — Capture one live frame as a PNG PLUS a structured, machine-readable `LiveScene`.

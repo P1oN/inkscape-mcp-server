@@ -119,3 +119,23 @@ def test_execute_before_start_raises_crash() -> None:
     p = _proc()
     with pytest.raises(EngineCrash):
         p.execute("query-x")
+
+
+@pytest.mark.parametrize("polling", [False, True])
+def test_action_error_never_bleeds_into_next_command(
+    monkeypatch: pytest.MonkeyPatch, polling: bool
+) -> None:
+    from inkscape_mcp.engine import process
+
+    if sys.platform == "win32" and not polling:
+        pytest.skip("Windows selectors cannot monitor pipes")
+    monkeypatch.setattr(process, "_POLL_PIPES", polling)
+    p = _proc()
+    p.start()
+    try:
+        for i in range(100):
+            with pytest.raises(EngineActionError, match=f"unknown-{i}"):
+                p.execute(f"unknown-{i}")
+            assert p.execute("query-x").output_lines == ["10"]
+    finally:
+        p.shutdown()

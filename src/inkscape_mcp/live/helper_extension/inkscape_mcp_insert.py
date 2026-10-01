@@ -22,12 +22,22 @@ class InsertOnce(inkex.EffectExtension):
             request = json.loads(request_path.read_text())
             nonce = request["nonce"]
             result["nonce"] = nonce
-            payload, ids = prepare_fragment(request["fragment"], nonce)
             existing = {elem.get("id") for elem in self.svg.iter() if elem.get("id")}
             if existing != set(request["expected_ids"]):
                 raise ValueError("document changed before insertion")
             if document_fingerprint(self.svg) != request["expected_fingerprint"]:
                 raise ValueError("drawing content changed before insertion")
+            if request.get("operation"):
+                from inkscape_mcp_edit import plan_edit
+                # The extension input selection is compared with the captured GUI selection.
+                if {e.get("id") for e in self.svg.selection} != set(request["selection"]):
+                    raise ValueError("selection changed before edit")
+                working, ids = plan_edit(self.svg, request)
+                fingerprint = document_fingerprint(working)
+                self.document._setroot(working)
+                result.update(ok=True, ids=ids, fingerprint=fingerprint)
+                return
+            payload, ids = prepare_fragment(request["fragment"], nonce)
             if existing.intersection(ids):
                 raise ValueError("insertion id collision")
             group = etree.fromstring(payload)
@@ -36,6 +46,11 @@ class InsertOnce(inkex.EffectExtension):
             result.update(ok=True, ids=ids)
         except Exception as exc:
             result["error"] = type(exc).__name__
+            if "request" in locals() and request.get("operation"):
+                # Return the unchanged SVG instead of opening a blocking native error dialog.
+                from inkscape_mcp_edit_errors import EDIT_REFUSALS
+                result["error"] = str(exc) if str(exc) in EDIT_REFUSALS else "invalid document or selection"
+                return
             raise inkex.AbortExtension("Insertion refused; document context or SVG is invalid.") from exc
         finally:
             pending = root / "insert-result.tmp"

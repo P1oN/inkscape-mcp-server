@@ -52,10 +52,14 @@ def test_failed_insert_cleans_request_and_allows_next_operation(
         elif failure == "array":
             reply.write_text("[]")
         elif failure != "timeout":
-            reply.write_text(json.dumps({
-                "nonce": "stale" if failure == "nonce" else data["nonce"],
-                "ok": failure != "refused",
-            }))
+            reply.write_text(
+                json.dumps(
+                    {
+                        "nonce": "stale" if failure == "nonce" else data["nonce"],
+                        "ok": failure != "refused",
+                    }
+                )
+            )
 
     monkeypatch.setattr(transport, "_activate", activate)
     with pytest.raises(LiveError) as error:

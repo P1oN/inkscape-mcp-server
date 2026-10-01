@@ -20,8 +20,10 @@ from inkscape_mcp.workspace.subprocess_exec import ProcessResult
 
 @pytest.mark.parametrize("bus_available,stream_available", [(False, True), (True, False)])
 def test_unavailable_probe_skips_insertion_check(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
-    bus_available: bool, stream_available: bool,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    bus_available: bool,
+    stream_available: bool,
 ) -> None:
     stream = tmp_path / "stdout.log"
     if stream_available:
@@ -35,7 +37,8 @@ def test_unavailable_probe_skips_insertion_check(
         ManagedDBusTransport, "_actions_list_reachable", lambda timeout: bus_available
     )
     monkeypatch.setattr(
-        ManagedDBusTransport, "_insert_available",
+        ManagedDBusTransport,
+        "_insert_available",
         lambda timeout: pytest.fail("unavailable transport must not check insertion"),
     )
     probe = ManagedDBusTransport.probe(Settings())
@@ -53,9 +56,12 @@ def test_insert_capability_requires_enabled_gaction(
         managed_dbus,
         "run_process",
         lambda *args, **kwargs: ProcessResult(
-            args=["gdbus"], returncode=0,
-            stdout=f"(({str(enabled).lower()}, signature '', @av []),)\n", stderr="",
-            duration_s=0.001, timed_out=False,
+            args=["gdbus"],
+            returncode=0,
+            stdout=f"(({str(enabled).lower()}, signature '', @av []),)\n",
+            stderr="",
+            duration_s=0.001,
+            timed_out=False,
         ),
     )
     assert ManagedDBusTransport._insert_available(1) is enabled
@@ -74,9 +80,11 @@ def test_connection_flag_requires_a_bounded_live_bus_probe(monkeypatch: pytest.M
     transport = ManagedDBusTransport(Settings(process_timeout_s=60))
     transport._connected = True
     timeouts: list[float] = []
+
     def unavailable(timeout: float) -> bool:
         timeouts.append(timeout)
         return False
+
     monkeypatch.setattr(transport, "_actions_list_reachable", unavailable)
     assert transport.is_connected() is False
     assert timeouts == [2.0]
@@ -139,13 +147,14 @@ def test_missing_reply_times_out(tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 
 @pytest.mark.skipif(sys.platform == "win32", reason="POSIX managed operations")
 def test_unsupported_edits_and_empty_selection_do_not_activate(
-    monkeypatch: pytest.MonkeyPatch, tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
 ) -> None:
     (tmp_path / "stdout.log").write_text("")
     monkeypatch.setenv(ENV_STDOUT, str(tmp_path / "stdout.log"))
     transport = ManagedDBusTransport(Settings())
     monkeypatch.setattr(transport, "_activate", lambda *args: pytest.fail("must not mutate"))
-    with pytest.raises(LiveError, match="single fill"):
+    with pytest.raises(LiveError, match="restart managed"):
         transport.apply_to_selection(style={"fill": "red", "opacity": "0.5"}, transform=None)
     monkeypatch.setattr(transport, "get_selection", lambda: LiveSelection())
     with pytest.raises(LiveError, match="select an object"):

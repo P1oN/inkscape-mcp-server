@@ -51,6 +51,10 @@ class LiveMutationUncertain(LiveConnectionError):
     """An edit may have applied; the caller must inspect before retrying."""
 
 
+class LiveEditRefused(LiveError):
+    """A safe, allowlisted refusal reason from the managed edit helper."""
+
+
 class LiveCapabilityUnsupported(LiveError):
     """The active transport cannot perform this semantic operation (e.g. DBus reads)."""
 

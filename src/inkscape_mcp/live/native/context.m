@@ -58,7 +58,7 @@ static gboolean allowed(const char *action) {
         "export-id", "export-id-only", "export-text-to-path", "export-plain-svg",
         "export-filename", "export-type", "export-area", "export-area-page", "export-dpi",
         "export-do", "select-list", "query-x", "object-set-property",
-        "org.inkscape-mcp.insert.noprefs", NULL
+        "org.inkscape-mcp.insert.noprefs", "org.inkscape-mcp.edit.noprefs", NULL
     };
     for (int i = 0; names[i]; i++) if (!strcmp(names[i], action)) return TRUE;
     return FALSE;

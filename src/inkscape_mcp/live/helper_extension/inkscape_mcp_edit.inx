@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+  <name>inkscape-mcp Edit Once</name>
+  <id>org.inkscape-mcp.edit</id>
+  <dependency type="executable" location="inx">inkscape_mcp_insert.py</dependency>
+  <effect needs-live-preview="false"><object-type>all</object-type>
+    <effects-menu><submenu name="inkscape-mcp"/></effects-menu>
+  </effect>
+  <script><command location="inx">inkscape_mcp_insert_run.sh</command></script>
+</inkscape-extension>

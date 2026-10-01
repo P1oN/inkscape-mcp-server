@@ -82,7 +82,8 @@ def test_scene_reads_filename_from_real_inkscape_namespace() -> None:
     scene = scene_from_svg(
         '<svg xmlns="http://www.w3.org/2000/svg" '
         'xmlns:s="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" '
-        's:docname="landscape.svg"><rect id="hill"/></svg>', []
+        's:docname="landscape.svg"><rect id="hill"/></svg>',
+        [],
     )
     assert scene.active_document is not None
     assert scene.active_document.name == "landscape.svg"

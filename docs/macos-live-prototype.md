@@ -143,7 +143,10 @@ Save through Inkscape normally when you want to keep the changes.
 
 ## Limits and next milestones
 
-A fill edit still supports only one fill change per call. Insertion accepts vector shapes,
+Everyday edits now support fill, stroke, stroke width, opacity, document-space transforms,
+single-run text, duplication, deletion, grouping and stacking. Each changed call is one native
+Undo transaction. See [supported cases and constraints](everyday-edits.md).
+Insertion accepts vector shapes,
 groups, text, gradients, clipping, masks and patterns up to 1 MiB / 10,000 elements. It rejects
 scripts, images, foreignObject, stylesheet elements, event handlers and external references.
 References must resolve inside the fragment. Authored ids are remapped; returned affected ids
@@ -155,8 +158,7 @@ changed document is refused. This narrows the race with manual edits but does no
 input. Do not switch drawings or edit while an operation runs. If insertion times out, inspect
 the canvas before retrying because completion may be uncertain.
 
-Stroke edits, transforms, existing-text changes, viewport control and change notifications
-remain unsupported by this transport. Existing headless tools remain available separately;
+Viewport control and change notifications remain unsupported by this transport. Existing headless tools remain available separately;
 changing a file with them does not update the managed canvas automatically.
 
 Selection inspection reports explicit element paint, not computed inherited CSS. Simple
@@ -167,8 +169,7 @@ not a screenshot of the current pan/zoom, and changes the GUI's persistent expor
 Do not change the selection or switch documents while an edit is executing. Locks serialize
 our action sequences across MCP processes; they cannot lock out human input.
 
-Next: add existing-text changes as native transactions, then test realistic illustrations
-and package a simpler installer. Rust would not by itself
+Next: test realistic illustrations and improve scene understanding, then package a simpler installer. Rust would not by itself
 solve Inkscape's selection/transaction integration; the working transport is the first thing
 to validate.
 
