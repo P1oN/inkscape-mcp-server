@@ -334,7 +334,7 @@ class EngineProcess:
     @staticmethod
     def _strip_frame(frame: str, command: str) -> list[str]:
         """Strip the echoed command line and the trailing prompt from a framed response region."""
-        body = frame
+        body = frame.replace("\r\n", "\n")
         # Drop the trailing prompt (``...\n> `` or a bare ``> ``).
         if body.endswith(PROMPT):
             body = body[: -len(PROMPT)]

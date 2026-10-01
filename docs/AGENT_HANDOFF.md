@@ -151,3 +151,9 @@ now reject Windows explicitly. Missing-directory creation and save use native Wi
 no-follow handles with ancestors held against renames; POSIX safeguards remain in place.
 Windows-specific tests cover nested creation, overwrite, exclusive writes, symlink refusal
 before truncation/descent, and parent rename prevention. Native GUI acceptance is unchanged.
+
+The next CI run passed the Linux full suite. Windows then exposed existing CRLF shell
+framing and path separator issues; shell frames normalize CRLF, registry source paths
+use portable forward slashes, and DBus export filenames use forward slashes before
+GVariant validation. macOS tests requiring actual POSIX ownership/locking are explicitly
+platform-gated; the launch-policy fake uses the same socket path construction as production.

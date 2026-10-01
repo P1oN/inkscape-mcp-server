@@ -49,7 +49,7 @@ def test_attach_reuses_running_session_then_clears_closed_session(
     isolated: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     isolated.mkdir()
-    data = {"address": f"unix:path={isolated}/bus.sock", "context_bridge": True}
+    data = {"address": f"unix:path={isolated / 'bus.sock'}", "context_bridge": True}
     monkeypatch.setattr(launcher, "_read_session", lambda root: data)
     monkeypatch.setattr(launcher, "ensure_session", lambda *a: pytest.fail("no launch on attach"))
     assert launcher.attach_session(isolated)

@@ -197,6 +197,7 @@ def test_existing_supervisor_lock_is_probed_without_changing_files(
 
 @pytest.mark.parametrize("exists", [False, True])
 @pytest.mark.parametrize("socket_bytes", [103, 104])
+@pytest.mark.skipif(sys.platform == "win32", reason="POSIX ownership/permissions")
 def test_socket_path_limit_prevents_false_readiness(
     environment: Path, exists: bool, socket_bytes: int
 ) -> None:
@@ -231,6 +232,7 @@ def test_new_launch_requires_context_build_tools(
 
 
 @pytest.mark.parametrize("available", [True, False])
+@pytest.mark.skipif(sys.platform == "win32", reason="POSIX ownership/permissions")
 def test_doctor_checks_bridge_without_activating_or_repairing(
     environment: Path, monkeypatch: pytest.MonkeyPatch, available: bool
 ) -> None:
