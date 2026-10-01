@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import ast
 import importlib.util
 import os
 import shutil
@@ -13,7 +14,9 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
+from inkscape_mcp.live.context_bridge import INTERFACE, OBJECT_PATH
 from inkscape_mcp.live.managed_dbus import INSERT_ACTION
+from inkscape_mcp.live.native_launcher import build_dependencies
 
 
 class MacOSDiagnosis(BaseModel):
@@ -26,6 +29,7 @@ class MacOSDiagnosis(BaseModel):
         "session_unavailable",
         "running",
         "running_helper_unavailable",
+        "running_context_unavailable",
         "diagnosis_failed",
     ]
     ready: bool = False
@@ -33,6 +37,7 @@ class MacOSDiagnosis(BaseModel):
     checks: dict[str, bool] = Field(default_factory=dict)
     helper_installed: bool = False
     insertion_available: bool = False
+    context_bridge_available: bool = False
     next_steps: list[str] = Field(default_factory=list)
 
 
@@ -71,6 +76,21 @@ def diagnose_macos(root: Path) -> MacOSDiagnosis:
                 "Could not inspect setup/session; check file access and installation paths."
             ],
         )
+
+
+def _ready_to_launch(report: MacOSDiagnosis) -> MacOSDiagnosis:
+    report.checks.update(build_dependencies())
+    if not all(report.checks[name] for name in ("clang", "codesign", "glib_headers")):
+        report.state = "missing_dependencies"
+        report.next_steps = [
+            "Install Apple command line tools (xcode-select --install) and brew install glib.",
+            "The context bridge builds a private launcher copy; the vendor app stays unchanged.",
+        ]
+    else:
+        report.state = "ready_to_launch"
+        report.ready = True
+        report.next_steps = ["Start inkscape-mcp-macos to build the bridge and launch Inkscape."]
+    return report
 
 
 def _diagnose_macos(root: Path) -> MacOSDiagnosis:
@@ -122,12 +142,7 @@ def _diagnose_macos(root: Path) -> MacOSDiagnosis:
         report.next_steps = ["Use a shorter session directory for the macOS Unix socket."]
         return report
     if not root.exists():
-        report.state = "ready_to_launch"
-        report.ready = True
-        report.next_steps = [
-            "Start inkscape-mcp-macos; it installs the helper and launches Inkscape."
-        ]
-        return report
+        return _ready_to_launch(report)
     info = root.stat()
     if not root.is_dir() or info.st_uid != os.getuid() or stat.S_IMODE(info.st_mode) != 0o700:
         report.state = "unsafe_session"
@@ -139,9 +154,7 @@ def _diagnose_macos(root: Path) -> MacOSDiagnosis:
     session = _read_session(root.resolve())
     if session is None:
         if not (root / "session.json").exists() and not _supervisor_lock_held(root):
-            report.state = "ready_to_launch"
-            report.ready = True
-            report.next_steps = ["Start inkscape-mcp-macos to create a managed session."]
+            return _ready_to_launch(report)
         else:
             report.state = "session_unavailable"
             report.next_steps = [
@@ -182,4 +195,50 @@ def _diagnose_macos(root: Path) -> MacOSDiagnosis:
             "Restarting MCP alone preserves the GUI and does not reload its extension manifest.",
         ]
     )
+    if session.get("context_bridge") is True:
+        reply = _stdout(
+            [
+                paths["gdbus"] or "gdbus",
+                "call",
+                "--address",
+                session["address"],
+                "--dest",
+                "org.inkscape.Inkscape",
+                "--object-path",
+                OBJECT_PATH,
+                "--method",
+                f"{INTERFACE}.ListDocuments",
+            ]
+        )
+        try:
+            rows = ast.literal_eval((reply or "").replace("@a(sss) ", ""))
+            report.context_bridge_available = (
+                isinstance(rows, tuple)
+                and len(rows) == 1
+                and isinstance(rows[0], list)
+                and all(
+                    isinstance(row, tuple)
+                    and len(row) == 3
+                    and all(isinstance(value, str) for value in row)
+                    for row in rows[0]
+                )
+            )
+        except (SyntaxError, ValueError):
+            pass
+        report.checks["context_bridge"] = report.context_bridge_available
+        if not report.context_bridge_available:
+            report.state = "running_context_unavailable"
+            report.ready = False
+            report.next_steps = [
+                "Context bridge unavailable: save work before restarting the managed GUI.",
+                "Restarting MCP alone preserves the GUI and cannot reload its GTK module.",
+            ]
+        elif report.ready:
+            report.next_steps = [
+                "Choose the task drawing with live_list_documents and live_select_document."
+            ]
+    elif report.ready:
+        report.next_steps.append(
+            "Legacy GUI has no task document guard; save work before restarting to load the bridge."
+        )
     return report

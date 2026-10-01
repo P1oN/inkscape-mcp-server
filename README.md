@@ -6,6 +6,7 @@ one-shot effect, and keeps the drawing open across MCP restarts. Fill Undo and i
 Undo/Redo (including a gradient fragment) are verified in the native UI.
 See [macOS setup and verified limits](docs/macos-live-prototype.md). Live edits change the open
 document; the working-copy guarantees described below apply to headless editing.
+Document choice and native dispatch guard: [current implementation and acceptance status](docs/document-context.md).
 Development priorities and acceptance criteria: [macOS roadmap](docs/ROADMAP.md).
 
 > A Model Context Protocol (MCP) server that makes Inkscape / SVG documents **agent-ready** —

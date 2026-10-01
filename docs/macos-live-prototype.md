@@ -30,8 +30,9 @@ No persistent modal effect extension runs, so the canvas stays interactive.
 Install official Inkscape in `/Applications/Inkscape.app` and Homebrew first. Then:
 
 ```sh
+xcode-select --install # if Apple command line tools are not installed
 brew install dbus glib uv
-git clone --branch macos-session-diagnostics https://github.com/P1oN/inkscape-mcp-server.git
+git clone https://github.com/P1oN/inkscape-mcp-server.git
 cd inkscape-mcp-server
 uv sync --python 3.12 --frozen
 ```
@@ -55,6 +56,12 @@ tool_timeout_sec = 60
 [mcp_servers.inkscape.env]
 INKSCAPE_MCP_WORKSPACE_ROOTS = "/Users/yourname/Documents/Drawings"
 ```
+
+New managed sessions also build the [native context bridge](document-context.md) and a private
+ad-hoc signed executable copy. The original vendor application stays unchanged; the copy does not
+retain its vendor signature or hardened runtime. Native acceptance passed on 2026-10-01;
+see the [recorded results](document-context.md#validation). The integration remains experimental.
+Existing legacy sessions are reused with a guard-unavailable note.
 
 Create that drawing directory first. It contains preview artifacts and snapshots. This root
 restricts the server's file operations, but is not a jail for the GUI: the user can open other
@@ -97,8 +104,12 @@ a note; a vanished bus is reported as disconnected. Use `live_connect` to reconn
 transports keep their existing connect-time document semantics.
 
 A filename is not a unique window/document identity, and paths remain null when the transport
-cannot report them. Explicit document binding and stable identity are the next part of roadmap
-stage 2; this change does not claim to pin future edits to a chosen window.
+cannot report them. New managed sessions provide runtime window/document UUIDs through
+`live_list_documents`; `live_select_document` activates and binds the drawing for the task.
+The native module rejects actions after a window/document change. Reconnect clears that binding.
+See [implementation and acceptance results](document-context.md) before using this experimental
+version. `live_status` exposes `document_guard_available`, `ready_to_edit`, `connection_state`
+and `recovery_actions`. Legacy sessions have no document guard.
 
 ### Diagnosis verification (2026-09-30)
 
@@ -119,7 +130,8 @@ session. The generated tool manifest was refreshed before this acceptance.
 ## First user trial
 
 1. Ask Codex to connect with `live_connect(prefer="no_freeze")` and confirm `managed-dbus`.
-2. Select a rectangle manually, then ask: “Tell me which object is selected and its fill.”
+2. Ask Codex to list drawings with `live_list_documents` and choose the task drawing with
+   `live_select_document`. Check `live_status.ready_to_edit`. Select a rectangle manually, then ask: “Tell me which object is selected and its fill.”
 3. Ask: “Change the selected object's fill to #cc3344.” The inherited tool requires a nonempty
    `approval_token`; this is a request marker, not cryptographic authorization. Codex should
    supply it only for an edit the user requested.

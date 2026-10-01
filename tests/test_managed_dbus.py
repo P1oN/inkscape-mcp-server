@@ -82,7 +82,12 @@ def test_connection_flag_requires_a_bounded_live_bus_probe(monkeypatch: pytest.M
     assert timeouts == [2.0]
 
 
-def test_active_document_parse_failure_is_a_live_error(monkeypatch: pytest.MonkeyPatch) -> None:
+@pytest.mark.skipif(sys.platform == "win32", reason="POSIX managed operations")
+def test_active_document_parse_failure_is_a_live_error(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    (tmp_path / "stdout.log").write_text("")
+    monkeypatch.setenv(ENV_STDOUT, str(tmp_path / "stdout.log"))
     transport = ManagedDBusTransport(Settings())
     monkeypatch.setattr(transport, "get_document_svg", lambda: "not SVG")
     with pytest.raises(LiveError, match="active document export is invalid"):
@@ -132,9 +137,12 @@ def test_missing_reply_times_out(tmp_path: Path, monkeypatch: pytest.MonkeyPatch
         transport.get_selection()
 
 
+@pytest.mark.skipif(sys.platform == "win32", reason="POSIX managed operations")
 def test_unsupported_edits_and_empty_selection_do_not_activate(
-    monkeypatch: pytest.MonkeyPatch,
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path,
 ) -> None:
+    (tmp_path / "stdout.log").write_text("")
+    monkeypatch.setenv(ENV_STDOUT, str(tmp_path / "stdout.log"))
     transport = ManagedDBusTransport(Settings())
     monkeypatch.setattr(transport, "_activate", lambda *args: pytest.fail("must not mutate"))
     with pytest.raises(LiveError, match="single fill"):

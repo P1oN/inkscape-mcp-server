@@ -59,7 +59,7 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 packages = ["src/inkscape_mcp"]
 # Ship the live helper extension's non-Python data (the .inx manifest) inside the wheel.
-artifacts = ["*.inx"]
+artifacts = ["*.inx", "*.m"]
 
 [tool.ruff]
 line-length = 100

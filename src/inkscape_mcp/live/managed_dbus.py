@@ -21,6 +21,13 @@ from typing import ClassVar
 from uuid import uuid4
 
 from inkscape_mcp.config import Settings
+from inkscape_mcp.live.context_bridge import (
+    ENV_BRIDGE,
+    context_call,
+    list_contexts,
+    read_context,
+    validate_identity,
+)
 from inkscape_mcp.live.dbus_backend import (
     DBusTransport,
     _variant_bool,
@@ -33,9 +40,11 @@ from inkscape_mcp.live.protocol import LiveCommand
 from inkscape_mcp.live.transport import (
     LiveCapabilityUnsupported,
     LiveConnectionError,
+    LiveContextError,
     LiveDocumentRef,
     LiveError,
     LiveMutationResult,
+    LiveMutationUncertain,
     LiveScene,
     LiveSelection,
     LiveSelectionInspection,
@@ -77,6 +86,82 @@ class ManagedDBusTransport(DBusTransport):
     name: ClassVar[str] = "managed-dbus"
     rank: ClassVar[int] = 30
     _root_id: str | None = None
+    selected_document: LiveDocumentRef | None = None
+
+    @property
+    def context_guard_available(self) -> bool:
+        return os.environ.get(ENV_BRIDGE) == "1"
+
+    def list_documents(self) -> list[LiveDocumentRef]:
+        if not self.context_guard_available:
+            raise LiveCapabilityUnsupported(
+                "restart a managed session with the context bridge after saving your work"
+            )
+        return list_contexts(self._settings.process_timeout_s)
+
+    def select_document(self, window_id: str, document_id: str) -> LiveDocumentRef:
+        validate_identity(window_id, document_id)
+        if not self.context_guard_available:
+            raise LiveCapabilityUnsupported("document context bridge is unavailable")
+        with self._operation():
+            context_call("SelectDocument", self._settings.process_timeout_s, window_id, document_id)
+            deadline = time.monotonic() + min(self._settings.process_timeout_s, 2.0)
+            while True:
+                current = read_context(self._settings.process_timeout_s)
+                if (current.window_id, current.document_id) == (window_id, document_id):
+                    self.selected_document = current
+                    return current
+                if time.monotonic() >= deadline:
+                    raise LiveContextError(
+                        "activate the chosen drawing and call live_select_document again"
+                    )
+                time.sleep(0.02)
+
+    def _require_selected(self) -> None:
+        if not self.context_guard_available:
+            return  # Compatibility with already running pre-bridge sessions.
+        current = getattr(_LOCAL, "context", None)
+        selected = self.selected_document
+        if selected is None:
+            raise LiveContextError(
+                "choose the task drawing with live_select_document before editing"
+            )
+        if current is None or (current.window_id, current.document_id) != (
+            selected.window_id,
+            selected.document_id,
+        ):
+            raise LiveContextError("task drawing changed; call live_select_document before editing")
+
+    def _activate(
+        self, action: str, parameter: str, *, object_path: str = "/org/inkscape/Inkscape"
+    ) -> None:
+        try:
+            context = getattr(_LOCAL, "context", None)
+            if self.context_guard_available:
+                if context is None:
+                    raise LiveError("context action requires a managed operation")
+                context_call(
+                    "Activate",
+                    self._settings.process_timeout_s,
+                    context.window_id,
+                    context.document_id,
+                    action,
+                    parameter,
+                )
+            else:
+                super()._activate(action, parameter, object_path=object_path)
+
+        except LiveConnectionError as exc:
+            if action in {"object-set-property", INSERT_ACTION}:
+                raise LiveMutationUncertain(
+                    "edit completion uncertain; inspect the task drawing before retrying"
+                ) from exc
+            raise
+
+    def disconnect(self) -> None:
+        self.selected_document = None
+        super().disconnect()
+
     supported_commands: ClassVar[frozenset[LiveCommand]] = frozenset(
         {
             LiveCommand.PING,
@@ -136,12 +221,18 @@ class ManagedDBusTransport(DBusTransport):
 
     def get_active_document(self) -> LiveDocumentRef:
         try:
-            root = parse_svg_bytes(self.get_document_svg().encode()).getroot()
+            with self._operation():
+                root = parse_svg_bytes(self.get_document_svg().encode()).getroot()
+                ref = document_ref(root)
+                context = getattr(_LOCAL, "context", None)
+                if context is not None:
+                    ref.window_id = context.window_id
+                    ref.document_id = context.document_id
         except UnsafeXMLError as exc:
             raise LiveError("active document export is invalid") from exc
         except OSError as exc:
             raise LiveError("active document export is unavailable") from exc
-        return document_ref(root)
+        return ref
 
     @contextmanager
     def _operation(self) -> Iterator[Path]:
@@ -170,10 +261,23 @@ class ManagedDBusTransport(DBusTransport):
                     time.sleep(0.02)
             try:
                 _LOCAL.path = path
+                _LOCAL.context = (
+                    read_context(self._settings.process_timeout_s)
+                    if self.context_guard_available
+                    else None
+                )
                 yield path
             finally:
+                if hasattr(_LOCAL, "context"):
+                    del _LOCAL.context
                 del _LOCAL.path
                 fcntl.flock(lock, fcntl.LOCK_UN)
+
+    @contextmanager
+    def operation_scope(self) -> Iterator[None]:
+        """Pin document identity across context capture, previews, and the edit."""
+        with self._operation():
+            yield
 
     def get_selection(self) -> LiveSelection:
         with self._operation() as path, path.open("rb") as stream:
@@ -211,19 +315,25 @@ class ManagedDBusTransport(DBusTransport):
             return data
 
     def inspect_selection(self) -> LiveSelectionInspection:
-        ids = set(self.get_selection().object_ids)
-        root = parse_svg_bytes(self.get_document_svg().encode("utf-8")).getroot()
-        objects = [
-            object_info(elem)
-            for elem in root.iter()
-            if isinstance(elem.tag, str) and elem.get("id") in ids
-        ]
-        return LiveSelectionInspection(objects=objects, count=len(objects))
+        with self._operation():
+            ids = set(self.get_selection().object_ids)
+            root = parse_svg_bytes(self.get_document_svg().encode("utf-8")).getroot()
+            objects = [
+                object_info(elem)
+                for elem in root.iter()
+                if isinstance(elem.tag, str) and elem.get("id") in ids
+            ]
+            return LiveSelectionInspection(objects=objects, count=len(objects))
 
     def get_scene(self) -> LiveScene:
         with self._operation():
             selected = self.get_selection().object_ids
-            return scene_from_svg(self.get_document_svg(), selected)
+            scene = scene_from_svg(self.get_document_svg(), selected)
+            context = getattr(_LOCAL, "context", None)
+            if context is not None and scene.active_document is not None:
+                scene.active_document.window_id = context.window_id
+                scene.active_document.document_id = context.document_id
+            return scene
 
     def insert_svg(self, svg_fragment: str) -> LiveMutationResult:
         nonce = "mcp_" + uuid4().hex
@@ -240,6 +350,7 @@ class ManagedDBusTransport(DBusTransport):
         request = root / "insert-request.json"
         reply = root / "insert-result.json"
         with self._operation():
+            self._require_selected()
             doc = parse_svg_bytes(self.get_document_svg().encode()).getroot()
             expected = [e.get("id") for e in doc.iter() if e.get("id")]
             reply.unlink(missing_ok=True)
@@ -263,7 +374,7 @@ class ManagedDBusTransport(DBusTransport):
                     # A native error dialog can outlive the D-Bus call. The helper may
                     # already have reported refusal; reconcile that reply below.
                     if not reply.is_file():
-                        raise LiveConnectionError(
+                        raise LiveMutationUncertain(
                             "insertion activation did not complete; "
                             "inspect Inkscape before retrying"
                         ) from exc
@@ -284,7 +395,14 @@ class ManagedDBusTransport(DBusTransport):
                             )
                         if result.get("nonce") != nonce or not result.get("ok"):
                             raise LiveError("Inkscape refused insertion; document context changed")
-                        if nonce in self.get_document_svg():
+                        try:
+                            applied = nonce in self.get_document_svg()
+                        except (LiveError, OSError, UnsafeXMLError) as exc:
+                            raise LiveMutationUncertain(
+                                "insertion may have applied before the window changed; "
+                                "inspect the selected task drawing before retrying"
+                            ) from exc
+                        if applied:
                             return LiveMutationResult(
                                 affected_ids=ids,
                                 count=len(ids),
@@ -292,7 +410,7 @@ class ManagedDBusTransport(DBusTransport):
                                 undo_friendly=True,
                             )
                     time.sleep(0.05)
-                raise LiveConnectionError(
+                raise LiveMutationUncertain(
                     "insertion did not complete; inspect Inkscape before retrying"
                 )
             finally:
@@ -306,10 +424,11 @@ class ManagedDBusTransport(DBusTransport):
         # entry. Do not pretend several separate GActions form an atomic transaction.
         if set(style) != {"fill"} or transform is not None:
             raise LiveError("managed prototype supports a single fill change only")
-        selected = self.get_selection()
-        if not selected.object_ids:
-            raise LiveError("select an object in the managed Inkscape window first")
         with self._operation():
+            self._require_selected()
+            selected = self.get_selection()
+            if not selected.object_ids:
+                raise LiveError("select an object in the managed Inkscape window first")
             result = super().apply_to_selection(style=style, transform=None)
         result.affected_ids = selected.object_ids
         result.count = selected.count

@@ -216,3 +216,33 @@ def test_available_transports_no_duplicate_extension_socket(
 
     status = mgr.status()
     assert status.available_transports.count("extension-socket") == 1
+
+
+def test_task_binding_status_and_connection_loss_have_recovery(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from inkscape_mcp.live.managed_dbus import ManagedDBusTransport
+
+    transport = ManagedDBusTransport(_settings(tmp_path, enabled=True))
+    monkeypatch.setenv("INKSCAPE_MCP_CONTEXT_BRIDGE", "1")
+    current = LiveDocumentRef(window_id="window-a", document_id="document-a", name="same.svg")
+    transport.selected_document = current
+    connected = True
+    monkeypatch.setattr(transport, "is_connected", lambda: connected)
+    monkeypatch.setattr(transport, "get_active_document", lambda: current)
+    mgr = LiveSessionManager(_settings(tmp_path, enabled=True))
+    mgr._transport = transport
+    status = mgr.status()
+    assert status.ready_to_edit and status.document_guard_available
+    assert status.connection_state == "connected"
+    current = LiveDocumentRef(window_id="window-b", document_id="document-b", name="same.svg")
+    status = mgr.status()
+    assert not status.ready_to_edit
+    assert status.selected_document.document_id == "document-a"
+    assert any("live_select_document" in action for action in status.recovery_actions)
+    connected = False
+    status = mgr.status()
+    assert status.connection_state == "connection_lost"
+    assert status.active_document is None and status.selected_document is None
+    assert not status.ready_to_edit
+    assert any("may have applied" in action for action in status.recovery_actions)

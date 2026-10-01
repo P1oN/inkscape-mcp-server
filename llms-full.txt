@@ -9,7 +9,7 @@
 
 inkscape-mcp — an MCP server that makes Inkscape/SVG documents agent-ready: inspect, edit safely (reversible), validate, render, and export.
 
-Surface: 99 tools, 7 prompts, 16 resources.
+Surface: 101 tools, 7 prompts, 16 resources.
 
 ## Run & transport
 Transport: STDIO only (local). No HTTP.
@@ -1918,6 +1918,20 @@ Description:
 
     Risk class: restricted (writes a server-bundled file under the Inkscape extensions dir).
 
+#### live_list_documents
+Risk class: low
+Key params: (none)
+Description:
+    List open managed macOS drawing windows with opaque window and document IDs.
+
+    When to use: choosing the drawing for a task before a live edit. Identical names and SVG
+    content can belong to different windows. IDs are valid only while their GUI objects live.
+
+    Key params: none. Requires a managed session with the GTK context bridge.
+    Return shape: documents containing window_id, document_id and window title.
+    Example: live_list_documents()
+    Risk class: low (read-only).
+
 #### live_render_view
 Risk class: low
 Key params: region_x: number | null, region_y: number | null, region_width: number | null, region_height: number | null, scale: number | null, fast: boolean
@@ -1940,6 +1954,21 @@ Description:
     Example: `live_render_view(fast=True)`
 
     Risk class: low (render to artifact dir; view-only, no Operation Record).
+
+#### live_select_document
+Risk class: medium
+Key params: window_id: string, document_id: string
+Description:
+    Activate and bind an open drawing window as the document for this task.
+
+    When to use: after live_list_documents and before edits on managed macOS. Edits refuse if
+    the active window or document changes. Reconnect clears the binding; select again after
+    inspecting the drawing. Closing, reopening or reverting a drawing can invalidate its IDs.
+
+    Key params: window_id and document_id from live_list_documents. No file is opened or closed.
+    Return shape: LiveSession with selected_document and ready_to_edit.
+    Example: live_select_document(window_id="...", document_id="...")
+    Risk class: medium (changes active window and the task binding; no drawing mutation).
 
 #### live_session_step
 Risk class: high
@@ -2022,8 +2051,10 @@ Description:
     When to use: checking whether a session is live before issuing live tools. For per-host
     transport detail use `check_live_support`.
 
-    Managed macOS refreshes the current drawing name and probes bus liveness. Other transports
-    retain the document observed at connect time. A filename is not a unique document identity.
+    Managed macOS refreshes the current drawing and probes bus liveness. The context bridge
+    reports runtime window/document IDs, the selected task drawing, and ready_to_edit. Other
+    transports retain the document observed at connect time. connection_state and recovery_actions
+    explain failures without closing the GUI. Reconnect resets the task binding.
 
     Key params: none. Never raises — reports "not connected" / "none available" cleanly.
 

@@ -1,0 +1,104 @@
+# Managed macOS document context
+
+The managed GTK 3 session can identify and select a drawing window, then check that
+identity inside Inkscape immediately before dispatching an action. This is the remaining
+implementation scope from roadmap stage 2. **Native acceptance passed on 2026-10-01 with
+official Inkscape 1.4.3 (0d15f75). The integration remains experimental.**
+
+## Workflow
+
+1. `live_connect(prefer="no_freeze")`.
+2. `live_list_documents()` returns open drawing windows with titles and opaque
+   `window_id` / `document_id`. Names and identical SVG content do not identify a window.
+3. `live_select_document(window_id=..., document_id=...)` activates the chosen window and
+   binds it to the task. Check `live_status.ready_to_edit` and inspect `live_get_scene`.
+4. Make the requested fill or SVG insertion. Switching to another window or replacing
+   its document causes refusal. Inspect the drawing and choose it again before continuing.
+5. After reconnect, choose the task drawing again. Reconnect keeps the GUI and unsaved work.
+
+A window UUID belongs to its live GTK window object. The document UUID belongs to the
+Inkscape document's GAction group. Neither depends on filenames, SVG root IDs or content
+fingerprints. IDs survive edits while those GTK objects remain alive. Saving does not itself mint an ID;
+if any operation replaces the document group, choose it again. Closing/reopening or
+replacing a document can invalidate its identity. Two windows showing the same document
+share its document identity but have different window identities. IDs are runtime handles,
+not permanent file IDs, and are not credentials.
+
+`connection_state` distinguishes disabled, disconnected, connected, connection_lost and
+document_unavailable. `recovery_actions` explains the next step. A working private bus does
+not guarantee an active drawing. An edit timeout may mean the edit applied: inspect the
+selected task drawing before retrying. A discarded operation with `completion_uncertain=true`
+is not proof of rollback. Never restart or kill an unsaved GUI automatically.
+
+## Bridge and installation
+
+Official macOS Inkscape 1.4.3 exports document actions but omits the usual GTK window action
+paths. Its application actions operate on the currently active document; comparing exported
+SVGs cannot reliably distinguish two identical drawings. The implementation therefore uses
+a small GTK module (`src/inkscape_mcp/live/native/context.m`) and only public GTK/GIO/Cocoa
+APIs. It does not depend on Inkscape's C++ object layout or modify drawing XML to assign IDs.
+
+The module exposes a fixed private D-Bus interface: list, get context, select and dispatch
+an allowlisted adapter action. The GUI main-loop callback compares the expected window and
+document UUIDs and immediately activates the GAction, without returning to the event loop
+between the check and dispatch. The insertion effect captures that document and retains its
+existing ID/content fingerprint guard and native Undo transaction. Each related scene/frame
+or edit/preview sequence shares one context; manual focus changes cause a later action to refuse.
+
+The vendor executable's hardened runtime rejects external GTK modules. The launcher makes a
+**session-local executable copy, removes its vendor signature by signing that copy ad hoc,
+and loads the module there**. The copied bundle has a separate identifier and links to vendor
+resources. `/Applications/Inkscape.app` stays unchanged. The copy does not retain the vendor
+executable's hardened-runtime protection or signature; this remains an experimental integration,
+not a supported vendor plugin installation. Only the session's private bus is used.
+
+New sessions require official GTK 3 Inkscape, Apple command line tools (`clang`, `codesign`),
+and Homebrew glib development headers. `--doctor` checks these before advertising launch readiness.
+The module is compiled and the copy prepared on first launch; a content hash invalidates the
+cache after source or executable changes. Updating Inkscape's resource bundle requires saving
+and restarting a managed GUI before use. A fresh session launch passed native acceptance.
+
+A GUI started by an older version is reused with its existing behavior and an explicit
+legacy-session note: `document_guard_available` / `ready_to_edit` are false and the new
+selection tools are unsupported. Save and close that managed GUI before restarting to load
+the module. Restarting MCP alone never upgrades a running GUI's native module.
+
+Inkscape 1.4.3 was observed crashing during primary-monitor initialization while the Mac was
+locked. The module now refuses startup before loading any drawing when no primary monitor
+is available, with an unlock-and-retry message in `inkscape.stderr.log`. The locked-Mac refusal
+has been observed in a native run; startup and full acceptance also passed after unlocking the Mac.
+
+## Validation
+
+Automated tests cover malformed and missing identities, identical titles with distinct IDs,
+window switches and document replacement, refusal before edits, native dispatch parameters,
+lock cleanup, explicit binding, connection-loss guidance, bridge diagnosis without repair,
+and private-copy build/cache behavior. Strict mypy (110 source files), focused Ruff, MCP surface smoke (101 tools) and wheel
+build pass. Latest full pytest: 1078 passed, 74 skipped, 1 failed — the previously documented
+intermittent fake-shell `test_unknown_action_surfaces_engine_action_error`; an isolated repeat
+passed. Native acceptance passed through actual MCP STDIO on 2026-10-01: two identical
+SVGs received distinct live identities, edits required explicit choice, fill and insertion
+returned to exact before/after content fingerprints with native Undo/Redo, a switch between
+context read and dispatch was refused without changing drawing B, and a new STDIO client
+reused the GUI and IDs while clearing the task binding. The fresh test GUI was closed only
+after verifying both synthetic drawing identities. The report recorded `passed: true`.
+
+```sh
+.venv/bin/pytest -q
+.venv/bin/mypy
+INKSCAPE_MCP_RAW_ACTION_ENABLED=1 .venv/bin/python scripts/ci_surface_smoke.py
+.venv/bin/python scripts/accept_document_context.py
+```
+
+The final command requires an unlocked Mac and creates a new disposable private GUI, profile,
+and two identical synthetic SVGs. It verifies window identities, explicit choice, fill and
+insertion Undo/Redo fingerprints, switching between the context read and native action dispatch,
+stale-binding refusal and STDIO reuse with binding reset. Successful acceptance closes only
+its two verified synthetic windows; `--keep-gui` preserves them. Failure preserves the GUI
+for inspection. Its printed directory retains SVGs, logs and a successful `acceptance.json`.
+It never adopts an existing session or opens user drawings.
+
+Rust migration is deferred for this PR: native identity and macOS integration required additional
+work and exposed actual startup/activation problems. The Python server and inkex insertion helper
+retain their functionality. A full migration needs a separate feature-parity and packaging plan;
+this implementation does not claim Rust performance improvements.

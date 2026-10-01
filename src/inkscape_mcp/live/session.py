@@ -14,6 +14,7 @@ from __future__ import annotations
 
 from datetime import UTC, datetime
 from threading import Lock
+from typing import Literal
 
 from pydantic import BaseModel, Field
 
@@ -60,6 +61,19 @@ class LiveSession(BaseModel):
         description="Current managed macOS document; connect-time document on other transports.",
     )
     connected_at: str | None = Field(default=None, description="UTC ISO-8601 connect timestamp.")
+    selected_document: LiveDocumentRef | None = Field(
+        default=None, description="Drawing explicitly selected for the task; reset on reconnect."
+    )
+    document_guard_available: bool = Field(
+        default=False, description="Runtime identity guard supported."
+    )
+    ready_to_edit: bool = Field(
+        default=False, description="Managed guarded task drawing matches the active drawing."
+    )
+    connection_state: Literal[
+        "disabled", "disconnected", "connected", "connection_lost", "document_unavailable"
+    ] = "disconnected"
+    recovery_actions: list[str] = Field(default_factory=list)
     notes: list[str] = Field(default_factory=list, description="Clean human-readable status notes.")
 
 
@@ -134,7 +148,52 @@ class LiveSessionManager:
                     notes.append("active document unavailable; activate a drawing and retry")
             elif self._transport is not None and not connected:
                 notes.append("connection unavailable; call live_connect to reconnect")
+            selected = getattr(self._transport, "selected_document", None) if connected else None
+            guard = bool(getattr(self._transport, "context_guard_available", False))
+            ready = bool(
+                connected
+                and guard
+                and document
+                and document.window_id
+                and document.document_id
+                and selected
+                and (document.window_id, document.document_id)
+                == (selected.window_id, selected.document_id)
+            )
+            state: Literal[
+                "disabled", "disconnected", "connected", "connection_lost", "document_unavailable"
+            ]
+            recovery: list[str] = []
+            if not self._settings.live_enabled:
+                state = "disabled"
+            elif self._transport is None:
+                state = "disconnected"
+                recovery = ["Call live_connect to attach; it never closes the GUI."]
+            elif not connected:
+                state = "connection_lost"
+                recovery = [
+                    "Reconnect with live_connect, then select the task drawing again.",
+                    "If the private bus failed, save work before restarting the GUI session.",
+                    "Inspect the drawing after an edit timeout: it may have applied.",
+                ]
+            elif document is None:
+                state = "document_unavailable"
+                recovery = ["Activate a drawing, dismiss any dialog, and retry live_status."]
+            else:
+                state = "connected"
+                if guard and not ready:
+                    recovery = ["Use live_list_documents and live_select_document before editing."]
+                elif self._transport.name == "managed-dbus" and not guard:
+                    notes.append(
+                        "legacy session: window identity and task document guard unavailable"
+                    )
+                    recovery = ["Save work before restarting the managed GUI to load the bridge."]
             return LiveSession(
+                selected_document=selected,
+                document_guard_available=guard,
+                ready_to_edit=ready,
+                connection_state=state,
+                recovery_actions=recovery,
                 enabled=self._settings.live_enabled,
                 connected=connected,
                 transport=self._transport.name if connected and self._transport else None,

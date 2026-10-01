@@ -16,6 +16,8 @@ can map it cleanly and a live fault never escapes as an opaque traceback.
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
+from collections.abc import Iterator
+from contextlib import contextmanager
 from typing import ClassVar
 
 from pydantic import BaseModel, Field
@@ -29,6 +31,10 @@ class LiveError(Exception):
     """Base class for all live-mode failures (stable, host-path-free public message)."""
 
 
+class LiveContextError(LiveError):
+    """A stable document binding failure with caller recovery guidance."""
+
+
 class LiveNotAvailable(LiveError):
     """No live session is connected, or no transport is available on this host."""
 
@@ -39,6 +45,10 @@ class LiveDisabled(LiveError):
 
 class LiveConnectionError(LiveError):
     """Connecting to / communicating with the running instance failed."""
+
+
+class LiveMutationUncertain(LiveConnectionError):
+    """An edit may have applied; the caller must inspect before retrying."""
 
 
 class LiveCapabilityUnsupported(LiveError):
@@ -56,6 +66,12 @@ class LiveDocumentRef(BaseModel):
     an unsaved document.
     """
 
+    window_id: str | None = Field(
+        default=None, description="Opaque live window identity, if supported."
+    )
+    document_id: str | None = Field(
+        default=None, description="Opaque document lifetime identity, if supported."
+    )
     name: str | None = Field(default=None, description="Document title / base filename.")
     path: str | None = Field(default=None, description="On-disk path as reported by Inkscape.")
     object_count: int | None = Field(default=None, description="Object node count, if reported.")
@@ -328,6 +344,11 @@ class LiveTransport(ABC):
         downscales/upscales the raster. Both are server-validated before they cross the boundary.
         When neither is given the whole canvas is rendered (backward-compatible).
         """
+
+    @contextmanager
+    def operation_scope(self) -> Iterator[None]:
+        """Group related calls under a backend's document context, when supported."""
+        yield
 
     # --- Semantic WRITE surface -----------------------------------------
     #

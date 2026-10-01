@@ -164,6 +164,7 @@ READ_ONLY_TOOLS: frozenset[str] = frozenset(
         "open_document",
         # live read surface (read the running instance, do not mutate it)
         "live_status",
+        "live_list_documents",
         "live_diff_view",
         "live_render_view",
         "live_export_selection",
