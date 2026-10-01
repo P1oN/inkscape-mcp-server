@@ -252,6 +252,8 @@ class ManagedDBusTransport(DBusTransport):
 
     @contextmanager
     def _operation(self) -> Iterator[Path]:
+        if sys.platform == "win32":
+            raise LiveConnectionError("managed session requires a POSIX platform")
         import fcntl  # POSIX-only; this transport is advertised only on macOS.
 
         stream = os.environ.get(ENV_STDOUT)

@@ -31,6 +31,9 @@ from __future__ import annotations
 
 import errno
 import os
+import sys
+from collections.abc import Iterator
+from contextlib import contextmanager
 from pathlib import Path
 
 from fastmcp.exceptions import ToolError
@@ -221,6 +224,16 @@ def _safe_mkdir_chain(base_real_dir: Path, components: tuple[str, ...]) -> None:
     descend `open` fails with `ELOOP`/`ENOTDIR` and creation aborts — the side-effect can never
     escape the base dir. Mirrors `render/cli.py::_safe_mkdir_chain`.
     """
+    if sys.platform == "win32":
+        from inkscape_mcp.workspace.windows_io import mkdir_chain
+
+        try:
+            mkdir_chain(base_real_dir, components)
+        except OSError as exc:
+            raise SandboxViolation(
+                "path rejected: outside workspace", detail=f"directory creation refused: {exc}"
+            ) from None
+        return
     dir_fd = os.open(base_real_dir, os.O_RDONLY | os.O_DIRECTORY)
     try:
         for part in components:
@@ -245,6 +258,21 @@ def _safe_mkdir_chain(base_real_dir: Path, components: tuple[str, ...]) -> None:
             os.close(old_fd)
     finally:
         os.close(dir_fd)
+
+
+@contextmanager
+def _destination_fd(path: Path) -> Iterator[int]:
+    if sys.platform == "win32":
+        from inkscape_mcp.workspace.windows_io import write_fd
+
+        with write_fd(path) as fd:
+            yield fd
+        return
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC | os.O_NOFOLLOW, 0o644)
+    try:
+        yield fd
+    finally:
+        os.close(fd)
 
 
 @mcp.tool
@@ -358,9 +386,10 @@ def save_document_as(
     #    file is truncated (the approval-gated overwrite).
     working = sandbox.working_copy(Path(entry.root), doc_id)
     working_bytes = working.read_bytes()
-    flags = os.O_WRONLY | os.O_CREAT | os.O_TRUNC | os.O_NOFOLLOW
     try:
-        fd = os.open(resolved_dest, flags, 0o644)
+        with _destination_fd(resolved_dest) as fd:
+            with os.fdopen(os.dup(fd), "wb") as handle:
+                handle.write(working_bytes)
     except OSError as exc:
         if exc.errno == errno.ELOOP:
             # A symlink appeared at the destination after the pre-checks: refuse to follow it.
@@ -374,11 +403,7 @@ def save_document_as(
             extra={"detail": f"destination open failed: {exc}"},
         )
         raise ToolError("saved file could not be written") from exc
-    try:
-        with os.fdopen(fd, "wb") as handle:
-            handle.write(working_bytes)
-    except OSError as exc:  # pragma: no cover - write failure after a successful open is rare
-        raise ToolError("saved file could not be written") from exc
+
     log_file_io(
         _logger,
         action="save_document_as",

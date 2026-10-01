@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import os
 import secrets
+import sys
 from pathlib import Path
 
 from pydantic import BaseModel
@@ -125,7 +126,9 @@ def sync_live_to_workspace(
     #    (server-minted) temp name and never clobber a pre-existing file — defence in depth behind
     #    resolve_write_path's containment + symlink guard (sec.12 / SV5; mirrors tools/save.py).
     tmp = resolved.with_name(f"{resolved.name}.{secrets.token_hex(4)}.tmp")
-    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW
+    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL
+    if sys.platform != "win32":
+        flags |= os.O_NOFOLLOW
     try:
         fd = os.open(tmp, flags, 0o644)
         try:

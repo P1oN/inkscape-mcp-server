@@ -141,3 +141,13 @@ acceptance в этой проверке не перезапускались; р�
 
 MCP нужно перезапустить/переподключить для загрузки новых tools/resources/instructions.
 Не закрывать пользовательский GUI: startup/reconnect по-прежнему не запускают окно.
+
+## CI follow-up for PR #7
+
+The initial Linux CI installed unsupported Inkscape 1.2.2 from Ubuntu's default archive.
+The full-suite job now uses Ubuntu 24.04 and the official stable PPA, with an explicit
+runtime-minimum check. Windows mypy exposed unguarded POSIX APIs: managed macOS helpers
+now reject Windows explicitly. Missing-directory creation and save use native Windows
+no-follow handles with ancestors held against renames; POSIX safeguards remain in place.
+Windows-specific tests cover nested creation, overwrite, exclusive writes, symlink refusal
+before truncation/descent, and parent rename prevention. Native GUI acceptance is unchanged.

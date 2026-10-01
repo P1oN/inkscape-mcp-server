@@ -51,6 +51,8 @@ def _stdout(argv: list[str]) -> str | None:
 
 def _supervisor_lock_held(root: Path) -> bool:
     """Probe an existing lock without creating files or waiting for the supervisor."""
+    if sys.platform == "win32":
+        raise RuntimeError("managed session requires a POSIX platform")
     import fcntl
 
     try:

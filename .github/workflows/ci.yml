@@ -77,12 +77,15 @@ jobs:
   # matrix above.
   linux-inkscape:
     name: linux + inkscape (full suite)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
 
       - name: Install Inkscape
         run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends software-properties-common
+          sudo add-apt-repository -y ppa:inkscape.dev/stable
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends inkscape
           inkscape --version
@@ -94,6 +97,9 @@ jobs:
 
       - name: Sync dependencies
         run: uv sync
+
+      - name: Require supported Inkscape
+        run: uv run python -c "from inkscape_mcp.runtime.probe import probe_capabilities; c = probe_capabilities(); assert c.meets_minimum, c.inkscape_version"
 
       - name: Diagnostics — capability matrix (Inkscape present)
         run: uv run python scripts/ci_diagnostics.py

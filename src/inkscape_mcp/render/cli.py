@@ -58,6 +58,7 @@ import os
 import re
 import secrets
 import struct
+import sys
 import time
 from datetime import UTC, datetime
 from pathlib import Path
@@ -681,6 +682,16 @@ def _safe_mkdir_chain(base_real_dir: Path, components: tuple[str, ...]) -> None:
     `O_RDONLY|O_DIRECTORY|O_NOFOLLOW`, so if any component is (or is raced into) a symlink the
     `open` fails with `ELOOP` and creation aborts — the side-effect can never escape the base dir.
     """
+    if sys.platform == "win32":
+        from inkscape_mcp.workspace.windows_io import mkdir_chain
+
+        try:
+            mkdir_chain(base_real_dir, components)
+        except OSError as exc:
+            raise SandboxViolation(
+                "path rejected: outside workspace", detail=f"directory creation refused: {exc}"
+            ) from None
+        return
     dir_fd = os.open(base_real_dir, os.O_RDONLY | os.O_DIRECTORY)
     try:
         for part in components:

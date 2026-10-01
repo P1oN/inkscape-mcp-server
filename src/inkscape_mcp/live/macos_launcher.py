@@ -65,6 +65,8 @@ def install_insertion_helper() -> None:
 
 
 def secure_directory(path: Path) -> Path:
+    if sys.platform == "win32":
+        raise RuntimeError("managed session requires a POSIX platform")
     if path.is_symlink():
         raise RuntimeError("session directory must not be a symlink")
     path.mkdir(mode=0o700, parents=True, exist_ok=True)
@@ -168,6 +170,8 @@ def _read_session(root: Path) -> dict[str, Any] | None:
 
 
 def ensure_session(root: Path, document: Path | None = None) -> dict[str, Any]:
+    if sys.platform == "win32":
+        raise RuntimeError("managed session requires a POSIX platform")
     import fcntl
 
     root = secure_directory(root)
@@ -321,6 +325,8 @@ def main() -> None:
     if document is not None and (not document.is_file() or document.suffix.lower() != ".svg"):
         parser.error("--document must point to an existing SVG")
     if args.supervise:
+        if sys.platform == "win32":
+            raise RuntimeError("managed session requires a POSIX platform")
         import fcntl
 
         root = secure_directory(root)
