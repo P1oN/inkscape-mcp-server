@@ -35,14 +35,12 @@ Origin: https://github.com/P1oN/inkscape-mcp-server.
   (102 tools) и STDIO boot smoke проходят.
 - Wheel построен на Python 3.12; проверены edit helper, INX, карта отказов и native source
   в архиве. Build tools находятся только в `/tmp/imcp-stage3-build-tools`.
-- Повторный native прогон после ревью остановился до подключения MCP: macOS не предоставила
-  основной монитор (`MCP startup refused: no primary monitor; unlock the Mac and retry`).
-  Логи: `/private/tmp/imcp-context-jj8tlkv3/inkscape.stderr.log`.
-- Native acceptance до исправлений ревью прошла на official Inkscape 1.4.3 через настоящий MCP STDIO.
+- Повторный native acceptance после исправлений ревью прошёл на official Inkscape 1.4.3
+  через настоящий MCP STDIO на разблокированном Mac.
   Проверены все семейства правок, точные отпечатки Undo/Redo, неизменяющий вызов,
   блокировки/неверный выбор текста, guard/race/stale-binding и STDIO reuse.
-- Доказательство: `/private/tmp/imcp-context-use24ftg/acceptance.json` (`passed: true`),
-  `stage3-*.svg`, preview PNG и `/tmp/imcp-stage3-final.log`.
+- Доказательство: `/private/tmp/imcp-context-r79j3lvj/acceptance.json` (`passed: true`),
+  `stage3-*.svg` и preview PNG в том же каталоге.
   Команда воспроизведения: `.venv/bin/python scripts/accept_document_context.py`.
   Успешный прогон закрыл только два своих проверенных тестовых окна.
 
