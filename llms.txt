@@ -9,7 +9,7 @@
 
 inkscape-mcp — an MCP server that makes Inkscape/SVG documents agent-ready: inspect, edit safely (reversible), validate, render, and export.
 
-Surface: 103 tools, 7 prompts, 16 resources.
+Surface: 105 tools, 7 prompts, 16 resources.
 
 ## Run & transport
 Transport: STDIO only (local). No HTTP.
@@ -132,6 +132,7 @@ Operator-tunable limits / gates (all optional, env-overridable):
 - live_disconnect [risk: low] — Disconnect the current live session (the X1 disable switch). Idempotent.
 - live_edit_selection [risk: high] — Duplicate, delete, group, ungroup or reorder selected objects in managed macOS Inkscape.
 - live_export_selection [risk: low] — Export just the current live selection to a PNG under the live artifacts dir.
+- live_find_objects [risk: low] — Find visible live objects by layer, label, text, tag or id prefix, with engine bounds.
 - live_get_active_document [risk: low] — Identify the document open in the connected live instance (read-only).
 - live_get_scene [risk: low] — Capture one live frame as a PNG PLUS a structured, machine-readable `LiveScene`.
 - live_get_selection [risk: low] — Read the current selection in the live instance as object ids (read-only).
@@ -140,6 +141,7 @@ Operator-tunable limits / gates (all optional, env-overridable):
 - live_install_helper [risk: restricted] — Install the shipped extension-socket helper into the Inkscape user extensions dir.
 - live_launch [risk: medium] — Explicitly launch or reuse the managed Inkscape window on macOS.
 - live_list_documents [risk: low] — List open managed macOS drawing windows with opaque window and document IDs.
+- live_preview_object [risk: low] — Render one found live object in isolation without changing the GUI selection.
 - live_render_view [risk: low] — Rasterize the live canvas to a PNG in the live artifacts dir (visual feedback).
 - live_select_document [risk: medium] — Activate and bind an open drawing window as the document for this task.
 - live_session_step [risk: high] — Run ONE perceive→decide→act→observe iteration of the live-view loop.

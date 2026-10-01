@@ -51,6 +51,7 @@ _MODULE_DOMAIN: dict[str, str] = {
     "export_batch": "export",
     "profiles": "export",
     "live": "live",
+    "live_discovery": "live",
     "actions": "actions",
     "system": "system",
     "quality": "quality",

@@ -121,6 +121,7 @@ def register_tools() -> None:
         export_batch,
         find,
         live,
+        live_discovery,
         optimize,
         paths,
         profiles,

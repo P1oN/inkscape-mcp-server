@@ -62,7 +62,7 @@ _MODULE_GROUPS: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("Paths", ("paths",)),
     ("Export", ("export", "profiles", "export_batch")),
     ("Optimize", ("optimize",)),
-    ("Live", ("live",)),
+    ("Live", ("live", "live_discovery")),
     ("Snapshots", ("snapshots",)),
     ("Discover", ("discover",)),
     ("System", ("system", "actions")),
