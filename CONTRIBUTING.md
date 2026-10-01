@@ -20,14 +20,20 @@ All four must pass before a change is merged (CI enforces them on Linux/macOS/Wi
 
 ```bash
 uv run pytest                       # full suite
-uv run pytest -m "not inkscape"     # skip tests needing the Inkscape binary
-uv run ruff check --fix .           # lint (selects E,F,I,B,UP,S,RUF)
-uv run ruff format .                # format
+uv run ruff check .                 # lint (selects E,F,I,B,UP,S,RUF)
+uv run ruff format --check .        # format
 uv run mypy src                     # strict type check
 ```
 
+For a focused headless run, use `uv run pytest -m "not inkscape"`. Apply formatting or lint
+fixes deliberately, then rerun the checks above. An existing `.venv/bin/` installation can
+run the same commands directly when `uv` is unavailable.
+
 Tests that need a real Inkscape binary are marked `@pytest.mark.inkscape` and auto-skip when no
 `inkscape` is on `PATH`, so the suite stays green on a host without it.
+
+Read [AGENTS.md](AGENTS.md) and [the current handoff](docs/AGENT_HANDOFF.md) before starting
+repository work; the handoff distinguishes shipped features from planned improvements.
 
 ## Tool conventions (non-negotiable)
 

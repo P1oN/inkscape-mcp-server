@@ -9,6 +9,10 @@ document; the working-copy guarantees described below apply to headless editing.
 Everyday live edits and Undo: [supported operations](docs/everyday-edits.md).
 Document choice and native dispatch guard: [current implementation and acceptance status](docs/document-context.md).
 Development priorities and acceptance criteria: [macOS roadmap](docs/ROADMAP.md).
+Agent handoff and the next six improvements: [current task](docs/AGENT_HANDOFF.md).
+Authoring defaults: [agent usage guide](docs/agent-usage-guide.md) — use editable vector shapes
+and named semantic groups; do not propose or perform bitmap tracing. These defaults are also
+MCP `instructions`; restart the server after changing them.
 
 > A Model Context Protocol (MCP) server that makes Inkscape / SVG documents **agent-ready** —
 > inspect, edit safely, validate, render, and export vector graphics from any MCP client.
@@ -61,7 +65,7 @@ argument lists — never shell strings.
 
 ## Highlights
 
-- **88 typed tools** across read, validate, render, export, optimize, safe-edit, element-creation,
+- **103 typed tools** across read, validate, render, export, optimize, safe-edit, element-creation,
   defs/grouping, path-geometry, snapshot, save, and live groups.
 - **Headless-first.** No GUI required; the Inkscape binary is used only for render / export /
   geometry, and the server probes the runtime instead of assuming a version.
@@ -96,7 +100,8 @@ MCP client (Claude, etc.)
    `doc_id`. The original file is never opened for writing again.
 2. **Read tools / resources** inspect that working copy — tree, layers, styles, fonts, assets.
 3. **Edit tools** mutate the working copy through the pipeline: take a snapshot → apply the change
-   → render a before/after preview → write an Operation Record. All medium-risk and reversible.
+   → render a before/after preview → write an Operation Record. Risk depends on the operation;
+   high-risk edits require an approval token.
 4. **Render / export tools** shell out to the Inkscape CLI (argument lists only) and drop artifacts
    into the workspace artifacts / exports directories as workspace-relative paths.
 5. **`save_document_as`** writes the working copy to a *new* file (validated before and after).
@@ -257,8 +262,9 @@ preview.
 `object_ids`. A caller-chosen write target is `dest_path` (a file) or `out_dir` + `name_prefix` (a
 directory); a relative `dest_path`/`out_dir` anchors to the **workspace root**, never the process
 CWD, and is sandbox + symlink checked (`path rejected: outside workspace` otherwise). Every
-artifact-producing tool returns a `workspace_relative_path` (root-relative, opens directly with no
-`find`/`stat`) alongside the managed `artifact_path`; no absolute host path ever appears in a result
+artifact-producing tool returns a `workspace_relative_path` (relative to the server workspace,
+not necessarily resolvable by a client on another host) alongside the managed `artifact_path`;
+no absolute host path ever appears in a result
 (sec.12). The four raster tools (`render_preview` / `capture_frame` / `export_document` /
 `export_object`) also return the PNG **inline** as an MCP image block when it is under the inline
 byte threshold (≈5 MiB; tune via `max_output_bytes`, opt out with `inline=False`) — **view that

@@ -14,10 +14,12 @@ then connect with `prefer="no_freeze"`, list and select the task drawing, and ch
 `live_status.ready_to_edit`. Reconnect preserves an existing GUI and resets the drawing binding.
 A closed GUI requires a new explicit launch request.
 
-The server also ships a concise **system overview as MCP `instructions`** (E19-02), delivered
-in-context every turn (the document model + `doc_id` lifecycle, the snapshot/restore reversibility
-idiom, the risk classes + the `approval_token` gate, the intended tool ordering, and the
-render-and-look default below). This page is the fuller companion to that always-in-context summary.
+The server also ships a concise **system overview as MCP `instructions`** (E19-02), provided
+at MCP initialization. It covers the document model, `doc_id` lifecycle, snapshot/restore,
+risk classes, approval tokens, tool ordering and the render-and-look default below.
+The client controls how it includes this guidance in model context. This page is the fuller
+companion. Restart the MCP server after changing these instructions; an already running
+process keeps its previous copy.
 
 This is the agent-facing companion to the two machine-readable manifests
 [`llms.txt`](../llms.txt) (concise index) and
@@ -55,8 +57,8 @@ DOM layer; render, export, and complex path geometry go through the Inkscape eng
 The generative flow (E14). All writes land on a **working copy**, never the original file.
 
 1. **Create or open a document.**
-   - `create_document(width, height, units)` — a brand-new blank tracked document (no source file
-     required). Returns a `doc_id` used by every other tool.
+   - `create_document(width, height, viewBox=None, background=None)` — a brand-new
+     blank tracked document (no source file required). Returns a `doc_id` used by every other tool.
    - `open_document(path)` — open an existing workspace SVG as a working copy; also returns a `doc_id`.
 
 2. **Draw / compose.** Add elements with the typed creation tools:
@@ -65,8 +67,39 @@ The generative flow (E14). All writes land on a **working copy**, never the orig
    reuse with `create_use`; add gradients with `add_linear_gradient` / `add_radial_gradient`.
    Each returns the new `object_id` (+ analytic bbox), so the next call can target it.
 
-3. **Style.** `set_fill`, `set_stroke`, `set_opacity`, `set_font`, `replace_text` take an `object_id`
-   (use `find_objects` to resolve one). `replace_color` / `apply_palette` recolor document-wide.
+   **Author vectors; do not trace bitmaps.** The MCP instructions prohibit proposing or
+   performing bitmap tracing and automatic raster-to-vector conversion, including Inkscape
+   Trace Bitmap, external tracers (VTracer/Potrace), scripts, shell commands and preprocessing
+   before importing SVG. Passing traced output through MCP does not make it acceptable.
+   Use supplied PNGs and other bitmaps only as visual references; reconstruct them with
+   deliberately authored, editable shapes, Bezier curves, fills and gradients. Do not replace
+   vector artwork with an embedded bitmap. Render, compare and refine, and report remaining
+   differences honestly rather than promise pixel-identical reproduction. This is agent
+   guidance in MCP `instructions` and `compose_artwork`, not a new runtime tracing detector.
+
+   **Make complete objects easy to select.** Unless the user requests another structure,
+   use ordinary named groups for semantic objects (`cat-1`, `sofa-1`, `flower-1`, etc.),
+   with stable unique ids and readable `inkscape:label` names. For a new illustration,
+   prefer one general artwork layer containing these groups. Additional layers should
+   organize the scene, rather than turning every object into a layer: Inkscape selects
+   children of layers, and Select All can be scoped to the current layer.
+   Preserve existing document organization unless the requested change requires otherwise.
+   Regrouping must preserve paint order, transforms, clipping, masks and styles; do not
+   merge paths, flatten structure or add masks just to arrange the object tree.
+   Render and compare the result after structural changes.
+
+   A layer and an ordinary group are both SVG `<g>` containers. Converting between them
+   changes `inkscape:groupmode` (`layer` versus ordinary group mode); preserve the same
+   id, children, styles, visibility, locks and parent position. It changes editor selection
+   behaviour, not geometry. Layer highlight colours are editor UI metadata and do not
+   change the artwork's fill colours. This guidance is delivered automatically in MCP
+   `instructions` and reused by the `compose_artwork` prompt; it is a default, not a ban
+   on user-requested layers.
+
+3. **Style.** `set_fill`, `set_stroke`, `set_opacity` and `set_font` take `object_ids` (a list);
+   `replace_text` takes one `object_id`. Use `find_objects` to resolve ids.
+   For a gradient, use `set_fill(doc_id, [object_id], color="url(#gradient-id)")` after defining it.
+   `replace_color` / `apply_palette` recolor document-wide.
 
    **Batch several edits in one call.** `apply_edits(doc_id, edits)` applies an ordered list (≤ 64) of
    **typed** edits — a discriminated union over the DOM ops (each tagged by an `op` field, e.g.

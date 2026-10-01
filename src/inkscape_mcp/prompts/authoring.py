@@ -22,6 +22,7 @@ Each function is registered via ``@mcp.prompt`` against the shared app; the modu
 
 from __future__ import annotations
 
+from inkscape_mcp.overview import ARTWORK_STRUCTURE_GUIDANCE, VECTOR_AUTHORING_GUIDANCE
 from inkscape_mcp.server import mcp
 
 
@@ -46,23 +47,25 @@ def compose_artwork(goal: str) -> str:
     return (
         "You are composing NEW vector artwork in inkscape-mcp. Work toward this goal:\n"
         f"  {clean_goal}\n\n"
+        f"{VECTOR_AUTHORING_GUIDANCE}\n"
         "Follow the create → draw → render → validate → export loop with the typed tools (each is "
         "small, typed, risk-classed, and reversible — every mutation writes a snapshot + Operation "
         "Record, so you can `restore_snapshot` at any point):\n\n"
-        "1. CREATE — `create_document(width, height, units)` to start a blank SVG in the "
-        "workspace; it returns a `doc_id` the other tools take. (To work on an existing file "
-        "instead, `open_document` and skip this step.)\n"
+        "1. CREATE — `create_document(width, height, viewBox=None, background=None)` to start "
+        "a blank SVG in the workspace; it returns a `doc_id` the other tools take. "
+        "(To work on an existing file instead, `open_document` and skip this step.)\n"
         "2. DRAW — add geometry with the shape tools: `create_rect`, `create_circle`, "
         "`create_ellipse`, `create_line`, `create_polygon`, `create_polyline`, `create_path` "
         "(arbitrary `d`), and `create_text` for labels. Each returns the new object's `id`.\n"
         "3. PAINT — set color with `set_fill` / `set_stroke` (+ `set_opacity`). For gradients, "
         "first define one with `add_linear_gradient` / `add_radial_gradient` (each returns a "
-        "gradient id), then `set_fill(doc_id, object_id, paint='url(#<gradient_id>)')` to paint "
+        "gradient id), then `set_fill(doc_id, [object_id], color='url(#<gradient_id>)')` to paint "
         "the object with it.\n"
         "4. COMPOSE — organize with `create_group` / `group_objects` (wrap existing ids) and "
         "`reparent_object`; instance a shape with `create_use`. Lost track of an id? "
         "`find_objects` resolves ids by fill/stroke/tag/text/id-prefix/bbox, and "
         "`inspect_document` gives the whole tree.\n"
+        f"{ARTWORK_STRUCTURE_GUIDANCE}\n"
         "5. RENDER — `render_preview(doc_id)` returns the rasterized image INLINE so you can SEE "
         "the current result and decide what to adjust. Iterate steps 2-5 until it matches `goal`.\n"
         "6. VALIDATE — `validate_document(doc_id)` to confirm the SVG is well-formed before "

@@ -20,9 +20,36 @@ Audit: before this module the server was constructed as ``FastMCP("inkscape-mcp"
 
 from __future__ import annotations
 
+#: Author original vector geometry even when a bitmap is supplied as a visual reference.
+VECTOR_AUTHORING_GUIDANCE = """\
+Vector authoring. Do not propose or perform bitmap tracing or automatic raster-to-vector
+conversion when working through this MCP. This applies to Inkscape Trace Bitmap, external
+tracers (such as VTracer or Potrace), shell commands, scripts and preprocessing before SVG
+adoption; importing their traced output through MCP does not satisfy this rule. Treat a PNG
+or other bitmap as a visual reference only. Reconstruct the artwork with deliberately
+authored, editable shapes, Bezier curves, fills and gradients, organized into semantic groups.
+Do not substitute an embedded bitmap for vector artwork. Render, compare with the reference
+and refine; be honest about remaining differences rather than promise pixel-identical results.
+"""
+
+#: Shared by the always-delivered overview and the opt-in authoring prompt.
+ARTWORK_STRUCTURE_GUIDANCE = """\
+Editable artwork structure. Unless the user requests otherwise, make each semantic object
+(cat, sofa, tree, flower, cloud, etc.) an ordinary named SVG group, selectable as a whole.
+Use stable unique ids and readable inkscape:label names. For new illustrations, prefer one
+general artwork layer containing these groups; reserve additional layers for genuine scene
+organization, not one layer per object. Inkscape layers expose their children to selection;
+Select All may be scoped to the current layer. Do not silently convert existing layers or
+flatten groups, merge paths, or introduce masks merely to organize objects. Preserve paint
+order, transforms, clipping, masks and styles when regrouping; render and compare afterwards.
+A group/layer conversion changes inkscape:groupmode on the same <g>, not its geometry;
+preserve its id, children, styles, visibility, locks and position in the parent.
+Layer highlight colours are editor UI metadata, not artwork fill colours.
+"""
+
 #: The concise, always-in-context overview handed to FastMCP as ``instructions``. Kept short on
 #: purpose — it orients, then points at the generated discovery surface for specifics.
-SYSTEM_OVERVIEW = """\
+SYSTEM_OVERVIEW = f"""\
 inkscape-mcp makes Inkscape/SVG documents agent-ready through SMALL TYPED TOOLS (not a free-text
 run_action / execute_code portmanteau). Orientation:
 
@@ -46,6 +73,10 @@ Batching. `apply_edits` applies an ordered list of typed edits as ONE atomic, re
 (validate-all first, all-or-nothing, one snapshot) — use it to make several edits in a single call
 instead of N round-trips. Its effective risk is the max over its members.
 
+{ARTWORK_STRUCTURE_GUIDANCE}
+
+{VECTOR_AUTHORING_GUIDANCE}
+
 Render and look before you trust an edit. After a mutating call (especially a batch), render and
 INSPECT the result — `render_preview` (headless) or `live_render_view` (live mode) — before relying
 on it; `restore_snapshot` reverts if it is wrong.
@@ -64,4 +95,4 @@ plus the full intent map. The generated `llms.txt` / `llms-full.txt` manifest an
 `docs/agent-usage-guide.md` carry the full per-tool detail.
 """
 
-__all__ = ["SYSTEM_OVERVIEW"]
+__all__ = ["ARTWORK_STRUCTURE_GUIDANCE", "SYSTEM_OVERVIEW", "VECTOR_AUTHORING_GUIDANCE"]
