@@ -51,11 +51,11 @@ def live_find_objects(
         return find_live_objects(
             label=label, layer=layer, text=text, tag=tag, id_prefix=id_prefix, limit=limit
         )
-    except (LiveDiscoveryError, LiveGeometryError) as exc:
+    except (LiveDiscoveryError, LiveGeometryError, LimitExceeded) as exc:
         raise ToolError(str(exc)) from exc
     except LiveError as exc:
         raise _map_live_error(exc) from exc
-    except (UnsafeXMLError, LimitExceeded, OSError) as exc:
+    except (UnsafeXMLError, OSError) as exc:
         raise ToolError("live discovery snapshot could not be inspected safely") from exc
 
 
@@ -85,9 +85,9 @@ def live_preview_object(
     """
     try:
         return preview_live_object(object_id, expected_fingerprint, width)
-    except (LiveDiscoveryError, LiveGeometryError) as exc:
+    except (LiveDiscoveryError, LiveGeometryError, LimitExceeded) as exc:
         raise ToolError(str(exc)) from exc
     except LiveError as exc:
         raise _map_live_error(exc) from exc
-    except (UnsafeXMLError, LimitExceeded, OSError) as exc:
+    except (UnsafeXMLError, OSError) as exc:
         raise ToolError("live object preview could not be rendered safely") from exc

@@ -37,11 +37,12 @@ passed user coordinates directly, producing an incorrect crop when the viewBox w
 
 - Requires Inkscape CLI on PATH in addition to a connected live transport. Reads remain bounded
   by input-size, element-count, subprocess-timeout and preview output/dimension limits.
-- Root CSS sizing, percentage/missing dimensions with a viewBox, and unsupported aspect syntax
-  refuse rather than guessing the mapping. Nested SVG geometry is delegated to the renderer.
+- A root with only a viewBox uses Inkscape's standalone default: unit scale with viewBox-origin
+  translation. Root CSS sizing, percentage dimensions, only one missing dimension, and unsupported
+  aspect syntax refuse rather than guessing the mapping. Nested SVG geometry is delegated to the renderer.
 - Stylesheets, scripts, foreignObject, active attributes, external assets and external paint
-  references refuse. Embedded PNG/JPEG images, internal gradients, filters and clipping are
-  supported in the snapshot. The exported snapshot never enables network fetches by design.
+  references refuse, including Inkscape's image fallback paths (`sodipodi:absref`). Embedded
+  PNG/JPEG images, internal gradients, filters and clipping are supported in the snapshot. The exported snapshot never enables network fetches by design.
 - Paint is authored paint, not full computed CSS. The existing visibility approximation applies
   to inline/presentation attributes. Fully transparent, clipped-away or off-page items may have
   engine bounds without being perceptually visible; confirm the preview.
@@ -51,6 +52,10 @@ passed user coordinates directly, producing an incorrect crop when the viewBox w
   geometry describes the captured SVG rather than promising a lock on future edits.
 - Managed SVG reads change persistent GUI export options, as existing live inspection does.
   Selection, drawing content and Undo history are preserved by discovery/isolated previews.
+- Object previews are ephemeral `live-view-object-*.png` frames. The existing startup/explicit
+  retention pass applies `live_frame_keep_days` and `live_frame_max_bytes`, keeping newest
+  unreferenced frames within budget and protecting frames referenced by operation records.
+  Returned paths can expire after maintenance; render again if a preview is removed.
 
 ## Real illustration pilot
 

@@ -59,6 +59,7 @@ class LiveFindResult(BaseModel):
 
 
 def _snapshot(svg: str, settings: Settings) -> etree._Element:
+    """Bound and validate a self-contained snapshot before any CLI processing."""
     data = svg.encode("utf-8")
     check_input_bytes_size(data, settings)
     root = parse_svg_bytes(data).getroot()
@@ -85,6 +86,10 @@ def _snapshot(svg: str, settings: Settings) -> etree._Element:
         for key, value in elem.attrib.items():
             value = str(value)
             name = etree.QName(key).localname
+            # Inkscape falls back to this editor attribute if an image href fails.
+            # Even a fragment href can therefore load a file outside the snapshot.
+            if name == "absref" and value:
+                raise LiveDiscoveryError("image fallback paths require a self-contained snapshot")
             if name == "base" or name.lower().startswith("on"):
                 raise LiveDiscoveryError("active content is unsupported in discovery snapshots")
             if name == "href" and not value.startswith("#"):
@@ -95,29 +100,35 @@ def _snapshot(svg: str, settings: Settings) -> etree._Element:
                     raise LiveDiscoveryError(
                         "external assets require a self-contained discovery snapshot"
                     )
-            if name in {
-                "style",
-                "fill",
-                "stroke",
-                "filter",
-                "clip-path",
-                "mask",
-                "cursor",
-                "marker",
-                "marker-start",
-                "marker-mid",
-                "marker-end",
-            } and ("\\" in value or "/*" in value):
+            # Apply to all possible presentation attributes, including shape-inside
+            # and future resource properties, rather than a partial paint allowlist.
+            # Literal geometry/ids and namespaced editor metadata are not CSS.
+            css_value = etree.QName(key).namespace is None and name not in {
+                "id",
+                "d",
+                "points",
+                "href",
+            }
+            if css_value and ("\\" in value or "/*" in value):
                 raise LiveDiscoveryError("escaped CSS is unsupported in discovery snapshots")
-            for target in re.findall(r"url\s*\((.*?)\)", value, re.IGNORECASE | re.DOTALL):
+            url_pattern = r"url\s*\((.*?)\)"
+            for target in re.findall(url_pattern, value, re.IGNORECASE | re.DOTALL):
                 if not target.strip(" \t\r\n\"'").startswith("#"):
                     raise LiveDiscoveryError(
                         "external paint references are unsupported in discovery"
                     )
+            # CSS parsers recover an unterminated url() at EOF; a closed-token-only
+            # scan must not let that recovered external resource reach the renderer.
+            remainder = re.sub(url_pattern, "", value, flags=re.IGNORECASE | re.DOTALL)
+            if re.search(r"url\s*\(", remainder, re.IGNORECASE):
+                raise LiveDiscoveryError(
+                    "unterminated paint references are unsupported in discovery"
+                )
     return root
 
 
 def query_boxes(path: Path, root: etree._Element, settings: Settings) -> dict[str, BBox]:
+    """Query one bounded snapshot, rejecting malformed geometry but accepting an empty drawing."""
     sx, sy, tx, ty = root_mapping(root)
     try:
         result = run_inkscape([str(path), "--query-all"], settings)
@@ -138,7 +149,7 @@ def query_boxes(path: Path, root: etree._Element, settings: Settings) -> dict[st
         if not all(math.isfinite(v) for v in values) or min(w, h) < 0:
             continue
         boxes[parts[0]] = BBox(x=values[0], y=values[1], width=values[2], height=values[3])
-    if not boxes:
+    if not boxes and result.stdout.strip():
         raise LiveDiscoveryError("Inkscape returned no usable object geometry")
     return boxes
 
@@ -229,6 +240,7 @@ def find_live_objects(
     id_prefix: str | None = None,
     limit: int = 100,
 ) -> LiveFindResult:
+    """Capture document identity and SVG in one transport scope, then inspect the snapshot."""
     transport = get_session_manager().require_transport()
     with transport.operation_scope():
         doc = transport.get_active_document()
@@ -270,7 +282,8 @@ def preview_snapshot_object(
         raise LiveDiscoveryError("no workspace root configured for object previews")
     workspace = s.workspace_roots[0].resolve()
     sandbox.ensure_live_dirs(workspace)
-    out = sandbox.live_artifacts_dir(workspace) / f"live-object-{secrets.token_hex(12)}.png"
+    # Standalone ephemeral frame: use the existing live-view retention lifecycle.
+    out = sandbox.live_artifacts_dir(workspace) / f"live-view-object-{secrets.token_hex(12)}.png"
     if not out.resolve().parent.is_relative_to(workspace):
         raise LiveDiscoveryError("live artifacts path escaped the workspace")
     with tempfile.TemporaryDirectory(prefix="imcp-preview-") as directory:
@@ -280,7 +293,13 @@ def preview_snapshot_object(
         if box is None or min(box.width, box.height) <= 0:
             raise LiveDiscoveryError("object has no nonempty engine bounds")
         sx, sy, _, _ = root_mapping(root)
-        height = math.ceil(width * (box.height * sy) / (box.width * sx))
+        pixel_width, pixel_height = box.width * sx, box.height * sy
+        if not all(math.isfinite(v) and v > 0 for v in (pixel_width, pixel_height)):
+            raise LiveDiscoveryError("object bounds cannot produce a finite preview size")
+        requested_height = width * (pixel_height / pixel_width)
+        if not math.isfinite(requested_height):
+            raise LiveDiscoveryError("preview height exceeds the export cap; reduce preview width")
+        height = math.ceil(requested_height)
         check_export_dimensions(width, height, s)
         try:
             result = run_inkscape(
@@ -319,6 +338,7 @@ def preview_snapshot_object(
 def preview_live_object(
     object_id: str, expected_fingerprint: str, width: int = 512
 ) -> LiveRenderResult:
+    """Export a fresh live SVG and preview it only if the supplied fingerprint still matches."""
     transport = get_session_manager().require_transport()
     with transport.operation_scope():
         svg = transport.get_document_svg()

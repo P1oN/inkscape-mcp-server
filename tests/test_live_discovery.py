@@ -21,6 +21,7 @@ from inkscape_mcp.live.discovery import (
     root_mapping,
 )
 from inkscape_mcp.live.transport import LiveError, RenderRegion
+from inkscape_mcp.workspace.limits import LimitExceeded
 from inkscape_mcp.workspace.subprocess_exec import ProcessResult
 
 SVG = (
@@ -60,6 +61,20 @@ def test_root_mapping_accounts_for_origin_letterbox_and_nonuniform_scale(
 def test_physical_units_are_converted_to_pixels() -> None:
     root = etree.fromstring('<svg width="25.4mm" height="1in" viewBox="0 0 24 24"/>')
     assert root_mapping(root) == pytest.approx((4, 4, 0, 0))
+
+
+def test_viewbox_only_root_uses_unit_scale_and_origin_translation() -> None:
+    """Inkscape's standalone default preserves the viewBox's user-unit dimensions."""
+    root = etree.fromstring('<svg viewBox="10 20 100 50"/>')
+    assert root_mapping(root) == (1, 1, -10, -20)
+
+
+@pytest.mark.parametrize("dimension", ["width", "height"])
+def test_single_missing_root_dimension_still_refuses(dimension: str) -> None:
+    root = etree.fromstring('<svg width="100" height="50" viewBox="0 0 100 50"/>')
+    del root.attrib[dimension]
+    with pytest.raises(LiveError, match="absolute root width and height"):
+        root_mapping(root)
 
 
 def test_managed_region_export_accepts_the_document_bounds_returned_by_discovery(
@@ -106,10 +121,16 @@ def test_unsupported_root_mapping_refuses(attrs: str) -> None:
         '<rect fill="url(https://example.com/x)"/>',
         '<rect fill="u\\72l(file:///secret)"/>',
         '<rect style="fill:url(\nfile:///secret\n)"/>',
+        '<rect fill="url(file:///secret"/>',
+        '<rect style="fill:url(#valid);stroke:URL(\nfile:///secret"/>',
+        '<text shape-inside="u\\72l(file:///secret)"/>',
+        '<text shape-inside="u/**/rl(file:///secret)"/>',
         "<style>rect {fill:red}</style>",
         "<script/>",
         '<rect id="same"/><rect id="same"/>',
         '<image href="data:image/svg+xml;base64,PHN2Zy8+"/>',
+        '<image xmlns:s="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" '
+        'href="#missing" s:absref="/outside/secret.png"/>',
     ],
 )
 def test_snapshot_refuses_ambiguous_or_external_content(content: str) -> None:
@@ -151,6 +172,89 @@ def test_tool_preserves_actionable_stale_snapshot_refusal(monkeypatch: pytest.Mo
     monkeypatch.setattr(live_discovery, "preview_live_object", refuse)
     with pytest.raises(ToolError, match=r"drawing changed.*find the object again"):
         live_discovery.live_preview_object("hill", "old-fingerprint")
+
+
+@pytest.mark.parametrize("tool", ["find", "preview"])
+def test_tool_preserves_limit_reason_without_exposing_os_errors(
+    monkeypatch: pytest.MonkeyPatch,
+    tool: str,
+) -> None:
+    """Dimension/input caps are actionable; filesystem failures stay path-free."""
+    from inkscape_mcp.tools import live_discovery
+
+    name = "find_live_objects" if tool == "find" else "preview_live_object"
+
+    def limited(*args: object, **kwargs: object) -> None:
+        raise LimitExceeded("export dimensions exceed cap: 512x16384 > 8192px per side")
+
+    monkeypatch.setattr(live_discovery, name, limited)
+    invoke = (
+        (lambda: live_discovery.live_find_objects())
+        if tool == "find"
+        else (lambda: live_discovery.live_preview_object("hill", "fingerprint"))
+    )
+    with pytest.raises(ToolError, match="export dimensions exceed cap"):
+        invoke()
+
+    def os_error(*args: object, **kwargs: object) -> None:
+        raise OSError("private path /some/private/workspace")
+
+    monkeypatch.setattr(live_discovery, name, os_error)
+    with pytest.raises(ToolError) as error:
+        invoke()
+    assert "private" not in str(error.value)
+
+
+@pytest.mark.inkscape
+@pytest.mark.skipif(shutil.which("inkscape") is None, reason="requires Inkscape CLI")
+def test_viewbox_only_geometry_preview_and_retention(tmp_path: Path) -> None:
+    """Exercise Inkscape's missing-size default and the generated artifact's actual lifecycle."""
+    from inkscape_mcp.retention import prune_live_frames_at
+
+    svg = (
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 20 100 50">'
+        '<rect id="r" x="20" y="30" width="10" height="5" fill="red"/></svg>'
+    )
+    settings = Settings(workspace_roots=[tmp_path], live_frame_max_bytes=1)
+    found = find_in_snapshot(svg, settings=settings)
+    assert found.objects[0].bbox is not None
+    assert found.objects[0].bbox.model_dump() == pytest.approx(
+        {"x": 20, "y": 30, "width": 10, "height": 5}
+    )
+    preview = preview_snapshot_object(svg, "r", found.fingerprint, width=200, settings=settings)
+    artifact = tmp_path / preview.artifact_path
+    with Image.open(artifact) as image:
+        assert image.size == (200, 100)
+        assert image.convert("RGBA").getpixel((100, 50)) == (255, 0, 0, 255)
+    unrelated = artifact.with_name("unrelated.png")
+    unrelated.write_bytes(b"keep")
+    pruned = prune_live_frames_at(tmp_path, settings)
+    assert pruned.pruned_frames == 1 and not artifact.exists()
+    assert unrelated.exists()
+
+
+@pytest.mark.inkscape
+@pytest.mark.skipif(shutil.which("inkscape") is None, reason="requires Inkscape CLI")
+def test_empty_drawing_discovery_returns_zero_matches() -> None:
+    result = find_in_snapshot('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 50"/>')
+    assert result.objects == [] and result.total_matches == 0
+
+
+@pytest.mark.inkscape
+@pytest.mark.skipif(shutil.which("inkscape") is None, reason="requires Inkscape CLI")
+def test_tall_object_limit_can_be_recovered_by_reducing_width(tmp_path: Path) -> None:
+    """Reject oversized aspect-ratio exports before rendering; a smaller width succeeds."""
+    svg = (
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 100">'
+        '<rect id="r" width="1" height="100"/></svg>'
+    )
+    settings = Settings(workspace_roots=[tmp_path])
+    found = find_in_snapshot(svg, settings=settings)
+    with pytest.raises(LimitExceeded, match=r"512x51200.*8192px per side"):
+        preview_snapshot_object(svg, "r", found.fingerprint, width=512, settings=settings)
+    preview = preview_snapshot_object(svg, "r", found.fingerprint, width=8, settings=settings)
+    with Image.open(tmp_path / preview.artifact_path) as image:
+        assert image.size == (8, 800)
 
 
 @pytest.mark.inkscape

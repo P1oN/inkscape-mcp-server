@@ -29,6 +29,7 @@ _LENGTH = re.compile(r"([+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)\s*([a-z]*)
 
 
 def _length(raw: str) -> float:
+    """Resolve a finite positive absolute SVG length in output pixels."""
     match = _LENGTH.fullmatch(raw.strip())
     if not match or match[2] not in _UNITS:
         raise LiveGeometryError("accurate geometry requires absolute root width and height")
@@ -50,7 +51,12 @@ def root_mapping(root: etree._Element) -> tuple[float, float, float, float]:
         raise LiveGeometryError("invalid document viewBox") from exc
     if not all(math.isfinite(v) for v in (x, y, w, h)) or min(w, h) <= 0:
         raise LiveGeometryError("invalid document viewBox")
-    width, height = _length(root.get("width", "")), _length(root.get("height", ""))
+    raw_width, raw_height = root.get("width"), root.get("height")
+    if raw_width is None and raw_height is None:
+        # Inkscape sizes a standalone viewBox-only drawing from its viewBox.
+        width, height = w, h
+    else:
+        width, height = _length(raw_width or ""), _length(raw_height or "")
     sx, sy = width / w, height / h
     if not all(math.isfinite(v) and v > 0 for v in (sx, sy)):
         raise LiveGeometryError("invalid root coordinate mapping")
