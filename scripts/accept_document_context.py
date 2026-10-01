@@ -62,6 +62,17 @@ async def accept(root: Path, keep_gui: bool) -> dict[str, object]:
             result = await client.call_tool(name, params, raise_on_error=False)
             assert result.is_error, (name, result.structured_content)
 
+        async def documents(count: int) -> list[dict]:
+            # D-Bus registration and file-open replies can precede GTK window creation.
+            deadline = time.monotonic() + 10
+            while True:
+                rows = (await call("live_list_documents"))["documents"]
+                if len(rows) == count:
+                    return rows
+                assert len(rows) < count, ("unexpected drawing", rows)
+                assert time.monotonic() < deadline, ("drawing did not open", rows)
+                await asyncio.sleep(0.02)
+
         await call("live_connect", prefer="no_freeze")
         manifest = json.loads((root / "session.json").read_text())
         os.environ.update(
@@ -79,11 +90,10 @@ async def accept(root: Path, keep_gui: bool) -> dict[str, object]:
                 parse_svg_bytes(native.get_document_svg().encode()).getroot()
             )
 
-        a = (await call("live_list_documents"))["documents"][0]
+        a = (await documents(1))[0]
         await refuses("live_apply_to_selection", fill="blue", approval_token="requested")
         raw._activate("file-open-window", _variant_string(str(b_path)))
-        rows = (await call("live_list_documents"))["documents"]
-        assert len(rows) == 2
+        rows = await documents(2)
         b = next(row for row in rows if row["window_id"] != a["window_id"])
         assert b["document_id"] != a["document_id"]  # identical SVG, distinct live objects
 
