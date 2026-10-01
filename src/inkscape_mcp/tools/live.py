@@ -13,6 +13,7 @@ Client-facing failures are raised as `ToolError` with stable, host-path-free mes
 from __future__ import annotations
 
 import contextlib
+import os
 import platform
 from pathlib import Path
 from typing import Annotated, Literal
@@ -44,7 +45,7 @@ from inkscape_mcp.live.events import (
     wait_for_change,
 )
 from inkscape_mcp.live.loop import LiveSessionStepResult, StepAction, run_session_step
-from inkscape_mcp.live.managed_dbus import ManagedDBusTransport
+from inkscape_mcp.live.managed_dbus import ENV_DIR, ManagedDBusTransport
 from inkscape_mcp.live.protocol import LiveCommand
 from inkscape_mcp.live.render import LiveRenderResult, render_live_view
 from inkscape_mcp.live.scene import get_live_scene
@@ -288,6 +289,33 @@ def check_live_support() -> LiveSupport:
 
 
 @mcp.tool
+def live_launch() -> bool:
+    """Explicitly launch or reuse the managed Inkscape window on macOS.
+
+    When to use: only when the user asks to open Inkscape. MCP startup, status checks,
+    and live_connect never launch a window. An existing managed window is reused.
+    Requires the live master gate. After launch call live_connect(prefer="no_freeze"),
+    then choose the drawing with live_list_documents and live_select_document.
+
+    Return shape: true when the managed session is ready.
+
+    Risk class: medium (opens a GUI and prepares its managed bridge).
+    """
+    if not get_settings().live_enabled:
+        raise _map_live_error(LiveDisabled("live mode is disabled"))
+    if platform.system() != "Darwin":
+        raise ToolError("live_launch requires macOS")
+    from inkscape_mcp.live.macos_launcher import attach_session, session_directory
+
+    try:
+        ready = attach_session(session_directory(), launch=True)
+    except (RuntimeError, OSError):
+        raise ToolError("managed Inkscape launch failed; check launcher diagnostics") from None
+    log_tool_call(_logger, tool="live_launch")
+    return ready
+
+
+@mcp.tool
 def live_connect(prefer: str = "read") -> LiveSession:
     """Connect to a running Inkscape over the best-ranked available transport (enables live).
 
@@ -304,6 +332,7 @@ def live_connect(prefer: str = "read") -> LiveSession:
     single-run text, style/transform and structural edits through the one-shot helper.
     Requires the master gate (`INKSCAPE_MCP_LIVE_ENABLED`). With no
     transport available it fails cleanly without affecting headless tools.
+    Never opens Inkscape. On macOS use live_launch only if the user asks to open it.
 
     Return shape: `LiveSession` — the chosen `transport`, active document, and connection state.
 
@@ -314,6 +343,19 @@ def live_connect(prefer: str = "read") -> LiveSession:
     if prefer not in ("read", "no_freeze"):
         raise ToolError("prefer must be 'read' or 'no_freeze'")
     try:
+        if (
+            platform.system() == "Darwin"
+            and os.environ.get(ENV_DIR)
+            and get_settings().live_enabled
+        ):
+            from inkscape_mcp.live.macos_launcher import attach_session, session_directory
+
+            try:
+                attach_session(session_directory())
+            except (RuntimeError, OSError):
+                raise ToolError(
+                    "managed Inkscape session unavailable; check launcher diagnostics"
+                ) from None
         session = get_session_manager().connect(prefer=prefer)
     except LiveError as exc:
         _logger.error("live_connect failed", extra={"detail": str(exc)})

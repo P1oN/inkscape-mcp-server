@@ -17,6 +17,7 @@ Other builds are unverified.
   objects, explicit paint and canvas viewBox, alongside a PNG preview.
 - `live_insert_svg` adds a self-contained vector fragment as one group at the SVG root in
   document coordinates, remaps ids and internal paint/use references, and records previews.
+- MCP startup never opens Inkscape. Use `live_launch()` only when the user asks to open it.
 - Stopping the MCP server does not kill Inkscape. A later connection reuses the same GUI process.
 
 The prototype uses a private Unix D-Bus and Inkscape's own GActions. `select-list` writes ids to
@@ -62,6 +63,11 @@ ad-hoc signed executable copy. The original vendor application stays unchanged; 
 retain its vendor signature or hardened runtime. Native acceptance passed on 2026-10-01;
 see the [recorded results](document-context.md#validation). The integration remains experimental.
 Existing legacy sessions are reused with a guard-unavailable note.
+
+The configured command starts MCP without opening a window. It attaches to an existing managed
+session when available. Closing the window leaves later MCP connections idle until an explicit
+`live_launch()` request. For an explicit terminal launch use `.venv/bin/inkscape-mcp-macos --launch`
+(and optionally `--document /absolute/path/drawing.svg`).
 
 Create that drawing directory first. It contains preview artifacts and snapshots. This root
 restricts the server's file operations, but is not a jail for the GUI: the user can open other
@@ -129,7 +135,7 @@ session. The generated tool manifest was refreshed before this acceptance.
 
 ## First user trial
 
-1. Ask Codex to connect with `live_connect(prefer="no_freeze")` and confirm `managed-dbus`.
+1. Ask Codex to open Inkscape (`live_launch`), then connect with `live_connect(prefer="no_freeze")` and confirm `managed-dbus`.
 2. Ask Codex to list drawings with `live_list_documents` and choose the task drawing with
    `live_select_document`. Check `live_status.ready_to_edit`. Select a rectangle manually, then ask: “Tell me which object is selected and its fill.”
 3. Ask: “Change the selected object's fill to #cc3344.” The inherited tool requires a nonempty

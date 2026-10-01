@@ -1,4 +1,7 @@
-"""Launch/reuse a private Inkscape session, then run the usual MCP stdio server.
+"""Attach to a private Inkscape session, then run the usual MCP stdio server.
+
+Starting the MCP server never opens a GUI. Launching requires --launch or the
+explicit live_launch tool.
 
 A detached supervisor owns the bus and GUI. Closing/restarting Codex's MCP
 connection therefore never terminates a drawing with unsaved work. The supervisor
@@ -79,6 +82,39 @@ def _binary(name: str) -> str:
     if found is None:
         raise RuntimeError(f"{name} is missing; install it before starting the managed session")
     return found
+
+
+def session_directory() -> Path:
+    configured = os.environ.get(ENV_DIR)
+    if configured is not None:
+        return Path(configured)
+    uid = getattr(os, "getuid", lambda: 0)()
+    return Path(f"/tmp/inkscape-mcp-{uid}")  # noqa: S108
+
+
+def attach_session(root: Path, *, launch: bool = False) -> bool:
+    """Refresh managed environment; only an explicit launch may create a session."""
+    data: dict[str, Any] | None
+    if launch:
+        data = ensure_session(root)
+    elif root.exists() or root.is_symlink():
+        data = _read_session(secure_directory(root))
+    else:
+        data = None
+    root = root.resolve()
+    os.environ[ENV_DIR] = str(root)
+    if data is None:
+        os.environ.pop(ENV_STDOUT, None)
+        os.environ.pop(ENV_BRIDGE, None)
+        if os.environ.get("DBUS_SESSION_BUS_ADDRESS", "").startswith(
+            f"unix:path={root / 'bus.sock'}"
+        ):
+            os.environ.pop("DBUS_SESSION_BUS_ADDRESS", None)
+        return False
+    os.environ["DBUS_SESSION_BUS_ADDRESS"] = data["address"]
+    os.environ[ENV_STDOUT] = str(root / "inkscape.stdout.log")
+    os.environ[ENV_BRIDGE] = "1" if data.get("context_bridge") is True else "0"
+    return True
 
 
 def _reachable(address: str, *, context_bridge: bool = False) -> bool:
@@ -254,6 +290,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Experimental macOS Inkscape + Codex session")
     parser.add_argument("--session-dir", type=Path)
     parser.add_argument("--document", type=Path, help="initial drawing, only for a new session")
+    parser.add_argument("--launch", action="store_true", help="explicitly launch/reuse Inkscape")
     parser.add_argument(
         "--doctor", action="store_true", help="print read-only setup/session diagnosis"
     )
@@ -279,6 +316,8 @@ def main() -> None:
         print(report.model_dump_json(indent=2))
         parser.exit(0 if report.ready else 1)
     document = args.document.resolve() if args.document else None
+    if document is not None and not (args.launch or args.supervise):
+        parser.error("--document requires --launch")
     if document is not None and (not document.is_file() or document.suffix.lower() != ".svg"):
         parser.error("--document must point to an existing SVG")
     if args.supervise:
@@ -290,13 +329,11 @@ def main() -> None:
             supervise(root, document)
         return
     try:
-        data = ensure_session(root, document)
+        if args.launch:
+            ensure_session(root, document)
+        attach_session(root)
     except (RuntimeError, OSError) as exc:
         parser.exit(1, f"{exc}\n")
-    os.environ["DBUS_SESSION_BUS_ADDRESS"] = data["address"]
-    os.environ[ENV_STDOUT] = str(root.resolve() / "inkscape.stdout.log")
-    os.environ[ENV_DIR] = str(root.resolve())
-    os.environ[ENV_BRIDGE] = "1" if data.get("context_bridge") is True else "0"
     from inkscape_mcp.server import main as run_server
 
     run_server()

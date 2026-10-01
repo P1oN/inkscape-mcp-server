@@ -187,7 +187,9 @@ class ManagedDBusTransport(DBusTransport):
         probe.supported_commands = [c.value for c in sorted(cls.supported_commands)]
         if sys.platform != "darwin" or not stream or not Path(stream).is_file():
             probe.available = False
-            probe.detail = "start Inkscape with inkscape-mcp-macos to capture its selection replies"
+            probe.detail = (
+                "explicitly open Inkscape with live_launch or inkscape-mcp-macos --launch"
+            )
         elif probe.available:
             probe.detail = (
                 "managed Inkscape: current selection and undoable edits, no modal session"

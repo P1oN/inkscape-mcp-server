@@ -280,6 +280,7 @@ TITLE_OVERRIDES: dict[str, str] = {
     "live_insert_svg": "Live: insert SVG",
     "live_inspect_selection": "Live: inspect selection",
     "live_install_helper": "Live: install helper",
+    "live_launch": "Live: launch Inkscape",
     "live_render_view": "Live: render view",
     "live_session_step": "Live: session step",
     "live_set_selected_text": "Live: set selected text",

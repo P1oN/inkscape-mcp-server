@@ -9,7 +9,7 @@
 
 inkscape-mcp — an MCP server that makes Inkscape/SVG documents agent-ready: inspect, edit safely (reversible), validate, render, and export.
 
-Surface: 102 tools, 7 prompts, 16 resources.
+Surface: 103 tools, 7 prompts, 16 resources.
 
 ## Run & transport
 Transport: STDIO only (local). No HTTP.
@@ -138,6 +138,7 @@ Operator-tunable limits / gates (all optional, env-overridable):
 - live_insert_svg [risk: high] — Insert an SVG fragment into the running document.
 - live_inspect_selection [risk: low] — Inspect the selected objects in the live instance (semantic, by id; read-only).
 - live_install_helper [risk: restricted] — Install the shipped extension-socket helper into the Inkscape user extensions dir.
+- live_launch [risk: medium] — Explicitly launch or reuse the managed Inkscape window on macOS.
 - live_list_documents [risk: low] — List open managed macOS drawing windows with opaque window and document IDs.
 - live_render_view [risk: low] — Rasterize the live canvas to a PNG in the live artifacts dir (visual feedback).
 - live_select_document [risk: medium] — Activate and bind an open drawing window as the document for this task.

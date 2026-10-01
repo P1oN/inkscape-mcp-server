@@ -89,7 +89,10 @@ def _ready_to_launch(report: MacOSDiagnosis) -> MacOSDiagnosis:
     else:
         report.state = "ready_to_launch"
         report.ready = True
-        report.next_steps = ["Start inkscape-mcp-macos to build the bridge and launch Inkscape."]
+        report.next_steps = [
+            "Use live_launch or inkscape-mcp-macos --launch to build the bridge "
+            "and launch Inkscape."
+        ]
     return report
 
 

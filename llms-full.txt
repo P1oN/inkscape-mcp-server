@@ -9,7 +9,7 @@
 
 inkscape-mcp — an MCP server that makes Inkscape/SVG documents agent-ready: inspect, edit safely (reversible), validate, render, and export.
 
-Surface: 102 tools, 7 prompts, 16 resources.
+Surface: 103 tools, 7 prompts, 16 resources.
 
 ## Run & transport
 Transport: STDIO only (local). No HTTP.
@@ -1744,6 +1744,7 @@ Description:
     single-run text, style/transform and structural edits through the one-shot helper.
     Requires the master gate (`INKSCAPE_MCP_LIVE_ENABLED`). With no
     transport available it fails cleanly without affecting headless tools.
+    Never opens Inkscape. On macOS use live_launch only if the user asks to open it.
 
     Return shape: `LiveSession` — the chosen `transport`, active document, and connection state.
 
@@ -1950,6 +1951,21 @@ Description:
     Example: `live_install_helper()`
 
     Risk class: restricted (writes a server-bundled file under the Inkscape extensions dir).
+
+#### live_launch
+Risk class: medium
+Key params: (none)
+Description:
+    Explicitly launch or reuse the managed Inkscape window on macOS.
+
+    When to use: only when the user asks to open Inkscape. MCP startup, status checks,
+    and live_connect never launch a window. An existing managed window is reused.
+    Requires the live master gate. After launch call live_connect(prefer="no_freeze"),
+    then choose the drawing with live_list_documents and live_select_document.
+
+    Return shape: true when the managed session is ready.
+
+    Risk class: medium (opens a GUI and prepares its managed bridge).
 
 #### live_list_documents
 Risk class: low
