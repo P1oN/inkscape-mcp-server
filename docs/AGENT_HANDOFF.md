@@ -14,7 +14,8 @@
 
 - Ветка: `codex/document-context-guard`, база `main` (`9f58b16`).
 - Origin: `https://github.com/P1oN/inkscape-mcp-server`.
-- PR: будет указан после создания; продолжать в нем, не создавать второй PR.
+- Один draft PR: [#4](https://github.com/P1oN/inkscape-mcp-server/pull/4).
+  Продолжать в нем; не создавать второй PR.
 - Реализованы `live_list_documents` / `live_select_document`, UUID живых GTK
   объектов окна/документа, выбор рисунка для задачи и guard внутри GUI перед GAction.
 - Общий context scope связывает scene/frame, provenance, previews и изменение.
@@ -29,7 +30,8 @@
 
 ## Проверки и оставшаяся работа
 
-- Strict mypy: 110 source files. Focused Ruff проходит; native module компилируется
+- Strict mypy: 110 source files; focused Ruff, MCP surface smoke (101 tools), wheel
+  build проходят. Focused final suite: 81 passed. Native module компилируется
   clang с `-Wall -Wextra -Werror`.
 - Последний полный pytest: 1078 passed, 74 skipped, 1 failed — известный ранее
   нестабильный `test_engine_process.py::test_unknown_action_surfaces_engine_action_error`.
