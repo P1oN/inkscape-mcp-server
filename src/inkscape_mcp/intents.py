@@ -635,8 +635,17 @@ INTENT_MAP: tuple[IntentEntry, ...] = (
     # --- live mode ---
     IntentEntry(
         goal_pattern="Connect to a running Inkscape (live mode) and work on the open canvas",
-        tools=["live_connect", "live_get_scene", "live_apply_to_selection"],
-        how_to="live_connect attaches; live_get_scene reads canvas; live_apply_to_selection edits.",
+        tools=[
+            "live_connect",
+            "live_list_documents",
+            "live_select_document",
+            "live_get_scene",
+            "live_apply_to_selection",
+        ],
+        how_to=(
+            "Connect; on managed macOS list and select the task drawing; read its scene, "
+            "then edit. Reconnect resets the task binding."
+        ),
         group="live",
         keywords=[
             "live",

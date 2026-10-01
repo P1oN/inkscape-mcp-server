@@ -412,3 +412,30 @@ def test_tool_render_view_fast_applies_default_downscale(live_on: None) -> None:
     # An explicit scale always wins over `fast` (full-res / chosen-res on demand).
     explicit = live_render_view(fast=True, scale=2.0)
     assert explicit.scale == 2.0
+
+
+def test_uncertain_edit_is_recorded_without_claiming_rollback(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from inkscape_mcp.live.transport import LiveMutationUncertain
+
+    mgr, settings = _connected(tmp_path, monkeypatch)
+
+    def uncertain(transport):  # type: ignore[no-untyped-def]
+        transport.apply_to_selection(style={"fill": "blue"}, transform=None)
+        raise LiveMutationUncertain("lost reply after dispatch")
+
+    with pytest.raises(LiveMutationUncertain):
+        run_live_mutation(
+            tool="live_apply_to_selection",
+            params={},
+            required_command=LiveCommand.APPLY_TO_SELECTION,
+            op=uncertain,
+            approval_token="requested",
+            manager=mgr,
+            settings=settings,
+        )
+    record = list_live_operations(settings=settings).operations[0]
+    assert record.status == OperationStatus.DISCARDED
+    assert record.completion_uncertain
+    assert "blue" in mgr.require_transport().get_document_svg()

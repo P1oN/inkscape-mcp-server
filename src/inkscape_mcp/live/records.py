@@ -65,6 +65,9 @@ class LiveOperationRecord(BaseModel):
     policy_decision: dict[str, Any] = Field(default_factory=dict)
     affected_ids: list[str] = Field(default_factory=list)
     undo_friendly: bool = False
+    completion_uncertain: bool = Field(
+        default=False, description="An edit may have applied despite a discarded server record."
+    )
     previews: dict[str, str] = Field(default_factory=dict)
     diff_artifacts: list[str] = Field(default_factory=list)
     status: OperationStatus = OperationStatus.PROPOSED

@@ -44,6 +44,7 @@ from inkscape_mcp.live.events import (
     wait_for_change,
 )
 from inkscape_mcp.live.loop import LiveSessionStepResult, StepAction, run_session_step
+from inkscape_mcp.live.managed_dbus import ManagedDBusTransport
 from inkscape_mcp.live.protocol import LiveCommand
 from inkscape_mcp.live.render import LiveRenderResult, render_live_view
 from inkscape_mcp.live.scene import get_live_scene
@@ -56,10 +57,12 @@ from inkscape_mcp.live.transport import (
     LiveCapabilityUnsupported,
     LiveChange,
     LiveConnectionError,
+    LiveContextError,
     LiveDisabled,
     LiveDocumentRef,
     LiveError,
     LiveMutationResult,
+    LiveMutationUncertain,
     LiveNotAvailable,
     LiveScene,
     LiveSelection,
@@ -228,6 +231,10 @@ def _map_live_error(exc: Exception) -> ToolError:
             "the active live transport does not support this operation; "
             "call check_live_support to see which transport supports it"
         )
+    if isinstance(exc, LiveContextError):
+        return ToolError(str(exc))
+    if isinstance(exc, LiveMutationUncertain):
+        return ToolError("edit completion is uncertain; inspect the task drawing before retrying")
     if isinstance(exc, LiveConnectionError):
         return ToolError("live session communication failed")
     if isinstance(exc, LiveError):
@@ -339,8 +346,10 @@ def live_status() -> LiveSession:
     When to use: checking whether a session is live before issuing live tools. For per-host
     transport detail use `check_live_support`.
 
-    Managed macOS refreshes the current drawing name and probes bus liveness. Other transports
-    retain the document observed at connect time. A filename is not a unique document identity.
+    Managed macOS refreshes the current drawing and probes bus liveness. The context bridge
+    reports runtime window/document IDs, the selected task drawing, and ready_to_edit. Other
+    transports retain the document observed at connect time. connection_state and recovery_actions
+    explain failures without closing the GUI. Reconnect resets the task binding.
 
     Key params: none. Never raises — reports "not connected" / "none available" cleanly.
 
@@ -351,6 +360,57 @@ def live_status() -> LiveSession:
     Risk class: low (read-only).
     """
     return get_session_manager().status()
+
+
+class LiveDocumentList(BaseModel):
+    """Open drawing windows with their runtime identities."""
+
+    documents: list[LiveDocumentRef] = Field(default_factory=list)
+
+
+def _managed_document_transport() -> ManagedDBusTransport:
+    transport = get_session_manager().require_transport()
+    if not isinstance(transport, ManagedDBusTransport):
+        raise LiveCapabilityUnsupported("document selection requires the managed macOS bridge")
+    return transport
+
+
+@mcp.tool
+def live_list_documents() -> LiveDocumentList:
+    """List open managed macOS drawing windows with opaque window and document IDs.
+
+    When to use: choosing the drawing for a task before a live edit. Identical names and SVG
+    content can belong to different windows. IDs are valid only while their GUI objects live.
+
+    Key params: none. Requires a managed session with the GTK context bridge.
+    Return shape: documents containing window_id, document_id and window title.
+    Example: live_list_documents()
+    Risk class: low (read-only).
+    """
+    try:
+        return LiveDocumentList(documents=_managed_document_transport().list_documents())
+    except LiveError as exc:
+        raise _map_live_error(exc) from exc
+
+
+@mcp.tool
+def live_select_document(window_id: str, document_id: str) -> LiveSession:
+    """Activate and bind an open drawing window as the document for this task.
+
+    When to use: after live_list_documents and before edits on managed macOS. Edits refuse if
+    the active window or document changes. Reconnect clears the binding; select again after
+    inspecting the drawing. Closing, reopening or reverting a drawing can invalidate its IDs.
+
+    Key params: window_id and document_id from live_list_documents. No file is opened or closed.
+    Return shape: LiveSession with selected_document and ready_to_edit.
+    Example: live_select_document(window_id="...", document_id="...")
+    Risk class: medium (changes active window and the task binding; no drawing mutation).
+    """
+    try:
+        _managed_document_transport().select_document(window_id, document_id)
+        return get_session_manager().status()
+    except LiveError as exc:
+        raise _map_live_error(exc) from exc
 
 
 @mcp.tool
@@ -629,8 +689,9 @@ def live_get_scene(
         region, checked_scale = _validate_frame_params(
             region_x, region_y, region_width, region_height, scale, fast
         )
-        render = render_live_view(region=region, scale=checked_scale)  # type: ignore[arg-type]
-        scene = get_live_scene()
+        with get_session_manager().require_transport().operation_scope():
+            render = render_live_view(region=region, scale=checked_scale)  # type: ignore[arg-type]
+            scene = get_live_scene()
     except EditError as exc:
         raise _map_live_error(exc) from exc
     except LiveError as exc:

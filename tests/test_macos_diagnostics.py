@@ -39,6 +39,11 @@ def environment(short_directory: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
         "_stdout",
         lambda argv: "Inkscape 1.4.3" if argv[-1] == "--version" else str(data),
     )
+    monkeypatch.setattr(
+        diag,
+        "build_dependencies",
+        lambda: {"clang": True, "codesign": True, "glib_headers": True},
+    )
     monkeypatch.setattr(macos_launcher, "_read_session", lambda root: None)
     return tmp_path / "session"
 
@@ -209,3 +214,46 @@ def test_socket_path_limit_prevents_false_readiness(
     if socket_bytes >= 104:
         assert any("shorter" in step for step in report.next_steps)
     assert root.exists() is exists
+
+
+def test_new_launch_requires_context_build_tools(
+    environment: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(
+        diag,
+        "build_dependencies",
+        lambda: {"clang": False, "codesign": True, "glib_headers": False},
+    )
+    report = diag.diagnose_macos(environment)
+    assert not report.ready and report.state == "missing_dependencies"
+    assert not environment.exists()
+    assert any("command line tools" in step for step in report.next_steps)
+
+
+@pytest.mark.parametrize("available", [True, False])
+def test_doctor_checks_bridge_without_activating_or_repairing(
+    environment: Path, monkeypatch: pytest.MonkeyPatch, available: bool
+) -> None:
+    environment.mkdir(mode=0o700)
+    (environment / "inkscape.stdout.log").touch()
+    monkeypatch.setattr(
+        macos_launcher,
+        "_read_session",
+        lambda root: {"address": "unix:path=/private/test/bus.sock", "context_bridge": True},
+    )
+    original = diag._stdout
+
+    def output(argv: list[str]) -> str | None:
+        if argv[-1] == diag.INSERT_ACTION:
+            return "((true, signature '', @av []),)"
+        if argv[-1] == f"{diag.INTERFACE}.ListDocuments":
+            return "(@a(sss) [],)" if available else None
+        return original(argv)
+
+    monkeypatch.setattr(diag, "_stdout", output)
+    before = sorted(environment.rglob("*"))
+    report = diag.diagnose_macos(environment)
+    assert report.context_bridge_available is available
+    assert report.ready is available
+    assert report.state == ("running" if available else "running_context_unavailable")
+    assert sorted(environment.rglob("*")) == before

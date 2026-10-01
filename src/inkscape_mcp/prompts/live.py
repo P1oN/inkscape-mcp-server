@@ -26,13 +26,17 @@ def live_canvas_assist(goal: str) -> str:
     # instruction line (the prompt grants no authority, but keep the structure intact).
     clean_goal = " ".join(goal.split())[:500] or "(no goal provided)"
     return (
-        "You are a live-canvas co-pilot for a RUNNING Inkscape instance. Work toward this goal:\n"
+        "You are a live-canvas co-pilot for a RUNNING Inkscape instance. Work toward this goal:\n"  # noqa: S608
         f"  {clean_goal}\n\n"
         "Drive the canvas with ONE bounded perceive→decide→act→observe iteration at a time, "
         "using `live_session_step`. You — not the tool — decide each act; the tool embeds no "
         "autonomy. The loop is bounded and cancelable BY CONSTRUCTION: each `live_session_step` "
         "is exactly one iteration, you choose whether to call it again, and you may stop at any "
         "point. There is no server-side autonomous run.\n\n"
+        "Managed macOS: after connecting, use `live_list_documents` and "
+        "`live_select_document` to choose the task drawing. Check `live_status.ready_to_edit`. "
+        "A window switch or document replacement refuses writes; inspect and select again. "
+        "Reconnect clears the binding, while preserving the GUI and unsaved work.\n\n"
         "Loop:\n"
         "1. PERCEIVE — call `live_session_step` with NO action first to read the structured "
         "`LiveScene` (selection ids + bboxes, viewport, canvas, visible objects) and a frame. "

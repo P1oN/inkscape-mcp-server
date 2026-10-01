@@ -50,6 +50,12 @@ Render and look before you trust an edit. After a mutating call (especially a ba
 INSPECT the result — `render_preview` (headless) or `live_render_view` (live mode) — before relying
 on it; `restore_snapshot` reverts if it is wrong.
 
+Managed macOS live documents. After `live_connect`, use `live_list_documents` and
+`live_select_document(window_id, document_id)` to bind the task drawing. Check
+`live_status.ready_to_edit`: writes refuse after a window switch or document replacement.
+Reconnect preserves the GUI and resets the binding. Inspect a drawing after an edit timeout
+before retrying: the edit may have applied.
+
 Finding the right tool. Don't grep the surface: call `how_do_i(goal)` (natural-language goal ->
 tool names + how-to, and it flags out-of-scope goals), or `list_capabilities` for the runtime matrix
 plus the full intent map. The generated `llms.txt` / `llms-full.txt` manifest and

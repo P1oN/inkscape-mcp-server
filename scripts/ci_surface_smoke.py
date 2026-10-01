@@ -56,7 +56,8 @@ from typing import Any
 #: adds 2 more (place_document, live_arm_socket) → 97. Adds the `apply_edits` typed batch
 #: tool → 98. Adds the `transform_objects` selector→op tool → 99. A future epic that changes
 #: the tool/prompt/resource set bumps the matching constant; the diff pinpoints what moved.
-EXPECTED_TOOLS = 99
+#: Managed document list/choice adds two live tools → 101.
+EXPECTED_TOOLS = 101
 #: 5 prior prompts (export/recolor x4 + live_canvas_assist) + 2 authoring
 #: prompts (compose_artwork, restyle_artwork) = 7. No new @mcp.tool — tool count is unchanged.
 EXPECTED_PROMPTS = 7

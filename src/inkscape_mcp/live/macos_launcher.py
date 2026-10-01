@@ -19,7 +19,9 @@ import time
 from pathlib import Path
 from typing import Any
 
+from inkscape_mcp.live.context_bridge import ENV_BRIDGE
 from inkscape_mcp.live.managed_dbus import ENV_DIR, ENV_STDOUT
+from inkscape_mcp.live.native_launcher import prepare_context_launcher
 
 
 def install_insertion_helper() -> None:
@@ -73,7 +75,7 @@ def _binary(name: str) -> str:
     return found
 
 
-def _reachable(address: str) -> bool:
+def _reachable(address: str, *, context_bridge: bool = False) -> bool:
     try:
         result = subprocess.run(
             [
@@ -84,9 +86,11 @@ def _reachable(address: str) -> bool:
                 "--dest",
                 "org.inkscape.Inkscape",
                 "--object-path",
-                "/org/inkscape/Inkscape",
+                "/org/inkscape/Inkscape/MCPContext" if context_bridge else "/org/inkscape/Inkscape",
                 "--method",
-                "org.gtk.Actions.List",
+                "org.inkscape.MCP.Context1.ListDocuments"
+                if context_bridge
+                else "org.gtk.Actions.List",
             ],
             capture_output=True,
             timeout=2,
@@ -111,6 +115,10 @@ def _read_session(root: Path) -> dict[str, Any] | None:
         if data["address"].split(",", 1)[0] != prefix:
             return None
         if _reachable(data["address"]):
+            if data.get("context_bridge") is True and not _reachable(
+                data["address"], context_bridge=True
+            ):
+                return None
             return data
     except (OSError, ValueError, TypeError):
         pass
@@ -176,7 +184,7 @@ def supervise(root: Path, document: Path | None) -> None:
     root = secure_directory(root)
     install_insertion_helper()
     daemon = _binary("dbus-daemon")
-    inkscape = _binary("inkscape")
+    inkscape, context_module = prepare_context_launcher(Path(_binary("inkscape")), root)
     (root / "bus.sock").unlink(missing_ok=True)
     with (
         (root / "bus.log").open("wb") as bus_log,
@@ -205,11 +213,20 @@ def supervise(root: Path, document: Path | None) -> None:
             env = os.environ.copy()
             env["DBUS_SESSION_BUS_ADDRESS"] = address
             env[ENV_DIR] = str(root)
-            argv = [inkscape, "--with-gui"]
+            env[ENV_BRIDGE] = "1"
+            env["GTK_MODULES"] = os.pathsep.join(
+                value for value in (env.get("GTK_MODULES", ""), str(context_module)) if value
+            )
+            argv = [str(inkscape), "--with-gui"]
             if document is not None:
                 argv.append(str(document))
             gui = subprocess.Popen(argv, env=env, stdout=stdout, stderr=stderr)
-            manifest = {"address": address, "inkscape_pid": gui.pid, "supervisor_pid": os.getpid()}
+            manifest = {
+                "address": address,
+                "inkscape_pid": gui.pid,
+                "supervisor_pid": os.getpid(),
+                "context_bridge": True,
+            }
             pending = root / "session.tmp"
             pending.write_text(json.dumps(manifest))
             pending.chmod(0o600)
@@ -273,6 +290,7 @@ def main() -> None:
     os.environ["DBUS_SESSION_BUS_ADDRESS"] = data["address"]
     os.environ[ENV_STDOUT] = str(root.resolve() / "inkscape.stdout.log")
     os.environ[ENV_DIR] = str(root.resolve())
+    os.environ[ENV_BRIDGE] = "1" if data.get("context_bridge") is True else "0"
     from inkscape_mcp.server import main as run_server
 
     run_server()

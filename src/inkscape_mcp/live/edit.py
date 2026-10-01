@@ -44,6 +44,7 @@ from inkscape_mcp.live.transport import (
     LiveCapabilityUnsupported,
     LiveError,
     LiveMutationResult,
+    LiveMutationUncertain,
     LiveSelection,
     LiveTransport,
     LiveViewportResult,
@@ -334,60 +335,66 @@ def run_live_mutation(
     if not transport.supports(required_command):
         raise LiveCapabilityUnsupported("the active live transport cannot perform this edit")
 
-    document = mgr.status().active_document
-    selection = _safe_selection(transport)
+    with transport.operation_scope():
+        document = mgr.status().active_document
+        selection = _safe_selection(transport)
 
-    # Opening the record enforces the approval gate FIRST — never mutate unapproved (X1).
-    record: LiveOperationRecord = new_live_operation(
-        tool=tool,
-        risk_class=RiskClass.HIGH,
-        params=params,
-        transport=transport.name,
-        document=document,
-        selection=selection.object_ids,
-        approval_token=approval_token,
-        settings=s,
-    )
+        # Opening the record enforces the approval gate FIRST — never mutate unapproved (X1).
+        record: LiveOperationRecord = new_live_operation(
+            tool=tool,
+            risk_class=RiskClass.HIGH,
+            params=params,
+            transport=transport.name,
+            document=document,
+            selection=selection.object_ids,
+            approval_token=approval_token,
+            settings=s,
+        )
 
-    preview_before = _safe_render(mgr, s)
+        preview_before = _safe_render(mgr, s)
 
-    try:
-        result = op(transport)
-    except LiveError:
-        update_live_operation(record, settings=s, status=OperationStatus.DISCARDED)
-        raise
+        try:
+            result = op(transport)
+        except LiveMutationUncertain:
+            update_live_operation(
+                record, settings=s, status=OperationStatus.DISCARDED, completion_uncertain=True
+            )
+            raise
+        except LiveError:
+            update_live_operation(record, settings=s, status=OperationStatus.DISCARDED)
+            raise
 
-    preview_after = _safe_render(mgr, s)
-    previews = {
-        phase: path
-        for phase, path in (("before", preview_before), ("after", preview_after))
-        if path is not None
-    }
-    update_live_operation(
-        record,
-        settings=s,
-        status=OperationStatus.APPLIED,
-        previews=previews,
-        affected_ids=result.affected_ids,
-        undo_friendly=result.undo_friendly,
-    )
-    log_tool_call(
-        _logger,
-        tool=tool,
-        operation_id=record.operation_id,
-        transport=transport.name,
-        affected=result.count,
-    )
-    return LiveEditResult(
-        operation_id=record.operation_id,
-        transport=transport.name,
-        summary=result.detail or tool,
-        affected_ids=result.affected_ids,
-        count=result.count,
-        undo_friendly=result.undo_friendly,
-        preview_before=preview_before,
-        preview_after=preview_after,
-    )
+        preview_after = _safe_render(mgr, s)
+        previews = {
+            phase: path
+            for phase, path in (("before", preview_before), ("after", preview_after))
+            if path is not None
+        }
+        update_live_operation(
+            record,
+            settings=s,
+            status=OperationStatus.APPLIED,
+            previews=previews,
+            affected_ids=result.affected_ids,
+            undo_friendly=result.undo_friendly,
+        )
+        log_tool_call(
+            _logger,
+            tool=tool,
+            operation_id=record.operation_id,
+            transport=transport.name,
+            affected=result.count,
+        )
+        return LiveEditResult(
+            operation_id=record.operation_id,
+            transport=transport.name,
+            summary=result.detail or tool,
+            affected_ids=result.affected_ids,
+            count=result.count,
+            undo_friendly=result.undo_friendly,
+            preview_before=preview_before,
+            preview_after=preview_after,
+        )
 
 
 def export_live_selection(
