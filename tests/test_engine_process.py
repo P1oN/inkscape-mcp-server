@@ -182,3 +182,9 @@ def test_reader_preserves_split_utf8_and_flushes_incomplete_eof(
     finally:
         child.wait(timeout=5)
         p.shutdown()
+
+
+@pytest.mark.parametrize("newline", ["\n", "\r\n"])
+def test_shell_frame_normalizes_platform_newlines(newline: str) -> None:
+    frame = newline.join(["query-all", "svg1,10,10,70,20", "r1,10,10,30,20", "> "])
+    assert EngineProcess._strip_frame(frame, "query-all") == ["svg1,10,10,70,20", "r1,10,10,30,20"]

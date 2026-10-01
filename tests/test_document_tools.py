@@ -141,7 +141,10 @@ def test_open_relative_escape_still_rejected(root: Path, monkeypatch: pytest.Mon
     monkeypatch.chdir(root)
     with pytest.raises(ToolError) as exc:
         open_document("../escape.svg")
-    assert str(exc.value) == "path rejected: outside workspace"
+    assert str(exc.value) == (
+        "path rejected: outside workspace; call get_workspace_info and choose a relative path "
+        "under a configured server root (relative paths default to the first root)"
+    )
     # No host path leaks into the client-facing message.
     assert str(root) not in str(exc.value)
     assert str(outside) not in str(exc.value)
@@ -153,7 +156,10 @@ def test_open_absolute_outside_still_rejected(root: Path) -> None:
     outside.write_bytes(SVG)
     with pytest.raises(ToolError) as exc:
         open_document(str(outside))
-    assert str(exc.value) == "path rejected: outside workspace"
+    assert str(exc.value) == (
+        "path rejected: outside workspace; call get_workspace_info and choose a relative path "
+        "under a configured server root (relative paths default to the first root)"
+    )
     assert str(outside) not in str(exc.value)
 
 
@@ -165,5 +171,8 @@ def test_open_symlink_to_outside_still_rejected(root: Path) -> None:
     (root / "link.svg").symlink_to(outside)
     with pytest.raises(ToolError) as exc:
         open_document("link.svg")
-    assert str(exc.value) == "path rejected: outside workspace"
+    assert str(exc.value) == (
+        "path rejected: outside workspace; call get_workspace_info and choose a relative path "
+        "under a configured server root (relative paths default to the first root)"
+    )
     assert str(outside) not in str(exc.value)

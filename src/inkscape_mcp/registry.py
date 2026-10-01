@@ -110,7 +110,7 @@ class Registry:
         )
 
         try:
-            rel_source = str(resolved.relative_to(root))
+            rel_source = resolved.relative_to(root).as_posix()
         except ValueError:  # pragma: no cover - containment already guarantees this holds
             rel_source = resolved.name
 

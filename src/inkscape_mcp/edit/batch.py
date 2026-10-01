@@ -62,6 +62,13 @@ from inkscape_mcp.edit.create import (
     make_reparent_object,
 )
 from inkscape_mcp.edit.pipeline import MutateFn
+from inkscape_mcp.edit.repeat import (
+    Placement,
+    Point,
+    RepeatVariation,
+    make_repeat,
+    placement_plan,
+)
 from inkscape_mcp.edit.style import (
     apply_palette_mutate,
     replace_color_mutate,
@@ -553,9 +560,13 @@ class CreateGroupEdit(_Edit):
     op: Literal["create_group"]
     parent_id: str | None = None
     object_id: str | None = None
+    label: str | None = None
+    mode: Literal["group", "layer"] = "group"
 
     def build(self) -> MutateFn:
-        return make_create_group(parent_id=self.parent_id, object_id=self.object_id)
+        return make_create_group(
+            parent_id=self.parent_id, object_id=self.object_id, label=self.label, mode=self.mode
+        )
 
 
 class GroupObjectsEdit(_Edit):
@@ -575,9 +586,56 @@ class ReparentObjectEdit(_Edit):
     op: Literal["reparent_object"]
     object_id: str
     new_parent_id: str
+    preserve_appearance: bool = False
 
     def build(self) -> MutateFn:
-        return make_reparent_object(self.object_id, self.new_parent_id)
+        return make_reparent_object(self.object_id, self.new_parent_id, self.preserve_appearance)
+
+
+class RepeatObjectsEdit(_Edit):
+    op: Literal["repeat_objects"]
+    object_id: str
+    placement: Placement
+    group_id: str
+    mode: Literal["linked", "copies"] = "linked"
+    label: str = "Repeated objects"
+    orientation: Literal["fixed", "tangent"] = "fixed"
+    variation: RepeatVariation | None = None
+    anchor: Point | None = None
+
+    def build(self) -> MutateFn:
+        return make_repeat(
+            self.object_id,
+            placement_plan(self.placement, self.orientation, self.variation),
+            self.mode,
+            self.group_id,
+            self.label,
+            self.anchor,
+        )
+
+
+class SetGroupModeEdit(_Edit):
+    op: Literal["set_group_mode"]
+    object_id: str
+    mode: Literal["group", "layer"]
+
+    def build(self) -> MutateFn:
+        from inkscape_mcp.edit.structure import make_group_mode
+
+        return make_group_mode(self.object_id, self.mode)
+
+
+class ReplaceSvgFragmentEdit(_Edit):
+    RISK: ClassVar[RiskClass] = RiskClass.HIGH
+    op: Literal["replace_svg_fragment"]
+    object_id: str
+    svg: str
+    reference_policy: Literal["reject_changes", "allow_retained"] = "reject_changes"
+
+    def build(self) -> MutateFn:
+        from inkscape_mcp.edit.fragment import make_replace_fragment
+
+        return make_replace_fragment(self.object_id, self.svg, self.reference_policy)
 
 
 class CreateUseEdit(_Edit):
@@ -673,6 +731,9 @@ TypedEdit = Annotated[
     | CreateGroupEdit
     | GroupObjectsEdit
     | ReparentObjectEdit
+    | RepeatObjectsEdit
+    | SetGroupModeEdit
+    | ReplaceSvgFragmentEdit
     | CreateUseEdit
     | AddLinearGradientEdit
     | AddRadialGradientEdit,

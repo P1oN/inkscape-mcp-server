@@ -35,8 +35,9 @@ from inkscape_mcp.logging_setup import get_logger, log_tool_call
 from inkscape_mcp.registry import get_registry
 from inkscape_mcp.server import mcp
 from inkscape_mcp.snapshots import create_snapshot
+from inkscape_mcp.workspace.artifacts import qualified_workspace_path
 from inkscape_mcp.workspace.limits import LimitExceeded
-from inkscape_mcp.workspace.paths import SandboxViolation
+from inkscape_mcp.workspace.paths import SandboxViolation, public_path_error
 from inkscape_mcp.workspace.xml_safety import UnsafeXMLError
 
 _logger = get_logger("tools.document")
@@ -88,7 +89,7 @@ class ReloadDocumentResult(BaseModel):
 
 
 @mcp.tool
-def open_document(path: str) -> OpenDocumentResult:
+def open_document(path: str, root_id: str | None = None) -> OpenDocumentResult:
     """Open an SVG into a tracked workspace document and return its id + summary.
 
     When to use: the entry point for working on an EXISTING file — you need the `doc_id` before any
@@ -98,7 +99,8 @@ def open_document(path: str) -> OpenDocumentResult:
     Key params: `path` may be workspace-RELATIVE (anchored to the first workspace root, NOT the
     server CWD — matching `save_document_as` / `live_sync_to_workspace`) or absolute; either is
     sandbox-validated and a `../`-escape, an absolute path outside the workspace, or a symlink whose
-    target leaves the sandbox is rejected with `path rejected: outside workspace`.
+    target leaves the sandbox is rejected with `path rejected: outside workspace`. Optional
+    `root_id` from get_workspace_info selects a configured root for a relative path.
     WORKING-COPY MODEL: opening copies your source SVG byte-for-byte into a per-document workspace
     as an immutable `original.svg` and seeds a single live WORKING COPY. The returned `doc_id`
     addresses that copy; EVERY subsequent tool operates on it, and your ORIGINAL is NEVER mutated.
@@ -112,12 +114,14 @@ def open_document(path: str) -> OpenDocumentResult:
     Risk class: low (opens via working copy; original never mutated).
     """
     try:
-        entry = get_registry().open_document(path)
+        entry = get_registry().open_document(
+            qualified_workspace_path(path, root_id) if root_id is not None else path
+        )
     except SandboxViolation as exc:
         # exc.args[0] is already a SAFE public message (no host path), prefixed
         # "path rejected: ..." by the sandbox layer.
         _logger.error("open_document rejected", extra={"detail": exc.detail})
-        raise ToolError(str(exc)) from exc
+        raise ToolError(public_path_error(exc)) from exc
     except LimitExceeded as exc:
         _logger.error("open_document over limit", extra={"detail": str(exc)})
         raise ToolError("input file exceeds the configured size limit") from exc
@@ -210,7 +214,7 @@ def reload_document(doc_id: str) -> ReloadDocumentResult:
         raise ToolError("document id not found") from exc
     except SandboxViolation as exc:
         _logger.error("reload_document rejected", extra={"detail": exc.detail})
-        raise ToolError(str(exc)) from exc
+        raise ToolError(public_path_error(exc)) from exc
     except LimitExceeded as exc:
         raise ToolError("input file exceeds the configured size limit") from exc
 

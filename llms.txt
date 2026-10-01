@@ -9,7 +9,7 @@
 
 inkscape-mcp — an MCP server that makes Inkscape/SVG documents agent-ready: inspect, edit safely (reversible), validate, render, and export.
 
-Surface: 105 tools, 7 prompts, 16 resources.
+Surface: 110 tools, 7 prompts, 18 resources.
 
 ## Run & transport
 Transport: STDIO only (local). No HTTP.
@@ -70,7 +70,9 @@ Operator-tunable limits / gates (all optional, env-overridable):
 - place_document [risk: medium] — Place an existing document or object INTO another document at `(x, y)` with `scale`.
 - reload_document [risk: low] — Refresh a working copy FROM ITS SOURCE under the SAME `doc_id`, discarding working edits.
 - reparent_object [risk: medium] — Move an object (`object_id`) under a new parent (`new_parent_id`); both must exist.
+- replace_svg_fragment [risk: high] — Replace one selected SVG subtree atomically, retaining its container ID and qualified tag.
 - set_document_svg [risk: high] — REPLACE the whole working copy with an agent-composed SVG string (root must be `<svg>`).
+- set_group_mode [risk: medium] — Convert the same g between ordinary group and layer; preserve ID and all other attributes.
 
 ### Inspect
 - find_objects [risk: low] — Find addressable object ids in a tracked document by tag / paint / text / id-prefix / bbox.
@@ -87,6 +89,7 @@ Operator-tunable limits / gates (all optional, env-overridable):
 - move_object [risk: medium] — Translate an object/group by ``(dx, dy)`` in its parent coordinate space.
 - normalize_viewbox [risk: medium] — Normalize or repair the document's root ``viewBox``.
 - rename_object [risk: medium] — Change an object's `id` and/or its `inkscape:label`.
+- repeat_objects [risk: medium] — Place editable instances along a polyline (two points = line) or in a rectangle.
 - replace_color [risk: medium] — Replace one colour with another across the document (or within `scope_ids` subtrees).
 - replace_text [risk: medium] — Replace the text content of a text element (`<text>` / `<tspan>` / flow text).
 - resize_canvas [risk: medium] — Set the document canvas ``width`` / ``height`` to validated CSS lengths.
@@ -109,6 +112,7 @@ Operator-tunable limits / gates (all optional, env-overridable):
 
 ### Export
 - capture_frame [risk: low] — Capture the next numbered PNG screenshot in a per-run frame series.
+- compare_region [risk: low] — Render the same fixed region from a pre-edit snapshot and the current working copy.
 - create_icon_set [risk: low] — Export a multi-size square PNG icon set from the source document.
 - export_batch [risk: low] — Run a bounded batch of typed export specs in one call (dry-run by default).
 - export_document [risk: low] — Export the whole document to PNG, PDF, or SVG.
@@ -163,6 +167,7 @@ Operator-tunable limits / gates (all optional, env-overridable):
 ### System
 - diagnose_runtime [risk: low] — Probe the local Inkscape + Python runtime fresh and return the capability matrix.
 - discover_extensions [risk: low] — List the server-side allowlisted Inkscape extensions + probe notes (read-only, diagnostic).
+- get_workspace_info [risk: low] — Discover configured server workspace roots and portable artifact access.
 - list_actions [risk: low] — Discover the host's actual Inkscape Action surface (probe-driven, version-aware).
 - list_capabilities [risk: low] — Return the cached runtime capability matrix (probed once, then reused).
 - run_action_chain [risk: high] — Execute a validated Action chain over a document's working copy (HIGH risk, approval-gated).

@@ -186,7 +186,10 @@ def test_symlinked_dest_escape_rejected_no_write_to_target(
 
     with pytest.raises(ToolError) as exc:
         save_document_as(doc_id, str(evil_link), overwrite=True, approval_token="ok")
-    assert str(exc.value) == "path rejected: outside workspace"
+    assert str(exc.value) == (
+        "path rejected: outside workspace; call get_workspace_info and choose a relative path "
+        "under a configured server root (relative paths default to the first root)"
+    )
 
     # The escape did not happen: no file appeared at the link target.
     assert not escape_target.exists()
@@ -203,7 +206,10 @@ def test_symlinked_dest_escape_rejected_relative_form(
 
     with pytest.raises(ToolError) as exc:
         save_document_as(doc_id, "evil_rel.svg", overwrite=True, approval_token="ok")
-    assert str(exc.value) == "path rejected: outside workspace"
+    assert str(exc.value) == (
+        "path rejected: outside workspace; call get_workspace_info and choose a relative path "
+        "under a configured server root (relative paths default to the first root)"
+    )
     assert not escape_target.exists()
 
 
@@ -319,13 +325,19 @@ def test_out_of_sandbox_nested_dest_rejected_creates_nothing(
     # Relative escape via `..` into a subfolder above the workspace root.
     with pytest.raises(ToolError) as exc1:
         save_document_as(doc_id, "../escape/x.svg")
-    assert str(exc1.value) == "path rejected: outside workspace"
+    assert str(exc1.value) == (
+        "path rejected: outside workspace; call get_workspace_info and choose a relative path "
+        "under a configured server root (relative paths default to the first root)"
+    )
     assert not (root.parent / "escape").exists()
 
     # Absolute path into a system directory (parent exists, but resolves outside every root).
     with pytest.raises(ToolError) as exc2:
         save_document_as(doc_id, "/etc/inkscape_mcp_escape/x.svg")
-    assert str(exc2.value) == "path rejected: outside workspace"
+    assert str(exc2.value) == (
+        "path rejected: outside workspace; call get_workspace_info and choose a relative path "
+        "under a configured server root (relative paths default to the first root)"
+    )
     assert not Path("/etc/inkscape_mcp_escape").exists()
 
 
@@ -343,7 +355,10 @@ def test_nested_dest_through_symlinked_ancestor_rejected(
 
     with pytest.raises(ToolError) as exc:
         save_document_as(doc_id, "linked/sub/out.svg")
-    assert str(exc.value) == "path rejected: outside workspace"
+    assert str(exc.value) == (
+        "path rejected: outside workspace; call get_workspace_info and choose a relative path "
+        "under a configured server root (relative paths default to the first root)"
+    )
     # Nothing was created through the link target.
     assert not (outside / "sub").exists()
 

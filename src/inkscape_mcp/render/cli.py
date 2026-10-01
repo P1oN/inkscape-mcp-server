@@ -58,6 +58,7 @@ import os
 import re
 import secrets
 import struct
+import sys
 import time
 from datetime import UTC, datetime
 from pathlib import Path
@@ -76,6 +77,7 @@ from inkscape_mcp.logging_setup import get_logger, log_export, log_preview
 from inkscape_mcp.registry import DocEntry, get_registry
 from inkscape_mcp.render.verify import verify_pdf, verify_raster
 from inkscape_mcp.workspace import sandbox
+from inkscape_mcp.workspace.artifacts import ArtifactLink, artifact_link
 from inkscape_mcp.workspace.limits import (
     LimitExceeded,
     check_export_dimensions,
@@ -137,6 +139,7 @@ class RenderResult(BaseModel):
     artifact_path: str
     # Defaults to empty only so a hand-built stub (test fakes) stays valid; every real engine
     # result populates it via `_relative_paths`.
+    artifact: ArtifactLink | None = None
     workspace_relative_path: str = ""
     format: str
     width_px: int | None
@@ -540,6 +543,7 @@ def _finalize_output(
         doc_id=doc_id,
         artifact_path=artifact_rel,
         workspace_relative_path=ws_rel,
+        artifact=artifact_link(out, settings),
         format=fmt,
         width_px=width_px,
         height_px=height_px,
@@ -678,6 +682,16 @@ def _safe_mkdir_chain(base_real_dir: Path, components: tuple[str, ...]) -> None:
     `O_RDONLY|O_DIRECTORY|O_NOFOLLOW`, so if any component is (or is raced into) a symlink the
     `open` fails with `ELOOP` and creation aborts — the side-effect can never escape the base dir.
     """
+    if sys.platform == "win32":
+        from inkscape_mcp.workspace.windows_io import mkdir_chain
+
+        try:
+            mkdir_chain(base_real_dir, components)
+        except OSError as exc:
+            raise SandboxViolation(
+                "path rejected: outside workspace", detail=f"directory creation refused: {exc}"
+            ) from None
+        return
     dir_fd = os.open(base_real_dir, os.O_RDONLY | os.O_DIRECTORY)
     try:
         for part in components:

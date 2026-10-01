@@ -97,6 +97,7 @@ def test_refusal_mapping_does_not_expose_generic_internal_errors() -> None:
 
 
 @pytest.mark.parametrize("failure", ["write", "chmod", "replace", "cleanup"])
+@pytest.mark.skipif(sys.platform == "win32", reason="POSIX managed operations")
 def test_edit_filesystem_errors_are_typed_and_cleanup_is_attempted(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: str
 ) -> None:

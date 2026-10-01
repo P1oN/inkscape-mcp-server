@@ -59,6 +59,12 @@ open/create -> inspect (`inspect_document` / `find_objects` for object ids) -> e
 tools) -> `render_preview` to look -> `export_document` / `save_document_as`. All writes land on a
 WORKING COPY; the original source file is never modified.
 
+Workspace and artifacts. Call `get_workspace_info` or read `inkscape://workspace` before choosing
+paths. Existing relative paths use the first server root, never client CWD; open/save accept
+an explicit root_id. Read returned artifact resource URIs through MCP; server paths are not
+client-local paths. Use render_preview(object_id/region) for details and compare_region with a
+pre-edit snapshot for fixed-area comparison.
+
 Reversibility. Every real mutation auto-snapshots first and emits an Operation Record (ADR-004). A
 genuine no-op writes nothing and reports `changed: false`. Undo with
 `restore_snapshot(doc_id, snapshot_id)`; `create_snapshot` checkpoints on demand; `list_snapshots`

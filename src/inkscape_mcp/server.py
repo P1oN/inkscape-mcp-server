@@ -63,6 +63,7 @@ def register_tools() -> None:
     from inkscape_mcp.resources import live as live_resources  # noqa: F401
     from inkscape_mcp.resources import prompts as prompts_resources  # noqa: F401
     from inkscape_mcp.resources import runtime  # noqa: F401
+    from inkscape_mcp.resources import workspace as workspace_resources  # noqa: F401
 
     #: post-registration pass — stamp every registered tool with its MCP `ToolAnnotations`
     # (`readOnlyHint` / `destructiveHint` / `idempotentHint` / `openWorldHint` / `title`) derived

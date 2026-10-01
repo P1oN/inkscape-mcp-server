@@ -16,6 +16,7 @@ fastmcp-patterns error model); the offending raw path is kept only in the privat
 from __future__ import annotations
 
 import os
+import sys
 from pathlib import Path
 
 from inkscape_mcp.config import Settings, get_settings
@@ -160,6 +161,16 @@ def _safe_mkdir_chain(base_real_dir: Path, components: tuple[str, ...]) -> None:
     descend `open` fails with `ELOOP`/`ENOTDIR` and creation aborts — the side-effect can never
     escape the base dir. Mirrors `render/cli.py::_safe_mkdir_chain`/`tools/save.py`.
     """
+    if sys.platform == "win32":
+        from inkscape_mcp.workspace.windows_io import mkdir_chain
+
+        try:
+            mkdir_chain(base_real_dir, components)
+        except OSError as exc:
+            raise SandboxViolation(
+                "path rejected: outside workspace", detail=f"directory creation refused: {exc}"
+            ) from None
+        return
     dir_fd = os.open(base_real_dir, os.O_RDONLY | os.O_DIRECTORY)
     try:
         for part in components:
@@ -340,3 +351,14 @@ def resolve_write_path(raw: str | Path, settings: Settings | None = None) -> Pat
             )
 
     return final_path
+
+
+def public_path_error(exc: SandboxViolation) -> str:
+    """Keep the stable error prefix and add actionable, host-path-free tool guidance."""
+    message = str(exc.args[0])
+    if message == "path rejected: outside workspace":
+        return (
+            message + "; call get_workspace_info and choose a relative path under a configured "
+            "server root (relative paths default to the first root)"
+        )
+    return message

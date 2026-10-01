@@ -31,6 +31,9 @@ from __future__ import annotations
 
 import errno
 import os
+import sys
+from collections.abc import Iterator
+from contextlib import contextmanager
 from pathlib import Path
 
 from fastmcp.exceptions import ToolError
@@ -48,10 +51,12 @@ from inkscape_mcp.registry import DocEntry, Registry, get_registry
 from inkscape_mcp.server import mcp
 from inkscape_mcp.validate import ValidationReport, validate_document
 from inkscape_mcp.workspace import sandbox
+from inkscape_mcp.workspace.artifacts import ArtifactLink, artifact_link, qualified_workspace_path
 from inkscape_mcp.workspace.paths import (
     SandboxViolation,
     is_contained,
     owning_root,
+    public_path_error,
     resolve_write_path,
 )
 from inkscape_mcp.workspace.risk import PolicyViolation, RiskClass
@@ -70,6 +75,7 @@ class SaveResult(BaseModel):
     """
 
     doc_id: str
+    artifact: ArtifactLink | None = None
     saved_path: str
     operation_id: str
     overwritten: bool
@@ -218,6 +224,16 @@ def _safe_mkdir_chain(base_real_dir: Path, components: tuple[str, ...]) -> None:
     descend `open` fails with `ELOOP`/`ENOTDIR` and creation aborts — the side-effect can never
     escape the base dir. Mirrors `render/cli.py::_safe_mkdir_chain`.
     """
+    if sys.platform == "win32":
+        from inkscape_mcp.workspace.windows_io import mkdir_chain
+
+        try:
+            mkdir_chain(base_real_dir, components)
+        except OSError as exc:
+            raise SandboxViolation(
+                "path rejected: outside workspace", detail=f"directory creation refused: {exc}"
+            ) from None
+        return
     dir_fd = os.open(base_real_dir, os.O_RDONLY | os.O_DIRECTORY)
     try:
         for part in components:
@@ -244,12 +260,28 @@ def _safe_mkdir_chain(base_real_dir: Path, components: tuple[str, ...]) -> None:
         os.close(dir_fd)
 
 
+@contextmanager
+def _destination_fd(path: Path) -> Iterator[int]:
+    if sys.platform == "win32":
+        from inkscape_mcp.workspace.windows_io import write_fd
+
+        with write_fd(path) as fd:
+            yield fd
+        return
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC | os.O_NOFOLLOW, 0o644)
+    try:
+        yield fd
+    finally:
+        os.close(fd)
+
+
 @mcp.tool
 def save_document_as(
     doc_id: str,
     dest_path: str,
     overwrite: bool = False,
     approval_token: str | None = None,
+    root_id: str | None = None,
 ) -> SaveResult:
     """Save a document's current working-copy state to a NEW file in the workspace.
 
@@ -258,7 +290,8 @@ def save_document_as(
     and source files are never touched.
 
     Key params: `dest_path` may be RELATIVE or absolute — relative anchors to the FIRST configured
-    workspace root (NOT the server CWD); absolute must resolve inside a configured root. A dest into
+    workspace root (NOT the server CWD); absolute must resolve inside a configured root. Optional
+    `root_id` from get_workspace_info selects a root explicitly with a relative dest. A dest into
     a not-yet-existing SUBFOLDER (e.g. `"output/final.svg"`) is supported: missing parents are
     created only after proving they resolve INSIDE the workspace (a `..`-escaping / out-of-sandbox
     dest creates nothing and is rejected with `path rejected: outside workspace`). The dest is
@@ -293,8 +326,12 @@ def save_document_as(
     #    inside a configured root. A containment failure in EITHER step raises SandboxViolation,
     #    which is mapped to the safe, host-path-free ToolError below — and the parent-creation
     #    step proves containment BEFORE any mkdir, so a rejected dest creates nothing.
-    anchored_dest = _anchor_dest(dest_path)
     try:
+        anchored_dest = (
+            qualified_workspace_path(dest_path, root_id)
+            if root_id is not None
+            else _anchor_dest(dest_path)
+        )
         _ensure_parent_dir(anchored_dest)
         resolved_dest = resolve_write_path(anchored_dest)
     except SandboxViolation as exc:
@@ -302,7 +339,7 @@ def save_document_as(
         # Use exc.args[0] explicitly: it is the SAFE public message (no host path). `str(exc)`
         # would happen to resolve to the same value today, but reading args[0] keeps the safe
         # field pinned even if SandboxViolation's str form ever changes.
-        raise ToolError(exc.args[0]) from exc
+        raise ToolError(public_path_error(exc)) from exc
 
     # 3. Never overwrite a managed document file (independent of the `overwrite` flag).
     if _safe_resolve(resolved_dest) in _managed_paths(registry):
@@ -349,9 +386,10 @@ def save_document_as(
     #    file is truncated (the approval-gated overwrite).
     working = sandbox.working_copy(Path(entry.root), doc_id)
     working_bytes = working.read_bytes()
-    flags = os.O_WRONLY | os.O_CREAT | os.O_TRUNC | os.O_NOFOLLOW
     try:
-        fd = os.open(resolved_dest, flags, 0o644)
+        with _destination_fd(resolved_dest) as fd:
+            with os.fdopen(os.dup(fd), "wb") as handle:
+                handle.write(working_bytes)
     except OSError as exc:
         if exc.errno == errno.ELOOP:
             # A symlink appeared at the destination after the pre-checks: refuse to follow it.
@@ -365,11 +403,7 @@ def save_document_as(
             extra={"detail": f"destination open failed: {exc}"},
         )
         raise ToolError("saved file could not be written") from exc
-    try:
-        with os.fdopen(fd, "wb") as handle:
-            handle.write(working_bytes)
-    except OSError as exc:  # pragma: no cover - write failure after a successful open is rare
-        raise ToolError("saved file could not be written") from exc
+
     log_file_io(
         _logger,
         action="save_document_as",
@@ -410,6 +444,7 @@ def save_document_as(
     return SaveResult(
         doc_id=doc_id,
         saved_path=rel_saved,
+        artifact=artifact_link(resolved_dest),
         operation_id=record.operation_id,
         overwritten=overwritten,
         pre_validation=pre_report,

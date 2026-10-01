@@ -21,7 +21,6 @@ from inkscape_mcp.config import (
     ENGINE_MODE_PER_CALL,
     ENGINE_MODE_SHELL,
     ENV_WORKSPACE_ROOTS,
-    Settings,
     get_settings,
 )
 from inkscape_mcp.engine.manager import reset_engine_manager
@@ -85,7 +84,9 @@ def test_shell_mode_routes_render_through_engine(
     monkeypatch.setattr(
         render_cli, "run_inkscape", lambda *a, **k: pytest.fail("per-call CLI should not run")
     )
-    result = render_cli.render_preview(doc_id, settings=Settings(engine_mode=ENGINE_MODE_SHELL))
+    result = render_cli.render_preview(
+        doc_id, settings=get_settings().model_copy(update={"engine_mode": ENGINE_MODE_SHELL})
+    )
     assert calls["engine"] == 1
     assert result.format == "png"
 
@@ -107,7 +108,9 @@ def test_engine_fault_falls_back_to_per_call(doc_id: str, monkeypatch: pytest.Mo
 
     monkeypatch.setattr(render_cli, "engine_export_document", boom)
     monkeypatch.setattr(render_cli, "run_inkscape", fake_run_inkscape)
-    result = render_cli.render_preview(doc_id, settings=Settings(engine_mode=ENGINE_MODE_SHELL))
+    result = render_cli.render_preview(
+        doc_id, settings=get_settings().model_copy(update={"engine_mode": ENGINE_MODE_SHELL})
+    )
     assert used["per_call"] == 1  # fault fell back to the per-call CLI
     assert result.format == "png"
 
@@ -127,7 +130,9 @@ def test_per_call_mode_never_touches_engine(doc_id: str, monkeypatch: pytest.Mon
         )
 
     monkeypatch.setattr(render_cli, "run_inkscape", fake_run_inkscape)
-    render_cli.render_preview(doc_id, settings=Settings(engine_mode=ENGINE_MODE_PER_CALL))
+    render_cli.render_preview(
+        doc_id, settings=get_settings().model_copy(update={"engine_mode": ENGINE_MODE_PER_CALL})
+    )
 
 
 def test_object_export_pdf_stay_per_call(doc_id: str, monkeypatch: pytest.MonkeyPatch) -> None:
@@ -149,7 +154,7 @@ def test_object_export_pdf_stay_per_call(doc_id: str, monkeypatch: pytest.Monkey
         )
 
     monkeypatch.setattr(render_cli, "run_inkscape", fake_run_inkscape)
-    s = Settings(engine_mode=ENGINE_MODE_SHELL)
+    s = get_settings().model_copy(update={"engine_mode": ENGINE_MODE_SHELL})
     render_cli.export_object(doc_id, "a", "png", settings=s)  # object -> per-call
     render_cli.export_document(doc_id, "pdf", settings=s)  # PDF -> per-call
 
@@ -159,8 +164,8 @@ def test_object_export_pdf_stay_per_call(doc_id: str, monkeypatch: pytest.Monkey
 
 @pytest.mark.inkscape
 def test_byte_equivalent_whole_doc_png_svg(doc_id: str) -> None:
-    per_call = Settings(engine_mode=ENGINE_MODE_PER_CALL)
-    shell = Settings(engine_mode=ENGINE_MODE_SHELL)
+    per_call = get_settings().model_copy(update={"engine_mode": ENGINE_MODE_PER_CALL})
+    shell = get_settings().model_copy(update={"engine_mode": ENGINE_MODE_SHELL})
     try:
         for fmt in ("png", "svg"):
             pc = render_cli.export_document(doc_id, fmt, settings=per_call)
@@ -179,10 +184,13 @@ def test_mutating_path_op_matches_per_call(doc_id: str) -> None:
     from inkscape_mcp.edit import paths as engine
 
     working = Path(get_registry().get(doc_id).working_path)
-    pc = engine.run_path_op(working, engine.UNION, ["a", "b"], settings=Settings())
+    pc = engine.run_path_op(working, engine.UNION, ["a", "b"], settings=get_settings())
     reset_engine_manager()
     sh = engine.run_path_op(
-        working, engine.UNION, ["a", "b"], settings=Settings(engine_mode=ENGINE_MODE_SHELL)
+        working,
+        engine.UNION,
+        ["a", "b"],
+        settings=get_settings().model_copy(update={"engine_mode": ENGINE_MODE_SHELL}),
     )
     reset_engine_manager()
     # Both run `select-by-id:a,b;path-union` then export plain SVG of the same input -> identical.
@@ -192,8 +200,8 @@ def test_mutating_path_op_matches_per_call(doc_id: str) -> None:
 @pytest.mark.inkscape
 def test_warm_engine_faster_than_per_call_for_batch(doc_id: str) -> None:
     n = 6
-    per_call = Settings(engine_mode=ENGINE_MODE_PER_CALL)
-    shell = Settings(engine_mode=ENGINE_MODE_SHELL)
+    per_call = get_settings().model_copy(update={"engine_mode": ENGINE_MODE_PER_CALL})
+    shell = get_settings().model_copy(update={"engine_mode": ENGINE_MODE_SHELL})
     try:
         t0 = time.monotonic()
         for _ in range(n):

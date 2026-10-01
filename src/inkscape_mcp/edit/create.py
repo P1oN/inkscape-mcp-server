@@ -666,6 +666,8 @@ def make_create_group(
     *,
     parent_id: str | None = None,
     object_id: str | None = None,
+    label: str | None = None,
+    mode: str = "group",
 ) -> MutateFn:
     """Build a ``mutate`` closure that inserts an empty ``<g>`` group.
 
@@ -679,6 +681,12 @@ def make_create_group(
         parent = _resolve_parent(root, parent_id)
         new_id = _resolve_id(object_id, "g", all_ids(root))
         _append(parent, "g", {"id": new_id})
+        from inkscape_mcp.edit.structure import make_group_mode
+        from inkscape_mcp.edit.text_object import make_rename_object
+
+        if label is not None:
+            make_rename_object(new_id, label=label)(tree)
+        make_group_mode(new_id, mode)(tree)
         return f"created <g> {new_id!r}"
 
     return mutate
@@ -723,6 +731,7 @@ def make_group_objects(
 def make_reparent_object(
     object_id: str,
     new_parent_id: str,
+    preserve_appearance: bool = False,
 ) -> MutateFn:
     """Build a ``mutate`` closure that moves an object under a new parent.
 
@@ -734,6 +743,10 @@ def make_reparent_object(
     """
 
     def mutate(tree: etree._ElementTree) -> str:
+        if preserve_appearance:
+            from inkscape_mcp.edit.structure import reparent_preserving
+
+            return reparent_preserving(tree, object_id, new_parent_id)
         root = tree.getroot()
         elem = require_target(root, object_id)
         new_parent = require_target(root, new_parent_id)

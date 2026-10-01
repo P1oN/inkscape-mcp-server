@@ -42,6 +42,7 @@ from inkscape_mcp.render.cli import (
     export_object,
     is_safe_object_id,
 )
+from inkscape_mcp.workspace.artifacts import ArtifactLink
 
 _logger = get_logger("render.batch")
 
@@ -91,6 +92,7 @@ class BatchItem(BaseModel):
     object_id: str | None
     projected_bytes: int
     artifact_path: str | None = None
+    artifact: ArtifactLink | None = None
     workspace_relative_path: str | None = None
     status: str  # "planned" (dry run) | "exported" (real run)
 
@@ -309,6 +311,7 @@ def export_batch(
                 projected_bytes=item.projected_bytes,
                 artifact_path=result.artifact_path,
                 workspace_relative_path=result.workspace_relative_path,
+                artifact=result.artifact,
                 status="exported",
             )
         )

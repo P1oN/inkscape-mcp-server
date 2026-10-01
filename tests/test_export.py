@@ -836,3 +836,58 @@ def test_export_result_recompute_stale_flips_after_edit(doc_id: str) -> None:
 
     assert result.recompute_stale() is True
     assert result.stale is True
+
+
+def test_object_previews_preserve_earlier_artifact_at_same_timestamp(doc_id, root, monkeypatch):
+    from PIL import Image
+
+    from inkscape_mcp.render import cli
+    from inkscape_mcp.workspace.subprocess_exec import ProcessResult
+
+    monkeypatch.setattr(cli, "_utc_stamp", lambda: "20261002T000000Z")
+    colors = iter(["red", "blue"])
+
+    def render(args, settings=None):
+        out = next(arg.split("=", 1)[1] for arg in args if arg.startswith("--export-filename="))
+        Image.new("RGB", (20, 20), next(colors)).save(out)
+        return ProcessResult(
+            args=args, returncode=0, stdout="", stderr="", duration_s=0, timed_out=False
+        )
+
+    monkeypatch.setattr(cli, "run_inkscape", render)
+    first = render_preview(doc_id, object_id="dot", width_px=20, inline=False)
+    original = (root / first.artifact_path).read_bytes()
+    second = render_preview(doc_id, object_id="dot", width_px=20, inline=False)
+    assert first.artifact_path != second.artifact_path
+    assert first.artifact.uri != second.artifact.uri
+    assert (root / first.artifact_path).read_bytes() == original
+    assert (root / second.artifact_path).read_bytes() != original
+
+
+def test_render_artifact_uses_explicit_workspace_settings(doc_id, root, tmp_path, monkeypatch):
+    from PIL import Image
+
+    from inkscape_mcp.config import Settings
+    from inkscape_mcp.render import cli
+    from inkscape_mcp.workspace.artifacts import root_id
+    from inkscape_mcp.workspace.subprocess_exec import ProcessResult
+
+    other = tmp_path / "other"
+    other.mkdir()
+    monkeypatch.setenv(ENV_WORKSPACE_ROOTS, str(other))
+    get_settings.cache_clear()
+
+    def render(args, settings=None):
+        out = next(arg.split("=", 1)[1] for arg in args if arg.startswith("--export-filename="))
+        Image.new("RGB", (20, 20), "red").save(out)
+        return ProcessResult(
+            args=args, returncode=0, stdout="", stderr="", duration_s=0, timed_out=False
+        )
+
+    monkeypatch.setattr(cli, "run_inkscape", render)
+    try:
+        result = cli.render_preview(doc_id, width_px=20, settings=Settings(workspace_roots=[root]))
+        assert result.artifact.root_id == root_id(root)
+        assert (root / result.artifact.workspace_relative_path).is_file()
+    finally:
+        get_settings.cache_clear()

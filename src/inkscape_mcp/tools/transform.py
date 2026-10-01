@@ -22,14 +22,24 @@ This is a THIN layer: it builds the ``mutate`` closure over the pure engine in
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Literal
 
 from fastmcp.exceptions import ToolError
 from lxml import etree
+from pydantic import BaseModel
 
 from inkscape_mcp.document.inspect import DocumentNotFound, InspectionError
 from inkscape_mcp.edit import transform as engine
-from inkscape_mcp.edit.dom import EditError, TargetNotFound
+from inkscape_mcp.edit.dom import EditError, TargetNotFound, load_working_tree
 from inkscape_mcp.edit.pipeline import EditApplyError, EditResult, MutateFn, apply_edit
+from inkscape_mcp.edit.repeat import (
+    Placement,
+    PlacementItem,
+    Point,
+    RepeatVariation,
+    make_repeat,
+    placement_plan,
+)
 from inkscape_mcp.edit.transform import ContentBBoxError
 from inkscape_mcp.logging_setup import get_logger, log_tool_call
 from inkscape_mcp.registry import Registry, get_registry
@@ -343,4 +353,63 @@ def tile(
         "tile",
         {"object_id": object_id, "rows": rows, "cols": cols, "dx": dx, "dy": dy},
         mutate,
+    )
+
+
+class RepeatResult(BaseModel):
+    doc_id: str
+    dry_run: bool
+    mode: Literal["linked", "copies"]
+    group_id: str
+    plan: list[PlacementItem]
+    edit: EditResult | None = None
+
+
+@mcp.tool
+def repeat_objects(
+    doc_id: str,
+    object_id: str,
+    placement: Placement,
+    group_id: str,
+    mode: Literal["linked", "copies"] = "linked",
+    label: str = "Repeated objects",
+    orientation: Literal["fixed", "tangent"] = "fixed",
+    variation: RepeatVariation | None = None,
+    anchor: Point | None = None,
+    dry_run: bool = True,
+) -> RepeatResult:
+    """Place editable instances along a polyline (two points = line) or in a rectangle.
+
+    Polyline uses count OR spacing; rectangle uses count/columns OR spacing_x/spacing_y.
+    Coordinates are root document user units; anchor is a point in the source's local coordinates
+    (default local origin). Fixed/tangent orientation and bounded seeded jitter are declarative.
+    Linked mode creates use references; copies reuse duplicate ID/internal-reference remapping.
+    Source stays intact; results live in a named ordinary group beside it. No arbitrary paths,
+    curves or execution; max 1024 instances and bounded resulting document size. Dry-run defaults
+    to True and validates the full plan without snapshots/records/writes. Stylesheets, locked
+    source/ancestors and unsupported viewport/animation contexts refuse before disk mutation.
+    Risk class: medium (one reversible edit through the shared pipeline on apply).
+    """
+    try:
+        plan = placement_plan(placement, orientation, variation)
+        mutate = make_repeat(object_id, plan, mode, group_id, label, anchor)
+        if dry_run:
+            _, tree = load_working_tree(doc_id)
+            mutate(tree)
+            edit = None
+        else:
+            edit = _apply(
+                doc_id,
+                "repeat_objects",
+                {"object_id": object_id, "mode": mode, "group_id": group_id, "count": len(plan)},
+                mutate,
+            )
+    except (EditError, TargetNotFound) as exc:
+        raise ToolError(str(exc)) from exc
+    except (DocumentNotFound, KeyError) as exc:
+        raise ToolError("document id not found") from exc
+    except InspectionError as exc:
+        raise ToolError("document could not be parsed safely") from exc
+    return RepeatResult(
+        doc_id=doc_id, dry_run=dry_run, mode=mode, group_id=group_id, plan=plan, edit=edit
     )

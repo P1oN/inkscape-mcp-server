@@ -31,6 +31,7 @@ from pydantic import BaseModel, Field
 from inkscape_mcp.config import Settings, get_settings
 from inkscape_mcp.logging_setup import get_logger
 from inkscape_mcp.render.cli import RenderResult, export_document
+from inkscape_mcp.workspace.artifacts import ArtifactLink
 
 _logger = get_logger("render.profiles")
 
@@ -93,6 +94,7 @@ class ProfileArtifact(BaseModel):
 
     path: str
     workspace_relative_path: str
+    artifact: ArtifactLink | None = None
     format: str
     width_px: int | None
     height_px: int | None
@@ -157,6 +159,7 @@ def _artifact(
     return ProfileArtifact(
         path=result.artifact_path,
         workspace_relative_path=result.workspace_relative_path,
+        artifact=result.artifact,
         format=result.format,
         width_px=result.width_px,
         height_px=result.height_px,

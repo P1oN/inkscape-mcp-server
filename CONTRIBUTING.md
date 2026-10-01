@@ -29,6 +29,12 @@ For a focused headless run, use `uv run pytest -m "not inkscape"`. Apply formatt
 fixes deliberately, then rerun the checks above. An existing `.venv/bin/` installation can
 run the same commands directly when `uv` is unavailable.
 
+The Linux full-suite job installs Inkscape from the official stable Ubuntu PPA on Ubuntu 24.04
+and checks the runtime minimum before running tests. The distro package can lag behind the
+supported version. Windows writes use native no-follow handles and hold ancestor directories
+against renames; POSIX writes retain `O_NOFOLLOW` and directory-relative creation. Native Windows
+handle safety tests run in the Windows headless job.
+
 Tests that need a real Inkscape binary are marked `@pytest.mark.inkscape` and auto-skip when no
 `inkscape` is on `PATH`, so the suite stays green on a host without it.
 
