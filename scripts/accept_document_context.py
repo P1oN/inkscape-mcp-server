@@ -58,7 +58,7 @@ async def accept(root: Path, keep_gui: bool) -> dict[str, object]:
     )
     args = ["-m", "inkscape_mcp.live.macos_launcher", "--session-dir", str(root)]
     transport = StdioTransport(
-        command=sys.executable, args=[*args, "--document", str(a_path)], env=env
+        command=sys.executable, args=[*args, "--launch", "--document", str(a_path)], env=env
     )
     async with Client(transport) as client:
 

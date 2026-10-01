@@ -1,7 +1,7 @@
 # Interactive macOS prototype
 
-Milestone 2 adds structured scene inspection and bounded SVG insertion to the interactive
-selection/fill prototype. Insertion uses a short native effect, then returns control to the canvas. Tested on macOS with official Inkscape 1.4.3
+The managed macOS integration supports scene inspection, bounded SVG insertion,
+[document identity](document-context.md) and [everyday edits](everyday-edits.md). Insertion uses a short native effect, then returns control to the canvas. Tested on macOS with official Inkscape 1.4.3
 (0d15f75), Python 3.12 and FastMCP 3.4.2 (locked install) / 3.4.7 on 2026-09-30.
 Other builds are unverified.
 
@@ -38,13 +38,13 @@ cd inkscape-mcp-server
 uv sync --python 3.12 --frozen
 ```
 
-No `brew services` daemon is needed. The launcher starts a private bus for its own Inkscape.
-The persistent socket extension does not need to be installed or armed. The launcher installs
+No `brew services` daemon is needed. An explicit launch starts a private bus for its Inkscape.
+The persistent socket extension does not need to be installed or armed. On launch the supervisor installs
 a separate one-shot insertion helper into the current Inkscape user extensions directory. Its
 shell wrapper runs the MCP Python interpreter with Inkscape’s bundled inkex source; the locked
 macOS dependencies supply numpy, cssselect and tinycss2. No bundled Python executable is used.
-After upgrading this helper, save and close the managed Inkscape before reconnecting so its
-extension manifest is reloaded. Restarting MCP alone preserves the existing GUI.
+After upgrading this helper, save and close the managed Inkscape, explicitly launch it again
+with `live_launch`, then reconnect so its extension manifest is reloaded. Restarting MCP alone preserves the existing GUI.
 
 Add an MCP entry to Codex's configuration, substituting absolute paths on that Mac:
 
@@ -78,7 +78,8 @@ An Inkscape window started normally from Finder is outside this managed session.
 
 The server uses a private session directory `/tmp/inkscape-mcp-<uid>` (0700). It is not a
 login service. Closing Inkscape ends its supervisor and private bus. A stalled bus while the
-GUI remains open causes restart to refuse: save and close that window before trying again.
+GUI remains open causes an explicit launch to refuse. MCP can still start without a usable
+live session. Save and close that window before explicitly launching it again.
 Logs are `supervisor.log`, `inkscape.stderr.log`, `bus.log` inside the session directory.
 
 ## Setup and connection diagnosis
@@ -106,7 +107,9 @@ is reported as `diagnosis_failed` without echoing raw exception details.
 For connected managed macOS sessions, `live_status` now reads the current drawing rather than
 retaining the connect-time drawing. The real Inkscape `sodipodi:docname` namespace is used in
 both status and scene reports. Missing/unreadable active documents are reported as null with
-a note; a vanished bus is reported as disconnected. Use `live_connect` to reconnect. Other
+a note; a vanished bus is reported as disconnected. Use `live_connect` to attach to a running
+managed session. If Inkscape was closed, reopening it requires an explicit `live_launch` request;
+reconnect alone never opens a window. Other
 transports keep their existing connect-time document semantics.
 
 A filename is not a unique window/document identity, and paths remain null when the transport
@@ -179,7 +182,9 @@ Next: test realistic illustrations and improve scene understanding, then package
 solve Inkscape's selection/transaction integration; the working transport is the first thing
 to validate.
 
-## Verification
+## Historical milestone 2 verification (2026-09-30)
+
+These results describe that milestone, not the current `main` validation or lint status.
 
 Manual test on the real macOS GUI: select `left`, change its fill from #3366cc to #cc3344,
 click `right`, observe its new id, then Edit → Undo restores `left` to #3366cc. The same path

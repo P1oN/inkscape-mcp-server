@@ -7,14 +7,17 @@ official Inkscape 1.4.3 (0d15f75). The integration remains experimental.**
 
 ## Workflow
 
-1. `live_connect(prefer="no_freeze")`.
+1. Configure the [managed macOS launcher](macos-live-prototype.md). If no managed window is
+   running and the user asks to open Inkscape, call `live_launch()`. Then call
+   `live_connect(prefer="no_freeze")`; connecting itself never opens a window.
 2. `live_list_documents()` returns open drawing windows with titles and opaque
    `window_id` / `document_id`. Names and identical SVG content do not identify a window.
 3. `live_select_document(window_id=..., document_id=...)` activates the chosen window and
    binds it to the task. Check `live_status.ready_to_edit` and inspect `live_get_scene`.
 4. Make the requested fill or SVG insertion. Switching to another window or replacing
    its document causes refusal. Inspect the drawing and choose it again before continuing.
-5. After reconnect, choose the task drawing again. Reconnect keeps the GUI and unsaved work.
+5. After reconnect, choose the task drawing again. Reconnect keeps an existing GUI and unsaved
+   work. It does not reopen a closed GUI; that requires another explicit launch request.
 
 A window UUID belongs to its live GTK window object. The document UUID belongs to the
 Inkscape document's GAction group. Neither depends on filenames, SVG root IDs or content
@@ -60,7 +63,7 @@ and restarting a managed GUI before use. A fresh session launch passed native ac
 
 A GUI started by an older version is reused with its existing behavior and an explicit
 legacy-session note: `document_guard_available` / `ready_to_edit` are false and the new
-selection tools are unsupported. Save and close that managed GUI before restarting to load
+selection tools are unsupported. Save and close that managed GUI, explicitly launch it again, then reconnect to load
 the module. Restarting MCP alone never upgrades a running GUI's native module.
 
 Inkscape 1.4.3 was observed crashing during primary-monitor initialization while the Mac was
@@ -68,13 +71,16 @@ locked. The module now refuses startup before loading any drawing when no primar
 is available, with an unlock-and-retry message in `inkscape.stderr.log`. The locked-Mac refusal
 has been observed in a native run; startup and full acceptance also passed after unlocking the Mac.
 
-## Validation
+## Historical stage 2 validation (2026-10-01)
+
+The counts and intermittent failure below record stage 2 before PR #5 and the explicit-launch
+change. For current `main` state see [AGENT_HANDOFF.md](AGENT_HANDOFF.md).
 
 Automated tests cover malformed and missing identities, identical titles with distinct IDs,
 window switches and document replacement, refusal before edits, native dispatch parameters,
 lock cleanup, explicit binding, connection-loss guidance, bridge diagnosis without repair,
 and private-copy build/cache behavior. Strict mypy (110 source files), focused Ruff, MCP surface smoke (101 tools) and wheel
-build pass. Latest full pytest: 1078 passed, 74 skipped, 1 failed — the previously documented
+build passed at that stage. Full pytest at that stage: 1078 passed, 74 skipped, 1 failed — the previously documented
 intermittent fake-shell `test_unknown_action_surfaces_engine_action_error`; an isolated repeat
 passed. Native acceptance passed through actual MCP STDIO on 2026-10-01: two identical
 SVGs received distinct live identities, edits required explicit choice, fill and insertion
@@ -85,7 +91,7 @@ after verifying both synthetic drawing identities. The report recorded `passed: 
 
 ```sh
 .venv/bin/pytest -q
-.venv/bin/mypy
+.venv/bin/mypy src
 INKSCAPE_MCP_RAW_ACTION_ENABLED=1 .venv/bin/python scripts/ci_surface_smoke.py
 .venv/bin/python scripts/accept_document_context.py
 ```

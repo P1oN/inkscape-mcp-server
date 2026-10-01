@@ -13,6 +13,12 @@ Ready-to-copy example files live in [`examples/`](../../examples/):
 > Replace every `/absolute/path/...` placeholder with a real **absolute** path. STDIO hosts often run
 > with a different working directory than your shell, so relative paths and `~` are unreliable.
 
+For experimental managed macOS control, use the separate
+[macOS setup guide](../macos-live-prototype.md) and its `inkscape-mcp-macos` command. It prepares
+the vendor/Homebrew PATH and starts MCP without opening a window. `live_launch` opens the GUI
+only on an explicit user request; do not put `--launch` in the normal MCP host configuration.
+The generic commands below require Inkscape and live-backend dependencies on PATH.
+
 ## Pick a launch command
 
 | Form | `command` | `args` | When |

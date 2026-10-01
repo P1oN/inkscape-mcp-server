@@ -106,8 +106,8 @@ raises when it has no usable root.
   `gdbus unavailable; cannot probe live Inkscape on session bus`, `gdbus failed to launch: <err>`,
   `gdbus list-names timed out after <N>s`, `gdbus list-names exited <code>`.
 - **Cause:** no *running* Inkscape, the helper extension isn't installed (cross-platform path), or no
-  DBus session bus / no Inkscape on the bus (Linux fast-path only).
-- **Fix:** start Inkscape, then install the helper via the `live_install_helper` tool or
+  DBus session bus / no Inkscape on the bus (plain Linux DBus or managed macOS).
+- **Fix (extension-socket):** start Inkscape, then install the helper via the `live_install_helper` tool or
   `scripts/install-live-helper.sh` / `install-live-helper.ps1`. DBus is an *optional* Linux fast-path;
   when it's absent the server uses the extension-socket transport — that is expected, not an error.
   Use `check_live_support` to see every transport probed on your host.
@@ -153,3 +153,18 @@ raises when it has no usable root.
 
 Re-run `diagnose_runtime` and read `notes` end to end. Cross-reference
 [compatibility.md](compatibility.md) for what your platform is expected to support.
+
+
+## Managed macOS window does not open on MCP connection
+
+This is expected: `inkscape-mcp-macos` starts MCP and reuses a running managed session;
+startup, `live_status` and `live_connect` do not open a window. On a user request to open
+Inkscape, call `live_launch`, then `live_connect(prefer="no_freeze")`, list and select the
+task drawing, and check `live_status.ready_to_edit`. For terminal launch use
+`inkscape-mcp-macos --launch`; `--document` requires `--launch`.
+
+Use `inkscape-mcp-macos --doctor` for read-only diagnosis. `ready_to_launch` means setup is
+ready, not that a GUI is running. If the private bus failed while a managed window remains
+open, save and close it before explicitly launching again. MCP restart alone does not
+upgrade an existing GUI or reopen a closed window. A Finder-launched window is outside the
+managed session. See [macOS setup](../macos-live-prototype.md) for dependencies and logs.

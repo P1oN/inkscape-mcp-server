@@ -161,7 +161,7 @@ uv run mypy src
 + mypy + pytest on Linux/macOS/Windows (headless + the cross-platform live-transport suite), the
 full suite incl. real-Inkscape tests on Linux, and a packaged `pipx`-install STDIO boot smoke on all
 three OSes, plus a full-surface MCP smoke (`ci_surface_smoke.py`) that asserts the registered
-primitive counts (**99 tools / 7 prompts / 16 resources**) and reads every resource over an in-memory
+primitive counts (**103 tools / 7 prompts / 16 resources**) and reads every resource over an in-memory
 client. CI helper scripts live in [`scripts/`](scripts/) (`ci_diagnostics.py`, `ci_boot_smoke.py`,
 `ci_surface_smoke.py`).
 
@@ -245,7 +245,8 @@ the `claude mcp add` / generic-host forms) is in
 
 ## Tool reference
 
-89 tools. Risk classes: **low** (read / render / export / quality / Action discovery) · **medium**
+See the generated [full catalog](llms.txt) for tool counts and signatures; the active surface
+depends on the configured gates. Risk classes: **low** (read / render / export / quality / Action discovery) · **medium**
 (write-new / element-creation / defs-grouping / style / text / transform / web-optimize / typed batch; reversible)
 · **high** (overwrite / delete / path geometry / Action chains / raw Action; approval-gated) ·
 **restricted** (live helper install).
@@ -293,9 +294,9 @@ widen it):
 | `INKSCAPE_MCP_LIVE_ENABLED` | `true` | every `live`-tagged tool |
 | `INKSCAPE_MCP_RAW_ACTION_ENABLED` (advanced mode) | `false` | the ADR-003 hatch group: `run_raw_action` + every `paths`- and `actions`-tagged tool |
 
-So the **default** surface (live on, advanced off) exposes the core 86 tools; turn advanced mode on
-to add the `paths`/`actions` geometry + Action surface (full 98), or turn live off to drop the live
-group (66 with both off). The self-describing `list_capabilities.tool_count` / `tools[]`
+The **default** surface has live on and advanced off. Turn advanced mode on to add the
+`paths`/`actions` geometry and Action surface, or turn live off to hide the live group.
+The full catalog currently has 103 tools; use runtime discovery for the active count. The self-describing `list_capabilities.tool_count` / `tools[]`
 report the **active** post-filter surface, since they read the same `mcp.list_tools()` the transforms
 filter. The generated `llms.txt` manifest still documents the FULL catalog (generated with both flags
 forced on).
@@ -523,9 +524,21 @@ reported cleanly, never as errors. **No-freeze:** the socket bridge is a *modal*
 effect extension (freezes the GUI for the whole session); the Linux DBus path runs in Inkscape's own
 main loop and does **not** freeze the GUI — `live_connect(prefer="no_freeze")` selects it on Linux for
 viewport, style/transform writes, and a structured export-to-file read (live SVG/PNG/active-doc).
-Selection-id reads stay on the (modal) socket path; Windows/macOS live stays modal (best-effort).
+Windows uses the modal socket path. On macOS the experimental
+[managed session](docs/macos-live-prototype.md) also supports no-freeze selection, scene reads,
+SVG insertion, text, style/transform and structural edits. Managed macOS viewport control and
+change notifications are unsupported. Check `check_live_support` for the actual transport capabilities.
+
+The `inkscape-mcp-macos` entry point starts MCP without opening Inkscape. On an explicit user
+request, call `live_launch()` to open or reuse its managed window, then
+`live_connect(prefer="no_freeze")`, `live_list_documents()` and `live_select_document(...)`.
+Check `live_status.ready_to_edit` before editing. A Finder-launched window is outside the managed
+session. MCP reconnect preserves an existing managed GUI and resets the task binding; closing
+the GUI does not cause a later MCP connection to reopen it. For setup and CLI launch flags, see
+[the macOS guide](docs/macos-live-prototype.md).
+
 The command schema is a fixed enum (wire **protocol v5**) — no arbitrary code or raw Action
-passthrough (ADR-003). Adds **semantic write**: the three mutating tools are HIGH risk and require
+passthrough (ADR-003). Adds **semantic write**: the live document mutation tools are HIGH risk and require
 an explicit `approval_token`, each producing a Live Operation Record with before/after canvas
 renders; live never mutates unapproved. Adds the **view loop**: view-only viewport/region tools and
 **structured perception** — `live_get_scene` pairs each rendered frame with a machine-readable
@@ -551,7 +564,10 @@ on this loop.
 | Tool | Signature | Risk | Description |
 |---|---|---|---|
 | `check_live_support` | `()` | low | Report every live transport probed on this host (not assumed by OS), the best read-capable one, and whether the helper is installed. |
-| `live_connect` | `(prefer="read")` | medium | Connect over the best-ranked transport; records the chosen transport + active document. `prefer="read"` (default) = full-read socket (modal); `prefer="no_freeze"` = Linux DBus no-freeze action path (no selection-id reads). Requires the master gate. |
+| `live_launch` | `()` | medium | Explicitly open or reuse the managed Inkscape window on macOS. Requires the master gate and managed launcher setup. Call only when the user asks to open Inkscape; then connect and select the task drawing. |
+| `live_connect` | `(prefer="read")` | medium | Attach to a running Inkscape; never opens a window. `prefer="read"` selects the best read-capable transport; `prefer="no_freeze"` selects a non-modal transport (plain Linux DBus or managed macOS). Requires the master gate. |
+| `live_list_documents` | `()` | low | Managed macOS: list drawing windows with runtime window/document IDs. |
+| `live_select_document` | `(window_id, document_id)` | medium | Managed macOS: activate and bind the task drawing; reconnect clears this binding. |
 | `live_status` | `()` | low | Current session state: enabled, connected, active transport, available transports. Never raises. |
 | `live_disconnect` | `()` | low | Tear down the live session (the X1 disable switch). Idempotent. |
 | `live_install_helper` | `()` | restricted | Install the shipped extension-socket helper into the Inkscape user extensions dir. Gated by the master switch. |

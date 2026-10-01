@@ -51,7 +51,9 @@ def live_canvas_assist(goal: str) -> str:
         "4. OBSERVE — the step returns the after-scene plus a focused before/after "
         "`live_diff_view` linked to the operation. Inspect it, then decide whether to iterate.\n\n"
         "Between iterations, use `live_wait_for_change` to react to the user's own GUI edits "
-        "instead of busy-looping. Connect with `live_connect` first; sync results into the "
+        "where the transport supports change notifications, instead of busy-looping. Connect with "
+        "`live_connect` first; it never opens a window. On managed "
+        "macOS use `live_launch` only when the user asks to open Inkscape. Sync results into the "
         "workspace with `live_sync_to_workspace` when you want a tracked, snapshotted copy. Never "
         "attempt to mutate without an approval token, and keep every act within the fixed set."
     )

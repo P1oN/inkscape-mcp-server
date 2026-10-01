@@ -50,7 +50,9 @@ Render and look before you trust an edit. After a mutating call (especially a ba
 INSPECT the result — `render_preview` (headless) or `live_render_view` (live mode) — before relying
 on it; `restore_snapshot` reverts if it is wrong.
 
-Managed macOS live documents. After `live_connect`, use `live_list_documents` and
+Managed macOS live documents. MCP startup and live_connect never open a window. Use live_launch
+only when the user asks to open Inkscape; otherwise attach to a running session.
+After `live_connect`, use `live_list_documents` and
 `live_select_document(window_id, document_id)` to bind the task drawing. Check
 `live_status.ready_to_edit`: writes refuse after a window switch or document replacement.
 Reconnect preserves the GUI and resets the binding. Inspect a drawing after an edit timeout

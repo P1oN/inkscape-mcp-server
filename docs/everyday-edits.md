@@ -2,13 +2,16 @@
 
 Implemented 2026-10-01 for official Inkscape 1.4.3. This extends the experimental
 [managed document context](document-context.md); the installation/launcher requirements stay
-as described there. Save and close an old managed GUI before reconnecting to load the new
+as described in the [macOS setup guide](macos-live-prototype.md). Save and close an old managed
+GUI, explicitly launch it again with `live_launch`, then reconnect to load the new
 `org.inkscape-mcp.edit` effect and native allowlist. Restarting MCP alone preserves the existing
 GUI and does not upgrade its extensions. No running user GUI is restarted automatically.
 
 ## Workflow and operations
 
-Connect with `live_connect(prefer="no_freeze")`, list documents, select the task drawing with
+MCP startup and reconnect never open a window. If no managed window is running, use
+`live_launch()` only when the user asks to open Inkscape. Then connect with
+`live_connect(prefer="no_freeze")`, list documents, select the task drawing with
 `live_select_document`, then select objects in Inkscape. Inspect the selection/scene before
 editing. Each write uses the existing live approval-token policy and records before/after
 previews. The task/document guard applies to all reads and edits.

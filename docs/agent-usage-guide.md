@@ -2,10 +2,17 @@
 
 How to drive this server from an LLM agent: the core create→render→export loop, the
 working-copy + snapshot reversibility model, the risk classes and the approval-token gate for
-HIGH-risk tools, and how to pick the right tool. The surface is **98 small typed tools / 7 prompts /
+HIGH-risk tools, and how to pick the right tool. The full surface is **103 small typed tools / 7 prompts /
 16 resources** — deliberately *not* a portmanteau `run_action(string)` / `do_task(prompt)` design
 (ADR-002/003). The trade-off: more tools to navigate, but each is explicit, typed, and risk-classed.
-Use the discovery tools below instead of grepping the list.
+Use the discovery tools below instead of grepping the list; gates may narrow the visible surface.
+The generated [manifest](../llms.txt) is the authoritative full catalog.
+
+For managed macOS, follow the [setup guide](macos-live-prototype.md). MCP startup and
+`live_connect` never open a window. Use `live_launch` only when the user asks to open Inkscape,
+then connect with `prefer="no_freeze"`, list and select the task drawing, and check
+`live_status.ready_to_edit`. Reconnect preserves an existing GUI and resets the drawing binding.
+A closed GUI requires a new explicit launch request.
 
 The server also ships a concise **system overview as MCP `instructions`** (E19-02), delivered
 in-context every turn (the document model + `doc_id` lifecycle, the snapshot/restore reversibility

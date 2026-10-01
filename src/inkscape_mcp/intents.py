@@ -643,7 +643,9 @@ INTENT_MAP: tuple[IntentEntry, ...] = (
             "live_apply_to_selection",
         ],
         how_to=(
-            "Connect; on managed macOS list and select the task drawing; read its scene, "
+            "Connect to an already running window; connecting never launches Inkscape. "
+            "On managed macOS use live_launch only on an explicit request to open Inkscape, "
+            "then connect, list and select the task drawing; read its scene, "
             "then edit. Reconnect resets the task binding."
         ),
         group="live",
