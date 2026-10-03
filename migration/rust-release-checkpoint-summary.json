@@ -1,0 +1,1701 @@
+{
+  "runs": [
+    {
+      "run": "run-0.json.gz",
+      "startup_to_initialized_ms": 7.21575,
+      "processes_at_initialization": [
+        {
+          "pid": 91392,
+          "ppid": 91383,
+          "rss_kib": 12688,
+          "command": "rust/target/release/inkscape-mcp-rust"
+        }
+      ],
+      "calls": [
+        {
+          "method": "initialize",
+          "name": null,
+          "args": null,
+          "roundtrip_ms": 5.232583
+        },
+        {
+          "method": "tools/call",
+          "name": "get_workspace_info",
+          "args": {},
+          "roundtrip_ms": 0.353
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "fixture.svg"
+          },
+          "roundtrip_ms": 36.713792
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_8b03b751"
+          },
+          "roundtrip_ms": 1.688291
+        },
+        {
+          "method": "tools/call",
+          "name": "list_snapshots",
+          "args": {
+            "doc_id": "d_8b03b751"
+          },
+          "roundtrip_ms": 0.206833
+        },
+        {
+          "method": "tools/call",
+          "name": "set_fill",
+          "args": {
+            "doc_id": "d_8b03b751",
+            "object_ids": [
+              "r1"
+            ],
+            "color": "#3366cc"
+          },
+          "roundtrip_ms": 8.272959
+        },
+        {
+          "method": "tools/call",
+          "name": "list_snapshots",
+          "args": {
+            "doc_id": "d_8b03b751"
+          },
+          "roundtrip_ms": 0.138541
+        },
+        {
+          "method": "tools/call",
+          "name": "set_fill",
+          "args": {
+            "doc_id": "d_8b03b751",
+            "object_ids": [
+              "r1"
+            ],
+            "color": "#ff0000"
+          },
+          "roundtrip_ms": 732.595917
+        },
+        {
+          "method": "tools/call",
+          "name": "restore_snapshot",
+          "args": {
+            "doc_id": "d_8b03b751",
+            "snapshot_id": "snap_ec180c13"
+          },
+          "roundtrip_ms": 31.967458
+        },
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "args": {
+            "doc_id": "d_8b03b751",
+            "edits": [
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "r1"
+                ],
+                "color": "#00ff00"
+              },
+              {
+                "op": "set_opacity",
+                "object_ids": [
+                  "r1"
+                ],
+                "opacity": 0.5
+              }
+            ]
+          },
+          "roundtrip_ms": 591.887459
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_8b03b751"
+          },
+          "roundtrip_ms": 0.876417
+        },
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "args": {
+            "doc_id": "d_8b03b751",
+            "edits": [
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "r1"
+                ],
+                "color": "#0000ff"
+              },
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "absent"
+                ],
+                "color": "#0000ff"
+              }
+            ]
+          },
+          "roundtrip_ms": 16.0145
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_8b03b751"
+          },
+          "roundtrip_ms": 0.759458
+        },
+        {
+          "method": "tools/call",
+          "name": "delete_object",
+          "args": {
+            "doc_id": "d_8b03b751",
+            "object_ids": [
+              "r1"
+            ]
+          },
+          "roundtrip_ms": 0.156834
+        },
+        {
+          "method": "tools/call",
+          "name": "save_document_as",
+          "args": {
+            "doc_id": "d_8b03b751",
+            "dest_path": "out/saved.svg"
+          },
+          "roundtrip_ms": 20.159583
+        },
+        {
+          "method": "resources/read",
+          "name": null,
+          "args": null,
+          "roundtrip_ms": 0.163542
+        },
+        {
+          "method": "tools/call",
+          "name": "render_preview",
+          "args": {
+            "doc_id": "d_8b03b751",
+            "width_px": 128,
+            "inline": false
+          },
+          "roundtrip_ms": 277.056083
+        },
+        {
+          "method": "tools/call",
+          "name": "export_document",
+          "args": {
+            "doc_id": "d_8b03b751",
+            "format": "png",
+            "out_dir": "out",
+            "width_px": 128
+          },
+          "roundtrip_ms": 273.82375
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "../escape.svg"
+          },
+          "roundtrip_ms": 0.1125
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_missing"
+          },
+          "roundtrip_ms": 0.060292
+        },
+        {
+          "method": "tools/call",
+          "name": "live_status",
+          "args": {},
+          "roundtrip_ms": 0.049334
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-100.svg"
+          },
+          "roundtrip_ms": 17.26825
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_ae85e09d"
+          },
+          "roundtrip_ms": 2.815542
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-10000.svg"
+          },
+          "roundtrip_ms": 23.967792
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_16363f23"
+          },
+          "roundtrip_ms": 191.488791
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-100000.svg"
+          },
+          "roundtrip_ms": 95.661333
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_fac85b88"
+          },
+          "roundtrip_ms": 2067.401166
+        }
+      ],
+      "errors": [
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "object id not found in document"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "delete_object",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "high-risk operation requires explicit approval"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "path rejected: outside workspace; call get_workspace_info and choose a relative path under a configured server root (relative paths default to the first root)"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "document id not found"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "live_status",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "Rust migration pending: live_status has not been ported"
+              }
+            ],
+            "isError": true
+          }
+        }
+      ]
+    },
+    {
+      "run": "run-1.json.gz",
+      "startup_to_initialized_ms": 35.752417,
+      "processes_at_initialization": [
+        {
+          "pid": 91420,
+          "ppid": 91383,
+          "rss_kib": 12592,
+          "command": "rust/target/release/inkscape-mcp-rust"
+        }
+      ],
+      "calls": [
+        {
+          "method": "initialize",
+          "name": null,
+          "args": null,
+          "roundtrip_ms": 0.258833
+        },
+        {
+          "method": "tools/call",
+          "name": "get_workspace_info",
+          "args": {},
+          "roundtrip_ms": 0.302625
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "fixture.svg"
+          },
+          "roundtrip_ms": 20.818667
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_9db81d1c"
+          },
+          "roundtrip_ms": 1.10175
+        },
+        {
+          "method": "tools/call",
+          "name": "list_snapshots",
+          "args": {
+            "doc_id": "d_9db81d1c"
+          },
+          "roundtrip_ms": 0.160125
+        },
+        {
+          "method": "tools/call",
+          "name": "set_fill",
+          "args": {
+            "doc_id": "d_9db81d1c",
+            "object_ids": [
+              "r1"
+            ],
+            "color": "#3366cc"
+          },
+          "roundtrip_ms": 7.864167
+        },
+        {
+          "method": "tools/call",
+          "name": "list_snapshots",
+          "args": {
+            "doc_id": "d_9db81d1c"
+          },
+          "roundtrip_ms": 0.160625
+        },
+        {
+          "method": "tools/call",
+          "name": "set_fill",
+          "args": {
+            "doc_id": "d_9db81d1c",
+            "object_ids": [
+              "r1"
+            ],
+            "color": "#ff0000"
+          },
+          "roundtrip_ms": 588.948375
+        },
+        {
+          "method": "tools/call",
+          "name": "restore_snapshot",
+          "args": {
+            "doc_id": "d_9db81d1c",
+            "snapshot_id": "snap_e30131f1"
+          },
+          "roundtrip_ms": 36.936917
+        },
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "args": {
+            "doc_id": "d_9db81d1c",
+            "edits": [
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "r1"
+                ],
+                "color": "#00ff00"
+              },
+              {
+                "op": "set_opacity",
+                "object_ids": [
+                  "r1"
+                ],
+                "opacity": 0.5
+              }
+            ]
+          },
+          "roundtrip_ms": 594.297875
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_9db81d1c"
+          },
+          "roundtrip_ms": 0.881375
+        },
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "args": {
+            "doc_id": "d_9db81d1c",
+            "edits": [
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "r1"
+                ],
+                "color": "#0000ff"
+              },
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "absent"
+                ],
+                "color": "#0000ff"
+              }
+            ]
+          },
+          "roundtrip_ms": 14.101875
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_9db81d1c"
+          },
+          "roundtrip_ms": 0.773542
+        },
+        {
+          "method": "tools/call",
+          "name": "delete_object",
+          "args": {
+            "doc_id": "d_9db81d1c",
+            "object_ids": [
+              "r1"
+            ]
+          },
+          "roundtrip_ms": 0.137625
+        },
+        {
+          "method": "tools/call",
+          "name": "save_document_as",
+          "args": {
+            "doc_id": "d_9db81d1c",
+            "dest_path": "out/saved.svg"
+          },
+          "roundtrip_ms": 19.972125
+        },
+        {
+          "method": "resources/read",
+          "name": null,
+          "args": null,
+          "roundtrip_ms": 0.136083
+        },
+        {
+          "method": "tools/call",
+          "name": "render_preview",
+          "args": {
+            "doc_id": "d_9db81d1c",
+            "width_px": 128,
+            "inline": false
+          },
+          "roundtrip_ms": 277.523041
+        },
+        {
+          "method": "tools/call",
+          "name": "export_document",
+          "args": {
+            "doc_id": "d_9db81d1c",
+            "format": "png",
+            "out_dir": "out",
+            "width_px": 128
+          },
+          "roundtrip_ms": 277.432417
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "../escape.svg"
+          },
+          "roundtrip_ms": 0.107666
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_missing"
+          },
+          "roundtrip_ms": 0.041041
+        },
+        {
+          "method": "tools/call",
+          "name": "live_status",
+          "args": {},
+          "roundtrip_ms": 0.048583
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-100.svg"
+          },
+          "roundtrip_ms": 16.756792
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_d901cb6f"
+          },
+          "roundtrip_ms": 2.758625
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-10000.svg"
+          },
+          "roundtrip_ms": 20.747083
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_acb14757"
+          },
+          "roundtrip_ms": 190.6855
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-100000.svg"
+          },
+          "roundtrip_ms": 91.453041
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_06240b24"
+          },
+          "roundtrip_ms": 2030.771542
+        }
+      ],
+      "errors": [
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "object id not found in document"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "delete_object",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "high-risk operation requires explicit approval"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "path rejected: outside workspace; call get_workspace_info and choose a relative path under a configured server root (relative paths default to the first root)"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "document id not found"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "live_status",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "Rust migration pending: live_status has not been ported"
+              }
+            ],
+            "isError": true
+          }
+        }
+      ]
+    },
+    {
+      "run": "run-2.json.gz",
+      "startup_to_initialized_ms": 34.525291,
+      "processes_at_initialization": [
+        {
+          "pid": 91443,
+          "ppid": 91383,
+          "rss_kib": 12688,
+          "command": "rust/target/release/inkscape-mcp-rust"
+        }
+      ],
+      "calls": [
+        {
+          "method": "initialize",
+          "name": null,
+          "args": null,
+          "roundtrip_ms": 0.268667
+        },
+        {
+          "method": "tools/call",
+          "name": "get_workspace_info",
+          "args": {},
+          "roundtrip_ms": 0.28725
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "fixture.svg"
+          },
+          "roundtrip_ms": 15.741375
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_907d2486"
+          },
+          "roundtrip_ms": 1.001958
+        },
+        {
+          "method": "tools/call",
+          "name": "list_snapshots",
+          "args": {
+            "doc_id": "d_907d2486"
+          },
+          "roundtrip_ms": 0.162459
+        },
+        {
+          "method": "tools/call",
+          "name": "set_fill",
+          "args": {
+            "doc_id": "d_907d2486",
+            "object_ids": [
+              "r1"
+            ],
+            "color": "#3366cc"
+          },
+          "roundtrip_ms": 8.888417
+        },
+        {
+          "method": "tools/call",
+          "name": "list_snapshots",
+          "args": {
+            "doc_id": "d_907d2486"
+          },
+          "roundtrip_ms": 0.110125
+        },
+        {
+          "method": "tools/call",
+          "name": "set_fill",
+          "args": {
+            "doc_id": "d_907d2486",
+            "object_ids": [
+              "r1"
+            ],
+            "color": "#ff0000"
+          },
+          "roundtrip_ms": 584.500458
+        },
+        {
+          "method": "tools/call",
+          "name": "restore_snapshot",
+          "args": {
+            "doc_id": "d_907d2486",
+            "snapshot_id": "snap_06774dbe"
+          },
+          "roundtrip_ms": 34.939042
+        },
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "args": {
+            "doc_id": "d_907d2486",
+            "edits": [
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "r1"
+                ],
+                "color": "#00ff00"
+              },
+              {
+                "op": "set_opacity",
+                "object_ids": [
+                  "r1"
+                ],
+                "opacity": 0.5
+              }
+            ]
+          },
+          "roundtrip_ms": 589.4335
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_907d2486"
+          },
+          "roundtrip_ms": 0.839125
+        },
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "args": {
+            "doc_id": "d_907d2486",
+            "edits": [
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "r1"
+                ],
+                "color": "#0000ff"
+              },
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "absent"
+                ],
+                "color": "#0000ff"
+              }
+            ]
+          },
+          "roundtrip_ms": 15.054416
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_907d2486"
+          },
+          "roundtrip_ms": 0.737084
+        },
+        {
+          "method": "tools/call",
+          "name": "delete_object",
+          "args": {
+            "doc_id": "d_907d2486",
+            "object_ids": [
+              "r1"
+            ]
+          },
+          "roundtrip_ms": 0.127667
+        },
+        {
+          "method": "tools/call",
+          "name": "save_document_as",
+          "args": {
+            "doc_id": "d_907d2486",
+            "dest_path": "out/saved.svg"
+          },
+          "roundtrip_ms": 22.083375
+        },
+        {
+          "method": "resources/read",
+          "name": null,
+          "args": null,
+          "roundtrip_ms": 0.16
+        },
+        {
+          "method": "tools/call",
+          "name": "render_preview",
+          "args": {
+            "doc_id": "d_907d2486",
+            "width_px": 128,
+            "inline": false
+          },
+          "roundtrip_ms": 276.928125
+        },
+        {
+          "method": "tools/call",
+          "name": "export_document",
+          "args": {
+            "doc_id": "d_907d2486",
+            "format": "png",
+            "out_dir": "out",
+            "width_px": 128
+          },
+          "roundtrip_ms": 273.555708
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "../escape.svg"
+          },
+          "roundtrip_ms": 0.116583
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_missing"
+          },
+          "roundtrip_ms": 0.045834
+        },
+        {
+          "method": "tools/call",
+          "name": "live_status",
+          "args": {},
+          "roundtrip_ms": 0.03575
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-100.svg"
+          },
+          "roundtrip_ms": 17.363708
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_8b82d168"
+          },
+          "roundtrip_ms": 2.762667
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-10000.svg"
+          },
+          "roundtrip_ms": 22.217583
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_5d7ebc22"
+          },
+          "roundtrip_ms": 190.037834
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-100000.svg"
+          },
+          "roundtrip_ms": 87.579666
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_8da89d23"
+          },
+          "roundtrip_ms": 2030.834
+        }
+      ],
+      "errors": [
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "object id not found in document"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "delete_object",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "high-risk operation requires explicit approval"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "path rejected: outside workspace; call get_workspace_info and choose a relative path under a configured server root (relative paths default to the first root)"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "document id not found"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "live_status",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "Rust migration pending: live_status has not been ported"
+              }
+            ],
+            "isError": true
+          }
+        }
+      ]
+    },
+    {
+      "run": "run-3.json.gz",
+      "startup_to_initialized_ms": 40.355959,
+      "processes_at_initialization": [
+        {
+          "pid": 91466,
+          "ppid": 91383,
+          "rss_kib": 12688,
+          "command": "rust/target/release/inkscape-mcp-rust"
+        }
+      ],
+      "calls": [
+        {
+          "method": "initialize",
+          "name": null,
+          "args": null,
+          "roundtrip_ms": 0.276417
+        },
+        {
+          "method": "tools/call",
+          "name": "get_workspace_info",
+          "args": {},
+          "roundtrip_ms": 0.299292
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "fixture.svg"
+          },
+          "roundtrip_ms": 18.446584
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_2880bdca"
+          },
+          "roundtrip_ms": 1.10475
+        },
+        {
+          "method": "tools/call",
+          "name": "list_snapshots",
+          "args": {
+            "doc_id": "d_2880bdca"
+          },
+          "roundtrip_ms": 0.23775
+        },
+        {
+          "method": "tools/call",
+          "name": "set_fill",
+          "args": {
+            "doc_id": "d_2880bdca",
+            "object_ids": [
+              "r1"
+            ],
+            "color": "#3366cc"
+          },
+          "roundtrip_ms": 8.640875
+        },
+        {
+          "method": "tools/call",
+          "name": "list_snapshots",
+          "args": {
+            "doc_id": "d_2880bdca"
+          },
+          "roundtrip_ms": 0.138583
+        },
+        {
+          "method": "tools/call",
+          "name": "set_fill",
+          "args": {
+            "doc_id": "d_2880bdca",
+            "object_ids": [
+              "r1"
+            ],
+            "color": "#ff0000"
+          },
+          "roundtrip_ms": 589.2125
+        },
+        {
+          "method": "tools/call",
+          "name": "restore_snapshot",
+          "args": {
+            "doc_id": "d_2880bdca",
+            "snapshot_id": "snap_2db4f695"
+          },
+          "roundtrip_ms": 35.952375
+        },
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "args": {
+            "doc_id": "d_2880bdca",
+            "edits": [
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "r1"
+                ],
+                "color": "#00ff00"
+              },
+              {
+                "op": "set_opacity",
+                "object_ids": [
+                  "r1"
+                ],
+                "opacity": 0.5
+              }
+            ]
+          },
+          "roundtrip_ms": 591.1325
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_2880bdca"
+          },
+          "roundtrip_ms": 0.816042
+        },
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "args": {
+            "doc_id": "d_2880bdca",
+            "edits": [
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "r1"
+                ],
+                "color": "#0000ff"
+              },
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "absent"
+                ],
+                "color": "#0000ff"
+              }
+            ]
+          },
+          "roundtrip_ms": 15.054792
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_2880bdca"
+          },
+          "roundtrip_ms": 0.752083
+        },
+        {
+          "method": "tools/call",
+          "name": "delete_object",
+          "args": {
+            "doc_id": "d_2880bdca",
+            "object_ids": [
+              "r1"
+            ]
+          },
+          "roundtrip_ms": 0.145459
+        },
+        {
+          "method": "tools/call",
+          "name": "save_document_as",
+          "args": {
+            "doc_id": "d_2880bdca",
+            "dest_path": "out/saved.svg"
+          },
+          "roundtrip_ms": 20.097458
+        },
+        {
+          "method": "resources/read",
+          "name": null,
+          "args": null,
+          "roundtrip_ms": 0.150042
+        },
+        {
+          "method": "tools/call",
+          "name": "render_preview",
+          "args": {
+            "doc_id": "d_2880bdca",
+            "width_px": 128,
+            "inline": false
+          },
+          "roundtrip_ms": 284.572167
+        },
+        {
+          "method": "tools/call",
+          "name": "export_document",
+          "args": {
+            "doc_id": "d_2880bdca",
+            "format": "png",
+            "out_dir": "out",
+            "width_px": 128
+          },
+          "roundtrip_ms": 270.444666
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "../escape.svg"
+          },
+          "roundtrip_ms": 0.111375
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_missing"
+          },
+          "roundtrip_ms": 0.049209
+        },
+        {
+          "method": "tools/call",
+          "name": "live_status",
+          "args": {},
+          "roundtrip_ms": 0.044541
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-100.svg"
+          },
+          "roundtrip_ms": 17.130209
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_17f2d309"
+          },
+          "roundtrip_ms": 2.667042
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-10000.svg"
+          },
+          "roundtrip_ms": 21.274666
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_b5ec18e0"
+          },
+          "roundtrip_ms": 193.395666
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-100000.svg"
+          },
+          "roundtrip_ms": 89.215292
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_1556971f"
+          },
+          "roundtrip_ms": 2031.694375
+        }
+      ],
+      "errors": [
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "object id not found in document"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "delete_object",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "high-risk operation requires explicit approval"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "path rejected: outside workspace; call get_workspace_info and choose a relative path under a configured server root (relative paths default to the first root)"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "document id not found"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "live_status",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "Rust migration pending: live_status has not been ported"
+              }
+            ],
+            "isError": true
+          }
+        }
+      ]
+    },
+    {
+      "run": "run-4.json.gz",
+      "startup_to_initialized_ms": 41.110458,
+      "processes_at_initialization": [
+        {
+          "pid": 91505,
+          "ppid": 91383,
+          "rss_kib": 12672,
+          "command": "rust/target/release/inkscape-mcp-rust"
+        }
+      ],
+      "calls": [
+        {
+          "method": "initialize",
+          "name": null,
+          "args": null,
+          "roundtrip_ms": 0.256875
+        },
+        {
+          "method": "tools/call",
+          "name": "get_workspace_info",
+          "args": {},
+          "roundtrip_ms": 0.279125
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "fixture.svg"
+          },
+          "roundtrip_ms": 20.798125
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_8a59165f"
+          },
+          "roundtrip_ms": 1.064208
+        },
+        {
+          "method": "tools/call",
+          "name": "list_snapshots",
+          "args": {
+            "doc_id": "d_8a59165f"
+          },
+          "roundtrip_ms": 0.169166
+        },
+        {
+          "method": "tools/call",
+          "name": "set_fill",
+          "args": {
+            "doc_id": "d_8a59165f",
+            "object_ids": [
+              "r1"
+            ],
+            "color": "#3366cc"
+          },
+          "roundtrip_ms": 8.806875
+        },
+        {
+          "method": "tools/call",
+          "name": "list_snapshots",
+          "args": {
+            "doc_id": "d_8a59165f"
+          },
+          "roundtrip_ms": 0.118917
+        },
+        {
+          "method": "tools/call",
+          "name": "set_fill",
+          "args": {
+            "doc_id": "d_8a59165f",
+            "object_ids": [
+              "r1"
+            ],
+            "color": "#ff0000"
+          },
+          "roundtrip_ms": 586.660791
+        },
+        {
+          "method": "tools/call",
+          "name": "restore_snapshot",
+          "args": {
+            "doc_id": "d_8a59165f",
+            "snapshot_id": "snap_c47a7f81"
+          },
+          "roundtrip_ms": 34.740375
+        },
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "args": {
+            "doc_id": "d_8a59165f",
+            "edits": [
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "r1"
+                ],
+                "color": "#00ff00"
+              },
+              {
+                "op": "set_opacity",
+                "object_ids": [
+                  "r1"
+                ],
+                "opacity": 0.5
+              }
+            ]
+          },
+          "roundtrip_ms": 592.308042
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_8a59165f"
+          },
+          "roundtrip_ms": 0.792917
+        },
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "args": {
+            "doc_id": "d_8a59165f",
+            "edits": [
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "r1"
+                ],
+                "color": "#0000ff"
+              },
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "absent"
+                ],
+                "color": "#0000ff"
+              }
+            ]
+          },
+          "roundtrip_ms": 14.20375
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_8a59165f"
+          },
+          "roundtrip_ms": 0.70225
+        },
+        {
+          "method": "tools/call",
+          "name": "delete_object",
+          "args": {
+            "doc_id": "d_8a59165f",
+            "object_ids": [
+              "r1"
+            ]
+          },
+          "roundtrip_ms": 0.176708
+        },
+        {
+          "method": "tools/call",
+          "name": "save_document_as",
+          "args": {
+            "doc_id": "d_8a59165f",
+            "dest_path": "out/saved.svg"
+          },
+          "roundtrip_ms": 22.119
+        },
+        {
+          "method": "resources/read",
+          "name": null,
+          "args": null,
+          "roundtrip_ms": 0.13025
+        },
+        {
+          "method": "tools/call",
+          "name": "render_preview",
+          "args": {
+            "doc_id": "d_8a59165f",
+            "width_px": 128,
+            "inline": false
+          },
+          "roundtrip_ms": 281.450625
+        },
+        {
+          "method": "tools/call",
+          "name": "export_document",
+          "args": {
+            "doc_id": "d_8a59165f",
+            "format": "png",
+            "out_dir": "out",
+            "width_px": 128
+          },
+          "roundtrip_ms": 275.623375
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "../escape.svg"
+          },
+          "roundtrip_ms": 0.110708
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_missing"
+          },
+          "roundtrip_ms": 0.048875
+        },
+        {
+          "method": "tools/call",
+          "name": "live_status",
+          "args": {},
+          "roundtrip_ms": 0.044667
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-100.svg"
+          },
+          "roundtrip_ms": 16.36875
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_ff83ba07"
+          },
+          "roundtrip_ms": 2.685917
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-10000.svg"
+          },
+          "roundtrip_ms": 23.503708
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_b523ab90"
+          },
+          "roundtrip_ms": 192.413792
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-100000.svg"
+          },
+          "roundtrip_ms": 92.016125
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_9a55ae5a"
+          },
+          "roundtrip_ms": 2020.457792
+        }
+      ],
+      "errors": [
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "object id not found in document"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "delete_object",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "high-risk operation requires explicit approval"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "path rejected: outside workspace; call get_workspace_info and choose a relative path under a configured server root (relative paths default to the first root)"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "document id not found"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "live_status",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "Rust migration pending: live_status has not been ported"
+              }
+            ],
+            "isError": true
+          }
+        }
+      ]
+    }
+  ],
+  "median_startup_ms": 35.752417,
+  "note": "Real JSON-RPC roundtrips include IPC, IO, engine and client JSON parsing. No separate server attribution or peak child-process memory claim. RSS snapshot is only at initialization. Raw traces are retained in migration/results/rust-release-checkpoint"
+}

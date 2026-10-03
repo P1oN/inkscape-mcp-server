@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "differences": [],
+  "scenarios": [
+    "single",
+    "agree",
+    "disagree",
+    "all-styles",
+    "reverse-tie",
+    "unknown-properties",
+    "budget",
+    "empty",
+    "duplicate",
+    "missing",
+    "bad-spec",
+    "malformed-member",
+    "real",
+    "real-0-0",
+    "real-0-1",
+    "real-1-0",
+    "real-1-1"
+  ],
+  "normalization": "Actual bound minted document IDs, JSON text and UTC filenames; PNG RGBA/SVG byte hashes."
+}

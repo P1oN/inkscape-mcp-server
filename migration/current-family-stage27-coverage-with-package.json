@@ -1,0 +1,1051 @@
+{
+  "passed": true,
+  "scope": "Actual current-binary calls from the named cohort/current checks only",
+  "additional_current_evidence": [
+    "fresh_release_edit",
+    "archive_cold",
+    "archive_warm"
+  ],
+  "binary_sha256": "62a75763d517af691c0cc1c9026d8963dc9bb33394d9dfdd76aa8fa9d5819f18",
+  "family_scenario_counts": {
+    "adopt": 152,
+    "batch_members": 24,
+    "create": 93,
+    "duplicate": 19,
+    "fragment": 131,
+    "grid": 102,
+    "optimize": 161,
+    "place": 69,
+    "recovery": 13,
+    "reparent": 42,
+    "repeat": 19,
+    "save": 50,
+    "set": 17,
+    "tile": 27,
+    "transform": 116
+  },
+  "tools": {
+    "diagnose_runtime": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "list_capabilities": {
+      "requests": 2,
+      "successful_replies": 2,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": [
+        "archive_cold",
+        "archive_warm"
+      ]
+    },
+    "stat_artifact": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "stat_artifacts": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "get_workspace_info": {
+      "requests": 7,
+      "successful_replies": 7,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": [
+        "create",
+        "duplicate",
+        "fresh_release_edit",
+        "reparent",
+        "repeat",
+        "save",
+        "tile"
+      ]
+    },
+    "list_actions": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "discover_extensions": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "validate_action_chain": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "run_action_chain": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "run_raw_action": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "apply_edits": {
+      "requests": 31,
+      "successful_replies": 14,
+      "error_replies": 17,
+      "changed_true_replies": 14,
+      "families": [
+        "archive_cold",
+        "archive_warm",
+        "create",
+        "duplicate",
+        "fresh_release_edit",
+        "reparent",
+        "tile"
+      ]
+    },
+    "set_document_svg": {
+      "requests": 9,
+      "successful_replies": 5,
+      "error_replies": 4,
+      "changed_true_replies": 5,
+      "families": [
+        "adopt"
+      ]
+    },
+    "insert_svg_fragment": {
+      "requests": 21,
+      "successful_replies": 7,
+      "error_replies": 14,
+      "changed_true_replies": 7,
+      "families": [
+        "adopt"
+      ]
+    },
+    "compose_grid": {
+      "requests": 18,
+      "successful_replies": 6,
+      "error_replies": 12,
+      "changed_true_replies": 6,
+      "families": [
+        "grid"
+      ]
+    },
+    "place_document": {
+      "requests": 19,
+      "successful_replies": 4,
+      "error_replies": 15,
+      "changed_true_replies": 4,
+      "families": [
+        "place"
+      ]
+    },
+    "replace_svg_fragment": {
+      "requests": 27,
+      "successful_replies": 9,
+      "error_replies": 18,
+      "changed_true_replies": 6,
+      "families": [
+        "fragment"
+      ]
+    },
+    "create_rect": {
+      "requests": 5,
+      "successful_replies": 3,
+      "error_replies": 2,
+      "changed_true_replies": 3,
+      "families": [
+        "create"
+      ]
+    },
+    "create_circle": {
+      "requests": 3,
+      "successful_replies": 1,
+      "error_replies": 2,
+      "changed_true_replies": 1,
+      "families": [
+        "create"
+      ]
+    },
+    "create_ellipse": {
+      "requests": 1,
+      "successful_replies": 1,
+      "error_replies": 0,
+      "changed_true_replies": 1,
+      "families": [
+        "create"
+      ]
+    },
+    "create_line": {
+      "requests": 1,
+      "successful_replies": 1,
+      "error_replies": 0,
+      "changed_true_replies": 1,
+      "families": [
+        "create"
+      ]
+    },
+    "create_polygon": {
+      "requests": 2,
+      "successful_replies": 1,
+      "error_replies": 1,
+      "changed_true_replies": 1,
+      "families": [
+        "create"
+      ]
+    },
+    "create_polyline": {
+      "requests": 1,
+      "successful_replies": 1,
+      "error_replies": 0,
+      "changed_true_replies": 1,
+      "families": [
+        "create"
+      ]
+    },
+    "create_path": {
+      "requests": 7,
+      "successful_replies": 1,
+      "error_replies": 6,
+      "changed_true_replies": 1,
+      "families": [
+        "create"
+      ]
+    },
+    "create_text": {
+      "requests": 3,
+      "successful_replies": 2,
+      "error_replies": 1,
+      "changed_true_replies": 2,
+      "families": [
+        "create"
+      ]
+    },
+    "add_linear_gradient": {
+      "requests": 10,
+      "successful_replies": 1,
+      "error_replies": 9,
+      "changed_true_replies": 1,
+      "families": [
+        "create"
+      ]
+    },
+    "add_radial_gradient": {
+      "requests": 4,
+      "successful_replies": 1,
+      "error_replies": 3,
+      "changed_true_replies": 1,
+      "families": [
+        "create"
+      ]
+    },
+    "create_group": {
+      "requests": 8,
+      "successful_replies": 2,
+      "error_replies": 6,
+      "changed_true_replies": 2,
+      "families": [
+        "create"
+      ]
+    },
+    "group_objects": {
+      "requests": 11,
+      "successful_replies": 1,
+      "error_replies": 10,
+      "changed_true_replies": 1,
+      "families": [
+        "create"
+      ]
+    },
+    "reparent_object": {
+      "requests": 43,
+      "successful_replies": 13,
+      "error_replies": 30,
+      "changed_true_replies": 11,
+      "families": [
+        "reparent"
+      ]
+    },
+    "create_use": {
+      "requests": 16,
+      "successful_replies": 4,
+      "error_replies": 12,
+      "changed_true_replies": 4,
+      "families": [
+        "create"
+      ]
+    },
+    "set_group_mode": {
+      "requests": 8,
+      "successful_replies": 5,
+      "error_replies": 3,
+      "changed_true_replies": 2,
+      "families": [
+        "create"
+      ]
+    },
+    "how_do_i": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "open_document": {
+      "requests": 288,
+      "successful_replies": 286,
+      "error_replies": 2,
+      "changed_true_replies": 0,
+      "families": [
+        "adopt",
+        "archive_cold",
+        "archive_warm",
+        "create",
+        "duplicate",
+        "fragment",
+        "fresh_release_edit",
+        "grid",
+        "optimize",
+        "place",
+        "reparent",
+        "repeat",
+        "save",
+        "tile",
+        "transform"
+      ]
+    },
+    "create_document": {
+      "requests": 9,
+      "successful_replies": 4,
+      "error_replies": 5,
+      "changed_true_replies": 0,
+      "families": [
+        "save"
+      ]
+    },
+    "reload_document": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "inspect_document": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "delete_object": {
+      "requests": 10,
+      "successful_replies": 3,
+      "error_replies": 7,
+      "changed_true_replies": 2,
+      "families": [
+        "archive_cold",
+        "archive_warm",
+        "fresh_release_edit"
+      ]
+    },
+    "render_preview": {
+      "requests": 2,
+      "successful_replies": 2,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": [
+        "archive_cold",
+        "archive_warm"
+      ]
+    },
+    "capture_frame": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "list_frames": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "export_document": {
+      "requests": 30,
+      "successful_replies": 30,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": [
+        "archive_cold",
+        "archive_warm",
+        "optimize"
+      ]
+    },
+    "export_object": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "compare_region": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "export_batch": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "export_set": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "find_objects": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "check_live_support": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_launch": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_connect": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_disconnect": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_status": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_list_documents": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_select_document": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_install_helper": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_arm_socket": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_get_active_document": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_get_selection": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_inspect_selection": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_render_view": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_get_scene": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_wait_for_change": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_set_viewport": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_sync_to_workspace": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_apply_to_selection": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_insert_svg": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_set_selected_text": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_edit_selection": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_export_selection": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_diff_view": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_session_step": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_find_objects": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_preview_object": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "svg_web_optimize": {
+      "requests": 35,
+      "successful_replies": 28,
+      "error_replies": 7,
+      "changed_true_replies": 9,
+      "families": [
+        "optimize"
+      ]
+    },
+    "optimize_set": {
+      "requests": 5,
+      "successful_replies": 2,
+      "error_replies": 3,
+      "changed_true_replies": 0,
+      "families": [
+        "optimize"
+      ]
+    },
+    "simplify_path": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "boolean_union": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "boolean_difference": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "combine_paths": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "break_apart": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "stroke_to_path": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "cleanup_paths": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "export_web_profile": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "create_icon_set": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "export_print_profile": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "quality_report": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "quality_report_set": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "save_document_as": {
+      "requests": 21,
+      "successful_replies": 6,
+      "error_replies": 15,
+      "changed_true_replies": 0,
+      "families": [
+        "archive_cold",
+        "archive_warm",
+        "save"
+      ]
+    },
+    "create_snapshot": {
+      "requests": 1,
+      "successful_replies": 1,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "list_snapshots": {
+      "requests": 245,
+      "successful_replies": 245,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": [
+        "adopt",
+        "create",
+        "duplicate",
+        "fragment",
+        "fresh_release_edit",
+        "grid",
+        "optimize",
+        "place",
+        "reparent",
+        "repeat",
+        "tile",
+        "transform"
+      ]
+    },
+    "restore_snapshot": {
+      "requests": 50,
+      "successful_replies": 49,
+      "error_replies": 1,
+      "changed_true_replies": 0,
+      "families": [
+        "adopt",
+        "archive_cold",
+        "archive_warm",
+        "fragment",
+        "fresh_release_edit",
+        "grid",
+        "optimize",
+        "place",
+        "transform"
+      ]
+    },
+    "prune_snapshots": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "set_fill": {
+      "requests": 12,
+      "successful_replies": 10,
+      "error_replies": 2,
+      "changed_true_replies": 7,
+      "families": [
+        "archive_cold",
+        "archive_warm",
+        "create",
+        "fresh_release_edit",
+        "save"
+      ]
+    },
+    "set_stroke": {
+      "requests": 1,
+      "successful_replies": 1,
+      "error_replies": 0,
+      "changed_true_replies": 1,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "set_opacity": {
+      "requests": 3,
+      "successful_replies": 3,
+      "error_replies": 0,
+      "changed_true_replies": 2,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "replace_color": {
+      "requests": 5,
+      "successful_replies": 3,
+      "error_replies": 2,
+      "changed_true_replies": 2,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "apply_palette": {
+      "requests": 4,
+      "successful_replies": 2,
+      "error_replies": 2,
+      "changed_true_replies": 1,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "replace_text": {
+      "requests": 9,
+      "successful_replies": 6,
+      "error_replies": 3,
+      "changed_true_replies": 5,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "set_font": {
+      "requests": 9,
+      "successful_replies": 4,
+      "error_replies": 5,
+      "changed_true_replies": 2,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "duplicate_object": {
+      "requests": 23,
+      "successful_replies": 13,
+      "error_replies": 10,
+      "changed_true_replies": 13,
+      "families": [
+        "duplicate"
+      ]
+    },
+    "rename_object": {
+      "requests": 12,
+      "successful_replies": 6,
+      "error_replies": 6,
+      "changed_true_replies": 5,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "move_object": {
+      "requests": 4,
+      "successful_replies": 2,
+      "error_replies": 2,
+      "changed_true_replies": 2,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "scale_object": {
+      "requests": 4,
+      "successful_replies": 2,
+      "error_replies": 2,
+      "changed_true_replies": 2,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "rotate_object": {
+      "requests": 4,
+      "successful_replies": 2,
+      "error_replies": 2,
+      "changed_true_replies": 2,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "resize_canvas": {
+      "requests": 16,
+      "successful_replies": 9,
+      "error_replies": 7,
+      "changed_true_replies": 8,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "normalize_viewbox": {
+      "requests": 6,
+      "successful_replies": 4,
+      "error_replies": 2,
+      "changed_true_replies": 3,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "fit_to_content": {
+      "requests": 10,
+      "successful_replies": 8,
+      "error_replies": 2,
+      "changed_true_replies": 5,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "tile": {
+      "requests": 26,
+      "successful_replies": 15,
+      "error_replies": 11,
+      "changed_true_replies": 13,
+      "families": [
+        "tile"
+      ]
+    },
+    "repeat_objects": {
+      "requests": 19,
+      "successful_replies": 9,
+      "error_replies": 10,
+      "changed_true_replies": 0,
+      "families": [
+        "repeat"
+      ]
+    },
+    "transform_objects": {
+      "requests": 21,
+      "successful_replies": 16,
+      "error_replies": 5,
+      "changed_true_replies": 11,
+      "families": [
+        "transform"
+      ]
+    },
+    "validate_document": {
+      "requests": 14,
+      "successful_replies": 14,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": [
+        "save"
+      ]
+    }
+  },
+  "tools_called": 53,
+  "tools_with_success_reply": 53,
+  "tools_not_called_by_included_evidence": [
+    "diagnose_runtime",
+    "stat_artifact",
+    "stat_artifacts",
+    "list_actions",
+    "discover_extensions",
+    "validate_action_chain",
+    "run_action_chain",
+    "run_raw_action",
+    "how_do_i",
+    "reload_document",
+    "inspect_document",
+    "capture_frame",
+    "list_frames",
+    "export_object",
+    "compare_region",
+    "export_batch",
+    "export_set",
+    "find_objects",
+    "check_live_support",
+    "live_launch",
+    "live_connect",
+    "live_disconnect",
+    "live_status",
+    "live_list_documents",
+    "live_select_document",
+    "live_install_helper",
+    "live_arm_socket",
+    "live_get_active_document",
+    "live_get_selection",
+    "live_inspect_selection",
+    "live_render_view",
+    "live_get_scene",
+    "live_wait_for_change",
+    "live_set_viewport",
+    "live_sync_to_workspace",
+    "live_apply_to_selection",
+    "live_insert_svg",
+    "live_set_selected_text",
+    "live_edit_selection",
+    "live_export_selection",
+    "live_diff_view",
+    "live_session_step",
+    "live_find_objects",
+    "live_preview_object",
+    "simplify_path",
+    "boolean_union",
+    "boolean_difference",
+    "combine_paths",
+    "break_apart",
+    "stroke_to_path",
+    "cleanup_paths",
+    "export_web_profile",
+    "create_icon_set",
+    "export_print_profile",
+    "quality_report",
+    "quality_report_set",
+    "prune_snapshots"
+  ],
+  "unknown_names_observed": [],
+  "raw_files": [
+    "migration/results/current-family-stage27-v2/adopt/raw/rust-raw.json",
+    "migration/results/current-family-stage27-v2/create/raw/rust-raw.json",
+    "migration/results/current-family-stage27-v2/duplicate/raw/rust-raw.json",
+    "migration/results/current-family-stage27-v2/fragment/raw/rust-raw.json",
+    "migration/results/current-family-stage27-v2/grid/raw/rust-raw.json",
+    "migration/results/current-family-stage27-v2/optimize/raw/rust-raw.json",
+    "migration/results/current-family-stage27-v2/place/raw/rust-raw.json",
+    "migration/results/current-family-stage27-v2/reparent/raw/rust-raw.json",
+    "migration/results/current-family-stage27-v2/repeat/raw/rust-raw.json",
+    "migration/results/current-family-stage27-v2/save/raw/rust-raw.json",
+    "migration/results/current-family-stage27-v2/tile/raw/native-size-guard-raw.json",
+    "migration/results/current-family-stage27-v2/tile/raw/rust-raw.json",
+    "migration/results/current-family-stage27-v2/transform/raw/rust-raw.json",
+    "migration/results/noop-fix-stage26-release-edits/rust-raw.json",
+    "migration/results/package-stage27-cold/packaged-server.trace.json",
+    "migration/results/package-stage27-warm/packaged-server.trace.json"
+  ],
+  "full_behavior_coverage_complete": false,
+  "native_GUI_coverage": false,
+  "limitations": [
+    "Presence or success reply is not proof of all argument/error/appearance cases",
+    "Successful reply can be a plan/dry-run/no-op rather than a mutation",
+    "changed_true counts only explicit structuredContent.changed=true",
+    "Other current-package suites and historical live/native evidence are separate",
+    "Tools absent here require their own affected/current acceptance audit"
+  ]
+}

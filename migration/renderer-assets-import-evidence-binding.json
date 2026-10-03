@@ -1,0 +1,259 @@
+{
+  "evidence_verified": true,
+  "implementation_complete": false,
+  "current_package_updated": false,
+  "rust_tests": "208 passed/1 ignored",
+  "scope": "Local UTF-8 stylesheet import staging, selected CLI17cases and direct Inkscape8fixture baseline. PI/xml:base explicitly unsupported, archive/notices/broader checks pending.",
+  "files": [
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/css-import-string.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/css-import-string.stderr",
+      "bytes": 86,
+      "sha256": "4d10f9c455aac9575a7c8031eca84e71b5e8f463511d0ea47e54738f93863bdf"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/css-import-string.svg",
+      "bytes": 166,
+      "sha256": "9388b958ccdb7e13e502916d05208298ac213fe49b0765ecf2035c7918d84cc5"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/css-import-url.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/css-import-url.stderr",
+      "bytes": 86,
+      "sha256": "2427260f51a77ec41168993b0028c2539d24236844a32ba42f79db3c40474eaa"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/css-import-url.svg",
+      "bytes": 171,
+      "sha256": "65276baee70779f8da6e2d03c3bba30a2973cca1a14bb2723054b8ecdfae3cf2"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/inline-css-control.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/inline-css-control.stderr",
+      "bytes": 86,
+      "sha256": "de6a4d2dd821d4d1be6d559ca65136d72cb0efee1ae141443817a0d2a3320efe"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/inline-css-control.svg",
+      "bytes": 160,
+      "sha256": "d7174c970c91dc8ed6d7c7c8d32f9c55bef96df5d1250b4487c4d2d932568185"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/probe.json",
+      "bytes": 4849,
+      "sha256": "daefbfe71a82c8c7c77eaa8d528123fd0d997964fda49fbf68829f527d1a4b6e"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/relative-image-control.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/relative-image-control.stderr",
+      "bytes": 86,
+      "sha256": "e7ce64822fe6ca6f4af3d1894a44c5ced53e6eea28d1dbcbac80b8aed9fa2f46"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/relative-image-control.svg",
+      "bytes": 123,
+      "sha256": "2973c7c481084b43228622ef273406a1b0bbd43a3f6d0682a17489fe84b99d0a"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/stylesheet-pi.png",
+      "bytes": 144,
+      "sha256": "8aaaac4101542e16a9f3a2f2e77589227c22b8ac3a3524d2aa48efb5ba2426ae"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/stylesheet-pi.stderr",
+      "bytes": 86,
+      "sha256": "c19e2a5bcabd6877a220e4e8f58eba297a22c558125943674fc712cf566674e1"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/stylesheet-pi.svg",
+      "bytes": 182,
+      "sha256": "1d7a159a652b4a73de30eb10711816071a50c2db66437dcf9a0b1fe2a85091c5"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/xml-base-group.png",
+      "bytes": 579,
+      "sha256": "f624a86c5eeadfea003e8625d10f39df6f3c31e6c374e9b9adae269d92885865"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/xml-base-group.stderr",
+      "bytes": 86,
+      "sha256": "4e9b68924d0bba31d3aa7ace1f06458174704ebbea4d88825f8257f128bf208e"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/xml-base-group.svg",
+      "bytes": 142,
+      "sha256": "432b03d7d4801db426abaa0114b462d388ecdc6fc3deb5f1cda5ebf92f4eefaa"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/xml-base-root-absolute.png",
+      "bytes": 579,
+      "sha256": "f624a86c5eeadfea003e8625d10f39df6f3c31e6c374e9b9adae269d92885865"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/xml-base-root-absolute.stderr",
+      "bytes": 86,
+      "sha256": "ef816df3a6e0ca0a2770023f708b67cb782de0c07be0e1f29b167de5ac5bbded"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/xml-base-root-absolute.svg",
+      "bytes": 217,
+      "sha256": "34b02c57ebf19a8884a512fb4b792f3b551610058d75b852225f32018bad45b8"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/xml-base-root-relative.png",
+      "bytes": 579,
+      "sha256": "f624a86c5eeadfea003e8625d10f39df6f3c31e6c374e9b9adae269d92885865"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/xml-base-root-relative.stderr",
+      "bytes": 86,
+      "sha256": "f438d08723d9c6600be5e1da6c45429a777673c4ed74f699176a40aefceeaa5b"
+    },
+    {
+      "path": "migration/results/inkscape-stylesheet-base-probe/xml-base-root-relative.svg",
+      "bytes": 135,
+      "sha256": "30aef7272e64596a5650c312c97632e47a173d4bf85b0facf8d87a7633568f32"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-debug/inside-absolute-export.svg",
+      "bytes": 343,
+      "sha256": "7f9841a6d8e69e568f06734f6b3688a901e70515041b772d514fcaa14b0f06e6"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-debug/inside-absolute.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-debug/inside-css-export.svg",
+      "bytes": 400,
+      "sha256": "adf272d6c5f80b502d4b6b48c6e9bcc8c6323c0a64fa53da9b6e737001daa705"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-debug/inside-css.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-debug/inside-feimage-export.svg",
+      "bytes": 465,
+      "sha256": "9e1d9926477dfcb65ea34a1688fe64271f87b61ad0db19540c23ee9f95ebadc0"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-debug/inside-feimage.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-debug/inside-import-export.svg",
+      "bytes": 434,
+      "sha256": "cfaeccf7ac76a44d740c8cf3a1ec2a0f2b85829e30d3e4be5b40f249d267bfe8"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-debug/inside-import.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-debug/inside-nested-import-export.svg",
+      "bytes": 439,
+      "sha256": "cd4d71f1bef67e7fc1132aa9fe16db0bc9c4f974b9f5315056747c16eb90cde5"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-debug/inside-nested-import.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-debug/inside-nested-svg-export.svg",
+      "bytes": 342,
+      "sha256": "fc0c21d5aa94b72c68e2364fa958e77e596eefc39ca68991310654405da796f8"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-debug/inside-nested-svg.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-debug/inside-relative-export.svg",
+      "bytes": 343,
+      "sha256": "7f9841a6d8e69e568f06734f6b3688a901e70515041b772d514fcaa14b0f06e6"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-debug/inside-relative.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-debug/inside-use-export.svg",
+      "bytes": 323,
+      "sha256": "9dcfa5a3a776653c7bdd1c66dd07f175af21620c3c585ebaf009ceb73679841e"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-debug/inside-use.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-debug/probe.json",
+      "bytes": 3990,
+      "sha256": "3508ea71d28d730bb26833be2790934ade60e461310d9774b54cc60af9efd978"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-debug/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-debug/server.trace.json",
+      "bytes": 74924,
+      "sha256": "d6757ef14235ee26075663dab9c9f42cd1d5164c9f38c58fd5feea1632fb58ae"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-review/docs/AGENT_HANDOFF.md",
+      "bytes": 210134,
+      "sha256": "272fde5c77237a50726a6aa62435392f7fc8543bd3544f73652b40bb55d76952"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-review/docs/RUST_SECURITY_AUDIT.md",
+      "bytes": 14173,
+      "sha256": "e74b1bd2c620da8733bd551d25dc653cbce1f6af7e446b77bc88865db9844552"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-review/rust/src/css_assets.rs",
+      "bytes": 5425,
+      "sha256": "d187817352c36d4508a65be54ae871f648ec6af258d28b1bf4874a94668684a7"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-review/rust/src/engine_input.rs",
+      "bytes": 34467,
+      "sha256": "a063595fe297644e3da80ff0a066ddece3d6534083b4a856072fdf7146bf4afc"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-review/rust-tests.log",
+      "bytes": 19579,
+      "sha256": "55c928b442742b4f085e297ca27f17139e8c7549ac637044a1ddb2a0249c8428"
+    },
+    {
+      "path": "migration/results/renderer-assets-import-review/scripts/rust_renderer_asset_probe.py",
+      "bytes": 9458,
+      "sha256": "4b29c40bcb6500e772bb09720fbc352b978ebc65c2bf9360a8062e77c0faea33"
+    }
+  ]
+}

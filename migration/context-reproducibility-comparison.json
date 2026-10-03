@@ -1,0 +1,110 @@
+{
+  "passed": true,
+  "checks": {
+    "bytes_equal": true,
+    "fixed_install_name": true,
+    "no_output_path_embedded": true,
+    "signatures_valid": true
+  },
+  "builds": [
+    {
+      "source_sha256": "3ed713f9eeba5b3042aa9dede32a1610b74a0e8777ef5a697c00d8e32845676f",
+      "compiler_command": [
+        "/usr/bin/clang",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-dynamiclib",
+        "-framework",
+        "Cocoa",
+        "-undefined",
+        "dynamic_lookup",
+        "-Wl,-install_name,@rpath/inkscape-mcp-context.so",
+        "-I/opt/homebrew/include/glib-2.0",
+        "-I/opt/homebrew/lib/glib-2.0/include",
+        "src/inkscape_mcp/live/native/context.m",
+        "-o",
+        "migration/results/context-reproducibility/first-short/context.so"
+      ],
+      "install_name": "@rpath/inkscape-mcp-context.so",
+      "sha256": "4a09deebce9c96708ddd8c9b69896838c209b355a1feeb14ea7c400edac3b3db",
+      "checks": {
+        "install_name": {
+          "command": [
+            "/usr/bin/otool",
+            "-D",
+            "migration/results/context-reproducibility/first-short/context.so"
+          ],
+          "exit_code": 0
+        },
+        "load_commands": {
+          "command": [
+            "/usr/bin/otool",
+            "-l",
+            "migration/results/context-reproducibility/first-short/context.so"
+          ],
+          "exit_code": 0
+        },
+        "signature": {
+          "command": [
+            "/usr/bin/codesign",
+            "--verify",
+            "--strict",
+            "migration/results/context-reproducibility/first-short/context.so"
+          ],
+          "exit_code": 0
+        }
+      }
+    },
+    {
+      "source_sha256": "3ed713f9eeba5b3042aa9dede32a1610b74a0e8777ef5a697c00d8e32845676f",
+      "compiler_command": [
+        "/usr/bin/clang",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-dynamiclib",
+        "-framework",
+        "Cocoa",
+        "-undefined",
+        "dynamic_lookup",
+        "-Wl,-install_name,@rpath/inkscape-mcp-context.so",
+        "-I/opt/homebrew/include/glib-2.0",
+        "-I/opt/homebrew/lib/glib-2.0/include",
+        "src/inkscape_mcp/live/native/context.m",
+        "-o",
+        "migration/results/context-reproducibility/second-longer-output-path/context.so"
+      ],
+      "install_name": "@rpath/inkscape-mcp-context.so",
+      "sha256": "4a09deebce9c96708ddd8c9b69896838c209b355a1feeb14ea7c400edac3b3db",
+      "checks": {
+        "install_name": {
+          "command": [
+            "/usr/bin/otool",
+            "-D",
+            "migration/results/context-reproducibility/second-longer-output-path/context.so"
+          ],
+          "exit_code": 0
+        },
+        "load_commands": {
+          "command": [
+            "/usr/bin/otool",
+            "-l",
+            "migration/results/context-reproducibility/second-longer-output-path/context.so"
+          ],
+          "exit_code": 0
+        },
+        "signature": {
+          "command": [
+            "/usr/bin/codesign",
+            "--verify",
+            "--strict",
+            "migration/results/context-reproducibility/second-longer-output-path/context.so"
+          ],
+          "exit_code": 0
+        }
+      }
+    }
+  ],
+  "scope": "Actual same-host two-directory context module builds only; not whole archive reproducibility, foreign-host ABI or native GUI acceptance."
+}

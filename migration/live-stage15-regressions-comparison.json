@@ -1,0 +1,180 @@
+{
+  "passed_with_explicit_retained_differences": true,
+  "rust_binary_sha256": "67fa96601d86d244c3f824f322081848ceb0bfb2844be01f0be1f01171fab5b7",
+  "reports": [
+    {
+      "report": "migration/live-connect-stage15-source-comparison.json",
+      "mode": "source",
+      "family": "connect",
+      "observations": 26,
+      "normalization": "validated UTC connected_at binding only"
+    },
+    {
+      "report": "migration/live-events-stage15-source-comparison.json",
+      "mode": "source",
+      "family": "events",
+      "observations": 23,
+      "normalization": "semantic JSON decoding only",
+      "additional_native_server_checks": {
+        "concurrent_read_and_cancelled_wait": true
+      }
+    },
+    {
+      "report": "migration/live-mutation-stage15-source-comparison.json",
+      "mode": "source",
+      "family": "mutation",
+      "observations": 62,
+      "normalization": "validated operation IDs/UTC timestamp relationships/preview path bindings only",
+      "explicit_uncertainty_differences": [
+        {
+          "path": "/lost-mutation-reply/content/0/text",
+          "expected": "live session communication failed",
+          "actual": "edit completion is uncertain; inspect the task drawing before retrying"
+        },
+        {
+          "path": "/lost-reply-log/operations/0/completion_uncertain",
+          "expected": false,
+          "actual": true
+        }
+      ]
+    },
+    {
+      "report": "migration/live-loop-stage15-source-comparison.json",
+      "mode": "source",
+      "family": "loop",
+      "observations": 46,
+      "normalization": "validated minted IDs/times/PNG bindings; exact transport and full semantic fields",
+      "retained_PNG_encoding_differences": 10
+    },
+    {
+      "report": "migration/live-connect-stage15-package-comparison.json",
+      "mode": "package",
+      "family": "connect",
+      "observations": 26,
+      "normalization": "validated UTC connected_at binding only"
+    },
+    {
+      "report": "migration/live-events-stage15-package-comparison.json",
+      "mode": "package",
+      "family": "events",
+      "observations": 23,
+      "normalization": "semantic JSON decoding only",
+      "additional_native_server_checks": {
+        "concurrent_read_and_cancelled_wait": true
+      }
+    },
+    {
+      "report": "migration/live-mutation-stage15-package-comparison.json",
+      "mode": "package",
+      "family": "mutation",
+      "observations": 62,
+      "normalization": "validated operation IDs/UTC timestamp relationships/preview path bindings only",
+      "explicit_uncertainty_differences": [
+        {
+          "path": "/lost-mutation-reply/content/0/text",
+          "expected": "live session communication failed",
+          "actual": "edit completion is uncertain; inspect the task drawing before retrying"
+        },
+        {
+          "path": "/lost-reply-log/operations/0/completion_uncertain",
+          "expected": false,
+          "actual": true
+        }
+      ]
+    },
+    {
+      "report": "migration/live-loop-stage15-package-comparison.json",
+      "mode": "package",
+      "family": "loop",
+      "observations": 46,
+      "normalization": "validated minted IDs/times/PNG bindings; exact transport and full semantic fields",
+      "retained_PNG_encoding_differences": 10
+    },
+    {
+      "report": "migration/live-viewport-stage15-package-comparison.json",
+      "mode": "package",
+      "family": "viewport",
+      "observations": 46,
+      "normalization": "semantic JSON decoding only"
+    },
+    {
+      "report": "migration/live-render-stage15-package-comparison.json",
+      "mode": "package",
+      "family": "render",
+      "observations": 60,
+      "normalization": "validated live path timestamp/nonce bindings only; semantic JSON"
+    },
+    {
+      "report": "migration/live-events-stage15-coercion-comparison.json",
+      "mode": "coercion",
+      "family": "events",
+      "observations": 23,
+      "normalization": "semantic JSON decoding only",
+      "coerced_requests": 16,
+      "coercion_harness_sha256": "5876fc1297c9371b506a44a775d6a0aef434c8ccfecd48db5cdb79b6680c5ebb",
+      "additional_native_server_checks": {
+        "concurrent_read_and_cancelled_wait": true
+      }
+    },
+    {
+      "report": "migration/live-mutation-stage15-coercion-comparison.json",
+      "mode": "coercion",
+      "family": "mutation",
+      "observations": 62,
+      "normalization": "validated operation IDs/UTC timestamp relationships/preview path bindings only",
+      "explicit_uncertainty_differences": [
+        {
+          "path": "/lost-mutation-reply/content/0/text",
+          "expected": "live session communication failed",
+          "actual": "edit completion is uncertain; inspect the task drawing before retrying"
+        },
+        {
+          "path": "/lost-reply-log/operations/0/completion_uncertain",
+          "expected": false,
+          "actual": true
+        }
+      ],
+      "coerced_requests": 20,
+      "coercion_harness_sha256": "5876fc1297c9371b506a44a775d6a0aef434c8ccfecd48db5cdb79b6680c5ebb"
+    },
+    {
+      "report": "migration/live-loop-stage15-coercion-comparison.json",
+      "mode": "coercion",
+      "family": "loop",
+      "observations": 46,
+      "normalization": "validated minted IDs/times/PNG bindings; exact transport and full semantic fields",
+      "retained_PNG_encoding_differences": 10,
+      "coerced_requests": 8,
+      "coercion_harness_sha256": "5876fc1297c9371b506a44a775d6a0aef434c8ccfecd48db5cdb79b6680c5ebb"
+    },
+    {
+      "report": "migration/live-viewport-stage15-coercion-comparison.json",
+      "mode": "coercion",
+      "family": "viewport",
+      "observations": 46,
+      "normalization": "semantic JSON decoding only",
+      "coerced_requests": 62,
+      "coercion_harness_sha256": "960b66e84f555175a61e7f9e4bef302d2a4a5d4a45d65a89f99325aa2c530de2"
+    },
+    {
+      "report": "migration/live-render-stage15-coercion-comparison.json",
+      "mode": "coercion",
+      "family": "render",
+      "observations": 60,
+      "normalization": "validated live path timestamp/nonce bindings only; semantic JSON",
+      "coerced_requests": 48,
+      "coercion_harness_sha256": "960b66e84f555175a61e7f9e4bef302d2a4a5d4a45d65a89f99325aa2c530de2"
+    }
+  ],
+  "observations": 657,
+  "real_STDIO_starts": 30,
+  "source_observations": 157,
+  "packaged_observations": 263,
+  "packaged_coercion_observations": 237,
+  "native_GUI_acceptance": false,
+  "scope": "Real MCP STDIO against an authenticated owned loopback peer; synthetic IPC, not native GUI/Undo. Packaged/coercion harnesses use owned HOME/Inkscape/XDG profiles and remove existing bus/managed/context environment bindings.",
+  "full_migration_complete": false,
+  "retained_differences": "Each mutation comparison preserves two specifically asserted stronger lost-reply uncertainty differences. Each loop comparison retains ten PNG encoding differences with semantic/pixel checks. No broad exclusion added.",
+  "Ruff_files": 318,
+  "mypy_sources": 122
+}

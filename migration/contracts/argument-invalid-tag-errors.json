@@ -1,0 +1,374 @@
+[
+  {
+    "name": "apply_edits",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[apply_edits]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nedits.0\n  Input tag 'unexpected' found using 'op' does not match any of the expected tags: 'set_fill', 'set_stroke', 'set_opacity', 'replace_color', 'apply_palette', 'replace_text', 'set_font', 'duplicate_object', 'rename_object', 'delete_object', 'move_object', 'scale_object', 'rotate_object', 'resize_canvas', 'normalize_viewbox', 'tile', 'create_rect', 'create_circle', 'create_ellipse', 'create_line', 'create_polygon', 'create_polyline', 'create_path', 'create_text', 'create_group', 'group_objects', 'reparent_object', 'repeat_objects', 'set_group_mode', 'replace_svg_fragment', 'create_use', 'add_linear_gradient', 'add_radial_gradient' [type=union_tag_invalid, input_value={'op': 'unexpected'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_invalid"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "edits": [
+        {
+          "op": "unexpected"
+        }
+      ]
+    },
+    "case": "tag-edits-0"
+  },
+  {
+    "name": "apply_edits",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[apply_edits]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nedits.0\n  Input tag 'None' found using 'op' does not match any of the expected tags: 'set_fill', 'set_stroke', 'set_opacity', 'replace_color', 'apply_palette', 'replace_text', 'set_font', 'duplicate_object', 'rename_object', 'delete_object', 'move_object', 'scale_object', 'rotate_object', 'resize_canvas', 'normalize_viewbox', 'tile', 'create_rect', 'create_circle', 'create_ellipse', 'create_line', 'create_polygon', 'create_polyline', 'create_path', 'create_text', 'create_group', 'group_objects', 'reparent_object', 'repeat_objects', 'set_group_mode', 'replace_svg_fragment', 'create_use', 'add_linear_gradient', 'add_radial_gradient' [type=union_tag_invalid, input_value={'op': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_invalid"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "edits": [
+        {
+          "op": null
+        }
+      ]
+    },
+    "case": "tag-edits-1"
+  },
+  {
+    "name": "apply_edits",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[apply_edits]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nedits.0\n  Input tag 'True' found using 'op' does not match any of the expected tags: 'set_fill', 'set_stroke', 'set_opacity', 'replace_color', 'apply_palette', 'replace_text', 'set_font', 'duplicate_object', 'rename_object', 'delete_object', 'move_object', 'scale_object', 'rotate_object', 'resize_canvas', 'normalize_viewbox', 'tile', 'create_rect', 'create_circle', 'create_ellipse', 'create_line', 'create_polygon', 'create_polyline', 'create_path', 'create_text', 'create_group', 'group_objects', 'reparent_object', 'repeat_objects', 'set_group_mode', 'replace_svg_fragment', 'create_use', 'add_linear_gradient', 'add_radial_gradient' [type=union_tag_invalid, input_value={'op': True}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_invalid"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "edits": [
+        {
+          "op": true
+        }
+      ]
+    },
+    "case": "tag-edits-2"
+  },
+  {
+    "name": "apply_edits",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[apply_edits]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nedits.0\n  Input tag '1' found using 'op' does not match any of the expected tags: 'set_fill', 'set_stroke', 'set_opacity', 'replace_color', 'apply_palette', 'replace_text', 'set_font', 'duplicate_object', 'rename_object', 'delete_object', 'move_object', 'scale_object', 'rotate_object', 'resize_canvas', 'normalize_viewbox', 'tile', 'create_rect', 'create_circle', 'create_ellipse', 'create_line', 'create_polygon', 'create_polyline', 'create_path', 'create_text', 'create_group', 'group_objects', 'reparent_object', 'repeat_objects', 'set_group_mode', 'replace_svg_fragment', 'create_use', 'add_linear_gradient', 'add_radial_gradient' [type=union_tag_invalid, input_value={'op': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_invalid"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "edits": [
+        {
+          "op": 1
+        }
+      ]
+    },
+    "case": "tag-edits-3"
+  },
+  {
+    "name": "apply_edits",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[apply_edits]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nedits.0\n  Input tag '{}' found using 'op' does not match any of the expected tags: 'set_fill', 'set_stroke', 'set_opacity', 'replace_color', 'apply_palette', 'replace_text', 'set_font', 'duplicate_object', 'rename_object', 'delete_object', 'move_object', 'scale_object', 'rotate_object', 'resize_canvas', 'normalize_viewbox', 'tile', 'create_rect', 'create_circle', 'create_ellipse', 'create_line', 'create_polygon', 'create_polyline', 'create_path', 'create_text', 'create_group', 'group_objects', 'reparent_object', 'repeat_objects', 'set_group_mode', 'replace_svg_fragment', 'create_use', 'add_linear_gradient', 'add_radial_gradient' [type=union_tag_invalid, input_value={'op': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_invalid"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "edits": [
+        {
+          "op": {}
+        }
+      ]
+    },
+    "case": "tag-edits-4"
+  },
+  {
+    "name": "apply_edits",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[apply_edits]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nedits.0\n  Input tag '[]' found using 'op' does not match any of the expected tags: 'set_fill', 'set_stroke', 'set_opacity', 'replace_color', 'apply_palette', 'replace_text', 'set_font', 'duplicate_object', 'rename_object', 'delete_object', 'move_object', 'scale_object', 'rotate_object', 'resize_canvas', 'normalize_viewbox', 'tile', 'create_rect', 'create_circle', 'create_ellipse', 'create_line', 'create_polygon', 'create_polyline', 'create_path', 'create_text', 'create_group', 'group_objects', 'reparent_object', 'repeat_objects', 'set_group_mode', 'replace_svg_fragment', 'create_use', 'add_linear_gradient', 'add_radial_gradient' [type=union_tag_invalid, input_value={'op': []}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_invalid"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "edits": [
+        {
+          "op": []
+        }
+      ]
+    },
+    "case": "tag-edits-5"
+  },
+  {
+    "name": "repeat_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[repeat_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nplacement\n  Input tag 'unexpected' found using 'kind' does not match any of the expected tags: 'polyline', 'rectangle' [type=union_tag_invalid, input_value={'kind': 'unexpected'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_invalid\ngroup_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {},
+      "placement": {
+        "kind": "unexpected"
+      },
+      "group_id": {}
+    },
+    "case": "tag-placement-0"
+  },
+  {
+    "name": "repeat_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[repeat_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nplacement\n  Input tag 'None' found using 'kind' does not match any of the expected tags: 'polyline', 'rectangle' [type=union_tag_invalid, input_value={'kind': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_invalid\ngroup_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {},
+      "placement": {
+        "kind": null
+      },
+      "group_id": {}
+    },
+    "case": "tag-placement-1"
+  },
+  {
+    "name": "repeat_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[repeat_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nplacement\n  Input tag 'True' found using 'kind' does not match any of the expected tags: 'polyline', 'rectangle' [type=union_tag_invalid, input_value={'kind': True}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_invalid\ngroup_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {},
+      "placement": {
+        "kind": true
+      },
+      "group_id": {}
+    },
+    "case": "tag-placement-2"
+  },
+  {
+    "name": "repeat_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[repeat_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nplacement\n  Input tag '1' found using 'kind' does not match any of the expected tags: 'polyline', 'rectangle' [type=union_tag_invalid, input_value={'kind': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_invalid\ngroup_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {},
+      "placement": {
+        "kind": 1
+      },
+      "group_id": {}
+    },
+    "case": "tag-placement-3"
+  },
+  {
+    "name": "repeat_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[repeat_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nplacement\n  Input tag '{}' found using 'kind' does not match any of the expected tags: 'polyline', 'rectangle' [type=union_tag_invalid, input_value={'kind': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_invalid\ngroup_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {},
+      "placement": {
+        "kind": {}
+      },
+      "group_id": {}
+    },
+    "case": "tag-placement-4"
+  },
+  {
+    "name": "repeat_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[repeat_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nplacement\n  Input tag '[]' found using 'kind' does not match any of the expected tags: 'polyline', 'rectangle' [type=union_tag_invalid, input_value={'kind': []}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_invalid\ngroup_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {},
+      "placement": {
+        "kind": []
+      },
+      "group_id": {}
+    },
+    "case": "tag-placement-5"
+  },
+  {
+    "name": "transform_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[transform_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\noperation\n  Input tag 'unexpected' found using 'op' does not match any of the expected tags: 'set_fill', 'set_stroke', 'set_opacity', 'set_font', 'delete_object', 'move_object', 'scale_object', 'rotate_object' [type=union_tag_invalid, input_value={'op': 'unexpected'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_invalid"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "selector": {},
+      "operation": {
+        "op": "unexpected"
+      }
+    },
+    "case": "tag-operation-0"
+  },
+  {
+    "name": "transform_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[transform_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\noperation\n  Input tag 'None' found using 'op' does not match any of the expected tags: 'set_fill', 'set_stroke', 'set_opacity', 'set_font', 'delete_object', 'move_object', 'scale_object', 'rotate_object' [type=union_tag_invalid, input_value={'op': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_invalid"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "selector": {},
+      "operation": {
+        "op": null
+      }
+    },
+    "case": "tag-operation-1"
+  },
+  {
+    "name": "transform_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[transform_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\noperation\n  Input tag 'True' found using 'op' does not match any of the expected tags: 'set_fill', 'set_stroke', 'set_opacity', 'set_font', 'delete_object', 'move_object', 'scale_object', 'rotate_object' [type=union_tag_invalid, input_value={'op': True}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_invalid"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "selector": {},
+      "operation": {
+        "op": true
+      }
+    },
+    "case": "tag-operation-2"
+  },
+  {
+    "name": "transform_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[transform_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\noperation\n  Input tag '1' found using 'op' does not match any of the expected tags: 'set_fill', 'set_stroke', 'set_opacity', 'set_font', 'delete_object', 'move_object', 'scale_object', 'rotate_object' [type=union_tag_invalid, input_value={'op': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_invalid"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "selector": {},
+      "operation": {
+        "op": 1
+      }
+    },
+    "case": "tag-operation-3"
+  },
+  {
+    "name": "transform_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[transform_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\noperation\n  Input tag '{}' found using 'op' does not match any of the expected tags: 'set_fill', 'set_stroke', 'set_opacity', 'set_font', 'delete_object', 'move_object', 'scale_object', 'rotate_object' [type=union_tag_invalid, input_value={'op': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_invalid"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "selector": {},
+      "operation": {
+        "op": {}
+      }
+    },
+    "case": "tag-operation-4"
+  },
+  {
+    "name": "transform_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[transform_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\noperation\n  Input tag '[]' found using 'op' does not match any of the expected tags: 'set_fill', 'set_stroke', 'set_opacity', 'set_font', 'delete_object', 'move_object', 'scale_object', 'rotate_object' [type=union_tag_invalid, input_value={'op': []}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_invalid"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "selector": {},
+      "operation": {
+        "op": []
+      }
+    },
+    "case": "tag-operation-5"
+  }
+]

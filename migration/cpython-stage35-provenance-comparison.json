@@ -1,0 +1,124 @@
+{
+  "passed": true,
+  "runtime_report": "migration/results/cpython-source-audit/stage35-runtime-guarded-verified.json",
+  "runtime_native_observations": {
+    "python": "3.12.14 (main, Sep 29 2026, 14:50:19) [Clang 22.1.3 ]",
+    "openssl": "OpenSSL 3.5.9 29 Sep 2026",
+    "sqlite": "3.53.1",
+    "expat": "expat_2.8.5",
+    "mpdecimal": "4.0.0"
+  },
+  "build_recipe_commit": "b498734a5791d0e6786695a226fd398a41c6f7f6",
+  "pinned_recipe_sources": {
+    "cpython-3.12": {
+      "url": "https://www.python.org/ftp/python/3.12.14/Python-3.12.14.tar.xz",
+      "size": 20820300,
+      "sha256": "5c8462af5790baf43a321a1559dbe0db06d1be4300fb85fb53c40060668e548a",
+      "version": "3.12.14",
+      "licenses": [
+        "Python-2.0",
+        "CNRI-Python"
+      ],
+      "license_file": "LICENSE.cpython.txt",
+      "python_tag": "cp312"
+    },
+    "bzip2": {
+      "upstream_url": "https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz",
+      "url": "https://astral-sh.github.io/mirror/files/bzip2-1.0.8.tar.gz",
+      "size": 810029,
+      "sha256": "ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269",
+      "version": "1.0.8",
+      "library_names": [
+        "bz2"
+      ],
+      "licenses": [
+        "bzip2-1.0.6"
+      ],
+      "license_file": "LICENSE.bzip2.txt"
+    },
+    "expat": {
+      "url": "https://github.com/libexpat/libexpat/releases/download/R_2_8_5/expat-2.8.5.tar.xz",
+      "size": 528380,
+      "sha256": "1e727b8933ec51a77a9a9d9afcf8e688bce45d907c13e36ab7393fe36e703182",
+      "version": "2.8.5",
+      "library_names": [
+        "expat"
+      ],
+      "licenses": [
+        "MIT"
+      ],
+      "license_file": "LICENSE.expat.txt"
+    },
+    "libffi": {
+      "url": "https://github.com/libffi/libffi/releases/download/v3.4.8/libffi-3.4.8.tar.gz",
+      "size": 1397992,
+      "sha256": "bc9842a18898bfacb0ed1252c4febcc7e78fa139fd27fdc7a3e30d9d9356119b",
+      "version": "3.4.8",
+      "library_names": [
+        "ffi"
+      ],
+      "licenses": [
+        "MIT"
+      ],
+      "license_file": "LICENSE.libffi.txt"
+    },
+    "mpdecimal": {
+      "upstream_url": "https://www.bytereef.org/software/mpdecimal/releases/mpdecimal-4.0.0.tar.gz",
+      "url": "https://astral-sh.github.io/mirror/files/mpdecimal-4.0.0.tar.gz",
+      "size": 315325,
+      "sha256": "942445c3245b22730fd41a67a7c5c231d11cb1b9936b9c0f76334fb7d0b4468c",
+      "version": "4.0.0",
+      "library_names": [
+        "mpdec"
+      ],
+      "licenses": [
+        "BSD-2-Clause"
+      ],
+      "license_file": "LICENSE.mpdecimal.txt"
+    },
+    "openssl-3.5": {
+      "_comment": "Remember to update OPENSSL_VERSION_INFO in pythonbuild/disttests/ whenever upgrading.",
+      "url": "https://github.com/openssl/openssl/releases/download/openssl-3.5.9/openssl-3.5.9.tar.gz",
+      "size": 53279637,
+      "sha256": "603f5602e2eef00d77fbd429d34dcd5822bb301757a1bc9cdb24c670f1eb859a",
+      "version": "3.5.9",
+      "library_names": [
+        "crypto",
+        "ssl"
+      ],
+      "licenses": [
+        "Apache-2.0"
+      ],
+      "license_file": "LICENSE.openssl-3.txt"
+    },
+    "sqlite": {
+      "_comment": "Remember to update pythonbuild/disttests/ when version changed.",
+      "url": "https://www.sqlite.org/2026/sqlite-autoconf-3530100.tar.gz",
+      "size": 3275272,
+      "sha256": "83e6b2020a034e9a7ad4a72feea59e1ad52f162e09cbd26735a3ffb98359fc4f",
+      "version": "3530100",
+      "actual_version": "3.53.1.0",
+      "library_names": [
+        "sqlite3"
+      ],
+      "licenses": [],
+      "license_file": "LICENSE.sqlite.txt",
+      "license_public_domain": true
+    },
+    "xz": {
+      "_comment": "IMPORTANT: xz 5.6.0 was released with a backdoor (CVE-2024-3094). This has been resolved. Be cautious before taking any xz upgrades given this past behavior. liblzma is licensed as 0BSD. Other parts of code have different licenses. But we only use liblzma.",
+      "url": "https://github.com/tukaani-project/xz/releases/download/v5.8.4/xz-5.8.4.tar.gz",
+      "size": 2799797,
+      "sha256": "0014c7886930454fe8bd4228665b51af55eeae560ea135c9c4cd33f55b2591d9",
+      "version": "5.8.4",
+      "library_names": [
+        "lzma"
+      ],
+      "licenses": [
+        "0BSD"
+      ],
+      "license_file": "LICENSE.liblzma.txt"
+    }
+  },
+  "scope": "Exact stage35 regular runtime members outside wheels; transformations verified without broad field ignores; observed native versions agree with pinned recipe. Recipe source descriptors do not prove a whole source rebuild; 19 notices collected for next package, current35 unchanged."
+}

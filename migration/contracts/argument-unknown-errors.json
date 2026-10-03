@@ -1,0 +1,1762 @@
+[
+  {
+    "name": "diagnose_runtime",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[diagnose_runtime]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "list_capabilities",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[list_capabilities]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "stat_artifact",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[stat_artifact]\npath\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "stat_artifacts",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[stat_artifacts]\npaths\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "get_workspace_info",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[get_workspace_info]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "list_actions",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[list_actions]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "discover_extensions",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[discover_extensions]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "validate_action_chain",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[validate_action_chain]\nsteps\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "run_action_chain",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[run_action_chain]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsteps\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "run_raw_action",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[run_raw_action]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\naction\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "apply_edits",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[apply_edits]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nedits\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "set_document_svg",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[set_document_svg]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsvg\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "insert_svg_fragment",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[insert_svg_fragment]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsvg\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "compose_grid",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[compose_grid]\nrows\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncols\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncell\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "place_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[place_document]\ntarget_doc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nx\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ny\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "replace_svg_fragment",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[replace_svg_fragment]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsvg\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "create_rect",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "6 validation errors for call[create_rect]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nx\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ny\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nwidth\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nheight\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "create_circle",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_circle]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncx\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncy\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nr\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "create_ellipse",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "6 validation errors for call[create_ellipse]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncx\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncy\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nrx\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nry\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "create_line",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "6 validation errors for call[create_line]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nx1\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ny1\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nx2\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ny2\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "create_polygon",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[create_polygon]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\npoints\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "create_polyline",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[create_polyline]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\npoints\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "create_path",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[create_path]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nd\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "create_text",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_text]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nx\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ny\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ntext\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "add_linear_gradient",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[add_linear_gradient]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nstops\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "add_radial_gradient",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[add_radial_gradient]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nstops\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "create_group",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_group]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "group_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[group_objects]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "reparent_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[reparent_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nnew_parent_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "create_use",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[create_use]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nhref_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "set_group_mode",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[set_group_mode]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nmode\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "how_do_i",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[how_do_i]\ngoal\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "open_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[open_document]\npath\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "create_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[create_document]\nwidth\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nheight\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "reload_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[reload_document]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "inspect_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[inspect_document]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "delete_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[delete_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "render_preview",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[render_preview]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "capture_frame",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[capture_frame]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "list_frames",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[list_frames]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "export_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[export_document]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nformat\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "export_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[export_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "compare_region",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[compare_region]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsnapshot_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nregion\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "export_batch",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[export_batch]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nspecs\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "export_set",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[export_set]\ndoc_ids\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nspecs\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "find_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[find_objects]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "check_live_support",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[check_live_support]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_launch",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_launch]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_connect",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_connect]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_disconnect",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_disconnect]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_status",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_status]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_list_documents",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_list_documents]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_select_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[live_select_document]\nwindow_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndocument_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_install_helper",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_install_helper]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_arm_socket",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_arm_socket]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_get_active_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_get_active_document]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_get_selection",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_get_selection]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_inspect_selection",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_inspect_selection]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_render_view",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_render_view]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_get_scene",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_get_scene]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_wait_for_change",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_wait_for_change]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_set_viewport",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[live_set_viewport]\nmode\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_sync_to_workspace",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[live_sync_to_workspace]\ndest_path\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_apply_to_selection",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_apply_to_selection]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_insert_svg",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[live_insert_svg]\nsvg_fragment\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_set_selected_text",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[live_set_selected_text]\ntext\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_edit_selection",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[live_edit_selection]\noperation\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_export_selection",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_export_selection]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_diff_view",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[live_diff_view]\noperation_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_session_step",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_session_step]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_find_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_find_objects]\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "live_preview_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[live_preview_object]\nobject_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nexpected_fingerprint\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "svg_web_optimize",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[svg_web_optimize]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "optimize_set",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[optimize_set]\ndoc_ids\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "simplify_path",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[simplify_path]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "boolean_union",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[boolean_union]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "boolean_difference",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[boolean_difference]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "combine_paths",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[combine_paths]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "break_apart",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[break_apart]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "stroke_to_path",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[stroke_to_path]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "cleanup_paths",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[cleanup_paths]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "export_web_profile",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[export_web_profile]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "create_icon_set",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_icon_set]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "export_print_profile",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[export_print_profile]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "quality_report",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[quality_report]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "quality_report_set",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[quality_report_set]\ndoc_ids\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "save_document_as",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[save_document_as]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndest_path\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "create_snapshot",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_snapshot]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "list_snapshots",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[list_snapshots]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "restore_snapshot",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[restore_snapshot]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsnapshot_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "prune_snapshots",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[prune_snapshots]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "set_fill",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[set_fill]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncolor\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "set_stroke",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[set_stroke]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "set_opacity",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[set_opacity]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nopacity\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "replace_color",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[replace_color]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nfrom_color\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nto_color\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "apply_palette",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[apply_palette]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nmapping\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "replace_text",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[replace_text]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ntext\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "set_font",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[set_font]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "duplicate_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[duplicate_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "rename_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[rename_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "move_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[move_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndx\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndy\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "scale_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[scale_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsx\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "rotate_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[rotate_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndegrees\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "resize_canvas",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[resize_canvas]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nwidth\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nheight\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "normalize_viewbox",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[normalize_viewbox]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "fit_to_content",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[fit_to_content]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "tile",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "7 validation errors for call[tile]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nrows\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncols\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndx\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndy\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "repeat_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[repeat_objects]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nplacement\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ngroup_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "transform_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[transform_objects]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nselector\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\noperation\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  },
+  {
+    "name": "validate_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[validate_document]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'unexpected': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nunexpected\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "unexpected": 1
+    },
+    "case": "unknown"
+  }
+]

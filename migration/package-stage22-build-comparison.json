@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage22",
+  "archive": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage22.tar.gz",
+  "archive_bytes": 46458418,
+  "archive_sha256": "38584a70bef451b610cf9fac7b519e7d2f27b5e04de2c8b116b91f206aabef3d",
+  "binary_sha256": "ea78a3430065316c47fcb0362d21feba62e29b93a65c1dd3d854fd418af97ccb",
+  "regular_files": 2453,
+  "regular_bytes": 132708134,
+  "changed_previous_paths": [
+    "bin/inkscape-mcp",
+    "libexec/inkscape-mcp/package.json",
+    "run-mcp.sh",
+    "setup.sh"
+  ],
+  "context_bridge_sha256": "4a09deebce9c96708ddd8c9b69896838c209b355a1feeb14ea7c400edac3b3db",
+  "native_evidence_transferred": false,
+  "scope": "Actual stage22 build/archive/CLI/STDIO/launcher/doctor/notices; no stage22 native GUI or benchmark acceptance"
+}

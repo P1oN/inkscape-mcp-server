@@ -1,0 +1,17 @@
+{
+  "name": "pcre2",
+  "version": "10.48",
+  "url": "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.48/pcre2-10.48.tar.bz2",
+  "sha256": "b6c68fdf6f3ac31388b50aa89ff0fc49c00c987c16e7b5146491d12003f2c8ed",
+  "bytes": 2213024,
+  "archive": "pcre2-10.48.tar.bz2",
+  "notices": [
+    {
+      "path": "COPYING",
+      "bytes": 97,
+      "sha256": "99272c55f3dcfa07a8a7e15a5c1a33096e4727de74241d65fa049fccfdd59507"
+    }
+  ],
+  "source_notice_links": [],
+  "scope": "Exact upstream source notice supplement; not a complete corresponding-source/build-patch audit."
+}

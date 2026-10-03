@@ -1,0 +1,841 @@
+{
+  "passed": true,
+  "profiles": 13,
+  "real_STDIO_starts": 26,
+  "binary": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage13/bin/inkscape-mcp",
+  "binary_sha256": "488dbf10c50443dfe4b1ef172c04d137ad1d19f5b3d7eda0ab1f4cc358b0f0c3",
+  "normalization": "None: complete raw file inventories hashed; fixed fixture IDs. Expected status checked explicitly, generated update time retained in file hashes.",
+  "scope": "Synthetic durable journal states at actual MCP startup. Separate Rust child-exit test verifies real publication boundaries; not a power-loss or concurrent external-writer proof.",
+  "cases": {
+    "prepared": {
+      "before": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "bdd1ca7da665759e48a7acfee165858a27f015aef80784c1296eeabd88e9554b",
+          "bytes": 288
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/recovery/op_00000001.json": {
+          "sha256": "1c3188c0b013b53684b11afe4caac2e2ea5ff7fcc2a983a346d45e6175a218b4",
+          "bytes": 270
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "after": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "83ce8c1a5533528273bff922ce8b4c532d1c2f96e8bae10b37d57e9217b521d9",
+          "bytes": 340
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "expected_head_sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+      "journal_count": 0,
+      "idempotent": true,
+      "original_and_external_preserved": true
+    },
+    "head-written": {
+      "before": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "bdd1ca7da665759e48a7acfee165858a27f015aef80784c1296eeabd88e9554b",
+          "bytes": 288
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/recovery/op_00000001.json": {
+          "sha256": "1c3188c0b013b53684b11afe4caac2e2ea5ff7fcc2a983a346d45e6175a218b4",
+          "bytes": 270
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+          "bytes": 71
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "after": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "4933d65b4e48147dfa31b55b26323f3a64f6adde02771989f2fa207118372654",
+          "bytes": 340
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "expected_head_sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+      "journal_count": 0,
+      "idempotent": true,
+      "original_and_external_preserved": true
+    },
+    "discarded": {
+      "before": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "07b427cd109c0a739cefeae4f48e81b97c15544dac5ce985c8134005f0e2a765",
+          "bytes": 289
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/recovery/op_00000001.json": {
+          "sha256": "1c3188c0b013b53684b11afe4caac2e2ea5ff7fcc2a983a346d45e6175a218b4",
+          "bytes": 270
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+          "bytes": 71
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "after": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "588aa32255e5bd58569e10196e6b4db80f0624e2bde61ba9ab1f1462bc10bf2d",
+          "bytes": 340
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "expected_head_sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+      "journal_count": 0,
+      "idempotent": true,
+      "original_and_external_preserved": true
+    },
+    "applied": {
+      "before": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "2f5a040a7de8f2c58eadf3a4548ec9971327ad4c4fd9d1c18c8221ac0b5d1c5b",
+          "bytes": 287
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/recovery/op_00000001.json": {
+          "sha256": "1c3188c0b013b53684b11afe4caac2e2ea5ff7fcc2a983a346d45e6175a218b4",
+          "bytes": 270
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+          "bytes": 71
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "after": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "2f5a040a7de8f2c58eadf3a4548ec9971327ad4c4fd9d1c18c8221ac0b5d1c5b",
+          "bytes": 287
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+          "bytes": 71
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "expected_head_sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+      "journal_count": 0,
+      "idempotent": true,
+      "original_and_external_preserved": true
+    },
+    "applied-later": {
+      "before": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "2f5a040a7de8f2c58eadf3a4548ec9971327ad4c4fd9d1c18c8221ac0b5d1c5b",
+          "bytes": 287
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/recovery/op_00000001.json": {
+          "sha256": "1c3188c0b013b53684b11afe4caac2e2ea5ff7fcc2a983a346d45e6175a218b4",
+          "bytes": 270
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "bfd9f3d0d2305303d66ac501ef07ba599993371d86cbbd9c43640c8ce6dd4df5",
+          "bytes": 73
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "after": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "2f5a040a7de8f2c58eadf3a4548ec9971327ad4c4fd9d1c18c8221ac0b5d1c5b",
+          "bytes": 287
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "bfd9f3d0d2305303d66ac501ef07ba599993371d86cbbd9c43640c8ce6dd4df5",
+          "bytes": 73
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "expected_head_sha256": "bfd9f3d0d2305303d66ac501ef07ba599993371d86cbbd9c43640c8ce6dd4df5",
+      "journal_count": 0,
+      "idempotent": true,
+      "original_and_external_preserved": true
+    },
+    "unrelated": {
+      "before": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "bdd1ca7da665759e48a7acfee165858a27f015aef80784c1296eeabd88e9554b",
+          "bytes": 288
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/recovery/op_00000001.json": {
+          "sha256": "1c3188c0b013b53684b11afe4caac2e2ea5ff7fcc2a983a346d45e6175a218b4",
+          "bytes": 270
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "bfd9f3d0d2305303d66ac501ef07ba599993371d86cbbd9c43640c8ce6dd4df5",
+          "bytes": 73
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "after": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "bdd1ca7da665759e48a7acfee165858a27f015aef80784c1296eeabd88e9554b",
+          "bytes": 288
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/recovery/op_00000001.json": {
+          "sha256": "1c3188c0b013b53684b11afe4caac2e2ea5ff7fcc2a983a346d45e6175a218b4",
+          "bytes": 270
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "bfd9f3d0d2305303d66ac501ef07ba599993371d86cbbd9c43640c8ce6dd4df5",
+          "bytes": 73
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "expected_head_sha256": "bfd9f3d0d2305303d66ac501ef07ba599993371d86cbbd9c43640c8ce6dd4df5",
+      "journal_count": 1,
+      "idempotent": true,
+      "original_and_external_preserved": true
+    },
+    "snapshot-corrupt": {
+      "before": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "bdd1ca7da665759e48a7acfee165858a27f015aef80784c1296eeabd88e9554b",
+          "bytes": 288
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/recovery/op_00000001.json": {
+          "sha256": "1c3188c0b013b53684b11afe4caac2e2ea5ff7fcc2a983a346d45e6175a218b4",
+          "bytes": 270
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "6d445d98f714d8c164f0523911bbcaea1c94e4cdacc5b158eb230dd50f60cf22",
+          "bytes": 17
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+          "bytes": 71
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "after": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "bdd1ca7da665759e48a7acfee165858a27f015aef80784c1296eeabd88e9554b",
+          "bytes": 288
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/recovery/op_00000001.json": {
+          "sha256": "1c3188c0b013b53684b11afe4caac2e2ea5ff7fcc2a983a346d45e6175a218b4",
+          "bytes": 270
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "6d445d98f714d8c164f0523911bbcaea1c94e4cdacc5b158eb230dd50f60cf22",
+          "bytes": 17
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+          "bytes": 71
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "expected_head_sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+      "journal_count": 1,
+      "idempotent": true,
+      "original_and_external_preserved": true
+    },
+    "audit-corrupt": {
+      "before": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "6a43da1d9a19b623979347d4c1e57750f179cf869cf3eb0246a7ec76ac88e7b4",
+          "bytes": 13
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/recovery/op_00000001.json": {
+          "sha256": "1c3188c0b013b53684b11afe4caac2e2ea5ff7fcc2a983a346d45e6175a218b4",
+          "bytes": 270
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+          "bytes": 71
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "after": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "6a43da1d9a19b623979347d4c1e57750f179cf869cf3eb0246a7ec76ac88e7b4",
+          "bytes": 13
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/recovery/op_00000001.json": {
+          "sha256": "1c3188c0b013b53684b11afe4caac2e2ea5ff7fcc2a983a346d45e6175a218b4",
+          "bytes": 270
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+          "bytes": 71
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "expected_head_sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+      "journal_count": 1,
+      "idempotent": true,
+      "original_and_external_preserved": true
+    },
+    "journal-corrupt": {
+      "before": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "bdd1ca7da665759e48a7acfee165858a27f015aef80784c1296eeabd88e9554b",
+          "bytes": 288
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/recovery/op_00000001.json": {
+          "sha256": "3f800bd75aa8155e6fec7af4982b7e8ab7cbef81d94d8366b662b039fab1848b",
+          "bytes": 15
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+          "bytes": 71
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "after": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "bdd1ca7da665759e48a7acfee165858a27f015aef80784c1296eeabd88e9554b",
+          "bytes": 288
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/recovery/op_00000001.json": {
+          "sha256": "3f800bd75aa8155e6fec7af4982b7e8ab7cbef81d94d8366b662b039fab1848b",
+          "bytes": 15
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+          "bytes": 71
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "expected_head_sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+      "journal_count": 1,
+      "idempotent": true,
+      "original_and_external_preserved": true
+    },
+    "journal-link": {
+      "before": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "bdd1ca7da665759e48a7acfee165858a27f015aef80784c1296eeabd88e9554b",
+          "bytes": 288
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+          "bytes": 71
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "after": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "bdd1ca7da665759e48a7acfee165858a27f015aef80784c1296eeabd88e9554b",
+          "bytes": 288
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+          "bytes": 71
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "expected_head_sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+      "journal_count": 1,
+      "idempotent": true,
+      "original_and_external_preserved": true
+    },
+    "multiple": {
+      "before": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "bdd1ca7da665759e48a7acfee165858a27f015aef80784c1296eeabd88e9554b",
+          "bytes": 288
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/recovery/op_00000001.json": {
+          "sha256": "1c3188c0b013b53684b11afe4caac2e2ea5ff7fcc2a983a346d45e6175a218b4",
+          "bytes": 270
+        },
+        ".inkscape-mcp/documents/d_00000001/recovery/op_00000002.json": {
+          "sha256": "1c3188c0b013b53684b11afe4caac2e2ea5ff7fcc2a983a346d45e6175a218b4",
+          "bytes": 270
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+          "bytes": 71
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "after": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "bdd1ca7da665759e48a7acfee165858a27f015aef80784c1296eeabd88e9554b",
+          "bytes": 288
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/recovery/op_00000001.json": {
+          "sha256": "1c3188c0b013b53684b11afe4caac2e2ea5ff7fcc2a983a346d45e6175a218b4",
+          "bytes": 270
+        },
+        ".inkscape-mcp/documents/d_00000001/recovery/op_00000002.json": {
+          "sha256": "1c3188c0b013b53684b11afe4caac2e2ea5ff7fcc2a983a346d45e6175a218b4",
+          "bytes": 270
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+          "bytes": 71
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "expected_head_sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+      "journal_count": 2,
+      "idempotent": true,
+      "original_and_external_preserved": true
+    },
+    "identity-mismatch": {
+      "before": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "bdd1ca7da665759e48a7acfee165858a27f015aef80784c1296eeabd88e9554b",
+          "bytes": 288
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/recovery/op_00000001.json": {
+          "sha256": "c9c82dcc79da14015ba64bbcaede95cc1b7861f1d0a5cc73fabe8a9fe06d8ef1",
+          "bytes": 267
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+          "bytes": 71
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "after": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "bdd1ca7da665759e48a7acfee165858a27f015aef80784c1296eeabd88e9554b",
+          "bytes": 288
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/recovery/op_00000001.json": {
+          "sha256": "c9c82dcc79da14015ba64bbcaede95cc1b7861f1d0a5cc73fabe8a9fe06d8ef1",
+          "bytes": 267
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+          "bytes": 71
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "expected_head_sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+      "journal_count": 1,
+      "idempotent": true,
+      "original_and_external_preserved": true
+    },
+    "legacy-no-journal": {
+      "before": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "bdd1ca7da665759e48a7acfee165858a27f015aef80784c1296eeabd88e9554b",
+          "bytes": 288
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+          "bytes": 71
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "after": {
+        ".inkscape-mcp/documents/d_00000001/operations/op_00000001.json": {
+          "sha256": "bdd1ca7da665759e48a7acfee165858a27f015aef80784c1296eeabd88e9554b",
+          "bytes": 288
+        },
+        ".inkscape-mcp/documents/d_00000001/original.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/index.json": {
+          "sha256": "204128a8985ebf739d4a68b2f9c31e319469dc2d0cc4ae93f6af5c832ad7ff64",
+          "bytes": 200
+        },
+        ".inkscape-mcp/documents/d_00000001/snapshots/pre.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        },
+        ".inkscape-mcp/documents/d_00000001/working/document.svg": {
+          "sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+          "bytes": 71
+        },
+        "source.svg": {
+          "sha256": "a720f4f52b1859e09c861bbf548f4183024445a4351db89db8afd2dec575fc14",
+          "bytes": 72
+        }
+      },
+      "expected_head_sha256": "235f6bed933ea7064e6643d3836ffa16e84efee73cc846065c0ac25e7cadc958",
+      "journal_count": 0,
+      "idempotent": true,
+      "original_and_external_preserved": true
+    }
+  }
+}

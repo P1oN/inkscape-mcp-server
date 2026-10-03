@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "mach_timebase_numer_denom": [
+    125,
+    3
+  ],
+  "process_time_ns": 49995000,
+  "converted_cpu_ns": 50028709,
+  "relative_error": 0.0006742474247425356,
+  "owned_child_observed": true,
+  "rusage_info_v2_bytes": 160,
+  "proc_listchildpids_returns": "PID count, not bytes",
+  "sampler_failures": 0
+}

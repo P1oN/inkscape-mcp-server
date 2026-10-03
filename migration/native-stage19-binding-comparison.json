@@ -1,0 +1,86 @@
+{
+  "passed": true,
+  "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19",
+  "binary_sha256": "c30527cf22c33ff3bd9291f7dff324dc5318338e36162b5d5355628ec6c33030",
+  "helper_sha256": "30ce11b57011990fa726d2d86dc3c9718cdc48ec1ee805086927a5ac68dc5bf8",
+  "installed_helper_matches_package": true,
+  "source_helper_matches_package": true,
+  "files": {
+    "migration/native-stage19-comparison.json": {
+      "bytes": 6456,
+      "sha256": "6c3dfaef21691b2b164a17d0170dca05da9673df6ecf3d2da72e450a7fb6553b"
+    },
+    "migration/native-stage19-captured-comparison.json": {
+      "bytes": 6459,
+      "sha256": "8a2740977adb008a2bc18b0eab17201e3e533d13e2b7c6916dc5a5252e0d72fa"
+    },
+    "migration/native-structure-stage19-comparison.json": {
+      "bytes": 7346,
+      "sha256": "52fed58a7c0e4e19e8e716c7116c36dba24d3171daa8e7475346afa42a9fc2e3"
+    },
+    "migration/native-structure-stage19-captured-comparison.json": {
+      "bytes": 7345,
+      "sha256": "041945d17fd24efa0239a169456e7fb716875f1fec39608ee9d651149762aedb"
+    },
+    "migration/package-stage19-build-comparison.json": {
+      "bytes": 833,
+      "sha256": "93a5257258a3c69e76a4749f653f02f6a417979fde5c69fe2bf2e48d0b77e343"
+    },
+    "migration/package-stage19-cold-comparison.json": {
+      "bytes": 553,
+      "sha256": "6e31edbf0ea638b592fd7677998c07cffcf6d198e50d037c43cc665c604db232"
+    },
+    "migration/package-stage19-shell-comparison.json": {
+      "bytes": 550,
+      "sha256": "a23c40628ee6a071109f236c9f22f750c54e4bb3ca656770016f1260d64b641e"
+    },
+    "migration/doctor-stage19-comparison.json": {
+      "bytes": 236,
+      "sha256": "fc696f24d4bd246214b6cfb4ae93a0cdf025833fbb24b4051aa51d4c81ead06d"
+    },
+    "migration/helper-prolog-stage19-v2-comparison.json": {
+      "bytes": 46212,
+      "sha256": "4c7109f48cd046c1e6447f8d480f84cee3ca91d7fecda6f98d543ea42cba0f40"
+    },
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/FILES.json": {
+      "bytes": 429366,
+      "sha256": "e448db076dea9f0a2af46f7c5eb3006e122f1e61ca41fff5ce9b98e2290f1354"
+    },
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/package.json": {
+      "bytes": 5217,
+      "sha256": "088af8100095fb47a18e6b2340a9844450ab2a3538d40a24d8ed131100c9fd4e"
+    },
+    "migration/results/native-gui-stage19/session.json": {
+      "bytes": 1490,
+      "sha256": "31e91d47c3279bdfe6364178f5a0d6294eefec678920420e27eb2c0d73f5c4f3"
+    },
+    "migration/helper-stylesheet-transform-stage19-comparison.json": {
+      "bytes": 56739,
+      "sha256": "72a5a47e53ca0b750733abb4cc8962361459df109048e11a0ac925eb6edae9bd"
+    }
+  },
+  "owned_processes": "  PID  PPID COMMAND\n12496     1 /Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3 -I /Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/supervise.py /private/tmp/imcp-native-i4iar794/session /Applications/Inkscape.app/Contents/MacOS/inkscape\n12505 12496 /private/tmp/imcp-native-i4iar794/session/context-bridge/Inkscape.app/Contents/MacOS/inkscape --with-gui\n",
+  "native_UI_actions": [
+    "insert Undo",
+    "insert Redo",
+    "Select All",
+    "style Undo after exact repeat",
+    "style Redo",
+    "Select All",
+    "duplicate Undo",
+    "duplicate Redo",
+    "Select All",
+    "group Undo",
+    "group Redo",
+    "Select All",
+    "ungroup Undo",
+    "ungroup Redo",
+    "Select All",
+    "delete Undo",
+    "delete Redo",
+    "delete Undo final restoration"
+  ],
+  "scope": "46 fixed native effects/guards plus 38 fixed structural checks; separate offline helper20. Six owned test launches historically; stages12/13/18/19 retained. Stage18 cause unproven; no full compatibility/native/benchmark claim.",
+  "vendor_executable_sha256_after_native_checks": "ad03b220889be90ed3276102dac39638de75cca91c364d58b482dac85395c193",
+  "offline_helper_observations": 24
+}

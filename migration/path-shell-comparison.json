@@ -1,0 +1,31 @@
+{
+  "scenarios": 170,
+  "differences": [
+    {
+      "path": "/boolean_difference-real-pixels/0/sha256",
+      "expected": "0f645526685c920946458628f16d74e4407a376f20d840940189b4c128241d0e",
+      "actual": "855067038520112065c2ac977c90f891cc38354a07682baf56f4ae2655e9c883"
+    },
+    {
+      "path": "/boolean_union-real-pixels/0/sha256",
+      "expected": "1cf22e47128554b0fbbf6227a56815f31b3a83ac3518d056375c983442ce4f0a",
+      "actual": "855067038520112065c2ac977c90f891cc38354a07682baf56f4ae2655e9c883"
+    },
+    {
+      "path": "/combine_paths-real-pixels/0/sha256",
+      "expected": "1cf22e47128554b0fbbf6227a56815f31b3a83ac3518d056375c983442ce4f0a",
+      "actual": "855067038520112065c2ac977c90f891cc38354a07682baf56f4ae2655e9c883"
+    },
+    {
+      "path": "/document-siblings-pixels/0/sha256",
+      "expected": "1cf22e47128554b0fbbf6227a56815f31b3a83ac3518d056375c983442ce4f0a",
+      "actual": "855067038520112065c2ac977c90f891cc38354a07682baf56f4ae2655e9c883"
+    },
+    {
+      "path": "/referenced-paint-pixels/0/sha256",
+      "expected": "1cf22e47128554b0fbbf6227a56815f31b3a83ac3518d056375c983442ce4f0a",
+      "actual": "870ab08da02269e6926ec4e6f18b071b2a86056c43e4b056c61534e4a3703ad8"
+    }
+  ],
+  "passed": false
+}

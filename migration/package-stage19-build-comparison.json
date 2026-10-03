@@ -1,0 +1,13 @@
+{
+  "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19",
+  "archive": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19.tar.gz",
+  "archive_bytes": 46347048,
+  "archive_sha256": "d18c42a06bd76a7fcb2434298bcb632b1d5b91c83995ad69e2c3b01be424d4d2",
+  "binary_sha256": "c30527cf22c33ff3bd9291f7dff324dc5318338e36162b5d5355628ec6c33030",
+  "helper_sha256": "30ce11b57011990fa726d2d86dc3c9718cdc48ec1ee805086927a5ac68dc5bf8",
+  "source_helper_matches": true,
+  "native_gui_acceptance": true,
+  "scope": "Current stage19 helper candidate; same Rust executable as stage18; fixed effects/guards and structure native evidence, full migration incomplete.",
+  "native_fixed_checks": 46,
+  "native_structure_checks": 38
+}

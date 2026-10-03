@@ -1,0 +1,339 @@
+{
+  "evidence_verified": true,
+  "implementation_complete": false,
+  "current_package_updated": false,
+  "rust_tests": "207 passed/1 ignored",
+  "scope": "Token-aware CSS URL staging and restoration, selected CLI13 cases; prior probe prefix collisions preserved. Imports/xml:base, new notices and archive checks pending.",
+  "files": [
+    {
+      "path": "migration/results/renderer-assets-css-debug/inside-absolute-export.svg",
+      "bytes": 343,
+      "sha256": "7f9841a6d8e69e568f06734f6b3688a901e70515041b772d514fcaa14b0f06e6"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug/inside-absolute.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug/inside-css.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug/inside-feimage-export.svg",
+      "bytes": 465,
+      "sha256": "9e1d9926477dfcb65ea34a1688fe64271f87b61ad0db19540c23ee9f95ebadc0"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug/inside-feimage.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug/inside-nested-svg-export.svg",
+      "bytes": 342,
+      "sha256": "fc0c21d5aa94b72c68e2364fa958e77e596eefc39ca68991310654405da796f8"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug/inside-nested-svg.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug/inside-relative-export.svg",
+      "bytes": 343,
+      "sha256": "7f9841a6d8e69e568f06734f6b3688a901e70515041b772d514fcaa14b0f06e6"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug/inside-relative.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug/inside-use-export.svg",
+      "bytes": 323,
+      "sha256": "9dcfa5a3a776653c7bdd1c66dd07f175af21620c3c585ebaf009ceb73679841e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug/inside-use.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug/server.trace.json",
+      "bytes": 55944,
+      "sha256": "831722bdad423e837f4f8239dea38de389056e01f87bd7be1971446f9d4e9dc5"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v2/inside-absolute-export.svg",
+      "bytes": 343,
+      "sha256": "7f9841a6d8e69e568f06734f6b3688a901e70515041b772d514fcaa14b0f06e6"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v2/inside-absolute.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v2/inside-css.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v2/inside-feimage-export.svg",
+      "bytes": 465,
+      "sha256": "9e1d9926477dfcb65ea34a1688fe64271f87b61ad0db19540c23ee9f95ebadc0"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v2/inside-feimage.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v2/inside-nested-svg-export.svg",
+      "bytes": 342,
+      "sha256": "fc0c21d5aa94b72c68e2364fa958e77e596eefc39ca68991310654405da796f8"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v2/inside-nested-svg.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v2/inside-relative-export.svg",
+      "bytes": 343,
+      "sha256": "7f9841a6d8e69e568f06734f6b3688a901e70515041b772d514fcaa14b0f06e6"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v2/inside-relative.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v2/inside-use-export.svg",
+      "bytes": 323,
+      "sha256": "9dcfa5a3a776653c7bdd1c66dd07f175af21620c3c585ebaf009ceb73679841e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v2/inside-use.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v2/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v2/server.trace.json",
+      "bytes": 55946,
+      "sha256": "f314d225443e1a519901efb20d8a8699ebbdf7174cdcc15b9f0343ecfb737d59"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v3/inside-absolute-export.svg",
+      "bytes": 343,
+      "sha256": "7f9841a6d8e69e568f06734f6b3688a901e70515041b772d514fcaa14b0f06e6"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v3/inside-absolute.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v3/inside-css-export.svg",
+      "bytes": 400,
+      "sha256": "a140a4c88ca7284969408529dceeb52565afd3439b955128723960136cc31b6c"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v3/inside-css.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v3/inside-feimage-export.svg",
+      "bytes": 465,
+      "sha256": "9e1d9926477dfcb65ea34a1688fe64271f87b61ad0db19540c23ee9f95ebadc0"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v3/inside-feimage.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v3/inside-nested-svg-export.svg",
+      "bytes": 342,
+      "sha256": "fc0c21d5aa94b72c68e2364fa958e77e596eefc39ca68991310654405da796f8"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v3/inside-nested-svg.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v3/inside-relative-export.svg",
+      "bytes": 343,
+      "sha256": "7f9841a6d8e69e568f06734f6b3688a901e70515041b772d514fcaa14b0f06e6"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v3/inside-relative.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v3/inside-use-export.svg",
+      "bytes": 323,
+      "sha256": "9dcfa5a3a776653c7bdd1c66dd07f175af21620c3c585ebaf009ceb73679841e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v3/inside-use.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v3/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v3/server.trace.json",
+      "bytes": 55941,
+      "sha256": "728b69bc7f6267f8ef0927d0c11fd82cb87c7d8b8d3644697eac4cedf178ef92"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v4/inside-absolute-export.svg",
+      "bytes": 343,
+      "sha256": "7f9841a6d8e69e568f06734f6b3688a901e70515041b772d514fcaa14b0f06e6"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v4/inside-absolute.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v4/inside-css-export.svg",
+      "bytes": 400,
+      "sha256": "a09c4ee24596e01ccf36d7e2dccc395ca42fb6dc38661133fe8c314aefa41434"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v4/inside-css.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v4/inside-feimage-export.svg",
+      "bytes": 465,
+      "sha256": "9e1d9926477dfcb65ea34a1688fe64271f87b61ad0db19540c23ee9f95ebadc0"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v4/inside-feimage.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v4/inside-nested-svg-export.svg",
+      "bytes": 342,
+      "sha256": "fc0c21d5aa94b72c68e2364fa958e77e596eefc39ca68991310654405da796f8"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v4/inside-nested-svg.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v4/inside-relative-export.svg",
+      "bytes": 343,
+      "sha256": "7f9841a6d8e69e568f06734f6b3688a901e70515041b772d514fcaa14b0f06e6"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v4/inside-relative.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v4/inside-use-export.svg",
+      "bytes": 323,
+      "sha256": "9dcfa5a3a776653c7bdd1c66dd07f175af21620c3c585ebaf009ceb73679841e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v4/inside-use.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v4/probe.json",
+      "bytes": 3127,
+      "sha256": "0e2dbd539180d3456c0dfe8bf872e3bbcab3f03f01d25683d7e3bcb534230973"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v4/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-debug-v4/server.trace.json",
+      "bytes": 58168,
+      "sha256": "af815b68edb6b854048088288c84a1ff45688d23e4db8d19f1f0eea5f8fcee27"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-review/docs/AGENT_HANDOFF.md",
+      "bytes": 209518,
+      "sha256": "ab42b12313f02d5aff24ecced9a757ce565eae1b480ff183436e0909036d93ea"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-review/docs/RUST_SECURITY_AUDIT.md",
+      "bytes": 12428,
+      "sha256": "7965f9327e652725a3a55da1598d35c78a76404ea03e6c06de6c7eafb73b3594"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-review/rust/Cargo.lock",
+      "bytes": 29860,
+      "sha256": "03c078be76d2cf0ebf31f4a963361a39738b247e290864faa3a94fec7158b63e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-review/rust/Cargo.toml",
+      "bytes": 861,
+      "sha256": "8094c4a4945708dcc96a2a0f07cf0d06c8b1874d2ec50e87f28b50513f235459"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-review/rust/src/css_assets.rs",
+      "bytes": 4005,
+      "sha256": "f2e9443c44f89df2464efe10aad14e604ec02893f46078fe9174f2af767472b3"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-review/rust/src/engine_input.rs",
+      "bytes": 29341,
+      "sha256": "e4347b0e24e6a932ff2bfa4eae84d8afa42de797027f8e4227775e4178137102"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-review/rust/src/main.rs",
+      "bytes": 29744,
+      "sha256": "290fa124f9648a48085a0d7b3be1c8f02de155f3f5478035eb4fea95579df9a3"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-review/rust/src/paths.rs",
+      "bytes": 17890,
+      "sha256": "dc9e09443ecbfaaa75e422568b895df78228e8895bb222ad26b606ffb8cea10e"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-review/rust/src/render.rs",
+      "bytes": 28841,
+      "sha256": "24b75c0f8d02e642dd6fea0bcdd61c8dba863cfff6ff57deb112139ba940e2cc"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-review/rust-tests.log",
+      "bytes": 19477,
+      "sha256": "62d35df1d9c41700521a29049e1493860e30f5bd55c3fcb9e4f610f6f2610ee2"
+    },
+    {
+      "path": "migration/results/renderer-assets-css-review/scripts/rust_renderer_asset_probe.py",
+      "bytes": 8581,
+      "sha256": "40940fec400a7fb091d3b2580986e3c2400626ee2f6ce9d12900f5e7e9a077ad"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "differences": [],
+  "scenarios": [
+    "default-dry",
+    "dry-over-budget",
+    "clamped-budget",
+    "dry-out",
+    "empty",
+    "too-many",
+    "budget-zero",
+    "budget-negative",
+    "bad-format",
+    "bad-width",
+    "width-cap",
+    "bad-id",
+    "missing-id",
+    "escape",
+    "real-budget-refusal",
+    "real-missing-refusal",
+    "dry-directory-created",
+    "real",
+    "item-0",
+    "item-1",
+    "item-2"
+  ],
+  "normalization": "Validated IDs/filename timestamps, decoded JSON text, PNG RGBA hashes and SVG byte hashes."
+}

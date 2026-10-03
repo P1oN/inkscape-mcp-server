@@ -1,0 +1,362 @@
+{
+  "goal_complete": true,
+  "package_index": "migration/package-stage38-final-comparison.json",
+  "requirements": [
+    {
+      "id": "1-state",
+      "requirement": "Separate branch, original state and preserved uncommitted work",
+      "status": "complete_scoped",
+      "evidence": [
+        "migration/python-retirement.json",
+        "docs/history/RUST_MIGRATION_LOG.md"
+      ],
+      "scope": "Branch codex/rust-migration; historical baseline c50a924. Backup before retirement. No commits/PR/publication."
+    },
+    {
+      "id": "2-contract",
+      "requirement": "Tools, defaults, schemas, annotations/gates, resources, prompts/instructions",
+      "status": "complete_scoped",
+      "evidence": [
+        "migration/discovery-stage38-comparison.json"
+      ],
+      "scope": "16 discovery configurations exact without normalization, full110/7/18. Frozen JSON, no current Python oracle."
+    },
+    {
+      "id": "2-results",
+      "requirement": "Substantive results/errors and family compatibility",
+      "status": "complete_scoped",
+      "evidence": [
+        "migration/results/current-headless-stage27-review/review.json",
+        "migration/results/export-name-review/tests.log",
+        "migration/results/security-stage38/comparison.json"
+      ],
+      "scope": "Historical family/error coverage + current Rust frozen regressions and affected current STDIO cases. Finite coverage, not every possible argument combination."
+    },
+    {
+      "id": "2-startup",
+      "requirement": "Real STDIO startup readiness and repeated raw results",
+      "status": "complete_scoped",
+      "evidence": [
+        "migration/results/rust-measurements-stage38/environment.json",
+        "migration/results/rust-measurements-stage38/raw-timings.json"
+      ],
+      "scope": "10 current server runs, spawn through initialize-response readiness; encoding/IPC/handler/serialization included."
+    },
+    {
+      "id": "2-rss",
+      "requirement": "Server and child memory",
+      "status": "complete_scoped",
+      "evidence": [
+        "migration/results/rust-measurements-stage38/memory.json",
+        "migration/results/rust-measurements-stage38/00-shell/rss-samples.json"
+      ],
+      "scope": "Observed ps RSS every50ms plus ps runtime, with child-tree snapshots. Shared pages/short missed peaks; no true peak claim."
+    },
+    {
+      "id": "2-headless",
+      "requirement": "SVG sizes, read/inspect, single edit, atomic batch, render/export/save/readback",
+      "status": "complete_scoped",
+      "evidence": [
+        "migration/results/rust-measurements-stage38/comparison.json"
+      ],
+      "scope": "Five alternating runs per engine,100/3000/15000rectangles,250 measured requests/startups; commands/env/raw/wire retained. Selected absolute results, no Python speedup claim."
+    },
+    {
+      "id": "2-phases",
+      "requirement": "Separate server/IPC/files/Inkscape time where useful",
+      "status": "complete_scoped",
+      "evidence": [
+        "docs/RUST_PHASE_MEASUREMENTS.md",
+        "docs/RUST_MIGRATION_REPORT.md"
+      ],
+      "scope": "Historical instrumented phase boundaries retained. Current roundtrip explicitly mixed; automatic before/after previews account for edit cost. Refinement secondary by user decision."
+    },
+    {
+      "id": "2-live",
+      "requirement": "Current live operation measurements",
+      "status": "complete_scoped",
+      "evidence": [
+        "migration/results/live-measurements-stage38-retry1/comparison.json",
+        "scripts/rust_current_live_measurements.py"
+      ],
+      "scope": "Five actual38 reconnects,15 stable selection/tree/RGBA observations; absolute mixed roundtrips and point RSS, no pure IPC/peak/Python speedup claim. Individual mutation timings in native traces."
+    },
+    {
+      "id": "3-rust",
+      "requirement": "Native server using official pinned rmcp",
+      "status": "complete_scoped",
+      "evidence": [
+        "rust/Cargo.toml",
+        "rust/Cargo.lock",
+        "rust/src/main.rs"
+      ],
+      "scope": "rmcp3.5.0; native Rust owns protocol and tools, not a Python MCP wrapper."
+    },
+    {
+      "id": "3-edit",
+      "requirement": "Originals, common pipeline, atomic validation/rollback, snapshots/records/no-op/approvals",
+      "status": "complete_scoped",
+      "evidence": [
+        "migration/package-stage38-cold-comparison.json",
+        "migration/package-stage38-warm-comparison.json",
+        "migration/results/export-name-review/tests.log"
+      ],
+      "scope": "Both actual archive installs verify transaction fixtures; current tests include crash/recovery child cases. The ignored child case is invoked by its parent test."
+    },
+    {
+      "id": "3-xml",
+      "requirement": "Safe XML, encodings/mixed content/IDs/references/namespaces/paint order",
+      "status": "complete_scoped",
+      "evidence": [
+        "migration/results/export-name-review/tests.log",
+        "migration/results/security-stage38/comparison.json"
+      ],
+      "scope": "libxml2 bounded parsing and conservative safe structural edits. CLI dependency staging rejects unsupported forms; not general arbitrary-SVG rewrite proof."
+    },
+    {
+      "id": "3-files",
+      "requirement": "Containment/no-follow/races/regular-file checks",
+      "status": "complete_scoped",
+      "evidence": [
+        "migration/results/security-stage38-special-files/comparison.json",
+        "migration/results/export-name-review/tests.log"
+      ],
+      "scope": "POSIX descriptor/race/recovery regressions;12 actual special-file/escape refusals. Windows excluded/deferred."
+    },
+    {
+      "id": "3-bounds",
+      "requirement": "Bounded inputs, artifacts/render outputs, diagnostics and request frames",
+      "status": "complete_scoped",
+      "evidence": [
+        "migration/results/output-limits-stage38/comparison.json",
+        "migration/results/stdio-frame-stage38/comparison.json",
+        "migration/results/diagnostic-limits-stage38/comparison.json"
+      ],
+      "scope": "Selected raw input/artifact/render byte and pixel caps + three large invalid errors + unfinished frame guard. No global RSS/every JSON-output claim; byte refusal may create empty planned directories."
+    },
+    {
+      "id": "3-publication",
+      "requirement": "Safe renderer assets and comparison/repeated export publication",
+      "status": "complete_scoped",
+      "evidence": [
+        "migration/results/renderer-assets-stage38-per_call/probe.json",
+        "migration/results/renderer-assets-stage38-shell/probe.json",
+        "migration/results/engine-routes-stage38-per_call/comparison.json",
+        "migration/results/engine-routes-stage38-shell/comparison.json",
+        "migration/results/compare-publication-stage38/comparison.json",
+        "migration/results/rust-measurements-stage38/comparison.json"
+      ],
+      "scope": "Assets17/routes8 both engines, comparison refusal before publication and blue/red readback.30 repeated exports have unique paths/prior bytes. Pair not crash-atomic."
+    },
+    {
+      "id": "3-policy",
+      "requirement": "Typed bounded tools; no arbitrary execution/network/tracing; semantic vector groups",
+      "status": "complete_scoped",
+      "evidence": [
+        "migration/discovery-stage38-comparison.json",
+        "docs/agent-usage-guide.md"
+      ],
+      "scope": "Exact instructions/gated surface; fixed subprocess/helper actions only. Guidance is not a runtime tracing-provenance detector."
+    },
+    {
+      "id": "3-oracle",
+      "requirement": "Preserve executable Python reference until migration complete",
+      "status": "superseded_by_user",
+      "evidence": [
+        "migration/python-retirement.json",
+        "CONTRIBUTING.md"
+      ],
+      "scope": "User explicitly requested removing rewritten Python and continuing Rust-only; immutable backup/contracts/history retained."
+    },
+    {
+      "id": "4-lifecycle",
+      "requirement": "Live session/reconnect/document guards/timeouts/uncertain-result IPC",
+      "status": "complete_scoped",
+      "evidence": [
+        "migration/results/export-name-review/tests.log",
+        "migration/discovery-stage38-comparison.json",
+        "migration/native-stage38-retry1-comparison.json",
+        "migration/native-structure-stage38-retry1-comparison.json",
+        "migration/native-transform-stage38-retry1-comparison.json",
+        "migration/native-order-stage38-retry1-comparison.json",
+        "migration/results/native-window-guard-stage38-retry1/comparison.json",
+        "migration/results/native-stage38-retry1/closure.json"
+      ],
+      "scope": "Current Rust guard/audit/uncertain-result regressions plus actual38 reconnect reset, real two-window refusal and closed-session reconnect. Finite failure coverage."
+    },
+    {
+      "id": "4-helpers",
+      "requirement": "Private packaged Python/inkex effects, supervisor and bridge",
+      "status": "complete_scoped",
+      "evidence": [
+        "migration/package-stage38-cold-comparison.json",
+        "migration/package-stage38-warm-comparison.json",
+        "runtime/README.md",
+        "migration/native-stage38-retry1-comparison.json",
+        "migration/native-structure-stage38-retry1-comparison.json",
+        "migration/native-transform-stage38-retry1-comparison.json",
+        "migration/native-order-stage38-retry1-comparison.json"
+      ],
+      "scope": "Packaged imports,two helper CLIs/private bus,helper6 plus actual38 native effect dispatch and Undo/Redo on owned synthetic documents."
+    },
+    {
+      "id": "4-investigation",
+      "requirement": "Investigate Rust helper transfer without replacing native Undo",
+      "status": "complete_scoped",
+      "evidence": [
+        "docs/RUST_HELPER_INVESTIGATION.md"
+      ],
+      "scope": "20 historical packaged-helper observations and explicit scope. Full rewrite is not required; fixed inkex native transaction retained."
+    },
+    {
+      "id": "4-gui-safety",
+      "requirement": "Startup/reconnect never launch GUI; preserve user documents/windows",
+      "status": "complete_scoped",
+      "evidence": [
+        "migration/package-stage38-cold-comparison.json",
+        "migration/results/security-stage38/comparison.json",
+        "migration/native-stage36-launch-comparison.json",
+        "docs/AGENT_HANDOFF.md",
+        "migration/results/native-window-guard-stage38-retry1/comparison.json",
+        "migration/results/native-stage38-retry1/closure.json"
+      ],
+      "scope": "MCP startup/reconnect no GUI launch, including terminal managed session. Synthetic windows only for edits. CUA post-closure getAXState reopened private welcome window; left untouched and disclosed, separate from MCP behavior."
+    },
+    {
+      "id": "4-native",
+      "requirement": "Current synthetic native Undo/Redo/guards/reconnect and live guarantees",
+      "status": "complete_scoped",
+      "evidence": [
+        "migration/native-stage38-retry1-comparison.json",
+        "migration/native-structure-stage38-retry1-comparison.json",
+        "migration/native-transform-stage38-retry1-comparison.json",
+        "migration/native-order-stage38-retry1-comparison.json",
+        "migration/results/native-window-guard-stage38-retry1/comparison.json",
+        "migration/results/native-stage38-retry1/closure.json"
+      ],
+      "scope": "Actual unchanged38 on active display:122 fixed native Undo/Redo/tree/RGBA/audit checks +5 two-window guards +closed reconnect. Lower identical copies does not prove differing-color occlusion. Finite scenarios, not every live effect/error."
+    },
+    {
+      "id": "5-package",
+      "requirement": "Ready local package without end-user compiler/Python/Homebrew",
+      "status": "complete_scoped",
+      "evidence": [
+        "migration/package-stage38-build-comparison.json",
+        "migration/package-stage38-cold-comparison.json",
+        "migration/package-stage38-warm-comparison.json"
+      ],
+      "scope": "Actual Mac archive relocated into fresh temporary directories, empty PATH,2533files. Clean separate-machine test user-deferred."
+    },
+    {
+      "id": "5-native-assets",
+      "requirement": "Prebuilt bridge, GTK/GLib ABI and packaged bus",
+      "status": "complete_scoped",
+      "evidence": [
+        "migration/doctor-stage38-comparison.json",
+        "docs/RUST_PACKAGING.md"
+      ],
+      "scope": "Current official Inkscape1.4.3/macOSarm64 prerequisite profiles; actual current GUI loading pending. Foreign/older ABI unverified."
+    },
+    {
+      "id": "5-doctor-setup",
+      "requirement": "Read-only doctor and interactive setup/launcher",
+      "status": "complete_scoped",
+      "evidence": [
+        "migration/doctor-stage38-comparison.json",
+        "migration/results/launcher-stage38/comparison.json",
+        "setup.sh",
+        "run-mcp.sh"
+      ],
+      "scope": "Doctor10 and launcher11; no user system repair or GUI; setup saves data config without manual env editing."
+    },
+    {
+      "id": "5-provenance",
+      "requirement": "Exact dependency source/notice attribution",
+      "status": "complete_scoped",
+      "evidence": [
+        "migration/notices-stage38-comparison.json",
+        "migration/cpython-stage35-provenance-comparison.json",
+        "migration/results/wheel-source-audit-stage35-final/comparison.json",
+        "migration/results/homebrew-source-audit/source-kit-stage37.json"
+      ],
+      "scope": "102crate inventories, exact19CPython notices,946+transform runtime,1259wheelmembers, native SBOM/source/GLibrecipepatch/BSD2; source kit reused unchanged. Not full binary reproduction/legal certification; inventory broader gaps retained."
+    },
+    {
+      "id": "5-targets",
+      "requirement": "Builders and supported target scope",
+      "status": "complete_scoped",
+      "evidence": [
+        ".github/workflows/rust-migration.yml",
+        "docs/install/compatibility.md"
+      ],
+      "scope": "Only current macOSarm64 execution claimed. Four POSIX native jobs prepared not executed; Windows backlog."
+    },
+    {
+      "id": "5-signing",
+      "requirement": "No security bypass, clear ad-hoc signing limitation",
+      "status": "complete_scoped",
+      "evidence": [
+        "docs/RUST_PACKAGING.md",
+        "scripts/migration_build_macos_package.py"
+      ],
+      "scope": "No DeveloperID/notarization claim/credentials blocker; owned copies ad-hoc signed, vendor app untouched."
+    },
+    {
+      "id": "6-checks",
+      "requirement": "Rust/helper/tooling, real STDIO/CLI/security/transactions",
+      "status": "complete_scoped",
+      "evidence": [
+        "migration/package-stage38-build-comparison.json",
+        "migration/results/export-name-review/tests.log",
+        "migration/results/export-name-review/clippy.log",
+        "migration/results/native-window-guard-stage38-retry1/comparison.json",
+        "migration/results/live-measurements-stage38-retry1/comparison.json",
+        "migration/results/native-stage38-retry1/closure.json"
+      ],
+      "scope": "Rust215/1ignored(fmt/clippy); helper6, current Ruff36files; current archive/headless/native acceptance. Prepared CI not remote results. Ignored recovery child exercised by parent."
+    },
+    {
+      "id": "7-docs",
+      "requirement": "Install/architecture/handoff/report/generated manifests",
+      "status": "complete_scoped",
+      "evidence": [
+        "docs/RUST_MIGRATION_REPORT.md",
+        "docs/AGENT_HANDOFF.md",
+        "llms.txt",
+        "llms-full.txt",
+        "migration/results/export-name-review/llms-stage38/llms.txt",
+        "migration/results/export-name-review/llms-stage38/llms-full.txt"
+      ],
+      "scope": "Active docs reconciled after native retry; historical build/audit/failures/logs retained. llms generated actual38 and byte-identical to roots. Final install/config/scenarios documented."
+    },
+    {
+      "id": "deferred-incident",
+      "requirement": "Historical live disappearing-group cause",
+      "status": "deferred_by_user",
+      "evidence": [
+        "docs/RUST_NEXT_PLAN.md"
+      ],
+      "scope": "One stage21 recorded incident; investigate only on recurrence, separate stage18 crash."
+    },
+    {
+      "id": "deferred-clean",
+      "requirement": "Clean-machine installation",
+      "status": "deferred_by_user",
+      "evidence": [
+        "docs/RUST_NEXT_PLAN.md"
+      ],
+      "scope": "User will verify later. Current temporary local archive installs remain actual evidence."
+    },
+    {
+      "id": "deferred-windows",
+      "requirement": "Windows port/reparse/process/runtime validation",
+      "status": "deferred_by_user",
+      "evidence": [
+        "docs/RUST_NEXT_PLAN.md"
+      ],
+      "scope": "No Windows compatibility claimed."
+    }
+  ],
+  "remaining_required": [],
+  "previous_audit": "migration/requirement-audit-stage38.json"
+}

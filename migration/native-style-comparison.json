@@ -1,0 +1,10 @@
+{
+  "passed": false,
+  "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage5",
+  "repeated_style_native_noop": false,
+  "first_Undo_SVG_identical_to_styled": true,
+  "second_Undo_removes_style": true,
+  "reference_live_records_created_per_approved_call": true,
+  "native_fault": "Repeated identical style creates an extra native Undo entry; no-op assertion failed on actual Inkscape 1.4.3.",
+  "owned_window_retained": true
+}

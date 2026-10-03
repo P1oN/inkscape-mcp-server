@@ -1,0 +1,616 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "implementation": "python",
+      "repeat": 0,
+      "field": "scene_sha256",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 0,
+      "field": "selection",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 0,
+      "field": "scene_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 0,
+      "field": "render_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 1,
+      "field": "scene_sha256",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 1,
+      "field": "selection",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 1,
+      "field": "scene_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 1,
+      "field": "render_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 2,
+      "field": "scene_sha256",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 2,
+      "field": "selection",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 2,
+      "field": "scene_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 2,
+      "field": "render_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 3,
+      "field": "scene_sha256",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 3,
+      "field": "selection",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 3,
+      "field": "scene_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 3,
+      "field": "render_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 4,
+      "field": "scene_sha256",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 4,
+      "field": "selection",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 4,
+      "field": "scene_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 4,
+      "field": "render_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 0,
+      "field": "scene_sha256",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 0,
+      "field": "selection",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 0,
+      "field": "scene_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 0,
+      "field": "render_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 1,
+      "field": "scene_sha256",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 1,
+      "field": "selection",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 1,
+      "field": "scene_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 1,
+      "field": "render_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 2,
+      "field": "scene_sha256",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 2,
+      "field": "selection",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 2,
+      "field": "scene_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 2,
+      "field": "render_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 3,
+      "field": "scene_sha256",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 3,
+      "field": "selection",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 3,
+      "field": "scene_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 3,
+      "field": "render_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 4,
+      "field": "scene_sha256",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 4,
+      "field": "selection",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 4,
+      "field": "scene_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 4,
+      "field": "render_pixels",
+      "passed": true
+    }
+  ],
+  "summary": {
+    "python": {
+      "startup_median_ms": 581.4625,
+      "operations": {
+        "initialize": {
+          "roundtrip_ns": 579002458,
+          "server_user_delta": 487215500,
+          "server_system_delta": 67188333,
+          "server_child_user_delta": 0,
+          "server_child_system_delta": 0,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 0,
+          "sampled_peak_tree_rss_bytes": 95191040,
+          "sampled_peak_server_rss_bytes": 95191040,
+          "sampled_peak_tree_footprint_bytes": 78561856,
+          "sampled_peak_server_footprint_bytes": 78561856,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 0,
+          "sampled_peak_gui_tree_rss_bytes": 215875584,
+          "sampled_peak_gui_tree_footprint_bytes": 184601024
+        },
+        "connect": {
+          "roundtrip_ns": 1282168958,
+          "server_user_delta": 104087542,
+          "server_system_delta": 57059541,
+          "server_child_user_delta": 655810750,
+          "server_child_system_delta": 204525791,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 4096,
+          "sampled_peak_tree_rss_bytes": 233979904,
+          "sampled_peak_server_rss_bytes": 98172928,
+          "sampled_peak_tree_footprint_bytes": 117737104,
+          "sampled_peak_server_footprint_bytes": 81117736,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 33703375,
+          "sampled_peak_gui_tree_rss_bytes": 215924736,
+          "sampled_peak_gui_tree_footprint_bytes": 184650176
+        },
+        "documents": {
+          "roundtrip_ns": 22258000,
+          "server_user_delta": 3228292,
+          "server_system_delta": 3732791,
+          "server_child_user_delta": 8597250,
+          "server_child_system_delta": 4832167,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 0,
+          "sampled_peak_tree_rss_bytes": 98811904,
+          "sampled_peak_server_rss_bytes": 98172928,
+          "sampled_peak_tree_footprint_bytes": 81806056,
+          "sampled_peak_server_footprint_bytes": 81117736,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 1316916,
+          "sampled_peak_gui_tree_rss_bytes": 215924736,
+          "sampled_peak_gui_tree_footprint_bytes": 184650176
+        },
+        "bind": {
+          "roundtrip_ns": 340909208,
+          "server_user_delta": 66968250,
+          "server_system_delta": 29937417,
+          "server_child_user_delta": 72018250,
+          "server_child_system_delta": 42363042,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 0,
+          "sampled_peak_tree_rss_bytes": 108019712,
+          "sampled_peak_server_rss_bytes": 98172928,
+          "sampled_peak_tree_footprint_bytes": 83887088,
+          "sampled_peak_server_footprint_bytes": 81117736,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 286990126,
+          "sampled_peak_gui_tree_rss_bytes": 215941120,
+          "sampled_peak_gui_tree_footprint_bytes": 185436608
+        },
+        "status": {
+          "roundtrip_ns": 174886916,
+          "server_user_delta": 51671916,
+          "server_system_delta": 22700375,
+          "server_child_user_delta": 55158875,
+          "server_child_system_delta": 31491083,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 0,
+          "sampled_peak_tree_rss_bytes": 103579648,
+          "sampled_peak_server_rss_bytes": 98172928,
+          "sampled_peak_tree_footprint_bytes": 82084848,
+          "sampled_peak_server_footprint_bytes": 81117736,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 40874666,
+          "sampled_peak_gui_tree_rss_bytes": 215957504,
+          "sampled_peak_gui_tree_footprint_bytes": 185321920
+        },
+        "selection": {
+          "roundtrip_ns": 40874042,
+          "server_user_delta": 3037709,
+          "server_system_delta": 7475041,
+          "server_child_user_delta": 17109541,
+          "server_child_system_delta": 9950625,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 0,
+          "sampled_peak_tree_rss_bytes": 103579648,
+          "sampled_peak_server_rss_bytes": 98172928,
+          "sampled_peak_tree_footprint_bytes": 82461560,
+          "sampled_peak_server_footprint_bytes": 81117736,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 7757708,
+          "sampled_peak_gui_tree_rss_bytes": 215957504,
+          "sampled_peak_gui_tree_footprint_bytes": 185321920
+        },
+        "scene": {
+          "roundtrip_ns": 231156042,
+          "server_user_delta": 20219584,
+          "server_system_delta": 32255083,
+          "server_child_user_delta": 89285417,
+          "server_child_system_delta": 49312708,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 8192,
+          "sampled_peak_tree_rss_bytes": 107806720,
+          "sampled_peak_server_rss_bytes": 98222080,
+          "sampled_peak_tree_footprint_bytes": 83756016,
+          "sampled_peak_server_footprint_bytes": 81134120,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 44344167,
+          "sampled_peak_gui_tree_rss_bytes": 215957504,
+          "sampled_peak_gui_tree_footprint_bytes": 185371072
+        },
+        "render": {
+          "roundtrip_ns": 115686125,
+          "server_user_delta": 4779875,
+          "server_system_delta": 15063667,
+          "server_child_user_delta": 43879875,
+          "server_child_system_delta": 23653042,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 8192,
+          "sampled_peak_tree_rss_bytes": 107167744,
+          "sampled_peak_server_rss_bytes": 98222080,
+          "sampled_peak_tree_footprint_bytes": 83100680,
+          "sampled_peak_server_footprint_bytes": 81134120,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 25622084,
+          "sampled_peak_gui_tree_rss_bytes": 215957504,
+          "sampled_peak_gui_tree_footprint_bytes": 184814016
+        }
+      }
+    },
+    "rust": {
+      "startup_median_ms": 7.45225,
+      "operations": {
+        "initialize": {
+          "roundtrip_ns": 5194875,
+          "server_user_delta": 2865834,
+          "server_system_delta": 1791333,
+          "server_child_user_delta": 0,
+          "server_child_system_delta": 0,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 0,
+          "sampled_peak_tree_rss_bytes": 13041664,
+          "sampled_peak_server_rss_bytes": 13041664,
+          "sampled_peak_tree_footprint_bytes": 6308320,
+          "sampled_peak_server_footprint_bytes": 6308320,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 0,
+          "sampled_peak_gui_tree_rss_bytes": 215957504,
+          "sampled_peak_gui_tree_footprint_bytes": 184666560
+        },
+        "connect": {
+          "roundtrip_ns": 1287353750,
+          "server_user_delta": 5056541,
+          "server_system_delta": 20217917,
+          "server_child_user_delta": 668179000,
+          "server_child_system_delta": 194929125,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 0,
+          "sampled_peak_tree_rss_bytes": 152256512,
+          "sampled_peak_server_rss_bytes": 17678336,
+          "sampled_peak_tree_footprint_bytes": 45008456,
+          "sampled_peak_server_footprint_bytes": 8962552,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 23908749,
+          "sampled_peak_gui_tree_rss_bytes": 215973888,
+          "sampled_peak_gui_tree_footprint_bytes": 184715712
+        },
+        "documents": {
+          "roundtrip_ns": 25804250,
+          "server_user_delta": 267667,
+          "server_system_delta": 872666,
+          "server_child_user_delta": 9080208,
+          "server_child_system_delta": 4061125,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 0,
+          "sampled_peak_tree_rss_bytes": 26902528,
+          "sampled_peak_server_rss_bytes": 17776640,
+          "sampled_peak_tree_footprint_bytes": 9290256,
+          "sampled_peak_server_footprint_bytes": 9060856,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 1312958,
+          "sampled_peak_gui_tree_rss_bytes": 215973888,
+          "sampled_peak_gui_tree_footprint_bytes": 184617408
+        },
+        "bind": {
+          "roundtrip_ns": 255845625,
+          "server_user_delta": 2025000,
+          "server_system_delta": 8862250,
+          "server_child_user_delta": 87247292,
+          "server_child_system_delta": 41397125,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 0,
+          "sampled_peak_tree_rss_bytes": 27951104,
+          "sampled_peak_server_rss_bytes": 17858560,
+          "sampled_peak_tree_footprint_bytes": 11781056,
+          "sampled_peak_server_footprint_bytes": 9142776,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 17809750,
+          "sampled_peak_gui_tree_rss_bytes": 216006656,
+          "sampled_peak_gui_tree_footprint_bytes": 184650176
+        },
+        "status": {
+          "roundtrip_ns": 191546667,
+          "server_user_delta": 1614333,
+          "server_system_delta": 6358750,
+          "server_child_user_delta": 66247000,
+          "server_child_system_delta": 30788125,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 0,
+          "sampled_peak_tree_rss_bytes": 28098560,
+          "sampled_peak_server_rss_bytes": 18022400,
+          "sampled_peak_tree_footprint_bytes": 12010432,
+          "sampled_peak_server_footprint_bytes": 9306616,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 10165626,
+          "sampled_peak_gui_tree_rss_bytes": 216023040,
+          "sampled_peak_gui_tree_footprint_bytes": 184584640
+        },
+        "selection": {
+          "roundtrip_ns": 51879500,
+          "server_user_delta": 647959,
+          "server_system_delta": 1737542,
+          "server_child_user_delta": 17734750,
+          "server_child_system_delta": 8331458,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 0,
+          "sampled_peak_tree_rss_bytes": 27721728,
+          "sampled_peak_server_rss_bytes": 18235392,
+          "sampled_peak_tree_footprint_bytes": 10388224,
+          "sampled_peak_server_footprint_bytes": 9519608,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 2231541,
+          "sampled_peak_gui_tree_rss_bytes": 216023040,
+          "sampled_peak_gui_tree_footprint_bytes": 184551872
+        },
+        "scene": {
+          "roundtrip_ns": 271261917,
+          "server_user_delta": 2143333,
+          "server_system_delta": 8684041,
+          "server_child_user_delta": 82585083,
+          "server_child_system_delta": 35943375,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 8192,
+          "sampled_peak_tree_rss_bytes": 28065792,
+          "sampled_peak_server_rss_bytes": 19103744,
+          "sampled_peak_tree_footprint_bytes": 12338112,
+          "sampled_peak_server_footprint_bytes": 10207736,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 32783999,
+          "sampled_peak_gui_tree_rss_bytes": 216268800,
+          "sampled_peak_gui_tree_footprint_bytes": 184650176
+        },
+        "render": {
+          "roundtrip_ns": 153704459,
+          "server_user_delta": 904458,
+          "server_system_delta": 4811625,
+          "server_child_user_delta": 42296000,
+          "server_child_system_delta": 19248292,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 8192,
+          "sampled_peak_tree_rss_bytes": 28704768,
+          "sampled_peak_server_rss_bytes": 19136512,
+          "sampled_peak_tree_footprint_bytes": 12813248,
+          "sampled_peak_server_footprint_bytes": 10240504,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 25781667,
+          "sampled_peak_gui_tree_rss_bytes": 216481792,
+          "sampled_peak_gui_tree_footprint_bytes": 184764864
+        }
+      }
+    }
+  },
+  "observations": {
+    "python": {
+      "requests_per_run": [
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "sampling_errors": {
+        "mcp_samples": [
+          {
+            "repeat": 0,
+            "timestamp_ns": 894368644568541,
+            "pid": 22485,
+            "operation": "rusage",
+            "errno": 3
+          }
+        ],
+        "gui_samples": []
+      },
+      "memory_observations_complete": false
+    },
+    "rust": {
+      "requests_per_run": [
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "sampling_errors": {
+        "mcp_samples": [],
+        "gui_samples": []
+      },
+      "memory_observations_complete": true
+    }
+  },
+  "environment": {
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "session": {
+      "root": "/private/tmp/imcp-native-h1xg7o7d",
+      "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage21",
+      "profile": "/private/tmp/imcp-native-h1xg7o7d/profile",
+      "vendor_executable_sha256": "ad03b220889be90ed3276102dac39638de75cca91c364d58b482dac85395c193",
+      "state": "owned-native-fixed-effects-passed-retained",
+      "env": {
+        "HOME": "/private/tmp/imcp-native-h1xg7o7d/home",
+        "TMPDIR": "/private/tmp/imcp-native-h1xg7o7d",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "INKSCAPE_PROFILE_DIR": "/private/tmp/imcp-native-h1xg7o7d/profile",
+        "INKSCAPE_MCP_WORKSPACE_ROOTS": "/private/tmp/imcp-native-h1xg7o7d/workspace",
+        "INKSCAPE_MCP_LIVE_ENABLED": "1",
+        "INKSCAPE_MCP_TOOL_PROFILE": "full",
+        "INKSCAPE_MCP_MANAGED_DIR": "/private/tmp/imcp-native-h1xg7o7d/session",
+        "INKSCAPE_MCP_LIVE_RENDEZVOUS": "/private/tmp/imcp-native-h1xg7o7d/absent-rendezvous",
+        "INKSCAPE_MCP_PROCESS_TIMEOUT_S": "10"
+      },
+      "manifest": {
+        "address": "unix:path=/private/tmp/imcp-native-h1xg7o7d/session/bus.sock",
+        "inkscape_pid": 19927,
+        "supervisor_pid": 19914,
+        "context_bridge": true
+      },
+      "document": {
+        "window_id": "a33ad685-dad2-487a-b910-b0479ee9f82e",
+        "document_id": "f5fb7c0f-2347-4efd-be0f-150e602453c9",
+        "name": "New document 1 - Inkscape",
+        "path": null,
+        "object_count": null
+      }
+    },
+    "repeats": 5,
+    "harness_sha256": "9daf1cae3291ed89bfdf4479227bee01187756646d2ad50074e5810cf68c0eae",
+    "binary_sha256": "c30527cf22c33ff3bd9291f7dff324dc5318338e36162b5d5355628ec6c33030",
+    "scope": "Sequential read-only live operations on the recorded owned GUI/package; no launch or edits.",
+    "limitations": [
+      "20ms sampled peaks can miss children; RSS sums include shared pages",
+      "MCP and supervisor trees measured separately, not exclusive simultaneous phases",
+      "GUI CPU delta includes only processes surviving both boundaries",
+      "roundtrip includes client JSON, IPC, filesystem and native processing",
+      "GUI and private bus warm throughout; no cache flush or cold launch measured",
+      "bind selects only the recorded owned document; reconnect clears live history"
+    ]
+  },
+  "scope": "Five paired read-only existing-owned stage21 GUI trials. No cold launch, edits, native Undo, exclusive phases or isolated machine load measured. Separate MCP/GUI sampled RSS includes shared pages and may miss peaks."
+}

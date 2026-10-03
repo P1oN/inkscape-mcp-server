@@ -1,0 +1,155 @@
+{
+  "passed": true,
+  "native_GUI": true,
+  "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage27",
+  "source": "migration/results/native-gui-stage29",
+  "immediate_audit_captured": true,
+  "verification_mode": "owned workspace",
+  "checks": {
+    "insert_immediate_applied_audit": true,
+    "style-changed_immediate_applied_audit": true,
+    "style-repeated_immediate_applied_audit": true,
+    "duplicate_immediate_applied_audit": true,
+    "approved_repeat_has_distinct_audit": true,
+    "native_anonymous_group_id_confirmed": true,
+    "named_semantic_group": true,
+    "rectangle_geometry_and_fill": true,
+    "one_insert_Undo_removes_entire_group": true,
+    "insert_Redo_exact_tree": true,
+    "insert_Undo_exact_before_RGBA": true,
+    "insert_Redo_exact_RGBA": true,
+    "insert_has_visible_effect": true,
+    "repeated_style_identical_RGBA": true,
+    "style_changes_selected_wrapper": true,
+    "explicit_child_fill_preserves_RGBA": true,
+    "one_style_Undo_no_extra_repeat_step": true,
+    "style_Redo_exact_tree_RGBA": true,
+    "duplicate_three_unique_new_ids": true,
+    "duplicate_original_preserved": true,
+    "one_duplicate_Undo_exact_tree_RGBA": true,
+    "duplicate_Redo_exact_tree_RGBA": true,
+    "unbound-guard_refused": true,
+    "approval-guard_refused": true,
+    "guards_preserve_tree_RGBA": true,
+    "insert_reconnect_requires_binding": true,
+    "insert_editable_vectors_only": true,
+    "undone_reconnect_requires_binding": true,
+    "undone_editable_vectors_only": true,
+    "redone_reconnect_requires_binding": true,
+    "redone_editable_vectors_only": true,
+    "style-repeat_reconnect_requires_binding": true,
+    "style-repeat_editable_vectors_only": true,
+    "style-undone_reconnect_requires_binding": true,
+    "style-undone_editable_vectors_only": true,
+    "style-redone_reconnect_requires_binding": true,
+    "style-redone_editable_vectors_only": true,
+    "duplicate_reconnect_requires_binding": true,
+    "duplicate_editable_vectors_only": true,
+    "duplicate-undone_reconnect_requires_binding": true,
+    "duplicate-undone_editable_vectors_only": true,
+    "duplicate-redone_reconnect_requires_binding": true,
+    "duplicate-redone_editable_vectors_only": true,
+    "guarded_reconnect_requires_binding": true,
+    "guarded_editable_vectors_only": true,
+    "vendor_executable_unchanged": true
+  },
+  "artifacts": {
+    "live-view-20261003T084417_674504Z-251802d0.png": {
+      "sha256": "7082640f0cae012a660c893bc5e1f1c30f8d76dd59f9738ded732ef995725865",
+      "bytes": 6041
+    },
+    "live-view-20261003T084350_314504Z-8391aaa1.png": {
+      "sha256": "7082640f0cae012a660c893bc5e1f1c30f8d76dd59f9738ded732ef995725865",
+      "bytes": 6041
+    },
+    "live-view-20261003T084445_309922Z-822aea16.png": {
+      "sha256": "e197bfb508e754625d4b2f21c0772384fa2c51c68a4a7bfeb59ff66ef3c53121",
+      "bytes": 6127
+    },
+    "live-view-20261003T084351_680014Z-afd24d91.png": {
+      "sha256": "e197bfb508e754625d4b2f21c0772384fa2c51c68a4a7bfeb59ff66ef3c53121",
+      "bytes": 6127
+    },
+    "live-view-20261003T084546_403095Z-673323c8.png": {
+      "sha256": "e197bfb508e754625d4b2f21c0772384fa2c51c68a4a7bfeb59ff66ef3c53121",
+      "bytes": 6127
+    },
+    "live-view-20261003T084546_701749Z-09657f28.png": {
+      "sha256": "e197bfb508e754625d4b2f21c0772384fa2c51c68a4a7bfeb59ff66ef3c53121",
+      "bytes": 6127
+    },
+    "live-view-20261003T084547_192099Z-fd646f86.png": {
+      "sha256": "e197bfb508e754625d4b2f21c0772384fa2c51c68a4a7bfeb59ff66ef3c53121",
+      "bytes": 6127
+    },
+    "live-view-20261003T084547_485114Z-3910c339.png": {
+      "sha256": "e197bfb508e754625d4b2f21c0772384fa2c51c68a4a7bfeb59ff66ef3c53121",
+      "bytes": 6127
+    },
+    "live-view-20261003T084621_799128Z-af8a6e70.png": {
+      "sha256": "e197bfb508e754625d4b2f21c0772384fa2c51c68a4a7bfeb59ff66ef3c53121",
+      "bytes": 6127
+    },
+    "live-view-20261003T084645_185048Z-88ef9f74.png": {
+      "sha256": "e197bfb508e754625d4b2f21c0772384fa2c51c68a4a7bfeb59ff66ef3c53121",
+      "bytes": 6127
+    },
+    "live-view-20261003T084754_348783Z-a7908e42.png": {
+      "sha256": "e197bfb508e754625d4b2f21c0772384fa2c51c68a4a7bfeb59ff66ef3c53121",
+      "bytes": 6127
+    },
+    "live-view-20261003T085246_517287Z-fd88397a.png": {
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33",
+      "bytes": 6130
+    },
+    "live-view-20261003T084716_955813Z-6c08e8c1.png": {
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33",
+      "bytes": 6130
+    },
+    "live-view-20261003T085325_942705Z-2ad35382.png": {
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33",
+      "bytes": 6130
+    },
+    "native-insert.svg": {
+      "sha256": "d1dea18f1cba0cefd7e4a90a929cd0734acb16bbd4bf9adf9673342d11f047bd",
+      "bytes": 1425
+    },
+    "native-undone.svg": {
+      "sha256": "fd8ba7fdd13f0251ca85e3a862cacdd3fd798447b28c4994a1d11158150b23fb",
+      "bytes": 1125
+    },
+    "native-redone.svg": {
+      "sha256": "d1dea18f1cba0cefd7e4a90a929cd0734acb16bbd4bf9adf9673342d11f047bd",
+      "bytes": 1425
+    },
+    "native-style-repeat.svg": {
+      "sha256": "350819a405b36e20df0d695dcd3b536478efd481cefa5553b797363355237282",
+      "bytes": 1451
+    },
+    "native-style-undone.svg": {
+      "sha256": "e699d9869c0d6f36f710c31e8d8fb3ac2ec31f62095c1584fdf31507f96597de",
+      "bytes": 1425
+    },
+    "native-style-redone.svg": {
+      "sha256": "350819a405b36e20df0d695dcd3b536478efd481cefa5553b797363355237282",
+      "bytes": 1451
+    },
+    "native-duplicate.svg": {
+      "sha256": "2fd0122261d9169e0c2141bb77400f91855cac69032823cdb47b7b8e3d880d21",
+      "bytes": 1815
+    },
+    "native-duplicate-undone.svg": {
+      "sha256": "350819a405b36e20df0d695dcd3b536478efd481cefa5553b797363355237282",
+      "bytes": 1451
+    },
+    "native-duplicate-redone.svg": {
+      "sha256": "2fd0122261d9169e0c2141bb77400f91855cac69032823cdb47b7b8e3d880d21",
+      "bytes": 1815
+    },
+    "native-guarded.svg": {
+      "sha256": "2fd0122261d9169e0c2141bb77400f91855cac69032823cdb47b7b8e3d880d21",
+      "bytes": 1815
+    }
+  },
+  "scope": "One owned blank synthetic document; fixed insertion, wrapper style repeat, duplicate, Undo/Redo, reconnect and approval/binding guards. The explicit blue child fill overrides the changed orange wrapper fill. Not all live effects or failure scenarios."
+}

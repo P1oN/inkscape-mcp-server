@@ -1,0 +1,7 @@
+{
+  "scenarios": 12,
+  "differences": [],
+  "passed": true,
+  "binary": "/Users/bm/Documents/repos/inkscape-mcp-server/rust/target/release/inkscape-mcp-rust",
+  "binary_sha256": "e85979a3c7b5a80b2943ac088e1cd5c5e50e0fd1ccf8f3326587eed004483172"
+}

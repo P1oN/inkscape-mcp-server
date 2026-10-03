@@ -1,0 +1,136 @@
+{
+  "complete_argument_compatibility": false,
+  "stage": "defaults, finite scalar and nested model materialization",
+  "source_binary_sha256": "e8533a74973a4803c2c2c1fd44e244687fddcffce4b915528b7496fe3c577deb",
+  "root_default_cases": 110,
+  "supplied_value_cases": 182,
+  "reference_value_cases": 292,
+  "reference": "migration/argument-normalization-reference-recapture.json",
+  "reference_value_float_comparison": "IEEE f64 equality through canonical exponent spelling; integers exact",
+  "reference_deferred_nonfinite_samples": 4,
+  "reference_invalid_samples": 2,
+  "Rust_tests_passed": 189,
+  "ignored_child_entry": 1,
+  "clippy_all_targets": true,
+  "format": true,
+  "Ruff_files": 316,
+  "mypy_sources": 122,
+  "negative_STDIO_matrices": [
+    {
+      "report": "migration/arguments-empty-normalization-comparison.json",
+      "observations": 87,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-required-objects-normalization-comparison.json",
+      "observations": 87,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-required-null-normalization-comparison.json",
+      "observations": 87,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-type-fields-normalization-comparison.json",
+      "observations": 418,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-missing-one-normalization-comparison.json",
+      "observations": 147,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-unknown-normalization-comparison.json",
+      "observations": 110,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-nested-unknown-normalization-comparison.json",
+      "observations": 6,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-invalid-tag-normalization-comparison.json",
+      "observations": 18,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-numeric-text-normalization-comparison.json",
+      "observations": 2250,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    }
+  ],
+  "negative_STDIO_observations": 3210,
+  "negative_STDIO_starts": 18,
+  "negative_normalization": "none",
+  "coercion_behavior": [
+    {
+      "report": "migration/repeat-coercion-final-comparison.json",
+      "scenarios": 19,
+      "coerced_wire_requests": 38,
+      "wire_requests_with_ignored_model_extras": 0
+    },
+    {
+      "report": "migration/batch_members-coercion-final-comparison.json",
+      "scenarios": 24,
+      "coerced_wire_requests": 48,
+      "wire_requests_with_ignored_model_extras": 48
+    },
+    {
+      "report": "migration/find-coercion-final-comparison.json",
+      "scenarios": 45,
+      "coerced_wire_requests": 38,
+      "wire_requests_with_ignored_model_extras": 20
+    },
+    {
+      "report": "migration/edit-coercion-verified-comparison.json",
+      "scenarios": 122,
+      "coerced_wire_requests": 66,
+      "wire_requests_with_ignored_model_extras": 12
+    }
+  ],
+  "coercion_scenarios": 210,
+  "package_stage13_contains_this_change": false,
+  "full_migration_complete": false,
+  "remaining": [
+    "multi-type union validation and model branch semantics",
+    "custom model validators/aliases and complete length/tuple/map constraints",
+    "nonfinite model-value representation and all downstream behavior",
+    "large integer parsing limits and pathological input/error formatting",
+    "reserved/injected argument semantics",
+    "packaged native acceptance for new source",
+    "other-platform packaging/runtime and native acceptance"
+  ],
+  "package_stage14_contains_this_change": true,
+  "package_stage14_report": "migration/package-stage14-build-comparison.json",
+  "package_stage14_native_GUI_acceptance": false
+}

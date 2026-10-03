@@ -1,0 +1,1259 @@
+{
+  "passed": true,
+  "scope": "Actual current-binary calls from the named cohort/current checks only",
+  "additional_current_evidence": [
+    "fresh_release_edit",
+    "archive_cold",
+    "archive_warm"
+  ],
+  "binary_sha256": "62a75763d517af691c0cc1c9026d8963dc9bb33394d9dfdd76aa8fa9d5819f18",
+  "cohorts": [
+    "migration/results/current-family-stage27-v2",
+    "migration/results/current-headless-release-stage27-verified",
+    "migration/results/current-headless-package-stage27-verified"
+  ],
+  "family_scenario_counts": {
+    "current-family-stage27-v2/adopt": 152,
+    "current-family-stage27-v2/batch_members": 24,
+    "current-family-stage27-v2/create": 93,
+    "current-family-stage27-v2/duplicate": 19,
+    "current-family-stage27-v2/fragment": 131,
+    "current-family-stage27-v2/grid": 102,
+    "current-family-stage27-v2/optimize": 161,
+    "current-family-stage27-v2/place": 69,
+    "current-family-stage27-v2/recovery": 13,
+    "current-family-stage27-v2/reparent": 42,
+    "current-family-stage27-v2/repeat": 19,
+    "current-family-stage27-v2/save": 50,
+    "current-family-stage27-v2/set": 17,
+    "current-family-stage27-v2/tile": 27,
+    "current-family-stage27-v2/transform": 116,
+    "current-headless-release-stage27-verified/action": 110,
+    "current-headless-release-stage27-verified/action_discovery": 98,
+    "current-headless-release-stage27-verified/action_fault": 32,
+    "current-headless-release-stage27-verified/batch": 21,
+    "current-headless-release-stage27-verified/capability": 46,
+    "current-headless-release-stage27-verified/find": 45,
+    "current-headless-release-stage27-verified/intent": 820,
+    "current-headless-release-stage27-verified/path": 170,
+    "current-headless-release-stage27-verified/path_fault": 32,
+    "current-headless-release-stage27-verified/profile": 28,
+    "current-headless-release-stage27-verified/quality": 126,
+    "current-headless-release-stage27-verified/read": 71,
+    "current-headless-release-stage27-verified/reload": 11,
+    "current-headless-release-stage27-verified/render": 74,
+    "current-headless-release-stage27-verified/retention": 12,
+    "current-headless-release-stage27-verified/stat": 19,
+    "current-headless-package-stage27-verified/action": 110,
+    "current-headless-package-stage27-verified/batch": 21,
+    "current-headless-package-stage27-verified/intent": 820,
+    "current-headless-package-stage27-verified/path": 170,
+    "current-headless-package-stage27-verified/profile": 28,
+    "current-headless-package-stage27-verified/quality": 126,
+    "current-headless-package-stage27-verified/read": 71,
+    "current-headless-package-stage27-verified/reload": 11,
+    "current-headless-package-stage27-verified/render": 74,
+    "current-headless-package-stage27-verified/retention": 12,
+    "current-headless-package-stage27-verified/stat": 19
+  },
+  "tools": {
+    "diagnose_runtime": {
+      "requests": 18,
+      "successful_replies": 10,
+      "error_replies": 8,
+      "changed_true_replies": 0,
+      "families": [
+        "current-headless-release-stage27-verified/capability"
+      ]
+    },
+    "list_capabilities": {
+      "requests": 40,
+      "successful_replies": 32,
+      "error_replies": 8,
+      "changed_true_replies": 0,
+      "families": [
+        "archive_cold",
+        "archive_warm",
+        "current-headless-release-stage27-verified/capability"
+      ]
+    },
+    "stat_artifact": {
+      "requests": 28,
+      "successful_replies": 14,
+      "error_replies": 14,
+      "changed_true_replies": 0,
+      "families": [
+        "current-headless-package-stage27-verified/stat",
+        "current-headless-release-stage27-verified/stat"
+      ]
+    },
+    "stat_artifacts": {
+      "requests": 10,
+      "successful_replies": 4,
+      "error_replies": 6,
+      "changed_true_replies": 0,
+      "families": [
+        "current-headless-package-stage27-verified/stat",
+        "current-headless-release-stage27-verified/stat"
+      ]
+    },
+    "get_workspace_info": {
+      "requests": 15,
+      "successful_replies": 15,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": [
+        "current-family-stage27-v2/create",
+        "current-family-stage27-v2/duplicate",
+        "current-family-stage27-v2/reparent",
+        "current-family-stage27-v2/repeat",
+        "current-family-stage27-v2/save",
+        "current-family-stage27-v2/tile",
+        "current-headless-package-stage27-verified/read",
+        "current-headless-release-stage27-verified/find",
+        "current-headless-release-stage27-verified/read",
+        "fresh_release_edit"
+      ]
+    },
+    "list_actions": {
+      "requests": 51,
+      "successful_replies": 51,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": [
+        "current-headless-release-stage27-verified/action_discovery"
+      ]
+    },
+    "discover_extensions": {
+      "requests": 17,
+      "successful_replies": 17,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": [
+        "current-headless-release-stage27-verified/action_discovery"
+      ]
+    },
+    "validate_action_chain": {
+      "requests": 24,
+      "successful_replies": 4,
+      "error_replies": 20,
+      "changed_true_replies": 0,
+      "families": [
+        "current-headless-package-stage27-verified/action",
+        "current-headless-release-stage27-verified/action"
+      ]
+    },
+    "run_action_chain": {
+      "requests": 8,
+      "successful_replies": 4,
+      "error_replies": 4,
+      "changed_true_replies": 4,
+      "families": [
+        "current-headless-package-stage27-verified/action",
+        "current-headless-release-stage27-verified/action"
+      ]
+    },
+    "run_raw_action": {
+      "requests": 32,
+      "successful_replies": 17,
+      "error_replies": 15,
+      "changed_true_replies": 2,
+      "families": [
+        "current-headless-package-stage27-verified/action",
+        "current-headless-release-stage27-verified/action",
+        "current-headless-release-stage27-verified/action_fault"
+      ]
+    },
+    "apply_edits": {
+      "requests": 31,
+      "successful_replies": 14,
+      "error_replies": 17,
+      "changed_true_replies": 14,
+      "families": [
+        "archive_cold",
+        "archive_warm",
+        "current-family-stage27-v2/create",
+        "current-family-stage27-v2/duplicate",
+        "current-family-stage27-v2/reparent",
+        "current-family-stage27-v2/tile",
+        "fresh_release_edit"
+      ]
+    },
+    "set_document_svg": {
+      "requests": 9,
+      "successful_replies": 5,
+      "error_replies": 4,
+      "changed_true_replies": 5,
+      "families": [
+        "current-family-stage27-v2/adopt"
+      ]
+    },
+    "insert_svg_fragment": {
+      "requests": 21,
+      "successful_replies": 7,
+      "error_replies": 14,
+      "changed_true_replies": 7,
+      "families": [
+        "current-family-stage27-v2/adopt"
+      ]
+    },
+    "compose_grid": {
+      "requests": 18,
+      "successful_replies": 6,
+      "error_replies": 12,
+      "changed_true_replies": 6,
+      "families": [
+        "current-family-stage27-v2/grid"
+      ]
+    },
+    "place_document": {
+      "requests": 19,
+      "successful_replies": 4,
+      "error_replies": 15,
+      "changed_true_replies": 4,
+      "families": [
+        "current-family-stage27-v2/place"
+      ]
+    },
+    "replace_svg_fragment": {
+      "requests": 27,
+      "successful_replies": 9,
+      "error_replies": 18,
+      "changed_true_replies": 6,
+      "families": [
+        "current-family-stage27-v2/fragment"
+      ]
+    },
+    "create_rect": {
+      "requests": 5,
+      "successful_replies": 3,
+      "error_replies": 2,
+      "changed_true_replies": 3,
+      "families": [
+        "current-family-stage27-v2/create"
+      ]
+    },
+    "create_circle": {
+      "requests": 3,
+      "successful_replies": 1,
+      "error_replies": 2,
+      "changed_true_replies": 1,
+      "families": [
+        "current-family-stage27-v2/create"
+      ]
+    },
+    "create_ellipse": {
+      "requests": 1,
+      "successful_replies": 1,
+      "error_replies": 0,
+      "changed_true_replies": 1,
+      "families": [
+        "current-family-stage27-v2/create"
+      ]
+    },
+    "create_line": {
+      "requests": 1,
+      "successful_replies": 1,
+      "error_replies": 0,
+      "changed_true_replies": 1,
+      "families": [
+        "current-family-stage27-v2/create"
+      ]
+    },
+    "create_polygon": {
+      "requests": 2,
+      "successful_replies": 1,
+      "error_replies": 1,
+      "changed_true_replies": 1,
+      "families": [
+        "current-family-stage27-v2/create"
+      ]
+    },
+    "create_polyline": {
+      "requests": 1,
+      "successful_replies": 1,
+      "error_replies": 0,
+      "changed_true_replies": 1,
+      "families": [
+        "current-family-stage27-v2/create"
+      ]
+    },
+    "create_path": {
+      "requests": 7,
+      "successful_replies": 1,
+      "error_replies": 6,
+      "changed_true_replies": 1,
+      "families": [
+        "current-family-stage27-v2/create"
+      ]
+    },
+    "create_text": {
+      "requests": 3,
+      "successful_replies": 2,
+      "error_replies": 1,
+      "changed_true_replies": 2,
+      "families": [
+        "current-family-stage27-v2/create"
+      ]
+    },
+    "add_linear_gradient": {
+      "requests": 10,
+      "successful_replies": 1,
+      "error_replies": 9,
+      "changed_true_replies": 1,
+      "families": [
+        "current-family-stage27-v2/create"
+      ]
+    },
+    "add_radial_gradient": {
+      "requests": 4,
+      "successful_replies": 1,
+      "error_replies": 3,
+      "changed_true_replies": 1,
+      "families": [
+        "current-family-stage27-v2/create"
+      ]
+    },
+    "create_group": {
+      "requests": 8,
+      "successful_replies": 2,
+      "error_replies": 6,
+      "changed_true_replies": 2,
+      "families": [
+        "current-family-stage27-v2/create"
+      ]
+    },
+    "group_objects": {
+      "requests": 11,
+      "successful_replies": 1,
+      "error_replies": 10,
+      "changed_true_replies": 1,
+      "families": [
+        "current-family-stage27-v2/create"
+      ]
+    },
+    "reparent_object": {
+      "requests": 43,
+      "successful_replies": 13,
+      "error_replies": 30,
+      "changed_true_replies": 11,
+      "families": [
+        "current-family-stage27-v2/reparent"
+      ]
+    },
+    "create_use": {
+      "requests": 16,
+      "successful_replies": 4,
+      "error_replies": 12,
+      "changed_true_replies": 4,
+      "families": [
+        "current-family-stage27-v2/create"
+      ]
+    },
+    "set_group_mode": {
+      "requests": 8,
+      "successful_replies": 5,
+      "error_replies": 3,
+      "changed_true_replies": 2,
+      "families": [
+        "current-family-stage27-v2/create"
+      ]
+    },
+    "how_do_i": {
+      "requests": 1632,
+      "successful_replies": 1596,
+      "error_replies": 36,
+      "changed_true_replies": 0,
+      "families": [
+        "current-headless-package-stage27-verified/intent",
+        "current-headless-release-stage27-verified/intent"
+      ]
+    },
+    "open_document": {
+      "requests": 519,
+      "successful_replies": 511,
+      "error_replies": 8,
+      "changed_true_replies": 0,
+      "families": [
+        "archive_cold",
+        "archive_warm",
+        "current-family-stage27-v2/adopt",
+        "current-family-stage27-v2/create",
+        "current-family-stage27-v2/duplicate",
+        "current-family-stage27-v2/fragment",
+        "current-family-stage27-v2/grid",
+        "current-family-stage27-v2/optimize",
+        "current-family-stage27-v2/place",
+        "current-family-stage27-v2/reparent",
+        "current-family-stage27-v2/repeat",
+        "current-family-stage27-v2/save",
+        "current-family-stage27-v2/tile",
+        "current-family-stage27-v2/transform",
+        "current-headless-package-stage27-verified/action",
+        "current-headless-package-stage27-verified/path",
+        "current-headless-package-stage27-verified/quality",
+        "current-headless-package-stage27-verified/read",
+        "current-headless-package-stage27-verified/reload",
+        "current-headless-package-stage27-verified/retention",
+        "current-headless-release-stage27-verified/action",
+        "current-headless-release-stage27-verified/action_discovery",
+        "current-headless-release-stage27-verified/action_fault",
+        "current-headless-release-stage27-verified/find",
+        "current-headless-release-stage27-verified/path",
+        "current-headless-release-stage27-verified/path_fault",
+        "current-headless-release-stage27-verified/quality",
+        "current-headless-release-stage27-verified/read",
+        "current-headless-release-stage27-verified/reload",
+        "current-headless-release-stage27-verified/retention",
+        "fresh_release_edit"
+      ]
+    },
+    "create_document": {
+      "requests": 11,
+      "successful_replies": 6,
+      "error_replies": 5,
+      "changed_true_replies": 0,
+      "families": [
+        "current-family-stage27-v2/save",
+        "current-headless-package-stage27-verified/reload",
+        "current-headless-release-stage27-verified/reload"
+      ]
+    },
+    "reload_document": {
+      "requests": 20,
+      "successful_replies": 14,
+      "error_replies": 6,
+      "changed_true_replies": 0,
+      "families": [
+        "current-headless-package-stage27-verified/reload",
+        "current-headless-release-stage27-verified/reload"
+      ]
+    },
+    "inspect_document": {
+      "requests": 12,
+      "successful_replies": 12,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": [
+        "current-headless-package-stage27-verified/read",
+        "current-headless-release-stage27-verified/read"
+      ]
+    },
+    "delete_object": {
+      "requests": 10,
+      "successful_replies": 3,
+      "error_replies": 7,
+      "changed_true_replies": 2,
+      "families": [
+        "archive_cold",
+        "archive_warm",
+        "fresh_release_edit"
+      ]
+    },
+    "render_preview": {
+      "requests": 2,
+      "successful_replies": 2,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": [
+        "archive_cold",
+        "archive_warm"
+      ]
+    },
+    "capture_frame": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "list_frames": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "export_document": {
+      "requests": 30,
+      "successful_replies": 30,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": [
+        "archive_cold",
+        "archive_warm",
+        "current-family-stage27-v2/optimize"
+      ]
+    },
+    "export_object": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "compare_region": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "export_batch": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "export_set": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "find_objects": {
+      "requests": 44,
+      "successful_replies": 42,
+      "error_replies": 2,
+      "changed_true_replies": 0,
+      "families": [
+        "current-headless-release-stage27-verified/find"
+      ]
+    },
+    "check_live_support": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_launch": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_connect": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_disconnect": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_status": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_list_documents": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_select_document": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_install_helper": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_arm_socket": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_get_active_document": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_get_selection": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_inspect_selection": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_render_view": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_get_scene": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_wait_for_change": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_set_viewport": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_sync_to_workspace": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_apply_to_selection": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_insert_svg": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_set_selected_text": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_edit_selection": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_export_selection": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_diff_view": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_session_step": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_find_objects": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "live_preview_object": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "svg_web_optimize": {
+      "requests": 35,
+      "successful_replies": 28,
+      "error_replies": 7,
+      "changed_true_replies": 9,
+      "families": [
+        "current-family-stage27-v2/optimize"
+      ]
+    },
+    "optimize_set": {
+      "requests": 5,
+      "successful_replies": 2,
+      "error_replies": 3,
+      "changed_true_replies": 0,
+      "families": [
+        "current-family-stage27-v2/optimize"
+      ]
+    },
+    "simplify_path": {
+      "requests": 40,
+      "successful_replies": 16,
+      "error_replies": 24,
+      "changed_true_replies": 2,
+      "families": [
+        "current-headless-package-stage27-verified/path",
+        "current-headless-release-stage27-verified/path",
+        "current-headless-release-stage27-verified/path_fault"
+      ]
+    },
+    "boolean_union": {
+      "requests": 12,
+      "successful_replies": 8,
+      "error_replies": 4,
+      "changed_true_replies": 4,
+      "families": [
+        "current-headless-package-stage27-verified/path",
+        "current-headless-release-stage27-verified/path"
+      ]
+    },
+    "boolean_difference": {
+      "requests": 6,
+      "successful_replies": 4,
+      "error_replies": 2,
+      "changed_true_replies": 2,
+      "families": [
+        "current-headless-package-stage27-verified/path",
+        "current-headless-release-stage27-verified/path"
+      ]
+    },
+    "combine_paths": {
+      "requests": 8,
+      "successful_replies": 6,
+      "error_replies": 2,
+      "changed_true_replies": 4,
+      "families": [
+        "current-headless-package-stage27-verified/path",
+        "current-headless-release-stage27-verified/path"
+      ]
+    },
+    "break_apart": {
+      "requests": 6,
+      "successful_replies": 4,
+      "error_replies": 2,
+      "changed_true_replies": 2,
+      "families": [
+        "current-headless-package-stage27-verified/path",
+        "current-headless-release-stage27-verified/path"
+      ]
+    },
+    "stroke_to_path": {
+      "requests": 8,
+      "successful_replies": 6,
+      "error_replies": 2,
+      "changed_true_replies": 4,
+      "families": [
+        "current-headless-package-stage27-verified/path",
+        "current-headless-release-stage27-verified/path"
+      ]
+    },
+    "cleanup_paths": {
+      "requests": 6,
+      "successful_replies": 4,
+      "error_replies": 2,
+      "changed_true_replies": 2,
+      "families": [
+        "current-headless-package-stage27-verified/path",
+        "current-headless-release-stage27-verified/path"
+      ]
+    },
+    "export_web_profile": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "create_icon_set": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "export_print_profile": {
+      "requests": 0,
+      "successful_replies": 0,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": []
+    },
+    "quality_report": {
+      "requests": 216,
+      "successful_replies": 208,
+      "error_replies": 8,
+      "changed_true_replies": 0,
+      "families": [
+        "current-headless-package-stage27-verified/quality",
+        "current-headless-release-stage27-verified/quality"
+      ]
+    },
+    "quality_report_set": {
+      "requests": 32,
+      "successful_replies": 16,
+      "error_replies": 16,
+      "changed_true_replies": 0,
+      "families": [
+        "current-headless-package-stage27-verified/quality",
+        "current-headless-release-stage27-verified/quality"
+      ]
+    },
+    "save_document_as": {
+      "requests": 21,
+      "successful_replies": 6,
+      "error_replies": 15,
+      "changed_true_replies": 0,
+      "families": [
+        "archive_cold",
+        "archive_warm",
+        "current-family-stage27-v2/save"
+      ]
+    },
+    "create_snapshot": {
+      "requests": 37,
+      "successful_replies": 37,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": [
+        "current-headless-package-stage27-verified/retention",
+        "current-headless-release-stage27-verified/retention",
+        "fresh_release_edit"
+      ]
+    },
+    "list_snapshots": {
+      "requests": 405,
+      "successful_replies": 405,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": [
+        "current-family-stage27-v2/adopt",
+        "current-family-stage27-v2/create",
+        "current-family-stage27-v2/duplicate",
+        "current-family-stage27-v2/fragment",
+        "current-family-stage27-v2/grid",
+        "current-family-stage27-v2/optimize",
+        "current-family-stage27-v2/place",
+        "current-family-stage27-v2/reparent",
+        "current-family-stage27-v2/repeat",
+        "current-family-stage27-v2/tile",
+        "current-family-stage27-v2/transform",
+        "current-headless-package-stage27-verified/action",
+        "current-headless-package-stage27-verified/path",
+        "current-headless-package-stage27-verified/reload",
+        "current-headless-package-stage27-verified/retention",
+        "current-headless-release-stage27-verified/action",
+        "current-headless-release-stage27-verified/action_fault",
+        "current-headless-release-stage27-verified/find",
+        "current-headless-release-stage27-verified/path",
+        "current-headless-release-stage27-verified/path_fault",
+        "current-headless-release-stage27-verified/reload",
+        "current-headless-release-stage27-verified/retention",
+        "fresh_release_edit"
+      ]
+    },
+    "restore_snapshot": {
+      "requests": 78,
+      "successful_replies": 77,
+      "error_replies": 1,
+      "changed_true_replies": 0,
+      "families": [
+        "archive_cold",
+        "archive_warm",
+        "current-family-stage27-v2/adopt",
+        "current-family-stage27-v2/fragment",
+        "current-family-stage27-v2/grid",
+        "current-family-stage27-v2/optimize",
+        "current-family-stage27-v2/place",
+        "current-family-stage27-v2/transform",
+        "current-headless-package-stage27-verified/action",
+        "current-headless-package-stage27-verified/path",
+        "current-headless-package-stage27-verified/reload",
+        "current-headless-release-stage27-verified/action",
+        "current-headless-release-stage27-verified/path",
+        "current-headless-release-stage27-verified/reload",
+        "fresh_release_edit"
+      ]
+    },
+    "prune_snapshots": {
+      "requests": 24,
+      "successful_replies": 18,
+      "error_replies": 6,
+      "changed_true_replies": 0,
+      "families": [
+        "current-headless-package-stage27-verified/retention",
+        "current-headless-release-stage27-verified/retention"
+      ]
+    },
+    "set_fill": {
+      "requests": 12,
+      "successful_replies": 10,
+      "error_replies": 2,
+      "changed_true_replies": 7,
+      "families": [
+        "archive_cold",
+        "archive_warm",
+        "current-family-stage27-v2/create",
+        "current-family-stage27-v2/save",
+        "fresh_release_edit"
+      ]
+    },
+    "set_stroke": {
+      "requests": 1,
+      "successful_replies": 1,
+      "error_replies": 0,
+      "changed_true_replies": 1,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "set_opacity": {
+      "requests": 3,
+      "successful_replies": 3,
+      "error_replies": 0,
+      "changed_true_replies": 2,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "replace_color": {
+      "requests": 5,
+      "successful_replies": 3,
+      "error_replies": 2,
+      "changed_true_replies": 2,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "apply_palette": {
+      "requests": 4,
+      "successful_replies": 2,
+      "error_replies": 2,
+      "changed_true_replies": 1,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "replace_text": {
+      "requests": 9,
+      "successful_replies": 6,
+      "error_replies": 3,
+      "changed_true_replies": 5,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "set_font": {
+      "requests": 9,
+      "successful_replies": 4,
+      "error_replies": 5,
+      "changed_true_replies": 2,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "duplicate_object": {
+      "requests": 23,
+      "successful_replies": 13,
+      "error_replies": 10,
+      "changed_true_replies": 13,
+      "families": [
+        "current-family-stage27-v2/duplicate"
+      ]
+    },
+    "rename_object": {
+      "requests": 12,
+      "successful_replies": 6,
+      "error_replies": 6,
+      "changed_true_replies": 5,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "move_object": {
+      "requests": 4,
+      "successful_replies": 2,
+      "error_replies": 2,
+      "changed_true_replies": 2,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "scale_object": {
+      "requests": 4,
+      "successful_replies": 2,
+      "error_replies": 2,
+      "changed_true_replies": 2,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "rotate_object": {
+      "requests": 4,
+      "successful_replies": 2,
+      "error_replies": 2,
+      "changed_true_replies": 2,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "resize_canvas": {
+      "requests": 16,
+      "successful_replies": 9,
+      "error_replies": 7,
+      "changed_true_replies": 8,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "normalize_viewbox": {
+      "requests": 6,
+      "successful_replies": 4,
+      "error_replies": 2,
+      "changed_true_replies": 3,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "fit_to_content": {
+      "requests": 10,
+      "successful_replies": 8,
+      "error_replies": 2,
+      "changed_true_replies": 5,
+      "families": [
+        "fresh_release_edit"
+      ]
+    },
+    "tile": {
+      "requests": 26,
+      "successful_replies": 15,
+      "error_replies": 11,
+      "changed_true_replies": 13,
+      "families": [
+        "current-family-stage27-v2/tile"
+      ]
+    },
+    "repeat_objects": {
+      "requests": 19,
+      "successful_replies": 9,
+      "error_replies": 10,
+      "changed_true_replies": 0,
+      "families": [
+        "current-family-stage27-v2/repeat"
+      ]
+    },
+    "transform_objects": {
+      "requests": 21,
+      "successful_replies": 16,
+      "error_replies": 5,
+      "changed_true_replies": 11,
+      "families": [
+        "current-family-stage27-v2/transform"
+      ]
+    },
+    "validate_document": {
+      "requests": 26,
+      "successful_replies": 26,
+      "error_replies": 0,
+      "changed_true_replies": 0,
+      "families": [
+        "current-family-stage27-v2/save",
+        "current-headless-package-stage27-verified/read",
+        "current-headless-release-stage27-verified/read"
+      ]
+    }
+  },
+  "tools_called": 75,
+  "tools_with_success_reply": 75,
+  "tools_not_called_by_included_evidence": [
+    "capture_frame",
+    "list_frames",
+    "export_object",
+    "compare_region",
+    "export_batch",
+    "export_set",
+    "check_live_support",
+    "live_launch",
+    "live_connect",
+    "live_disconnect",
+    "live_status",
+    "live_list_documents",
+    "live_select_document",
+    "live_install_helper",
+    "live_arm_socket",
+    "live_get_active_document",
+    "live_get_selection",
+    "live_inspect_selection",
+    "live_render_view",
+    "live_get_scene",
+    "live_wait_for_change",
+    "live_set_viewport",
+    "live_sync_to_workspace",
+    "live_apply_to_selection",
+    "live_insert_svg",
+    "live_set_selected_text",
+    "live_edit_selection",
+    "live_export_selection",
+    "live_diff_view",
+    "live_session_step",
+    "live_find_objects",
+    "live_preview_object",
+    "export_web_profile",
+    "create_icon_set",
+    "export_print_profile"
+  ],
+  "unknown_names_observed": [],
+  "raw_files": [
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/adopt/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/create/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/duplicate/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/fragment/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/grid/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/optimize/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/place/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/reparent/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/repeat/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/save/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/tile/raw/native-size-guard-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/tile/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/transform/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/action/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/action_discovery/raw/rust-absent-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/action_discovery/raw/rust-bad-version-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/action_discovery/raw/rust-bus-owned-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/action_discovery/raw/rust-bus-unowned-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/action_discovery/raw/rust-capped-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/action_discovery/raw/rust-data-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/action_discovery/raw/rust-empty-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/action_discovery/raw/rust-failed-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/action_discovery/raw/rust-fonts-failed-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/action_discovery/raw/rust-inkex-dir-link-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/action_discovery/raw/rust-inkex-link-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/action_discovery/raw/rust-no-version-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/action_discovery/raw/rust-nonexec-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/action_discovery/raw/rust-operator-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/action_discovery/raw/rust-real-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/action_discovery/raw/rust-signal-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/action_discovery/raw/rust-timeout-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/action_fault/raw/rust-absent-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/action_fault/raw/rust-duplicate-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/action_fault/raw/rust-empty-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/action_fault/raw/rust-failed-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/action_fault/raw/rust-missing-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/action_fault/raw/rust-noop-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/action_fault/raw/rust-oversize-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/action_fault/raw/rust-reference-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/action_fault/raw/rust-root-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/action_fault/raw/rust-timeout-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/action_fault/raw/rust-unsafe-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-absent-True-True-full-full-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-False-False-core-full-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-False-False-core-short-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-False-False-full-full-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-False-False-full-short-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-False-True-core-full-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-False-True-core-short-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-False-True-full-full-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-False-True-full-short-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-True-False-core-full-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-True-False-core-short-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-True-False-full-full-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-True-False-full-short-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-True-True-core-full-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-True-True-core-short-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-True-True-full-full-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-True-True-full-short-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-real-True-True-full-full-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/find/raw/rust-absent-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/find/raw/rust-capped-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/find/raw/rust-failed-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/find/raw/rust-real-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/find/raw/rust-rows-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/find/raw/rust-timeout-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/intent/raw/rust-core-live-false-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/intent/raw/rust-core-live-true-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/intent/raw/rust-full-live-false-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/intent/raw/rust-full-live-true-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/path/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/path_fault/raw/rust-absent-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/path_fault/raw/rust-duplicate-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/path_fault/raw/rust-empty-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/path_fault/raw/rust-failed-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/path_fault/raw/rust-missing-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/path_fault/raw/rust-noop-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/path_fault/raw/rust-oversize-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/path_fault/raw/rust-reference-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/path_fault/raw/rust-root-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/path_fault/raw/rust-timeout-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/path_fault/raw/rust-unsafe-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/quality/raw/rust-no-fonts-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v3-fixes/quality/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/read/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/reload/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/retention/raw/rust-disabled-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/retention/raw/rust-normal-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/retention/raw/rust-zero-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/stat/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/action/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/intent/raw/rust-core-live-false-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/intent/raw/rust-core-live-true-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/intent/raw/rust-full-live-false-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/intent/raw/rust-full-live-true-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/path/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v3-quality/quality/raw/rust-no-fonts-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v3-quality/quality/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/read/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/reload/raw/rust-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/retention/raw/rust-disabled-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/retention/raw/rust-normal-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/retention/raw/rust-zero-raw.json",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/stat/raw/rust-raw.json",
+    "migration/results/noop-fix-stage26-release-edits/rust-raw.json",
+    "migration/results/package-stage27-cold/packaged-server.trace.json",
+    "migration/results/package-stage27-warm/packaged-server.trace.json"
+  ],
+  "full_behavior_coverage_complete": false,
+  "native_GUI_coverage": false,
+  "limitations": [
+    "Presence or success reply is not proof of all argument/error/appearance cases",
+    "Successful reply can be a plan/dry-run/no-op rather than a mutation",
+    "changed_true counts only explicit structuredContent.changed=true",
+    "Other current-package suites and historical live/native evidence are separate",
+    "Tools absent here require their own affected/current acceptance audit"
+  ]
+}

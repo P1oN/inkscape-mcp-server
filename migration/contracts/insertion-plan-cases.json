@@ -1,0 +1,570 @@
+[
+  {
+    "fragment": "",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "insertion fragment is empty or too large",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": " ",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "insertion fragment is empty or too large",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "plain text",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "insertion has no objects",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<rect/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      ]
+    }
+  },
+  {
+    "fragment": "<g/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      ]
+    }
+  },
+  {
+    "fragment": "<svg/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      ]
+    }
+  },
+  {
+    "fragment": "<rect id=\"r\"/><use href=\"#r\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<defs><linearGradient id=\"p\"><stop/></linearGradient></defs><rect fill=\"url(#p)\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<text id=\"t\">Привіт<tspan>mixed</tspan> tail</text>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<g id=\"g\"><rect id=\"r\"/></g>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_1"
+      ]
+    }
+  },
+  {
+    "fragment": "<g id=\"g\"/><g id=\"g\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "duplicate insertion id",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<g id=\"\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "''",
+      "kind": "KeyError"
+    }
+  },
+  {
+    "fragment": "<use href=\"#missing\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "href must reference an id in the fragment",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<use href=\"https://example.test\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "href must reference an id in the fragment",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<rect fill=\"url(#missing)\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "paint reference must be internal to the fragment",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<rect fill=\"url(https://example.test)\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "external or malformed CSS URL",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<rect style=\"fill:red\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      ]
+    }
+  },
+  {
+    "fragment": "<rect style=\"@import x\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "unsupported CSS insertion value",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<rect style=\"fill: u\\72l(x)\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "unsupported CSS insertion value",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<rect onclick=\"x\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "event attributes are unsupported",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<rect ONLOAD=\"x\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "event attributes are unsupported",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<rect xml:base=\"x\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "event attributes are unsupported",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<g><!--comment--><rect/></g>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "insertion contains non-element content",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<g><?pi data?></g>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "insertion contains non-element content",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<script/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "unsupported SVG insertion element",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<image/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "unsupported SVG insertion element",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<foreignObject/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "unsupported SVG insertion element",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<g xmlns=\"urn:evil\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "unsupported SVG insertion element",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<x:g xmlns:x=\"http://www.w3.org/2000/svg\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      ]
+    }
+  },
+  {
+    "fragment": "<g xmlns:x=\"http://www.w3.org/1999/xlink\" id=\"r\"><use x:href=\"#r\"/></g>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<g id=\"r\"/><rect fill=\"URL( &quot;#r&quot; )\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<g id=\"é١\"/><rect fill=\"url(#é١)\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<g id=\"r\"/><rect fill=\"url(#r) URL(#r)\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<g id=\"r\"/><rect style=\"fill:url(#r);stroke:blue\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<g id=\"r\"/><rect fill=\"url(#r) residual-url\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "external or malformed CSS URL",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<g id=\"r\"/><rect fill=\"url(#r)\" stroke=\"url(#outside)\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "paint reference must be internal to the fragment",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<g id=\"r\"/><rect fill=\"url(' #r')\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "external or malformed CSS URL",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<g id=\"r\"/><rect fill=\"url(#r')\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<g id=\"r\"/><rect fill=\"url('#r)\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<g id=\"r\"/><rect style=\"fill:red;content:@\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "unsupported CSS insertion value",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<g id=\"r\"/><rect style=\"url(#r)\\x\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "unsupported CSS insertion value",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<rect>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "malformed insertion XML",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "</svg><svg>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "malformed insertion XML",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<!DOCTYPE svg><g/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "malformed insertion XML",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<g>&undefined;</g>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "malformed insertion XML",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<x:g/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "malformed insertion XML",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<circle id=\"n\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<ellipse id=\"n\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<path id=\"n\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<line id=\"n\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<polygon id=\"n\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<polyline id=\"n\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<tspan id=\"n\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<radialGradient id=\"n\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<stop id=\"n\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<clipPath id=\"n\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<mask id=\"n\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<pattern id=\"n\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<title id=\"n\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<desc id=\"n\"/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "ids": [
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+      ]
+    }
+  },
+  {
+    "fragment": "<rect/>",
+    "prefix": "",
+    "expected": {
+      "error": "invalid insertion id",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<rect/>",
+    "prefix": "mcp_test",
+    "expected": {
+      "error": "invalid insertion id",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<rect/>",
+    "prefix": "mcp_AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "expected": {
+      "error": "invalid insertion id",
+      "kind": "ValueError"
+    }
+  },
+  {
+    "fragment": "<rect/>",
+    "prefix": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": {
+      "error": "invalid insertion id",
+      "kind": "ValueError"
+    }
+  }
+]

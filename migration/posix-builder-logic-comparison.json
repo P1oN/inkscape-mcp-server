@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "target_selections": [
+    "macos-arm64",
+    "macos-x86_64",
+    "linux-arm64",
+    "linux-x86_64"
+  ],
+  "unsupported_targets_refused": 2,
+  "synthetic_ELF_cases": 3,
+  "actual_Linux_execution": false,
+  "native_GUI_launched": false,
+  "scope": "Synthetic command replies only; not Linux ABI/loader acceptance",
+  "builder_sha256": "7c11ebd1ee3e49b691ad5f62bbec87a95a88050a4b2c329576691b6823ef7669",
+  "harness_sha256": "6ad2c1b777ef110eb182f1d7f285ee8d82ceb565b4b4f1b4f657a64d24b9de11"
+}

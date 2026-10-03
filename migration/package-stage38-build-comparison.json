@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage38",
+  "archive": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage38.tar.gz",
+  "archive_bytes": 46748658,
+  "archive_sha256": "94aab2652babf39c440a8a88ebd52efd70f036ea35f254a65dbe26307405bd6e",
+  "binary_sha256": "d6614579efa32d8912e8bc73c552cf0597dcd74e4e6b1ae1448c167415a4f311",
+  "package_files_verified": 2533,
+  "reports": [
+    "migration/package-stage38-cold-comparison.json",
+    "migration/package-stage38-warm-comparison.json",
+    "migration/doctor-stage38-comparison.json",
+    "migration/notices-stage38-comparison.json",
+    "migration/discovery-stage38-comparison.json",
+    "migration/results/launcher-stage38/comparison.json",
+    "migration/results/security-stage38/comparison.json",
+    "migration/results/stdio-frame-stage38/comparison.json",
+    "migration/results/diagnostic-limits-stage38/comparison.json",
+    "migration/results/compare-publication-stage38/comparison.json",
+    "migration/results/output-limits-stage38/comparison.json",
+    "migration/results/rust-measurements-stage38/comparison.json",
+    "migration/results/security-stage38-special-files/comparison.json",
+    "migration/results/engine-routes-stage38-per_call/comparison.json",
+    "migration/results/renderer-assets-stage38-per_call/probe.json",
+    "migration/results/engine-routes-stage38-shell/comparison.json",
+    "migration/results/renderer-assets-stage38-shell/probe.json"
+  ],
+  "native_source_kit": "migration/results/homebrew-source-audit/source-kit-stage37.json",
+  "scope": "Actual38 cold/warm archive installations, exact16 discovery, doctor10/launcher11/notices17/security35/files12/diagnostics3/STDIO frame/compare publication/limits5, assets17/routes8 both engines. Rust215/1ignored. Fresh Rust-only10 runs/250 measured requests/startups. Current GUI not proved."
+}

@@ -1,3 +1,7 @@
+Current Rust candidate: stage38. Operation constraints below describe the fixed helper
+protocol; dated native results are historical. Current GUI acceptance passes122 fixed
+checks +5 two-window guards; see RUST_MIGRATION_REPORT.md for scope.
+
 # Everyday edits in managed macOS Inkscape
 
 Implemented 2026-10-01 for official Inkscape 1.4.3. This extends the experimental

@@ -1,0 +1,846 @@
+{
+  "cases": [
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\"/>",
+      "mapping": [
+        1.0,
+        1.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"none\"/>",
+      "mapping": [
+        1.0,
+        1.0,
+        10.0,
+        -20.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"none meet\"/>",
+      "error": "unsupported preserveAspectRatio",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"none slice\"/>",
+      "error": "unsupported preserveAspectRatio",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMin\"/>",
+      "mapping": [
+        1.0,
+        1.0,
+        10.0,
+        -20.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMin meet\"/>",
+      "mapping": [
+        1.0,
+        1.0,
+        10.0,
+        -20.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMin slice\"/>",
+      "mapping": [
+        1.0,
+        1.0,
+        10.0,
+        -20.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMax\"/>",
+      "mapping": [
+        1.0,
+        1.0,
+        10.0,
+        -20.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMax meet\"/>",
+      "mapping": [
+        1.0,
+        1.0,
+        10.0,
+        -20.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMax slice\"/>",
+      "mapping": [
+        1.0,
+        1.0,
+        10.0,
+        -20.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMidYMid\"/>",
+      "mapping": [
+        1.0,
+        1.0,
+        10.0,
+        -20.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMidYMid meet\"/>",
+      "mapping": [
+        1.0,
+        1.0,
+        10.0,
+        -20.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMidYMid slice\"/>",
+      "mapping": [
+        1.0,
+        1.0,
+        10.0,
+        -20.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMid\"/>",
+      "mapping": [
+        1.0,
+        1.0,
+        10.0,
+        -20.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMid meet\"/>",
+      "mapping": [
+        1.0,
+        1.0,
+        10.0,
+        -20.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMid slice\"/>",
+      "mapping": [
+        1.0,
+        1.0,
+        10.0,
+        -20.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMax\"/>",
+      "mapping": [
+        1.0,
+        1.0,
+        10.0,
+        -20.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMax meet\"/>",
+      "mapping": [
+        1.0,
+        1.0,
+        10.0,
+        -20.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMax slice\"/>",
+      "mapping": [
+        1.0,
+        1.0,
+        10.0,
+        -20.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"none\" width=\"200\" height=\"100\"/>",
+      "mapping": [
+        2.5,
+        2.5,
+        25.0,
+        -50.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"none meet\" width=\"200\" height=\"100\"/>",
+      "error": "unsupported preserveAspectRatio",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"none slice\" width=\"200\" height=\"100\"/>",
+      "error": "unsupported preserveAspectRatio",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMin\" width=\"200\" height=\"100\"/>",
+      "mapping": [
+        2.5,
+        2.5,
+        25.0,
+        -50.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMin meet\" width=\"200\" height=\"100\"/>",
+      "mapping": [
+        2.5,
+        2.5,
+        25.0,
+        -50.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMin slice\" width=\"200\" height=\"100\"/>",
+      "mapping": [
+        2.5,
+        2.5,
+        25.0,
+        -50.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMax\" width=\"200\" height=\"100\"/>",
+      "mapping": [
+        2.5,
+        2.5,
+        25.0,
+        -50.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMax meet\" width=\"200\" height=\"100\"/>",
+      "mapping": [
+        2.5,
+        2.5,
+        25.0,
+        -50.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMax slice\" width=\"200\" height=\"100\"/>",
+      "mapping": [
+        2.5,
+        2.5,
+        25.0,
+        -50.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMidYMid\" width=\"200\" height=\"100\"/>",
+      "mapping": [
+        2.5,
+        2.5,
+        25.0,
+        -50.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMidYMid meet\" width=\"200\" height=\"100\"/>",
+      "mapping": [
+        2.5,
+        2.5,
+        25.0,
+        -50.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMidYMid slice\" width=\"200\" height=\"100\"/>",
+      "mapping": [
+        2.5,
+        2.5,
+        25.0,
+        -50.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMid\" width=\"200\" height=\"100\"/>",
+      "mapping": [
+        2.5,
+        2.5,
+        25.0,
+        -50.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMid meet\" width=\"200\" height=\"100\"/>",
+      "mapping": [
+        2.5,
+        2.5,
+        25.0,
+        -50.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMid slice\" width=\"200\" height=\"100\"/>",
+      "mapping": [
+        2.5,
+        2.5,
+        25.0,
+        -50.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMax\" width=\"200\" height=\"100\"/>",
+      "mapping": [
+        2.5,
+        2.5,
+        25.0,
+        -50.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMax meet\" width=\"200\" height=\"100\"/>",
+      "mapping": [
+        2.5,
+        2.5,
+        25.0,
+        -50.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMax slice\" width=\"200\" height=\"100\"/>",
+      "mapping": [
+        2.5,
+        2.5,
+        25.0,
+        -50.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"none\" width=\"100mm\" height=\"5cm\"/>",
+      "mapping": [
+        4.724409448818898,
+        4.724409448818897,
+        47.24409448818898,
+        -94.48818897637794
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"none meet\" width=\"100mm\" height=\"5cm\"/>",
+      "error": "unsupported preserveAspectRatio",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"none slice\" width=\"100mm\" height=\"5cm\"/>",
+      "error": "unsupported preserveAspectRatio",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMin\" width=\"100mm\" height=\"5cm\"/>",
+      "mapping": [
+        4.724409448818897,
+        4.724409448818897,
+        47.24409448818897,
+        -94.48818897637794
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMin meet\" width=\"100mm\" height=\"5cm\"/>",
+      "mapping": [
+        4.724409448818897,
+        4.724409448818897,
+        47.24409448818897,
+        -94.48818897637794
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMin slice\" width=\"100mm\" height=\"5cm\"/>",
+      "mapping": [
+        4.724409448818898,
+        4.724409448818898,
+        47.24409448818898,
+        -94.48818897637796
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMax\" width=\"100mm\" height=\"5cm\"/>",
+      "mapping": [
+        4.724409448818897,
+        4.724409448818897,
+        47.24409448818897,
+        -94.48818897637794
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMax meet\" width=\"100mm\" height=\"5cm\"/>",
+      "mapping": [
+        4.724409448818897,
+        4.724409448818897,
+        47.24409448818897,
+        -94.48818897637794
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMax slice\" width=\"100mm\" height=\"5cm\"/>",
+      "mapping": [
+        4.724409448818898,
+        4.724409448818898,
+        47.24409448818898,
+        -94.48818897637798
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMidYMid\" width=\"100mm\" height=\"5cm\"/>",
+      "mapping": [
+        4.724409448818897,
+        4.724409448818897,
+        47.244094488189,
+        -94.48818897637794
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMidYMid meet\" width=\"100mm\" height=\"5cm\"/>",
+      "mapping": [
+        4.724409448818897,
+        4.724409448818897,
+        47.244094488189,
+        -94.48818897637794
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMidYMid slice\" width=\"100mm\" height=\"5cm\"/>",
+      "mapping": [
+        4.724409448818898,
+        4.724409448818898,
+        47.24409448818898,
+        -94.48818897637797
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMid\" width=\"100mm\" height=\"5cm\"/>",
+      "mapping": [
+        4.724409448818897,
+        4.724409448818897,
+        47.24409448818903,
+        -94.48818897637794
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMid meet\" width=\"100mm\" height=\"5cm\"/>",
+      "mapping": [
+        4.724409448818897,
+        4.724409448818897,
+        47.24409448818903,
+        -94.48818897637794
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMid slice\" width=\"100mm\" height=\"5cm\"/>",
+      "mapping": [
+        4.724409448818898,
+        4.724409448818898,
+        47.24409448818898,
+        -94.48818897637797
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMax\" width=\"100mm\" height=\"5cm\"/>",
+      "mapping": [
+        4.724409448818897,
+        4.724409448818897,
+        47.24409448818903,
+        -94.48818897637794
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMax meet\" width=\"100mm\" height=\"5cm\"/>",
+      "mapping": [
+        4.724409448818897,
+        4.724409448818897,
+        47.24409448818903,
+        -94.48818897637794
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMax slice\" width=\"100mm\" height=\"5cm\"/>",
+      "mapping": [
+        4.724409448818898,
+        4.724409448818898,
+        47.24409448818898,
+        -94.48818897637798
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"none\" width=\"+1e2px\" height=\".5in\"/>",
+      "mapping": [
+        1.25,
+        1.2,
+        12.5,
+        -24.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"none meet\" width=\"+1e2px\" height=\".5in\"/>",
+      "error": "unsupported preserveAspectRatio",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"none slice\" width=\"+1e2px\" height=\".5in\"/>",
+      "error": "unsupported preserveAspectRatio",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMin\" width=\"+1e2px\" height=\".5in\"/>",
+      "mapping": [
+        1.2,
+        1.2,
+        12.0,
+        -24.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMin meet\" width=\"+1e2px\" height=\".5in\"/>",
+      "mapping": [
+        1.2,
+        1.2,
+        12.0,
+        -24.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMin slice\" width=\"+1e2px\" height=\".5in\"/>",
+      "mapping": [
+        1.25,
+        1.25,
+        12.5,
+        -25.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMax\" width=\"+1e2px\" height=\".5in\"/>",
+      "mapping": [
+        1.2,
+        1.2,
+        12.0,
+        -24.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMax meet\" width=\"+1e2px\" height=\".5in\"/>",
+      "mapping": [
+        1.2,
+        1.2,
+        12.0,
+        -24.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMinYMax slice\" width=\"+1e2px\" height=\".5in\"/>",
+      "mapping": [
+        1.25,
+        1.25,
+        12.5,
+        -27.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMidYMid\" width=\"+1e2px\" height=\".5in\"/>",
+      "mapping": [
+        1.2,
+        1.2,
+        14.0,
+        -24.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMidYMid meet\" width=\"+1e2px\" height=\".5in\"/>",
+      "mapping": [
+        1.2,
+        1.2,
+        14.0,
+        -24.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMidYMid slice\" width=\"+1e2px\" height=\".5in\"/>",
+      "mapping": [
+        1.25,
+        1.25,
+        12.5,
+        -26.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMid\" width=\"+1e2px\" height=\".5in\"/>",
+      "mapping": [
+        1.2,
+        1.2,
+        16.0,
+        -24.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMid meet\" width=\"+1e2px\" height=\".5in\"/>",
+      "mapping": [
+        1.2,
+        1.2,
+        16.0,
+        -24.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMid slice\" width=\"+1e2px\" height=\".5in\"/>",
+      "mapping": [
+        1.25,
+        1.25,
+        12.5,
+        -26.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMax\" width=\"+1e2px\" height=\".5in\"/>",
+      "mapping": [
+        1.2,
+        1.2,
+        16.0,
+        -24.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMax meet\" width=\"+1e2px\" height=\".5in\"/>",
+      "mapping": [
+        1.2,
+        1.2,
+        16.0,
+        -24.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"-10,20,80,40\" preserveAspectRatio=\"xMaxYMax slice\" width=\"+1e2px\" height=\".5in\"/>",
+      "mapping": [
+        1.25,
+        1.25,
+        12.5,
+        -27.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"\" width=\"100\" height=\"100\"/>",
+      "mapping": [
+        1.0,
+        1.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 10 20\" width=\"100\" height=\"100\"/>",
+      "mapping": [
+        5.0,
+        5.0,
+        25.0,
+        0.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 0 20\" width=\"100\" height=\"100\"/>",
+      "error": "invalid document viewBox",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 -1 20\" width=\"100\" height=\"100\"/>",
+      "error": "invalid document viewBox",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1\" width=\"100\" height=\"100\"/>",
+      "error": "invalid document viewBox",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"nan 0 1 1\" width=\"100\" height=\"100\"/>",
+      "error": "invalid document viewBox",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"1_0 0 1 1\" width=\"100\" height=\"100\"/>",
+      "mapping": [
+        100.0,
+        100.0,
+        -1000.0,
+        0.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1e-320 1\" width=\"100\" height=\"100\"/>",
+      "error": "invalid root coordinate mapping",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1 1e-320\" width=\"100\" height=\"100\"/>",
+      "error": "invalid root coordinate mapping",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\" &#1632; &#1632; &#1633;&#1632; &#1634;&#1632; \" width=\"100\" height=\"100\"/>",
+      "mapping": [
+        5.0,
+        5.0,
+        25.0,
+        0.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1 1\" width=\"0\" height=\"0\"/>",
+      "error": "invalid document dimensions for accurate geometry",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1 1\" width=\"-1\" height=\"-1\"/>",
+      "error": "accurate geometry requires absolute root width and height",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1 1\" width=\"50%\" height=\"50%\"/>",
+      "error": "accurate geometry requires absolute root width and height",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1 1\" width=\"auto\" height=\"auto\"/>",
+      "error": "accurate geometry requires absolute root width and height",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1 1\" width=\"1em\" height=\"1em\"/>",
+      "error": "accurate geometry requires absolute root width and height",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1 1\" width=\"1MM\" height=\"1MM\"/>",
+      "error": "accurate geometry requires absolute root width and height",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1 1\" width=\"1e999\" height=\"1e999\"/>",
+      "error": "invalid document dimensions for accurate geometry",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1 1\" width=\"1_0\" height=\"1_0\"/>",
+      "error": "accurate geometry requires absolute root width and height",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1 1\" width=\"&#1633;&#1632;px\" height=\"&#1633;&#1632;px\"/>",
+      "mapping": [
+        10.0,
+        10.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1 1\" width=\"1q\" height=\"1q\"/>",
+      "mapping": [
+        0.9448818897637796,
+        0.9448818897637796,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1 1\" width=\"1pt\" height=\"1pt\"/>",
+      "mapping": [
+        1.3333333333333333,
+        1.3333333333333333,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1 1\" width=\"1pc\" height=\"1pc\"/>",
+      "mapping": [
+        16.0,
+        16.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1 1\" width=\"1cm\" height=\"1cm\"/>",
+      "mapping": [
+        37.79527559055118,
+        37.79527559055118,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1 1\" width=\"1mm\" height=\"1mm\"/>",
+      "mapping": [
+        3.7795275590551185,
+        3.7795275590551185,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1 1\" width=\"&#9;2px&#10;\" height=\"&#9;2px&#10;\"/>",
+      "mapping": [
+        2.0,
+        2.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" style=\"width: 10px\"/>",
+      "error": "root CSS sizing requires snapshot preparation",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 10 20\" style=\"height: 10px\"/>",
+      "error": "root CSS sizing requires snapshot preparation",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 10 20\" width=\"10\"/>",
+      "error": "accurate geometry requires absolute root width and height",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 10 20\" preserveAspectRatio=\"defer xMaxYMin slice\"/>",
+      "mapping": [
+        1.0,
+        1.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 10 20\" preserveAspectRatio=\"defer none\"/>",
+      "mapping": [
+        1.0,
+        1.0,
+        -0.0,
+        -0.0
+      ]
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 10 20\" preserveAspectRatio=\"\"/>",
+      "error": "unsupported preserveAspectRatio",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 10 20\" preserveAspectRatio=\"xmidYmid\"/>",
+      "error": "unsupported preserveAspectRatio",
+      "error_type": "LiveGeometryError"
+    },
+    {
+      "svg": "<ns0:svg xmlns:ns0=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 10 20\" preserveAspectRatio=\"xMidYMid meet junk\"/>",
+      "error": "unsupported preserveAspectRatio",
+      "error_type": "LiveGeometryError"
+    }
+  ]
+}

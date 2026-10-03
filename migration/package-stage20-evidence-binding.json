@@ -1,0 +1,58 @@
+{
+  "passed": true,
+  "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage20",
+  "files": {
+    "scripts/migration_package_notices.py": {
+      "bytes": 9186,
+      "sha256": "38ced4da54ab874a3d99a3bb98ca0f8a84cf43823b3739e8106e1e6e950dcb15"
+    },
+    "scripts/migration_notices_acceptance.py": {
+      "bytes": 4350,
+      "sha256": "ceaad26c43b21ae9894b3350e732e7e971c37a647056bb663cfe82752629bc43"
+    },
+    "scripts/migration_build_macos_package.py": {
+      "bytes": 14200,
+      "sha256": "eae3293ef40b2ae72f53fec96a1114bdd8f8ee14be35cbf48aa02104f009df77"
+    },
+    "migration/vendor-notices/rmcp-3.5.0/LICENSE": {
+      "bytes": 12227,
+      "sha256": "0382b0057770ca05e9c350a50aa3b1c1fea84da0bc81d723bf00b9aa841be58a"
+    },
+    "migration/vendor-notices/rmcp-3.5.0/provenance.json": {
+      "bytes": 264,
+      "sha256": "4a128f6ba270a8d4921ba471e3a055bd7bfaa52881049b5bc08538a030b30159"
+    },
+    ".github/workflows/rust-migration.yml": {
+      "bytes": 6612,
+      "sha256": "6a2414632148a769836795678630f6d2002065f396c63ec26ea967ef005d5658"
+    },
+    "migration/package-stage20-build-comparison.json": {
+      "bytes": 15042,
+      "sha256": "d504385c93f96a614d05ec1121dfd53d546f4944ae44ef1624a9678c937ec875"
+    },
+    "migration/package-stage20-cold-comparison.json": {
+      "bytes": 553,
+      "sha256": "7d379ae3a3e7a5c1e822f11fd3b59b967f887fafe806cd7b043201ec197d0499"
+    },
+    "migration/package-stage20-shell-comparison.json": {
+      "bytes": 550,
+      "sha256": "38fb308782156c0f6e9c8b53ae97300f5b822438396719d0c187ea082169b895"
+    },
+    "migration/doctor-stage20-comparison.json": {
+      "bytes": 236,
+      "sha256": "fc696f24d4bd246214b6cfb4ae93a0cdf025833fbb24b4051aa51d4c81ead06d"
+    },
+    "migration/notices-stage20-comparison.json": {
+      "bytes": 25362,
+      "sha256": "7bcf2133594e444df5792047c0e08cc2796b3e8acf6ececd4cc1d794a254c8dc"
+    },
+    "migration/native-license-gaps-stage20.json": {
+      "bytes": 4778,
+      "sha256": "91eadb79a15a57b5f0b4fec53d08c6473b672c9c687f8fcf5c4ff739e541b960"
+    }
+  },
+  "prepared_ci_targets": 4,
+  "CI_run": false,
+  "current_native_GUI_acceptance": false,
+  "scope": "Actual stage20 notice/build/cold/warm/doctor checks; no native GUI transfer or legal clearance."
+}

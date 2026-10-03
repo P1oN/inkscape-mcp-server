@@ -1,0 +1,79 @@
+{
+  "scenarios": 32,
+  "differences": [
+    {
+      "path": "/absent/records/0/status",
+      "expected": "proposed",
+      "actual": "discarded"
+    },
+    {
+      "path": "/empty/records/0/status",
+      "expected": "proposed",
+      "actual": "discarded"
+    },
+    {
+      "path": "/failed/records/0/status",
+      "expected": "proposed",
+      "actual": "discarded"
+    },
+    {
+      "path": "/missing/records/0/status",
+      "expected": "proposed",
+      "actual": "discarded"
+    },
+    {
+      "path": "/oversize/records/0/status",
+      "expected": "proposed",
+      "actual": "discarded"
+    },
+    {
+      "path": "/timeout/records/0/status",
+      "expected": "proposed",
+      "actual": "discarded"
+    },
+    {
+      "path": "/unsafe/records/0/status",
+      "expected": "proposed",
+      "actual": "discarded"
+    }
+  ],
+  "intentional_audit_safety_differences": [
+    {
+      "path": "/absent/records/0/status",
+      "expected": "proposed",
+      "actual": "discarded"
+    },
+    {
+      "path": "/empty/records/0/status",
+      "expected": "proposed",
+      "actual": "discarded"
+    },
+    {
+      "path": "/failed/records/0/status",
+      "expected": "proposed",
+      "actual": "discarded"
+    },
+    {
+      "path": "/missing/records/0/status",
+      "expected": "proposed",
+      "actual": "discarded"
+    },
+    {
+      "path": "/oversize/records/0/status",
+      "expected": "proposed",
+      "actual": "discarded"
+    },
+    {
+      "path": "/timeout/records/0/status",
+      "expected": "proposed",
+      "actual": "discarded"
+    },
+    {
+      "path": "/unsafe/records/0/status",
+      "expected": "proposed",
+      "actual": "discarded"
+    }
+  ],
+  "unexpected_differences": [],
+  "exact_parity": false
+}

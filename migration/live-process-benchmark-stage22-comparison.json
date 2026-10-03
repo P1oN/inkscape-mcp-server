@@ -1,0 +1,577 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "implementation": "python",
+      "repeat": 0,
+      "field": "scene_sha256",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 0,
+      "field": "selection",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 0,
+      "field": "scene_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 0,
+      "field": "render_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 1,
+      "field": "scene_sha256",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 1,
+      "field": "selection",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 1,
+      "field": "scene_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 1,
+      "field": "render_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 2,
+      "field": "scene_sha256",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 2,
+      "field": "selection",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 2,
+      "field": "scene_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 2,
+      "field": "render_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 3,
+      "field": "scene_sha256",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 3,
+      "field": "selection",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 3,
+      "field": "scene_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 3,
+      "field": "render_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 4,
+      "field": "scene_sha256",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 4,
+      "field": "selection",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 4,
+      "field": "scene_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "python",
+      "repeat": 4,
+      "field": "render_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 0,
+      "field": "scene_sha256",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 0,
+      "field": "selection",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 0,
+      "field": "scene_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 0,
+      "field": "render_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 1,
+      "field": "scene_sha256",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 1,
+      "field": "selection",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 1,
+      "field": "scene_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 1,
+      "field": "render_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 2,
+      "field": "scene_sha256",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 2,
+      "field": "selection",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 2,
+      "field": "scene_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 2,
+      "field": "render_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 3,
+      "field": "scene_sha256",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 3,
+      "field": "selection",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 3,
+      "field": "scene_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 3,
+      "field": "render_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 4,
+      "field": "scene_sha256",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 4,
+      "field": "selection",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 4,
+      "field": "scene_pixels",
+      "passed": true
+    },
+    {
+      "implementation": "rust",
+      "repeat": 4,
+      "field": "render_pixels",
+      "passed": true
+    }
+  ],
+  "implementations": {
+    "python": {
+      "startup_median_ms": 509.783708,
+      "operations": {
+        "initialize": {
+          "roundtrip_ns": 507864958,
+          "server_user_delta": 446956166,
+          "server_system_delta": 58957875,
+          "server_child_user_delta": 0,
+          "server_child_system_delta": 0,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 0,
+          "sampled_peak_tree_rss_bytes": 94519296,
+          "sampled_peak_server_rss_bytes": 94519296,
+          "sampled_peak_tree_footprint_bytes": 77873704,
+          "sampled_peak_server_footprint_bytes": 77873704,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 62125,
+          "sampled_peak_gui_tree_rss_bytes": 286015488,
+          "sampled_peak_gui_tree_footprint_bytes": 195529128
+        },
+        "connect": {
+          "roundtrip_ns": 1106515625,
+          "server_user_delta": 95246375,
+          "server_system_delta": 43872500,
+          "server_child_user_delta": 618588250,
+          "server_child_system_delta": 173912291,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 4096,
+          "sampled_peak_tree_rss_bytes": 233619456,
+          "sampled_peak_server_rss_bytes": 97484800,
+          "sampled_peak_tree_footprint_bytes": 116541096,
+          "sampled_peak_server_footprint_bytes": 80462424,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 29451249,
+          "sampled_peak_gui_tree_rss_bytes": 286048256,
+          "sampled_peak_gui_tree_footprint_bytes": 195561896
+        },
+        "documents": {
+          "roundtrip_ns": 19297292,
+          "server_user_delta": 2796125,
+          "server_system_delta": 2940541,
+          "server_child_user_delta": 7937042,
+          "server_child_system_delta": 3864792,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 0,
+          "sampled_peak_tree_rss_bytes": 98549760,
+          "sampled_peak_server_rss_bytes": 97517568,
+          "sampled_peak_tree_footprint_bytes": 81298128,
+          "sampled_peak_server_footprint_bytes": 80495192,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 1141377,
+          "sampled_peak_gui_tree_rss_bytes": 286048256,
+          "sampled_peak_gui_tree_footprint_bytes": 195561896
+        },
+        "bind": {
+          "roundtrip_ns": 349309667,
+          "server_user_delta": 68947625,
+          "server_system_delta": 30814792,
+          "server_child_user_delta": 72086916,
+          "server_child_system_delta": 42375292,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 0,
+          "sampled_peak_tree_rss_bytes": 107511808,
+          "sampled_peak_server_rss_bytes": 97632256,
+          "sampled_peak_tree_footprint_bytes": 83444768,
+          "sampled_peak_server_footprint_bytes": 80609880,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 282244124,
+          "sampled_peak_gui_tree_rss_bytes": 286048256,
+          "sampled_peak_gui_tree_footprint_bytes": 195725736
+        },
+        "status": {
+          "roundtrip_ns": 179410041,
+          "server_user_delta": 52185666,
+          "server_system_delta": 23240625,
+          "server_child_user_delta": 54305417,
+          "server_child_system_delta": 31296125,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 0,
+          "sampled_peak_tree_rss_bytes": 107003904,
+          "sampled_peak_server_rss_bytes": 97763328,
+          "sampled_peak_tree_footprint_bytes": 83117088,
+          "sampled_peak_server_footprint_bytes": 80740952,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 33005500,
+          "sampled_peak_gui_tree_rss_bytes": 286031872,
+          "sampled_peak_gui_tree_footprint_bytes": 195578280
+        },
+        "selection": {
+          "roundtrip_ns": 39467417,
+          "server_user_delta": 2731583,
+          "server_system_delta": 7270291,
+          "server_child_user_delta": 16725000,
+          "server_child_system_delta": 9460667,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 0,
+          "sampled_peak_tree_rss_bytes": 105267200,
+          "sampled_peak_server_rss_bytes": 97779712,
+          "sampled_peak_tree_footprint_bytes": 82887712,
+          "sampled_peak_server_footprint_bytes": 80757336,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 5061751,
+          "sampled_peak_gui_tree_rss_bytes": 286031872,
+          "sampled_peak_gui_tree_footprint_bytes": 195578280
+        },
+        "scene": {
+          "roundtrip_ns": 221027500,
+          "server_user_delta": 19663291,
+          "server_system_delta": 30115542,
+          "server_child_user_delta": 87500708,
+          "server_child_system_delta": 46257583,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 8192,
+          "sampled_peak_tree_rss_bytes": 107528192,
+          "sampled_peak_server_rss_bytes": 97828864,
+          "sampled_peak_tree_footprint_bytes": 83510304,
+          "sampled_peak_server_footprint_bytes": 80773720,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 39659917,
+          "sampled_peak_gui_tree_rss_bytes": 286031872,
+          "sampled_peak_gui_tree_footprint_bytes": 195578280
+        },
+        "render": {
+          "roundtrip_ns": 107903542,
+          "server_user_delta": 4345708,
+          "server_system_delta": 13461875,
+          "server_child_user_delta": 41468459,
+          "server_child_system_delta": 20392125,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 8192,
+          "sampled_peak_tree_rss_bytes": 107511808,
+          "sampled_peak_server_rss_bytes": 97828864,
+          "sampled_peak_tree_footprint_bytes": 83461152,
+          "sampled_peak_server_footprint_bytes": 80773720,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 23890166,
+          "sampled_peak_gui_tree_rss_bytes": 286179328,
+          "sampled_peak_gui_tree_footprint_bytes": 195725736
+        }
+      }
+    },
+    "rust": {
+      "startup_median_ms": 6.947292,
+      "operations": {
+        "initialize": {
+          "roundtrip_ns": 5031500,
+          "server_user_delta": 2790042,
+          "server_system_delta": 1402292,
+          "server_child_user_delta": 0,
+          "server_child_system_delta": 0,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 0,
+          "sampled_peak_tree_rss_bytes": 13058048,
+          "sampled_peak_server_rss_bytes": 13058048,
+          "sampled_peak_tree_footprint_bytes": 6324704,
+          "sampled_peak_server_footprint_bytes": 6324704,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 0,
+          "sampled_peak_gui_tree_rss_bytes": 286179328,
+          "sampled_peak_gui_tree_footprint_bytes": 195447208
+        },
+        "connect": {
+          "roundtrip_ns": 1123855666,
+          "server_user_delta": 4509875,
+          "server_system_delta": 17712125,
+          "server_child_user_delta": 644634875,
+          "server_child_system_delta": 173689541,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 0,
+          "sampled_peak_tree_rss_bytes": 152174592,
+          "sampled_peak_server_rss_bytes": 17514496,
+          "sampled_peak_tree_footprint_bytes": 44795464,
+          "sampled_peak_server_footprint_bytes": 8929760,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 19852125,
+          "sampled_peak_gui_tree_rss_bytes": 287080448,
+          "sampled_peak_gui_tree_footprint_bytes": 196331944
+        },
+        "documents": {
+          "roundtrip_ns": 24769708,
+          "server_user_delta": 242292,
+          "server_system_delta": 620375,
+          "server_child_user_delta": 8102333,
+          "server_child_system_delta": 3458750,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 0,
+          "sampled_peak_tree_rss_bytes": 23789568,
+          "sampled_peak_server_rss_bytes": 17580032,
+          "sampled_peak_tree_footprint_bytes": 9273944,
+          "sampled_peak_server_footprint_bytes": 8995296,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 1039625,
+          "sampled_peak_gui_tree_rss_bytes": 286932992,
+          "sampled_peak_gui_tree_footprint_bytes": 196184488
+        },
+        "bind": {
+          "roundtrip_ns": 208469084,
+          "server_user_delta": 1851250,
+          "server_system_delta": 6873333,
+          "server_child_user_delta": 78829750,
+          "server_child_system_delta": 32093041,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 0,
+          "sampled_peak_tree_rss_bytes": 27983872,
+          "sampled_peak_server_rss_bytes": 17842176,
+          "sampled_peak_tree_footprint_bytes": 12010408,
+          "sampled_peak_server_footprint_bytes": 9273848,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 15128334,
+          "sampled_peak_gui_tree_rss_bytes": 287948800,
+          "sampled_peak_gui_tree_footprint_bytes": 197233064
+        },
+        "status": {
+          "roundtrip_ns": 182445666,
+          "server_user_delta": 1373416,
+          "server_system_delta": 5257041,
+          "server_child_user_delta": 61014583,
+          "server_child_system_delta": 24584084,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 0,
+          "sampled_peak_tree_rss_bytes": 27901952,
+          "sampled_peak_server_rss_bytes": 18104320,
+          "sampled_peak_tree_footprint_bytes": 11420608,
+          "sampled_peak_server_footprint_bytes": 9552400,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 8890125,
+          "sampled_peak_gui_tree_rss_bytes": 287997952,
+          "sampled_peak_gui_tree_footprint_bytes": 197233064
+        },
+        "selection": {
+          "roundtrip_ns": 51833416,
+          "server_user_delta": 660542,
+          "server_system_delta": 1450667,
+          "server_child_user_delta": 16800292,
+          "server_child_system_delta": 6882209,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 0,
+          "sampled_peak_tree_rss_bytes": 18546688,
+          "sampled_peak_server_rss_bytes": 18448384,
+          "sampled_peak_tree_footprint_bytes": 9896464,
+          "sampled_peak_server_footprint_bytes": 9896464,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 1984250,
+          "sampled_peak_gui_tree_rss_bytes": 287997952,
+          "sampled_peak_gui_tree_footprint_bytes": 197216680
+        },
+        "scene": {
+          "roundtrip_ns": 253641917,
+          "server_user_delta": 1990875,
+          "server_system_delta": 7795875,
+          "server_child_user_delta": 78858334,
+          "server_child_system_delta": 31279375,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 8192,
+          "sampled_peak_tree_rss_bytes": 28295168,
+          "sampled_peak_server_rss_bytes": 19070976,
+          "sampled_peak_tree_footprint_bytes": 12665816,
+          "sampled_peak_server_footprint_bytes": 10371600,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 31292042,
+          "sampled_peak_gui_tree_rss_bytes": 288210944,
+          "sampled_peak_gui_tree_footprint_bytes": 197265832
+        },
+        "render": {
+          "roundtrip_ns": 110140500,
+          "server_user_delta": 686875,
+          "server_system_delta": 3872125,
+          "server_child_user_delta": 36952458,
+          "server_child_system_delta": 14644708,
+          "server_disk_read_delta": 0,
+          "server_disk_write_delta": 8192,
+          "sampled_peak_tree_rss_bytes": 28852224,
+          "sampled_peak_server_rss_bytes": 19120128,
+          "sampled_peak_tree_footprint_bytes": 13009856,
+          "sampled_peak_server_footprint_bytes": 10420752,
+          "live_descendant_cpu_delta_ns_at_boundary": 0,
+          "gui_surviving_process_cpu_delta_ns": 22744583,
+          "sampled_peak_gui_tree_rss_bytes": 288210944,
+          "sampled_peak_gui_tree_footprint_bytes": 197265832
+        }
+      }
+    }
+  },
+  "requests": 80,
+  "scene_object_count_all_trials": 7,
+  "sampler_errors": {
+    "python-0": {
+      "mcp_samples": [],
+      "gui_samples": []
+    },
+    "python-1": {
+      "mcp_samples": [],
+      "gui_samples": []
+    },
+    "python-2": {
+      "mcp_samples": [],
+      "gui_samples": []
+    },
+    "python-3": {
+      "mcp_samples": [],
+      "gui_samples": []
+    },
+    "python-4": {
+      "mcp_samples": [],
+      "gui_samples": []
+    },
+    "rust-0": {
+      "mcp_samples": [],
+      "gui_samples": []
+    },
+    "rust-1": {
+      "mcp_samples": [],
+      "gui_samples": []
+    },
+    "rust-2": {
+      "mcp_samples": [],
+      "gui_samples": []
+    },
+    "rust-3": {
+      "mcp_samples": [],
+      "gui_samples": []
+    },
+    "rust-4": {
+      "mcp_samples": [],
+      "gui_samples": []
+    }
+  },
+  "memory_observation_complete": true,
+  "binary_sha256": "ea78a3430065316c47fcb0362d21feba62e29b93a65c1dd3d854fd418af97ccb",
+  "scope": "Five paired read-only real STDIO trials on explicitly owned warm stage22 GUI; separate process trees/CPU/physical IO; not exclusive phases or cold GUI",
+  "root_cause_proven": false
+}

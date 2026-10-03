@@ -1,0 +1,78 @@
+{
+  "passed": true,
+  "scope": "Direct and nullable integer argument boundaries and frozen negative argument regressions through actual STDIO; no valid mutation or GUI launch",
+  "reports": [
+    {
+      "report": "migration/arguments-empty-integers-comparison.json",
+      "sha256": "e3c1bf83a6d2c6d7f2bdc761454c02915f3b40ae53afef450d72f77357b5f857",
+      "observations": 87
+    },
+    {
+      "report": "migration/arguments-required-objects-integers-comparison.json",
+      "sha256": "fd22328488498866fb1cd4c56ecfc27a7e70579e61d6d2ab38c51120cfd59729",
+      "observations": 87
+    },
+    {
+      "report": "migration/arguments-required-null-integers-comparison.json",
+      "sha256": "f3c699ee1bdbb272a323714db8da0df1a0f1086cd2f71e5178e1ef61677846f8",
+      "observations": 87
+    },
+    {
+      "report": "migration/arguments-type-fields-integers-comparison.json",
+      "sha256": "ef68f4ab386b250f4265dfdc7fec05daafa6d38ecb296bfc940106a726bcfa24",
+      "observations": 418
+    },
+    {
+      "report": "migration/arguments-missing-one-integers-comparison.json",
+      "sha256": "f85501deb7a3de547f773e2b335ee636cf815c00747df07828107db249159ce1",
+      "observations": 147
+    },
+    {
+      "report": "migration/arguments-unknown-integers-comparison.json",
+      "sha256": "138be82bac092f7da8a2a2e42aa58fd59da666aeb4c8ef717bc0e560bbc00f24",
+      "observations": 110
+    },
+    {
+      "report": "migration/arguments-nested-unknown-integers-comparison.json",
+      "sha256": "33b16d69f90d7122714061cf0071fede570ae90a0361563f31dfb7984412a4da",
+      "observations": 6
+    },
+    {
+      "report": "migration/arguments-invalid-tag-integers-comparison.json",
+      "sha256": "1ddb6bed42db99963f6ea078a961e071621bd0c2e2ccf30dc7a3ff9806c61ab3",
+      "observations": 18
+    },
+    {
+      "report": "migration/arguments-numeric-text-integers-comparison.json",
+      "sha256": "238d9479c7141943d2ab9ab16bb44777588c41ae5b08878c45e771fe1986bb6f",
+      "observations": 2250
+    },
+    {
+      "report": "migration/arguments-container-fields-integers-comparison.json",
+      "sha256": "b4e7868a199a399b66f73f97e345a7d3c50773379ad04631d90c38735245553a",
+      "observations": 78
+    },
+    {
+      "report": "migration/arguments-integer-extremes-integers-comparison.json",
+      "sha256": "fb2bbfab5b157b5d5f259baebf24b608e94597c0fb9d53f3b558fa92f237e84f",
+      "observations": 487
+    },
+    {
+      "report": "migration/arguments-integer-extremes-package-comparison.json",
+      "sha256": "fb2bbfab5b157b5d5f259baebf24b608e94597c0fb9d53f3b558fa92f237e84f",
+      "observations": 487
+    }
+  ],
+  "observations": 4262,
+  "STDIO_starts": 24,
+  "normalization": "none",
+  "rust_binary_sha256": "9cfd86877fff427d82b06a8de7ab273201620ce8f2afb7f3f90126e2898fffef",
+  "reference_contract": "migration/contracts/argument-integer-expanded-errors.json",
+  "reference_contract_sha256": "f8406fff7ad87f8f6917e287662842bcbe9be6ed15ec1e18615e3069dd74e37e",
+  "reference_cases": 487,
+  "integer_parameters": 21,
+  "schema_audit": "migration/argument-schema-audit.json",
+  "native_GUI_acceptance": false,
+  "full_argument_validation_complete": false,
+  "full_migration_complete": false
+}

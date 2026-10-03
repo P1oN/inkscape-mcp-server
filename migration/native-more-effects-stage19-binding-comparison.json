@@ -1,0 +1,194 @@
+{
+  "passed": true,
+  "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19",
+  "binary_sha256": "c30527cf22c33ff3bd9291f7dff324dc5318338e36162b5d5355628ec6c33030",
+  "helper_sha256": "30ce11b57011990fa726d2d86dc3c9718cdc48ec1ee805086927a5ac68dc5bf8",
+  "vendor_unchanged": true,
+  "no_new_GUI_launch": true,
+  "native_owned_processes": "  PID  PPID COMMAND\n12496     1 /Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3 -I /Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/supervise.py /private/tmp/imcp-native-i4iar794/session /Applications/Inkscape.app/Contents/MacOS/inkscape\n12505 12496 /private/tmp/imcp-native-i4iar794/session/context-bridge/Inkscape.app/Contents/MacOS/inkscape --with-gui\n",
+  "native_actions": [
+    "Select All two owned groups",
+    "transform Undo",
+    "transform Redo",
+    "transform Undo final restoration",
+    "click owned canvas at (200,260); single duplicate selection checked by exact ID",
+    "lower Undo",
+    "lower Redo",
+    "lower Undo final restoration"
+  ],
+  "checks": {
+    "transform": 22,
+    "lower": 16
+  },
+  "artifacts": {
+    "transform": 10,
+    "lower": 10
+  },
+  "files": {
+    "migration/native-transform-stage19-comparison.json": {
+      "bytes": 5102,
+      "sha256": "ebfb0977943a719019e4568b5a136b2b23aa201b2ea103a9e2116e1869430090"
+    },
+    "migration/native-transform-stage19-captured-comparison.json": {
+      "bytes": 5101,
+      "sha256": "9e46f6aa24c10d839960a392228854864ab3a9777fd9b69d24416fb0bbcf6652"
+    },
+    "migration/native-order-stage19-comparison.json": {
+      "bytes": 4225,
+      "sha256": "e0349ea21a1cbdba2ffddf4324aa9831dd841195634eccd64b72aa116aed15fb"
+    },
+    "migration/native-order-stage19-captured-comparison.json": {
+      "bytes": 4224,
+      "sha256": "bdeca425288d6df0484d30e903978fe1512fdb8f5690cc83d55e70bd4fd2541b"
+    },
+    "scripts/migration_native_structure.py": {
+      "bytes": 6462,
+      "sha256": "84ed2d16aeb6db4581563ddc416f99e0d995ab498d231d4891f92a7b9848c7f0"
+    },
+    "scripts/migration_verify_native_transform.py": {
+      "bytes": 6173,
+      "sha256": "737ba5508f0a18181cd378848da9a00817cec2d789404df0d1a90f2a06379be5"
+    },
+    "scripts/migration_verify_native_structure.py": {
+      "bytes": 7509,
+      "sha256": "dab0c6e8df023f566837d1e390e2d83248d3301f512a3df90ebc9b4cd367a69a"
+    },
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/FILES.json": {
+      "bytes": 429366,
+      "sha256": "e448db076dea9f0a2af46f7c5eb3006e122f1e61ca41fff5ce9b98e2290f1354"
+    },
+    "migration/results/native-gui-stage19/session.json": {
+      "bytes": 1490,
+      "sha256": "31e91d47c3279bdfe6364178f5a0d6294eefec678920420e27eb2c0d73f5c4f3"
+    },
+    "migration/results/native-gui-stage19/transform-apply.trace.json": {
+      "bytes": 50925,
+      "sha256": "f9fd4d9ff16bab7e8372bcdd10e5b51b9d005197164ad38f0c064ace301ed0fc"
+    },
+    "migration/results/native-gui-stage19/transform-apply.ownership.json": {
+      "bytes": 711,
+      "sha256": "a1532a6c659637bb56cb3a05e519339f507b74148da36e36cd753f7c47ed1a83"
+    },
+    "migration/results/native-gui-stage19/transform-apply.scene.json": {
+      "bytes": 8537,
+      "sha256": "31a530b1e3dbc75d9796321fc0ff06651d105de75945f8f1a92c441ea5a03ab1"
+    },
+    "migration/results/native-gui-stage19/transform-apply.sync.json": {
+      "bytes": 532,
+      "sha256": "05466defb365ff84343a3223d46e9293d58fd8f36bd0ff6c1edfde7162a59e31"
+    },
+    "migration/results/native-gui-stage19/transform-undone.trace.json": {
+      "bytes": 28682,
+      "sha256": "a4fe6299042a4a6a19ed7f3b8342ecca145aa254efe599d0f0bc0e426b9b119c"
+    },
+    "migration/results/native-gui-stage19/transform-undone.ownership.json": {
+      "bytes": 711,
+      "sha256": "a1532a6c659637bb56cb3a05e519339f507b74148da36e36cd753f7c47ed1a83"
+    },
+    "migration/results/native-gui-stage19/transform-undone.scene.json": {
+      "bytes": 8454,
+      "sha256": "1000849c2681cb9da33b9ccea987db626541dd6ab17d76a7dc101e89774f10e6"
+    },
+    "migration/results/native-gui-stage19/transform-undone.sync.json": {
+      "bytes": 533,
+      "sha256": "66920a1b2a15c652ce626c31be7d2d604390bfa62207636dce98cc9eb170dbca"
+    },
+    "migration/results/native-gui-stage19/transform-redone.trace.json": {
+      "bytes": 28490,
+      "sha256": "7ac3caae57572be3572250140af568260570f1f2ce50e75cc9a399e59898b3de"
+    },
+    "migration/results/native-gui-stage19/transform-redone.ownership.json": {
+      "bytes": 711,
+      "sha256": "a1532a6c659637bb56cb3a05e519339f507b74148da36e36cd753f7c47ed1a83"
+    },
+    "migration/results/native-gui-stage19/transform-redone.scene.json": {
+      "bytes": 8347,
+      "sha256": "bef2f5d14e8d4e22b64c8f77fe976cca96b8a4733b9e424bb9ee51834eb687d0"
+    },
+    "migration/results/native-gui-stage19/transform-redone.sync.json": {
+      "bytes": 533,
+      "sha256": "a6d367b70577e8d7fd348aa1c5e8b69b0f626fff2adf9a4941d756ccd1bf9e9f"
+    },
+    "migration/results/native-gui-stage19/transform-restored.trace.json": {
+      "bytes": 28688,
+      "sha256": "57387f32bbb6c25a06691820e7562abdd8a3389f4f3b59e332bc4d292d4d7847"
+    },
+    "migration/results/native-gui-stage19/transform-restored.ownership.json": {
+      "bytes": 711,
+      "sha256": "a1532a6c659637bb56cb3a05e519339f507b74148da36e36cd753f7c47ed1a83"
+    },
+    "migration/results/native-gui-stage19/transform-restored.scene.json": {
+      "bytes": 8454,
+      "sha256": "b5d0f9ea04107033a0675a2f4ce0682b176469486b958e06670a9aac512bab95"
+    },
+    "migration/results/native-gui-stage19/transform-restored.sync.json": {
+      "bytes": 537,
+      "sha256": "201082766376188903ba59b72d5a87e32a94f135ab38abe4ab7a0b06c840f765"
+    },
+    "migration/results/native-gui-stage19/lower-apply.trace.json": {
+      "bytes": 50337,
+      "sha256": "6f90ccaa0a2d690b96ae49d6ba688dcb46d5ef50cf2dca727017c80dd6486a8a"
+    },
+    "migration/results/native-gui-stage19/lower-apply.ownership.json": {
+      "bytes": 711,
+      "sha256": "a1532a6c659637bb56cb3a05e519339f507b74148da36e36cd753f7c47ed1a83"
+    },
+    "migration/results/native-gui-stage19/lower-apply.scene.json": {
+      "bytes": 8552,
+      "sha256": "e928696fc17017ca400dfe459a12ca0a3969680742ad0fe1d286d84eeb5332cc"
+    },
+    "migration/results/native-gui-stage19/lower-apply.sync.json": {
+      "bytes": 524,
+      "sha256": "7cfc95192e37186b8b1dcde573adaebb492fe4d46fafdda0a90776ae1b3e1620"
+    },
+    "migration/results/native-gui-stage19/lower-undone.trace.json": {
+      "bytes": 28670,
+      "sha256": "a8ec1583a52772d135b7819a7c1b0aaf7246370c6dd0724746f95200782b9906"
+    },
+    "migration/results/native-gui-stage19/lower-undone.ownership.json": {
+      "bytes": 711,
+      "sha256": "a1532a6c659637bb56cb3a05e519339f507b74148da36e36cd753f7c47ed1a83"
+    },
+    "migration/results/native-gui-stage19/lower-undone.scene.json": {
+      "bytes": 8454,
+      "sha256": "cdfc6541821b221e6eae04b1f474ef33763e970fc724609146a7be84779b6523"
+    },
+    "migration/results/native-gui-stage19/lower-undone.sync.json": {
+      "bytes": 525,
+      "sha256": "7b8f24d7d8efe1780e33dcb54f225c7efc063cc2b3f8e8ed9f5573ca0c47f17b"
+    },
+    "migration/results/native-gui-stage19/lower-redone.trace.json": {
+      "bytes": 28670,
+      "sha256": "29494f11260476b37861b1381c286e219258e38c9d17223d98752d447502c00b"
+    },
+    "migration/results/native-gui-stage19/lower-redone.ownership.json": {
+      "bytes": 711,
+      "sha256": "a1532a6c659637bb56cb3a05e519339f507b74148da36e36cd753f7c47ed1a83"
+    },
+    "migration/results/native-gui-stage19/lower-redone.scene.json": {
+      "bytes": 8454,
+      "sha256": "6752c4f1128a1ae619dd0ffb32adf8be4e1799442d6c5959cc9c304967e66fc2"
+    },
+    "migration/results/native-gui-stage19/lower-redone.sync.json": {
+      "bytes": 525,
+      "sha256": "18ada1e5156a205de69b8c8bfb5d82b6bfcc7f78b4a228249b9aae7ea53d2ff4"
+    },
+    "migration/results/native-gui-stage19/lower-restored.trace.json": {
+      "bytes": 28676,
+      "sha256": "9d46da07e8dc6fb361d0d2607b6b69614db4ee998395f0eca3d987996dff3b95"
+    },
+    "migration/results/native-gui-stage19/lower-restored.ownership.json": {
+      "bytes": 711,
+      "sha256": "a1532a6c659637bb56cb3a05e519339f507b74148da36e36cd753f7c47ed1a83"
+    },
+    "migration/results/native-gui-stage19/lower-restored.scene.json": {
+      "bytes": 8454,
+      "sha256": "f089d0d152f63c0e9ed03973638553f40ea610772b9a369e0257525c632f9b90"
+    },
+    "migration/results/native-gui-stage19/lower-restored.sync.json": {
+      "bytes": 529,
+      "sha256": "1ff08d286c39fd4306ee94d4234ae562f58027239158977077653a386887f588"
+    }
+  },
+  "scope": "Fixed compound transform and lower only. Archive/source bytes unchanged. Additional native text/parent-transform/other-order/document-switch/lost-result acceptance and phase benchmarks remain incomplete."
+}

@@ -1,0 +1,27 @@
+{
+  "name": "glib",
+  "version": "2.90.0",
+  "formula_sha256": "eb964bd9d934f92a1e271e84085c58541770d41f5698e7e5f17094375bb46d2a",
+  "bottle_sha256": "07422c68ee1c3d01ba6ac6296668e82cad2ee21c9466e60e79a70da2c5947207",
+  "patch_commit": "1cf441a09f572566b1b7c4695a4d169d1177248a",
+  "patch_url": "https://raw.githubusercontent.com/Homebrew/homebrew-core/1cf441a09f572566b1b7c4695a4d169d1177248a/Patches/glib/hardcoded-paths.diff",
+  "files": [
+    {
+      "path": "glib.rb",
+      "bytes": 7480,
+      "sha256": "eb964bd9d934f92a1e271e84085c58541770d41f5698e7e5f17094375bb46d2a"
+    },
+    {
+      "path": "hardcoded-paths.diff",
+      "bytes": 1523,
+      "sha256": "d846efd0bf62918350da94f850db33b0f8727fece9bfaf8164566e3094e80c97"
+    },
+    {
+      "path": "Homebrew-core-LICENSE.txt",
+      "bytes": 1334,
+      "sha256": "f80329e58613ad669c0e73cb132d8060b9b2c55e339c73848068e4d1567f4627"
+    }
+  ],
+  "scope": "Installed recipe matches exact SBOM bottle; sole patch history commit predates bottle, patch dry-run applies to exact upstream2.90.0. No binary reproducibility claim.",
+  "homebrew_license_url": "https://raw.githubusercontent.com/Homebrew/homebrew-core/1cf441a09f572566b1b7c4695a4d169d1177248a/LICENSE.txt"
+}

@@ -1,0 +1,76 @@
+{
+  "passed": true,
+  "scope": "Native container validation, frozen negative argument regressions through actual STDIO; no valid mutation or GUI launch in these argument matrices",
+  "reports": [
+    {
+      "report": "migration/arguments-empty-containers-comparison.json",
+      "sha256": "c46bda837bde5ba916ab39b59082eaa4e451d75a0c746976be037908340961bf",
+      "observations": 87
+    },
+    {
+      "report": "migration/arguments-required-objects-containers-comparison.json",
+      "sha256": "4e7eb546bc61c618004aaef9089e2c652b34d4025a8a40ef0a4709c48a98bf9e",
+      "observations": 87
+    },
+    {
+      "report": "migration/arguments-required-null-containers-comparison.json",
+      "sha256": "3b6d6819b22d71a2f5a24cc86cb9d2631a43f2dd485b77bbdbb42377289dce74",
+      "observations": 87
+    },
+    {
+      "report": "migration/arguments-type-fields-containers-comparison.json",
+      "sha256": "624d7f2f52e372ffd8c0dd008859c7b8fc0dcd1e6a37e8404ce7962865f95a9e",
+      "observations": 418
+    },
+    {
+      "report": "migration/arguments-missing-one-containers-comparison.json",
+      "sha256": "63d0941ad648682f61be82a4502fee4e3c6665dc390410b08d97065c1e7dc6e7",
+      "observations": 147
+    },
+    {
+      "report": "migration/arguments-unknown-containers-comparison.json",
+      "sha256": "7e01c086f666166f69555fba3fba9d7c512a91137f26b8b2ca6c1d2a8e158ca1",
+      "observations": 110
+    },
+    {
+      "report": "migration/arguments-nested-unknown-containers-comparison.json",
+      "sha256": "88ce93a875d24e4ce632d62bc48da58a9e5d4653eaf4e246907be9c6be014e80",
+      "observations": 6
+    },
+    {
+      "report": "migration/arguments-invalid-tag-containers-comparison.json",
+      "sha256": "ed5c4b684b25975d535c176d6a33822ee2c23a942ae07eeba9b24f5a4baf950d",
+      "observations": 18
+    },
+    {
+      "report": "migration/arguments-numeric-text-containers-comparison.json",
+      "sha256": "34ace15ba9b936c6119e90bd23b4306877abf551ccdcb1619265f2b1886d2980",
+      "observations": 2250
+    },
+    {
+      "report": "migration/arguments-containers-source-comparison.json",
+      "sha256": "e544d4b117d86e4d86d27d18f0fad87b78b79a289c2f3c60b4a0c3a4657553ce",
+      "observations": 78
+    },
+    {
+      "report": "migration/arguments-containers-package-comparison.json",
+      "sha256": "e544d4b117d86e4d86d27d18f0fad87b78b79a289c2f3c60b4a0c3a4657553ce",
+      "observations": 78
+    }
+  ],
+  "observations": 3366,
+  "STDIO_starts": 22,
+  "normalization": "none",
+  "rust_binary_sha256": "20d5cc37d2573eeebe2b9fc3fb1532ef2d53d76c5737288751865aa35fcd16fc",
+  "reference_contract": "migration/contracts/argument-container-expanded-errors.json",
+  "reference_contract_sha256": "d342f881941eef78cfa6ffb2a59f24b51757971f119b11cc8072fd03447459d3",
+  "reference_cases": 78,
+  "tuple_missing_and_overlong": true,
+  "typed_mapping_values": true,
+  "list_length_and_invalid_element_precedence": true,
+  "native_GUI_acceptance": false,
+  "full_argument_validation_complete": false,
+  "full_migration_complete": false,
+  "positive_repeat_report": "migration/repeat-containers-package-cli-comparison.json",
+  "initial_asymmetric_CLI_repeat_failure": "migration/repeat-containers-package-comparison.json"
+}

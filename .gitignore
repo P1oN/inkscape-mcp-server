@@ -24,3 +24,8 @@ uv.lock.bak
 .DS_Store
 .idea/
 *.swp
+
+# Rust build products and raw migration measurements (summaries are tracked).
+/rust/target/
+/migration/results/
+/.inkscape-mcp-local/

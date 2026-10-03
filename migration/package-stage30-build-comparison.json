@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage30",
+  "archive": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage30.tar.gz",
+  "archive_bytes": 46471739,
+  "archive_sha256": "e21e92317865cb96df73f24f9f172f6a0080fe45f21d35ddcffb5a38f04eeaaa",
+  "binary_sha256": "fbb6b678cfe73d47c9dc3aaa1a784fd59611b8613d530e811dafa6e46e1e0b8a",
+  "reports": [
+    "migration/package-stage30-cold-comparison.json",
+    "migration/package-stage30-warm-comparison.json",
+    "migration/doctor-stage30-comparison.json",
+    "migration/notices-stage30-comparison.json",
+    "migration/discovery-stage30-comparison.json",
+    "migration/results/launcher-stage30/comparison.json"
+  ],
+  "scope": "Current Rust-only layout and namespace fix; actual archive cold/warm CLI/STDIO install, launcher11, doctor10, notices9 and discovery16. Native/performance stage27 evidence not transferred."
+}

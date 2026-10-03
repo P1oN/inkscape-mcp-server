@@ -1,0 +1,7 @@
+{
+  "profiles": 6,
+  "observations": 27,
+  "normalization": "only validated server-minted temp document path; complete wire/assets/argv",
+  "differences": [],
+  "passed": true
+}

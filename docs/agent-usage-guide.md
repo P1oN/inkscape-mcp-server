@@ -43,12 +43,11 @@ Three read-only discovery tools answer "which tool do I call?" without reading s
   (filter by fill/stroke/tag/text/id_prefix/bbox). `inspect_document` gives the same ids plus the
   full structure (tree, layers, styles, fonts, assets).
 
-The README's [“Try asking your agent to…”](../README.md#try-asking-your-agent-to)
-catalog lists representative asks per group; it is aligned with the same `intents.py` map so the doc
-and the tools never diverge.
+Use `how_do_i` and `list_capabilities` for representative asks and current tool routing.
+Their intent catalog is embedded in the Rust server.
 
-Rule of thumb: simple structural edits (create/style/text/transform) go through the direct `lxml`
-DOM layer; render, export, and complex path geometry go through the Inkscape engine (ADR-005).
+Rule of thumb: simple structural edits (create/style/text/transform) go through the Rust DOM
+edit pipeline; render, export, and complex path geometry go through the Inkscape engine (ADR-005).
 
 ---
 
@@ -167,7 +166,7 @@ unless it is called with a non-empty `approval_token`. The token is **minted/con
 and bound to a single operation** — it is deliberately *not* an ambient env flag or a setting the
 model can flip on for itself. Many HIGH-risk path tools also default to `dry_run=True`: call them
 once to validate + preview the change with no mutation, then call again with `dry_run=False` **and**
-the `approval_token` to apply it. Compose/adopt tools (`tools/compose.py`) are HIGH + approval-gated
+the `approval_token` to apply it. Compose/adopt tools (`rust/src/adopt.rs`) are HIGH + approval-gated
 for the same reason (they ingest arbitrary SVG).
 
 So a typical HIGH-risk flow is: `how_do_i` → dry-run the tool to preview → obtain an `approval_token`

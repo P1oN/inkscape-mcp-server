@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "observations": 87,
+  "normalization": "none",
+  "scope": "All 87 tools with required arguments called with an empty object. No valid tool call or explicit GUI launch.",
+  "rust_binary_sha256": "1c06569f720c7dec6d8eb7af13be30ffeb59f47cc924dbe20fbe91e9abf9b3c3",
+  "discovery_sha256": "e83b34257858096e07c673e5a38eeadd8a371b0e4a63496181e893d8f48128b6",
+  "differences": [],
+  "workspace_changed": {
+    "python": false,
+    "rust": false
+  }
+}

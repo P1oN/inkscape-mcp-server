@@ -1,0 +1,138 @@
+{
+  "passed": true,
+  "checks": {
+    "transform-apply-before_unique_ids": true,
+    "transform-apply_unique_ids": true,
+    "transform-undone_unique_ids": true,
+    "transform-redone_unique_ids": true,
+    "transform-restored_unique_ids": true,
+    "undone_exact_drawing": true,
+    "undone_exact_rgba": true,
+    "undone_exact_scene": true,
+    "redone_exact_drawing": true,
+    "redone_exact_rgba": true,
+    "redone_exact_scene": true,
+    "restored_exact_drawing": true,
+    "restored_exact_rgba": true,
+    "restored_exact_scene": true,
+    "object_counts_unchanged": true,
+    "IDs_and_paint_order_preserved": true,
+    "pixels_changed": true,
+    "two_objects_transformed": true,
+    "mcp_a0e40c050d0142edb1e88b9961375f76_0_expected_affine": true,
+    "mcp_949786f9369d49debbfe2cc59c3686e8_expected_affine": true,
+    "only_selected_transforms_changed": true,
+    "applied_audit": true
+  },
+  "artifacts": {
+    "native-transform-apply-before.svg": {
+      "bytes": 1815,
+      "sha256": "187baf87b90db06e442a4f8034e166db05d139da8d50be586ace8f631e2446ce"
+    },
+    "live-view-20261002T224220_153558Z-b066466d.png": {
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    "native-transform-apply.svg": {
+      "bytes": 1947,
+      "sha256": "381b48e276351392b8edb79f14df732152135d7a791d6d25a328757835d2cf6d"
+    },
+    "live-view-20261002T224221_817191Z-6c3d7c74.png": {
+      "bytes": 15394,
+      "sha256": "7674fce8f46ebba9d7d2d46064bc22595b366d6d32ab3d819dcba63eabda3bbb"
+    },
+    "native-transform-undone.svg": {
+      "bytes": 1815,
+      "sha256": "187baf87b90db06e442a4f8034e166db05d139da8d50be586ace8f631e2446ce"
+    },
+    "live-view-20261002T224240_769924Z-ce03884c.png": {
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    "native-transform-redone.svg": {
+      "bytes": 1947,
+      "sha256": "381b48e276351392b8edb79f14df732152135d7a791d6d25a328757835d2cf6d"
+    },
+    "live-view-20261002T224315_055730Z-8862968d.png": {
+      "bytes": 15394,
+      "sha256": "7674fce8f46ebba9d7d2d46064bc22595b366d6d32ab3d819dcba63eabda3bbb"
+    },
+    "native-transform-restored.svg": {
+      "bytes": 1815,
+      "sha256": "187baf87b90db06e442a4f8034e166db05d139da8d50be586ace8f631e2446ce"
+    },
+    "live-view-20261002T224330_240305Z-76cbc70b.png": {
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    }
+  },
+  "matrices": {
+    "mcp_a0e40c050d0142edb1e88b9961375f76_0": {
+      "raw": "matrix(1.20741 0.323524 -0.323524 1.20741 20 15)",
+      "values": [
+        1.20741,
+        0.323524,
+        -0.323524,
+        1.20741,
+        20.0,
+        15.0
+      ]
+    },
+    "mcp_949786f9369d49debbfe2cc59c3686e8": {
+      "raw": "matrix(1.20741 0.323524 -0.323524 1.20741 20 15)",
+      "values": [
+        1.20741,
+        0.323524,
+        -0.323524,
+        1.20741,
+        20.0,
+        15.0
+      ]
+    }
+  },
+  "expected_matrix": [
+    1.2074072828613354,
+    0.3235238063781509,
+    -0.3235238063781509,
+    1.2074072828613354,
+    20,
+    15
+  ],
+  "matrix_absolute_tolerance": 5e-06,
+  "session": {
+    "root": "/private/tmp/imcp-native-l3sosx3s",
+    "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage22",
+    "profile": "/private/tmp/imcp-native-l3sosx3s/profile",
+    "vendor_executable_sha256": "ad03b220889be90ed3276102dac39638de75cca91c364d58b482dac85395c193",
+    "state": "owned-native-fixed-effects-passed-retained",
+    "env": {
+      "HOME": "/private/tmp/imcp-native-l3sosx3s/home",
+      "TMPDIR": "/private/tmp/imcp-native-l3sosx3s",
+      "PATH": "",
+      "LANG": "en_US.UTF-8",
+      "INKSCAPE_PROFILE_DIR": "/private/tmp/imcp-native-l3sosx3s/profile",
+      "INKSCAPE_MCP_WORKSPACE_ROOTS": "/private/tmp/imcp-native-l3sosx3s/workspace",
+      "INKSCAPE_MCP_LIVE_ENABLED": "1",
+      "INKSCAPE_MCP_TOOL_PROFILE": "full",
+      "INKSCAPE_MCP_MANAGED_DIR": "/private/tmp/imcp-native-l3sosx3s/session",
+      "INKSCAPE_MCP_LIVE_RENDEZVOUS": "/private/tmp/imcp-native-l3sosx3s/absent-rendezvous",
+      "INKSCAPE_MCP_PROCESS_TIMEOUT_S": "10"
+    },
+    "manifest": {
+      "address": "unix:path=/private/tmp/imcp-native-l3sosx3s/session/bus.sock",
+      "inkscape_pid": 30645,
+      "supervisor_pid": 30626,
+      "context_bridge": true
+    },
+    "document": {
+      "window_id": "fc3f641c-5f10-4903-84d8-e313db7e5c7b",
+      "document_id": "e2453f0b-1f33-4730-8675-0e01e629bce1",
+      "name": "New document 1 - Inkscape",
+      "path": null,
+      "object_count": null
+    },
+    "binary_sha256": "ea78a3430065316c47fcb0362d21feba62e29b93a65c1dd3d854fd418af97ccb"
+  },
+  "captured_only": true,
+  "scope": "One compound translate(20,15), scale(1.25), rotate(15) on two owned groups and native Undo/Redo/restoration. Drawing C14N excludes only sodipodi:namedview GUI metadata; raw SVGs retained. Affine tolerance covers six-digit SVG output. No document-switch, arbitrary-parent-transform or performance claim."
+}

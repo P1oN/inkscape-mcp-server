@@ -1,0 +1,100 @@
+{
+  "passed": true,
+  "checks": {
+    "lower-apply-before_unique_ids": true,
+    "lower-apply_unique_ids": true,
+    "lower-undone_unique_ids": true,
+    "lower-redone_unique_ids": true,
+    "lower_counts": true,
+    "lower_undo_exact_scene": true,
+    "lower_redo_exact_scene": true,
+    "lower_undo_exact_rgba": true,
+    "lower_redo_exact_rgba": true,
+    "lower_appearance_preserved": true,
+    "lower_applied_audit": true,
+    "lower_reverses_two_sibling_groups": true,
+    "lower_preserves_group_subtrees": true,
+    "lower-restored_unique_ids": true,
+    "lower_final_restoration_scene": true,
+    "lower_final_restoration_rgba": true
+  },
+  "artifacts": {
+    "native-lower-apply-before.svg": {
+      "bytes": 1815,
+      "sha256": "187baf87b90db06e442a4f8034e166db05d139da8d50be586ace8f631e2446ce"
+    },
+    "live-view-20261002T225036_507632Z-0f6f0e46.png": {
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    "native-lower-apply.svg": {
+      "bytes": 1815,
+      "sha256": "742a305ed0f4a109a9ff2c893c94df1e4bd1b3efcb137fd5b87672c0035c3abc"
+    },
+    "live-view-20261002T225038_118756Z-a169a95c.png": {
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    "native-lower-undone.svg": {
+      "bytes": 1815,
+      "sha256": "fb57d20ec97bda5b268e6fd7fec6df2017a21778e8c456baf709212fa7d236b5"
+    },
+    "live-view-20261002T225101_389578Z-c5eafbf9.png": {
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    "native-lower-redone.svg": {
+      "bytes": 1815,
+      "sha256": "742a305ed0f4a109a9ff2c893c94df1e4bd1b3efcb137fd5b87672c0035c3abc"
+    },
+    "live-view-20261002T225119_179121Z-1c5eb03f.png": {
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    "native-lower-restored.svg": {
+      "bytes": 1815,
+      "sha256": "fb57d20ec97bda5b268e6fd7fec6df2017a21778e8c456baf709212fa7d236b5"
+    },
+    "live-view-20261002T225134_041631Z-013f2648.png": {
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    }
+  },
+  "session": {
+    "root": "/private/tmp/imcp-native-l3sosx3s",
+    "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage22",
+    "profile": "/private/tmp/imcp-native-l3sosx3s/profile",
+    "vendor_executable_sha256": "ad03b220889be90ed3276102dac39638de75cca91c364d58b482dac85395c193",
+    "state": "owned-native-fixed-effects-passed-retained",
+    "env": {
+      "HOME": "/private/tmp/imcp-native-l3sosx3s/home",
+      "TMPDIR": "/private/tmp/imcp-native-l3sosx3s",
+      "PATH": "",
+      "LANG": "en_US.UTF-8",
+      "INKSCAPE_PROFILE_DIR": "/private/tmp/imcp-native-l3sosx3s/profile",
+      "INKSCAPE_MCP_WORKSPACE_ROOTS": "/private/tmp/imcp-native-l3sosx3s/workspace/order-acceptance",
+      "INKSCAPE_MCP_LIVE_ENABLED": "1",
+      "INKSCAPE_MCP_TOOL_PROFILE": "full",
+      "INKSCAPE_MCP_MANAGED_DIR": "/private/tmp/imcp-native-l3sosx3s/session",
+      "INKSCAPE_MCP_LIVE_RENDEZVOUS": "/private/tmp/imcp-native-l3sosx3s/absent-rendezvous",
+      "INKSCAPE_MCP_PROCESS_TIMEOUT_S": "10"
+    },
+    "manifest": {
+      "address": "unix:path=/private/tmp/imcp-native-l3sosx3s/session/bus.sock",
+      "inkscape_pid": 30645,
+      "supervisor_pid": 30626,
+      "context_bridge": true
+    },
+    "document": {
+      "window_id": "fc3f641c-5f10-4903-84d8-e313db7e5c7b",
+      "document_id": "e2453f0b-1f33-4730-8675-0e01e629bce1",
+      "name": "New document 1 - Inkscape",
+      "path": null,
+      "object_count": null
+    },
+    "binary_sha256": "ea78a3430065316c47fcb0362d21feba62e29b93a65c1dd3d854fd418af97ccb"
+  },
+  "captured_only": true,
+  "order_only": true,
+  "scope": "One fixed current-package synthetic native group/ungroup/delete sequence with AX Undo/Redo. Does not establish the root cause of stage18 crash, other native effects or lost-result/document-switch behavior. Order-only mode checks lower on two identical overlapping group copies; it establishes XML paint order and preserved pixels, not differing-color occlusion."
+}

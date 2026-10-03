@@ -1,0 +1,98 @@
+{
+  "evidence_verified": true,
+  "renderer_isolation_passed": false,
+  "defect_fixed": false,
+  "scope": "Confirmed owned-file workspace read escape on stage31; no network/GUI/user files",
+  "files": [
+    {
+      "path": "migration/results/renderer-assets-stage31-probe/absolute.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage31-probe/file-uri.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage31-probe/probe.json",
+      "bytes": 589,
+      "sha256": "3875ce037938c8e278602df30d3912cfca06c3d72c37a55eec47d8ea23239b4d"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage31-probe/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage31-probe/server.trace.json",
+      "bytes": 13435,
+      "sha256": "4c2ec082945e736778a9d59151188f71ebe0b9c2f2e35cf7f08989ea5552bd4e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage31-regression/inside-absolute.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage31-regression/outside-absolute.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage31-regression/outside-file-uri.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage31-regression/outside-symlink.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage31-regression/probe.json",
+      "bytes": 1285,
+      "sha256": "a767076dc9084a368c1d815816fafc53360493ea03f5536261a7dc0271282510"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage31-regression/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage31-regression/server.trace.json",
+      "bytes": 21015,
+      "sha256": "9f0c84ad74d6251f36bc20cece7d89fbd2f5f4d4bf322a3c8d6395424422fa7f"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage31-review/docs/AGENT_HANDOFF.md",
+      "bytes": 207285,
+      "sha256": "1f9c407032a80bc6c3ca78276d480bbfe766cde1e67fd52352189fb4f1a749a6"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage31-review/docs/RUST_COMPLETION_CHECKLIST.md",
+      "bytes": 2431,
+      "sha256": "425d873f23a68bbeee413f3d45aafa9009ba9e0e6575804af60bf105c293f0ce"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage31-review/docs/RUST_NEXT_PLAN.md",
+      "bytes": 7130,
+      "sha256": "825a093aa3b77f2fa13c42d7f0b0b16bd319d5a8703414b71aecbcf33f685e4e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage31-review/docs/RUST_SECURITY_AUDIT.md",
+      "bytes": 5464,
+      "sha256": "796fa80db4e1b8e1c56529c2c13131f98ef962b8592c7fdf31a0f953507ec457"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage31-review/rust/src/render.rs",
+      "bytes": 29667,
+      "sha256": "c5b98b99de2da8a41f1e8a15138e73f73bd9e308761e33102bb5bd7248fc2fea"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage31-review/scripts/rust_renderer_asset_probe.py",
+      "bytes": 5048,
+      "sha256": "d919fac3a9a9a381479108ca4b166109d1fe86fec007b86693c54199afd1d70c"
+    }
+  ]
+}

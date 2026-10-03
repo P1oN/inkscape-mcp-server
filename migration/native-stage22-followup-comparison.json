@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "native_gui": true,
+  "binary_sha256": "ea78a3430065316c47fcb0362d21feba62e29b93a65c1dd3d854fd418af97ccb",
+  "scope_checks": {
+    "fixed_effects_history": 46,
+    "structure": 38,
+    "transform": 22,
+    "order": 16
+  },
+  "native_check_total": 122,
+  "captured_only_rechecks_passed": true,
+  "live_paired_requests": 80,
+  "live_comparisons": 40,
+  "scene_objects_all_trials": 7,
+  "after_select_all_objects": 7,
+  "memory_sampler_errors": 0,
+  "gui_root": "/private/tmp/imcp-native-l3sosx3s",
+  "retained": true,
+  "native_disappearance_reproduced": false,
+  "native_disappearance_cause_proven": false,
+  "full_migration_complete": false,
+  "source_package_build_automated": false,
+  "exclusive_phases_measured": false,
+  "review_followup": "Review-cycle1 is an earlier immutable no-GUI checkpoint; this is fresh subsequent native work"
+}

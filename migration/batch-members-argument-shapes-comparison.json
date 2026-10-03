@@ -1,0 +1,7 @@
+{
+  "scenarios": 24,
+  "differences": [],
+  "passed": true,
+  "binary_sha256": "13a9dd3286ee3f52ce49625464bd3d9837da80b63a1f4bbe0c5588ccd8f3d2a2",
+  "normalization": "validated minted IDs and UTC timestamps only; complete results, SVG bytes, history and RGBA pixels compared"
+}

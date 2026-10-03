@@ -1,0 +1,886 @@
+{
+  "entries": [
+    {
+      "goal_pattern": "Discover workspace roots and open server artifacts",
+      "tools": [
+        "get_workspace_info"
+      ],
+      "how_to": "Call get_workspace_info; read returned artifact resource URIs through MCP.",
+      "group": "inspect",
+      "keywords": [
+        "workspace",
+        "artifact uri",
+        "where saved",
+        "find saved file"
+      ]
+    },
+    {
+      "goal_pattern": "Convert ordinary groups and layers without changing geometry",
+      "tools": [
+        "set_group_mode",
+        "create_group",
+        "rename_object"
+      ],
+      "how_to": "Use set_group_mode; create_group(mode/label); rename_object(label=...) keeps ID.",
+      "group": "edit",
+      "keywords": [
+        "convert layer",
+        "layer to group",
+        "group to layer",
+        "named group"
+      ]
+    },
+    {
+      "goal_pattern": "Preview a detail or compare a fixed region before and after",
+      "tools": [
+        "render_preview",
+        "compare_region"
+      ],
+      "how_to": "render_preview(object_id/region); compare_region(region, snapshot_id).",
+      "group": "export",
+      "keywords": [
+        "detail preview",
+        "preview region",
+        "compare region",
+        "before after"
+      ]
+    },
+    {
+      "goal_pattern": "Replace one SVG fragment preserving its root ID",
+      "tools": [
+        "replace_svg_fragment"
+      ],
+      "how_to": "Pass a same-tag fragment; ID/reference checks apply; approval_token required.",
+      "group": "edit",
+      "keywords": [
+        "replace fragment",
+        "update subtree",
+        "replace subtree",
+        "edit fragment"
+      ]
+    },
+    {
+      "goal_pattern": "Repeat editable objects along a line or inside an area",
+      "tools": [
+        "repeat_objects"
+      ],
+      "how_to": "Plan polyline/rectangle, count/spacing, linked/copies and seeded variation.",
+      "group": "transform",
+      "keywords": [
+        "repeat objects",
+        "along line",
+        "along path",
+        "garland",
+        "stitches"
+      ]
+    },
+    {
+      "goal_pattern": "Draw a rectangle / square",
+      "tools": [
+        "create_rect"
+      ],
+      "how_to": "Call create_rect with x, y, width, height (and rx/ry for rounded corners).",
+      "group": "create",
+      "keywords": [
+        "rectangle",
+        "rect",
+        "square",
+        "box",
+        "draw a rect",
+        "draw a box"
+      ]
+    },
+    {
+      "goal_pattern": "Draw a circle",
+      "tools": [
+        "create_circle"
+      ],
+      "how_to": "Call create_circle with cx, cy, r.",
+      "group": "create",
+      "keywords": [
+        "circle",
+        "draw a circle",
+        "round dot",
+        "disc"
+      ]
+    },
+    {
+      "goal_pattern": "Draw an ellipse / oval",
+      "tools": [
+        "create_ellipse"
+      ],
+      "how_to": "Call create_ellipse with cx, cy, rx, ry.",
+      "group": "create",
+      "keywords": [
+        "ellipse",
+        "oval",
+        "draw an ellipse"
+      ]
+    },
+    {
+      "goal_pattern": "Draw a line",
+      "tools": [
+        "create_line"
+      ],
+      "how_to": "Call create_line with x1, y1, x2, y2.",
+      "group": "create",
+      "keywords": [
+        "line",
+        "draw a line",
+        "segment",
+        "straight line"
+      ]
+    },
+    {
+      "goal_pattern": "Draw a polygon or polyline",
+      "tools": [
+        "create_polygon",
+        "create_polyline"
+      ],
+      "how_to": "Call create_polygon (closed) or create_polyline (open) with a list of points.",
+      "group": "create",
+      "keywords": [
+        "polygon",
+        "polyline",
+        "many sided",
+        "triangle",
+        "points shape"
+      ]
+    },
+    {
+      "goal_pattern": "Draw an arbitrary path / freeform shape",
+      "tools": [
+        "create_path"
+      ],
+      "how_to": "Call create_path with an SVG path `d` string.",
+      "group": "create",
+      "keywords": [
+        "path",
+        "freeform",
+        "bezier",
+        "curve",
+        "draw a path",
+        "path data",
+        "d string"
+      ]
+    },
+    {
+      "goal_pattern": "Add text / a label",
+      "tools": [
+        "create_text"
+      ],
+      "how_to": "Call create_text with x, y and the text content.",
+      "group": "create",
+      "keywords": [
+        "add text",
+        "write text",
+        "label",
+        "caption",
+        "type text",
+        "place text"
+      ]
+    },
+    {
+      "goal_pattern": "Group objects together / make a group",
+      "tools": [
+        "create_group",
+        "group_objects"
+      ],
+      "how_to": "Use group_objects to wrap existing object ids; create_group makes an empty group.",
+      "group": "create",
+      "keywords": [
+        "group",
+        "make a group",
+        "group objects",
+        "combine into group",
+        "wrap in group"
+      ]
+    },
+    {
+      "goal_pattern": "Move an object into another group / reparent",
+      "tools": [
+        "reparent_object"
+      ],
+      "how_to": "Call reparent_object with preserve_appearance=True for checked preservation.",
+      "group": "create",
+      "keywords": [
+        "reparent",
+        "move into group",
+        "change parent",
+        "nest object"
+      ]
+    },
+    {
+      "goal_pattern": "Reuse / clone an element via <use>",
+      "tools": [
+        "create_use"
+      ],
+      "how_to": "Call create_use referencing an existing element id to instance it.",
+      "group": "create",
+      "keywords": [
+        "use element",
+        "clone",
+        "instance",
+        "reuse element",
+        "symbol reference"
+      ]
+    },
+    {
+      "goal_pattern": "Add a gradient fill (linear or radial)",
+      "tools": [
+        "add_linear_gradient",
+        "add_radial_gradient"
+      ],
+      "how_to": "Define one with add_linear_gradient / add_radial_gradient, then set_fill to it.",
+      "group": "create",
+      "keywords": [
+        "gradient",
+        "linear gradient",
+        "radial gradient",
+        "color fade",
+        "blend colors"
+      ]
+    },
+    {
+      "goal_pattern": "Create a brand-new blank document",
+      "tools": [
+        "create_document"
+      ],
+      "how_to": "Call create_document with width/height/units to start a new SVG in the workspace.",
+      "group": "create",
+      "keywords": [
+        "new document",
+        "blank document",
+        "blank svg",
+        "new svg",
+        "start a document",
+        "start a new",
+        "create canvas"
+      ]
+    },
+    {
+      "goal_pattern": "Replace the whole document SVG or insert an SVG fragment",
+      "tools": [
+        "set_document_svg",
+        "insert_svg_fragment"
+      ],
+      "how_to": "Use set_document_svg to replace the doc; insert_svg_fragment to paste a snippet.",
+      "group": "create",
+      "keywords": [
+        "set svg",
+        "replace svg",
+        "insert svg",
+        "paste svg",
+        "svg fragment",
+        "raw svg"
+      ]
+    },
+    {
+      "goal_pattern": "Open an existing SVG file to work on it",
+      "tools": [
+        "open_document"
+      ],
+      "how_to": "Call open_document with the workspace path to get a doc_id for the other tools.",
+      "group": "inspect",
+      "keywords": [
+        "open",
+        "load file",
+        "open svg",
+        "load svg",
+        "open a document",
+        "load document"
+      ]
+    },
+    {
+      "goal_pattern": "Understand a document's structure (tree, layers, styles, fonts, assets)",
+      "tools": [
+        "inspect_document"
+      ],
+      "how_to": "Call inspect_document with the doc_id for the full structural picture and ids.",
+      "group": "inspect",
+      "keywords": [
+        "inspect",
+        "structure",
+        "what is in",
+        "layers",
+        "tree",
+        "outline document",
+        "overview"
+      ]
+    },
+    {
+      "goal_pattern": "Find specific objects by color / tag / text / position",
+      "tools": [
+        "find_objects"
+      ],
+      "how_to": "Call find_objects with filters (fill/stroke/tag/text/id_prefix/bbox) for ids.",
+      "group": "inspect",
+      "keywords": [
+        "find",
+        "find objects",
+        "locate",
+        "search for",
+        "red shapes",
+        "blue shapes",
+        "which objects",
+        "select by",
+        "get ids"
+      ]
+    },
+    {
+      "goal_pattern": "Validate that a document is well-formed / correct",
+      "tools": [
+        "validate_document"
+      ],
+      "how_to": "Call validate_document with the doc_id to check well-formedness and report issues.",
+      "group": "inspect",
+      "keywords": [
+        "validate",
+        "is it valid",
+        "check document",
+        "well formed",
+        "lint",
+        "verify svg"
+      ]
+    },
+    {
+      "goal_pattern": "Get quality metrics for a document",
+      "tools": [
+        "quality_report"
+      ],
+      "how_to": "Call quality_report with the doc_id for machine-readable quality metrics.",
+      "group": "inspect",
+      "keywords": [
+        "quality",
+        "metrics",
+        "quality report",
+        "health",
+        "score document"
+      ]
+    },
+    {
+      "goal_pattern": "See what the runtime / server can do (capabilities)",
+      "tools": [
+        "list_capabilities"
+      ],
+      "how_to": "Call list_capabilities for the runtime matrix (incl. this intents map).",
+      "group": "inspect",
+      "keywords": [
+        "capabilities",
+        "what can you do",
+        "supported",
+        "what tools",
+        "features",
+        "list capabilities"
+      ]
+    },
+    {
+      "goal_pattern": "Change an object's fill color",
+      "tools": [
+        "set_fill"
+      ],
+      "how_to": "Call set_fill with the object id and a paint value (find_objects gets the id).",
+      "group": "edit",
+      "keywords": [
+        "fill",
+        "fill color",
+        "color it",
+        "paint",
+        "set color",
+        "change color",
+        "recolor object"
+      ]
+    },
+    {
+      "goal_pattern": "Change an object's stroke / outline",
+      "tools": [
+        "set_stroke"
+      ],
+      "how_to": "Call set_stroke with the object id and stroke paint/width.",
+      "group": "edit",
+      "keywords": [
+        "stroke",
+        "outline color",
+        "border",
+        "stroke width",
+        "line color",
+        "edge"
+      ]
+    },
+    {
+      "goal_pattern": "Change opacity / transparency",
+      "tools": [
+        "set_opacity"
+      ],
+      "how_to": "Call set_opacity with the object id and a 0..1 opacity.",
+      "group": "edit",
+      "keywords": [
+        "opacity",
+        "transparent",
+        "transparency",
+        "fade",
+        "alpha",
+        "see through"
+      ]
+    },
+    {
+      "goal_pattern": "Change the font of text",
+      "tools": [
+        "set_font"
+      ],
+      "how_to": "Call set_font with the text object id and font-family/size.",
+      "group": "edit",
+      "keywords": [
+        "font",
+        "typeface",
+        "font family",
+        "font size",
+        "change font"
+      ]
+    },
+    {
+      "goal_pattern": "Replace text content",
+      "tools": [
+        "replace_text"
+      ],
+      "how_to": "Call replace_text with the text object id and the new string.",
+      "group": "edit",
+      "keywords": [
+        "replace text",
+        "replace the text",
+        "change text",
+        "edit text",
+        "rename label",
+        "new text",
+        "update text",
+        "text content"
+      ]
+    },
+    {
+      "goal_pattern": "Replace one color with another across the document",
+      "tools": [
+        "replace_color"
+      ],
+      "how_to": "Call replace_color with the from/to paint values to swap a color document-wide.",
+      "group": "edit",
+      "keywords": [
+        "replace color",
+        "swap color",
+        "swap all",
+        "recolor document",
+        "change all red",
+        "color swap"
+      ]
+    },
+    {
+      "goal_pattern": "Apply a color palette / theme to the document",
+      "tools": [
+        "apply_palette"
+      ],
+      "how_to": "Call apply_palette with a palette mapping to recolor the document to a theme.",
+      "group": "edit",
+      "keywords": [
+        "palette",
+        "theme",
+        "color scheme",
+        "apply palette",
+        "rebrand colors",
+        "retheme"
+      ]
+    },
+    {
+      "goal_pattern": "Move / scale / rotate an object",
+      "tools": [
+        "move_object",
+        "scale_object",
+        "rotate_object"
+      ],
+      "how_to": "Use move_object, scale_object, or rotate_object with the id and the transform.",
+      "group": "edit",
+      "keywords": [
+        "move",
+        "scale",
+        "resize object",
+        "rotate",
+        "transform",
+        "reposition",
+        "shrink",
+        "enlarge"
+      ]
+    },
+    {
+      "goal_pattern": "Duplicate or rename an object",
+      "tools": [
+        "duplicate_object",
+        "rename_object"
+      ],
+      "how_to": "Use duplicate_object to copy an object; rename_object to change its id.",
+      "group": "edit",
+      "keywords": [
+        "duplicate",
+        "copy object",
+        "rename object",
+        "change id",
+        "clone object"
+      ]
+    },
+    {
+      "goal_pattern": "Apply several typed edits at once (batch) in one atomic operation",
+      "tools": [
+        "apply_edits"
+      ],
+      "how_to": "Call apply_edits with an ordered list of typed `op` edits (one snapshot, atomic).",
+      "group": "edit",
+      "keywords": [
+        "batch edit",
+        "multiple edits",
+        "several edits",
+        "many edits at once",
+        "apply edits",
+        "atomic edits",
+        "edit in one call",
+        "combine edits"
+      ]
+    },
+    {
+      "goal_pattern": "Bulk-edit every object matching a selector (recolour all blue rects, etc.)",
+      "tools": [
+        "transform_objects"
+      ],
+      "how_to": "Call transform_objects with a find_objects selector + ONE typed op (set_fill / move_object / delete_object / …); dry_run first, then dry_run=false.",
+      "group": "edit",
+      "keywords": [
+        "bulk edit",
+        "bulk",
+        "every object",
+        "all the",
+        "recolor all",
+        "recolour all",
+        "nudge all",
+        "move all",
+        "delete all",
+        "select then apply",
+        "all matching",
+        "apply to every"
+      ]
+    },
+    {
+      "goal_pattern": "Resize the canvas or fit it to the content",
+      "tools": [
+        "resize_canvas",
+        "fit_to_content",
+        "normalize_viewbox"
+      ],
+      "how_to": "resize_canvas sets size; fit_to_content crops to art; normalize_viewbox tidies.",
+      "group": "canvas",
+      "keywords": [
+        "resize canvas",
+        "canvas size",
+        "fit to content",
+        "crop",
+        "viewbox",
+        "page size",
+        "trim"
+      ]
+    },
+    {
+      "goal_pattern": "Tile or repeat objects across the canvas",
+      "tools": [
+        "tile"
+      ],
+      "how_to": "Call tile to repeat object(s) in a grid across the canvas.",
+      "group": "canvas",
+      "keywords": [
+        "tile",
+        "repeat",
+        "grid of",
+        "pattern of objects",
+        "array"
+      ]
+    },
+    {
+      "goal_pattern": "Simplify / clean up paths",
+      "tools": [
+        "simplify_path",
+        "cleanup_paths"
+      ],
+      "how_to": "simplify_path reduces nodes; cleanup_paths tidies data (HIGH risk, dry-run first).",
+      "group": "paths",
+      "keywords": [
+        "simplify",
+        "reduce nodes",
+        "cleanup path",
+        "clean paths",
+        "optimize path",
+        "fewer points"
+      ]
+    },
+    {
+      "goal_pattern": "Combine paths or do boolean union / difference",
+      "tools": [
+        "combine_paths",
+        "boolean_union",
+        "boolean_difference"
+      ],
+      "how_to": "combine_paths merges; boolean_union/boolean_difference do shape math (HIGH risk).",
+      "group": "paths",
+      "keywords": [
+        "combine paths",
+        "merge paths",
+        "boolean",
+        "union",
+        "difference",
+        "subtract",
+        "intersect"
+      ]
+    },
+    {
+      "goal_pattern": "Convert a stroke into a filled path / outline",
+      "tools": [
+        "stroke_to_path"
+      ],
+      "how_to": "Call stroke_to_path to outline strokes into fills (HIGH risk, dry-run first).",
+      "group": "paths",
+      "keywords": [
+        "stroke to path",
+        "outline stroke",
+        "convert stroke",
+        "expand stroke"
+      ]
+    },
+    {
+      "goal_pattern": "Break a compound path apart",
+      "tools": [
+        "break_apart"
+      ],
+      "how_to": "Call break_apart to split a compound path into separate subpaths (HIGH risk).",
+      "group": "paths",
+      "keywords": [
+        "break apart",
+        "split path",
+        "separate subpaths",
+        "ungroup path"
+      ]
+    },
+    {
+      "goal_pattern": "Export a PNG (or other raster/PDF) of the document",
+      "tools": [
+        "export_document",
+        "render_preview"
+      ],
+      "how_to": "export_document writes a PNG/PDF/etc; render_preview gives a quick preview.",
+      "group": "export",
+      "keywords": [
+        "export png",
+        "export a png",
+        "export pdf",
+        "render",
+        "to png",
+        "save as png",
+        "rasterize",
+        "make a png"
+      ]
+    },
+    {
+      "goal_pattern": "Export just one object",
+      "tools": [
+        "export_object"
+      ],
+      "how_to": "Call export_object with the doc_id and object id to export that object alone.",
+      "group": "export",
+      "keywords": [
+        "export object",
+        "export just",
+        "export one shape",
+        "export selection",
+        "crop export"
+      ]
+    },
+    {
+      "goal_pattern": "Export many sizes/formats at once (batch)",
+      "tools": [
+        "export_batch",
+        "create_icon_set"
+      ],
+      "how_to": "export_batch takes a list of specs; create_icon_set makes a standard icon set.",
+      "group": "export",
+      "keywords": [
+        "batch export",
+        "export a batch",
+        "batch of",
+        "many sizes",
+        "multiple formats",
+        "icon set",
+        "icons",
+        "export all sizes"
+      ]
+    },
+    {
+      "goal_pattern": "Make the SVG smaller / optimized for the web",
+      "tools": [
+        "svg_web_optimize"
+      ],
+      "how_to": "Call svg_web_optimize to losslessly shrink the SVG (reversible).",
+      "group": "export",
+      "keywords": [
+        "smaller",
+        "optimize",
+        "web optimize",
+        "shrink svg",
+        "minify",
+        "compress svg",
+        "reduce size",
+        "for web"
+      ]
+    },
+    {
+      "goal_pattern": "Export with a web or print profile",
+      "tools": [
+        "export_web_profile",
+        "export_print_profile"
+      ],
+      "how_to": "export_web_profile gives web-ready output; export_print_profile prints (CMYK/DPI).",
+      "group": "export",
+      "keywords": [
+        "web profile",
+        "print profile",
+        "for print",
+        "cmyk",
+        "dpi",
+        "print ready",
+        "web ready"
+      ]
+    },
+    {
+      "goal_pattern": "Save the document to a new file",
+      "tools": [
+        "save_document_as"
+      ],
+      "how_to": "Call save_document_as with the doc_id and a new workspace path.",
+      "group": "save",
+      "keywords": [
+        "save",
+        "save as",
+        "write file",
+        "save document",
+        "export svg",
+        "save to disk"
+      ]
+    },
+    {
+      "goal_pattern": "Snapshot, undo, or restore the document state",
+      "tools": [
+        "create_snapshot",
+        "restore_snapshot",
+        "list_snapshots"
+      ],
+      "how_to": "create_snapshot checkpoints; list_snapshots browses; restore_snapshot rolls back.",
+      "group": "snapshots",
+      "keywords": [
+        "snapshot",
+        "undo",
+        "revert",
+        "restore",
+        "roll back",
+        "checkpoint",
+        "history",
+        "previous state"
+      ]
+    },
+    {
+      "goal_pattern": "Connect to a running Inkscape (live mode) and work on the open canvas",
+      "tools": [
+        "live_connect",
+        "live_list_documents",
+        "live_select_document",
+        "live_get_scene",
+        "live_apply_to_selection"
+      ],
+      "how_to": "Connect to an already running window; connecting never launches Inkscape. On managed macOS use live_launch only on an explicit request to open Inkscape, then connect, list and select the task drawing; read its scene, then edit. Reconnect resets the task binding.",
+      "group": "live",
+      "keywords": [
+        "live",
+        "running inkscape",
+        "open canvas",
+        "live mode",
+        "connect to inkscape",
+        "current selection in inkscape"
+      ]
+    }
+  ],
+  "out_of_scope": [
+    {
+      "label": "raster/photo pixel editing",
+      "reason": "This is a vector/SVG server — it cannot edit raster/photo PIXELS (JPEG/PNG/GIF/bitmap). Use raster images only as visual references; deliberately author vectors. Pixel editing (retouch/filter/crop photo content) is out of scope.",
+      "keywords": [
+        "jpeg",
+        "jpg",
+        "photo",
+        "photograph",
+        "raster",
+        "bitmap",
+        "pixel",
+        "retouch",
+        "photoshop",
+        "edit a png",
+        "edit png",
+        "edit the png",
+        "edit my png"
+      ]
+    },
+    {
+      "label": "arbitrary Actions / extensions / scripts",
+      "reason": "Per ADR-003 there is no raw-action/extension/script escape hatch in the MVP surface. Use the small typed tools instead; raw Inkscape Actions and arbitrary extension/script execution are not exposed.",
+      "keywords": [
+        "arbitrary action",
+        "arbitrary inkscape action",
+        "raw action",
+        "run an action",
+        "run actions",
+        "run an extension",
+        "run extension",
+        "arbitrary extension",
+        "run a script",
+        "run script",
+        "run a macro",
+        "macro",
+        "plugin"
+      ]
+    },
+    {
+      "label": "network / URL fetch",
+      "reason": "The server is offline by policy (security sec.12: no network). It cannot fetch an image, font, or any asset from a URL or the internet. Provide local files in the workspace instead.",
+      "keywords": [
+        "download",
+        "from a url",
+        "from url",
+        "from the internet",
+        "fetch an image",
+        "fetch image",
+        "fetch a font",
+        "fetch font",
+        "http://",
+        "https://",
+        "from the web",
+        "from the network",
+        "online"
+      ]
+    },
+    {
+      "label": "code execution",
+      "reason": "Executing arbitrary code/shell/programs is a restricted risk class and is not exposed (security sec.12: no arbitrary execution). The server only runs its own typed tools.",
+      "keywords": [
+        "execute code",
+        "run code",
+        "run arbitrary code",
+        "run a program",
+        "run python",
+        "shell command",
+        "run shell",
+        "eval",
+        "subprocess"
+      ]
+    }
+  ],
+  "no_match_note": "No confident match. Browse the full goal→tool map via list_capabilities (its `intents` section), or call inspect_document to see a document's structure and addressable ids."
+}

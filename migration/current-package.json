@@ -1,0 +1,20 @@
+{
+  "current_package_build_report": "migration/package-stage38-build-comparison.json",
+  "active_server": "Rust",
+  "python_server_retired": true,
+  "native_GUI_acceptance": true,
+  "performance_acceptance": true,
+  "historical_native": "stage29 on stage27; not transferred",
+  "user_deferred": "historical live investigation, clean-machine installation and Windows; phase refinement secondary",
+  "headless_measurement_acceptance": true,
+  "current_live_measurement_acceptance": true,
+  "native_failed_report": "migration/native-stage38-launch-comparison.json",
+  "current_package_final_report": "migration/package-stage38-final-comparison.json",
+  "goal_complete": true,
+  "native_failure_resolution": "Unchanged actual38 retry passed on active display; original failed report remains immutable history.",
+  "post_stage38_installed_package": "/Users/bm/Documents/repos/inkscape-mcp-server/.inkscape-mcp-local/build.KjfRBi/package",
+  "post_stage38_monitoring_report": "migration/results/sentry-boundaries-review/comparison.json",
+  "post_stage38_scope": "Sentry boundaries plus existing URI export fix; Rust220/1ignored and relocated headless package pass. Historical stage38 native results not transferred. Client reconnect needed.",
+  "latest_onboarding_report": "migration/results/sentry-setup-review/comparison.json",
+  "latest_ready_archive": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-sentry-setup.tar.gz"
+}

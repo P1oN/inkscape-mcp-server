@@ -1,0 +1,133 @@
+{
+  "evidence_verified": true,
+  "packaged": false,
+  "goal_complete": false,
+  "scope": "Before/after unfinished-frame guard, Rust215/1ignored; failed native36 launch diagnostic preserved. No GUI acceptance claim.",
+  "files": [
+    {
+      "path": "migration/native-stage36-launch-comparison.json",
+      "bytes": 587,
+      "sha256": "8fef9288111f8e632d20df94fc7005a23c9069bec8e35f5639812c9d6e898414"
+    },
+    {
+      "path": "migration/results/native-stage36/launch.json",
+      "bytes": 214,
+      "sha256": "d000e9dcf72c42adcab65f5b5e7def3a3d3cb68b920be2cde71fdc7abf1fb7fb"
+    },
+    {
+      "path": "migration/results/native-stage36/mcp.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/native-stage36/mcp.trace.json",
+      "bytes": 6377,
+      "sha256": "e86236329ff827bc697c23a47e96948afb2aa390a2c6c800d844596a09ea4ba3"
+    },
+    {
+      "path": "migration/results/native-stage36/saved-launch-diagnostics/bus.log",
+      "bytes": 99,
+      "sha256": "a73f08f245348b855ecb8c7dde46ddcddae88f3009ffcc4394e7b1a1f0ffa37f"
+    },
+    {
+      "path": "migration/results/native-stage36/saved-launch-diagnostics/inkscape.stderr.log",
+      "bytes": 152,
+      "sha256": "d26a2157192ba4f06dafb9460b908e6f7bc26d15178fa71052a5e7b8cbea5f5c"
+    },
+    {
+      "path": "migration/results/native-stage36/saved-launch-diagnostics/inkscape.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/native-stage36/saved-launch-diagnostics/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/native-stage36/session.json",
+      "bytes": 1049,
+      "sha256": "c10c2e409229494e29eb7500dbba2ebe6c42981eeecef1f58bf8434c97435253"
+    },
+    {
+      "path": "migration/results/stdio-frame-debug/comparison.json",
+      "bytes": 345,
+      "sha256": "43c3b2f70f6b33f12e312dfa70b7d0d60f246f41c7f645f97b527edaf135d95c"
+    },
+    {
+      "path": "migration/results/stdio-frame-debug/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/stdio-frame-debug/server.trace.json",
+      "bytes": 6501,
+      "sha256": "e0e9f67dd5d3e896247a0c5f69b12b2d592761c5ab057c641084802f92f9f96f"
+    },
+    {
+      "path": "migration/results/stdio-frame-review/build.log",
+      "bytes": 163,
+      "sha256": "4c2fba4c18fc1395be44c55b152668945112497654ff3321a2b0ba6cb1cd2513"
+    },
+    {
+      "path": "migration/results/stdio-frame-review/clippy.log",
+      "bytes": 163,
+      "sha256": "9d2b4329ddb8f8ca0a43520319ca84ddd273d54f36f12c26b73b2581f11bbe53"
+    },
+    {
+      "path": "migration/results/stdio-frame-review/snapshots/.github/workflows/rust-migration.yml",
+      "bytes": 8838,
+      "sha256": "062728a6e0aad6bed3d374829dc1a3fe6ddc9394006e97027f40b71f51d58dbc"
+    },
+    {
+      "path": "migration/results/stdio-frame-review/snapshots/docs/AGENT_HANDOFF.md",
+      "bytes": 220587,
+      "sha256": "44ff0c1f9692c64e0c72d302067c2785d35693430ccf2bb3b3c5e9338dfdd859"
+    },
+    {
+      "path": "migration/results/stdio-frame-review/snapshots/docs/RUST_PACKAGING.md",
+      "bytes": 13931,
+      "sha256": "cfdff169ffa3fd7fd1a257d76c25c6863f5498837f15b4d6fcc08d96cf006c9b"
+    },
+    {
+      "path": "migration/results/stdio-frame-review/snapshots/docs/RUST_SECURITY_AUDIT.md",
+      "bytes": 25374,
+      "sha256": "d253629b9c924f1243b8fccdc312e55c2b87b308ed7562ae4b80c1f7c5fb72d5"
+    },
+    {
+      "path": "migration/results/stdio-frame-review/snapshots/rust/src/main.rs",
+      "bytes": 29921,
+      "sha256": "95e9cc0a6e0cf5024c0a15cad3fc4396fb4b21ff2c9f5b66cb7d0c5f5f8bb056"
+    },
+    {
+      "path": "migration/results/stdio-frame-review/snapshots/rust/src/stdio_limit.rs",
+      "bytes": 3231,
+      "sha256": "3735459455b507aebc13707dba6870091fa0f3bfa6e63517e504d3eb09fd0bdf"
+    },
+    {
+      "path": "migration/results/stdio-frame-review/snapshots/scripts/rust_stdio_frame_acceptance.py",
+      "bytes": 2725,
+      "sha256": "857bbb63d02ec3ea0860c6d2513b56fa938428a369bbaa8c84810347dd7a756e"
+    },
+    {
+      "path": "migration/results/stdio-frame-review/tests.log",
+      "bytes": 20269,
+      "sha256": "7ab8ce95460bc5ead1a89c816bdca650a76ff9df7daa7bf52cdc47104e4133a6"
+    },
+    {
+      "path": "migration/results/stdio-frame-stage36-before-fix/comparison.json",
+      "bytes": 347,
+      "sha256": "a85a2865bf8d26b8b67f2ff6aaf30de76c56b4ddccfba052644bf1f60a92ec0f"
+    },
+    {
+      "path": "migration/results/stdio-frame-stage36-before-fix/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/stdio-frame-stage36-before-fix/server.trace.json",
+      "bytes": 6499,
+      "sha256": "da755c9bab70780241a159aa8f2dc2efa767cbb4e0d3d2a65c805c802351deb3"
+    }
+  ]
+}

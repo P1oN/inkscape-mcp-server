@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "observations": 18,
+  "cases": "invalid-tag",
+  "normalization": "none",
+  "scope": "Frozen schema argument matrix; cases=invalid-tag. No valid tool call or explicit GUI launch.",
+  "rust_binary_sha256": "ba1fa9d52dd90e42b18879b7f78f53ff18125986d1bb9dc42182db727c2125e3",
+  "discovery_sha256": "e83b34257858096e07c673e5a38eeadd8a371b0e4a63496181e893d8f48128b6",
+  "differences": [],
+  "workspace_changed": {
+    "python": false,
+    "rust": false
+  }
+}

@@ -1,0 +1,563 @@
+{
+  "cases": [
+    {
+      "kind": "read",
+      "text": "('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'task.svg')",
+      "expected": {
+        "result": {
+          "window_id": "12345678-1234-1234-1234-123456789abc",
+          "document_id": "abcdefab-1234-1234-1234-123456789abc",
+          "name": "task.svg",
+          "path": null,
+          "object_count": null
+        }
+      }
+    },
+    {
+      "kind": "read",
+      "text": "('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', '')",
+      "expected": {
+        "result": {
+          "window_id": "12345678-1234-1234-1234-123456789abc",
+          "document_id": "abcdefab-1234-1234-1234-123456789abc",
+          "name": null,
+          "path": null,
+          "object_count": null
+        }
+      }
+    },
+    {
+      "kind": "read",
+      "text": "('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'Привіт.svg')",
+      "expected": {
+        "result": {
+          "window_id": "12345678-1234-1234-1234-123456789abc",
+          "document_id": "abcdefab-1234-1234-1234-123456789abc",
+          "name": "Привіт.svg",
+          "path": null,
+          "object_count": null
+        }
+      }
+    },
+    {
+      "kind": "read",
+      "text": "('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'quote\\'\"\\\\')",
+      "expected": {
+        "result": {
+          "window_id": "12345678-1234-1234-1234-123456789abc",
+          "document_id": "abcdefab-1234-1234-1234-123456789abc",
+          "name": "quote'\"\\",
+          "path": null,
+          "object_count": null
+        }
+      }
+    },
+    {
+      "kind": "read",
+      "text": "('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'line\\nfeed')",
+      "expected": {
+        "result": {
+          "window_id": "12345678-1234-1234-1234-123456789abc",
+          "document_id": "abcdefab-1234-1234-1234-123456789abc",
+          "name": "line\nfeed",
+          "path": null,
+          "object_count": null
+        }
+      }
+    },
+    {
+      "kind": "read",
+      "text": "('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'nul\\x00')",
+      "expected": {
+        "result": {
+          "window_id": "12345678-1234-1234-1234-123456789abc",
+          "document_id": "abcdefab-1234-1234-1234-123456789abc",
+          "name": "nul\u0000",
+          "path": null,
+          "object_count": null
+        }
+      }
+    },
+    {
+      "kind": "read",
+      "text": "('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', '@a(sss) title')",
+      "expected": {
+        "result": {
+          "window_id": "12345678-1234-1234-1234-123456789abc",
+          "document_id": "abcdefab-1234-1234-1234-123456789abc",
+          "name": "@a(sss) title",
+          "path": null,
+          "object_count": null
+        }
+      }
+    },
+    {
+      "kind": "read",
+      "text": "('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'literal$`title')",
+      "expected": {
+        "result": {
+          "window_id": "12345678-1234-1234-1234-123456789abc",
+          "document_id": "abcdefab-1234-1234-1234-123456789abc",
+          "name": "literal$`title",
+          "path": null,
+          "object_count": null
+        }
+      }
+    },
+    {
+      "kind": "read",
+      "text": "('', 'abcdefab-1234-1234-1234-123456789abc', 'task')",
+      "expected": {
+        "error": "no drawing window available; activate a drawing and retry"
+      }
+    },
+    {
+      "kind": "read",
+      "text": "('12345678-1234-1234-1234-123456789ABC', 'abcdefab-1234-1234-1234-123456789abc', 'task')",
+      "expected": {
+        "error": "no drawing window available; activate a drawing and retry"
+      }
+    },
+    {
+      "kind": "read",
+      "text": "('12345678-1234-1234-1234-123456789abc', 'bad', 'task')",
+      "expected": {
+        "error": "no drawing window available; activate a drawing and retry"
+      }
+    },
+    {
+      "kind": "read",
+      "text": "('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', None)",
+      "expected": {
+        "error": "invalid document context reply"
+      }
+    },
+    {
+      "kind": "read",
+      "text": "('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 1)",
+      "expected": {
+        "error": "invalid document context reply"
+      }
+    },
+    {
+      "kind": "read",
+      "text": "('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc')",
+      "expected": {
+        "error": "invalid document context reply"
+      }
+    },
+    {
+      "kind": "read",
+      "text": "('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'extra', 'field')",
+      "expected": {
+        "error": "invalid document context reply"
+      }
+    },
+    {
+      "kind": "read",
+      "text": "['12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'task.svg']",
+      "expected": {
+        "error": "invalid document context reply"
+      }
+    },
+    {
+      "kind": "read",
+      "text": "()",
+      "expected": {
+        "error": "invalid document context reply"
+      }
+    },
+    {
+      "kind": "read",
+      "text": "[]",
+      "expected": {
+        "error": "invalid document context reply"
+      }
+    },
+    {
+      "kind": "read",
+      "text": "None",
+      "expected": {
+        "error": "invalid document context reply"
+      }
+    },
+    {
+      "kind": "read",
+      "text": "False",
+      "expected": {
+        "error": "invalid document context reply"
+      }
+    },
+    {
+      "kind": "read",
+      "text": "bad",
+      "expected": {
+        "error": "invalid document context reply"
+      }
+    },
+    {
+      "kind": "read",
+      "text": "__import__('os').system('do-not-run')",
+      "expected": {
+        "error": "invalid document context reply"
+      }
+    },
+    {
+      "kind": "read",
+      "text": "('partial'",
+      "expected": {
+        "error": "invalid document context reply"
+      }
+    },
+    {
+      "kind": "read",
+      "text": "(1, 2, 3)",
+      "expected": {
+        "error": "invalid document context reply"
+      }
+    },
+    {
+      "kind": "read",
+      "text": "('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', '\\u041f\\x41\\101')",
+      "expected": {
+        "result": {
+          "window_id": "12345678-1234-1234-1234-123456789abc",
+          "document_id": "abcdefab-1234-1234-1234-123456789abc",
+          "name": "ПAA",
+          "path": null,
+          "object_count": null
+        }
+      }
+    },
+    {
+      "kind": "read",
+      "text": "('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'one' 'two')",
+      "expected": {
+        "result": {
+          "window_id": "12345678-1234-1234-1234-123456789abc",
+          "document_id": "abcdefab-1234-1234-1234-123456789abc",
+          "name": "onetwo",
+          "path": null,
+          "object_count": null
+        }
+      }
+    },
+    {
+      "kind": "read",
+      "text": "('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'raw\u0000nul')",
+      "expected": {
+        "error": "invalid document context reply"
+      }
+    },
+    {
+      "kind": "read",
+      "text": "((' 12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'nested'))",
+      "expected": {
+        "error": "no drawing window available; activate a drawing and retry"
+      }
+    },
+    {
+      "kind": "list",
+      "text": "([('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'task.svg')],)",
+      "expected": {
+        "result": [
+          {
+            "window_id": "12345678-1234-1234-1234-123456789abc",
+            "document_id": "abcdefab-1234-1234-1234-123456789abc",
+            "name": "task.svg",
+            "path": null,
+            "object_count": null
+          }
+        ]
+      }
+    },
+    {
+      "kind": "list",
+      "text": "([('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', '')],)",
+      "expected": {
+        "result": [
+          {
+            "window_id": "12345678-1234-1234-1234-123456789abc",
+            "document_id": "abcdefab-1234-1234-1234-123456789abc",
+            "name": null,
+            "path": null,
+            "object_count": null
+          }
+        ]
+      }
+    },
+    {
+      "kind": "list",
+      "text": "([('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'Привіт.svg')],)",
+      "expected": {
+        "result": [
+          {
+            "window_id": "12345678-1234-1234-1234-123456789abc",
+            "document_id": "abcdefab-1234-1234-1234-123456789abc",
+            "name": "Привіт.svg",
+            "path": null,
+            "object_count": null
+          }
+        ]
+      }
+    },
+    {
+      "kind": "list",
+      "text": "([('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'quote\\'\"\\\\')],)",
+      "expected": {
+        "result": [
+          {
+            "window_id": "12345678-1234-1234-1234-123456789abc",
+            "document_id": "abcdefab-1234-1234-1234-123456789abc",
+            "name": "quote'\"\\",
+            "path": null,
+            "object_count": null
+          }
+        ]
+      }
+    },
+    {
+      "kind": "list",
+      "text": "([('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'line\\nfeed')],)",
+      "expected": {
+        "result": [
+          {
+            "window_id": "12345678-1234-1234-1234-123456789abc",
+            "document_id": "abcdefab-1234-1234-1234-123456789abc",
+            "name": "line\nfeed",
+            "path": null,
+            "object_count": null
+          }
+        ]
+      }
+    },
+    {
+      "kind": "list",
+      "text": "([('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'nul\\x00')],)",
+      "expected": {
+        "result": [
+          {
+            "window_id": "12345678-1234-1234-1234-123456789abc",
+            "document_id": "abcdefab-1234-1234-1234-123456789abc",
+            "name": "nul\u0000",
+            "path": null,
+            "object_count": null
+          }
+        ]
+      }
+    },
+    {
+      "kind": "list",
+      "text": "([('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', '@a(sss) title')],)",
+      "expected": {
+        "result": [
+          {
+            "window_id": "12345678-1234-1234-1234-123456789abc",
+            "document_id": "abcdefab-1234-1234-1234-123456789abc",
+            "name": "title",
+            "path": null,
+            "object_count": null
+          }
+        ]
+      }
+    },
+    {
+      "kind": "list",
+      "text": "([('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'literal$`title')],)",
+      "expected": {
+        "result": [
+          {
+            "window_id": "12345678-1234-1234-1234-123456789abc",
+            "document_id": "abcdefab-1234-1234-1234-123456789abc",
+            "name": "literal$`title",
+            "path": null,
+            "object_count": null
+          }
+        ]
+      }
+    },
+    {
+      "kind": "list",
+      "text": "([('', 'abcdefab-1234-1234-1234-123456789abc', 'task')],)",
+      "expected": {
+        "error": "no drawing window available; activate a drawing and retry"
+      }
+    },
+    {
+      "kind": "list",
+      "text": "([('12345678-1234-1234-1234-123456789ABC', 'abcdefab-1234-1234-1234-123456789abc', 'task')],)",
+      "expected": {
+        "error": "no drawing window available; activate a drawing and retry"
+      }
+    },
+    {
+      "kind": "list",
+      "text": "([('12345678-1234-1234-1234-123456789abc', 'bad', 'task')],)",
+      "expected": {
+        "error": "no drawing window available; activate a drawing and retry"
+      }
+    },
+    {
+      "kind": "list",
+      "text": "([('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', None)],)",
+      "expected": {
+        "error": "invalid document context reply"
+      }
+    },
+    {
+      "kind": "list",
+      "text": "([('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 1)],)",
+      "expected": {
+        "error": "invalid document context reply"
+      }
+    },
+    {
+      "kind": "list",
+      "text": "([('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc')],)",
+      "expected": {
+        "error": "invalid document context reply"
+      }
+    },
+    {
+      "kind": "list",
+      "text": "([('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'extra', 'field')],)",
+      "expected": {
+        "error": "invalid document context reply"
+      }
+    },
+    {
+      "kind": "list",
+      "text": "([] ,)",
+      "expected": {
+        "result": []
+      }
+    },
+    {
+      "kind": "list",
+      "text": "(@a(sss) [],)",
+      "expected": {
+        "result": []
+      }
+    },
+    {
+      "kind": "list",
+      "text": "([('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'task.svg'), ('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', ''), ('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'Привіт.svg'), ('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'quote\\'\"\\\\'), ('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'line\\nfeed'), ('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'nul\\x00'), ('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', '@a(sss) title'), ('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'literal$`title')],)",
+      "expected": {
+        "result": [
+          {
+            "window_id": "12345678-1234-1234-1234-123456789abc",
+            "document_id": "abcdefab-1234-1234-1234-123456789abc",
+            "name": "task.svg",
+            "path": null,
+            "object_count": null
+          },
+          {
+            "window_id": "12345678-1234-1234-1234-123456789abc",
+            "document_id": "abcdefab-1234-1234-1234-123456789abc",
+            "name": null,
+            "path": null,
+            "object_count": null
+          },
+          {
+            "window_id": "12345678-1234-1234-1234-123456789abc",
+            "document_id": "abcdefab-1234-1234-1234-123456789abc",
+            "name": "Привіт.svg",
+            "path": null,
+            "object_count": null
+          },
+          {
+            "window_id": "12345678-1234-1234-1234-123456789abc",
+            "document_id": "abcdefab-1234-1234-1234-123456789abc",
+            "name": "quote'\"\\",
+            "path": null,
+            "object_count": null
+          },
+          {
+            "window_id": "12345678-1234-1234-1234-123456789abc",
+            "document_id": "abcdefab-1234-1234-1234-123456789abc",
+            "name": "line\nfeed",
+            "path": null,
+            "object_count": null
+          },
+          {
+            "window_id": "12345678-1234-1234-1234-123456789abc",
+            "document_id": "abcdefab-1234-1234-1234-123456789abc",
+            "name": "nul\u0000",
+            "path": null,
+            "object_count": null
+          },
+          {
+            "window_id": "12345678-1234-1234-1234-123456789abc",
+            "document_id": "abcdefab-1234-1234-1234-123456789abc",
+            "name": "title",
+            "path": null,
+            "object_count": null
+          },
+          {
+            "window_id": "12345678-1234-1234-1234-123456789abc",
+            "document_id": "abcdefab-1234-1234-1234-123456789abc",
+            "name": "literal$`title",
+            "path": null,
+            "object_count": null
+          }
+        ]
+      }
+    },
+    {
+      "kind": "list",
+      "text": "([1],)",
+      "expected": {
+        "error": "invalid document context reply"
+      }
+    },
+    {
+      "kind": "list",
+      "text": "([], [])",
+      "expected": {
+        "error": "invalid document list reply"
+      }
+    },
+    {
+      "kind": "list",
+      "text": "[[]]",
+      "expected": {
+        "error": "invalid document list reply"
+      }
+    },
+    {
+      "kind": "list",
+      "text": "None",
+      "expected": {
+        "error": "invalid document list reply"
+      }
+    },
+    {
+      "kind": "list",
+      "text": "()",
+      "expected": {
+        "error": "invalid document list reply"
+      }
+    },
+    {
+      "kind": "list",
+      "text": "__import__('os').system('do-not-run')",
+      "expected": {
+        "error": "invalid document list reply"
+      }
+    },
+    {
+      "kind": "list",
+      "text": "([)",
+      "expected": {
+        "error": "invalid document list reply"
+      }
+    },
+    {
+      "kind": "list",
+      "text": "([('12345678-1234-1234-1234-123456789abc', 'abcdefab-1234-1234-1234-123456789abc', 'raw\u0000nul')],)",
+      "expected": {
+        "error": "invalid document list reply"
+      }
+    }
+  ]
+}

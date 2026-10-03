@@ -1,0 +1,15 @@
+{
+  "observations": 23,
+  "rust_binary_sha256": "67fa96601d86d244c3f824f322081848ceb0bfb2844be01f0be1f01171fab5b7",
+  "normalization": "semantic JSON decoding only",
+  "native_checks": {
+    "concurrent_read_and_cancelled_wait": true
+  },
+  "differences": [],
+  "passed": true,
+  "coercion_harness_sha256": "5876fc1297c9371b506a44a775d6a0aef434c8ccfecd48db5cdb79b6680c5ebb",
+  "coercion_requests": 16,
+  "ignored_model_extras": false,
+  "coercion_scope": "Schema-directed numeric strings, integer .0 tails and boolean strings",
+  "coercion_coverage": true
+}

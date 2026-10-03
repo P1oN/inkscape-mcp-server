@@ -1,0 +1,6 @@
+{
+  "observations": 26,
+  "normalization": "validated UTC connected_at binding only",
+  "differences": [],
+  "passed": true
+}

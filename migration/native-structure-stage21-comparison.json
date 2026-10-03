@@ -1,0 +1,26 @@
+{
+  "passed": false,
+  "native_extended_readiness": false,
+  "preflight_refusal_before_mutation": true,
+  "group_edit_requests": 0,
+  "observed_counts": {
+    "last_live_benchmark": 7,
+    "group_preflight": 4,
+    "repeat_read_only_capture": 4
+  },
+  "missing_root_ids": [
+    "mcp_fdcae944f9854451b8755106c8891883_0"
+  ],
+  "owned_processes": [
+    19914,
+    19927
+  ],
+  "native_UI_observations": [
+    "Fresh bound app AX Select All action before preflight; no structural edit requested.",
+    "Subsequent native Edit menu: Undo available, Redo disabled.",
+    "Native XML inspector showed a single wrapper group; inspector closed, drawing retained."
+  ],
+  "cause": "Unproven. Last benchmark had seven objects; subsequent native selection/preflight had four. No claim that Select All is the root cause.",
+  "source_owned_record": "migration/results/native-gui-stage21/session.json",
+  "scope": "Actual stage21 owned native fixture/history mismatch; preserve for investigation. Earlier 46 fixed checks and 40 live benchmark comparisons remain scoped historical evidence, not broad native readiness."
+}

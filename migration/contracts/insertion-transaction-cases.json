@@ -1,0 +1,65 @@
+[
+  {
+    "fragment": "<rect/>",
+    "refused": false,
+    "request": {
+      "nonce": "mcp_1234567890abcdef1234567890abcdef",
+      "fragment": "<rect/>",
+      "expected_ids": [
+        "g",
+        "r"
+      ],
+      "expected_fingerprint": "470160d69aeaf8bcfa863bee2270be50d0e91a6262150845520c47101e0b04b5"
+    },
+    "expected": {
+      "result": {
+        "affected_ids": [
+          "mcp_1234567890abcdef1234567890abcdef"
+        ],
+        "count": 1,
+        "detail": "inserted one SVG group; one native Undo step",
+        "undo_friendly": true
+      }
+    }
+  },
+  {
+    "fragment": "<g id=\"r\"><text>Привіт</text></g><use href=\"#r\"/>",
+    "refused": false,
+    "request": {
+      "nonce": "mcp_1234567890abcdef1234567890abcdef",
+      "fragment": "<g id=\"r\"><text>Привіт</text></g><use href=\"#r\"/>",
+      "expected_ids": [
+        "g",
+        "r"
+      ],
+      "expected_fingerprint": "470160d69aeaf8bcfa863bee2270be50d0e91a6262150845520c47101e0b04b5"
+    },
+    "expected": {
+      "result": {
+        "affected_ids": [
+          "mcp_1234567890abcdef1234567890abcdef",
+          "mcp_1234567890abcdef1234567890abcdef_0"
+        ],
+        "count": 2,
+        "detail": "inserted one SVG group; one native Undo step",
+        "undo_friendly": true
+      }
+    }
+  },
+  {
+    "fragment": "<circle/>",
+    "refused": true,
+    "request": {
+      "nonce": "mcp_1234567890abcdef1234567890abcdef",
+      "fragment": "<circle/>",
+      "expected_ids": [
+        "g",
+        "r"
+      ],
+      "expected_fingerprint": "470160d69aeaf8bcfa863bee2270be50d0e91a6262150845520c47101e0b04b5"
+    },
+    "expected": {
+      "error": "Inkscape refused insertion; document context changed"
+    }
+  }
+]

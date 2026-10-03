@@ -1,0 +1,556 @@
+{
+  "passed": true,
+  "scope": "38 fixed current-package structural native checks passed: group, ungroup, delete with native menu Undo/Redo and final restoration to seven objects. Exact scenes/IDs/paint order/RGBA and immediate applied audit verified. Current-layer Select All selected nothing; choosing Select All in All Layers allowed exact two-group guard. First retry sync refused pre-existing destination before any mutation. Successful group-selection-apply kept its distinct artifact names; verifier accepts only that or original group-apply phase. Original failures retained, no relaxed selection/tree/pixel/audit assertions. Verifier regression on saved stage22 structural captures passed38. Historical stage21 disappearance and stage18 crash causes remain unknown. Current owned native process remains preserved for transform/order/benchmark.\n",
+  "files": [
+    {
+      "path": "migration/native-structure-stage29-captured-comparison.json",
+      "bytes": 7700,
+      "sha256": "afe7b6b714392b7adfa55d452c5d964d1c3655f5d0817354b304d6fe763fc582"
+    },
+    {
+      "path": "migration/native-structure-stage29-comparison.json",
+      "bytes": 7701,
+      "sha256": "77dfbb907e9ef921c0a16b057526bb65216a605853fef21d9ce8ac2bb52b622e"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-apply-before.scene.json",
+      "bytes": 8644,
+      "sha256": "990844f6afedf6bafa9a92ccd8126a486800641fda8fa236cc37be1ba3d07cc4"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-apply-before.sync.json",
+      "bytes": 539,
+      "sha256": "3723182bb804cb6272868dcc147abed9fd1ccaff1190c6970398e4d7665a36f8"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-apply.operations.json",
+      "bytes": 1274,
+      "sha256": "054f40c769c19f1cafad6871dcc53eef0d967792a2fbef56b7a5214455238838"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-apply.ownership.json",
+      "bytes": 711,
+      "sha256": "8478b34b7f83b85c6f429d54974dd7019082675d6a34252e056148b6d65a31a4"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-apply.reply.json",
+      "bytes": 1182,
+      "sha256": "5fcc25bc090ca24fd94ea2b75747109d9b3175f6f21fef8ba4473bfb66c46f2e"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-apply.scene.json",
+      "bytes": 2832,
+      "sha256": "70391afef3f13e7ccef8950da10bbe9dcdda50b053eafb369543b6b7e7091123"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-apply.selection.json",
+      "bytes": 129,
+      "sha256": "9c2a406a14cc13ec8ff7589912991b6b4eeae95ea1510230dcd431f041aa82c0"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-apply.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-apply.sync.json",
+      "bytes": 526,
+      "sha256": "94ef6be9cb19ef58002832ed5fd615deda57002171cfd9fac65ccef012846aca"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-apply.trace.json",
+      "bytes": 40100,
+      "sha256": "fd724a89dd9501c2038575c1eb229aad1eb798d331e8b71e3ceb9d683dd65ed8"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-redone.ownership.json",
+      "bytes": 711,
+      "sha256": "8478b34b7f83b85c6f429d54974dd7019082675d6a34252e056148b6d65a31a4"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-redone.scene.json",
+      "bytes": 2832,
+      "sha256": "b1f2fd1bd3ca4e948f1f8df49331c24fed22497e632e6877b7181a538fe61298"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-redone.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-redone.sync.json",
+      "bytes": 527,
+      "sha256": "297eb03c65c2a03882f024c56c6ccb0fceae2ab6ef6ce108b7651734d097f416"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-redone.trace.json",
+      "bytes": 18173,
+      "sha256": "647707313eca7e32e214d8a1ef3485c2475501ecec1163d396b62c42e8312c50"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-restored.ownership.json",
+      "bytes": 711,
+      "sha256": "8478b34b7f83b85c6f429d54974dd7019082675d6a34252e056148b6d65a31a4"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-restored.scene.json",
+      "bytes": 8454,
+      "sha256": "d7c00d41399d1cc04eecbc8889b629f21988d355a9cf243f49216c623cc9b05e"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-restored.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-restored.sync.json",
+      "bytes": 531,
+      "sha256": "eb0db752d39185233c0b4786fee0c46cc4c60fe5f4807ca713bd2c4c4ffea842"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-restored.trace.json",
+      "bytes": 28679,
+      "sha256": "511501ebd5c117d53fe61a4ce01e8c8472b9689e15b286d6461d4e53e935d74f"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-undone.ownership.json",
+      "bytes": 711,
+      "sha256": "8478b34b7f83b85c6f429d54974dd7019082675d6a34252e056148b6d65a31a4"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-undone.scene.json",
+      "bytes": 8454,
+      "sha256": "8495b0037e2b484e9dda878997b4ff9bbcb2fd2985078e1c3894d1264b133eb1"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-undone.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-undone.sync.json",
+      "bytes": 527,
+      "sha256": "cb49279bc043d551afb979f4f15d1fc206707cdc13a1e5903ddb61cdd743298e"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/delete-undone.trace.json",
+      "bytes": 28673,
+      "sha256": "24de128e0ec03448dea514d1114513d16a2b1674fdc2093d7a2375a55102e29c"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-apply-before.sync.json",
+      "bytes": 210,
+      "sha256": "60775a12a55d79b6452de0e4da230f35c76ef875b147478fa0debc8e0820f7e4"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-apply.ownership.json",
+      "bytes": 711,
+      "sha256": "8478b34b7f83b85c6f429d54974dd7019082675d6a34252e056148b6d65a31a4"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-apply.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-apply.trace.json",
+      "bytes": 11641,
+      "sha256": "4c0b339b3248d47c06627d88a9eb02c5fdc5b8f29ec4a0bf9418ed3ef46f809a"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-redone.ownership.json",
+      "bytes": 711,
+      "sha256": "8478b34b7f83b85c6f429d54974dd7019082675d6a34252e056148b6d65a31a4"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-redone.scene.json",
+      "bytes": 9678,
+      "sha256": "fd5e272d366efa27d07447235b05b2d83a53e38811b76cbe58f13bb7f7475ea5"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-redone.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-redone.sync.json",
+      "bytes": 525,
+      "sha256": "6a93e659751c38b8a07031883658b697371ae5933d0ed372ad5931fb902f6f2e"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-redone.trace.json",
+      "bytes": 30641,
+      "sha256": "f58b6e77d1d8860c65ebf7a0c4f7dfaeeb9afc22da54425445fbc4bb6f4ead43"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-selection-apply-before.scene.json",
+      "bytes": 8644,
+      "sha256": "2af5e45db85025f05ea310ba745614c99b56368120b856cd7a5a9202b2fb745d"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-selection-apply-before.sync.json",
+      "bytes": 557,
+      "sha256": "57f4423de26f3b83000d2bb057eb21291edd5edff50eadf095c6e7e48b694151"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-selection-apply.operations.json",
+      "bytes": 1314,
+      "sha256": "9b2db3dfc0b3a6ce22c1c3109cb75117f5cf116ad4f1995cd95f2e86f86c8167"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-selection-apply.ownership.json",
+      "bytes": 711,
+      "sha256": "8478b34b7f83b85c6f429d54974dd7019082675d6a34252e056148b6d65a31a4"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-selection-apply.reply.json",
+      "bytes": 1269,
+      "sha256": "b43803b948ae8a058c3f1af60c29d2eea95ee7bfa541d0e80ea384708560056e"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-selection-apply.scene.json",
+      "bytes": 9868,
+      "sha256": "9f49ff7b1a426723264134d9db51b416fe3490dad5f9a9ee4ce003a3091533ae"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-selection-apply.selection.json",
+      "bytes": 129,
+      "sha256": "9c2a406a14cc13ec8ff7589912991b6b4eeae95ea1510230dcd431f041aa82c0"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-selection-apply.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-selection-apply.sync.json",
+      "bytes": 544,
+      "sha256": "885c06c3cf79982b0e3babf3f81894095d30ccfcc258ce0e57d7f6d5d46cf9e8"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-selection-apply.trace.json",
+      "bytes": 53142,
+      "sha256": "013de842ae28358caf012cd02b24fb9e4b84031de3ed520e1a92eb897968d97c"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-undone.ownership.json",
+      "bytes": 711,
+      "sha256": "8478b34b7f83b85c6f429d54974dd7019082675d6a34252e056148b6d65a31a4"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-undone.scene.json",
+      "bytes": 8454,
+      "sha256": "89bc902874af6194e70b7e61ad1eabebc841ad47b4b853cf55eb4ce5ab8d79da"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-undone.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-undone.sync.json",
+      "bytes": 525,
+      "sha256": "61b840c52c27c28550a93a82fb6dcc3798b8fe72429a19e8081ba753477f2886"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/group-undone.trace.json",
+      "bytes": 28670,
+      "sha256": "1388e2f7aa94eb88b8f990bb7ee82d49c72672753ef5dc52f91956dde1f88db2"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/initial-current-layer-selection-refusal/group-apply-before.scene.json",
+      "bytes": 8454,
+      "sha256": "cf0ddb331eed55bdb223cab43a56bd8b2d719f3b92b33b68f58d317bcbd8bea5"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/initial-current-layer-selection-refusal/group-apply-before.sync.json",
+      "bytes": 537,
+      "sha256": "afa98baedf3b34fe0231ca11254fa00dc6672b067d825e12a172870fc368e2ac"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/initial-current-layer-selection-refusal/group-apply.ownership.json",
+      "bytes": 711,
+      "sha256": "8478b34b7f83b85c6f429d54974dd7019082675d6a34252e056148b6d65a31a4"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/initial-current-layer-selection-refusal/group-apply.selection.json",
+      "bytes": 37,
+      "sha256": "d480d31751aa3a5cd0c80f09367b423331e9887b33674890549373e945880501"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/initial-current-layer-selection-refusal/group-apply.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/initial-current-layer-selection-refusal/group-apply.trace.json",
+      "bytes": 29251,
+      "sha256": "a034d2c43800d7ec31b546f25f54a999803969c618321bab76eafd05764e3023"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/live-view-20261003T085509_235274Z-197f538e.png",
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/live-view-20261003T085510_735459Z-9ecb5e18.png",
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/live-view-20261003T085540_141769Z-d151daa2.png",
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/live-view-20261003T085656_901611Z-1636b0ec.png",
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/live-view-20261003T085730_909420Z-a6ba5f46.png",
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/live-view-20261003T085732_576978Z-4edfeb8f.png",
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/live-view-20261003T085810_586751Z-7b744f71.png",
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/live-view-20261003T085834_068618Z-ce632be7.png",
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/live-view-20261003T085904_326894Z-886f9f3f.png",
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/live-view-20261003T085905_862311Z-cc8f7526.png",
+      "bytes": 6041,
+      "sha256": "7082640f0cae012a660c893bc5e1f1c30f8d76dd59f9738ded732ef995725865"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/live-view-20261003T085924_763268Z-f97df782.png",
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/live-view-20261003T085945_005903Z-9285613e.png",
+      "bytes": 6041,
+      "sha256": "7082640f0cae012a660c893bc5e1f1c30f8d76dd59f9738ded732ef995725865"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/live-view-20261003T090004_728897Z-d5a847d9.png",
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/native-delete-apply-before.svg",
+      "bytes": 1815,
+      "sha256": "2fd0122261d9169e0c2141bb77400f91855cac69032823cdb47b7b8e3d880d21"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/native-delete-apply.svg",
+      "bytes": 1125,
+      "sha256": "670dafc9e9b4256a4f4c9784f1a86c3f17cd8b814b7d0443ac7d9985533e3340"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/native-delete-redone.svg",
+      "bytes": 1125,
+      "sha256": "670dafc9e9b4256a4f4c9784f1a86c3f17cd8b814b7d0443ac7d9985533e3340"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/native-delete-restored.svg",
+      "bytes": 1815,
+      "sha256": "2fd0122261d9169e0c2141bb77400f91855cac69032823cdb47b7b8e3d880d21"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/native-delete-undone.svg",
+      "bytes": 1815,
+      "sha256": "2fd0122261d9169e0c2141bb77400f91855cac69032823cdb47b7b8e3d880d21"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/native-group-redone.svg",
+      "bytes": 1935,
+      "sha256": "7a37a6a4f06b498a513aa76869ab3c7126856cf76558bcb48a29aa58876ade4b"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/native-group-selection-apply-before.svg",
+      "bytes": 1815,
+      "sha256": "2fd0122261d9169e0c2141bb77400f91855cac69032823cdb47b7b8e3d880d21"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/native-group-selection-apply.svg",
+      "bytes": 1935,
+      "sha256": "7a37a6a4f06b498a513aa76869ab3c7126856cf76558bcb48a29aa58876ade4b"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/native-group-undone.svg",
+      "bytes": 1815,
+      "sha256": "2fd0122261d9169e0c2141bb77400f91855cac69032823cdb47b7b8e3d880d21"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/native-ungroup-apply-before.svg",
+      "bytes": 1935,
+      "sha256": "7a37a6a4f06b498a513aa76869ab3c7126856cf76558bcb48a29aa58876ade4b"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/native-ungroup-apply.svg",
+      "bytes": 1815,
+      "sha256": "2fd0122261d9169e0c2141bb77400f91855cac69032823cdb47b7b8e3d880d21"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/native-ungroup-redone.svg",
+      "bytes": 1815,
+      "sha256": "2fd0122261d9169e0c2141bb77400f91855cac69032823cdb47b7b8e3d880d21"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/structure-captured-artifacts/native-ungroup-undone.svg",
+      "bytes": 1935,
+      "sha256": "7a37a6a4f06b498a513aa76869ab3c7126856cf76558bcb48a29aa58876ade4b"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/ungroup-apply-before.scene.json",
+      "bytes": 9774,
+      "sha256": "2ebee9e6df3d3f9e73765cbefb96b0153d410f808b00049ecebe8abe968d3b71"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/ungroup-apply-before.sync.json",
+      "bytes": 541,
+      "sha256": "164bf60937eebd130233c794454b6a3e6f8eca422727edd8eefc22c353f7286a"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/ungroup-apply.operations.json",
+      "bytes": 1233,
+      "sha256": "6d51bbd1da5c2c66bf5605345445d3f9df17105e575248a68f126ad1419992ca"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/ungroup-apply.ownership.json",
+      "bytes": 711,
+      "sha256": "8478b34b7f83b85c6f429d54974dd7019082675d6a34252e056148b6d65a31a4"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/ungroup-apply.reply.json",
+      "bytes": 1184,
+      "sha256": "f70378eff2978362f294c61a10aa351f4aff85ced6c34b933d9467b02d736efc"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/ungroup-apply.scene.json",
+      "bytes": 8454,
+      "sha256": "7be44e5f8acef66dea85b0c008aa1af5161e39c167e849faaa3659245f28a048"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/ungroup-apply.selection.json",
+      "bytes": 83,
+      "sha256": "2e3bfd2fb74e69629d77eb3b564307a00cbb914b78c5982372516f54925931ec"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/ungroup-apply.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/ungroup-apply.sync.json",
+      "bytes": 528,
+      "sha256": "210c3463b5c27de13e11812ce09172269fc2a7cb1442af91cd5995f2429c7ba5"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/ungroup-apply.trace.json",
+      "bytes": 52250,
+      "sha256": "1e71d6e1b6233827d4d39a85d6323913ac87581fcee4ff943b555c100c17b915"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/ungroup-redone.ownership.json",
+      "bytes": 711,
+      "sha256": "8478b34b7f83b85c6f429d54974dd7019082675d6a34252e056148b6d65a31a4"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/ungroup-redone.scene.json",
+      "bytes": 8454,
+      "sha256": "fcc7c1623caf9d446d28a9452e6ef04a04d017621fa186e65aebf50e3f1c2a72"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/ungroup-redone.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/ungroup-redone.sync.json",
+      "bytes": 529,
+      "sha256": "3deabaed8594ab5e337e99e7797f303caf269b5b140d3a189a06719d6a91d116"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/ungroup-redone.trace.json",
+      "bytes": 28676,
+      "sha256": "13df8107436c4978b59d61169deee58f398d831f5f3c7c93be42c04efc4b9cd6"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/ungroup-undone.ownership.json",
+      "bytes": 711,
+      "sha256": "8478b34b7f83b85c6f429d54974dd7019082675d6a34252e056148b6d65a31a4"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/ungroup-undone.scene.json",
+      "bytes": 9678,
+      "sha256": "33abde45b50246a0e2d3005f3935e3f187f2341ad3a8f723c5cb0f9a81743e25"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/ungroup-undone.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/ungroup-undone.sync.json",
+      "bytes": 529,
+      "sha256": "55eba3b8c31130609f7ae191f05ada21b06f59946c85957cf87a6c10e0646d51"
+    },
+    {
+      "path": "migration/results/native-gui-stage29/ungroup-undone.trace.json",
+      "bytes": 30647,
+      "sha256": "8298502bcd9c01af4680be584f67f2581e66b95f43076180f3117da6f05228fe"
+    },
+    {
+      "path": "migration/results/native-gui-stage29-review/historical-verifier-regression.json",
+      "bytes": 7545,
+      "sha256": "04257405f91e0becea9fe162235dea0a25f1e282f38bbd3734cb5b6bbffef693"
+    },
+    {
+      "path": "migration/results/native-structure-stage29-review/AGENT_HANDOFF.md",
+      "bytes": 203962,
+      "sha256": "ed52670f5904239e0896b080ccc788800da6dacfa82d8e0801cb787768c65f2f"
+    },
+    {
+      "path": "migration/results/native-structure-stage29-review/NOTES.md",
+      "bytes": 821,
+      "sha256": "84c982a49796bb86e5759f205f786cf6b9c24948bbd1daa271fdbdb9c731c04c"
+    },
+    {
+      "path": "migration/results/native-structure-stage29-review/README.md",
+      "bytes": 207307,
+      "sha256": "3d35e66545dd871813a2b2b2c422f9485e98f47295f90b31cfd9db79067e6d5a"
+    },
+    {
+      "path": "migration/results/native-structure-stage29-review/RUST_MIGRATION_REPORT.md",
+      "bytes": 260576,
+      "sha256": "3319fdaf07cecba06286518fd67ade93ffa0d6130b4d9a30df632c6bbf878477"
+    },
+    {
+      "path": "migration/results/native-structure-stage29-review/migration_native_structure.py",
+      "bytes": 6462,
+      "sha256": "84ed2d16aeb6db4581563ddc416f99e0d995ab498d231d4891f92a7b9848c7f0"
+    },
+    {
+      "path": "migration/results/native-structure-stage29-review/migration_verify_native_structure.py",
+      "bytes": 7800,
+      "sha256": "273287c3482f9a4caea94902e08ef4790cbb0d2256dd0cd8e619f9b820bd29fb"
+    }
+  ]
+}

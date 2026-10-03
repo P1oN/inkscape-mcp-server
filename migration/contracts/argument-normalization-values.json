@@ -1,0 +1,8392 @@
+[
+  {
+    "name": "diagnose_runtime",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "list_capabilities",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "stat_artifact",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "stat_artifacts",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "get_workspace_info",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "list_actions",
+    "arguments": {},
+    "expected": {
+      "include_all_actions": true
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "discover_extensions",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "validate_action_chain",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "run_action_chain",
+    "arguments": {},
+    "expected": {
+      "approval_token": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "run_raw_action",
+    "arguments": {},
+    "expected": {
+      "args": null,
+      "dry_run": true,
+      "approval_token": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {},
+    "expected": {
+      "approval_token": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_d1f83ba1",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_d1f83ba1",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_b072502b",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "mode": "copies",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_b072502b",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "copies",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_19932a4f",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "orientation": "tangent",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_19932a4f",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "tangent",
+          "variation": null,
+          "anchor": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_6ace7462",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "variation": {
+            "seed": "18446744073709551739.0",
+            "offset": "2",
+            "rotation_degrees": "10",
+            "scale": "0.1"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_6ace7462",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": {
+            "seed": 18446744073709551739,
+            "offset": 2.0,
+            "scale": 0.1,
+            "rotation_degrees": 10.0
+          },
+          "anchor": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_a867d01f",
+      "edits": [
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "allow_retained",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "approved"
+    },
+    "expected": {
+      "approval_token": "approved",
+      "doc_id": "d_a867d01f",
+      "edits": [
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "allow_retained"
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_5199fcce",
+      "edits": [
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "allow_retained",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_5199fcce",
+      "edits": [
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "allow_retained"
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_26c2b2e0",
+      "edits": [
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"red\"/></g>",
+          "reference_policy": "allow_retained",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "approved"
+    },
+    "expected": {
+      "approval_token": "approved",
+      "doc_id": "d_26c2b2e0",
+      "edits": [
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"red\"/></g>",
+          "reference_policy": "allow_retained"
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_c16a4e1f",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "allow_retained",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "approved"
+    },
+    "expected": {
+      "approval_token": "approved",
+      "doc_id": "d_c16a4e1f",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "allow_retained"
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_e6bfeed3",
+      "edits": [
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "allow_retained",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "approved"
+    },
+    "expected": {
+      "approval_token": "approved",
+      "doc_id": "d_e6bfeed3",
+      "edits": [
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "allow_retained"
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_7946512a",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "repeated-instance-1"
+          ],
+          "color": "purple",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_7946512a",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        },
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "repeated-instance-1"
+          ],
+          "color": "purple",
+          "opacity": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_c724e15a",
+      "edits": [
+        {
+          "op": "create_group",
+          "object_id": "new",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "new",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><circle id=\"new-circle\" r=\"3\"/></g>",
+          "reference_policy": "allow_retained",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "approved"
+    },
+    "expected": {
+      "approval_token": "approved",
+      "doc_id": "d_c724e15a",
+      "edits": [
+        {
+          "op": "create_group",
+          "parent_id": null,
+          "object_id": "new",
+          "label": null,
+          "mode": "group"
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "new",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><circle id=\"new-circle\" r=\"3\"/></g>",
+          "reference_policy": "allow_retained"
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_66eef1ec",
+      "edits": [
+        {
+          "op": "create_rect",
+          "object_id": "new",
+          "x": "1",
+          "y": "2",
+          "width": "3",
+          "height": "4",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "new",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_66eef1ec",
+      "edits": [
+        {
+          "op": "create_rect",
+          "x": 1.0,
+          "y": 2.0,
+          "width": 3.0,
+          "height": 4.0,
+          "parent_id": null,
+          "object_id": "new",
+          "rx": null,
+          "ry": null,
+          "fill": null,
+          "stroke": null,
+          "stroke_width": null
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "new",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_305cb858",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "missing"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_305cb858",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        },
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "missing"
+          ],
+          "color": "green",
+          "opacity": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_4bebfec7",
+      "edits": [
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "allow_retained",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "missing"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "approved"
+    },
+    "expected": {
+      "approval_token": "approved",
+      "doc_id": "d_4bebfec7",
+      "edits": [
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "allow_retained"
+        },
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "missing"
+          ],
+          "color": "green",
+          "opacity": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_e16f8391",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "reject_changes",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "approved"
+    },
+    "expected": {
+      "approval_token": "approved",
+      "doc_id": "d_e16f8391",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "opacity": null
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "reject_changes"
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_87558673",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"/>",
+          "reference_policy": "allow_retained",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "approved"
+    },
+    "expected": {
+      "approval_token": "approved",
+      "doc_id": "d_87558673",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "opacity": null
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"/>",
+          "reference_policy": "allow_retained"
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_51a80091",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"r\"/></g>",
+          "reference_policy": "allow_retained",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "approved"
+    },
+    "expected": {
+      "approval_token": "approved",
+      "doc_id": "d_51a80091",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "opacity": null
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"r\"/></g>",
+          "reference_policy": "allow_retained"
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_d98dfa6e",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_d98dfa6e",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "opacity": null
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_c0fc4844",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_c0fc4844",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "opacity": null
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_87ecb373",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "target",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_87ecb373",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "opacity": null
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "target",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_a2a64d6a",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_a2a64d6a",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "opacity": null
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_5330f4be",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "red;display:none",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_5330f4be",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        },
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "red;display:none",
+          "opacity": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_5e310c52",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\"/><circle id=\"a\"/></g>",
+          "reference_policy": "allow_retained",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "approved"
+    },
+    "expected": {
+      "approval_token": "approved",
+      "doc_id": "d_5e310c52",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "opacity": null
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\"/><circle id=\"a\"/></g>",
+          "reference_policy": "allow_retained"
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_42ed316c",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\" id=\"wrong\"/>",
+          "reference_policy": "allow_retained",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "approved"
+    },
+    "expected": {
+      "approval_token": "approved",
+      "doc_id": "d_42ed316c",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "opacity": null
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\" id=\"wrong\"/>",
+          "reference_policy": "allow_retained"
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_2529f5cc",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_2529f5cc",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_896e4c82",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "mode": "copies",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_896e4c82",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "copies",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_2e599119",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "orientation": "tangent",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_2e599119",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "tangent",
+          "variation": null,
+          "anchor": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_96c07144",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "variation": {
+            "seed": "18446744073709551739.0",
+            "offset": "2",
+            "rotation_degrees": "10",
+            "scale": "0.1"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_96c07144",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": {
+            "seed": 18446744073709551739,
+            "offset": 2.0,
+            "scale": 0.1,
+            "rotation_degrees": 10.0
+          },
+          "anchor": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_bf8c38d8",
+      "edits": [
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "allow_retained",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "approved"
+    },
+    "expected": {
+      "approval_token": "approved",
+      "doc_id": "d_bf8c38d8",
+      "edits": [
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "allow_retained"
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_5ca2573d",
+      "edits": [
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "allow_retained",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_5ca2573d",
+      "edits": [
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "allow_retained"
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_4290eb3e",
+      "edits": [
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"red\"/></g>",
+          "reference_policy": "allow_retained",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "approved"
+    },
+    "expected": {
+      "approval_token": "approved",
+      "doc_id": "d_4290eb3e",
+      "edits": [
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"red\"/></g>",
+          "reference_policy": "allow_retained"
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_7172344f",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "allow_retained",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "approved"
+    },
+    "expected": {
+      "approval_token": "approved",
+      "doc_id": "d_7172344f",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "allow_retained"
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_55505607",
+      "edits": [
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "allow_retained",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "approved"
+    },
+    "expected": {
+      "approval_token": "approved",
+      "doc_id": "d_55505607",
+      "edits": [
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "allow_retained"
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_bb43a47a",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "repeated-instance-1"
+          ],
+          "color": "purple",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_bb43a47a",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        },
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "repeated-instance-1"
+          ],
+          "color": "purple",
+          "opacity": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_aa037698",
+      "edits": [
+        {
+          "op": "create_group",
+          "object_id": "new",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "new",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><circle id=\"new-circle\" r=\"3\"/></g>",
+          "reference_policy": "allow_retained",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "approved"
+    },
+    "expected": {
+      "approval_token": "approved",
+      "doc_id": "d_aa037698",
+      "edits": [
+        {
+          "op": "create_group",
+          "parent_id": null,
+          "object_id": "new",
+          "label": null,
+          "mode": "group"
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "new",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><circle id=\"new-circle\" r=\"3\"/></g>",
+          "reference_policy": "allow_retained"
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_46f43342",
+      "edits": [
+        {
+          "op": "create_rect",
+          "object_id": "new",
+          "x": "1",
+          "y": "2",
+          "width": "3",
+          "height": "4",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "new",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_46f43342",
+      "edits": [
+        {
+          "op": "create_rect",
+          "x": 1.0,
+          "y": 2.0,
+          "width": 3.0,
+          "height": 4.0,
+          "parent_id": null,
+          "object_id": "new",
+          "rx": null,
+          "ry": null,
+          "fill": null,
+          "stroke": null,
+          "stroke_width": null
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "new",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_54152d7a",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "missing"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_54152d7a",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        },
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "missing"
+          ],
+          "color": "green",
+          "opacity": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_bb2d8509",
+      "edits": [
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "allow_retained",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "missing"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "approved"
+    },
+    "expected": {
+      "approval_token": "approved",
+      "doc_id": "d_bb2d8509",
+      "edits": [
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "allow_retained"
+        },
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "missing"
+          ],
+          "color": "green",
+          "opacity": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_41e8057f",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "reject_changes",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "approved"
+    },
+    "expected": {
+      "approval_token": "approved",
+      "doc_id": "d_41e8057f",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "opacity": null
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\" x=\"70\" y=\"70\" width=\"10\" height=\"10\" fill=\"blue\"/></g>",
+          "reference_policy": "reject_changes"
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_1706bbb9",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"/>",
+          "reference_policy": "allow_retained",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "approved"
+    },
+    "expected": {
+      "approval_token": "approved",
+      "doc_id": "d_1706bbb9",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "opacity": null
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"/>",
+          "reference_policy": "allow_retained"
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_0b9d3645",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"r\"/></g>",
+          "reference_policy": "allow_retained",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "approved"
+    },
+    "expected": {
+      "approval_token": "approved",
+      "doc_id": "d_0b9d3645",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "opacity": null
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"r\"/></g>",
+          "reference_policy": "allow_retained"
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_522a8766",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_522a8766",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "opacity": null
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_980b0ee1",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_980b0ee1",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "opacity": null
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_bf0f569d",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "target",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_bf0f569d",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "opacity": null
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "target",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_31373e36",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_31373e36",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "opacity": null
+        },
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_ebe4d850",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "group_id": "repeated",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": "10",
+                "y": "10"
+              },
+              {
+                "x": "60",
+                "y": "50"
+              }
+            ],
+            "count": "3.0"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "red;display:none",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_ebe4d850",
+      "edits": [
+        {
+          "op": "repeat_objects",
+          "object_id": "source",
+          "placement": {
+            "kind": "polyline",
+            "points": [
+              {
+                "x": 10.0,
+                "y": 10.0
+              },
+              {
+                "x": 60.0,
+                "y": 50.0
+              }
+            ],
+            "count": 3,
+            "spacing": null
+          },
+          "group_id": "repeated",
+          "mode": "linked",
+          "label": "Repeated objects",
+          "orientation": "fixed",
+          "variation": null,
+          "anchor": null
+        },
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "red;display:none",
+          "opacity": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_55e91dce",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\"/><circle id=\"a\"/></g>",
+          "reference_policy": "allow_retained",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "approved"
+    },
+    "expected": {
+      "approval_token": "approved",
+      "doc_id": "d_55e91dce",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "opacity": null
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\"><rect id=\"a\"/><circle id=\"a\"/></g>",
+          "reference_policy": "allow_retained"
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_a2bf071c",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\" id=\"wrong\"/>",
+          "reference_policy": "allow_retained",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "approved"
+    },
+    "expected": {
+      "approval_token": "approved",
+      "doc_id": "d_a2bf071c",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "opacity": null
+        },
+        {
+          "op": "replace_svg_fragment",
+          "object_id": "target",
+          "svg": "<g xmlns=\"http://www.w3.org/2000/svg\" id=\"wrong\"/>",
+          "reference_policy": "allow_retained"
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "set_opacity",
+          "object_ids": [
+            "r"
+          ],
+          "opacity": "0.8",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "replace_color",
+          "from_color": "yellow",
+          "to_color": "red",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "apply_palette",
+          "mapping": {
+            "red": "yellow"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "replace_text",
+          "object_id": "t",
+          "text": "batch text",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "set_font",
+          "object_ids": [
+            "t"
+          ],
+          "size": "14px",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "move_object",
+          "object_id": "r",
+          "dx": "2",
+          "dy": "3",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "scale_object",
+          "object_id": "r",
+          "sx": "1.1",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "rotate_object",
+          "object_id": "r",
+          "degrees": "5",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "resize_canvas",
+          "width": "120px",
+          "height": "110px",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "normalize_viewbox",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "rename_object",
+          "object_id": "scope",
+          "label": "Batch object",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_a0e6eb5e",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "opacity": null
+        },
+        {
+          "op": "set_opacity",
+          "object_ids": [
+            "r"
+          ],
+          "opacity": 0.8
+        },
+        {
+          "op": "replace_color",
+          "from_color": "yellow",
+          "to_color": "red",
+          "scope_ids": null
+        },
+        {
+          "op": "apply_palette",
+          "mapping": {
+            "red": "yellow"
+          },
+          "scope_ids": null
+        },
+        {
+          "op": "replace_text",
+          "object_id": "t",
+          "text": "batch text"
+        },
+        {
+          "op": "set_font",
+          "object_ids": [
+            "t"
+          ],
+          "family": null,
+          "size": "14px",
+          "weight": null
+        },
+        {
+          "op": "move_object",
+          "object_id": "r",
+          "dx": 2.0,
+          "dy": 3.0
+        },
+        {
+          "op": "scale_object",
+          "object_id": "r",
+          "sx": 1.1,
+          "sy": null
+        },
+        {
+          "op": "rotate_object",
+          "object_id": "r",
+          "degrees": 5.0,
+          "cx": null,
+          "cy": null
+        },
+        {
+          "op": "resize_canvas",
+          "width": "120px",
+          "height": "110px",
+          "adjust_viewbox": false,
+          "bleed": null,
+          "bleed_color": "#ffffff"
+        },
+        {
+          "op": "normalize_viewbox"
+        },
+        {
+          "op": "rename_object",
+          "object_id": "scope",
+          "new_id": null,
+          "label": "Batch object"
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "edits": [
+        {
+          "op": "move_object",
+          "object_id": "r",
+          "dx": "12",
+          "dy": "13",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "set_opacity",
+          "object_ids": [
+            "absent"
+          ],
+          "opacity": "0.3",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_a0e6eb5e",
+      "edits": [
+        {
+          "op": "move_object",
+          "object_id": "r",
+          "dx": 12.0,
+          "dy": 13.0
+        },
+        {
+          "op": "set_opacity",
+          "object_ids": [
+            "absent"
+          ],
+          "opacity": 0.3
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "red;display:none",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_a0e6eb5e",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "red;display:none",
+          "opacity": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "edits": [
+        {
+          "op": "delete_object",
+          "object_ids": [
+            "t"
+          ],
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_a0e6eb5e",
+      "edits": [
+        {
+          "op": "delete_object",
+          "object_ids": [
+            "t"
+          ]
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "orange",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "delete_object",
+          "object_ids": [
+            "t"
+          ],
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "synthetic acceptance"
+    },
+    "expected": {
+      "approval_token": "synthetic acceptance",
+      "doc_id": "d_a0e6eb5e",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "orange",
+          "opacity": null
+        },
+        {
+          "op": "delete_object",
+          "object_ids": [
+            "t"
+          ]
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "edits": [
+        {
+          "op": "delete_object",
+          "object_ids": [
+            "r"
+          ],
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "absent"
+          ],
+          "color": "red",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "synthetic acceptance"
+    },
+    "expected": {
+      "approval_token": "synthetic acceptance",
+      "doc_id": "d_a0e6eb5e",
+      "edits": [
+        {
+          "op": "delete_object",
+          "object_ids": [
+            "r"
+          ]
+        },
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "absent"
+          ],
+          "color": "red",
+          "opacity": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "set_opacity",
+          "object_ids": [
+            "r"
+          ],
+          "opacity": "0.8",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "replace_color",
+          "from_color": "yellow",
+          "to_color": "red",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "apply_palette",
+          "mapping": {
+            "red": "yellow"
+          },
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "replace_text",
+          "object_id": "t",
+          "text": "batch text",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "set_font",
+          "object_ids": [
+            "t"
+          ],
+          "size": "14px",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "move_object",
+          "object_id": "r",
+          "dx": "2",
+          "dy": "3",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "scale_object",
+          "object_id": "r",
+          "sx": "1.1",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "rotate_object",
+          "object_id": "r",
+          "degrees": "5",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "resize_canvas",
+          "width": "120px",
+          "height": "110px",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "normalize_viewbox",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "rename_object",
+          "object_id": "scope",
+          "label": "Batch object",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_48cecef8",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "green",
+          "opacity": null
+        },
+        {
+          "op": "set_opacity",
+          "object_ids": [
+            "r"
+          ],
+          "opacity": 0.8
+        },
+        {
+          "op": "replace_color",
+          "from_color": "yellow",
+          "to_color": "red",
+          "scope_ids": null
+        },
+        {
+          "op": "apply_palette",
+          "mapping": {
+            "red": "yellow"
+          },
+          "scope_ids": null
+        },
+        {
+          "op": "replace_text",
+          "object_id": "t",
+          "text": "batch text"
+        },
+        {
+          "op": "set_font",
+          "object_ids": [
+            "t"
+          ],
+          "family": null,
+          "size": "14px",
+          "weight": null
+        },
+        {
+          "op": "move_object",
+          "object_id": "r",
+          "dx": 2.0,
+          "dy": 3.0
+        },
+        {
+          "op": "scale_object",
+          "object_id": "r",
+          "sx": 1.1,
+          "sy": null
+        },
+        {
+          "op": "rotate_object",
+          "object_id": "r",
+          "degrees": 5.0,
+          "cx": null,
+          "cy": null
+        },
+        {
+          "op": "resize_canvas",
+          "width": "120px",
+          "height": "110px",
+          "adjust_viewbox": false,
+          "bleed": null,
+          "bleed_color": "#ffffff"
+        },
+        {
+          "op": "normalize_viewbox"
+        },
+        {
+          "op": "rename_object",
+          "object_id": "scope",
+          "new_id": null,
+          "label": "Batch object"
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "edits": [
+        {
+          "op": "move_object",
+          "object_id": "r",
+          "dx": "12",
+          "dy": "13",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "set_opacity",
+          "object_ids": [
+            "absent"
+          ],
+          "opacity": "0.3",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_48cecef8",
+      "edits": [
+        {
+          "op": "move_object",
+          "object_id": "r",
+          "dx": 12.0,
+          "dy": 13.0
+        },
+        {
+          "op": "set_opacity",
+          "object_ids": [
+            "absent"
+          ],
+          "opacity": 0.3
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "red;display:none",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_48cecef8",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "red;display:none",
+          "opacity": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "edits": [
+        {
+          "op": "delete_object",
+          "object_ids": [
+            "t"
+          ],
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ]
+    },
+    "expected": {
+      "approval_token": null,
+      "doc_id": "d_48cecef8",
+      "edits": [
+        {
+          "op": "delete_object",
+          "object_ids": [
+            "t"
+          ]
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "orange",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "delete_object",
+          "object_ids": [
+            "t"
+          ],
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "synthetic acceptance"
+    },
+    "expected": {
+      "approval_token": "synthetic acceptance",
+      "doc_id": "d_48cecef8",
+      "edits": [
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "r"
+          ],
+          "color": "orange",
+          "opacity": null
+        },
+        {
+          "op": "delete_object",
+          "object_ids": [
+            "t"
+          ]
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "apply_edits",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "edits": [
+        {
+          "op": "delete_object",
+          "object_ids": [
+            "r"
+          ],
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        },
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "absent"
+          ],
+          "color": "red",
+          "migration_ignored_probe": {
+            "unused": 17
+          }
+        }
+      ],
+      "approval_token": "synthetic acceptance"
+    },
+    "expected": {
+      "approval_token": "synthetic acceptance",
+      "doc_id": "d_48cecef8",
+      "edits": [
+        {
+          "op": "delete_object",
+          "object_ids": [
+            "r"
+          ]
+        },
+        {
+          "op": "set_fill",
+          "object_ids": [
+            "absent"
+          ],
+          "color": "red",
+          "opacity": null
+        }
+      ]
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "set_document_svg",
+    "arguments": {},
+    "expected": {
+      "approval_token": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "insert_svg_fragment",
+    "arguments": {},
+    "expected": {
+      "parent_id": null,
+      "unwrap": true,
+      "approval_token": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "compose_grid",
+    "arguments": {},
+    "expected": {
+      "doc_ids": null,
+      "object_ids": null,
+      "source_doc_id": null,
+      "target_doc_id": null,
+      "gap": 0.0,
+      "padding": 0.0,
+      "scale_to_fit": true
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "place_document",
+    "arguments": {},
+    "expected": {
+      "source_doc_id": null,
+      "object_id": null,
+      "scale": 1.0
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "replace_svg_fragment",
+    "arguments": {},
+    "expected": {
+      "reference_policy": "reject_changes",
+      "approval_token": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "create_rect",
+    "arguments": {},
+    "expected": {
+      "parent_id": null,
+      "object_id": null,
+      "rx": null,
+      "ry": null,
+      "fill": null,
+      "stroke": null,
+      "stroke_width": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "create_circle",
+    "arguments": {},
+    "expected": {
+      "parent_id": null,
+      "object_id": null,
+      "fill": null,
+      "stroke": null,
+      "stroke_width": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "create_ellipse",
+    "arguments": {},
+    "expected": {
+      "parent_id": null,
+      "object_id": null,
+      "fill": null,
+      "stroke": null,
+      "stroke_width": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "create_line",
+    "arguments": {},
+    "expected": {
+      "parent_id": null,
+      "object_id": null,
+      "stroke": null,
+      "stroke_width": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "create_polygon",
+    "arguments": {},
+    "expected": {
+      "parent_id": null,
+      "object_id": null,
+      "fill": null,
+      "stroke": null,
+      "stroke_width": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "create_polyline",
+    "arguments": {},
+    "expected": {
+      "parent_id": null,
+      "object_id": null,
+      "fill": null,
+      "stroke": null,
+      "stroke_width": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "create_path",
+    "arguments": {},
+    "expected": {
+      "parent_id": null,
+      "object_id": null,
+      "fill": null,
+      "stroke": null,
+      "stroke_width": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "create_text",
+    "arguments": {},
+    "expected": {
+      "parent_id": null,
+      "object_id": null,
+      "fill": null,
+      "stroke": null,
+      "stroke_width": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "add_linear_gradient",
+    "arguments": {},
+    "expected": {
+      "x1": "0%",
+      "y1": "0%",
+      "x2": "100%",
+      "y2": "0%",
+      "object_id": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "add_radial_gradient",
+    "arguments": {},
+    "expected": {
+      "cx": "50%",
+      "cy": "50%",
+      "r": "50%",
+      "fx": null,
+      "fy": null,
+      "object_id": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "create_group",
+    "arguments": {},
+    "expected": {
+      "parent_id": null,
+      "object_id": null,
+      "label": null,
+      "mode": "group"
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "group_objects",
+    "arguments": {},
+    "expected": {
+      "object_id": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "reparent_object",
+    "arguments": {},
+    "expected": {
+      "preserve_appearance": false
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "create_use",
+    "arguments": {},
+    "expected": {
+      "parent_id": null,
+      "object_id": null,
+      "x": null,
+      "y": null,
+      "transform": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "set_group_mode",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "how_do_i",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "open_document",
+    "arguments": {},
+    "expected": {
+      "root_id": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "create_document",
+    "arguments": {},
+    "expected": {
+      "viewBox": null,
+      "background": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "reload_document",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "inspect_document",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "delete_object",
+    "arguments": {},
+    "expected": {
+      "approval_token": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "render_preview",
+    "arguments": {},
+    "expected": {
+      "width_px": null,
+      "name": null,
+      "inline": true,
+      "max_output_bytes": null,
+      "object_id": null,
+      "region": null,
+      "background": "transparent"
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "capture_frame",
+    "arguments": {},
+    "expected": {
+      "series": null,
+      "width_px": null,
+      "label": null,
+      "inline": true,
+      "max_output_bytes": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "list_frames",
+    "arguments": {},
+    "expected": {
+      "series": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "export_document",
+    "arguments": {},
+    "expected": {
+      "width_px": null,
+      "out_dir": null,
+      "name_prefix": null,
+      "inline": true,
+      "max_output_bytes": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "export_object",
+    "arguments": {},
+    "expected": {
+      "format": "png",
+      "width_px": null,
+      "out_dir": null,
+      "name_prefix": null,
+      "inline": true,
+      "max_output_bytes": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "compare_region",
+    "arguments": {},
+    "expected": {
+      "width_px": 512,
+      "background": "transparent",
+      "inline": true
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "export_batch",
+    "arguments": {},
+    "expected": {
+      "dry_run": true,
+      "byte_budget": null,
+      "out_dir": null,
+      "name_prefix": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "export_set",
+    "arguments": {},
+    "expected": {
+      "dry_run": true,
+      "byte_budget": null,
+      "out_dir": null,
+      "name_prefix": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {},
+    "expected": {
+      "tag": null,
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": null,
+      "accurate_bbox": false
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_317620b2",
+      "accurate_bbox": "YES"
+    },
+    "expected": {
+      "tag": null,
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": null,
+      "accurate_bbox": true,
+      "doc_id": "d_317620b2"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_317620b2",
+      "bbox": {
+        "x": "30",
+        "y": "20",
+        "width": "0",
+        "height": "0",
+        "migration_ignored_probe": {
+          "unused": 17
+        }
+      }
+    },
+    "expected": {
+      "tag": null,
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": {
+        "x": 30.0,
+        "y": 20.0,
+        "width": 0.0,
+        "height": 0.0
+      },
+      "accurate_bbox": false,
+      "doc_id": "d_317620b2"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_317620b2",
+      "bbox": {
+        "x": "0",
+        "y": "0",
+        "width": "35",
+        "height": "45",
+        "migration_ignored_probe": {
+          "unused": 17
+        }
+      }
+    },
+    "expected": {
+      "tag": null,
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 35.0,
+        "height": 45.0
+      },
+      "accurate_bbox": false,
+      "doc_id": "d_317620b2"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_317620b2",
+      "bbox": {
+        "x": "50",
+        "y": "0",
+        "width": "50",
+        "height": "50",
+        "migration_ignored_probe": {
+          "unused": 17
+        }
+      },
+      "accurate_bbox": "YES"
+    },
+    "expected": {
+      "tag": null,
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": {
+        "x": 50.0,
+        "y": 0.0,
+        "width": 50.0,
+        "height": 50.0
+      },
+      "accurate_bbox": true,
+      "doc_id": "d_317620b2"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_317620b2",
+      "tag": "path",
+      "accurate_bbox": "YES"
+    },
+    "expected": {
+      "tag": "path",
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": null,
+      "accurate_bbox": true,
+      "doc_id": "d_317620b2"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_317620b2",
+      "tag": "text",
+      "accurate_bbox": "YES"
+    },
+    "expected": {
+      "tag": "text",
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": null,
+      "accurate_bbox": true,
+      "doc_id": "d_317620b2"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_317620b2",
+      "tag": "g",
+      "accurate_bbox": "YES"
+    },
+    "expected": {
+      "tag": "g",
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": null,
+      "accurate_bbox": true,
+      "doc_id": "d_317620b2"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_317620b2",
+      "tag": "rect",
+      "fill": "#fff",
+      "id_prefix": "shape-",
+      "bbox": {
+        "x": "0",
+        "y": "0",
+        "width": "100",
+        "height": "100",
+        "migration_ignored_probe": {
+          "unused": 17
+        }
+      }
+    },
+    "expected": {
+      "tag": "rect",
+      "fill": "#fff",
+      "stroke": null,
+      "text": null,
+      "id_prefix": "shape-",
+      "bbox": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 100.0,
+        "height": 100.0
+      },
+      "accurate_bbox": false,
+      "doc_id": "d_317620b2"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_317620b2",
+      "bbox": {
+        "x": "0",
+        "y": "0",
+        "width": "-10",
+        "height": "-10",
+        "migration_ignored_probe": {
+          "unused": 17
+        }
+      }
+    },
+    "expected": {
+      "tag": null,
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": -10.0,
+        "height": -10.0
+      },
+      "accurate_bbox": false,
+      "doc_id": "d_317620b2"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_ca4b6657",
+      "accurate_bbox": "YES"
+    },
+    "expected": {
+      "tag": null,
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": null,
+      "accurate_bbox": true,
+      "doc_id": "d_ca4b6657"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_ca4b6657",
+      "bbox": {
+        "x": "30",
+        "y": "20",
+        "width": "0",
+        "height": "0",
+        "migration_ignored_probe": {
+          "unused": 17
+        }
+      }
+    },
+    "expected": {
+      "tag": null,
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": {
+        "x": 30.0,
+        "y": 20.0,
+        "width": 0.0,
+        "height": 0.0
+      },
+      "accurate_bbox": false,
+      "doc_id": "d_ca4b6657"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_ca4b6657",
+      "bbox": {
+        "x": "0",
+        "y": "0",
+        "width": "35",
+        "height": "45",
+        "migration_ignored_probe": {
+          "unused": 17
+        }
+      }
+    },
+    "expected": {
+      "tag": null,
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 35.0,
+        "height": 45.0
+      },
+      "accurate_bbox": false,
+      "doc_id": "d_ca4b6657"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_ca4b6657",
+      "bbox": {
+        "x": "50",
+        "y": "0",
+        "width": "50",
+        "height": "50",
+        "migration_ignored_probe": {
+          "unused": 17
+        }
+      },
+      "accurate_bbox": "YES"
+    },
+    "expected": {
+      "tag": null,
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": {
+        "x": 50.0,
+        "y": 0.0,
+        "width": 50.0,
+        "height": 50.0
+      },
+      "accurate_bbox": true,
+      "doc_id": "d_ca4b6657"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_ca4b6657",
+      "tag": "path",
+      "accurate_bbox": "YES"
+    },
+    "expected": {
+      "tag": "path",
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": null,
+      "accurate_bbox": true,
+      "doc_id": "d_ca4b6657"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_ca4b6657",
+      "tag": "text",
+      "accurate_bbox": "YES"
+    },
+    "expected": {
+      "tag": "text",
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": null,
+      "accurate_bbox": true,
+      "doc_id": "d_ca4b6657"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_ca4b6657",
+      "tag": "g",
+      "accurate_bbox": "YES"
+    },
+    "expected": {
+      "tag": "g",
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": null,
+      "accurate_bbox": true,
+      "doc_id": "d_ca4b6657"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_ca4b6657",
+      "tag": "rect",
+      "fill": "#fff",
+      "id_prefix": "shape-",
+      "bbox": {
+        "x": "0",
+        "y": "0",
+        "width": "100",
+        "height": "100",
+        "migration_ignored_probe": {
+          "unused": 17
+        }
+      }
+    },
+    "expected": {
+      "tag": "rect",
+      "fill": "#fff",
+      "stroke": null,
+      "text": null,
+      "id_prefix": "shape-",
+      "bbox": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 100.0,
+        "height": 100.0
+      },
+      "accurate_bbox": false,
+      "doc_id": "d_ca4b6657"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_ca4b6657",
+      "bbox": {
+        "x": "0",
+        "y": "0",
+        "width": "-10",
+        "height": "-10",
+        "migration_ignored_probe": {
+          "unused": 17
+        }
+      }
+    },
+    "expected": {
+      "tag": null,
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": -10.0,
+        "height": -10.0
+      },
+      "accurate_bbox": false,
+      "doc_id": "d_ca4b6657"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_9815195c",
+      "accurate_bbox": "YES"
+    },
+    "expected": {
+      "tag": null,
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": null,
+      "accurate_bbox": true,
+      "doc_id": "d_9815195c"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_9815195c",
+      "tag": "rect",
+      "accurate_bbox": "YES",
+      "bbox": {
+        "x": "0",
+        "y": "0",
+        "width": "100",
+        "height": "100",
+        "migration_ignored_probe": {
+          "unused": 17
+        }
+      }
+    },
+    "expected": {
+      "tag": "rect",
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 100.0,
+        "height": 100.0
+      },
+      "accurate_bbox": true,
+      "doc_id": "d_9815195c"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_7c4fb03a",
+      "accurate_bbox": "YES"
+    },
+    "expected": {
+      "tag": null,
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": null,
+      "accurate_bbox": true,
+      "doc_id": "d_7c4fb03a"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_7c4fb03a",
+      "tag": "rect",
+      "accurate_bbox": "YES",
+      "bbox": {
+        "x": "0",
+        "y": "0",
+        "width": "100",
+        "height": "100",
+        "migration_ignored_probe": {
+          "unused": 17
+        }
+      }
+    },
+    "expected": {
+      "tag": "rect",
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 100.0,
+        "height": 100.0
+      },
+      "accurate_bbox": true,
+      "doc_id": "d_7c4fb03a"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_4794f3a3",
+      "accurate_bbox": "YES"
+    },
+    "expected": {
+      "tag": null,
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": null,
+      "accurate_bbox": true,
+      "doc_id": "d_4794f3a3"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_4794f3a3",
+      "tag": "rect",
+      "accurate_bbox": "YES",
+      "bbox": {
+        "x": "0",
+        "y": "0",
+        "width": "100",
+        "height": "100",
+        "migration_ignored_probe": {
+          "unused": 17
+        }
+      }
+    },
+    "expected": {
+      "tag": "rect",
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 100.0,
+        "height": 100.0
+      },
+      "accurate_bbox": true,
+      "doc_id": "d_4794f3a3"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_0f1aa4cc",
+      "accurate_bbox": "YES"
+    },
+    "expected": {
+      "tag": null,
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": null,
+      "accurate_bbox": true,
+      "doc_id": "d_0f1aa4cc"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_0f1aa4cc",
+      "tag": "rect",
+      "accurate_bbox": "YES",
+      "bbox": {
+        "x": "0",
+        "y": "0",
+        "width": "100",
+        "height": "100",
+        "migration_ignored_probe": {
+          "unused": 17
+        }
+      }
+    },
+    "expected": {
+      "tag": "rect",
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 100.0,
+        "height": 100.0
+      },
+      "accurate_bbox": true,
+      "doc_id": "d_0f1aa4cc"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_4d3c31c5",
+      "accurate_bbox": "YES"
+    },
+    "expected": {
+      "tag": null,
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": null,
+      "accurate_bbox": true,
+      "doc_id": "d_4d3c31c5"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_4d3c31c5",
+      "tag": "rect",
+      "accurate_bbox": "YES",
+      "bbox": {
+        "x": "0",
+        "y": "0",
+        "width": "100",
+        "height": "100",
+        "migration_ignored_probe": {
+          "unused": 17
+        }
+      }
+    },
+    "expected": {
+      "tag": "rect",
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 100.0,
+        "height": 100.0
+      },
+      "accurate_bbox": true,
+      "doc_id": "d_4d3c31c5"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_931fe113",
+      "accurate_bbox": "YES"
+    },
+    "expected": {
+      "tag": null,
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": null,
+      "accurate_bbox": true,
+      "doc_id": "d_931fe113"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_931fe113",
+      "tag": "rect",
+      "accurate_bbox": "YES",
+      "bbox": {
+        "x": "0",
+        "y": "0",
+        "width": "100",
+        "height": "100",
+        "migration_ignored_probe": {
+          "unused": 17
+        }
+      }
+    },
+    "expected": {
+      "tag": "rect",
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 100.0,
+        "height": 100.0
+      },
+      "accurate_bbox": true,
+      "doc_id": "d_931fe113"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_fcb5dba8",
+      "accurate_bbox": "YES"
+    },
+    "expected": {
+      "tag": null,
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": null,
+      "accurate_bbox": true,
+      "doc_id": "d_fcb5dba8"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_fcb5dba8",
+      "tag": "rect",
+      "accurate_bbox": "YES",
+      "bbox": {
+        "x": "0",
+        "y": "0",
+        "width": "100",
+        "height": "100",
+        "migration_ignored_probe": {
+          "unused": 17
+        }
+      }
+    },
+    "expected": {
+      "tag": "rect",
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 100.0,
+        "height": 100.0
+      },
+      "accurate_bbox": true,
+      "doc_id": "d_fcb5dba8"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_9945066c",
+      "accurate_bbox": "YES"
+    },
+    "expected": {
+      "tag": null,
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": null,
+      "accurate_bbox": true,
+      "doc_id": "d_9945066c"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_9945066c",
+      "tag": "rect",
+      "accurate_bbox": "YES",
+      "bbox": {
+        "x": "0",
+        "y": "0",
+        "width": "100",
+        "height": "100",
+        "migration_ignored_probe": {
+          "unused": 17
+        }
+      }
+    },
+    "expected": {
+      "tag": "rect",
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 100.0,
+        "height": 100.0
+      },
+      "accurate_bbox": true,
+      "doc_id": "d_9945066c"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_76832305",
+      "accurate_bbox": "YES"
+    },
+    "expected": {
+      "tag": null,
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": null,
+      "accurate_bbox": true,
+      "doc_id": "d_76832305"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_76832305",
+      "accurate_bbox": "off"
+    },
+    "expected": {
+      "tag": null,
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": null,
+      "accurate_bbox": false,
+      "doc_id": "d_76832305"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_76832305",
+      "tag": "rect",
+      "accurate_bbox": "YES",
+      "bbox": {
+        "x": "0",
+        "y": "0",
+        "width": "100",
+        "height": "100",
+        "migration_ignored_probe": {
+          "unused": 17
+        }
+      }
+    },
+    "expected": {
+      "tag": "rect",
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 100.0,
+        "height": 100.0
+      },
+      "accurate_bbox": true,
+      "doc_id": "d_76832305"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "find_objects",
+    "arguments": {
+      "doc_id": "d_76832305",
+      "tag": "rect",
+      "accurate_bbox": "off",
+      "bbox": {
+        "x": "0",
+        "y": "0",
+        "width": "100",
+        "height": "100",
+        "migration_ignored_probe": {
+          "unused": 17
+        }
+      }
+    },
+    "expected": {
+      "tag": "rect",
+      "fill": null,
+      "stroke": null,
+      "text": null,
+      "id_prefix": null,
+      "bbox": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 100.0,
+        "height": 100.0
+      },
+      "accurate_bbox": false,
+      "doc_id": "d_76832305"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "check_live_support",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_launch",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_connect",
+    "arguments": {},
+    "expected": {
+      "prefer": "read"
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_disconnect",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_status",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_list_documents",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_select_document",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_install_helper",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_arm_socket",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_get_active_document",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_get_selection",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_inspect_selection",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_render_view",
+    "arguments": {},
+    "expected": {
+      "region_x": null,
+      "region_y": null,
+      "region_width": null,
+      "region_height": null,
+      "scale": null,
+      "fast": false
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_get_scene",
+    "arguments": {},
+    "expected": {
+      "region_x": null,
+      "region_y": null,
+      "region_width": null,
+      "region_height": null,
+      "scale": null,
+      "fast": false
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_wait_for_change",
+    "arguments": {},
+    "expected": {
+      "timeout_s": 5.0,
+      "poll_interval_s": 0.5
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_set_viewport",
+    "arguments": {},
+    "expected": {
+      "zoom": null,
+      "center_x": null,
+      "center_y": null,
+      "dx": null,
+      "dy": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_sync_to_workspace",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_apply_to_selection",
+    "arguments": {},
+    "expected": {
+      "approval_token": null,
+      "fill": null,
+      "stroke": null,
+      "stroke_width": null,
+      "opacity": null,
+      "dx": null,
+      "dy": null,
+      "scale": null,
+      "rotate": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_insert_svg",
+    "arguments": {},
+    "expected": {
+      "approval_token": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_set_selected_text",
+    "arguments": {},
+    "expected": {
+      "approval_token": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_edit_selection",
+    "arguments": {},
+    "expected": {
+      "approval_token": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_export_selection",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_diff_view",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_session_step",
+    "arguments": {},
+    "expected": {
+      "action": null,
+      "approval_token": null,
+      "fill": null,
+      "stroke": null,
+      "stroke_width": null,
+      "opacity": null,
+      "dx": null,
+      "dy": null,
+      "scale": null,
+      "rotate": null,
+      "svg_fragment": null,
+      "text": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_find_objects",
+    "arguments": {},
+    "expected": {
+      "label": null,
+      "layer": null,
+      "text": null,
+      "tag": null,
+      "id_prefix": null,
+      "limit": 100
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "live_preview_object",
+    "arguments": {},
+    "expected": {
+      "width": 512
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "svg_web_optimize",
+    "arguments": {},
+    "expected": {
+      "precision": 2,
+      "keep_ids": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "optimize_set",
+    "arguments": {},
+    "expected": {
+      "precision": 2,
+      "keep_ids": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "simplify_path",
+    "arguments": {},
+    "expected": {
+      "dry_run": true,
+      "approval_token": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "boolean_union",
+    "arguments": {},
+    "expected": {
+      "dry_run": true,
+      "approval_token": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "boolean_difference",
+    "arguments": {},
+    "expected": {
+      "dry_run": true,
+      "approval_token": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "combine_paths",
+    "arguments": {},
+    "expected": {
+      "dry_run": true,
+      "approval_token": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "break_apart",
+    "arguments": {},
+    "expected": {
+      "dry_run": true,
+      "approval_token": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "stroke_to_path",
+    "arguments": {},
+    "expected": {
+      "dry_run": true,
+      "approval_token": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "cleanup_paths",
+    "arguments": {},
+    "expected": {
+      "dry_run": true,
+      "approval_token": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "export_web_profile",
+    "arguments": {},
+    "expected": {
+      "width_px": 1024,
+      "widths": null,
+      "scales": null,
+      "out_dir": null,
+      "name_prefix": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "create_icon_set",
+    "arguments": {},
+    "expected": {
+      "sizes": null,
+      "out_dir": null,
+      "name_prefix": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "export_print_profile",
+    "arguments": {},
+    "expected": {
+      "out_dir": null,
+      "name_prefix": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "quality_report",
+    "arguments": {},
+    "expected": {
+      "editability": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "quality_report_set",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "save_document_as",
+    "arguments": {},
+    "expected": {
+      "overwrite": false,
+      "approval_token": null,
+      "root_id": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "create_snapshot",
+    "arguments": {},
+    "expected": {
+      "label": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "list_snapshots",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "restore_snapshot",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "prune_snapshots",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "set_fill",
+    "arguments": {},
+    "expected": {
+      "opacity": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "set_fill",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "object_ids": [
+        "r"
+      ],
+      "color": "red",
+      "opacity": "0.7"
+    },
+    "expected": {
+      "opacity": 0.7,
+      "doc_id": "d_a0e6eb5e",
+      "object_ids": [
+        "r"
+      ],
+      "color": "red"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "set_fill",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "object_ids": [
+        "r"
+      ],
+      "color": "red",
+      "opacity": "0.7"
+    },
+    "expected": {
+      "opacity": 0.7,
+      "doc_id": "d_48cecef8",
+      "object_ids": [
+        "r"
+      ],
+      "color": "red"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "set_stroke",
+    "arguments": {},
+    "expected": {
+      "color": null,
+      "width": null,
+      "opacity": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "set_opacity",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "set_opacity",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "object_ids": [
+        "r"
+      ],
+      "opacity": "0.5"
+    },
+    "expected": {
+      "doc_id": "d_a0e6eb5e",
+      "object_ids": [
+        "r"
+      ],
+      "opacity": 0.5
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "set_opacity",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "object_ids": [
+        "r"
+      ],
+      "opacity": "0.5"
+    },
+    "expected": {
+      "doc_id": "d_48cecef8",
+      "object_ids": [
+        "r"
+      ],
+      "opacity": 0.5
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "replace_color",
+    "arguments": {},
+    "expected": {
+      "scope_ids": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "apply_palette",
+    "arguments": {},
+    "expected": {
+      "scope_ids": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "replace_text",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "set_font",
+    "arguments": {},
+    "expected": {
+      "family": null,
+      "size": null,
+      "weight": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "duplicate_object",
+    "arguments": {},
+    "expected": {
+      "new_id": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "rename_object",
+    "arguments": {},
+    "expected": {
+      "new_id": null,
+      "label": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "move_object",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "move_object",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "object_id": "r",
+      "dx": "3.25",
+      "dy": "-2"
+    },
+    "expected": {
+      "doc_id": "d_a0e6eb5e",
+      "object_id": "r",
+      "dx": 3.25,
+      "dy": -2.0
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "move_object",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "object_id": "r",
+      "dx": "-1e-07",
+      "dy": "0"
+    },
+    "expected": {
+      "doc_id": "d_a0e6eb5e",
+      "object_id": "r",
+      "dx": -1e-07,
+      "dy": 0.0
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "move_object",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "object_id": "absent",
+      "dx": "0",
+      "dy": "0"
+    },
+    "expected": {
+      "doc_id": "d_a0e6eb5e",
+      "object_id": "absent",
+      "dx": 0.0,
+      "dy": 0.0
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "move_object",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "object_id": "r",
+      "dx": "3.25",
+      "dy": "-2"
+    },
+    "expected": {
+      "doc_id": "d_48cecef8",
+      "object_id": "r",
+      "dx": 3.25,
+      "dy": -2.0
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "move_object",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "object_id": "r",
+      "dx": "-1e-07",
+      "dy": "0"
+    },
+    "expected": {
+      "doc_id": "d_48cecef8",
+      "object_id": "r",
+      "dx": -1e-07,
+      "dy": 0.0
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "move_object",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "object_id": "absent",
+      "dx": "0",
+      "dy": "0"
+    },
+    "expected": {
+      "doc_id": "d_48cecef8",
+      "object_id": "absent",
+      "dx": 0.0,
+      "dy": 0.0
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "scale_object",
+    "arguments": {},
+    "expected": {
+      "sy": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "scale_object",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "object_id": "r",
+      "sx": "1.5"
+    },
+    "expected": {
+      "sy": null,
+      "doc_id": "d_a0e6eb5e",
+      "object_id": "r",
+      "sx": 1.5
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "scale_object",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "object_id": "r",
+      "sx": "0.8",
+      "sy": "1.2"
+    },
+    "expected": {
+      "sy": 1.2,
+      "doc_id": "d_a0e6eb5e",
+      "object_id": "r",
+      "sx": 0.8
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "scale_object",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "object_id": "r",
+      "sx": "0"
+    },
+    "expected": {
+      "sy": null,
+      "doc_id": "d_a0e6eb5e",
+      "object_id": "r",
+      "sx": 0.0
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "scale_object",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "object_id": "r",
+      "sx": "1",
+      "sy": "-1"
+    },
+    "expected": {
+      "sy": -1.0,
+      "doc_id": "d_a0e6eb5e",
+      "object_id": "r",
+      "sx": 1.0
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "scale_object",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "object_id": "r",
+      "sx": "1.5"
+    },
+    "expected": {
+      "sy": null,
+      "doc_id": "d_48cecef8",
+      "object_id": "r",
+      "sx": 1.5
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "scale_object",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "object_id": "r",
+      "sx": "0.8",
+      "sy": "1.2"
+    },
+    "expected": {
+      "sy": 1.2,
+      "doc_id": "d_48cecef8",
+      "object_id": "r",
+      "sx": 0.8
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "scale_object",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "object_id": "r",
+      "sx": "0"
+    },
+    "expected": {
+      "sy": null,
+      "doc_id": "d_48cecef8",
+      "object_id": "r",
+      "sx": 0.0
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "scale_object",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "object_id": "r",
+      "sx": "1",
+      "sy": "-1"
+    },
+    "expected": {
+      "sy": -1.0,
+      "doc_id": "d_48cecef8",
+      "object_id": "r",
+      "sx": 1.0
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "rotate_object",
+    "arguments": {},
+    "expected": {
+      "cx": null,
+      "cy": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "rotate_object",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "object_id": "r",
+      "degrees": "15.12345678"
+    },
+    "expected": {
+      "cx": null,
+      "cy": null,
+      "doc_id": "d_a0e6eb5e",
+      "object_id": "r",
+      "degrees": 15.12345678
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "rotate_object",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "object_id": "r",
+      "degrees": "-15",
+      "cx": "25",
+      "cy": "30"
+    },
+    "expected": {
+      "cx": 25.0,
+      "cy": 30.0,
+      "doc_id": "d_a0e6eb5e",
+      "object_id": "r",
+      "degrees": -15.0
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "rotate_object",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "object_id": "r",
+      "degrees": "5",
+      "cx": "1"
+    },
+    "expected": {
+      "cx": 1.0,
+      "cy": null,
+      "doc_id": "d_a0e6eb5e",
+      "object_id": "r",
+      "degrees": 5.0
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "rotate_object",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "object_id": "r",
+      "degrees": "15.12345678"
+    },
+    "expected": {
+      "cx": null,
+      "cy": null,
+      "doc_id": "d_48cecef8",
+      "object_id": "r",
+      "degrees": 15.12345678
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "rotate_object",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "object_id": "r",
+      "degrees": "-15",
+      "cx": "25",
+      "cy": "30"
+    },
+    "expected": {
+      "cx": 25.0,
+      "cy": 30.0,
+      "doc_id": "d_48cecef8",
+      "object_id": "r",
+      "degrees": -15.0
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "rotate_object",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "object_id": "r",
+      "degrees": "5",
+      "cx": "1"
+    },
+    "expected": {
+      "cx": 1.0,
+      "cy": null,
+      "doc_id": "d_48cecef8",
+      "object_id": "r",
+      "degrees": 5.0
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {},
+    "expected": {
+      "adjust_viewbox": false,
+      "bleed": null,
+      "bleed_color": "#ffffff"
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "width": "120px",
+      "height": "110px",
+      "adjust_viewbox": "YES"
+    },
+    "expected": {
+      "adjust_viewbox": true,
+      "bleed": null,
+      "bleed_color": "#ffffff",
+      "doc_id": "d_a0e6eb5e",
+      "width": "120px",
+      "height": "110px"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "width": "100%",
+      "height": "100%",
+      "adjust_viewbox": "YES"
+    },
+    "expected": {
+      "adjust_viewbox": true,
+      "bleed": null,
+      "bleed_color": "#ffffff",
+      "doc_id": "d_a0e6eb5e",
+      "width": "100%",
+      "height": "100%"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "width": "100",
+      "height": "100",
+      "bleed": "0",
+      "adjust_viewbox": "YES"
+    },
+    "expected": {
+      "adjust_viewbox": true,
+      "bleed": 0.0,
+      "bleed_color": "#ffffff",
+      "doc_id": "d_a0e6eb5e",
+      "width": "100",
+      "height": "100"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "width": "100",
+      "height": "100",
+      "bleed": "-1"
+    },
+    "expected": {
+      "adjust_viewbox": false,
+      "bleed": -1.0,
+      "bleed_color": "#ffffff",
+      "doc_id": "d_a0e6eb5e",
+      "width": "100",
+      "height": "100"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "width": "100",
+      "height": "100",
+      "bleed": "2",
+      "bleed_color": "red;stroke:none"
+    },
+    "expected": {
+      "adjust_viewbox": false,
+      "bleed": 2.0,
+      "bleed_color": "red;stroke:none",
+      "doc_id": "d_a0e6eb5e",
+      "width": "100",
+      "height": "100"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "width": "120px",
+      "height": "110px",
+      "bleed": "2",
+      "bleed_color": "#ABC"
+    },
+    "expected": {
+      "adjust_viewbox": false,
+      "bleed": 2.0,
+      "bleed_color": "#ABC",
+      "doc_id": "d_a0e6eb5e",
+      "width": "120px",
+      "height": "110px"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_a0e6eb5e",
+      "width": "120px",
+      "height": "110px",
+      "bleed": "1"
+    },
+    "expected": {
+      "adjust_viewbox": false,
+      "bleed": 1.0,
+      "bleed_color": "#ffffff",
+      "doc_id": "d_a0e6eb5e",
+      "width": "120px",
+      "height": "110px"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_e186759a",
+      "width": "100%",
+      "height": "50%",
+      "bleed": "2"
+    },
+    "expected": {
+      "adjust_viewbox": false,
+      "bleed": 2.0,
+      "bleed_color": "#ffffff",
+      "doc_id": "d_e186759a",
+      "width": "100%",
+      "height": "50%"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_c63312dc",
+      "width": "100%",
+      "height": "50%",
+      "bleed": "2"
+    },
+    "expected": {
+      "adjust_viewbox": false,
+      "bleed": 2.0,
+      "bleed_color": "#ffffff",
+      "doc_id": "d_c63312dc",
+      "width": "100%",
+      "height": "50%"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_23f20cc1",
+      "width": "100%",
+      "height": "50%",
+      "bleed": "2"
+    },
+    "expected": {
+      "adjust_viewbox": false,
+      "bleed": 2.0,
+      "bleed_color": "#ffffff",
+      "doc_id": "d_23f20cc1",
+      "width": "100%",
+      "height": "50%"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_83d771fc",
+      "width": "100%",
+      "height": "50%",
+      "bleed": "2"
+    },
+    "expected": {
+      "adjust_viewbox": false,
+      "bleed": 2.0,
+      "bleed_color": "#ffffff",
+      "doc_id": "d_83d771fc",
+      "width": "100%",
+      "height": "50%"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_b56169d3",
+      "width": "100%",
+      "height": "50%",
+      "bleed": "2"
+    },
+    "expected": {
+      "adjust_viewbox": false,
+      "bleed": 2.0,
+      "bleed_color": "#ffffff",
+      "doc_id": "d_b56169d3",
+      "width": "100%",
+      "height": "50%"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "width": "120px",
+      "height": "110px",
+      "adjust_viewbox": "YES"
+    },
+    "expected": {
+      "adjust_viewbox": true,
+      "bleed": null,
+      "bleed_color": "#ffffff",
+      "doc_id": "d_48cecef8",
+      "width": "120px",
+      "height": "110px"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "width": "100%",
+      "height": "100%",
+      "adjust_viewbox": "YES"
+    },
+    "expected": {
+      "adjust_viewbox": true,
+      "bleed": null,
+      "bleed_color": "#ffffff",
+      "doc_id": "d_48cecef8",
+      "width": "100%",
+      "height": "100%"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "width": "100",
+      "height": "100",
+      "bleed": "0",
+      "adjust_viewbox": "YES"
+    },
+    "expected": {
+      "adjust_viewbox": true,
+      "bleed": 0.0,
+      "bleed_color": "#ffffff",
+      "doc_id": "d_48cecef8",
+      "width": "100",
+      "height": "100"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "width": "100",
+      "height": "100",
+      "bleed": "-1"
+    },
+    "expected": {
+      "adjust_viewbox": false,
+      "bleed": -1.0,
+      "bleed_color": "#ffffff",
+      "doc_id": "d_48cecef8",
+      "width": "100",
+      "height": "100"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "width": "100",
+      "height": "100",
+      "bleed": "2",
+      "bleed_color": "red;stroke:none"
+    },
+    "expected": {
+      "adjust_viewbox": false,
+      "bleed": 2.0,
+      "bleed_color": "red;stroke:none",
+      "doc_id": "d_48cecef8",
+      "width": "100",
+      "height": "100"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "width": "120px",
+      "height": "110px",
+      "bleed": "2",
+      "bleed_color": "#ABC"
+    },
+    "expected": {
+      "adjust_viewbox": false,
+      "bleed": 2.0,
+      "bleed_color": "#ABC",
+      "doc_id": "d_48cecef8",
+      "width": "120px",
+      "height": "110px"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_48cecef8",
+      "width": "120px",
+      "height": "110px",
+      "bleed": "1"
+    },
+    "expected": {
+      "adjust_viewbox": false,
+      "bleed": 1.0,
+      "bleed_color": "#ffffff",
+      "doc_id": "d_48cecef8",
+      "width": "120px",
+      "height": "110px"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_34b211f2",
+      "width": "100%",
+      "height": "50%",
+      "bleed": "2"
+    },
+    "expected": {
+      "adjust_viewbox": false,
+      "bleed": 2.0,
+      "bleed_color": "#ffffff",
+      "doc_id": "d_34b211f2",
+      "width": "100%",
+      "height": "50%"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_f42228df",
+      "width": "100%",
+      "height": "50%",
+      "bleed": "2"
+    },
+    "expected": {
+      "adjust_viewbox": false,
+      "bleed": 2.0,
+      "bleed_color": "#ffffff",
+      "doc_id": "d_f42228df",
+      "width": "100%",
+      "height": "50%"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_6341924c",
+      "width": "100%",
+      "height": "50%",
+      "bleed": "2"
+    },
+    "expected": {
+      "adjust_viewbox": false,
+      "bleed": 2.0,
+      "bleed_color": "#ffffff",
+      "doc_id": "d_6341924c",
+      "width": "100%",
+      "height": "50%"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_3bf56754",
+      "width": "100%",
+      "height": "50%",
+      "bleed": "2"
+    },
+    "expected": {
+      "adjust_viewbox": false,
+      "bleed": 2.0,
+      "bleed_color": "#ffffff",
+      "doc_id": "d_3bf56754",
+      "width": "100%",
+      "height": "50%"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "resize_canvas",
+    "arguments": {
+      "doc_id": "d_60bbe866",
+      "width": "100%",
+      "height": "50%",
+      "bleed": "2"
+    },
+    "expected": {
+      "adjust_viewbox": false,
+      "bleed": 2.0,
+      "bleed_color": "#ffffff",
+      "doc_id": "d_60bbe866",
+      "width": "100%",
+      "height": "50%"
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "normalize_viewbox",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "fit_to_content",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "tile",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {},
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": true
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_e34a7eed",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      }
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": true,
+      "doc_id": "d_e34a7eed",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_90b1fe3c",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      },
+      "dry_run": "off"
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": false,
+      "doc_id": "d_90b1fe3c",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_85dec5c2",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      },
+      "mode": "copies",
+      "dry_run": "off"
+    },
+    "expected": {
+      "mode": "copies",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": false,
+      "doc_id": "d_85dec5c2",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_d54c0a5f",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      },
+      "mode": "copies"
+    },
+    "expected": {
+      "mode": "copies",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": true,
+      "doc_id": "d_d54c0a5f",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_172473d2",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      },
+      "orientation": "tangent",
+      "dry_run": "off"
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "tangent",
+      "variation": null,
+      "anchor": null,
+      "dry_run": false,
+      "doc_id": "d_172473d2",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_0a6e050b",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      },
+      "anchor": {
+        "x": "4",
+        "y": "3"
+      },
+      "dry_run": "off"
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": {
+        "x": 4.0,
+        "y": 3.0
+      },
+      "dry_run": false,
+      "doc_id": "d_0a6e050b",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_9c7fcfee",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "rectangle",
+        "x": "5",
+        "y": "5",
+        "width": "80",
+        "height": "70",
+        "count": "5.0"
+      },
+      "dry_run": "off"
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": false,
+      "doc_id": "d_9c7fcfee",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "rectangle",
+        "x": 5.0,
+        "y": 5.0,
+        "width": 80.0,
+        "height": 70.0,
+        "count": 5,
+        "columns": null,
+        "spacing_x": null,
+        "spacing_y": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_486fbb05",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      },
+      "variation": {
+        "seed": "18446744073709551739.0",
+        "offset": "2",
+        "scale": "0.1",
+        "rotation_degrees": "15"
+      },
+      "dry_run": "off"
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": {
+        "seed": 18446744073709551739,
+        "offset": 2.0,
+        "scale": 0.1,
+        "rotation_degrees": 15.0
+      },
+      "anchor": null,
+      "dry_run": false,
+      "doc_id": "d_486fbb05",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_574077fc",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      },
+      "label": "Named \u0394 objects",
+      "dry_run": "off"
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Named \u0394 objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": false,
+      "doc_id": "d_574077fc",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_435c3acc",
+      "object_id": "missing",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      }
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": true,
+      "doc_id": "d_435c3acc",
+      "object_id": "missing",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_0945716e",
+      "object_id": "source",
+      "group_id": "parent",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      }
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": true,
+      "doc_id": "d_0945716e",
+      "object_id": "source",
+      "group_id": "parent",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_1232d523",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      },
+      "dry_run": "off"
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": false,
+      "doc_id": "d_1232d523",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_d68eb1c6",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      }
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": true,
+      "doc_id": "d_d68eb1c6",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_1721ac2d",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      }
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": true,
+      "doc_id": "d_1721ac2d",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_36a0f9f1",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      }
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": true,
+      "doc_id": "d_36a0f9f1",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_847fdafa",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      }
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": true,
+      "doc_id": "d_847fdafa",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_580e9058",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      }
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": true,
+      "doc_id": "d_580e9058",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_6cbc0e2c",
+      "object_id": "source",
+      "group_id": "bad space",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      }
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": true,
+      "doc_id": "d_6cbc0e2c",
+      "object_id": "source",
+      "group_id": "bad space",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_5927dd71",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      }
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": true,
+      "doc_id": "d_5927dd71",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_5246d68b",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      },
+      "dry_run": "off"
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": false,
+      "doc_id": "d_5246d68b",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_fe4bdc6b",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      },
+      "mode": "copies",
+      "dry_run": "off"
+    },
+    "expected": {
+      "mode": "copies",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": false,
+      "doc_id": "d_fe4bdc6b",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_95b3de98",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      },
+      "mode": "copies"
+    },
+    "expected": {
+      "mode": "copies",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": true,
+      "doc_id": "d_95b3de98",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_98347032",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      },
+      "orientation": "tangent",
+      "dry_run": "off"
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "tangent",
+      "variation": null,
+      "anchor": null,
+      "dry_run": false,
+      "doc_id": "d_98347032",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_bf6db475",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      },
+      "anchor": {
+        "x": "4",
+        "y": "3"
+      },
+      "dry_run": "off"
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": {
+        "x": 4.0,
+        "y": 3.0
+      },
+      "dry_run": false,
+      "doc_id": "d_bf6db475",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_48cf21e3",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "rectangle",
+        "x": "5",
+        "y": "5",
+        "width": "80",
+        "height": "70",
+        "count": "5.0"
+      },
+      "dry_run": "off"
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": false,
+      "doc_id": "d_48cf21e3",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "rectangle",
+        "x": 5.0,
+        "y": 5.0,
+        "width": 80.0,
+        "height": 70.0,
+        "count": 5,
+        "columns": null,
+        "spacing_x": null,
+        "spacing_y": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_ed20de76",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      },
+      "variation": {
+        "seed": "18446744073709551739.0",
+        "offset": "2",
+        "scale": "0.1",
+        "rotation_degrees": "15"
+      },
+      "dry_run": "off"
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": {
+        "seed": 18446744073709551739,
+        "offset": 2.0,
+        "scale": 0.1,
+        "rotation_degrees": 15.0
+      },
+      "anchor": null,
+      "dry_run": false,
+      "doc_id": "d_ed20de76",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_418a2318",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      },
+      "label": "Named \u0394 objects",
+      "dry_run": "off"
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Named \u0394 objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": false,
+      "doc_id": "d_418a2318",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_7541f10b",
+      "object_id": "missing",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      }
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": true,
+      "doc_id": "d_7541f10b",
+      "object_id": "missing",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_ad8cc0ef",
+      "object_id": "source",
+      "group_id": "parent",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      }
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": true,
+      "doc_id": "d_ad8cc0ef",
+      "object_id": "source",
+      "group_id": "parent",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_d29d56ae",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      },
+      "dry_run": "off"
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": false,
+      "doc_id": "d_d29d56ae",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_a11dfb59",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      }
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": true,
+      "doc_id": "d_a11dfb59",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_e21e5aa5",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      }
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": true,
+      "doc_id": "d_e21e5aa5",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_9fe7e4e4",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      }
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": true,
+      "doc_id": "d_9fe7e4e4",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_c98bdf9e",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      }
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": true,
+      "doc_id": "d_c98bdf9e",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_35f96b13",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      }
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": true,
+      "doc_id": "d_35f96b13",
+      "object_id": "source",
+      "group_id": "repeated",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "repeat_objects",
+    "arguments": {
+      "doc_id": "d_63aa5b35",
+      "object_id": "source",
+      "group_id": "bad space",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": "10",
+            "y": "10"
+          },
+          {
+            "x": "80",
+            "y": "70"
+          }
+        ],
+        "count": "3.0"
+      }
+    },
+    "expected": {
+      "mode": "linked",
+      "label": "Repeated objects",
+      "orientation": "fixed",
+      "variation": null,
+      "anchor": null,
+      "dry_run": true,
+      "doc_id": "d_63aa5b35",
+      "object_id": "source",
+      "group_id": "bad space",
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 10.0,
+            "y": 10.0
+          },
+          {
+            "x": 80.0,
+            "y": 70.0
+          }
+        ],
+        "count": 3,
+        "spacing": null
+      }
+    },
+    "scope": "validated supplied fields"
+  },
+  {
+    "name": "transform_objects",
+    "arguments": {},
+    "expected": {
+      "dry_run": true,
+      "max_matches": 64,
+      "approval_token": null
+    },
+    "scope": "root defaults only; required fields deliberately absent"
+  },
+  {
+    "name": "validate_document",
+    "arguments": {},
+    "expected": {},
+    "scope": "root defaults only; required fields deliberately absent"
+  }
+]

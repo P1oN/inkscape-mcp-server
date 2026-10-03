@@ -1,0 +1,12 @@
+{
+  "observations": 60,
+  "rust_binary_sha256": "67fa96601d86d244c3f824f322081848ceb0bfb2844be01f0be1f01171fab5b7",
+  "normalization": "validated live path timestamp/nonce bindings only; semantic JSON",
+  "differences": [],
+  "passed": true,
+  "coercion_harness_sha256": "960b66e84f555175a61e7f9e4bef302d2a4a5d4a45d65a89f99325aa2c530de2",
+  "coercion_requests": 48,
+  "ignored_model_extras": false,
+  "coercion_scope": "Schema-directed numeric strings, integer .0 tails and boolean strings",
+  "coercion_coverage": true
+}

@@ -1,0 +1,979 @@
+{
+  "passed": true,
+  "scope": "Diagnostic headless handler partition only",
+  "implementation": "rust",
+  "Python_context_bound_worker_threads": false,
+  "observations": 50,
+  "rows": [
+    {
+      "run": 0,
+      "label": "open-small",
+      "tool": "open_document",
+      "handler_ns": 18137000,
+      "roundtrip_ns": 31946917,
+      "outside_handler_mixed_ns": 13809917,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 376000,
+        "directory_sync": 3041000,
+        "file_sync": 12425000,
+        "inkscape_process": 0,
+        "logical_files": 2295000,
+        "other_process": 0
+      },
+      "nested_span_count": 116
+    },
+    {
+      "run": 0,
+      "label": "inspect-small",
+      "tool": "inspect_document",
+      "handler_ns": 2279000,
+      "roundtrip_ns": 11096084,
+      "outside_handler_mixed_ns": 8817084,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 1320000,
+        "directory_sync": 0,
+        "file_sync": 0,
+        "inkscape_process": 0,
+        "logical_files": 959000,
+        "other_process": 0
+      },
+      "nested_span_count": 105
+    },
+    {
+      "run": 0,
+      "label": "no-op",
+      "tool": "set_fill",
+      "handler_ns": 824000,
+      "roundtrip_ns": 4100250,
+      "outside_handler_mixed_ns": 3276250,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 479000,
+        "directory_sync": 0,
+        "file_sync": 0,
+        "inkscape_process": 0,
+        "logical_files": 345000,
+        "other_process": 0
+      },
+      "nested_span_count": 38
+    },
+    {
+      "run": 0,
+      "label": "single-edit",
+      "tool": "set_fill",
+      "handler_ns": 791923000,
+      "roundtrip_ns": 813947000,
+      "outside_handler_mixed_ns": 22024000,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 1638000,
+        "directory_sync": 16578000,
+        "file_sync": 41401000,
+        "inkscape_process": 727569000,
+        "logical_files": 4737000,
+        "other_process": 0
+      },
+      "nested_span_count": 370
+    },
+    {
+      "run": 0,
+      "label": "atomic-batch",
+      "tool": "apply_edits",
+      "handler_ns": 668121000,
+      "roundtrip_ns": 691093417,
+      "outside_handler_mixed_ns": 22972417,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 1927000,
+        "directory_sync": 16894000,
+        "file_sync": 37857000,
+        "inkscape_process": 606215000,
+        "logical_files": 5228000,
+        "other_process": 0
+      },
+      "nested_span_count": 384
+    },
+    {
+      "run": 0,
+      "label": "render",
+      "tool": "render_preview",
+      "handler_ns": 301479000,
+      "roundtrip_ns": 307678666,
+      "outside_handler_mixed_ns": 6199666,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 809000,
+        "directory_sync": 0,
+        "file_sync": 7789000,
+        "inkscape_process": 291840000,
+        "logical_files": 1041000,
+        "other_process": 0
+      },
+      "nested_span_count": 102
+    },
+    {
+      "run": 0,
+      "label": "export",
+      "tool": "export_document",
+      "handler_ns": 296600000,
+      "roundtrip_ns": 303299959,
+      "outside_handler_mixed_ns": 6699959,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 538000,
+        "directory_sync": 0,
+        "file_sync": 7658000,
+        "inkscape_process": 287290000,
+        "logical_files": 1114000,
+        "other_process": 0
+      },
+      "nested_span_count": 112
+    },
+    {
+      "run": 0,
+      "label": "save",
+      "tool": "save_document_as",
+      "handler_ns": 20525000,
+      "roundtrip_ns": 33079292,
+      "outside_handler_mixed_ns": 12554292,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 347000,
+        "directory_sync": 7830000,
+        "file_sync": 10450000,
+        "inkscape_process": 0,
+        "logical_files": 1898000,
+        "other_process": 0
+      },
+      "nested_span_count": 215
+    },
+    {
+      "run": 0,
+      "label": "open-100",
+      "tool": "open_document",
+      "handler_ns": 17275000,
+      "roundtrip_ns": 24378667,
+      "outside_handler_mixed_ns": 7103667,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 119000,
+        "directory_sync": 3810000,
+        "file_sync": 11841000,
+        "inkscape_process": 0,
+        "logical_files": 1505000,
+        "other_process": 0
+      },
+      "nested_span_count": 116
+    },
+    {
+      "run": 0,
+      "label": "inspect-100",
+      "tool": "inspect_document",
+      "handler_ns": 2166000,
+      "roundtrip_ns": 8638750,
+      "outside_handler_mixed_ns": 6472750,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 1578000,
+        "directory_sync": 0,
+        "file_sync": 0,
+        "inkscape_process": 0,
+        "logical_files": 588000,
+        "other_process": 0
+      },
+      "nested_span_count": 105
+    },
+    {
+      "run": 1,
+      "label": "open-small",
+      "tool": "open_document",
+      "handler_ns": 16892000,
+      "roundtrip_ns": 24633125,
+      "outside_handler_mixed_ns": 7741125,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 109000,
+        "directory_sync": 3827000,
+        "file_sync": 11278000,
+        "inkscape_process": 0,
+        "logical_files": 1678000,
+        "other_process": 0
+      },
+      "nested_span_count": 116
+    },
+    {
+      "run": 1,
+      "label": "inspect-small",
+      "tool": "inspect_document",
+      "handler_ns": 1082000,
+      "roundtrip_ns": 7497708,
+      "outside_handler_mixed_ns": 6415708,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 512000,
+        "directory_sync": 0,
+        "file_sync": 0,
+        "inkscape_process": 0,
+        "logical_files": 570000,
+        "other_process": 0
+      },
+      "nested_span_count": 105
+    },
+    {
+      "run": 1,
+      "label": "no-op",
+      "tool": "set_fill",
+      "handler_ns": 464000,
+      "roundtrip_ns": 2981042,
+      "outside_handler_mixed_ns": 2517042,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 219000,
+        "directory_sync": 0,
+        "file_sync": 0,
+        "inkscape_process": 0,
+        "logical_files": 245000,
+        "other_process": 0
+      },
+      "nested_span_count": 38
+    },
+    {
+      "run": 1,
+      "label": "single-edit",
+      "tool": "set_fill",
+      "handler_ns": 783191000,
+      "roundtrip_ns": 805011750,
+      "outside_handler_mixed_ns": 21820750,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 1544000,
+        "directory_sync": 18279000,
+        "file_sync": 40423000,
+        "inkscape_process": 718281000,
+        "logical_files": 4664000,
+        "other_process": 0
+      },
+      "nested_span_count": 370
+    },
+    {
+      "run": 1,
+      "label": "atomic-batch",
+      "tool": "apply_edits",
+      "handler_ns": 668089000,
+      "roundtrip_ns": 693435875,
+      "outside_handler_mixed_ns": 25346875,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 2052000,
+        "directory_sync": 18707000,
+        "file_sync": 42049000,
+        "inkscape_process": 599384000,
+        "logical_files": 5897000,
+        "other_process": 0
+      },
+      "nested_span_count": 384
+    },
+    {
+      "run": 1,
+      "label": "render",
+      "tool": "render_preview",
+      "handler_ns": 321237000,
+      "roundtrip_ns": 327430875,
+      "outside_handler_mixed_ns": 6193875,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 609000,
+        "directory_sync": 0,
+        "file_sync": 8426000,
+        "inkscape_process": 311140000,
+        "logical_files": 1062000,
+        "other_process": 0
+      },
+      "nested_span_count": 102
+    },
+    {
+      "run": 1,
+      "label": "export",
+      "tool": "export_document",
+      "handler_ns": 289173000,
+      "roundtrip_ns": 296131916,
+      "outside_handler_mixed_ns": 6958916,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 750000,
+        "directory_sync": 0,
+        "file_sync": 8368000,
+        "inkscape_process": 278794000,
+        "logical_files": 1261000,
+        "other_process": 0
+      },
+      "nested_span_count": 112
+    },
+    {
+      "run": 1,
+      "label": "save",
+      "tool": "save_document_as",
+      "handler_ns": 18496000,
+      "roundtrip_ns": 31336167,
+      "outside_handler_mixed_ns": 12840167,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 343000,
+        "directory_sync": 6592000,
+        "file_sync": 9409000,
+        "inkscape_process": 0,
+        "logical_files": 2152000,
+        "other_process": 0
+      },
+      "nested_span_count": 215
+    },
+    {
+      "run": 1,
+      "label": "open-100",
+      "tool": "open_document",
+      "handler_ns": 14945000,
+      "roundtrip_ns": 21843500,
+      "outside_handler_mixed_ns": 6898500,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 115000,
+        "directory_sync": 2779000,
+        "file_sync": 10559000,
+        "inkscape_process": 0,
+        "logical_files": 1492000,
+        "other_process": 0
+      },
+      "nested_span_count": 116
+    },
+    {
+      "run": 1,
+      "label": "inspect-100",
+      "tool": "inspect_document",
+      "handler_ns": 2159000,
+      "roundtrip_ns": 8841000,
+      "outside_handler_mixed_ns": 6682000,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 1565000,
+        "directory_sync": 0,
+        "file_sync": 0,
+        "inkscape_process": 0,
+        "logical_files": 594000,
+        "other_process": 0
+      },
+      "nested_span_count": 105
+    },
+    {
+      "run": 2,
+      "label": "open-small",
+      "tool": "open_document",
+      "handler_ns": 21583000,
+      "roundtrip_ns": 29194625,
+      "outside_handler_mixed_ns": 7611625,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 115000,
+        "directory_sync": 4747000,
+        "file_sync": 14938000,
+        "inkscape_process": 0,
+        "logical_files": 1783000,
+        "other_process": 0
+      },
+      "nested_span_count": 116
+    },
+    {
+      "run": 2,
+      "label": "inspect-small",
+      "tool": "inspect_document",
+      "handler_ns": 1182000,
+      "roundtrip_ns": 7356625,
+      "outside_handler_mixed_ns": 6174625,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 555000,
+        "directory_sync": 0,
+        "file_sync": 0,
+        "inkscape_process": 0,
+        "logical_files": 627000,
+        "other_process": 0
+      },
+      "nested_span_count": 105
+    },
+    {
+      "run": 2,
+      "label": "no-op",
+      "tool": "set_fill",
+      "handler_ns": 494000,
+      "roundtrip_ns": 2727875,
+      "outside_handler_mixed_ns": 2233875,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 240000,
+        "directory_sync": 0,
+        "file_sync": 0,
+        "inkscape_process": 0,
+        "logical_files": 254000,
+        "other_process": 0
+      },
+      "nested_span_count": 38
+    },
+    {
+      "run": 2,
+      "label": "single-edit",
+      "tool": "set_fill",
+      "handler_ns": 818297000,
+      "roundtrip_ns": 840460375,
+      "outside_handler_mixed_ns": 22163375,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 1475000,
+        "directory_sync": 19054000,
+        "file_sync": 42483000,
+        "inkscape_process": 750204000,
+        "logical_files": 5081000,
+        "other_process": 0
+      },
+      "nested_span_count": 370
+    },
+    {
+      "run": 2,
+      "label": "atomic-batch",
+      "tool": "apply_edits",
+      "handler_ns": 643373000,
+      "roundtrip_ns": 666475250,
+      "outside_handler_mixed_ns": 23102250,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 1771000,
+        "directory_sync": 16162000,
+        "file_sync": 37384000,
+        "inkscape_process": 583148000,
+        "logical_files": 4908000,
+        "other_process": 0
+      },
+      "nested_span_count": 384
+    },
+    {
+      "run": 2,
+      "label": "render",
+      "tool": "render_preview",
+      "handler_ns": 298292000,
+      "roundtrip_ns": 304639125,
+      "outside_handler_mixed_ns": 6347125,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 527000,
+        "directory_sync": 0,
+        "file_sync": 7753000,
+        "inkscape_process": 288988000,
+        "logical_files": 1024000,
+        "other_process": 0
+      },
+      "nested_span_count": 102
+    },
+    {
+      "run": 2,
+      "label": "export",
+      "tool": "export_document",
+      "handler_ns": 315864000,
+      "roundtrip_ns": 323043166,
+      "outside_handler_mixed_ns": 7179166,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 747000,
+        "directory_sync": 0,
+        "file_sync": 7127000,
+        "inkscape_process": 306649000,
+        "logical_files": 1341000,
+        "other_process": 0
+      },
+      "nested_span_count": 112
+    },
+    {
+      "run": 2,
+      "label": "save",
+      "tool": "save_document_as",
+      "handler_ns": 20222000,
+      "roundtrip_ns": 33023833,
+      "outside_handler_mixed_ns": 12801833,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 315000,
+        "directory_sync": 6704000,
+        "file_sync": 11124000,
+        "inkscape_process": 0,
+        "logical_files": 2079000,
+        "other_process": 0
+      },
+      "nested_span_count": 215
+    },
+    {
+      "run": 2,
+      "label": "open-100",
+      "tool": "open_document",
+      "handler_ns": 16965000,
+      "roundtrip_ns": 23952333,
+      "outside_handler_mixed_ns": 6987333,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 124000,
+        "directory_sync": 3741000,
+        "file_sync": 11556000,
+        "inkscape_process": 0,
+        "logical_files": 1544000,
+        "other_process": 0
+      },
+      "nested_span_count": 116
+    },
+    {
+      "run": 2,
+      "label": "inspect-100",
+      "tool": "inspect_document",
+      "handler_ns": 2212000,
+      "roundtrip_ns": 9105583,
+      "outside_handler_mixed_ns": 6893583,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 1587000,
+        "directory_sync": 0,
+        "file_sync": 0,
+        "inkscape_process": 0,
+        "logical_files": 625000,
+        "other_process": 0
+      },
+      "nested_span_count": 105
+    },
+    {
+      "run": 3,
+      "label": "open-small",
+      "tool": "open_document",
+      "handler_ns": 23337000,
+      "roundtrip_ns": 34228833,
+      "outside_handler_mixed_ns": 10891833,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 121000,
+        "directory_sync": 5950000,
+        "file_sync": 15576000,
+        "inkscape_process": 0,
+        "logical_files": 1690000,
+        "other_process": 0
+      },
+      "nested_span_count": 116
+    },
+    {
+      "run": 3,
+      "label": "inspect-small",
+      "tool": "inspect_document",
+      "handler_ns": 1165000,
+      "roundtrip_ns": 10203917,
+      "outside_handler_mixed_ns": 9038917,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 528000,
+        "directory_sync": 0,
+        "file_sync": 0,
+        "inkscape_process": 0,
+        "logical_files": 637000,
+        "other_process": 0
+      },
+      "nested_span_count": 105
+    },
+    {
+      "run": 3,
+      "label": "no-op",
+      "tool": "set_fill",
+      "handler_ns": 532000,
+      "roundtrip_ns": 3750292,
+      "outside_handler_mixed_ns": 3218292,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 265000,
+        "directory_sync": 0,
+        "file_sync": 0,
+        "inkscape_process": 0,
+        "logical_files": 267000,
+        "other_process": 0
+      },
+      "nested_span_count": 38
+    },
+    {
+      "run": 3,
+      "label": "single-edit",
+      "tool": "set_fill",
+      "handler_ns": 781835000,
+      "roundtrip_ns": 804285084,
+      "outside_handler_mixed_ns": 22450084,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 1371000,
+        "directory_sync": 18198000,
+        "file_sync": 42689000,
+        "inkscape_process": 714876000,
+        "logical_files": 4701000,
+        "other_process": 0
+      },
+      "nested_span_count": 370
+    },
+    {
+      "run": 3,
+      "label": "atomic-batch",
+      "tool": "apply_edits",
+      "handler_ns": 640967000,
+      "roundtrip_ns": 663786833,
+      "outside_handler_mixed_ns": 22819833,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 1512000,
+        "directory_sync": 18153000,
+        "file_sync": 39698000,
+        "inkscape_process": 576846000,
+        "logical_files": 4758000,
+        "other_process": 0
+      },
+      "nested_span_count": 384
+    },
+    {
+      "run": 3,
+      "label": "render",
+      "tool": "render_preview",
+      "handler_ns": 296429000,
+      "roundtrip_ns": 302781458,
+      "outside_handler_mixed_ns": 6352458,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 560000,
+        "directory_sync": 0,
+        "file_sync": 7586000,
+        "inkscape_process": 287275000,
+        "logical_files": 1008000,
+        "other_process": 0
+      },
+      "nested_span_count": 102
+    },
+    {
+      "run": 3,
+      "label": "export",
+      "tool": "export_document",
+      "handler_ns": 301200000,
+      "roundtrip_ns": 308324542,
+      "outside_handler_mixed_ns": 7124542,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 509000,
+        "directory_sync": 0,
+        "file_sync": 7555000,
+        "inkscape_process": 291773000,
+        "logical_files": 1363000,
+        "other_process": 0
+      },
+      "nested_span_count": 112
+    },
+    {
+      "run": 3,
+      "label": "save",
+      "tool": "save_document_as",
+      "handler_ns": 19512000,
+      "roundtrip_ns": 32827750,
+      "outside_handler_mixed_ns": 13315750,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 389000,
+        "directory_sync": 6779000,
+        "file_sync": 10286000,
+        "inkscape_process": 0,
+        "logical_files": 2058000,
+        "other_process": 0
+      },
+      "nested_span_count": 215
+    },
+    {
+      "run": 3,
+      "label": "open-100",
+      "tool": "open_document",
+      "handler_ns": 15307000,
+      "roundtrip_ns": 22473500,
+      "outside_handler_mixed_ns": 7166500,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 129000,
+        "directory_sync": 2697000,
+        "file_sync": 10842000,
+        "inkscape_process": 0,
+        "logical_files": 1639000,
+        "other_process": 0
+      },
+      "nested_span_count": 116
+    },
+    {
+      "run": 3,
+      "label": "inspect-100",
+      "tool": "inspect_document",
+      "handler_ns": 2305000,
+      "roundtrip_ns": 9183625,
+      "outside_handler_mixed_ns": 6878625,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 1554000,
+        "directory_sync": 0,
+        "file_sync": 0,
+        "inkscape_process": 0,
+        "logical_files": 751000,
+        "other_process": 0
+      },
+      "nested_span_count": 105
+    },
+    {
+      "run": 4,
+      "label": "open-small",
+      "tool": "open_document",
+      "handler_ns": 19103000,
+      "roundtrip_ns": 26780292,
+      "outside_handler_mixed_ns": 7677292,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 110000,
+        "directory_sync": 2909000,
+        "file_sync": 12380000,
+        "inkscape_process": 0,
+        "logical_files": 3704000,
+        "other_process": 0
+      },
+      "nested_span_count": 116
+    },
+    {
+      "run": 4,
+      "label": "inspect-small",
+      "tool": "inspect_document",
+      "handler_ns": 1232000,
+      "roundtrip_ns": 7602834,
+      "outside_handler_mixed_ns": 6370834,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 611000,
+        "directory_sync": 0,
+        "file_sync": 0,
+        "inkscape_process": 0,
+        "logical_files": 621000,
+        "other_process": 0
+      },
+      "nested_span_count": 105
+    },
+    {
+      "run": 4,
+      "label": "no-op",
+      "tool": "set_fill",
+      "handler_ns": 510000,
+      "roundtrip_ns": 2872625,
+      "outside_handler_mixed_ns": 2362625,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 265000,
+        "directory_sync": 0,
+        "file_sync": 0,
+        "inkscape_process": 0,
+        "logical_files": 245000,
+        "other_process": 0
+      },
+      "nested_span_count": 38
+    },
+    {
+      "run": 4,
+      "label": "single-edit",
+      "tool": "set_fill",
+      "handler_ns": 794787000,
+      "roundtrip_ns": 816625833,
+      "outside_handler_mixed_ns": 21838833,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 1501000,
+        "directory_sync": 18171000,
+        "file_sync": 40386000,
+        "inkscape_process": 730172000,
+        "logical_files": 4557000,
+        "other_process": 0
+      },
+      "nested_span_count": 370
+    },
+    {
+      "run": 4,
+      "label": "atomic-batch",
+      "tool": "apply_edits",
+      "handler_ns": 634672000,
+      "roundtrip_ns": 656767583,
+      "outside_handler_mixed_ns": 22095583,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 1805000,
+        "directory_sync": 18023000,
+        "file_sync": 41693000,
+        "inkscape_process": 568556000,
+        "logical_files": 4595000,
+        "other_process": 0
+      },
+      "nested_span_count": 384
+    },
+    {
+      "run": 4,
+      "label": "render",
+      "tool": "render_preview",
+      "handler_ns": 283344000,
+      "roundtrip_ns": 289480125,
+      "outside_handler_mixed_ns": 6136125,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 484000,
+        "directory_sync": 0,
+        "file_sync": 6698000,
+        "inkscape_process": 275300000,
+        "logical_files": 862000,
+        "other_process": 0
+      },
+      "nested_span_count": 102
+    },
+    {
+      "run": 4,
+      "label": "export",
+      "tool": "export_document",
+      "handler_ns": 301245000,
+      "roundtrip_ns": 308116750,
+      "outside_handler_mixed_ns": 6871750,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 758000,
+        "directory_sync": 0,
+        "file_sync": 8336000,
+        "inkscape_process": 291113000,
+        "logical_files": 1038000,
+        "other_process": 0
+      },
+      "nested_span_count": 112
+    },
+    {
+      "run": 4,
+      "label": "save",
+      "tool": "save_document_as",
+      "handler_ns": 20595000,
+      "roundtrip_ns": 33421750,
+      "outside_handler_mixed_ns": 12826750,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 393000,
+        "directory_sync": 7554000,
+        "file_sync": 10590000,
+        "inkscape_process": 0,
+        "logical_files": 2058000,
+        "other_process": 0
+      },
+      "nested_span_count": 215
+    },
+    {
+      "run": 4,
+      "label": "open-100",
+      "tool": "open_document",
+      "handler_ns": 17828000,
+      "roundtrip_ns": 25027834,
+      "outside_handler_mixed_ns": 7199834,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 127000,
+        "directory_sync": 3767000,
+        "file_sync": 12212000,
+        "inkscape_process": 0,
+        "logical_files": 1722000,
+        "other_process": 0
+      },
+      "nested_span_count": 116
+    },
+    {
+      "run": 4,
+      "label": "inspect-100",
+      "tool": "inspect_document",
+      "handler_ns": 2176000,
+      "roundtrip_ns": 9092541,
+      "outside_handler_mixed_ns": 6916541,
+      "exclusive_handler_partition_ns": {
+        "handler_remainder": 1547000,
+        "directory_sync": 0,
+        "file_sync": 0,
+        "inkscape_process": 0,
+        "logical_files": 629000,
+        "other_process": 0
+      },
+      "nested_span_count": 105
+    }
+  ],
+  "medians": {
+    "open-small": {
+      "roundtrip_ms": 29.194625,
+      "outside_handler_mixed_ms": 7.741125,
+      "handler_remainder_ms": 0.115,
+      "directory_sync_ms": 3.827,
+      "file_sync_ms": 12.425,
+      "inkscape_process_ms": 0.0,
+      "logical_files_ms": 1.783,
+      "other_process_ms": 0.0
+    },
+    "inspect-small": {
+      "roundtrip_ms": 7.602834,
+      "outside_handler_mixed_ms": 6.415708,
+      "handler_remainder_ms": 0.555,
+      "directory_sync_ms": 0.0,
+      "file_sync_ms": 0.0,
+      "inkscape_process_ms": 0.0,
+      "logical_files_ms": 0.627,
+      "other_process_ms": 0.0
+    },
+    "no-op": {
+      "roundtrip_ms": 2.981042,
+      "outside_handler_mixed_ms": 2.517042,
+      "handler_remainder_ms": 0.265,
+      "directory_sync_ms": 0.0,
+      "file_sync_ms": 0.0,
+      "inkscape_process_ms": 0.0,
+      "logical_files_ms": 0.254,
+      "other_process_ms": 0.0
+    },
+    "single-edit": {
+      "roundtrip_ms": 813.947,
+      "outside_handler_mixed_ms": 22.024,
+      "handler_remainder_ms": 1.501,
+      "directory_sync_ms": 18.198,
+      "file_sync_ms": 41.401,
+      "inkscape_process_ms": 727.569,
+      "logical_files_ms": 4.701,
+      "other_process_ms": 0.0
+    },
+    "atomic-batch": {
+      "roundtrip_ms": 666.47525,
+      "outside_handler_mixed_ms": 22.972417,
+      "handler_remainder_ms": 1.805,
+      "directory_sync_ms": 18.023,
+      "file_sync_ms": 39.698,
+      "inkscape_process_ms": 583.148,
+      "logical_files_ms": 4.908,
+      "other_process_ms": 0.0
+    },
+    "render": {
+      "roundtrip_ms": 304.639125,
+      "outside_handler_mixed_ms": 6.199666,
+      "handler_remainder_ms": 0.56,
+      "directory_sync_ms": 0.0,
+      "file_sync_ms": 7.753,
+      "inkscape_process_ms": 288.988,
+      "logical_files_ms": 1.024,
+      "other_process_ms": 0.0
+    },
+    "export": {
+      "roundtrip_ms": 308.11675,
+      "outside_handler_mixed_ms": 6.958916,
+      "handler_remainder_ms": 0.747,
+      "directory_sync_ms": 0.0,
+      "file_sync_ms": 7.658,
+      "inkscape_process_ms": 291.113,
+      "logical_files_ms": 1.261,
+      "other_process_ms": 0.0
+    },
+    "save": {
+      "roundtrip_ms": 33.023833,
+      "outside_handler_mixed_ms": 12.82675,
+      "handler_remainder_ms": 0.347,
+      "directory_sync_ms": 6.779,
+      "file_sync_ms": 10.45,
+      "inkscape_process_ms": 0.0,
+      "logical_files_ms": 2.058,
+      "other_process_ms": 0.0
+    },
+    "open-100": {
+      "roundtrip_ms": 23.952333,
+      "outside_handler_mixed_ms": 7.103667,
+      "handler_remainder_ms": 0.124,
+      "directory_sync_ms": 3.741,
+      "file_sync_ms": 11.556,
+      "inkscape_process_ms": 0.0,
+      "logical_files_ms": 1.544,
+      "other_process_ms": 0.0
+    },
+    "inspect-100": {
+      "roundtrip_ms": 9.092541,
+      "outside_handler_mixed_ms": 6.878625,
+      "handler_remainder_ms": 1.565,
+      "directory_sync_ms": 0.0,
+      "file_sync_ms": 0.0,
+      "inkscape_process_ms": 0.0,
+      "logical_files_ms": 0.625,
+      "other_process_ms": 0.0
+    }
+  },
+  "priority_for_overlapping_categories": [
+    "inkscape_process",
+    "other_process",
+    "file_sync",
+    "directory_sync",
+    "logical_files"
+  ],
+  "pure_IPC_measured": false,
+  "pure_kernel_file_IO_measured": false,
+  "production_speed_evidence": false,
+  "limitations": [
+    "logical_files includes guarded API validation/copy/publication; unguarded fs is remainder",
+    "Inkscape process includes spawning, wait polling, draining pipes and reaping",
+    "handler remainder includes server processing and in-memory profiler overhead",
+    "outside handler mixes IPC, client JSON, scheduling, protocol serialization and diagnostic profile output",
+    "per-row partitions sum exactly; independently computed medians need not sum",
+    "no live or warm shell attribution claimed"
+  ]
+}

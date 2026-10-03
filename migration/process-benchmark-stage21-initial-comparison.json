@@ -1,0 +1,13 @@
+{
+  "passed": false,
+  "complete": false,
+  "scope": "Initial benchmark attempt, not a performance comparison.",
+  "failure": "Python reference render_preview refused: Inkscape engine unavailable in inherited PATH.",
+  "partial_evidence": {
+    "migration/results/process-benchmark-stage21/python-0.stderr.log": "8e841b134ef46d42a05453f92318386e938d7c57e9542b19d9897b9097e73f6b",
+    "migration/results/process-benchmark-stage21/python-0.partial.json.gz": "65da8727861dd5760902471ebba7bbc0ea3f681311c7a17760e13883ec95ede5",
+    "migration/results/process-benchmark-stage21/environment.json": "e36daa44d982c1c6d0c0abf92a0586f9d7a31dcaff5be62b9916b79c1027e640"
+  },
+  "next_attempt": "migration/results/process-benchmark-stage21-v2",
+  "correction": "Prepend /Applications/Inkscape.app/Contents/MacOS to PATH for both implementations; no production code change."
+}

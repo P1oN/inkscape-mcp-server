@@ -1,0 +1,972 @@
+{
+  "evidence_verified": true,
+  "goal_complete": false,
+  "scope": "Exact wheel/native recipe attribution and source kit, actual36 installs/notices, runtime bytes unchanged from35. Additional Homebrew BSD2 text prepared but not in36; no new GUI/performance or binary-reproduction claim.",
+  "files": [
+    {
+      "path": "migration/doctor-stage36-comparison.json",
+      "bytes": 236,
+      "sha256": "fc696f24d4bd246214b6cfb4ae93a0cdf025833fbb24b4051aa51d4c81ead06d"
+    },
+    {
+      "path": "migration/package-stage36-build-comparison.json",
+      "bytes": 2510,
+      "sha256": "449db96c93186233f0604417aa03c8402d85a75e6320fd7a95adf7a847b0b6f2"
+    },
+    {
+      "path": "migration/package-stage36-cold-comparison.json",
+      "bytes": 606,
+      "sha256": "c2db48c58e53e11fd4342cd445e4126d7c8db163c27c41641f6ded113dcf797e"
+    },
+    {
+      "path": "migration/package-stage36-warm-comparison.json",
+      "bytes": 603,
+      "sha256": "3b8af8639a1ce57c1cb2998e4c0e4a6ce6d2b4b6230d6a2405c8a7fc91bc2d67"
+    },
+    {
+      "path": "migration/results/doctor-stage36/linked-bridge.json",
+      "bytes": 1447,
+      "sha256": "283c496becfbde1ffff2d8584722983e8ef7242951b94d0812125255818a3184"
+    },
+    {
+      "path": "migration/results/doctor-stage36/missing-bridge.json",
+      "bytes": 1447,
+      "sha256": "283c496becfbde1ffff2d8584722983e8ef7242951b94d0812125255818a3184"
+    },
+    {
+      "path": "migration/results/doctor-stage36/missing-bus.json",
+      "bytes": 1448,
+      "sha256": "09fc9d5fba5b8f12950aa4af67a54cd95a006a025a67b1bd62f7f829187f21ee"
+    },
+    {
+      "path": "migration/results/doctor-stage36/missing-gdbus.json",
+      "bytes": 1448,
+      "sha256": "ccb4e8ac97cbda2319aed2cf318cc9ac706759dd4286323ae06a7e8c6e3e57d3"
+    },
+    {
+      "path": "migration/results/doctor-stage36/missing-helper.json",
+      "bytes": 1447,
+      "sha256": "6b70941b9988bbd03bc34a86ba801251f91437fe188383310451ce88f0866567"
+    },
+    {
+      "path": "migration/results/doctor-stage36/missing-manifest.json",
+      "bytes": 1359,
+      "sha256": "93ca276fc9b5d91fa25c5f95461676e42249f981fe1da0e4efdc198e2683502a"
+    },
+    {
+      "path": "migration/results/doctor-stage36/missing-runtime.json",
+      "bytes": 1202,
+      "sha256": "297fb812a0d45b7e3a71287c70e36b9e41a2e98146cb658f5ab215f9528c8bf8"
+    },
+    {
+      "path": "migration/results/doctor-stage36/old-engine.json",
+      "bytes": 1271,
+      "sha256": "b7317b0674eae7e10b4f59a584c179a450be13d11c5c39d7e043278d3f87e9b0"
+    },
+    {
+      "path": "migration/results/doctor-stage36/ready.json",
+      "bytes": 1426,
+      "sha256": "cbf9e7096033114a8775f5d900f6cb6f59f1a75e463055386627df5dd83da34b"
+    },
+    {
+      "path": "migration/results/doctor-stage36/wrong-bridge.json",
+      "bytes": 1447,
+      "sha256": "283c496becfbde1ffff2d8584722983e8ef7242951b94d0812125255818a3184"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/Homebrew-core-LICENSE.txt",
+      "bytes": 1334,
+      "sha256": "f80329e58613ad669c0e73cb132d8060b9b2c55e339c73848068e4d1567f4627"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/bottle-recipe-comparison.json",
+      "bytes": 413,
+      "sha256": "6464776c0a30596ebc3d027dd8631e1921ab35bbd54f0388b4add6bdbcbf752d"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/cold36-acceptance.log",
+      "bytes": 552,
+      "sha256": "eef60f87e9f9bcbc90d8e55b61a0e6d5ed66bd6f0e02fa979da2d5ccb29af4fe"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/glib-2.90.0-bottle.tar.gz",
+      "bytes": 9339428,
+      "sha256": "07422c68ee1c3d01ba6ac6296668e82cad2ee21c9466e60e79a70da2c5947207"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/glib-api-cache-entry.json",
+      "bytes": 2829,
+      "sha256": "f89b3d97788bbfae61155ab1b9186957f107e247a6d4efc7cc995eab492d71ed"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/glib-bottle-recipe.rb",
+      "bytes": 7480,
+      "sha256": "eb964bd9d934f92a1e271e84085c58541770d41f5698e7e5f17094375bb46d2a"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/glib-installed-recipe.rb",
+      "bytes": 7480,
+      "sha256": "eb964bd9d934f92a1e271e84085c58541770d41f5698e7e5f17094375bb46d2a"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/hardcoded-paths.diff",
+      "bytes": 1523,
+      "sha256": "d846efd0bf62918350da94f850db33b0f8727fece9bfaf8164566e3094e80c97"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/FILES.json",
+      "bytes": 3369,
+      "sha256": "8c04673d1e25f37e9d8dfe20fc4b7d2b39aa78db9979701e1fd42d6fa3ae1402"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/README.md",
+      "bytes": 1400,
+      "sha256": "567a2edb95553652c048cdad8d707c3c37abf2ff1bab734f9839c3793779bda2"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/dbus/INSTALL_RECEIPT.json",
+      "bytes": 1887,
+      "sha256": "bf0d980ef6d6b925270f75c28ba9334d95991a59697af163e83c524df9bfe389"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/dbus/dbus-1.16.2.tar.xz",
+      "bytes": 1115644,
+      "sha256": "0ba2a1a4b16afe7bceb2c07e9ce99a8c2c3508e5dec290dbb643384bd6beb7e2"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/dbus/dbus.rb",
+      "bytes": 4578,
+      "sha256": "e890fc9d67bfca3a0fbe8343926a7010f93341238f939ffa56dec10feafaf78d"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/dbus/sbom.spdx.json",
+      "bytes": 3044,
+      "sha256": "7c23ed4680eb26abaac4537e1ba59e6c99d4919d612dc10f6b1e844340f951b4"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/dbus/source.json",
+      "bytes": 253,
+      "sha256": "a98bab4eb4305860962d10454dab18ba4031955329705c60744d5b4784536367"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/gettext/INSTALL_RECEIPT.json",
+      "bytes": 1471,
+      "sha256": "9db9fcb5c67484dc98e3accfa9f9abdcf32c4f81ef324f90ba3594cdbfc64b9c"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/gettext/gettext-1.0.tar.gz",
+      "bytes": 32694085,
+      "sha256": "85d99b79c981a404874c02e0342176cf75c7698e2b51fe41031cf6526d974f1a"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/gettext/gettext.rb",
+      "bytes": 2157,
+      "sha256": "170f5a29d2eb95b9dd1f1f754c0f9b90692c3d5dcf6db02c199c93e2c445177d"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/gettext/sbom.spdx.json",
+      "bytes": 3723,
+      "sha256": "e2aaea413ee4d342d9b53a7288eb068f7364dea5aca33aa1893225150395a1bd"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/gettext/source.json",
+      "bytes": 249,
+      "sha256": "f58768a54dc8d02cf3f7bbcfddc890666bed615aa3ba1ac854ed0ea8a7c14e45"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/glib/INSTALL_RECEIPT.json",
+      "bytes": 3187,
+      "sha256": "f1b6ab888d65b72ac1e0899c1c0e72fe9dff250f8b4a68be860b8011696ff75c"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/glib/glib-2.90.0.tar.xz",
+      "bytes": 5830480,
+      "sha256": "17d15cac2af80a33271127408e0abc2748eb297c595c2a26409e81e14e7d1b8f"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/glib/glib.rb",
+      "bytes": 7480,
+      "sha256": "eb964bd9d934f92a1e271e84085c58541770d41f5698e7e5f17094375bb46d2a"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/glib/gobject-introspection-1.86.0.tar.xz",
+      "bytes": 1083172,
+      "sha256": "920d1a3fcedeadc32acff95c2e203b319039dd4b4a08dd1a2dfd283d19c0b9ae"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/glib/hardcoded-paths.diff",
+      "bytes": 1523,
+      "sha256": "d846efd0bf62918350da94f850db33b0f8727fece9bfaf8164566e3094e80c97"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/glib/sbom.spdx.json",
+      "bytes": 7121,
+      "sha256": "8e0e245b9ad3114f0193bd2950bef601e0855989cfdbc9e23a3d651211427773"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/glib/source.json",
+      "bytes": 255,
+      "sha256": "894a0f338c5953e09d2b5d351f0d0bea0c91dfa1a58d6897ff840b7216ac8291"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/pcre2/INSTALL_RECEIPT.json",
+      "bytes": 1319,
+      "sha256": "7213f178acdc8baa58a28bee5bbc386a6679922e5585b2bf33336bb2dbaa77a8"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/pcre2/pcre2-10.48.tar.bz2",
+      "bytes": 2213024,
+      "sha256": "b6c68fdf6f3ac31388b50aa89ff0fc49c00c987c16e7b5146491d12003f2c8ed"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/pcre2/pcre2.rb",
+      "bytes": 1181,
+      "sha256": "493c6e81fa41064d8cdbb554f0884a9afe856f11c62d250ed747ce5f565a3f0d"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/pcre2/sbom.spdx.json",
+      "bytes": 3047,
+      "sha256": "e9ae8d5ee5977e5bcd18e3a0e5e107386a95fc003f017687ecb32069fa1feb69"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit/pcre2/source.json",
+      "bytes": 280,
+      "sha256": "b51a9f3690aeddb9f41781900670c7c88965fb1b27dc3f20f136a481f2cbf075"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/native-source-kit-stage35.tar.gz",
+      "bytes": 41096067,
+      "sha256": "deef68aefea0feb7324412755658c5d4a1b0fbacfa59c80a2a714df04d3a8cfe"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/notices-stage36-expanded.json",
+      "bytes": 27621,
+      "sha256": "b8850f51cdf2deae29adc48888c954e6b629e9b81d3ae108bc2c77082f19ad01"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/notices-stage36.json",
+      "bytes": 27534,
+      "sha256": "d25050afd25dd856d572dfc1aa9d51f4bba6c7b638210dfd916e035be476eb8f"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/package35-36-component-comparison.json",
+      "bytes": 2469,
+      "sha256": "52a7413636a126a2025bd4fade2be27641ebcc399b718c50cdb3da8526c51b5b"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/package36-build.log",
+      "bytes": 156,
+      "sha256": "920df86715f5d40e6db3250564455330b7eeb2316add8f95dc99118016a6adb6"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/patch-check/gio/xdgmime/xdgmime.c",
+      "bytes": 23417,
+      "sha256": "afb1c1c1ba726a9fb8d8732f4031f5aa85a67ec3b7a2f989b617e4f4f5282410"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/patch-check/girepository/girepository.c",
+      "bytes": 77984,
+      "sha256": "d2dc3928d6aa167ff1ecfd2dccb5923bea98adec88d3f2564bb69a3fd67e2409"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/patch-check/glib/gutils.c",
+      "bytes": 100534,
+      "sha256": "65086c293646bf83884f56f54bb5e2e872adb28ee77f1223d6d9f095a75e3771"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/patch-dry-run.log",
+      "bytes": 112,
+      "sha256": "dc4e29ebb421f20177cbdef7180659c0ec9919e2561e882032da69450fe9448e"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/patch-history.json",
+      "bytes": 4564,
+      "sha256": "80101b57dad74ece6f8ef18acf4fbf131f180679513bc1867d32a8db8e53e81b"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/snapshots/docs/AGENT_HANDOFF.md",
+      "bytes": 218800,
+      "sha256": "1dbb43da20b63977826ffbb50a59fbd462d755b737da134c00fec87a13f1984f"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/snapshots/docs/RUST_MIGRATION_REPORT.md",
+      "bytes": 266554,
+      "sha256": "e24889adf1c2eb397f37a0f8bc48b041ed6375b540968b43bc1e9c56bbb80b59"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/snapshots/docs/RUST_NEXT_PLAN.md",
+      "bytes": 8004,
+      "sha256": "533254a93530c1049ecb49c4eb1a895cfb30c00f0441fc2d8dfe9cac72a70e48"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/snapshots/docs/RUST_PACKAGING.md",
+      "bytes": 13456,
+      "sha256": "adb0ffd6822e0725bdf623b961e54aed89f7f4afa2f91786cb07eca6697a3ff1"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/snapshots/docs/RUST_SECURITY_AUDIT.md",
+      "bytes": 23587,
+      "sha256": "77ceced9bd35935c7858129e3e58737baf6595f23ea8792ee867fe0f3990cfa5"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/snapshots/migration/current-package.json",
+      "bytes": 399,
+      "sha256": "5d09ca550503af9302e67c7421ac30cebadb4b7ff0459ca0d6ac3324380dec10"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/snapshots/rust/package/helper-wheel-provenance-macos-arm64.json",
+      "bytes": 240041,
+      "sha256": "79d4425773b313ef8af89463af5a5ca4db07f8a0e5ee7673756ed5c9fe982c11"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/snapshots/scripts/migration_notices_acceptance.py",
+      "bytes": 8674,
+      "sha256": "6af96c946d64142c4305a2e3c29fdd014347663a006e03c87e254b4135535afb"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/snapshots/scripts/migration_package_notices.py",
+      "bytes": 15986,
+      "sha256": "2bea08b750ed13b6cc5837d1dc662b95d97cc1092ef9499b2bb284e8b4fb23ad"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/snapshots/scripts/migration_wheel_provenance.py",
+      "bytes": 7691,
+      "sha256": "db0ed00d3638bda142fd50552fcaf5df32e2ecc1f83b9c24b1ba7d68e7a43501"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/source-kit.json",
+      "bytes": 4163,
+      "sha256": "b436b3aecbf8ea8166783a4055787f3577f1a8adb62ad045f6054f450713da8a"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/supplement-collection.json",
+      "bytes": 203,
+      "sha256": "aa8a6f8cceac7ca6b7d9d72f26db904a4618b95f8e710456823dbc9a803030e8"
+    },
+    {
+      "path": "migration/results/homebrew-source-audit/warm36-acceptance.log",
+      "bytes": 549,
+      "sha256": "d15a653fd51f74e8042217d8b238a420f3e0d3c6dff58eba8e0924f58e47719f"
+    },
+    {
+      "path": "migration/results/launcher-stage36/comparison.json",
+      "bytes": 1216,
+      "sha256": "ab5fdec31965dded706d03f2eeb0e2e566aafc7003045049d1434ade9d1e63b6"
+    },
+    {
+      "path": "migration/results/launcher-stage36/mcp.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/launcher-stage36/mcp.trace.json",
+      "bytes": 798271,
+      "sha256": "04884283e0bf7192d005b92ee3c73c915940a12bc17278ad2f0481e8ae6d91e2"
+    },
+    {
+      "path": "migration/results/launcher-stage36/refused-engine.json",
+      "bytes": 73,
+      "sha256": "b2c6772624fb074d75b23f1d1d3d8774142eafd67601e9a79513ad619e873d42"
+    },
+    {
+      "path": "migration/results/launcher-stage36/refused-trailing.json",
+      "bytes": 106,
+      "sha256": "53d07e550f5b26262685e8f6e42f310f60e4195a6856679e330b4b424fb44277"
+    },
+    {
+      "path": "migration/results/launcher-stage36/refused-truncated.json",
+      "bytes": 101,
+      "sha256": "649174e508ec038506c0d3be1d40fc1fd74a45542b0b171739c8d4186692e439"
+    },
+    {
+      "path": "migration/results/launcher-stage36/refused-workspace.json",
+      "bytes": 88,
+      "sha256": "27a1af0c0ca2a0c66b5ef3d2301905f18f603a5d578bb46bd7565f7be8e0aecd"
+    },
+    {
+      "path": "migration/results/launcher-stage36/setup.json",
+      "bytes": 1988,
+      "sha256": "36d9e52225a12d9a6991de6bc4266afd3f945ca43090e9afeb9b1dce6fbda125"
+    },
+    {
+      "path": "migration/results/package-stage36-cold/noop-filesystem.json",
+      "bytes": 4034,
+      "sha256": "48e9b6f4d73067a74786128510bfd5b427b7d2f24b675178e75038eb914c016d"
+    },
+    {
+      "path": "migration/results/package-stage36-cold/packaged-bus.log",
+      "bytes": 96,
+      "sha256": "922ac3b7081bb80fdc50ed69ca2c3ef40fb1f905d93df5ac025bdf3aa140a5e0"
+    },
+    {
+      "path": "migration/results/package-stage36-cold/packaged-preview.json",
+      "bytes": 797,
+      "sha256": "b850361bea10a443881493a14501f30bbc788d9eb726f444bdd15c522e595a69"
+    },
+    {
+      "path": "migration/results/package-stage36-cold/packaged-server.stderr.log",
+      "bytes": 581,
+      "sha256": "74d4ff0b750751aa41e4c1407d153b905f15848e3775f1d3e9c226706f577a5c"
+    },
+    {
+      "path": "migration/results/package-stage36-cold/packaged-server.trace.json",
+      "bytes": 1064983,
+      "sha256": "3c48a2f84ae4660911f1a759730c8e0ffe2989ccc4e03d2114555c44c7410dc8"
+    },
+    {
+      "path": "migration/results/package-stage36-warm/noop-filesystem.json",
+      "bytes": 4034,
+      "sha256": "e9dd526743632a809cf7541fa59f7dacac1a147480802d5b26a02b1e50a36e93"
+    },
+    {
+      "path": "migration/results/package-stage36-warm/packaged-bus.log",
+      "bytes": 96,
+      "sha256": "cff299b10202b0d3c883487557f4b27ea25012afcd3899e25331ed5d54f15957"
+    },
+    {
+      "path": "migration/results/package-stage36-warm/packaged-preview.json",
+      "bytes": 797,
+      "sha256": "26ae89177d6119b282647e0a4fad4b3f58f8a1259ba5ca8a47ecd62059af31a9"
+    },
+    {
+      "path": "migration/results/package-stage36-warm/packaged-server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/package-stage36-warm/packaged-server.trace.json",
+      "bytes": 1064980,
+      "sha256": "8c2d0bd783ef75b81ec3842e34482cd5c23948a38450e945b31139e03b0cf1b1"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/FILES.json",
+      "bytes": 478455,
+      "sha256": "69a8ed53690a6d3c86dd32381dd08911f918484ee69434aa01afd5c43f8c00e6"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/LICENSE-INVENTORY.json",
+      "bytes": 379420,
+      "sha256": "17c45f13e36d3cbbf443d4a7781b9a7b2fcf57a3c8812d0b1ae9d31a6e0ad0ae"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/cpython-source/PYTHON.json",
+      "bytes": 118432,
+      "sha256": "abf936bc31161e4f83e2b659dcaa9590c3c77ade3ab1abf046d768692e0c6af8"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/cpython-source/licenses/LICENSE.bdb.txt",
+      "bytes": 7293,
+      "sha256": "3bdff06e69991c94664f2ef5c5f8096f60b7dbec071756ea6cc26b445e06ec5b"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/cpython-source/licenses/LICENSE.bzip2.txt",
+      "bytes": 1743,
+      "sha256": "1f38bbc7caacafd65169276d759c0d88c991b753b643ce35d0e45ea1971dd441"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/cpython-source/licenses/LICENSE.cpython.txt",
+      "bytes": 36164,
+      "sha256": "86e61415828a8b5b06ec8d024e6f086ce155a8b85fd0c419c0ba4dc004e74fdd"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/cpython-source/licenses/LICENSE.expat.txt",
+      "bytes": 1144,
+      "sha256": "122f2c27000472a201d337b9b31f7eb2b52d091b02857061a8880371612d9534"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/cpython-source/licenses/LICENSE.libX11.txt",
+      "bytes": 47018,
+      "sha256": "2daec087a88e7c9b8082557cdeebad5bbb8155a4137472f0b22e269cd99d0c1e"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/cpython-source/licenses/LICENSE.libXau.txt",
+      "bytes": 1148,
+      "sha256": "56abe29bb1d9806a9e04fa9f80fed2c0f18027594df3f098148d814aef6bddfa"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/cpython-source/licenses/LICENSE.libedit.txt",
+      "bytes": 1614,
+      "sha256": "29cea33c32bbc9785142386377915612a2fa786482c46843383384aded2e09b1"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/cpython-source/licenses/LICENSE.libffi.txt",
+      "bytes": 1132,
+      "sha256": "deaf3a42effb551a5b140fa9afefed183a27f1341c6d1bf430d106a5e6931fc0"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/cpython-source/licenses/LICENSE.liblzma.txt",
+      "bytes": 660,
+      "sha256": "9a4062de0a2c388a98cf35a35d348b62fa97c838a71c3c28ee1a2d7d0a565b02"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/cpython-source/licenses/LICENSE.libuuid.txt",
+      "bytes": 1432,
+      "sha256": "122ee1f7e258f2c3c0e538a75c037684f420454bf3850ddc74ce750bbf5fe86b"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/cpython-source/licenses/LICENSE.libxcb.txt",
+      "bytes": 1337,
+      "sha256": "c5ffbfeaa501071ceeb97b7de2c0d703fdaa35de01c0fb6cbac1c28453a3e9fd"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/cpython-source/licenses/LICENSE.mpdecimal.txt",
+      "bytes": 1284,
+      "sha256": "669512af7219f58be03a398766d7c9da11a3b3df9d3f05cb74c5ceca25c8da3b"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/cpython-source/licenses/LICENSE.ncurses.txt",
+      "bytes": 1447,
+      "sha256": "87a4c4442337b8968ef956031c406b74f9cb7149b7ba87311bdaba534816201c"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/cpython-source/licenses/LICENSE.openssl-1.1.txt",
+      "bytes": 6120,
+      "sha256": "9c04cce50c4989d5601dd8b07f6ab922c40388b66ac736c9007cb1ed9d9dd560"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/cpython-source/licenses/LICENSE.openssl-3.txt",
+      "bytes": 10175,
+      "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/cpython-source/licenses/LICENSE.sqlite.txt",
+      "bytes": 1481,
+      "sha256": "38bef3d28b24f145ea293bd3b6eb4b20396982abc8303128fb493986ea5bc719"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/cpython-source/licenses/LICENSE.tcl.txt",
+      "bytes": 2255,
+      "sha256": "c0a69a2bfd757361ec7e6143973b103c90409316b49e9c88db26ad6388e79f16"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/cpython-source/licenses/LICENSE.tix.txt",
+      "bytes": 2826,
+      "sha256": "3ac5cdd0bef6c43ce34c6a7ced452081d9e5a0bf94082b9f9147d23ec9e214f5"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/cpython-source/licenses/LICENSE.zlib.txt",
+      "bytes": 995,
+      "sha256": "818922b2620f12801a12bf78e399644a30990e66824abd8ca8ec24d451d6f92c"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/cpython-source/provenance.json",
+      "bytes": 4581,
+      "sha256": "f5071bcc73bf97c86b8488139f2e1a1e350748ba30a1762bafad646e4b434b62"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/native-build/glib/2.90.0/glib.rb",
+      "bytes": 7480,
+      "sha256": "eb964bd9d934f92a1e271e84085c58541770d41f5698e7e5f17094375bb46d2a"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/native-build/glib/2.90.0/hardcoded-paths.diff",
+      "bytes": 1523,
+      "sha256": "d846efd0bf62918350da94f850db33b0f8727fece9bfaf8164566e3094e80c97"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/licenses/native-build/glib/2.90.0/provenance.json",
+      "bytes": 926,
+      "sha256": "bca582b0a1b5829e6ba2f04094fdc9e3d85b2b010c465c6afd8c7c64fa8c6f44"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36/libexec/inkscape-mcp/package.json",
+      "bytes": 6188,
+      "sha256": "ee26af5d0be4518120e8d118d2db70c5ee11d5441efe4741317d94f00e1b0928"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage36.tar.gz",
+      "bytes": 46722663,
+      "sha256": "bfd012af9c3f21d191e3d0d9009a344ffe7cc6cd0eca74b880869bbe6368bfb0"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/comparison.json",
+      "bytes": 60662,
+      "sha256": "fdf138d7ec4d49f9ced4f09c0ad2fa18453fff49bbada4a18744e3615e085721"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/cssselect-1.5.0-py3-none-any.whl",
+      "bytes": 20797,
+      "sha256": "1d1aded98e82bdde447ded990a191fd6916177c4f0c914fb62eccd58e2ffcdcc"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/cssselect-RECORD-installed.txt",
+      "bytes": 889,
+      "sha256": "3e56eed77132213ae2812a49d6abdb28b3d293055e04b21e82185bb8a1f75f33"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/cssselect-RECORD-upstream.txt",
+      "bytes": 711,
+      "sha256": "3c9d0ccb8935fcff28f11cd14a74c6be375c7031182470e9fad0a9a0383a8ab7"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/cssselect-pypi.json",
+      "bytes": 4607,
+      "sha256": "f29feefd717d77d17172fbb0f23261828934851b555a0849c82e40159fe35991"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/lxml-6.1.1-cp312-cp312-macosx_10_13_universal2.whl",
+      "bytes": 8570821,
+      "sha256": "104c09bda8d2a562824c0e319d0768ce26a779b7601e0931d33b09b53c392ef7"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/lxml-RECORD-installed.txt",
+      "bytes": 15069,
+      "sha256": "9e19619aabc8fa141c3c6124c1e5669eaa90378673e49978c73a047bbac2a347"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/lxml-RECORD-upstream.txt",
+      "bytes": 15075,
+      "sha256": "b3470d3c534a0825e4c98029864b19151e81110097baf7df1dc865773bdf23a6"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/lxml-pypi.json",
+      "bytes": 118949,
+      "sha256": "16d30a4379bc3be8c747187330c48a6e0e2900d7a2e56fe467d5dc4ee656ca13"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/numpy-2.5.3-cp312-cp312-macosx_14_0_arm64.whl",
+      "bytes": 5445405,
+      "sha256": "a72f874bc9e10e4b8f80426fb49716d5141f64442a0c8418065093ec8017fbb0"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/numpy-RECORD-installed.txt",
+      "bytes": 85542,
+      "sha256": "b90597e10538d060df06b0b35735d6966942284e6658b531357b70f1eda8c500"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/numpy-RECORD-upstream.txt",
+      "bytes": 86141,
+      "sha256": "746538e43c5fc8b4abc43820f2eb954478df5728c1c92abf39de7eb694d49410"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/numpy-pypi.json",
+      "bytes": 63149,
+      "sha256": "497ade587d7c2cad83a918ca79b9776dbde9eddf4c0abddbfb637b27160e87a9"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/pillow-12.2.0-cp312-cp312-macosx_11_0_arm64.whl",
+      "bytes": 4695490,
+      "sha256": "f3f40b3c5a968281fd507d519e444c35f0ff171237f4fdde090dd60699458421"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/pillow-RECORD-installed.txt",
+      "bytes": 11070,
+      "sha256": "0c613b10e370a06201c637011a2cd8baa34916ac00528a4510aa3700867df73c"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/pillow-RECORD-upstream.txt",
+      "bytes": 11034,
+      "sha256": "49bc8feed73d6afb01dbf54ab8110dd78dd8d89ad3effa3864b257088ccadf92"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/pillow-pypi.json",
+      "bytes": 180771,
+      "sha256": "c6b6a7c81f177465b93eee3f0d15f857c92ead496816b5fbc17f2bb87b1bdd23"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/tinycss2-1.5.1-py3-none-any.whl",
+      "bytes": 28404,
+      "sha256": "3415ba0f5839c062696996998176c4a3751d18b7edaaeeb658c9ce21ec150661"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/tinycss2-RECORD-installed.txt",
+      "bytes": 1239,
+      "sha256": "6207761ce025bef201d6326bc82eedba4658dd2d680a2a35040b50e29b92a3b4"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/tinycss2-RECORD-upstream.txt",
+      "bytes": 1063,
+      "sha256": "49cab9d924d239e8e0f81a063491bc61be1616c4212cfd44d6907b27dca7a815"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/tinycss2-pypi.json",
+      "bytes": 4970,
+      "sha256": "d3511254c97d98b42ca5288f318e86db14df4b016819117d4287c6df53b3c03b"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/webencodings-0.6.1-py3-none-any.whl",
+      "bytes": 8745,
+      "sha256": "7fab6269c8bf237c657876b52058ccb182e861518d1c695c1a9aaa8c1c105d5b"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/webencodings-RECORD-installed.txt",
+      "bytes": 747,
+      "sha256": "19c0baa379ed8a45d37b9911a7f5e111b6b0022709fa735185dde53cff120ad8"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/webencodings-RECORD-upstream.txt",
+      "bytes": 570,
+      "sha256": "a5a089c4da6fba3e7b8be0c93edf52f46683f013445d869b32956a08e03d1d42"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35/webencodings-pypi.json",
+      "bytes": 5458,
+      "sha256": "a348b3fe8c89a181aab7709f8b6416b91aaa96da2b44f3461c8b9e0f041f64a3"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/comparison.json",
+      "bytes": 60662,
+      "sha256": "fdf138d7ec4d49f9ced4f09c0ad2fa18453fff49bbada4a18744e3615e085721"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/cssselect-1.5.0-py3-none-any.whl",
+      "bytes": 20797,
+      "sha256": "1d1aded98e82bdde447ded990a191fd6916177c4f0c914fb62eccd58e2ffcdcc"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/cssselect-RECORD-installed.txt",
+      "bytes": 889,
+      "sha256": "3e56eed77132213ae2812a49d6abdb28b3d293055e04b21e82185bb8a1f75f33"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/cssselect-RECORD-upstream.txt",
+      "bytes": 711,
+      "sha256": "3c9d0ccb8935fcff28f11cd14a74c6be375c7031182470e9fad0a9a0383a8ab7"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/cssselect-pypi.json",
+      "bytes": 4607,
+      "sha256": "f29feefd717d77d17172fbb0f23261828934851b555a0849c82e40159fe35991"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/lxml-6.1.1-cp312-cp312-macosx_10_13_universal2.whl",
+      "bytes": 8570821,
+      "sha256": "104c09bda8d2a562824c0e319d0768ce26a779b7601e0931d33b09b53c392ef7"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/lxml-RECORD-installed.txt",
+      "bytes": 15069,
+      "sha256": "9e19619aabc8fa141c3c6124c1e5669eaa90378673e49978c73a047bbac2a347"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/lxml-RECORD-upstream.txt",
+      "bytes": 15075,
+      "sha256": "b3470d3c534a0825e4c98029864b19151e81110097baf7df1dc865773bdf23a6"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/lxml-pypi.json",
+      "bytes": 118949,
+      "sha256": "16d30a4379bc3be8c747187330c48a6e0e2900d7a2e56fe467d5dc4ee656ca13"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/numpy-2.5.3-cp312-cp312-macosx_14_0_arm64.whl",
+      "bytes": 5445405,
+      "sha256": "a72f874bc9e10e4b8f80426fb49716d5141f64442a0c8418065093ec8017fbb0"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/numpy-RECORD-installed.txt",
+      "bytes": 85542,
+      "sha256": "b90597e10538d060df06b0b35735d6966942284e6658b531357b70f1eda8c500"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/numpy-RECORD-upstream.txt",
+      "bytes": 86141,
+      "sha256": "746538e43c5fc8b4abc43820f2eb954478df5728c1c92abf39de7eb694d49410"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/numpy-pypi.json",
+      "bytes": 63149,
+      "sha256": "497ade587d7c2cad83a918ca79b9776dbde9eddf4c0abddbfb637b27160e87a9"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/pillow-12.2.0-cp312-cp312-macosx_11_0_arm64.whl",
+      "bytes": 4695490,
+      "sha256": "f3f40b3c5a968281fd507d519e444c35f0ff171237f4fdde090dd60699458421"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/pillow-RECORD-installed.txt",
+      "bytes": 11070,
+      "sha256": "0c613b10e370a06201c637011a2cd8baa34916ac00528a4510aa3700867df73c"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/pillow-RECORD-upstream.txt",
+      "bytes": 11034,
+      "sha256": "49bc8feed73d6afb01dbf54ab8110dd78dd8d89ad3effa3864b257088ccadf92"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/pillow-pypi.json",
+      "bytes": 180771,
+      "sha256": "c6b6a7c81f177465b93eee3f0d15f857c92ead496816b5fbc17f2bb87b1bdd23"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/tinycss2-1.5.1-py3-none-any.whl",
+      "bytes": 28404,
+      "sha256": "3415ba0f5839c062696996998176c4a3751d18b7edaaeeb658c9ce21ec150661"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/tinycss2-RECORD-installed.txt",
+      "bytes": 1239,
+      "sha256": "6207761ce025bef201d6326bc82eedba4658dd2d680a2a35040b50e29b92a3b4"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/tinycss2-RECORD-upstream.txt",
+      "bytes": 1063,
+      "sha256": "49cab9d924d239e8e0f81a063491bc61be1616c4212cfd44d6907b27dca7a815"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/tinycss2-pypi.json",
+      "bytes": 4970,
+      "sha256": "d3511254c97d98b42ca5288f318e86db14df4b016819117d4287c6df53b3c03b"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/webencodings-0.6.1-py3-none-any.whl",
+      "bytes": 8745,
+      "sha256": "7fab6269c8bf237c657876b52058ccb182e861518d1c695c1a9aaa8c1c105d5b"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/webencodings-RECORD-installed.txt",
+      "bytes": 747,
+      "sha256": "19c0baa379ed8a45d37b9911a7f5e111b6b0022709fa735185dde53cff120ad8"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/webencodings-RECORD-upstream.txt",
+      "bytes": 570,
+      "sha256": "a5a089c4da6fba3e7b8be0c93edf52f46683f013445d869b32956a08e03d1d42"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-final/webencodings-pypi.json",
+      "bytes": 5458,
+      "sha256": "a348b3fe8c89a181aab7709f8b6416b91aaa96da2b44f3461c8b9e0f041f64a3"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/cssselect-1.5.0-py3-none-any.whl",
+      "bytes": 20797,
+      "sha256": "1d1aded98e82bdde447ded990a191fd6916177c4f0c914fb62eccd58e2ffcdcc"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/cssselect-RECORD-installed.txt",
+      "bytes": 889,
+      "sha256": "3e56eed77132213ae2812a49d6abdb28b3d293055e04b21e82185bb8a1f75f33"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/cssselect-RECORD-upstream.txt",
+      "bytes": 711,
+      "sha256": "3c9d0ccb8935fcff28f11cd14a74c6be375c7031182470e9fad0a9a0383a8ab7"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/cssselect-pypi.json",
+      "bytes": 4607,
+      "sha256": "f29feefd717d77d17172fbb0f23261828934851b555a0849c82e40159fe35991"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/lxml-6.1.1-cp312-cp312-macosx_10_13_universal2.whl",
+      "bytes": 8570821,
+      "sha256": "104c09bda8d2a562824c0e319d0768ce26a779b7601e0931d33b09b53c392ef7"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/lxml-RECORD-installed.txt",
+      "bytes": 15069,
+      "sha256": "9e19619aabc8fa141c3c6124c1e5669eaa90378673e49978c73a047bbac2a347"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/lxml-RECORD-upstream.txt",
+      "bytes": 15075,
+      "sha256": "b3470d3c534a0825e4c98029864b19151e81110097baf7df1dc865773bdf23a6"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/lxml-pypi.json",
+      "bytes": 118949,
+      "sha256": "16d30a4379bc3be8c747187330c48a6e0e2900d7a2e56fe467d5dc4ee656ca13"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/numpy-2.5.3-cp312-cp312-macosx_14_0_arm64.whl",
+      "bytes": 5445405,
+      "sha256": "a72f874bc9e10e4b8f80426fb49716d5141f64442a0c8418065093ec8017fbb0"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/numpy-RECORD-installed.txt",
+      "bytes": 85542,
+      "sha256": "b90597e10538d060df06b0b35735d6966942284e6658b531357b70f1eda8c500"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/numpy-RECORD-upstream.txt",
+      "bytes": 86141,
+      "sha256": "746538e43c5fc8b4abc43820f2eb954478df5728c1c92abf39de7eb694d49410"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/numpy-pypi.json",
+      "bytes": 63149,
+      "sha256": "497ade587d7c2cad83a918ca79b9776dbde9eddf4c0abddbfb637b27160e87a9"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/pillow-12.2.0-cp312-cp312-macosx_11_0_arm64.whl",
+      "bytes": 4695490,
+      "sha256": "f3f40b3c5a968281fd507d519e444c35f0ff171237f4fdde090dd60699458421"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/pillow-RECORD-installed.txt",
+      "bytes": 11070,
+      "sha256": "0c613b10e370a06201c637011a2cd8baa34916ac00528a4510aa3700867df73c"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/pillow-RECORD-upstream.txt",
+      "bytes": 11034,
+      "sha256": "49bc8feed73d6afb01dbf54ab8110dd78dd8d89ad3effa3864b257088ccadf92"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/pillow-pypi.json",
+      "bytes": 180771,
+      "sha256": "c6b6a7c81f177465b93eee3f0d15f857c92ead496816b5fbc17f2bb87b1bdd23"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/tinycss2-1.5.1-py3-none-any.whl",
+      "bytes": 28404,
+      "sha256": "3415ba0f5839c062696996998176c4a3751d18b7edaaeeb658c9ce21ec150661"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/tinycss2-RECORD-installed.txt",
+      "bytes": 1239,
+      "sha256": "6207761ce025bef201d6326bc82eedba4658dd2d680a2a35040b50e29b92a3b4"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/tinycss2-RECORD-upstream.txt",
+      "bytes": 1063,
+      "sha256": "49cab9d924d239e8e0f81a063491bc61be1616c4212cfd44d6907b27dca7a815"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/tinycss2-pypi.json",
+      "bytes": 4970,
+      "sha256": "d3511254c97d98b42ca5288f318e86db14df4b016819117d4287c6df53b3c03b"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/webencodings-0.6.1-py3-none-any.whl",
+      "bytes": 8745,
+      "sha256": "7fab6269c8bf237c657876b52058ccb182e861518d1c695c1a9aaa8c1c105d5b"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/webencodings-RECORD-installed.txt",
+      "bytes": 747,
+      "sha256": "19c0baa379ed8a45d37b9911a7f5e111b6b0022709fa735185dde53cff120ad8"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/webencodings-RECORD-upstream.txt",
+      "bytes": 570,
+      "sha256": "a5a089c4da6fba3e7b8be0c93edf52f46683f013445d869b32956a08e03d1d42"
+    },
+    {
+      "path": "migration/results/wheel-source-audit-stage35-record-verified/webencodings-pypi.json",
+      "bytes": 5458,
+      "sha256": "a348b3fe8c89a181aab7709f8b6416b91aaa96da2b44f3461c8b9e0f041f64a3"
+    },
+    {
+      "path": "migration/vendor-notices/native-build/glib/2.90.0/Homebrew-core-LICENSE.txt",
+      "bytes": 1334,
+      "sha256": "f80329e58613ad669c0e73cb132d8060b9b2c55e339c73848068e4d1567f4627"
+    },
+    {
+      "path": "migration/vendor-notices/native-build/glib/2.90.0/glib.rb",
+      "bytes": 7480,
+      "sha256": "eb964bd9d934f92a1e271e84085c58541770d41f5698e7e5f17094375bb46d2a"
+    },
+    {
+      "path": "migration/vendor-notices/native-build/glib/2.90.0/hardcoded-paths.diff",
+      "bytes": 1523,
+      "sha256": "d846efd0bf62918350da94f850db33b0f8727fece9bfaf8164566e3094e80c97"
+    },
+    {
+      "path": "migration/vendor-notices/native-build/glib/2.90.0/provenance.json",
+      "bytes": 1225,
+      "sha256": "e341618d4152e5ba286efc6c34edbb330e618c9c20ee1fc032a584556550130f"
+    }
+  ]
+}

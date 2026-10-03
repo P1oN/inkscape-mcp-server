@@ -1,0 +1,10 @@
+{
+  "observations": 23,
+  "rust_binary_sha256": "67fa96601d86d244c3f824f322081848ceb0bfb2844be01f0be1f01171fab5b7",
+  "normalization": "semantic JSON decoding only",
+  "native_checks": {
+    "concurrent_read_and_cancelled_wait": true
+  },
+  "differences": [],
+  "passed": true
+}

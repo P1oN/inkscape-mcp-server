@@ -1,0 +1,1397 @@
+[
+  {
+    "name": "polyline-seed-0",
+    "args": {
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 0,
+            "y": 0
+          },
+          {
+            "x": 30,
+            "y": 40
+          }
+        ],
+        "count": 5
+      },
+      "variation": {
+        "seed": 0,
+        "offset": 2.5,
+        "scale": 0.125,
+        "rotation_degrees": 37
+      }
+    },
+    "result": {
+      "plan": [
+        {
+          "x": 1.7221092576252408,
+          "y": 1.2897720147015121,
+          "rotation_degrees": -5.877703018517469,
+          "scale": 0.9397291875732409
+        },
+        {
+          "x": 7.556373606843042,
+          "y": 9.524670687252073,
+          "rotation_degrees": 21.001095588573172,
+          "scale": 0.9508281815197319
+        },
+        {
+          "x": 14.88298477076178,
+          "y": 20.416910197275158,
+          "rotation_degrees": 30.200353504454796,
+          "scale": 1.0011717139543475
+        },
+        {
+          "x": 21.40918922199852,
+          "y": 31.279021020786118,
+          "rotation_degrees": 8.759305753974537,
+          "scale": 0.9376265853406102
+        },
+        {
+          "x": 32.0487312798412,
+          "y": 42.41392738018827,
+          "rotation_degrees": 22.95607546374763,
+          "scale": 1.1005414876098958
+        }
+      ]
+    }
+  },
+  {
+    "name": "polyline-seed-1",
+    "args": {
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 0,
+            "y": 0
+          },
+          {
+            "x": 30,
+            "y": 40
+          }
+        ],
+        "count": 5
+      },
+      "variation": {
+        "seed": 1,
+        "offset": 2.5,
+        "scale": 0.125,
+        "rotation_degrees": 37
+      }
+    },
+    "result": {
+      "plan": [
+        {
+          "x": -1.828178779437994,
+          "y": 1.7371686846861634,
+          "rotation_degrees": 19.51932180426944,
+          "scale": 0.9387672564348555
+        },
+        {
+          "x": 7.477175435459705,
+          "y": 9.74745532394369,
+          "rotation_degrees": 11.217879981484458,
+          "scale": 1.0721808377838782
+        },
+        {
+          "x": 12.969297933871175,
+          "y": 17.64173738261003,
+          "rotation_degrees": 24.84661769007036,
+          "scale": 0.9831917669762633
+        },
+        {
+          "x": 23.81140041228971,
+          "y": 27.510530266755552,
+          "rotation_degrees": -4.041347639944696,
+          "scale": 1.0553850080851956
+        },
+        {
+          "x": 28.643811106352263,
+          "y": 42.226353477769614,
+          "rotation_degrees": 29.705631863249778,
+          "scale": 0.8826474957583884
+        }
+      ]
+    }
+  },
+  {
+    "name": "polyline-seed--1",
+    "args": {
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 0,
+            "y": 0
+          },
+          {
+            "x": 30,
+            "y": 40
+          }
+        ],
+        "count": 5
+      },
+      "variation": {
+        "seed": -1,
+        "offset": 2.5,
+        "scale": 0.125,
+        "rotation_degrees": 37
+      }
+    },
+    "result": {
+      "plan": [
+        {
+          "x": -1.828178779437994,
+          "y": 1.7371686846861634,
+          "rotation_degrees": 19.51932180426944,
+          "scale": 0.9387672564348555
+        },
+        {
+          "x": 7.477175435459705,
+          "y": 9.74745532394369,
+          "rotation_degrees": 11.217879981484458,
+          "scale": 1.0721808377838782
+        },
+        {
+          "x": 12.969297933871175,
+          "y": 17.64173738261003,
+          "rotation_degrees": 24.84661769007036,
+          "scale": 0.9831917669762633
+        },
+        {
+          "x": 23.81140041228971,
+          "y": 27.510530266755552,
+          "rotation_degrees": -4.041347639944696,
+          "scale": 1.0553850080851956
+        },
+        {
+          "x": 28.643811106352263,
+          "y": 42.226353477769614,
+          "rotation_degrees": 29.705631863249778,
+          "scale": 0.8826474957583884
+        }
+      ]
+    }
+  },
+  {
+    "name": "polyline-seed-18446744073709551739",
+    "args": {
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 0,
+            "y": 0
+          },
+          {
+            "x": 30,
+            "y": 40
+          }
+        ],
+        "count": 5
+      },
+      "variation": {
+        "seed": 18446744073709551739,
+        "offset": 2.5,
+        "scale": 0.125,
+        "rotation_degrees": 37
+      }
+    },
+    "result": {
+      "plan": [
+        {
+          "x": 1.2161590702071745,
+          "y": 2.0634575817168592,
+          "rotation_degrees": -34.685079045806035,
+          "scale": 1.0097289249283328
+        },
+        {
+          "x": 8.5768079915974,
+          "y": 12.385435792208396,
+          "rotation_degrees": 4.829482155955411,
+          "scale": 0.9911578608181509
+        },
+        {
+          "x": 16.94490344423803,
+          "y": 21.544748436909238,
+          "rotation_degrees": -12.908176048485366,
+          "scale": 1.031367521360314
+        },
+        {
+          "x": 23.140586808464924,
+          "y": 30.913222832120027,
+          "rotation_degrees": 5.898602122061817,
+          "scale": 1.0168146097797117
+        },
+        {
+          "x": 28.651247065639733,
+          "y": 40.22232608051611,
+          "rotation_degrees": -4.583741508236365,
+          "scale": 1.0773642719767849
+        }
+      ]
+    }
+  },
+  {
+    "name": "polyline-seed-123456789012345678901234567890",
+    "args": {
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 0,
+            "y": 0
+          },
+          {
+            "x": 30,
+            "y": 40
+          }
+        ],
+        "count": 5
+      },
+      "variation": {
+        "seed": "123456789012345678901234567890",
+        "offset": 2.5,
+        "scale": 0.125,
+        "rotation_degrees": 37
+      }
+    },
+    "result": {
+      "plan": [
+        {
+          "x": 1.137542285789093,
+          "y": -1.7023975841395704,
+          "rotation_degrees": -36.1258768662715,
+          "scale": 0.9423250275761595
+        },
+        {
+          "x": 9.410198172399436,
+          "y": 10.27535567819567,
+          "rotation_degrees": 16.29711561536378,
+          "scale": 1.1037249455467013
+        },
+        {
+          "x": 13.72512055063003,
+          "y": 18.809383089720725,
+          "rotation_degrees": -31.96432684156582,
+          "scale": 0.9263157008206927
+        },
+        {
+          "x": 20.571697197726202,
+          "y": 28.1816569905823,
+          "rotation_degrees": 19.77953851155325,
+          "scale": 0.9925902869327989
+        },
+        {
+          "x": 29.058435972784512,
+          "y": 40.05294171139556,
+          "rotation_degrees": -28.402539135422188,
+          "scale": 1.0464458741676042
+        }
+      ]
+    }
+  },
+  {
+    "name": "rectangle-seed-0",
+    "args": {
+      "placement": {
+        "kind": "rectangle",
+        "x": -10,
+        "y": 3,
+        "width": 100,
+        "height": 60,
+        "count": 7
+      },
+      "variation": {
+        "seed": 0,
+        "offset": 2.5,
+        "scale": 0.125,
+        "rotation_degrees": 37
+      }
+    },
+    "result": {
+      "plan": [
+        {
+          "x": 8.38877592429191,
+          "y": 14.289772014701512,
+          "rotation_degrees": -5.877703018517469,
+          "scale": 0.9397291875732409
+        },
+        {
+          "x": 40.056373606843046,
+          "y": 12.524670687252073,
+          "rotation_degrees": 21.001095588573172,
+          "scale": 0.9508281815197319
+        },
+        {
+          "x": 73.21631810409512,
+          "y": 13.416910197275156,
+          "rotation_degrees": 30.200353504454796,
+          "scale": 1.0011717139543475
+        },
+        {
+          "x": 5.5758558886651866,
+          "y": 34.27902102078612,
+          "rotation_degrees": 8.759305753974537,
+          "scale": 0.9376265853406102
+        },
+        {
+          "x": 42.0487312798412,
+          "y": 35.41392738018827,
+          "rotation_degrees": 22.95607546374763,
+          "scale": 1.1005414876098958
+        },
+        {
+          "x": 72.38407117993,
+          "y": 34.149158741300646,
+          "rotation_degrees": 29.514033309631515,
+          "scale": 1.0459959829788603
+        },
+        {
+          "x": 6.527380243930235,
+          "y": 51.003506040341826,
+          "rotation_degrees": -4.871284176420005,
+          "scale": 1.0277217433609505
+        }
+      ]
+    }
+  },
+  {
+    "name": "rectangle-seed-1",
+    "args": {
+      "placement": {
+        "kind": "rectangle",
+        "x": -10,
+        "y": 3,
+        "width": 100,
+        "height": 60,
+        "count": 7
+      },
+      "variation": {
+        "seed": 1,
+        "offset": 2.5,
+        "scale": 0.125,
+        "rotation_degrees": 37
+      }
+    },
+    "result": {
+      "plan": [
+        {
+          "x": 4.838487887228673,
+          "y": 14.737168684686164,
+          "rotation_degrees": 19.51932180426944,
+          "scale": 0.9387672564348555
+        },
+        {
+          "x": 39.977175435459706,
+          "y": 12.74745532394369,
+          "rotation_degrees": 11.217879981484458,
+          "scale": 1.0721808377838782
+        },
+        {
+          "x": 71.30263126720452,
+          "y": 10.641737382610032,
+          "rotation_degrees": 24.84661769007036,
+          "scale": 0.9831917669762633
+        },
+        {
+          "x": 7.978067078956378,
+          "y": 30.510530266755552,
+          "rotation_degrees": -4.041347639944696,
+          "scale": 1.0553850080851956
+        },
+        {
+          "x": 38.64381110635226,
+          "y": 35.226353477769614,
+          "rotation_degrees": 29.705631863249778,
+          "scale": 0.8826474957583884
+        },
+        {
+          "x": 70.96056263830064,
+          "y": 33.20706236396748,
+          "rotation_degrees": 32.497038045609784,
+          "scale": 0.9703010594220531
+        },
+        {
+          "x": 5.249663652319734,
+          "y": 52.610582877913586,
+          "rotation_degrees": -34.850981719459774,
+          "scale": 0.9304229165682587
+        }
+      ]
+    }
+  },
+  {
+    "name": "rectangle-seed--1",
+    "args": {
+      "placement": {
+        "kind": "rectangle",
+        "x": -10,
+        "y": 3,
+        "width": 100,
+        "height": 60,
+        "count": 7
+      },
+      "variation": {
+        "seed": -1,
+        "offset": 2.5,
+        "scale": 0.125,
+        "rotation_degrees": 37
+      }
+    },
+    "result": {
+      "plan": [
+        {
+          "x": 4.838487887228673,
+          "y": 14.737168684686164,
+          "rotation_degrees": 19.51932180426944,
+          "scale": 0.9387672564348555
+        },
+        {
+          "x": 39.977175435459706,
+          "y": 12.74745532394369,
+          "rotation_degrees": 11.217879981484458,
+          "scale": 1.0721808377838782
+        },
+        {
+          "x": 71.30263126720452,
+          "y": 10.641737382610032,
+          "rotation_degrees": 24.84661769007036,
+          "scale": 0.9831917669762633
+        },
+        {
+          "x": 7.978067078956378,
+          "y": 30.510530266755552,
+          "rotation_degrees": -4.041347639944696,
+          "scale": 1.0553850080851956
+        },
+        {
+          "x": 38.64381110635226,
+          "y": 35.226353477769614,
+          "rotation_degrees": 29.705631863249778,
+          "scale": 0.8826474957583884
+        },
+        {
+          "x": 70.96056263830064,
+          "y": 33.20706236396748,
+          "rotation_degrees": 32.497038045609784,
+          "scale": 0.9703010594220531
+        },
+        {
+          "x": 5.249663652319734,
+          "y": 52.610582877913586,
+          "rotation_degrees": -34.850981719459774,
+          "scale": 0.9304229165682587
+        }
+      ]
+    }
+  },
+  {
+    "name": "rectangle-seed-18446744073709551739",
+    "args": {
+      "placement": {
+        "kind": "rectangle",
+        "x": -10,
+        "y": 3,
+        "width": 100,
+        "height": 60,
+        "count": 7
+      },
+      "variation": {
+        "seed": 18446744073709551739,
+        "offset": 2.5,
+        "scale": 0.125,
+        "rotation_degrees": 37
+      }
+    },
+    "result": {
+      "plan": [
+        {
+          "x": 7.882825736873842,
+          "y": 15.06345758171686,
+          "rotation_degrees": -34.685079045806035,
+          "scale": 1.0097289249283328
+        },
+        {
+          "x": 41.0768079915974,
+          "y": 15.385435792208396,
+          "rotation_degrees": 4.829482155955411,
+          "scale": 0.9911578608181509
+        },
+        {
+          "x": 75.27823677757137,
+          "y": 14.544748436909238,
+          "rotation_degrees": -12.908176048485366,
+          "scale": 1.031367521360314
+        },
+        {
+          "x": 7.307253475131591,
+          "y": 33.91322283212003,
+          "rotation_degrees": 5.898602122061817,
+          "scale": 1.0168146097797117
+        },
+        {
+          "x": 38.65124706563973,
+          "y": 33.22232608051611,
+          "rotation_degrees": -4.583741508236365,
+          "scale": 1.0773642719767849
+        },
+        {
+          "x": 73.73402413396808,
+          "y": 31.13505450366546,
+          "rotation_degrees": -15.68981628536391,
+          "scale": 1.0000562034919087
+        },
+        {
+          "x": 7.70975690909092,
+          "y": 53.55066253739255,
+          "rotation_degrees": 16.054196879011656,
+          "scale": 0.9247802907507827
+        }
+      ]
+    }
+  },
+  {
+    "name": "rectangle-seed-123456789012345678901234567890",
+    "args": {
+      "placement": {
+        "kind": "rectangle",
+        "x": -10,
+        "y": 3,
+        "width": 100,
+        "height": 60,
+        "count": 7
+      },
+      "variation": {
+        "seed": "123456789012345678901234567890",
+        "offset": 2.5,
+        "scale": 0.125,
+        "rotation_degrees": 37
+      }
+    },
+    "result": {
+      "plan": [
+        {
+          "x": 7.804208952455761,
+          "y": 11.29760241586043,
+          "rotation_degrees": -36.1258768662715,
+          "scale": 0.9423250275761595
+        },
+        {
+          "x": 41.91019817239943,
+          "y": 13.27535567819567,
+          "rotation_degrees": 16.29711561536378,
+          "scale": 1.1037249455467013
+        },
+        {
+          "x": 72.05845388396337,
+          "y": 11.809383089720724,
+          "rotation_degrees": -31.96432684156582,
+          "scale": 0.9263157008206927
+        },
+        {
+          "x": 4.738363864392869,
+          "y": 31.1816569905823,
+          "rotation_degrees": 19.77953851155325,
+          "scale": 0.9925902869327989
+        },
+        {
+          "x": 39.05843597278451,
+          "y": 33.05294171139556,
+          "rotation_degrees": -28.402539135422188,
+          "scale": 1.0464458741676042
+        },
+        {
+          "x": 71.71659709801226,
+          "y": 32.24002377145273,
+          "rotation_degrees": 12.039965977644584,
+          "scale": 1.0935911199326238
+        },
+        {
+          "x": 8.602362173668862,
+          "y": 54.85488697134164,
+          "rotation_degrees": -35.22406985435347,
+          "scale": 0.9573047413681786
+        }
+      ]
+    }
+  },
+  {
+    "name": "plain-line",
+    "args": {
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 0,
+            "y": 0
+          },
+          {
+            "x": 30,
+            "y": 40
+          }
+        ],
+        "count": 5
+      }
+    },
+    "result": {
+      "plan": [
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 7.5,
+          "y": 10.0,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 15.0,
+          "y": 20.0,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 22.5,
+          "y": 30.0,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 30.0,
+          "y": 40.0,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        }
+      ]
+    }
+  },
+  {
+    "name": "tangent-line",
+    "args": {
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 0,
+            "y": 0
+          },
+          {
+            "x": 30,
+            "y": 40
+          }
+        ],
+        "count": 5
+      },
+      "orientation": "tangent"
+    },
+    "result": {
+      "plan": [
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "rotation_degrees": 53.13010235415598,
+          "scale": 1.0
+        },
+        {
+          "x": 7.5,
+          "y": 10.0,
+          "rotation_degrees": 53.13010235415598,
+          "scale": 1.0
+        },
+        {
+          "x": 15.0,
+          "y": 20.0,
+          "rotation_degrees": 53.13010235415598,
+          "scale": 1.0
+        },
+        {
+          "x": 22.5,
+          "y": 30.0,
+          "rotation_degrees": 53.13010235415598,
+          "scale": 1.0
+        },
+        {
+          "x": 30.0,
+          "y": 40.0,
+          "rotation_degrees": 53.13010235415598,
+          "scale": 1.0
+        }
+      ]
+    }
+  },
+  {
+    "name": "one-line",
+    "args": {
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 0,
+            "y": 0
+          },
+          {
+            "x": 30,
+            "y": 40
+          }
+        ],
+        "count": 1
+      }
+    },
+    "result": {
+      "plan": [
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        }
+      ]
+    }
+  },
+  {
+    "name": "spaced-line",
+    "args": {
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 0,
+            "y": 0
+          },
+          {
+            "x": 30,
+            "y": 40
+          }
+        ],
+        "spacing": 11
+      }
+    },
+    "result": {
+      "plan": [
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 6.6,
+          "y": 8.8,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 13.2,
+          "y": 17.6,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 19.8,
+          "y": 26.400000000000002,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 26.4,
+          "y": 35.2,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        }
+      ]
+    }
+  },
+  {
+    "name": "bent-line",
+    "args": {
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 0,
+            "y": 0
+          },
+          {
+            "x": 0,
+            "y": 0
+          },
+          {
+            "x": 0,
+            "y": 10
+          },
+          {
+            "x": 10,
+            "y": 10
+          }
+        ],
+        "count": 5
+      },
+      "orientation": "tangent"
+    },
+    "result": {
+      "plan": [
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "rotation_degrees": 90.0,
+          "scale": 1.0
+        },
+        {
+          "x": 0.0,
+          "y": 5.0,
+          "rotation_degrees": 90.0,
+          "scale": 1.0
+        },
+        {
+          "x": 0.0,
+          "y": 10.0,
+          "rotation_degrees": 90.0,
+          "scale": 1.0
+        },
+        {
+          "x": 5.0,
+          "y": 10.0,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 10.0,
+          "y": 10.0,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        }
+      ]
+    }
+  },
+  {
+    "name": "plain-rectangle",
+    "args": {
+      "placement": {
+        "kind": "rectangle",
+        "x": -10,
+        "y": 3,
+        "width": 100,
+        "height": 60,
+        "count": 7
+      }
+    },
+    "result": {
+      "plan": [
+        {
+          "x": 6.666666666666668,
+          "y": 13.0,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 40.0,
+          "y": 13.0,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 73.33333333333334,
+          "y": 13.0,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 6.666666666666668,
+          "y": 33.0,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 40.0,
+          "y": 33.0,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 73.33333333333334,
+          "y": 33.0,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 6.666666666666668,
+          "y": 53.0,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        }
+      ]
+    }
+  },
+  {
+    "name": "rectangle-columns",
+    "args": {
+      "placement": {
+        "kind": "rectangle",
+        "x": -10,
+        "y": 3,
+        "width": 100,
+        "height": 60,
+        "count": 7,
+        "columns": 2
+      }
+    },
+    "result": {
+      "plan": [
+        {
+          "x": 15.0,
+          "y": 10.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 65.0,
+          "y": 10.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 15.0,
+          "y": 25.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 65.0,
+          "y": 25.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 15.0,
+          "y": 40.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 65.0,
+          "y": 40.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 15.0,
+          "y": 55.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        }
+      ]
+    }
+  },
+  {
+    "name": "spaced-rectangle",
+    "args": {
+      "placement": {
+        "kind": "rectangle",
+        "x": 1.25,
+        "y": -2.5,
+        "width": 20,
+        "height": 30,
+        "spacing_x": 4,
+        "spacing_y": 6
+      }
+    },
+    "result": {
+      "plan": [
+        {
+          "x": 3.25,
+          "y": 0.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 7.25,
+          "y": 0.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 11.25,
+          "y": 0.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 15.25,
+          "y": 0.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 19.25,
+          "y": 0.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 3.25,
+          "y": 6.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 7.25,
+          "y": 6.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 11.25,
+          "y": 6.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 15.25,
+          "y": 6.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 19.25,
+          "y": 6.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 3.25,
+          "y": 12.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 7.25,
+          "y": 12.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 11.25,
+          "y": 12.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 15.25,
+          "y": 12.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 19.25,
+          "y": 12.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 3.25,
+          "y": 18.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 7.25,
+          "y": 18.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 11.25,
+          "y": 18.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 15.25,
+          "y": 18.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 19.25,
+          "y": 18.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 3.25,
+          "y": 24.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 7.25,
+          "y": 24.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 11.25,
+          "y": 24.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 15.25,
+          "y": 24.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        },
+        {
+          "x": 19.25,
+          "y": 24.5,
+          "rotation_degrees": 0.0,
+          "scale": 1.0
+        }
+      ]
+    }
+  },
+  {
+    "name": "line-conflicting-count",
+    "args": {
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 0,
+            "y": 0
+          },
+          {
+            "x": 30,
+            "y": 40
+          }
+        ],
+        "count": 5,
+        "spacing": 5
+      }
+    },
+    "result": {
+      "error": "polyline requires exactly one of count or spacing"
+    }
+  },
+  {
+    "name": "zero-length",
+    "args": {
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 0,
+            "y": 0
+          },
+          {
+            "x": 0,
+            "y": 0
+          }
+        ],
+        "count": 5
+      }
+    },
+    "result": {
+      "error": "polyline must have a finite nonzero length"
+    }
+  },
+  {
+    "name": "line-limit",
+    "args": {
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 0,
+            "y": 0
+          },
+          {
+            "x": 1024,
+            "y": 0
+          }
+        ],
+        "spacing": 1
+      }
+    },
+    "result": {
+      "error": "placement exceeds 1024 instances"
+    }
+  },
+  {
+    "name": "rectangle-conflict",
+    "args": {
+      "placement": {
+        "kind": "rectangle",
+        "x": -10,
+        "y": 3,
+        "width": 100,
+        "height": 60,
+        "count": 7,
+        "spacing_x": 3
+      }
+    },
+    "result": {
+      "error": "rectangle requires count or spacing, not both"
+    }
+  },
+  {
+    "name": "rectangle-columns-limit",
+    "args": {
+      "placement": {
+        "kind": "rectangle",
+        "x": -10,
+        "y": 3,
+        "width": 100,
+        "height": 60,
+        "count": 7,
+        "columns": 10
+      }
+    },
+    "result": {
+      "error": "columns must not exceed count"
+    }
+  },
+  {
+    "name": "rectangle-tangent",
+    "args": {
+      "placement": {
+        "kind": "rectangle",
+        "x": -10,
+        "y": 3,
+        "width": 100,
+        "height": 60,
+        "count": 7
+      },
+      "orientation": "tangent"
+    },
+    "result": {
+      "error": "rectangle placement supports fixed orientation only"
+    }
+  },
+  {
+    "name": "rectangle-missing-spacing",
+    "args": {
+      "placement": {
+        "kind": "rectangle",
+        "x": 0,
+        "y": 0,
+        "width": 10,
+        "height": 10
+      }
+    },
+    "result": {
+      "error": "rectangle requires count or both spacings (without columns)"
+    }
+  },
+  {
+    "name": "rectangle-spacing-limit",
+    "args": {
+      "placement": {
+        "kind": "rectangle",
+        "x": 0,
+        "y": 0,
+        "width": 100,
+        "height": 100,
+        "spacing_x": 1,
+        "spacing_y": 1
+      }
+    },
+    "result": {
+      "error": "placement requires 1..1024 instances"
+    }
+  },
+  {
+    "name": "rectangle-empty",
+    "args": {
+      "placement": {
+        "kind": "rectangle",
+        "x": 0,
+        "y": 0,
+        "width": 1,
+        "height": 1,
+        "spacing_x": 2,
+        "spacing_y": 2
+      }
+    },
+    "result": {
+      "error": "placement requires 1..1024 instances"
+    }
+  },
+  {
+    "name": "extra-field",
+    "args": {
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 0,
+            "y": 0
+          },
+          {
+            "x": 30,
+            "y": 40
+          }
+        ],
+        "count": 5,
+        "unknown": 1
+      }
+    },
+    "result": {
+      "error": "invalid bounded placement/variation parameters"
+    }
+  },
+  {
+    "name": "invalid-count",
+    "args": {
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 0,
+            "y": 0
+          },
+          {
+            "x": 30,
+            "y": 40
+          }
+        ],
+        "count": 1025
+      }
+    },
+    "result": {
+      "error": "invalid bounded placement/variation parameters"
+    }
+  },
+  {
+    "name": "invalid-jitter",
+    "args": {
+      "placement": {
+        "kind": "polyline",
+        "points": [
+          {
+            "x": 0,
+            "y": 0
+          },
+          {
+            "x": 30,
+            "y": 40
+          }
+        ],
+        "count": 5
+      },
+      "variation": {
+        "scale": 1
+      }
+    },
+    "result": {
+      "error": "invalid bounded placement/variation parameters"
+    }
+  }
+]

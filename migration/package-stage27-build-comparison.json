@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage27",
+  "archive": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage27.tar.gz",
+  "archive_bytes": 46473366,
+  "archive_sha256": "a8346979e8a4304fff87da0e3a27a0f5798c0ce78d4d497ae3b7d16c8369f593",
+  "binary_sha256": "62a75763d517af691c0cc1c9026d8963dc9bb33394d9dfdd76aa8fa9d5819f18",
+  "regular_files": 2453,
+  "regular_bytes": 132708938,
+  "changed_manifest_entries_from_stage23": [
+    "LICENSE-INVENTORY.json",
+    "bin/inkscape-mcp",
+    "libexec/inkscape-mcp/package.json"
+  ],
+  "fixed_release_byte_identity": true,
+  "scope": "Current stage27 packaged DOM no-op fix; cold/warm/archive/doctor/launcher/discovery/notices acceptance, no native GUI or performance transfer"
+}

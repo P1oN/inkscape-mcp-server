@@ -1,0 +1,4234 @@
+{
+  "cases": [
+    {
+      "text": "",
+      "expected": {
+        "invalid": true
+      }
+    },
+    {
+      "text": " ",
+      "expected": {
+        "invalid": true
+      }
+    },
+    {
+      "text": "0",
+      "expected": {
+        "number": 0.0
+      }
+    },
+    {
+      "text": "-0.0",
+      "expected": {
+        "number": -0.0
+      }
+    },
+    {
+      "text": "1.",
+      "expected": {
+        "number": 1.0
+      }
+    },
+    {
+      "text": ".2",
+      "expected": {
+        "number": 0.2
+      }
+    },
+    {
+      "text": "-.2",
+      "expected": {
+        "number": -0.2
+      }
+    },
+    {
+      "text": "+1e2",
+      "expected": {
+        "number": 100.0
+      }
+    },
+    {
+      "text": "1_2.3_4e5_6",
+      "expected": {
+        "number": 1.234e+57
+      }
+    },
+    {
+      "text": "_1",
+      "expected": {
+        "invalid": true
+      }
+    },
+    {
+      "text": "1_",
+      "expected": {
+        "invalid": true
+      }
+    },
+    {
+      "text": "1__2",
+      "expected": {
+        "invalid": true
+      }
+    },
+    {
+      "text": "1_.2",
+      "expected": {
+        "invalid": true
+      }
+    },
+    {
+      "text": "1._2",
+      "expected": {
+        "invalid": true
+      }
+    },
+    {
+      "text": "1e_2",
+      "expected": {
+        "invalid": true
+      }
+    },
+    {
+      "text": "1e",
+      "expected": {
+        "invalid": true
+      }
+    },
+    {
+      "text": "1e309",
+      "expected": {
+        "nonfinite": "inf"
+      }
+    },
+    {
+      "text": "-1e309",
+      "expected": {
+        "nonfinite": "-inf"
+      }
+    },
+    {
+      "text": "NaN",
+      "expected": {
+        "nonfinite": "nan"
+      }
+    },
+    {
+      "text": "-NaN",
+      "expected": {
+        "nonfinite": "nan"
+      }
+    },
+    {
+      "text": "+Infinity",
+      "expected": {
+        "nonfinite": "inf"
+      }
+    },
+    {
+      "text": "-Inf",
+      "expected": {
+        "nonfinite": "-inf"
+      }
+    },
+    {
+      "text": "\u001c1\u001c",
+      "expected": {
+        "invalid": true
+      }
+    },
+    {
+      "text": " 1 ",
+      "expected": {
+        "number": 1.0
+      }
+    },
+    {
+      "text": "1px",
+      "expected": {
+        "invalid": true
+      }
+    },
+    {
+      "text": "0.9",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "1.8",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "2.7",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "3.6",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "4.5",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "5.4",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "6.3",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "7.2",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "8.1",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "9.0",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "٠.٩",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "١.٨",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "٢.٧",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "٣.٦",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "٤.٥",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "٥.٤",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "٦.٣",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "٧.٢",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "٨.١",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "٩.٠",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "۰.۹",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "۱.۸",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "۲.۷",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "۳.۶",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "۴.۵",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "۵.۴",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "۶.۳",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "۷.۲",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "۸.۱",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "۹.۰",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "߀.߉",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "߁.߈",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "߂.߇",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "߃.߆",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "߄.߅",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "߅.߄",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "߆.߃",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "߇.߂",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "߈.߁",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "߉.߀",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "०.९",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "१.८",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "२.७",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "३.६",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "४.५",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "५.४",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "६.३",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "७.२",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "८.१",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "९.०",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "০.৯",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "১.৮",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "২.৭",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "৩.৬",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "৪.৫",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "৫.৪",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "৬.৩",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "৭.২",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "৮.১",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "৯.০",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "੦.੯",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "੧.੮",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "੨.੭",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "੩.੬",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "੪.੫",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "੫.੪",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "੬.੩",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "੭.੨",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "੮.੧",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "੯.੦",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "૦.૯",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "૧.૮",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "૨.૭",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "૩.૬",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "૪.૫",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "૫.૪",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "૬.૩",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "૭.૨",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "૮.૧",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "૯.૦",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "୦.୯",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "୧.୮",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "୨.୭",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "୩.୬",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "୪.୫",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "୫.୪",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "୬.୩",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "୭.୨",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "୮.୧",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "୯.୦",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "௦.௯",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "௧.௮",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "௨.௭",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "௩.௬",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "௪.௫",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "௫.௪",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "௬.௩",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "௭.௨",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "௮.௧",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "௯.௦",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "౦.౯",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "౧.౮",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "౨.౭",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "౩.౬",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "౪.౫",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "౫.౪",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "౬.౩",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "౭.౨",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "౮.౧",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "౯.౦",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "೦.೯",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "೧.೮",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "೨.೭",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "೩.೬",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "೪.೫",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "೫.೪",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "೬.೩",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "೭.೨",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "೮.೧",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "೯.೦",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "൦.൯",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "൧.൮",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "൨.൭",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "൩.൬",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "൪.൫",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "൫.൪",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "൬.൩",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "൭.൨",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "൮.൧",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "൯.൦",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "෦.෯",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "෧.෮",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "෨.෭",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "෩.෬",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "෪.෫",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "෫.෪",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "෬.෩",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "෭.෨",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "෮.෧",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "෯.෦",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "๐.๙",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "๑.๘",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "๒.๗",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "๓.๖",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "๔.๕",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "๕.๔",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "๖.๓",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "๗.๒",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "๘.๑",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "๙.๐",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "໐.໙",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "໑.໘",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "໒.໗",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "໓.໖",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "໔.໕",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "໕.໔",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "໖.໓",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "໗.໒",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "໘.໑",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "໙.໐",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "༠.༩",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "༡.༨",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "༢.༧",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "༣.༦",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "༤.༥",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "༥.༤",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "༦.༣",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "༧.༢",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "༨.༡",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "༩.༠",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "၀.၉",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "၁.၈",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "၂.၇",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "၃.၆",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "၄.၅",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "၅.၄",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "၆.၃",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "၇.၂",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "၈.၁",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "၉.၀",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "႐.႙",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "႑.႘",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "႒.႗",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "႓.႖",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "႔.႕",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "႕.႔",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "႖.႓",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "႗.႒",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "႘.႑",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "႙.႐",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "០.៩",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "១.៨",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "២.៧",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "៣.៦",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "៤.៥",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "៥.៤",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "៦.៣",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "៧.២",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "៨.១",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "៩.០",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "᠐.᠙",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "᠑.᠘",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "᠒.᠗",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "᠓.᠖",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "᠔.᠕",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "᠕.᠔",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "᠖.᠓",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "᠗.᠒",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "᠘.᠑",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "᠙.᠐",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "᥆.᥏",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "᥇.᥎",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "᥈.᥍",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "᥉.᥌",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "᥊.᥋",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "᥋.᥊",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "᥌.᥉",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "᥍.᥈",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "᥎.᥇",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "᥏.᥆",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "᧐.᧙",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "᧑.᧘",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "᧒.᧗",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "᧓.᧖",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "᧔.᧕",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "᧕.᧔",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "᧖.᧓",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "᧗.᧒",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "᧘.᧑",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "᧙.᧐",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "᪀.᪉",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "᪁.᪈",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "᪂.᪇",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "᪃.᪆",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "᪄.᪅",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "᪅.᪄",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "᪆.᪃",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "᪇.᪂",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "᪈.᪁",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "᪉.᪀",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "᪐.᪙",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "᪑.᪘",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "᪒.᪗",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "᪓.᪖",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "᪔.᪕",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "᪕.᪔",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "᪖.᪓",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "᪗.᪒",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "᪘.᪑",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "᪙.᪐",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "᭐.᭙",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "᭑.᭘",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "᭒.᭗",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "᭓.᭖",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "᭔.᭕",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "᭕.᭔",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "᭖.᭓",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "᭗.᭒",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "᭘.᭑",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "᭙.᭐",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "᮰.᮹",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "᮱.᮸",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "᮲.᮷",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "᮳.᮶",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "᮴.᮵",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "᮵.᮴",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "᮶.᮳",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "᮷.᮲",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "᮸.᮱",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "᮹.᮰",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "᱀.᱉",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "᱁.᱈",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "᱂.᱇",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "᱃.᱆",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "᱄.᱅",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "᱅.᱄",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "᱆.᱃",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "᱇.᱂",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "᱈.᱁",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "᱉.᱀",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "᱐.᱙",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "᱑.᱘",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "᱒.᱗",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "᱓.᱖",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "᱔.᱕",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "᱕.᱔",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "᱖.᱓",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "᱗.᱒",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "᱘.᱑",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "᱙.᱐",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "꘠.꘩",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "꘡.꘨",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "꘢.꘧",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "꘣.꘦",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "꘤.꘥",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "꘥.꘤",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "꘦.꘣",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "꘧.꘢",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "꘨.꘡",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "꘩.꘠",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "꣐.꣙",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "꣑.꣘",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "꣒.꣗",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "꣓.꣖",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "꣔.꣕",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "꣕.꣔",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "꣖.꣓",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "꣗.꣒",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "꣘.꣑",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "꣙.꣐",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "꤀.꤉",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "꤁.꤈",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "꤂.꤇",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "꤃.꤆",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "꤄.꤅",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "꤅.꤄",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "꤆.꤃",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "꤇.꤂",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "꤈.꤁",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "꤉.꤀",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "꧐.꧙",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "꧑.꧘",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "꧒.꧗",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "꧓.꧖",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "꧔.꧕",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "꧕.꧔",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "꧖.꧓",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "꧗.꧒",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "꧘.꧑",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "꧙.꧐",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "꧰.꧹",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "꧱.꧸",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "꧲.꧷",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "꧳.꧶",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "꧴.꧵",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "꧵.꧴",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "꧶.꧳",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "꧷.꧲",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "꧸.꧱",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "꧹.꧰",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "꩐.꩙",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "꩑.꩘",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "꩒.꩗",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "꩓.꩖",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "꩔.꩕",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "꩕.꩔",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "꩖.꩓",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "꩗.꩒",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "꩘.꩑",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "꩙.꩐",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "꯰.꯹",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "꯱.꯸",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "꯲.꯷",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "꯳.꯶",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "꯴.꯵",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "꯵.꯴",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "꯶.꯳",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "꯷.꯲",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "꯸.꯱",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "꯹.꯰",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "０.９",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "１.８",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "２.７",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "３.６",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "４.５",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "５.４",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "６.３",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "７.２",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "８.１",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "９.０",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𐒠.𐒩",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𐒡.𐒨",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𐒢.𐒧",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𐒣.𐒦",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𐒤.𐒥",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𐒥.𐒤",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𐒦.𐒣",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𐒧.𐒢",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𐒨.𐒡",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𐒩.𐒠",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𐴰.𐴹",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𐴱.𐴸",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𐴲.𐴷",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𐴳.𐴶",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𐴴.𐴵",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𐴵.𐴴",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𐴶.𐴳",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𐴷.𐴲",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𐴸.𐴱",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𐴹.𐴰",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𑁦.𑁯",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𑁧.𑁮",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𑁨.𑁭",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𑁩.𑁬",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𑁪.𑁫",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𑁫.𑁪",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𑁬.𑁩",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𑁭.𑁨",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𑁮.𑁧",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𑁯.𑁦",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𑃰.𑃹",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𑃱.𑃸",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𑃲.𑃷",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𑃳.𑃶",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𑃴.𑃵",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𑃵.𑃴",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𑃶.𑃳",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𑃷.𑃲",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𑃸.𑃱",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𑃹.𑃰",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𑄶.𑄿",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𑄷.𑄾",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𑄸.𑄽",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𑄹.𑄼",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𑄺.𑄻",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𑄻.𑄺",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𑄼.𑄹",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𑄽.𑄸",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𑄾.𑄷",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𑄿.𑄶",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𑇐.𑇙",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𑇑.𑇘",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𑇒.𑇗",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𑇓.𑇖",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𑇔.𑇕",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𑇕.𑇔",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𑇖.𑇓",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𑇗.𑇒",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𑇘.𑇑",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𑇙.𑇐",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𑋰.𑋹",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𑋱.𑋸",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𑋲.𑋷",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𑋳.𑋶",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𑋴.𑋵",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𑋵.𑋴",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𑋶.𑋳",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𑋷.𑋲",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𑋸.𑋱",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𑋹.𑋰",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𑑐.𑑙",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𑑑.𑑘",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𑑒.𑑗",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𑑓.𑑖",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𑑔.𑑕",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𑑕.𑑔",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𑑖.𑑓",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𑑗.𑑒",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𑑘.𑑑",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𑑙.𑑐",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𑓐.𑓙",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𑓑.𑓘",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𑓒.𑓗",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𑓓.𑓖",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𑓔.𑓕",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𑓕.𑓔",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𑓖.𑓓",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𑓗.𑓒",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𑓘.𑓑",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𑓙.𑓐",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𑙐.𑙙",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𑙑.𑙘",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𑙒.𑙗",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𑙓.𑙖",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𑙔.𑙕",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𑙕.𑙔",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𑙖.𑙓",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𑙗.𑙒",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𑙘.𑙑",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𑙙.𑙐",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𑛀.𑛉",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𑛁.𑛈",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𑛂.𑛇",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𑛃.𑛆",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𑛄.𑛅",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𑛅.𑛄",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𑛆.𑛃",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𑛇.𑛂",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𑛈.𑛁",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𑛉.𑛀",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𑜰.𑜹",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𑜱.𑜸",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𑜲.𑜷",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𑜳.𑜶",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𑜴.𑜵",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𑜵.𑜴",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𑜶.𑜳",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𑜷.𑜲",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𑜸.𑜱",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𑜹.𑜰",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𑣠.𑣩",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𑣡.𑣨",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𑣢.𑣧",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𑣣.𑣦",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𑣤.𑣥",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𑣥.𑣤",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𑣦.𑣣",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𑣧.𑣢",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𑣨.𑣡",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𑣩.𑣠",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𑥐.𑥙",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𑥑.𑥘",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𑥒.𑥗",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𑥓.𑥖",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𑥔.𑥕",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𑥕.𑥔",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𑥖.𑥓",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𑥗.𑥒",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𑥘.𑥑",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𑥙.𑥐",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𑱐.𑱙",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𑱑.𑱘",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𑱒.𑱗",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𑱓.𑱖",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𑱔.𑱕",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𑱕.𑱔",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𑱖.𑱓",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𑱗.𑱒",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𑱘.𑱑",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𑱙.𑱐",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𑵐.𑵙",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𑵑.𑵘",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𑵒.𑵗",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𑵓.𑵖",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𑵔.𑵕",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𑵕.𑵔",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𑵖.𑵓",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𑵗.𑵒",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𑵘.𑵑",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𑵙.𑵐",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𑶠.𑶩",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𑶡.𑶨",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𑶢.𑶧",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𑶣.𑶦",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𑶤.𑶥",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𑶥.𑶤",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𑶦.𑶣",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𑶧.𑶢",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𑶨.𑶡",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𑶩.𑶠",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𑽐.𑽙",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𑽑.𑽘",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𑽒.𑽗",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𑽓.𑽖",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𑽔.𑽕",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𑽕.𑽔",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𑽖.𑽓",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𑽗.𑽒",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𑽘.𑽑",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𑽙.𑽐",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𖩠.𖩩",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𖩡.𖩨",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𖩢.𖩧",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𖩣.𖩦",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𖩤.𖩥",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𖩥.𖩤",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𖩦.𖩣",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𖩧.𖩢",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𖩨.𖩡",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𖩩.𖩠",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𖫀.𖫉",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𖫁.𖫈",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𖫂.𖫇",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𖫃.𖫆",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𖫄.𖫅",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𖫅.𖫄",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𖫆.𖫃",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𖫇.𖫂",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𖫈.𖫁",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𖫉.𖫀",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𖭐.𖭙",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𖭑.𖭘",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𖭒.𖭗",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𖭓.𖭖",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𖭔.𖭕",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𖭕.𖭔",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𖭖.𖭓",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𖭗.𖭒",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𖭘.𖭑",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𖭙.𖭐",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𝟎.𝟗",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𝟏.𝟖",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𝟐.𝟕",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𝟑.𝟔",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𝟒.𝟓",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𝟓.𝟒",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𝟔.𝟑",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𝟕.𝟐",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𝟖.𝟏",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𝟗.𝟎",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𝟘.𝟡",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𝟙.𝟠",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𝟚.𝟟",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𝟛.𝟞",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𝟜.𝟝",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𝟝.𝟜",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𝟞.𝟛",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𝟟.𝟚",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𝟠.𝟙",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𝟡.𝟘",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𝟢.𝟫",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𝟣.𝟪",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𝟤.𝟩",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𝟥.𝟨",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𝟦.𝟧",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𝟧.𝟦",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𝟨.𝟥",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𝟩.𝟤",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𝟪.𝟣",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𝟫.𝟢",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𝟬.𝟵",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𝟭.𝟴",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𝟮.𝟳",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𝟯.𝟲",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𝟰.𝟱",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𝟱.𝟰",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𝟲.𝟯",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𝟳.𝟮",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𝟴.𝟭",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𝟵.𝟬",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𝟶.𝟿",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𝟷.𝟾",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𝟸.𝟽",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𝟹.𝟼",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𝟺.𝟻",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𝟻.𝟺",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𝟼.𝟹",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𝟽.𝟸",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𝟾.𝟷",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𝟿.𝟶",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𞅀.𞅉",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𞅁.𞅈",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𞅂.𞅇",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𞅃.𞅆",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𞅄.𞅅",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𞅅.𞅄",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𞅆.𞅃",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𞅇.𞅂",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𞅈.𞅁",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𞅉.𞅀",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𞋰.𞋹",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𞋱.𞋸",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𞋲.𞋷",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𞋳.𞋶",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𞋴.𞋵",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𞋵.𞋴",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𞋶.𞋳",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𞋷.𞋲",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𞋸.𞋱",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𞋹.𞋰",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𞓰.𞓹",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𞓱.𞓸",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𞓲.𞓷",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𞓳.𞓶",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𞓴.𞓵",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𞓵.𞓴",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𞓶.𞓳",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𞓷.𞓲",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𞓸.𞓱",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𞓹.𞓰",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "𞥐.𞥙",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "𞥑.𞥘",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "𞥒.𞥗",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "𞥓.𞥖",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "𞥔.𞥕",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "𞥕.𞥔",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "𞥖.𞥓",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "𞥗.𞥒",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "𞥘.𞥑",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "𞥙.𞥐",
+      "expected": {
+        "number": 9.0
+      }
+    },
+    {
+      "text": "🯰.🯹",
+      "expected": {
+        "number": 0.9
+      }
+    },
+    {
+      "text": "🯱.🯸",
+      "expected": {
+        "number": 1.8
+      }
+    },
+    {
+      "text": "🯲.🯷",
+      "expected": {
+        "number": 2.7
+      }
+    },
+    {
+      "text": "🯳.🯶",
+      "expected": {
+        "number": 3.6
+      }
+    },
+    {
+      "text": "🯴.🯵",
+      "expected": {
+        "number": 4.5
+      }
+    },
+    {
+      "text": "🯵.🯴",
+      "expected": {
+        "number": 5.4
+      }
+    },
+    {
+      "text": "🯶.🯳",
+      "expected": {
+        "number": 6.3
+      }
+    },
+    {
+      "text": "🯷.🯲",
+      "expected": {
+        "number": 7.2
+      }
+    },
+    {
+      "text": "🯸.🯱",
+      "expected": {
+        "number": 8.1
+      }
+    },
+    {
+      "text": "🯹.🯰",
+      "expected": {
+        "number": 9.0
+      }
+    }
+  ]
+}

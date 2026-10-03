@@ -1,0 +1,58 @@
+{
+  "observations": 46,
+  "normalization": "validated minted IDs/times/PNG bindings; exact transport and full semantic fields",
+  "differences": [],
+  "encoded_png_representation_differences": [
+    {
+      "path": "/<OP-1>/sha256",
+      "expected": "df9bf917c93a9515709833bd887a68ba3ddc41bdedd97e88f5174d9cbc2e83d2",
+      "actual": "7c6b745f26d9149f4df3f07492550bca2ce7684fe789fde16641b3db8b2e81ab"
+    },
+    {
+      "path": "/<OP-1>/size",
+      "expected": 77,
+      "actual": 75
+    },
+    {
+      "path": "/<OP-2>/sha256",
+      "expected": "87a66b65a1a31a83cfcde8ea9eb06b8bdf0e17ce3a8f3b246d4b005482224dba",
+      "actual": "3dcea8ddfd1ac614fe98d7b308a9d54ee66f1905155efd87524270d89416f7a2"
+    },
+    {
+      "path": "/<OP-2>/size",
+      "expected": 77,
+      "actual": 76
+    },
+    {
+      "path": "/<OP-3>/sha256",
+      "expected": "87a66b65a1a31a83cfcde8ea9eb06b8bdf0e17ce3a8f3b246d4b005482224dba",
+      "actual": "3dcea8ddfd1ac614fe98d7b308a9d54ee66f1905155efd87524270d89416f7a2"
+    },
+    {
+      "path": "/<OP-3>/size",
+      "expected": 77,
+      "actual": 76
+    },
+    {
+      "path": "/<OP-4>/sha256",
+      "expected": "87a66b65a1a31a83cfcde8ea9eb06b8bdf0e17ce3a8f3b246d4b005482224dba",
+      "actual": "3dcea8ddfd1ac614fe98d7b308a9d54ee66f1905155efd87524270d89416f7a2"
+    },
+    {
+      "path": "/<OP-4>/size",
+      "expected": 77,
+      "actual": 76
+    },
+    {
+      "path": "/<OP-5>/sha256",
+      "expected": "87a66b65a1a31a83cfcde8ea9eb06b8bdf0e17ce3a8f3b246d4b005482224dba",
+      "actual": "3dcea8ddfd1ac614fe98d7b308a9d54ee66f1905155efd87524270d89416f7a2"
+    },
+    {
+      "path": "/<OP-5>/size",
+      "expected": 77,
+      "actual": 76
+    }
+  ],
+  "passed": true
+}

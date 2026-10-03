@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "full_migration_complete": false,
+  "scope": "Actual stage23 binary synthetic live transport; not native GUI acceptance",
+  "reports": {
+    "connect": {
+      "path": "migration/live-connect-stage23-comparison.json",
+      "observations": 26,
+      "passed": true
+    },
+    "loop": {
+      "path": "migration/live-loop-stage23-comparison.json",
+      "observations": 46,
+      "passed": true
+    },
+    "mutation": {
+      "path": "migration/live-mutation-stage23-comparison.json",
+      "observations": 62,
+      "passed": true
+    }
+  },
+  "native_launch_refusal": "migration/native-stage23-launch-comparison.json",
+  "native_GUI_acceptance": false,
+  "primary_monitor_unavailable": true,
+  "automatic_relaunch": false,
+  "previous_live_disappearance_cause_proven": false,
+  "required_user_authorization": false
+}

@@ -1,0 +1,80 @@
+{
+  "observations": 55,
+  "normalization": "validated UTC connection/probe/record timestamps, minted operation IDs and PNG artifact bindings only",
+  "differences": [
+    {
+      "path": "/False/connected-cached-caps/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/False/connected-refreshed-caps/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/False/disconnected-refreshed-caps/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/True/before-connect-caps/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/True/connected-cached-caps/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/True/connected-refreshed-caps/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/True/disconnected-refreshed-caps/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    }
+  ],
+  "intentional_runtime_identity_differences": [
+    {
+      "path": "/False/connected-cached-caps/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/False/connected-refreshed-caps/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/False/disconnected-refreshed-caps/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/True/before-connect-caps/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/True/connected-cached-caps/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/True/connected-refreshed-caps/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/True/disconnected-refreshed-caps/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    }
+  ],
+  "unexpected_differences": [],
+  "passed": true
+}

@@ -1,0 +1,84 @@
+{
+  "passed": true,
+  "scope": "Model finite-number constraints and frozen negative argument regressions through actual STDIO; no valid mutation or GUI launch",
+  "reports": [
+    {
+      "report": "migration/arguments-empty-finite-comparison.json",
+      "sha256": "08e84bb7d19c65b9927173dcae7af06db85965b128166394a46f779d7119f2de",
+      "observations": 87
+    },
+    {
+      "report": "migration/arguments-required-objects-finite-comparison.json",
+      "sha256": "3a2f7551586e45fe730ba167b6722d788892558a09ddd36e602852be26f535f8",
+      "observations": 87
+    },
+    {
+      "report": "migration/arguments-required-null-finite-comparison.json",
+      "sha256": "4cd137b21387c5f56d056e073e4ade119e06e7408f7fcfcbe2c6da0b754332aa",
+      "observations": 87
+    },
+    {
+      "report": "migration/arguments-type-fields-finite-comparison.json",
+      "sha256": "320d1542010a7c8d92832255e3e523575bfdb7911da6ddc1aafa2564a58192ad",
+      "observations": 418
+    },
+    {
+      "report": "migration/arguments-missing-one-finite-comparison.json",
+      "sha256": "9cd5bf7d808d0ae699535a1a648575fb3f74fcb5b9ddfea2a13e3a0aabae288d",
+      "observations": 147
+    },
+    {
+      "report": "migration/arguments-unknown-finite-comparison.json",
+      "sha256": "2e67b41255c3e7041df8d4cee29904e6511a156c8a891c1f083b299bd36da9c3",
+      "observations": 110
+    },
+    {
+      "report": "migration/arguments-nested-unknown-finite-comparison.json",
+      "sha256": "71718f6f9ba64d3c638566a99830b68d1658d46750c534aa68ab65031d956646",
+      "observations": 6
+    },
+    {
+      "report": "migration/arguments-invalid-tag-finite-comparison.json",
+      "sha256": "62901c742d4a84244459083819f1d593f4fd2bbb3fb7530d4154d74e5b2bed50",
+      "observations": 18
+    },
+    {
+      "report": "migration/arguments-numeric-text-finite-comparison.json",
+      "sha256": "f1c8b33a2478b1eee3ebaac4b31a95a0eb52f4c8d52ef5c0852c8d3d56aabfbe",
+      "observations": 2250
+    },
+    {
+      "report": "migration/arguments-container-fields-finite-comparison.json",
+      "sha256": "1be17d8cfb90dc04388459d60effbc2f8ecf2bce0f4d8cafdc654443793d4943",
+      "observations": 78
+    },
+    {
+      "report": "migration/arguments-integer-extremes-finite-comparison.json",
+      "sha256": "9aba953c43a9017ca7669b2295be120488379263b79efb49ce232951c245152c",
+      "observations": 487
+    },
+    {
+      "report": "migration/arguments-finite-fields-finite-comparison.json",
+      "sha256": "f7278fa4f8d57654c62e29c3ba81af4a2aa7ff371b7e1f0702e71344533d51fd",
+      "observations": 576
+    },
+    {
+      "report": "migration/arguments-finite-fields-package-comparison.json",
+      "sha256": "f7278fa4f8d57654c62e29c3ba81af4a2aa7ff371b7e1f0702e71344533d51fd",
+      "observations": 576
+    }
+  ],
+  "observations": 4927,
+  "STDIO_starts": 26,
+  "normalization": "none",
+  "rust_binary_sha256": "c30527cf22c33ff3bd9291f7dff324dc5318338e36162b5d5355628ec6c33030",
+  "reference_contract": "migration/contracts/argument-finite-field-errors.json",
+  "reference_contract_sha256": "07e3f55365e5e09e6f17125cf7c82b846c5f01027fbbaf612a1d2cf2c3ce3b76",
+  "reference_cases": 576,
+  "finite_float_paths": 36,
+  "finite_path_contract_sha256": "c01af27892cb416aa5320ad398ad4200b8c9743373475546e0f379da74a24145",
+  "schema_audit": "migration/argument-schema-finite-audit.json",
+  "native_GUI_acceptance": false,
+  "full_argument_validation_complete": false,
+  "full_migration_complete": false
+}

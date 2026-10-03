@@ -1,0 +1,85 @@
+{
+  "normalization": "none",
+  "results": [
+    {
+      "configuration": "live-false_raw-false_core_full",
+      "passed": true,
+      "differences": []
+    },
+    {
+      "configuration": "live-false_raw-false_core_short",
+      "passed": true,
+      "differences": []
+    },
+    {
+      "configuration": "live-false_raw-false_full_full",
+      "passed": true,
+      "differences": []
+    },
+    {
+      "configuration": "live-false_raw-false_full_short",
+      "passed": true,
+      "differences": []
+    },
+    {
+      "configuration": "live-false_raw-true_core_full",
+      "passed": true,
+      "differences": []
+    },
+    {
+      "configuration": "live-false_raw-true_core_short",
+      "passed": true,
+      "differences": []
+    },
+    {
+      "configuration": "live-false_raw-true_full_full",
+      "passed": true,
+      "differences": []
+    },
+    {
+      "configuration": "live-false_raw-true_full_short",
+      "passed": true,
+      "differences": []
+    },
+    {
+      "configuration": "live-true_raw-false_core_full",
+      "passed": true,
+      "differences": []
+    },
+    {
+      "configuration": "live-true_raw-false_core_short",
+      "passed": true,
+      "differences": []
+    },
+    {
+      "configuration": "live-true_raw-false_full_full",
+      "passed": true,
+      "differences": []
+    },
+    {
+      "configuration": "live-true_raw-false_full_short",
+      "passed": true,
+      "differences": []
+    },
+    {
+      "configuration": "live-true_raw-true_core_full",
+      "passed": true,
+      "differences": []
+    },
+    {
+      "configuration": "live-true_raw-true_core_short",
+      "passed": true,
+      "differences": []
+    },
+    {
+      "configuration": "live-true_raw-true_full_full",
+      "passed": true,
+      "differences": []
+    },
+    {
+      "configuration": "live-true_raw-true_full_short",
+      "passed": true,
+      "differences": []
+    }
+  ]
+}

@@ -1,0 +1,1271 @@
+{
+  "passed": true,
+  "normalization": "Only actual doc_id fields bound by each inspected request; JSON text decoded. No fields discarded.",
+  "direct_summary": {
+    "metadata": {
+      "platform": "macOS-27.0-arm64-arm-64bit",
+      "machine": "arm64",
+      "package": "/Users/bm/Documents/repos/inkscape-mcp-server/.inkscape-mcp-local/phase-profile-stage24/diagnostic-package",
+      "binary_sha256": "2fa24214213d7c62ce276ad6ece0aa39863a4a87134942786a3b5faaf6ed7bec",
+      "harness_sha256": "879939d36edf04c15ae43524511b2d379bd334b95f8be07cc1d80eacc7984917",
+      "repeats": 5,
+      "counts": [
+        100
+      ],
+      "sampling_interval_target_ns": 20000000,
+      "diagnostic_cli": false,
+      "engine_mode": "per_call",
+      "limitations": [
+        "sampled peaks can miss short-lived children or between-sample peaks",
+        "RSS sums include shared pages; footprint is also summed, not unique pages",
+        "startup includes Popen, sampler setup and real initialize roundtrip",
+        "request roundtrip includes client JSON, pipes and scheduling",
+        "CPU converted from Mach ticks with mach_timebase_info; raw *_ticks retained",
+        "start/exit/child elapsed identities are raw Mach ticks",
+        "root child CPU counters cover reaped children and may lag",
+        "boundary descendant CPU covers children still live; excludes already exited children",
+        "physical disk counters can be zero for cached IO; not logical filesystem IO",
+        "diagnostic wrapper runs measure actual vendor CLI wall and child CPU separately",
+        "diagnostic wrapper bootstrap adds overhead; do not use as direct speed comparison",
+        "outside-CLI remainder contains server, IPC, filesystem and wrapper bootstrap",
+        "server CPU, physical IO and ping are observations, not exclusive wall phases",
+        "engine_mode recorded explicitly, live disabled; no GUI operations measured"
+      ]
+    },
+    "implementations": {
+      "python": {
+        "startup_median_ms": 676.093333,
+        "operations": {
+          "initialize": {
+            "roundtrip_ns": 673114416,
+            "server_user_delta": 455575792,
+            "server_system_delta": 60361958,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 4096,
+            "sampled_peak_tree_rss_bytes": 102039552,
+            "sampled_peak_server_rss_bytes": 102039552,
+            "sampled_peak_tree_footprint_bytes": 82150048,
+            "sampled_peak_server_footprint_bytes": 82150048,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "tools/list": {
+            "roundtrip_ns": 24792083,
+            "server_user_delta": 21977583,
+            "server_system_delta": 868792,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 106758144,
+            "sampled_peak_server_rss_bytes": 106758144,
+            "sampled_peak_tree_footprint_bytes": 86868664,
+            "sampled_peak_server_footprint_bytes": 86868664,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "prompts/list": {
+            "roundtrip_ns": 957208,
+            "server_user_delta": 682250,
+            "server_system_delta": 92625,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 106774528,
+            "sampled_peak_server_rss_bytes": 106774528,
+            "sampled_peak_tree_footprint_bytes": 86885048,
+            "sampled_peak_server_footprint_bytes": 86885048,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "resources/list": {
+            "roundtrip_ns": 1240292,
+            "server_user_delta": 774917,
+            "server_system_delta": 231375,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 106823680,
+            "sampled_peak_server_rss_bytes": 106823680,
+            "sampled_peak_tree_footprint_bytes": 86934200,
+            "sampled_peak_server_footprint_bytes": 86934200,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "ping": {
+            "roundtrip_ns": 415875,
+            "server_user_delta": 203125,
+            "server_system_delta": 47166,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 106823680,
+            "sampled_peak_server_rss_bytes": 106823680,
+            "sampled_peak_tree_footprint_bytes": 86934200,
+            "sampled_peak_server_footprint_bytes": 86934200,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "open-small": {
+            "roundtrip_ns": 5405333,
+            "server_user_delta": 3901834,
+            "server_system_delta": 1125667,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 12288,
+            "sampled_peak_tree_rss_bytes": 107282432,
+            "sampled_peak_server_rss_bytes": 107282432,
+            "sampled_peak_tree_footprint_bytes": 86966968,
+            "sampled_peak_server_footprint_bytes": 86966968,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "inspect-small": {
+            "roundtrip_ns": 13741000,
+            "server_user_delta": 13199916,
+            "server_system_delta": 309500,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 107315200,
+            "sampled_peak_server_rss_bytes": 107315200,
+            "sampled_peak_tree_footprint_bytes": 86983352,
+            "sampled_peak_server_footprint_bytes": 86983352,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "no-op": {
+            "roundtrip_ns": 2539708,
+            "server_user_delta": 2036958,
+            "server_system_delta": 273792,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 4096,
+            "sampled_peak_tree_rss_bytes": 107462656,
+            "sampled_peak_server_rss_bytes": 107462656,
+            "sampled_peak_tree_footprint_bytes": 86983352,
+            "sampled_peak_server_footprint_bytes": 86983352,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "single-edit": {
+            "roundtrip_ns": 672562750,
+            "server_user_delta": 5926541,
+            "server_system_delta": 6704625,
+            "server_child_user_delta": 468743666,
+            "server_child_system_delta": 127237000,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 28672,
+            "sampled_peak_tree_rss_bytes": 262144000,
+            "sampled_peak_server_rss_bytes": 107675648,
+            "sampled_peak_tree_footprint_bytes": 134219600,
+            "sampled_peak_server_footprint_bytes": 87081656,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "atomic-batch": {
+            "roundtrip_ns": 518018000,
+            "server_user_delta": 4749416,
+            "server_system_delta": 6014208,
+            "server_child_user_delta": 368489584,
+            "server_child_system_delta": 82626500,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 28672,
+            "sampled_peak_tree_rss_bytes": 245399552,
+            "sampled_peak_server_rss_bytes": 107692032,
+            "sampled_peak_tree_footprint_bytes": 127043288,
+            "sampled_peak_server_footprint_bytes": 87098040,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "render": {
+            "roundtrip_ns": 258763666,
+            "server_user_delta": 3703458,
+            "server_system_delta": 2840916,
+            "server_child_user_delta": 184372417,
+            "server_child_system_delta": 41567333,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 245710848,
+            "sampled_peak_server_rss_bytes": 107692032,
+            "sampled_peak_tree_footprint_bytes": 127387472,
+            "sampled_peak_server_footprint_bytes": 87098040,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "export": {
+            "roundtrip_ns": 261759750,
+            "server_user_delta": 4656584,
+            "server_system_delta": 2983334,
+            "server_child_user_delta": 183719000,
+            "server_child_system_delta": 42754500,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 245989376,
+            "sampled_peak_server_rss_bytes": 107692032,
+            "sampled_peak_tree_footprint_bytes": 128026400,
+            "sampled_peak_server_footprint_bytes": 87098040,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "save": {
+            "roundtrip_ns": 6188666,
+            "server_user_delta": 4896291,
+            "server_system_delta": 982292,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 12288,
+            "sampled_peak_tree_rss_bytes": 107692032,
+            "sampled_peak_server_rss_bytes": 107692032,
+            "sampled_peak_tree_footprint_bytes": 87098040,
+            "sampled_peak_server_footprint_bytes": 87098040,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "read-resource": {
+            "roundtrip_ns": 1408625,
+            "server_user_delta": 911666,
+            "server_system_delta": 320125,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 107741184,
+            "sampled_peak_server_rss_bytes": 107741184,
+            "sampled_peak_tree_footprint_bytes": 87163600,
+            "sampled_peak_server_footprint_bytes": 87163600,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "open-100": {
+            "roundtrip_ns": 3733375,
+            "server_user_delta": 2781709,
+            "server_system_delta": 743834,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 20480,
+            "sampled_peak_tree_rss_bytes": 107855872,
+            "sampled_peak_server_rss_bytes": 107855872,
+            "sampled_peak_tree_footprint_bytes": 87278288,
+            "sampled_peak_server_footprint_bytes": 87278288,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "inspect-100": {
+            "roundtrip_ns": 24947625,
+            "server_user_delta": 24230125,
+            "server_system_delta": 446042,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 107888640,
+            "sampled_peak_server_rss_bytes": 107888640,
+            "sampled_peak_tree_footprint_bytes": 87311056,
+            "sampled_peak_server_footprint_bytes": 87311056,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          }
+        }
+      },
+      "rust": {
+        "startup_median_ms": 6.546333,
+        "operations": {
+          "initialize": {
+            "roundtrip_ns": 3824459,
+            "server_user_delta": 2686916,
+            "server_system_delta": 1303250,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 12435456,
+            "sampled_peak_server_rss_bytes": 12435456,
+            "sampled_peak_tree_footprint_bytes": 5702088,
+            "sampled_peak_server_footprint_bytes": 5702088,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "tools/list": {
+            "roundtrip_ns": 3213708,
+            "server_user_delta": 1454209,
+            "server_system_delta": 312208,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 17317888,
+            "sampled_peak_server_rss_bytes": 17317888,
+            "sampled_peak_tree_footprint_bytes": 10289632,
+            "sampled_peak_server_footprint_bytes": 10289632,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "prompts/list": {
+            "roundtrip_ns": 83125,
+            "server_user_delta": 42875,
+            "server_system_delta": 50708,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 17350656,
+            "sampled_peak_server_rss_bytes": 17350656,
+            "sampled_peak_tree_footprint_bytes": 10338784,
+            "sampled_peak_server_footprint_bytes": 10338784,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "resources/list": {
+            "roundtrip_ns": 91084,
+            "server_user_delta": 41083,
+            "server_system_delta": 45875,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 17416192,
+            "sampled_peak_server_rss_bytes": 17416192,
+            "sampled_peak_tree_footprint_bytes": 10387936,
+            "sampled_peak_server_footprint_bytes": 10387936,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "ping": {
+            "roundtrip_ns": 47375,
+            "server_user_delta": 20667,
+            "server_system_delta": 41042,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 17432576,
+            "sampled_peak_server_rss_bytes": 17432576,
+            "sampled_peak_tree_footprint_bytes": 10404320,
+            "sampled_peak_server_footprint_bytes": 10404320,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "open-small": {
+            "roundtrip_ns": 23962792,
+            "server_user_delta": 601125,
+            "server_system_delta": 8461666,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 12288,
+            "sampled_peak_tree_rss_bytes": 18006016,
+            "sampled_peak_server_rss_bytes": 18006016,
+            "sampled_peak_tree_footprint_bytes": 10535368,
+            "sampled_peak_server_footprint_bytes": 10535368,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "inspect-small": {
+            "roundtrip_ns": 7386542,
+            "server_user_delta": 890416,
+            "server_system_delta": 6467541,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 19677184,
+            "sampled_peak_server_rss_bytes": 19677184,
+            "sampled_peak_tree_footprint_bytes": 11518456,
+            "sampled_peak_server_footprint_bytes": 11518456,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "no-op": {
+            "roundtrip_ns": 11646416,
+            "server_user_delta": 471792,
+            "server_system_delta": 3651083,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 4096,
+            "sampled_peak_tree_rss_bytes": 19955712,
+            "sampled_peak_server_rss_bytes": 19955712,
+            "sampled_peak_tree_footprint_bytes": 11649504,
+            "sampled_peak_server_footprint_bytes": 11649504,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "single-edit": {
+            "roundtrip_ns": 749390542,
+            "server_user_delta": 2372500,
+            "server_system_delta": 27894250,
+            "server_child_user_delta": 469811291,
+            "server_child_system_delta": 122705166,
+            "server_disk_read_delta": 4096,
+            "server_disk_write_delta": 45056,
+            "sampled_peak_tree_rss_bytes": 175783936,
+            "sampled_peak_server_rss_bytes": 20234240,
+            "sampled_peak_tree_footprint_bytes": 60442136,
+            "sampled_peak_server_footprint_bytes": 11731424,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "atomic-batch": {
+            "roundtrip_ns": 615639208,
+            "server_user_delta": 2498416,
+            "server_system_delta": 28510208,
+            "server_child_user_delta": 373627709,
+            "server_child_system_delta": 82369375,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 45056,
+            "sampled_peak_tree_rss_bytes": 159481856,
+            "sampled_peak_server_rss_bytes": 20348928,
+            "sampled_peak_tree_footprint_bytes": 53315120,
+            "sampled_peak_server_footprint_bytes": 11813368,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "render": {
+            "roundtrip_ns": 277710084,
+            "server_user_delta": 842250,
+            "server_system_delta": 8114292,
+            "server_child_user_delta": 186824750,
+            "server_child_system_delta": 42980833,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 8192,
+            "sampled_peak_tree_rss_bytes": 158629888,
+            "sampled_peak_server_rss_bytes": 20758528,
+            "sampled_peak_tree_footprint_bytes": 52758160,
+            "sampled_peak_server_footprint_bytes": 12124688,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "export": {
+            "roundtrip_ns": 282274000,
+            "server_user_delta": 916834,
+            "server_system_delta": 8649542,
+            "server_child_user_delta": 185172458,
+            "server_child_system_delta": 41198208,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 8192,
+            "sampled_peak_tree_rss_bytes": 158138368,
+            "sampled_peak_server_rss_bytes": 20922368,
+            "sampled_peak_tree_footprint_bytes": 51562080,
+            "sampled_peak_server_footprint_bytes": 12255712,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "save": {
+            "roundtrip_ns": 33928125,
+            "server_user_delta": 1157708,
+            "server_system_delta": 13882750,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 12288,
+            "sampled_peak_tree_rss_bytes": 20938752,
+            "sampled_peak_server_rss_bytes": 20938752,
+            "sampled_peak_tree_footprint_bytes": 12222944,
+            "sampled_peak_server_footprint_bytes": 12222944,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "read-resource": {
+            "roundtrip_ns": 173416,
+            "server_user_delta": 54833,
+            "server_system_delta": 133916,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 20971520,
+            "sampled_peak_server_rss_bytes": 20971520,
+            "sampled_peak_tree_footprint_bytes": 12239328,
+            "sampled_peak_server_footprint_bytes": 12239328,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "open-100": {
+            "roundtrip_ns": 23527791,
+            "server_user_delta": 628750,
+            "server_system_delta": 8487125,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 20480,
+            "sampled_peak_tree_rss_bytes": 21151744,
+            "sampled_peak_server_rss_bytes": 21151744,
+            "sampled_peak_tree_footprint_bytes": 12386784,
+            "sampled_peak_server_footprint_bytes": 12386784,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "inspect-100": {
+            "roundtrip_ns": 9599208,
+            "server_user_delta": 2198667,
+            "server_system_delta": 7109917,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 22020096,
+            "sampled_peak_server_rss_bytes": 22020096,
+            "sampled_peak_tree_footprint_bytes": 13255136,
+            "sampled_peak_server_footprint_bytes": 13255136,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          }
+        }
+      }
+    }
+  },
+  "prior_summary_path": "migration/results/process-benchmark-stage23/summary.json",
+  "prior_summary": {
+    "metadata": {
+      "platform": "macOS-27.0-arm64-arm-64bit",
+      "machine": "arm64",
+      "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage23",
+      "binary_sha256": "dfadfbc0a11cc14a1454c40d35956348070b353115ed726b8b450035b73afd1f",
+      "harness_sha256": "879939d36edf04c15ae43524511b2d379bd334b95f8be07cc1d80eacc7984917",
+      "repeats": 5,
+      "counts": [
+        100,
+        10000,
+        100000
+      ],
+      "sampling_interval_target_ns": 20000000,
+      "diagnostic_cli": false,
+      "engine_mode": "per_call",
+      "limitations": [
+        "sampled peaks can miss short-lived children or between-sample peaks",
+        "RSS sums include shared pages; footprint is also summed, not unique pages",
+        "startup includes Popen, sampler setup and real initialize roundtrip",
+        "request roundtrip includes client JSON, pipes and scheduling",
+        "CPU converted from Mach ticks with mach_timebase_info; raw *_ticks retained",
+        "start/exit/child elapsed identities are raw Mach ticks",
+        "root child CPU counters cover reaped children and may lag",
+        "boundary descendant CPU covers children still live; excludes already exited children",
+        "physical disk counters can be zero for cached IO; not logical filesystem IO",
+        "diagnostic wrapper runs measure actual vendor CLI wall and child CPU separately",
+        "diagnostic wrapper bootstrap adds overhead; do not use as direct speed comparison",
+        "outside-CLI remainder contains server, IPC, filesystem and wrapper bootstrap",
+        "server CPU, physical IO and ping are observations, not exclusive wall phases",
+        "engine_mode recorded explicitly, live disabled; no GUI operations measured"
+      ]
+    },
+    "implementations": {
+      "python": {
+        "startup_median_ms": 824.419084,
+        "operations": {
+          "initialize": {
+            "roundtrip_ns": 821867792,
+            "server_user_delta": 473797542,
+            "server_system_delta": 73340250,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 19980288,
+            "server_disk_write_delta": 4096,
+            "sampled_peak_tree_rss_bytes": 102187008,
+            "sampled_peak_server_rss_bytes": 102187008,
+            "sampled_peak_tree_footprint_bytes": 82281144,
+            "sampled_peak_server_footprint_bytes": 82281144,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "tools/list": {
+            "roundtrip_ns": 25479500,
+            "server_user_delta": 22419625,
+            "server_system_delta": 871584,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 16384,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 106840064,
+            "sampled_peak_server_rss_bytes": 106840064,
+            "sampled_peak_tree_footprint_bytes": 86950584,
+            "sampled_peak_server_footprint_bytes": 86950584,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "prompts/list": {
+            "roundtrip_ns": 956875,
+            "server_user_delta": 679250,
+            "server_system_delta": 82459,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 106856448,
+            "sampled_peak_server_rss_bytes": 106856448,
+            "sampled_peak_tree_footprint_bytes": 86966968,
+            "sampled_peak_server_footprint_bytes": 86966968,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "resources/list": {
+            "roundtrip_ns": 1370916,
+            "server_user_delta": 771209,
+            "server_system_delta": 248584,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 20480,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 106872832,
+            "sampled_peak_server_rss_bytes": 106872832,
+            "sampled_peak_tree_footprint_bytes": 86983352,
+            "sampled_peak_server_footprint_bytes": 86983352,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "ping": {
+            "roundtrip_ns": 413083,
+            "server_user_delta": 201542,
+            "server_system_delta": 52416,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 106872832,
+            "sampled_peak_server_rss_bytes": 106872832,
+            "sampled_peak_tree_footprint_bytes": 86983352,
+            "sampled_peak_server_footprint_bytes": 86983352,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "open-small": {
+            "roundtrip_ns": 5334125,
+            "server_user_delta": 3829916,
+            "server_system_delta": 1088750,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 16384,
+            "server_disk_write_delta": 12288,
+            "sampled_peak_tree_rss_bytes": 107347968,
+            "sampled_peak_server_rss_bytes": 107347968,
+            "sampled_peak_tree_footprint_bytes": 87048912,
+            "sampled_peak_server_footprint_bytes": 87048912,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "inspect-small": {
+            "roundtrip_ns": 13438041,
+            "server_user_delta": 12966667,
+            "server_system_delta": 248584,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 107380736,
+            "sampled_peak_server_rss_bytes": 107380736,
+            "sampled_peak_tree_footprint_bytes": 87065296,
+            "sampled_peak_server_footprint_bytes": 87065296,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "no-op": {
+            "roundtrip_ns": 2518375,
+            "server_user_delta": 2032291,
+            "server_system_delta": 261500,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 4096,
+            "sampled_peak_tree_rss_bytes": 107528192,
+            "sampled_peak_server_rss_bytes": 107528192,
+            "sampled_peak_tree_footprint_bytes": 87065296,
+            "sampled_peak_server_footprint_bytes": 87065296,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "single-edit": {
+            "roundtrip_ns": 693592167,
+            "server_user_delta": 6268583,
+            "server_system_delta": 6912875,
+            "server_child_user_delta": 471624583,
+            "server_child_system_delta": 126753166,
+            "server_disk_read_delta": 139264,
+            "server_disk_write_delta": 28672,
+            "sampled_peak_tree_rss_bytes": 258310144,
+            "sampled_peak_server_rss_bytes": 107773952,
+            "sampled_peak_tree_footprint_bytes": 133318432,
+            "sampled_peak_server_footprint_bytes": 87196344,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "atomic-batch": {
+            "roundtrip_ns": 505214875,
+            "server_user_delta": 4807666,
+            "server_system_delta": 5868250,
+            "server_child_user_delta": 372681292,
+            "server_child_system_delta": 84164417,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 28672,
+            "sampled_peak_tree_rss_bytes": 246349824,
+            "sampled_peak_server_rss_bytes": 107790336,
+            "sampled_peak_tree_footprint_bytes": 127682408,
+            "sampled_peak_server_footprint_bytes": 87212728,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "render": {
+            "roundtrip_ns": 255085333,
+            "server_user_delta": 3692084,
+            "server_system_delta": 2664834,
+            "server_child_user_delta": 187346625,
+            "server_child_system_delta": 41472292,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 244367360,
+            "sampled_peak_server_rss_bytes": 107790336,
+            "sampled_peak_tree_footprint_bytes": 126486256,
+            "sampled_peak_server_footprint_bytes": 87212728,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "export": {
+            "roundtrip_ns": 255822500,
+            "server_user_delta": 4786208,
+            "server_system_delta": 3144083,
+            "server_child_user_delta": 185756625,
+            "server_child_system_delta": 41993083,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 245252096,
+            "sampled_peak_server_rss_bytes": 107790336,
+            "sampled_peak_tree_footprint_bytes": 125847280,
+            "sampled_peak_server_footprint_bytes": 86934224,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "save": {
+            "roundtrip_ns": 5849625,
+            "server_user_delta": 4684958,
+            "server_system_delta": 938458,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 12288,
+            "sampled_peak_tree_rss_bytes": 107790336,
+            "sampled_peak_server_rss_bytes": 107790336,
+            "sampled_peak_tree_footprint_bytes": 86934224,
+            "sampled_peak_server_footprint_bytes": 86934224,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "read-resource": {
+            "roundtrip_ns": 1442084,
+            "server_user_delta": 925666,
+            "server_system_delta": 325750,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 107839488,
+            "sampled_peak_server_rss_bytes": 107839488,
+            "sampled_peak_tree_footprint_bytes": 86999784,
+            "sampled_peak_server_footprint_bytes": 86999784,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "open-100": {
+            "roundtrip_ns": 3679375,
+            "server_user_delta": 2777916,
+            "server_system_delta": 715709,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 20480,
+            "sampled_peak_tree_rss_bytes": 107921408,
+            "sampled_peak_server_rss_bytes": 107921408,
+            "sampled_peak_tree_footprint_bytes": 87081704,
+            "sampled_peak_server_footprint_bytes": 87081704,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "inspect-100": {
+            "roundtrip_ns": 29690666,
+            "server_user_delta": 24813542,
+            "server_system_delta": 456041,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 107954176,
+            "sampled_peak_server_rss_bytes": 107954176,
+            "sampled_peak_tree_footprint_bytes": 87114472,
+            "sampled_peak_server_footprint_bytes": 87114472,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "open-10000": {
+            "roundtrip_ns": 16795167,
+            "server_user_delta": 14970125,
+            "server_system_delta": 1468917,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 962560,
+            "sampled_peak_tree_rss_bytes": 118816768,
+            "sampled_peak_server_rss_bytes": 118816768,
+            "sampled_peak_tree_footprint_bytes": 97977064,
+            "sampled_peak_server_footprint_bytes": 97977064,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "inspect-10000": {
+            "roundtrip_ns": 1457571416,
+            "server_user_delta": 1417458000,
+            "server_system_delta": 16167167,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 220119040,
+            "sampled_peak_server_rss_bytes": 220119040,
+            "sampled_peak_tree_footprint_bytes": 199607088,
+            "sampled_peak_server_footprint_bytes": 199607088,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "open-100000": {
+            "roundtrip_ns": 164255542,
+            "server_user_delta": 149534000,
+            "server_system_delta": 12757333,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 9965568,
+            "sampled_peak_tree_rss_bytes": 315523072,
+            "sampled_peak_server_rss_bytes": 315523072,
+            "sampled_peak_tree_footprint_bytes": 295191416,
+            "sampled_peak_server_footprint_bytes": 295191416,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "inspect-100000": {
+            "roundtrip_ns": 15322694416,
+            "server_user_delta": 14923374417,
+            "server_system_delta": 157452667,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 1242251264,
+            "sampled_peak_server_rss_bytes": 1242251264,
+            "sampled_peak_tree_footprint_bytes": 1153254912,
+            "sampled_peak_server_footprint_bytes": 1153254912,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          }
+        }
+      },
+      "rust": {
+        "startup_median_ms": 20.182167,
+        "operations": {
+          "initialize": {
+            "roundtrip_ns": 11665583,
+            "server_user_delta": 2523959,
+            "server_system_delta": 3840000,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 5062656,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 12238848,
+            "sampled_peak_server_rss_bytes": 12238848,
+            "sampled_peak_tree_footprint_bytes": 5767648,
+            "sampled_peak_server_footprint_bytes": 5767648,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "tools/list": {
+            "roundtrip_ns": 3911584,
+            "server_user_delta": 1393875,
+            "server_system_delta": 756458,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 163840,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 17514496,
+            "sampled_peak_server_rss_bytes": 17514496,
+            "sampled_peak_tree_footprint_bytes": 10453472,
+            "sampled_peak_server_footprint_bytes": 10453472,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "prompts/list": {
+            "roundtrip_ns": 98125,
+            "server_user_delta": 45083,
+            "server_system_delta": 46917,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 17563648,
+            "sampled_peak_server_rss_bytes": 17563648,
+            "sampled_peak_tree_footprint_bytes": 10486240,
+            "sampled_peak_server_footprint_bytes": 10486240,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "resources/list": {
+            "roundtrip_ns": 95125,
+            "server_user_delta": 42792,
+            "server_system_delta": 40041,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 17596416,
+            "sampled_peak_server_rss_bytes": 17596416,
+            "sampled_peak_tree_footprint_bytes": 10519008,
+            "sampled_peak_server_footprint_bytes": 10519008,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "ping": {
+            "roundtrip_ns": 41875,
+            "server_user_delta": 19875,
+            "server_system_delta": 30750,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 17629184,
+            "sampled_peak_server_rss_bytes": 17629184,
+            "sampled_peak_tree_footprint_bytes": 10551776,
+            "sampled_peak_server_footprint_bytes": 10551776,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "open-small": {
+            "roundtrip_ns": 20811833,
+            "server_user_delta": 155500,
+            "server_system_delta": 1855500,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 147456,
+            "server_disk_write_delta": 12288,
+            "sampled_peak_tree_rss_bytes": 18055168,
+            "sampled_peak_server_rss_bytes": 18055168,
+            "sampled_peak_tree_footprint_bytes": 10617312,
+            "sampled_peak_server_footprint_bytes": 10617312,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "inspect-small": {
+            "roundtrip_ns": 2300375,
+            "server_user_delta": 485708,
+            "server_system_delta": 1138500,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 671744,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 19775488,
+            "sampled_peak_server_rss_bytes": 19775488,
+            "sampled_peak_tree_footprint_bytes": 11616736,
+            "sampled_peak_server_footprint_bytes": 11616736,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "no-op": {
+            "roundtrip_ns": 8456583,
+            "server_user_delta": 254125,
+            "server_system_delta": 725541,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 278528,
+            "server_disk_write_delta": 4096,
+            "sampled_peak_tree_rss_bytes": 20070400,
+            "sampled_peak_server_rss_bytes": 20070400,
+            "sampled_peak_tree_footprint_bytes": 11715040,
+            "sampled_peak_server_footprint_bytes": 11715040,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "single-edit": {
+            "roundtrip_ns": 760552750,
+            "server_user_delta": 1041042,
+            "server_system_delta": 7560167,
+            "server_child_user_delta": 475195333,
+            "server_child_system_delta": 123915875,
+            "server_disk_read_delta": 49152,
+            "server_disk_write_delta": 45056,
+            "sampled_peak_tree_rss_bytes": 175783936,
+            "sampled_peak_server_rss_bytes": 20463616,
+            "sampled_peak_tree_footprint_bytes": 60933728,
+            "sampled_peak_server_footprint_bytes": 11895240,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "atomic-batch": {
+            "roundtrip_ns": 582103083,
+            "server_user_delta": 1101125,
+            "server_system_delta": 7286709,
+            "server_child_user_delta": 376112083,
+            "server_child_system_delta": 83393166,
+            "server_disk_read_delta": 16384,
+            "server_disk_write_delta": 45056,
+            "sampled_peak_tree_rss_bytes": 159039488,
+            "sampled_peak_server_rss_bytes": 20561920,
+            "sampled_peak_tree_footprint_bytes": 53052904,
+            "sampled_peak_server_footprint_bytes": 11944392,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "render": {
+            "roundtrip_ns": 264272708,
+            "server_user_delta": 423500,
+            "server_system_delta": 2255583,
+            "server_child_user_delta": 186235125,
+            "server_child_system_delta": 41450709,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 8192,
+            "sampled_peak_tree_rss_bytes": 158072832,
+            "sampled_peak_server_rss_bytes": 20660224,
+            "sampled_peak_tree_footprint_bytes": 51627568,
+            "sampled_peak_server_footprint_bytes": 11960776,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "export": {
+            "roundtrip_ns": 261344417,
+            "server_user_delta": 476167,
+            "server_system_delta": 2288750,
+            "server_child_user_delta": 186395000,
+            "server_child_system_delta": 39662375,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 8192,
+            "sampled_peak_tree_rss_bytes": 157712384,
+            "sampled_peak_server_rss_bytes": 20709376,
+            "sampled_peak_tree_footprint_bytes": 51578512,
+            "sampled_peak_server_footprint_bytes": 12009952,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "save": {
+            "roundtrip_ns": 21266666,
+            "server_user_delta": 367458,
+            "server_system_delta": 1971500,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 32768,
+            "server_disk_write_delta": 12288,
+            "sampled_peak_tree_rss_bytes": 20725760,
+            "sampled_peak_server_rss_bytes": 20725760,
+            "sampled_peak_tree_footprint_bytes": 11993568,
+            "sampled_peak_server_footprint_bytes": 11993568,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "read-resource": {
+            "roundtrip_ns": 161750,
+            "server_user_delta": 49000,
+            "server_system_delta": 115833,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 20725760,
+            "sampled_peak_server_rss_bytes": 20725760,
+            "sampled_peak_tree_footprint_bytes": 11993568,
+            "sampled_peak_server_footprint_bytes": 11993568,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "open-100": {
+            "roundtrip_ns": 16975458,
+            "server_user_delta": 187417,
+            "server_system_delta": 1524583,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 20480,
+            "sampled_peak_tree_rss_bytes": 20873216,
+            "sampled_peak_server_rss_bytes": 20873216,
+            "sampled_peak_tree_footprint_bytes": 12124640,
+            "sampled_peak_server_footprint_bytes": 12124640,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "inspect-100": {
+            "roundtrip_ns": 7521833,
+            "server_user_delta": 1856666,
+            "server_system_delta": 702375,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 21807104,
+            "sampled_peak_server_rss_bytes": 21807104,
+            "sampled_peak_tree_footprint_bytes": 13074912,
+            "sampled_peak_server_footprint_bytes": 13074912,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "open-10000": {
+            "roundtrip_ns": 23109791,
+            "server_user_delta": 6182417,
+            "server_system_delta": 2382541,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 962560,
+            "sampled_peak_tree_rss_bytes": 34029568,
+            "sampled_peak_server_rss_bytes": 34029568,
+            "sampled_peak_tree_footprint_bytes": 25313784,
+            "sampled_peak_server_footprint_bytes": 25313784,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "inspect-10000": {
+            "roundtrip_ns": 180117208,
+            "server_user_delta": 147723958,
+            "server_system_delta": 11744500,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 141115392,
+            "sampled_peak_server_rss_bytes": 141115392,
+            "sampled_peak_tree_footprint_bytes": 81363496,
+            "sampled_peak_server_footprint_bytes": 81363496,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "open-100000": {
+            "roundtrip_ns": 86850708,
+            "server_user_delta": 61381583,
+            "server_system_delta": 8779250,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 9965568,
+            "sampled_peak_tree_rss_bytes": 258490368,
+            "sampled_peak_server_rss_bytes": 258490368,
+            "sampled_peak_tree_footprint_bytes": 149209760,
+            "sampled_peak_server_footprint_bytes": 149209760,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          },
+          "inspect-100000": {
+            "roundtrip_ns": 1966013000,
+            "server_user_delta": 1561218417,
+            "server_system_delta": 126367167,
+            "server_child_user_delta": 0,
+            "server_child_system_delta": 0,
+            "server_disk_read_delta": 0,
+            "server_disk_write_delta": 0,
+            "sampled_peak_tree_rss_bytes": 1276051456,
+            "sampled_peak_server_rss_bytes": 1276051456,
+            "sampled_peak_tree_footprint_bytes": 809485752,
+            "sampled_peak_server_footprint_bytes": 809485752,
+            "live_descendant_cpu_delta_ns_at_boundary": 0
+          }
+        }
+      }
+    }
+  },
+  "observations": {
+    "python": {
+      "runs": 5,
+      "requests_per_run": [
+        16,
+        16,
+        16,
+        16,
+        16
+      ],
+      "samples": 672,
+      "sample_errors": 0,
+      "sample_error_details": [],
+      "memory_observations_complete": true,
+      "gap_median_ms": 24.968958,
+      "gap_max_ms": 25.256834,
+      "startup_ms_range": [
+        673.924292,
+        803.894625
+      ]
+    },
+    "rust": {
+      "runs": 5,
+      "requests_per_run": [
+        16,
+        16,
+        16,
+        16,
+        16
+      ],
+      "samples": 603,
+      "sample_errors": 0,
+      "sample_error_details": [],
+      "memory_observations_complete": true,
+      "gap_median_ms": 23.8584375,
+      "gap_max_ms": 25.560708,
+      "startup_ms_range": [
+        6.228541,
+        358.04025
+      ]
+    }
+  },
+  "inspect_response_hashes": {
+    "python": [
+      [
+        {
+          "objects": 1,
+          "sha256": "7d75afc99075a042dc9ecdeefc14abe8f494a0169deee3fbaf3019b9f5278ccf",
+          "canonical_bytes": 2110
+        },
+        {
+          "objects": 100,
+          "sha256": "54abf6aa2c19215defabf7d0e8abca85bafd550cd43d0f340b4e4c2647a63114",
+          "canonical_bytes": 71456
+        }
+      ],
+      [
+        {
+          "objects": 1,
+          "sha256": "7d75afc99075a042dc9ecdeefc14abe8f494a0169deee3fbaf3019b9f5278ccf",
+          "canonical_bytes": 2110
+        },
+        {
+          "objects": 100,
+          "sha256": "54abf6aa2c19215defabf7d0e8abca85bafd550cd43d0f340b4e4c2647a63114",
+          "canonical_bytes": 71456
+        }
+      ],
+      [
+        {
+          "objects": 1,
+          "sha256": "7d75afc99075a042dc9ecdeefc14abe8f494a0169deee3fbaf3019b9f5278ccf",
+          "canonical_bytes": 2110
+        },
+        {
+          "objects": 100,
+          "sha256": "54abf6aa2c19215defabf7d0e8abca85bafd550cd43d0f340b4e4c2647a63114",
+          "canonical_bytes": 71456
+        }
+      ],
+      [
+        {
+          "objects": 1,
+          "sha256": "7d75afc99075a042dc9ecdeefc14abe8f494a0169deee3fbaf3019b9f5278ccf",
+          "canonical_bytes": 2110
+        },
+        {
+          "objects": 100,
+          "sha256": "54abf6aa2c19215defabf7d0e8abca85bafd550cd43d0f340b4e4c2647a63114",
+          "canonical_bytes": 71456
+        }
+      ],
+      [
+        {
+          "objects": 1,
+          "sha256": "7d75afc99075a042dc9ecdeefc14abe8f494a0169deee3fbaf3019b9f5278ccf",
+          "canonical_bytes": 2110
+        },
+        {
+          "objects": 100,
+          "sha256": "54abf6aa2c19215defabf7d0e8abca85bafd550cd43d0f340b4e4c2647a63114",
+          "canonical_bytes": 71456
+        }
+      ]
+    ],
+    "rust": [
+      [
+        {
+          "objects": 1,
+          "sha256": "7d75afc99075a042dc9ecdeefc14abe8f494a0169deee3fbaf3019b9f5278ccf",
+          "canonical_bytes": 2110
+        },
+        {
+          "objects": 100,
+          "sha256": "54abf6aa2c19215defabf7d0e8abca85bafd550cd43d0f340b4e4c2647a63114",
+          "canonical_bytes": 71456
+        }
+      ],
+      [
+        {
+          "objects": 1,
+          "sha256": "7d75afc99075a042dc9ecdeefc14abe8f494a0169deee3fbaf3019b9f5278ccf",
+          "canonical_bytes": 2110
+        },
+        {
+          "objects": 100,
+          "sha256": "54abf6aa2c19215defabf7d0e8abca85bafd550cd43d0f340b4e4c2647a63114",
+          "canonical_bytes": 71456
+        }
+      ],
+      [
+        {
+          "objects": 1,
+          "sha256": "7d75afc99075a042dc9ecdeefc14abe8f494a0169deee3fbaf3019b9f5278ccf",
+          "canonical_bytes": 2110
+        },
+        {
+          "objects": 100,
+          "sha256": "54abf6aa2c19215defabf7d0e8abca85bafd550cd43d0f340b4e4c2647a63114",
+          "canonical_bytes": 71456
+        }
+      ],
+      [
+        {
+          "objects": 1,
+          "sha256": "7d75afc99075a042dc9ecdeefc14abe8f494a0169deee3fbaf3019b9f5278ccf",
+          "canonical_bytes": 2110
+        },
+        {
+          "objects": 100,
+          "sha256": "54abf6aa2c19215defabf7d0e8abca85bafd550cd43d0f340b4e4c2647a63114",
+          "canonical_bytes": 71456
+        }
+      ],
+      [
+        {
+          "objects": 1,
+          "sha256": "7d75afc99075a042dc9ecdeefc14abe8f494a0169deee3fbaf3019b9f5278ccf",
+          "canonical_bytes": 2110
+        },
+        {
+          "objects": 100,
+          "sha256": "54abf6aa2c19215defabf7d0e8abca85bafd550cd43d0f340b4e4c2647a63114",
+          "canonical_bytes": 71456
+        }
+      ]
+    ]
+  }
+}

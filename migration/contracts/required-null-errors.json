@@ -1,0 +1,1398 @@
+[
+  {
+    "name": "stat_artifact",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[stat_artifact]\npath\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "path": null
+    }
+  },
+  {
+    "name": "stat_artifacts",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[stat_artifacts]\npaths\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "paths": null
+    }
+  },
+  {
+    "name": "validate_action_chain",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[validate_action_chain]\nsteps\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "steps": null
+    }
+  },
+  {
+    "name": "run_action_chain",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[run_action_chain]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nsteps\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "steps": null
+    }
+  },
+  {
+    "name": "run_raw_action",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[run_raw_action]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\naction\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "action": null
+    }
+  },
+  {
+    "name": "apply_edits",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[apply_edits]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nedits\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "edits": null
+    }
+  },
+  {
+    "name": "set_document_svg",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[set_document_svg]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nsvg\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "svg": null
+    }
+  },
+  {
+    "name": "insert_svg_fragment",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[insert_svg_fragment]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nsvg\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "svg": null
+    }
+  },
+  {
+    "name": "compose_grid",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[compose_grid]\nrows\n  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/int_type\ncols\n  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/int_type\ncell\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "rows": null,
+      "cols": null,
+      "cell": null
+    }
+  },
+  {
+    "name": "place_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[place_document]\ntarget_doc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nx\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ny\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "target_doc_id": null,
+      "x": null,
+      "y": null
+    }
+  },
+  {
+    "name": "replace_svg_fragment",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[replace_svg_fragment]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nsvg\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_id": null,
+      "svg": null
+    }
+  },
+  {
+    "name": "create_rect",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_rect]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nx\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ny\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nwidth\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nheight\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "x": null,
+      "y": null,
+      "width": null,
+      "height": null
+    }
+  },
+  {
+    "name": "create_circle",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[create_circle]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ncx\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ncy\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nr\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "cx": null,
+      "cy": null,
+      "r": null
+    }
+  },
+  {
+    "name": "create_ellipse",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_ellipse]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ncx\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ncy\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nrx\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nry\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "cx": null,
+      "cy": null,
+      "rx": null,
+      "ry": null
+    }
+  },
+  {
+    "name": "create_line",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_line]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nx1\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ny1\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nx2\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ny2\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "x1": null,
+      "y1": null,
+      "x2": null,
+      "y2": null
+    }
+  },
+  {
+    "name": "create_polygon",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_polygon]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\npoints\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "points": null
+    }
+  },
+  {
+    "name": "create_polyline",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_polyline]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\npoints\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "points": null
+    }
+  },
+  {
+    "name": "create_path",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_path]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nd\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "d": null
+    }
+  },
+  {
+    "name": "create_text",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[create_text]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nx\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ny\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ntext\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "x": null,
+      "y": null,
+      "text": null
+    }
+  },
+  {
+    "name": "add_linear_gradient",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[add_linear_gradient]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nstops\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "stops": null
+    }
+  },
+  {
+    "name": "add_radial_gradient",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[add_radial_gradient]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nstops\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "stops": null
+    }
+  },
+  {
+    "name": "create_group",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[create_group]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null
+    }
+  },
+  {
+    "name": "group_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[group_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_ids": null
+    }
+  },
+  {
+    "name": "reparent_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[reparent_object]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nnew_parent_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_id": null,
+      "new_parent_id": null
+    }
+  },
+  {
+    "name": "create_use",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_use]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nhref_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "href_id": null
+    }
+  },
+  {
+    "name": "set_group_mode",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[set_group_mode]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nmode\n  Input should be 'group' or 'layer' [type=literal_error, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_id": null,
+      "mode": null
+    }
+  },
+  {
+    "name": "how_do_i",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[how_do_i]\ngoal\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "goal": null
+    }
+  },
+  {
+    "name": "open_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[open_document]\npath\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "path": null
+    }
+  },
+  {
+    "name": "create_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_document]\nwidth\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nheight\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "width": null,
+      "height": null
+    }
+  },
+  {
+    "name": "reload_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[reload_document]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null
+    }
+  },
+  {
+    "name": "inspect_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[inspect_document]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null
+    }
+  },
+  {
+    "name": "delete_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[delete_object]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_ids": null
+    }
+  },
+  {
+    "name": "render_preview",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[render_preview]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null
+    }
+  },
+  {
+    "name": "capture_frame",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[capture_frame]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null
+    }
+  },
+  {
+    "name": "list_frames",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[list_frames]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null
+    }
+  },
+  {
+    "name": "export_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[export_document]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nformat\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "format": null
+    }
+  },
+  {
+    "name": "export_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[export_object]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_id": null
+    }
+  },
+  {
+    "name": "compare_region",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[compare_region]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nsnapshot_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nregion\n  Input should be a valid dictionary or instance of PreviewRegion [type=model_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/model_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "snapshot_id": null,
+      "region": null
+    }
+  },
+  {
+    "name": "export_batch",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[export_batch]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nspecs\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "specs": null
+    }
+  },
+  {
+    "name": "export_set",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[export_set]\ndoc_ids\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type\nspecs\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_ids": null,
+      "specs": null
+    }
+  },
+  {
+    "name": "find_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[find_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null
+    }
+  },
+  {
+    "name": "live_select_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[live_select_document]\nwindow_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ndocument_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "window_id": null,
+      "document_id": null
+    }
+  },
+  {
+    "name": "live_set_viewport",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_set_viewport]\nmode\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "mode": null
+    }
+  },
+  {
+    "name": "live_sync_to_workspace",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_sync_to_workspace]\ndest_path\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "dest_path": null
+    }
+  },
+  {
+    "name": "live_insert_svg",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_insert_svg]\nsvg_fragment\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "svg_fragment": null
+    }
+  },
+  {
+    "name": "live_set_selected_text",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_set_selected_text]\ntext\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "text": null
+    }
+  },
+  {
+    "name": "live_edit_selection",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_edit_selection]\noperation\n  Input should be 'duplicate', 'delete', 'group', 'ungroup', 'raise', 'lower', 'front' or 'back' [type=literal_error, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "operation": null
+    }
+  },
+  {
+    "name": "live_diff_view",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_diff_view]\noperation_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "operation_id": null
+    }
+  },
+  {
+    "name": "live_preview_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[live_preview_object]\nobject_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nexpected_fingerprint\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_id": null,
+      "expected_fingerprint": null
+    }
+  },
+  {
+    "name": "svg_web_optimize",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[svg_web_optimize]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null
+    }
+  },
+  {
+    "name": "optimize_set",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[optimize_set]\ndoc_ids\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_ids": null
+    }
+  },
+  {
+    "name": "simplify_path",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[simplify_path]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_ids": null
+    }
+  },
+  {
+    "name": "boolean_union",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[boolean_union]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_ids": null
+    }
+  },
+  {
+    "name": "boolean_difference",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[boolean_difference]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_ids": null
+    }
+  },
+  {
+    "name": "combine_paths",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[combine_paths]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_ids": null
+    }
+  },
+  {
+    "name": "break_apart",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[break_apart]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_ids": null
+    }
+  },
+  {
+    "name": "stroke_to_path",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[stroke_to_path]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_ids": null
+    }
+  },
+  {
+    "name": "cleanup_paths",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[cleanup_paths]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_ids": null
+    }
+  },
+  {
+    "name": "export_web_profile",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[export_web_profile]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null
+    }
+  },
+  {
+    "name": "create_icon_set",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[create_icon_set]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null
+    }
+  },
+  {
+    "name": "export_print_profile",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[export_print_profile]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null
+    }
+  },
+  {
+    "name": "quality_report",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[quality_report]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null
+    }
+  },
+  {
+    "name": "quality_report_set",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[quality_report_set]\ndoc_ids\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_ids": null
+    }
+  },
+  {
+    "name": "save_document_as",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[save_document_as]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ndest_path\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "dest_path": null
+    }
+  },
+  {
+    "name": "create_snapshot",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[create_snapshot]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null
+    }
+  },
+  {
+    "name": "list_snapshots",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[list_snapshots]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null
+    }
+  },
+  {
+    "name": "restore_snapshot",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[restore_snapshot]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nsnapshot_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "snapshot_id": null
+    }
+  },
+  {
+    "name": "prune_snapshots",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[prune_snapshots]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null
+    }
+  },
+  {
+    "name": "set_fill",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[set_fill]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type\ncolor\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_ids": null,
+      "color": null
+    }
+  },
+  {
+    "name": "set_stroke",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[set_stroke]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_ids": null
+    }
+  },
+  {
+    "name": "set_opacity",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[set_opacity]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type\nopacity\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_ids": null,
+      "opacity": null
+    }
+  },
+  {
+    "name": "replace_color",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[replace_color]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nfrom_color\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nto_color\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "from_color": null,
+      "to_color": null
+    }
+  },
+  {
+    "name": "apply_palette",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[apply_palette]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nmapping\n  Input should be a valid dictionary [type=dict_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/dict_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "mapping": null
+    }
+  },
+  {
+    "name": "replace_text",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[replace_text]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ntext\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_id": null,
+      "text": null
+    }
+  },
+  {
+    "name": "set_font",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[set_font]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_ids": null
+    }
+  },
+  {
+    "name": "duplicate_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[duplicate_object]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_id": null
+    }
+  },
+  {
+    "name": "rename_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[rename_object]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_id": null
+    }
+  },
+  {
+    "name": "move_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[move_object]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ndx\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ndy\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_id": null,
+      "dx": null,
+      "dy": null
+    }
+  },
+  {
+    "name": "scale_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[scale_object]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nsx\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_id": null,
+      "sx": null
+    }
+  },
+  {
+    "name": "rotate_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[rotate_object]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ndegrees\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_id": null,
+      "degrees": null
+    }
+  },
+  {
+    "name": "resize_canvas",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[resize_canvas]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nwidth\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nheight\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "width": null,
+      "height": null
+    }
+  },
+  {
+    "name": "normalize_viewbox",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[normalize_viewbox]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null
+    }
+  },
+  {
+    "name": "fit_to_content",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[fit_to_content]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null
+    }
+  },
+  {
+    "name": "tile",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "6 validation errors for call[tile]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nrows\n  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/int_type\ncols\n  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/int_type\ndx\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ndy\n  Input should be a valid number [type=float_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_id": null,
+      "rows": null,
+      "cols": null,
+      "dx": null,
+      "dy": null
+    }
+  },
+  {
+    "name": "repeat_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[repeat_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nplacement\n  Input should be a valid dictionary or object to extract fields from [type=model_attributes_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/model_attributes_type\ngroup_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "object_id": null,
+      "placement": null,
+      "group_id": null
+    }
+  },
+  {
+    "name": "transform_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[transform_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nselector\n  Input should be a valid dictionary or instance of TransformSelector [type=model_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/model_type\noperation\n  Input should be a valid dictionary or object to extract fields from [type=model_attributes_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/model_attributes_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null,
+      "selector": null,
+      "operation": null
+    }
+  },
+  {
+    "name": "validate_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[validate_document]\ndoc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": null
+    }
+  }
+]

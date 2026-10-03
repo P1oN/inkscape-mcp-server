@@ -1,0 +1,93 @@
+{
+  "passed": true,
+  "full_migration_complete": false,
+  "binary_sha256": "dfadfbc0a11cc14a1454c40d35956348070b353115ed726b8b450035b73afd1f",
+  "measurements": {
+    "process-benchmark-stage23": {
+      "comparison": "migration/process-benchmark-stage23-comparison.json",
+      "requests": 200,
+      "sampler_errors": 1,
+      "inspection_envelopes_equal": true,
+      "metadata": {
+        "platform": "macOS-27.0-arm64-arm-64bit",
+        "machine": "arm64",
+        "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage23",
+        "binary_sha256": "dfadfbc0a11cc14a1454c40d35956348070b353115ed726b8b450035b73afd1f",
+        "harness_sha256": "879939d36edf04c15ae43524511b2d379bd334b95f8be07cc1d80eacc7984917",
+        "repeats": 5,
+        "counts": [
+          100,
+          10000,
+          100000
+        ],
+        "sampling_interval_target_ns": 20000000,
+        "diagnostic_cli": false,
+        "engine_mode": "per_call",
+        "limitations": [
+          "sampled peaks can miss short-lived children or between-sample peaks",
+          "RSS sums include shared pages; footprint is also summed, not unique pages",
+          "startup includes Popen, sampler setup and real initialize roundtrip",
+          "request roundtrip includes client JSON, pipes and scheduling",
+          "CPU converted from Mach ticks with mach_timebase_info; raw *_ticks retained",
+          "start/exit/child elapsed identities are raw Mach ticks",
+          "root child CPU counters cover reaped children and may lag",
+          "boundary descendant CPU covers children still live; excludes already exited children",
+          "physical disk counters can be zero for cached IO; not logical filesystem IO",
+          "diagnostic wrapper runs measure actual vendor CLI wall and child CPU separately",
+          "diagnostic wrapper bootstrap adds overhead; do not use as direct speed comparison",
+          "outside-CLI remainder contains server, IPC, filesystem and wrapper bootstrap",
+          "server CPU, physical IO and ping are observations, not exclusive wall phases",
+          "engine_mode recorded explicitly, live disabled; no GUI operations measured"
+        ]
+      }
+    },
+    "process-benchmark-cli-stage23": {
+      "comparison": "migration/process-benchmark-cli-stage23-comparison.json",
+      "requests": 160,
+      "sampler_errors": 0,
+      "inspection_envelopes_equal": true,
+      "metadata": {
+        "platform": "macOS-27.0-arm64-arm-64bit",
+        "machine": "arm64",
+        "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage23",
+        "binary_sha256": "dfadfbc0a11cc14a1454c40d35956348070b353115ed726b8b450035b73afd1f",
+        "harness_sha256": "879939d36edf04c15ae43524511b2d379bd334b95f8be07cc1d80eacc7984917",
+        "repeats": 5,
+        "counts": [
+          100
+        ],
+        "sampling_interval_target_ns": 20000000,
+        "diagnostic_cli": true,
+        "engine_mode": "per_call",
+        "limitations": [
+          "sampled peaks can miss short-lived children or between-sample peaks",
+          "RSS sums include shared pages; footprint is also summed, not unique pages",
+          "startup includes Popen, sampler setup and real initialize roundtrip",
+          "request roundtrip includes client JSON, pipes and scheduling",
+          "CPU converted from Mach ticks with mach_timebase_info; raw *_ticks retained",
+          "start/exit/child elapsed identities are raw Mach ticks",
+          "root child CPU counters cover reaped children and may lag",
+          "boundary descendant CPU covers children still live; excludes already exited children",
+          "physical disk counters can be zero for cached IO; not logical filesystem IO",
+          "diagnostic wrapper runs measure actual vendor CLI wall and child CPU separately",
+          "diagnostic wrapper bootstrap adds overhead; do not use as direct speed comparison",
+          "outside-CLI remainder contains server, IPC, filesystem and wrapper bootstrap",
+          "server CPU, physical IO and ping are observations, not exclusive wall phases",
+          "engine_mode recorded explicitly, live disabled; no GUI operations measured"
+        ]
+      }
+    }
+  },
+  "strict_direct_validator_initially_refused": "one Python run-0 rusage ESRCH observation; raw error retained and memory completeness false, reply validation repeated with explicit --record-sampler-errors",
+  "direct_invocation": "PATH=/Applications/Inkscape.app/Contents/MacOS:$PATH .venv/bin/python scripts/migration_process_benchmark.py --package migration/results/packages/inkscape-mcp-macos-arm64-stage23 --output migration/results/process-benchmark-stage23 --repeats 5",
+  "diagnostic_invocation": "same harness with --output migration/results/process-benchmark-cli-stage23 --repeats 5 --counts 100 --diagnostic-cli",
+  "exclusive_server_IPC_logical_file_attribution": false,
+  "native_GUI_exercised": false,
+  "limitations": [
+    "Warm local OS caches, alternating order, no cache flush or isolated machine load",
+    "20ms target sampling has observed gaps and can miss child processes; no exact peak memory claim",
+    "Outside-CLI wall remainder includes IPC, files, server and diagnostic wrapper startup; CPU is a separate observation",
+    "Rust startup/small inspection lower here; edit/batch/render/export not generally faster; large-output RSS remains high in both",
+    "Prior summaries are historical comparison context, not evidence transferred to stage23"
+  ]
+}

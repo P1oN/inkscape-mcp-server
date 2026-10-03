@@ -1,0 +1,1302 @@
+{
+  "evidence_verified": true,
+  "goal_complete": false,
+  "scope": "Rust213/1ignored, bounded validation diagnostics and deferred compare pair publication; cold/warm archive, asset17/routes8 both engines, security35/files12/doctor10/launcher11/notices15 (102 crates and exact4 native source notice supplements)/discovery16. No new GUI/performance proof; corresponding-source patches and private CPython provenance remain open.",
+  "files": [
+    {
+      "path": "migration/discovery-stage35-comparison.json",
+      "bytes": 1897,
+      "sha256": "4d557f3264600ea2cadd6e00325aab0d095c8f8411733b3fad8f5d1c04f1393d"
+    },
+    {
+      "path": "migration/doctor-stage35-comparison.json",
+      "bytes": 236,
+      "sha256": "fc696f24d4bd246214b6cfb4ae93a0cdf025833fbb24b4051aa51d4c81ead06d"
+    },
+    {
+      "path": "migration/notices-stage35-comparison.json",
+      "bytes": 27534,
+      "sha256": "d25050afd25dd856d572dfc1aa9d51f4bba6c7b638210dfd916e035be476eb8f"
+    },
+    {
+      "path": "migration/package-stage35-build-comparison.json",
+      "bytes": 1738,
+      "sha256": "7f000bbafcb636b294d2d6fed1e9014ea494090eabc19a9019a1e5710523e32d"
+    },
+    {
+      "path": "migration/package-stage35-cold-comparison.json",
+      "bytes": 606,
+      "sha256": "d4313e899d6a7c2841ae900b0f856497f5f23777d8937959ce5213207dd43bd2"
+    },
+    {
+      "path": "migration/package-stage35-warm-comparison.json",
+      "bytes": 603,
+      "sha256": "00307a1f5305cce6be2897c55a4f510efc62d6611e8bf363eee37f81a442466b"
+    },
+    {
+      "path": "migration/results/compare-publication-stage35/after.png",
+      "bytes": 144,
+      "sha256": "f13203835a588d5bc907b1f5dd2b7a0e345ba037b14c1f1631fc55e3abfaff4c"
+    },
+    {
+      "path": "migration/results/compare-publication-stage35/before.png",
+      "bytes": 144,
+      "sha256": "8aaaac4101542e16a9f3a2f2e77589227c22b8ac3a3524d2aa48efb5ba2426ae"
+    },
+    {
+      "path": "migration/results/compare-publication-stage35/comparison.json",
+      "bytes": 244,
+      "sha256": "a7e54681213ff36e582490be956bbe7451d20ac112891b25bff2610b0c73af73"
+    },
+    {
+      "path": "migration/results/compare-publication-stage35/refusal-filesystem.json",
+      "bytes": 4406,
+      "sha256": "afe0a0ddad35148d214d34f6f77f9466f6586a97d196b5d77e6882274862de44"
+    },
+    {
+      "path": "migration/results/compare-publication-stage35/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/compare-publication-stage35/server.trace.json",
+      "bytes": 14093,
+      "sha256": "62c5b05155d316c2194f41430fc7d0c0cbd0e4aaf2f9fbafe4a28fec3f7ef9b2"
+    },
+    {
+      "path": "migration/results/diagnostic-limits-stage35/comparison.json",
+      "bytes": 361,
+      "sha256": "922250d0e650b5e2cb5ec3b11d3299033897b8e9810d93b9b2371baad7b670c8"
+    },
+    {
+      "path": "migration/results/diagnostic-limits-stage35/discriminator-size.json",
+      "bytes": 46,
+      "sha256": "f3715a90b44a34d25eb3ba726bf5ded6380980a16972d5652ab8604a34c71c1b"
+    },
+    {
+      "path": "migration/results/diagnostic-limits-stage35/nested-wrong-scalar-size.json",
+      "bytes": 45,
+      "sha256": "f3dc67328a9bb8ebbd413e28029c1b4897e114675e572bc7e6e664fc828c3ac5"
+    },
+    {
+      "path": "migration/results/diagnostic-limits-stage35/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/diagnostic-limits-stage35/server.trace.json",
+      "bytes": 3509457,
+      "sha256": "96291663b65abf6318fd3c25f0d87c67f0a045c12b2bc9bc05b5cc0d78a9055d"
+    },
+    {
+      "path": "migration/results/diagnostic-limits-stage35/unknown-field-size.json",
+      "bytes": 45,
+      "sha256": "1c188578936693b593feb047028edaa9f14708e749086fb45094b7ca3778f171"
+    },
+    {
+      "path": "migration/results/discovery-stage35/environment.json",
+      "bytes": 1750,
+      "sha256": "dc4c24d4ff4b25cea08dfe5d0f9cb289275173bd21ecced218cd5ec6c142ee8e"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-false_raw-false_core_full.json",
+      "bytes": 264278,
+      "sha256": "e569f28975e9657e1235e1d3cac341aabafc37927985782f8a48327fc6110a3f"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-false_raw-false_core_full.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-false_raw-false_core_short.json",
+      "bytes": 225730,
+      "sha256": "a8b5a0cb6d34e3a6721e3ec9caca120dd3815b4c6e3119da73a4584edf23eabf"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-false_raw-false_core_short.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-false_raw-false_full_full.json",
+      "bytes": 554214,
+      "sha256": "e5bb291f3527388329b3040548d612fded8fe340ae955a3fdfbcc4772ed2a4a0"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-false_raw-false_full_full.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-false_raw-false_full_short.json",
+      "bytes": 481809,
+      "sha256": "253494a06f959e15c5c6287888dfb49c7f9534e517530287e73f1ec862977e79"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-false_raw-false_full_short.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-false_raw-true_core_full.json",
+      "bytes": 264278,
+      "sha256": "e569f28975e9657e1235e1d3cac341aabafc37927985782f8a48327fc6110a3f"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-false_raw-true_core_full.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-false_raw-true_core_short.json",
+      "bytes": 225730,
+      "sha256": "a8b5a0cb6d34e3a6721e3ec9caca120dd3815b4c6e3119da73a4584edf23eabf"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-false_raw-true_core_short.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-false_raw-true_full_full.json",
+      "bytes": 620830,
+      "sha256": "edf5fb69aa32e630d124fbb557e280dd9981bbd0c945b5419757707ad586e1bc"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-false_raw-true_full_full.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-false_raw-true_full_short.json",
+      "bytes": 537141,
+      "sha256": "8c619beb7cd7683663f2267b7efa4adf7c8ee125bc2c0c16ff1131894d194841"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-false_raw-true_full_short.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-true_raw-false_core_full.json",
+      "bytes": 264278,
+      "sha256": "e569f28975e9657e1235e1d3cac341aabafc37927985782f8a48327fc6110a3f"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-true_raw-false_core_full.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-true_raw-false_core_short.json",
+      "bytes": 225730,
+      "sha256": "a8b5a0cb6d34e3a6721e3ec9caca120dd3815b4c6e3119da73a4584edf23eabf"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-true_raw-false_core_short.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-true_raw-false_full_full.json",
+      "bytes": 729567,
+      "sha256": "42d4c37d4ab50b9f233e87001b9abe83a6f1c361840326f971fe73b106546df3"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-true_raw-false_full_full.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-true_raw-false_full_short.json",
+      "bytes": 636963,
+      "sha256": "9205b7e96de3a2795363cb2f9ffcbd455203a63cdb9b885d9b6f86ecda69d5de"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-true_raw-false_full_short.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-true_raw-true_core_full.json",
+      "bytes": 264278,
+      "sha256": "e569f28975e9657e1235e1d3cac341aabafc37927985782f8a48327fc6110a3f"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-true_raw-true_core_full.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-true_raw-true_core_short.json",
+      "bytes": 225730,
+      "sha256": "a8b5a0cb6d34e3a6721e3ec9caca120dd3815b4c6e3119da73a4584edf23eabf"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-true_raw-true_core_short.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-true_raw-true_full_full.json",
+      "bytes": 796183,
+      "sha256": "d9a4e305c6fadc9fefc20eb056bbbd4895c31e1802b691badacc2c858c1abd8a"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-true_raw-true_full_full.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-true_raw-true_full_short.json",
+      "bytes": 692295,
+      "sha256": "050000983aa25ac27faf6632e37da78676796abe9030fc57177842888dce4f33"
+    },
+    {
+      "path": "migration/results/discovery-stage35/live-true_raw-true_full_short.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/doctor-stage35/linked-bridge.json",
+      "bytes": 1447,
+      "sha256": "038b0bd0fdcb6596711416dbb165bbcc97f1b1957a020d782ca2cf0e802aeb4c"
+    },
+    {
+      "path": "migration/results/doctor-stage35/missing-bridge.json",
+      "bytes": 1447,
+      "sha256": "038b0bd0fdcb6596711416dbb165bbcc97f1b1957a020d782ca2cf0e802aeb4c"
+    },
+    {
+      "path": "migration/results/doctor-stage35/missing-bus.json",
+      "bytes": 1448,
+      "sha256": "98db54f39a4ac4d72122e7b3cd42af413a44046c10abe45f0d2b82a6cd787361"
+    },
+    {
+      "path": "migration/results/doctor-stage35/missing-gdbus.json",
+      "bytes": 1448,
+      "sha256": "3284a840d2f4dc09a5434ea9d45cd06c4f3615db3dc07bedf43d49f1605ed82e"
+    },
+    {
+      "path": "migration/results/doctor-stage35/missing-helper.json",
+      "bytes": 1447,
+      "sha256": "3723c3b4c7f197d76c0c1d50e42cd5b895c25e67e027bfcde5712d75969736e9"
+    },
+    {
+      "path": "migration/results/doctor-stage35/missing-manifest.json",
+      "bytes": 1359,
+      "sha256": "93ca276fc9b5d91fa25c5f95461676e42249f981fe1da0e4efdc198e2683502a"
+    },
+    {
+      "path": "migration/results/doctor-stage35/missing-runtime.json",
+      "bytes": 1202,
+      "sha256": "297fb812a0d45b7e3a71287c70e36b9e41a2e98146cb658f5ab215f9528c8bf8"
+    },
+    {
+      "path": "migration/results/doctor-stage35/old-engine.json",
+      "bytes": 1271,
+      "sha256": "b7317b0674eae7e10b4f59a584c179a450be13d11c5c39d7e043278d3f87e9b0"
+    },
+    {
+      "path": "migration/results/doctor-stage35/ready.json",
+      "bytes": 1426,
+      "sha256": "5c687527f879a4ebfd9db4b6524cec89a8b361e68fb08c9aee8546af63301e41"
+    },
+    {
+      "path": "migration/results/doctor-stage35/wrong-bridge.json",
+      "bytes": 1447,
+      "sha256": "038b0bd0fdcb6596711416dbb165bbcc97f1b1957a020d782ca2cf0e802aeb4c"
+    },
+    {
+      "path": "migration/results/engine-routes-stage35/capture_frame-filesystem.json",
+      "bytes": 11934,
+      "sha256": "d7d294971a7b80a18f37d220cceaebacde8d8a96169a2794e8fdafc13f205878"
+    },
+    {
+      "path": "migration/results/engine-routes-stage35/comparison.json",
+      "bytes": 688,
+      "sha256": "f0a4a92231c1d87de65f6332f6819e3074f94f35dcf8a5d932aa03a2c3b18880"
+    },
+    {
+      "path": "migration/results/engine-routes-stage35/export_document-filesystem.json",
+      "bytes": 11934,
+      "sha256": "d7d294971a7b80a18f37d220cceaebacde8d8a96169a2794e8fdafc13f205878"
+    },
+    {
+      "path": "migration/results/engine-routes-stage35/find_objects-filesystem.json",
+      "bytes": 11934,
+      "sha256": "d7d294971a7b80a18f37d220cceaebacde8d8a96169a2794e8fdafc13f205878"
+    },
+    {
+      "path": "migration/results/engine-routes-stage35/server.stderr.log",
+      "bytes": 392,
+      "sha256": "1457a60aeed59f927e8dede37ac64bb8fbf13e510a60996c6106c058d86faa73"
+    },
+    {
+      "path": "migration/results/engine-routes-stage35/server.trace.json",
+      "bytes": 20504,
+      "sha256": "2cb33246577b5777ea6c5b6542488c4d3b20baa51a9874213713987dddd00aa9"
+    },
+    {
+      "path": "migration/results/engine-routes-stage35-warm/capture_frame-filesystem.json",
+      "bytes": 11934,
+      "sha256": "ee86b394b759c2c69a12efd2a9e576e7c00d9784442a371ab6dea2178458ad37"
+    },
+    {
+      "path": "migration/results/engine-routes-stage35-warm/comparison.json",
+      "bytes": 685,
+      "sha256": "dda60197044691503151a9e3e4dbfcb262bff32cf0de70966cd88078b31f7510"
+    },
+    {
+      "path": "migration/results/engine-routes-stage35-warm/export_document-filesystem.json",
+      "bytes": 11934,
+      "sha256": "ee86b394b759c2c69a12efd2a9e576e7c00d9784442a371ab6dea2178458ad37"
+    },
+    {
+      "path": "migration/results/engine-routes-stage35-warm/find_objects-filesystem.json",
+      "bytes": 11934,
+      "sha256": "ee86b394b759c2c69a12efd2a9e576e7c00d9784442a371ab6dea2178458ad37"
+    },
+    {
+      "path": "migration/results/engine-routes-stage35-warm/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/engine-routes-stage35-warm/server.trace.json",
+      "bytes": 20502,
+      "sha256": "c24f59f64ae65f11c73e0905ade28ac96a5d4a4a32f48ccde205abfc4ea07a0c"
+    },
+    {
+      "path": "migration/results/launcher-stage35/comparison.json",
+      "bytes": 1216,
+      "sha256": "ba8f3060c135237ee6506dd3752e4e4687c259c35ec800552db0c12431a80ca0"
+    },
+    {
+      "path": "migration/results/launcher-stage35/mcp.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/launcher-stage35/mcp.trace.json",
+      "bytes": 798270,
+      "sha256": "cc9ebbf4a15816cc629e9fc98fe6f1f67ab0558992232c91aae02c629e30880b"
+    },
+    {
+      "path": "migration/results/launcher-stage35/refused-engine.json",
+      "bytes": 73,
+      "sha256": "b2c6772624fb074d75b23f1d1d3d8774142eafd67601e9a79513ad619e873d42"
+    },
+    {
+      "path": "migration/results/launcher-stage35/refused-trailing.json",
+      "bytes": 106,
+      "sha256": "53d07e550f5b26262685e8f6e42f310f60e4195a6856679e330b4b424fb44277"
+    },
+    {
+      "path": "migration/results/launcher-stage35/refused-truncated.json",
+      "bytes": 101,
+      "sha256": "649174e508ec038506c0d3be1d40fc1fd74a45542b0b171739c8d4186692e439"
+    },
+    {
+      "path": "migration/results/launcher-stage35/refused-workspace.json",
+      "bytes": 88,
+      "sha256": "27a1af0c0ca2a0c66b5ef3d2301905f18f603a5d578bb46bd7565f7be8e0aecd"
+    },
+    {
+      "path": "migration/results/launcher-stage35/setup.json",
+      "bytes": 1988,
+      "sha256": "050c48a3186402b2e9e65a8a2dc2a9522c70e15eddfc1340798d35bbb01cf7c4"
+    },
+    {
+      "path": "migration/results/native-source-audit/cold-acceptance.log",
+      "bytes": 552,
+      "sha256": "bf02e9e9dbb656d38516648cf4da23177986723b3d11b4c689b766b5f8d43b3f"
+    },
+    {
+      "path": "migration/results/native-source-audit/dbus/dbus-1.16.2.tar.xz",
+      "bytes": 1115644,
+      "sha256": "0ba2a1a4b16afe7bceb2c07e9ce99a8c2c3508e5dec290dbb643384bd6beb7e2"
+    },
+    {
+      "path": "migration/results/native-source-audit/dbus/source.json",
+      "bytes": 253,
+      "sha256": "a98bab4eb4305860962d10454dab18ba4031955329705c60744d5b4784536367"
+    },
+    {
+      "path": "migration/results/native-source-audit/gettext/gettext-1.0.tar.gz",
+      "bytes": 32694085,
+      "sha256": "85d99b79c981a404874c02e0342176cf75c7698e2b51fe41031cf6526d974f1a"
+    },
+    {
+      "path": "migration/results/native-source-audit/gettext/source.json",
+      "bytes": 249,
+      "sha256": "f58768a54dc8d02cf3f7bbcfddc890666bed615aa3ba1ac854ed0ea8a7c14e45"
+    },
+    {
+      "path": "migration/results/native-source-audit/glib/glib-2.90.0.tar.xz",
+      "bytes": 5830480,
+      "sha256": "17d15cac2af80a33271127408e0abc2748eb297c595c2a26409e81e14e7d1b8f"
+    },
+    {
+      "path": "migration/results/native-source-audit/glib/source.json",
+      "bytes": 255,
+      "sha256": "894a0f338c5953e09d2b5d351f0d0bea0c91dfa1a58d6897ff840b7216ac8291"
+    },
+    {
+      "path": "migration/results/native-source-audit/llms/llms-full.txt",
+      "bytes": 796521,
+      "sha256": "acffb9c92c5072ca9a66bb2e0dd703968edda2905b378373b51c3bbad2c93bda"
+    },
+    {
+      "path": "migration/results/native-source-audit/llms/llms.txt",
+      "bytes": 11767,
+      "sha256": "9f9a4ed7f2a611a3a8201eca50b3cdfc262765307035a917d9931c1f3e5b59a7"
+    },
+    {
+      "path": "migration/results/native-source-audit/notices-stage33-supplement-regressions.json",
+      "bytes": 27490,
+      "sha256": "202a8ea88238da4a624a9df2fb2eb5c865b2c0e9618d3219219f2663602da89d"
+    },
+    {
+      "path": "migration/results/native-source-audit/notices-stage34-before-runtime-text.json",
+      "bytes": 27536,
+      "sha256": "31383d5cbf06b1404fdd873a757585f14c23473acab0978a896c6a9e02d1544c"
+    },
+    {
+      "path": "migration/results/native-source-audit/notices-stage35.json",
+      "bytes": 27534,
+      "sha256": "d25050afd25dd856d572dfc1aa9d51f4bba6c7b638210dfd916e035be476eb8f"
+    },
+    {
+      "path": "migration/results/native-source-audit/package-build.log",
+      "bytes": 156,
+      "sha256": "bf6d5d918b74d5636ebdf84fd2ca89b852e811bdedae3de14fb12049e11bf3a3"
+    },
+    {
+      "path": "migration/results/native-source-audit/package35-build.log",
+      "bytes": 156,
+      "sha256": "ae30d59e80ada17d13b7221fd51a92cb818ddc941d80a40014234d90a710b9fa"
+    },
+    {
+      "path": "migration/results/native-source-audit/pcre2/pcre2-10.48.tar.bz2",
+      "bytes": 2213024,
+      "sha256": "b6c68fdf6f3ac31388b50aa89ff0fc49c00c987c16e7b5146491d12003f2c8ed"
+    },
+    {
+      "path": "migration/results/native-source-audit/pcre2/source.json",
+      "bytes": 280,
+      "sha256": "b51a9f3690aeddb9f41781900670c7c88965fb1b27dc3f20f136a481f2cbf075"
+    },
+    {
+      "path": "migration/results/native-source-audit/release-build.log",
+      "bytes": 153,
+      "sha256": "df1b3baf12a2a0aa95eb3c471c2c002f9fed08be11543fc5ef07236952edf03f"
+    },
+    {
+      "path": "migration/results/native-source-audit/snapshots/README.md",
+      "bytes": 2819,
+      "sha256": "0ba865c7fd75cd371455f280e83668ba3c9db8a32e746a18161f4939c409abb6"
+    },
+    {
+      "path": "migration/results/native-source-audit/snapshots/docs/AGENT_HANDOFF.md",
+      "bytes": 215229,
+      "sha256": "41c6e74b5b9068e6c8a8ea8ee86506471e3b3edb168bfc44d6316ae1e1d656d0"
+    },
+    {
+      "path": "migration/results/native-source-audit/snapshots/docs/RUST_COMPLETION_CHECKLIST.md",
+      "bytes": 2423,
+      "sha256": "926b41ac60ac5f3912fc1dc2fd31bc37d710a3971a946d66ae2396dfdad37841"
+    },
+    {
+      "path": "migration/results/native-source-audit/snapshots/docs/RUST_MIGRATION_REPORT.md",
+      "bytes": 264626,
+      "sha256": "de40f8d76b0fc54a94f8ec15635ff2e80146e357d3ed6cd3253379bbb1ca4d6d"
+    },
+    {
+      "path": "migration/results/native-source-audit/snapshots/docs/RUST_NEXT_PLAN.md",
+      "bytes": 8004,
+      "sha256": "85a7ac763f20887847afa79e1fe9205dedb5a5b18dd1ff95818ce374b3812d0c"
+    },
+    {
+      "path": "migration/results/native-source-audit/snapshots/docs/RUST_PACKAGING.md",
+      "bytes": 9885,
+      "sha256": "8fc1037f5f98c8f8f5adb7e397dda9921c7f0b87c490d827b8619a46be813c17"
+    },
+    {
+      "path": "migration/results/native-source-audit/snapshots/docs/RUST_SECURITY_AUDIT.md",
+      "bytes": 20016,
+      "sha256": "115ea4fee354211f31269e662b56daa968f2a80d4d3af5d4ed434567b66fd5f4"
+    },
+    {
+      "path": "migration/results/native-source-audit/snapshots/migration/current-package.json",
+      "bytes": 399,
+      "sha256": "2ef8e35392f9bef0806d0949a85a5b03d8195e59a4deba6f87a7d1bed21b12ae"
+    },
+    {
+      "path": "migration/results/native-source-audit/snapshots/rust/src/argument_validation.rs",
+      "bytes": 36861,
+      "sha256": "9efcafb4a67b86d24ccba08f403824ec853698189be20faab642e5680ab8f166"
+    },
+    {
+      "path": "migration/results/native-source-audit/snapshots/rust/src/render.rs",
+      "bytes": 35312,
+      "sha256": "2b333334ff5fb2bad83920b8a96c6fbfd2e6b0617ef18c78b69e986d06b5763e"
+    },
+    {
+      "path": "migration/results/native-source-audit/snapshots/scripts/migration_build_macos_package.py",
+      "bytes": 15081,
+      "sha256": "01925c5358b559576c69e10639fad4617e4eb41a4ca31fb9e3e2f21c54eafcd6"
+    },
+    {
+      "path": "migration/results/native-source-audit/snapshots/scripts/migration_notices_acceptance.py",
+      "bytes": 7501,
+      "sha256": "d9e8f5de8c6c3e9d74951c01540786561667848bff71eaf4ff459eebd41f0493"
+    },
+    {
+      "path": "migration/results/native-source-audit/snapshots/scripts/migration_package_notices.py",
+      "bytes": 11907,
+      "sha256": "f2cc59e8899442210d1322f4851cb05af91e6281e3e064c35986dfe2cdd9014e"
+    },
+    {
+      "path": "migration/results/native-source-audit/source-notice-verification.json",
+      "bytes": 923,
+      "sha256": "c46e5011e927e36355e2fc844a8cbcfb54fef3157705ff6f078c5b1c7238c275"
+    },
+    {
+      "path": "migration/results/native-source-audit/warm-acceptance.log",
+      "bytes": 549,
+      "sha256": "5a29f2f199902f6a31d4b9bd04e2acce6a10a6374d61eac682d869566870437e"
+    },
+    {
+      "path": "migration/results/package-stage35-cold/noop-filesystem.json",
+      "bytes": 4034,
+      "sha256": "37488e9d5efd388482a2332362fd95466c8f6e68c1cf97bb87806268a69358fe"
+    },
+    {
+      "path": "migration/results/package-stage35-cold/packaged-bus.log",
+      "bytes": 96,
+      "sha256": "69516ea1dd72ca9268c6ef6c79cd08627f0b83b926ee1104075c7a8c6a1455cf"
+    },
+    {
+      "path": "migration/results/package-stage35-cold/packaged-preview.json",
+      "bytes": 797,
+      "sha256": "21b2a3f4bdedda6328a8039e80b4c94a10f12623d9e6becc392dadd2c5289f44"
+    },
+    {
+      "path": "migration/results/package-stage35-cold/packaged-server.stderr.log",
+      "bytes": 588,
+      "sha256": "f77d8704396753ca2813c3076f257af53d8c93c770a61b4bb88219209f357da4"
+    },
+    {
+      "path": "migration/results/package-stage35-cold/packaged-server.trace.json",
+      "bytes": 1064984,
+      "sha256": "341b088af2d080559cd0f435baa9ef2335f9e8a21b43afb184f3dcf007d9c295"
+    },
+    {
+      "path": "migration/results/package-stage35-warm/noop-filesystem.json",
+      "bytes": 4034,
+      "sha256": "739dc8f509a0f338c20884bf34b36ab780003546f70065d03fa505a2302b6665"
+    },
+    {
+      "path": "migration/results/package-stage35-warm/packaged-bus.log",
+      "bytes": 96,
+      "sha256": "c3b96fbb3469c84b86bbfda37136576982039b5eede4ea4c0218d49e21766c33"
+    },
+    {
+      "path": "migration/results/package-stage35-warm/packaged-preview.json",
+      "bytes": 797,
+      "sha256": "1a1973e52dc5b5aa57ce29f0ae5d4b833ebfa7d4b401d053bd8d794eb7f6f956"
+    },
+    {
+      "path": "migration/results/package-stage35-warm/packaged-server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/package-stage35-warm/packaged-server.trace.json",
+      "bytes": 1064977,
+      "sha256": "b908797fa85b5e27b699ebda937c1d5f148245e86df7618d219300ba8a8123e1"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/FILES.json",
+      "bytes": 474047,
+      "sha256": "3b45fad3fd7c30105040d5e71681a0daba8301bf575dc1e8cacea2f13da95043"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/LICENSE-INVENTORY.json",
+      "bytes": 113301,
+      "sha256": "e336fcfca5d6e729296cbccb14ab698210d776f62b6b688edfbf4902c83834ab"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/THIRD_PARTY_NOTICES.md",
+      "bytes": 4827,
+      "sha256": "4c40c25e8b2843bfb5a8bc474c954e16494b202b7f46ab46bdcc70956b62d5f4"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/bin/inkscape-mcp",
+      "bytes": 12887040,
+      "sha256": "3ad57c33d9e4530d2ddb7b7bb66fdc7975b853deb4b5a0d360b29719f39145c4"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/dbus/dbus/AUTHORS",
+      "bytes": 10813,
+      "sha256": "a56f6628c407e46ec72eb5512591b4c6204e7c0854c15ed0af4daad807edb84f"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/dbus/dbus/COPYING",
+      "bytes": 1134,
+      "sha256": "150e5d08e1cb5e62b65967d7931acad2c42d98ec1bbb584bebb01921cbc853c2"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/dbus/dbus/build-metadata/.brew/dbus.rb",
+      "bytes": 4578,
+      "sha256": "e890fc9d67bfca3a0fbe8343926a7010f93341238f939ffa56dec10feafaf78d"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/dbus/dbus/build-metadata/INSTALL_RECEIPT.json",
+      "bytes": 1887,
+      "sha256": "bf0d980ef6d6b925270f75c28ba9334d95991a59697af163e83c524df9bfe389"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/dbus/dbus/sbom.spdx.json",
+      "bytes": 3044,
+      "sha256": "7c23ed4680eb26abaac4537e1ba59e6c99d4919d612dc10f6b1e844340f951b4"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/dbus/gettext/AUTHORS",
+      "bytes": 2637,
+      "sha256": "167b04ed012e59c2d2cfc87d420d8c8a8f5c528ef1fd068598b36d57f39db203"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/dbus/gettext/COPYING",
+      "bytes": 35151,
+      "sha256": "e79e9c8a0c85d735ff98185918ec94ed7d175efc377012787aebcf3b80f0d90b"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/dbus/gettext/build-metadata/.brew/gettext.rb",
+      "bytes": 2157,
+      "sha256": "170f5a29d2eb95b9dd1f1f754c0f9b90692c3d5dcf6db02c199c93e2c445177d"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/dbus/gettext/build-metadata/INSTALL_RECEIPT.json",
+      "bytes": 1471,
+      "sha256": "9db9fcb5c67484dc98e3accfa9f9abdcf32c4f81ef324f90ba3594cdbfc64b9c"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/dbus/gettext/sbom.spdx.json",
+      "bytes": 3723,
+      "sha256": "e2aaea413ee4d342d9b53a7288eb068f7364dea5aca33aa1893225150395a1bd"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/dbus/glib/build-metadata/.brew/glib.rb",
+      "bytes": 7480,
+      "sha256": "eb964bd9d934f92a1e271e84085c58541770d41f5698e7e5f17094375bb46d2a"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/dbus/glib/build-metadata/INSTALL_RECEIPT.json",
+      "bytes": 3187,
+      "sha256": "f1b6ab888d65b72ac1e0899c1c0e72fe9dff250f8b4a68be860b8011696ff75c"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/dbus/glib/sbom.spdx.json",
+      "bytes": 7121,
+      "sha256": "8e0e245b9ad3114f0193bd2950bef601e0855989cfdbc9e23a3d651211427773"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/dbus/pcre2/COPYING",
+      "bytes": 97,
+      "sha256": "99272c55f3dcfa07a8a7e15a5c1a33096e4727de74241d65fa049fccfdd59507"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/dbus/pcre2/build-metadata/.brew/pcre2.rb",
+      "bytes": 1181,
+      "sha256": "493c6e81fa41064d8cdbb554f0884a9afe856f11c62d250ed747ce5f565a3f0d"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/dbus/pcre2/build-metadata/INSTALL_RECEIPT.json",
+      "bytes": 1319,
+      "sha256": "7213f178acdc8baa58a28bee5bbc386a6679922e5585b2bf33336bb2dbaa77a8"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/dbus/pcre2/sbom.spdx.json",
+      "bytes": 3047,
+      "sha256": "e9ae8d5ee5977e5bcd18e3a0e5e107386a95fc003f017687ecb32069fa1feb69"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/dbus/1.16.2/COPYING",
+      "bytes": 1134,
+      "sha256": "150e5d08e1cb5e62b65967d7931acad2c42d98ec1bbb584bebb01921cbc853c2"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/dbus/1.16.2/LICENSES/AFL-2.0.txt",
+      "bytes": 8987,
+      "sha256": "7ecc7db84298adb05d2cf10339c63a5315a1c5c270a68d97d7d40a53b508ccde"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/dbus/1.16.2/LICENSES/AFL-2.1.txt",
+      "bytes": 8948,
+      "sha256": "93bb4f7417aa775bab9026cc3d0af28aeb64451fc5a8ec651876785edd8eaf9b"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/dbus/1.16.2/LICENSES/Apache-2.0.txt",
+      "bytes": 10280,
+      "sha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/dbus/1.16.2/LICENSES/BSD-3-Clause.txt",
+      "bytes": 1460,
+      "sha256": "5a93d5831e1297ab10fe643e1a631e83be392896da14ee2951285a79012df69d"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/dbus/1.16.2/LICENSES/GPL-2.0-or-later.txt",
+      "bytes": 17337,
+      "sha256": "aaf135472f81c5b4a0dca9367e5bb5e9750032b5bebe5442b36e4c0a47430df3"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/dbus/1.16.2/LICENSES/LGPL-2.1-or-later.txt",
+      "bytes": 25967,
+      "sha256": "fa6f36630bb1e0c571d34b2bbdf188d08495c9dbf58f28cac112f303fc1f58fb"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/dbus/1.16.2/LICENSES/LicenseRef-CMakeScripts.txt",
+      "bytes": 1411,
+      "sha256": "a4c1387064fda4c22bfca364b606eb4e0421efa37cad27c040a3d7ca7186d522"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/dbus/1.16.2/LICENSES/LicenseRef-GAP.txt",
+      "bytes": 400,
+      "sha256": "cf4bc4c56dd0837f3d53b8c1467e0d7dbb95223de8bcfe83a4981c318a738ae3"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/dbus/1.16.2/LICENSES/LicenseRef-pycrypto-orig.txt",
+      "bytes": 151,
+      "sha256": "2cb8f4f410f0ffc5dcfbadd188e20c859fdbb161e616cf2f3d34dfbf8c740547"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/dbus/1.16.2/LICENSES/MIT.txt",
+      "bytes": 1078,
+      "sha256": "b85dcd3e453d05982552c52b5fc9e0bdd6d23c6f8e844b984a88af32570b0cc0"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/dbus/1.16.2/LICENSES/TCL.txt",
+      "bytes": 2251,
+      "sha256": "36fc2d8a56a2a014ded51e298a7e63635eb4ec62e8bedb99c82b892542ac5e7d"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/dbus/1.16.2/provenance.json",
+      "bytes": 2289,
+      "sha256": "9cc5477bf4edbfe2cd4463460a7ecd82f8d00981ebc78db95bfc3fc3e4f5498d"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/gettext/1.0/COPYING",
+      "bytes": 35151,
+      "sha256": "e79e9c8a0c85d735ff98185918ec94ed7d175efc377012787aebcf3b80f0d90b"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/gettext/1.0/gettext-runtime/COPYING",
+      "bytes": 495,
+      "sha256": "7ef2cdfe58e0c0460657b6598b49af29d4e03c1e41cbaf0e1da1eb8ad74b95d0"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/gettext/1.0/gettext-runtime/intl/COPYING.LIB",
+      "bytes": 26419,
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/gettext/1.0/gettext-runtime/libasprintf/COPYING",
+      "bytes": 65,
+      "sha256": "03133addae5b99a6148c538300e6d97074453089be1423b741bd081f18e2b298"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/gettext/1.0/gettext-runtime/libasprintf/COPYING.LIB",
+      "bytes": 26419,
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/gettext/1.0/provenance.json",
+      "bytes": 1189,
+      "sha256": "5d0447aba13d72a3fa40cf733c4187732d17e4b7554c9ae4c7dbb38c1bcaf2df"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/glib/2.90.0/LICENSES/AFL-2.0.txt",
+      "bytes": 8987,
+      "sha256": "7ecc7db84298adb05d2cf10339c63a5315a1c5c270a68d97d7d40a53b508ccde"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/glib/2.90.0/LICENSES/Apache-2.0.txt",
+      "bytes": 10280,
+      "sha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/glib/2.90.0/LICENSES/CC-BY-SA-3.0.txt",
+      "bytes": 22240,
+      "sha256": "3f941b3b89cf7b8370ceb83cc76d2120d471b58735d8ca60238a751a48d7f72f"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/glib/2.90.0/LICENSES/CC0-1.0.txt",
+      "bytes": 7048,
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/glib/2.90.0/LICENSES/GPL-2.0-or-later.txt",
+      "bytes": 17337,
+      "sha256": "aaf135472f81c5b4a0dca9367e5bb5e9750032b5bebe5442b36e4c0a47430df3"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/glib/2.90.0/LICENSES/LGPL-2.1-only.txt",
+      "bytes": 25967,
+      "sha256": "fa6f36630bb1e0c571d34b2bbdf188d08495c9dbf58f28cac112f303fc1f58fb"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/glib/2.90.0/LICENSES/LGPL-2.1-or-later.txt",
+      "bytes": 25967,
+      "sha256": "fa6f36630bb1e0c571d34b2bbdf188d08495c9dbf58f28cac112f303fc1f58fb"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/glib/2.90.0/LICENSES/LLVM-exception.txt",
+      "bytes": 919,
+      "sha256": "e34c58338bd89d43e709e226610d8f32b3e3c47f4ad9a99a8dc1d4ac7842488e"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/glib/2.90.0/LICENSES/LicenseRef-old-glib-tests.txt",
+      "bytes": 841,
+      "sha256": "fb261b2d5dbe76c4850f90da763210bc385e52428df6bbfd7b06295ac8a32914"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/glib/2.90.0/LICENSES/MIT.txt",
+      "bytes": 1078,
+      "sha256": "b85dcd3e453d05982552c52b5fc9e0bdd6d23c6f8e844b984a88af32570b0cc0"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/glib/2.90.0/LICENSES/MPL-1.1.txt",
+      "bytes": 23669,
+      "sha256": "6214f8b1300bb9f37b16ebc146f8f61af0187e0025042ff95c8b3030744a8795"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/glib/2.90.0/provenance.json",
+      "bytes": 2288,
+      "sha256": "16b4ffcdcf41ae164ada39c4702834e2bd97ab36955a17565b803f5ca1abca29"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/pcre2/10.48/COPYING",
+      "bytes": 97,
+      "sha256": "99272c55f3dcfa07a8a7e15a5c1a33096e4727de74241d65fa049fccfdd59507"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/licenses/native-source/pcre2/10.48/provenance.json",
+      "bytes": 578,
+      "sha256": "fc7c6a0ae307dc9e265b13bf7d329fcd8fd7315d5042144a1fa7dfbb7b000a55"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35/libexec/inkscape-mcp/package.json",
+      "bytes": 6188,
+      "sha256": "629456f28ea8190658aa0bb67257bd405968be555de412dd703322a7be555fc3"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage35.tar.gz",
+      "bytes": 46613307,
+      "sha256": "68ef2c82937ef1a2ab973f7a80e7878344af434228aecd223110768558043db5"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35/inside-absolute-export.svg",
+      "bytes": 343,
+      "sha256": "7f9841a6d8e69e568f06734f6b3688a901e70515041b772d514fcaa14b0f06e6"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35/inside-absolute.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35/inside-css-export.svg",
+      "bytes": 400,
+      "sha256": "38f2f22c3a75a9941b8cf5a99b2358f79b768ad70255b282a6580439f9e5c9cc"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35/inside-css.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35/inside-feimage-export.svg",
+      "bytes": 465,
+      "sha256": "9e1d9926477dfcb65ea34a1688fe64271f87b61ad0db19540c23ee9f95ebadc0"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35/inside-feimage.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35/inside-import-export.svg",
+      "bytes": 434,
+      "sha256": "fb7271b84f43e212a6a7bf9bd71f766a62d0880fc69c36064127f0439ec04e12"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35/inside-import.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35/inside-nested-import-export.svg",
+      "bytes": 439,
+      "sha256": "cb8d80d0002e0c0dbfb11d840600f3c170f7b5c7282c27ec392660291f6207f9"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35/inside-nested-import.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35/inside-nested-svg-export.svg",
+      "bytes": 342,
+      "sha256": "fc0c21d5aa94b72c68e2364fa958e77e596eefc39ca68991310654405da796f8"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35/inside-nested-svg.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35/inside-relative-export.svg",
+      "bytes": 343,
+      "sha256": "7f9841a6d8e69e568f06734f6b3688a901e70515041b772d514fcaa14b0f06e6"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35/inside-relative.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35/inside-use-export.svg",
+      "bytes": 323,
+      "sha256": "9dcfa5a3a776653c7bdd1c66dd07f175af21620c3c585ebaf009ceb73679841e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35/inside-use.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35/probe.json",
+      "bytes": 4009,
+      "sha256": "6ae93e8b21f6795edba8471cde8392793b8d62556fd80c7c3c7498c852ff2e40"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35/server.trace.json",
+      "bytes": 74919,
+      "sha256": "709551b1b2b6588656b1870040ad11ab2ede96d685bcf8ed5eb7fa84aebb642e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35-warm/inside-absolute-export.svg",
+      "bytes": 343,
+      "sha256": "7f9841a6d8e69e568f06734f6b3688a901e70515041b772d514fcaa14b0f06e6"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35-warm/inside-absolute.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35-warm/inside-css-export.svg",
+      "bytes": 400,
+      "sha256": "0e468307ebdafb5381ca93e4063954c60d4020b2a88f8407393b4515c9e0dc49"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35-warm/inside-css.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35-warm/inside-feimage-export.svg",
+      "bytes": 465,
+      "sha256": "9e1d9926477dfcb65ea34a1688fe64271f87b61ad0db19540c23ee9f95ebadc0"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35-warm/inside-feimage.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35-warm/inside-import-export.svg",
+      "bytes": 434,
+      "sha256": "b03e2a019915ce77a6cf17395cbb40fdc7a3600f388eda6144027d16180d9f91"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35-warm/inside-import.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35-warm/inside-nested-import-export.svg",
+      "bytes": 439,
+      "sha256": "0ec4a4f9c45ad9aaed102bd8616442e8061800515c8a12f813547bcf93f33eac"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35-warm/inside-nested-import.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35-warm/inside-nested-svg-export.svg",
+      "bytes": 342,
+      "sha256": "fc0c21d5aa94b72c68e2364fa958e77e596eefc39ca68991310654405da796f8"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35-warm/inside-nested-svg.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35-warm/inside-relative-export.svg",
+      "bytes": 343,
+      "sha256": "7f9841a6d8e69e568f06734f6b3688a901e70515041b772d514fcaa14b0f06e6"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35-warm/inside-relative.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35-warm/inside-use-export.svg",
+      "bytes": 323,
+      "sha256": "9dcfa5a3a776653c7bdd1c66dd07f175af21620c3c585ebaf009ceb73679841e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35-warm/inside-use.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35-warm/probe.json",
+      "bytes": 4006,
+      "sha256": "31f63bdd0bce749655510eb6053e413dcfb31041efb0489b778bb8b96e71be1b"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35-warm/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/renderer-assets-stage35-warm/server.trace.json",
+      "bytes": 74910,
+      "sha256": "718d5f21fd419e51da561380ce8bac55066ca4db65766b039f769656daff1449"
+    },
+    {
+      "path": "migration/results/security-stage35/comparison.json",
+      "bytes": 1589,
+      "sha256": "b659e1dbfd331fa7536ad1433c40d34969a824be89e5e4971ba91ecc90d49d55"
+    },
+    {
+      "path": "migration/results/security-stage35/depth-filesystem.json",
+      "bytes": 1074,
+      "sha256": "2a963260bf5fc0ffd87bb131c3011189b76ee23871543ea067d173218c22097b"
+    },
+    {
+      "path": "migration/results/security-stage35/malformed-filesystem.json",
+      "bytes": 1074,
+      "sha256": "2a963260bf5fc0ffd87bb131c3011189b76ee23871543ea067d173218c22097b"
+    },
+    {
+      "path": "migration/results/security-stage35/namespace-filesystem.json",
+      "bytes": 1074,
+      "sha256": "2a963260bf5fc0ffd87bb131c3011189b76ee23871543ea067d173218c22097b"
+    },
+    {
+      "path": "migration/results/security-stage35/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/security-stage35/server.trace.json",
+      "bytes": 304857,
+      "sha256": "370d47729970818d42878a909bbc86f6e57b04914216677a2903b46f0d785118"
+    },
+    {
+      "path": "migration/results/security-stage35-special-files/comparison.json",
+      "bytes": 1041,
+      "sha256": "10846d8e7b55bc1cabb83c2d6bb600056b92131359cd6aaeb92d8ef7e9150787"
+    },
+    {
+      "path": "migration/results/security-stage35-special-files/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/security-stage35-special-files/server.trace.json",
+      "bytes": 13131,
+      "sha256": "c470ccf06ea14e8813145c6e5e464a63ca33b2ad90d81117832ddf723f6ad0ae"
+    },
+    {
+      "path": "migration/vendor-notices/native/dbus/1.16.2/COPYING",
+      "bytes": 1134,
+      "sha256": "150e5d08e1cb5e62b65967d7931acad2c42d98ec1bbb584bebb01921cbc853c2"
+    },
+    {
+      "path": "migration/vendor-notices/native/dbus/1.16.2/LICENSES/AFL-2.0.txt",
+      "bytes": 8987,
+      "sha256": "7ecc7db84298adb05d2cf10339c63a5315a1c5c270a68d97d7d40a53b508ccde"
+    },
+    {
+      "path": "migration/vendor-notices/native/dbus/1.16.2/LICENSES/AFL-2.1.txt",
+      "bytes": 8948,
+      "sha256": "93bb4f7417aa775bab9026cc3d0af28aeb64451fc5a8ec651876785edd8eaf9b"
+    },
+    {
+      "path": "migration/vendor-notices/native/dbus/1.16.2/LICENSES/Apache-2.0.txt",
+      "bytes": 10280,
+      "sha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff"
+    },
+    {
+      "path": "migration/vendor-notices/native/dbus/1.16.2/LICENSES/BSD-3-Clause.txt",
+      "bytes": 1460,
+      "sha256": "5a93d5831e1297ab10fe643e1a631e83be392896da14ee2951285a79012df69d"
+    },
+    {
+      "path": "migration/vendor-notices/native/dbus/1.16.2/LICENSES/GPL-2.0-or-later.txt",
+      "bytes": 17337,
+      "sha256": "aaf135472f81c5b4a0dca9367e5bb5e9750032b5bebe5442b36e4c0a47430df3"
+    },
+    {
+      "path": "migration/vendor-notices/native/dbus/1.16.2/LICENSES/LGPL-2.1-or-later.txt",
+      "bytes": 25967,
+      "sha256": "fa6f36630bb1e0c571d34b2bbdf188d08495c9dbf58f28cac112f303fc1f58fb"
+    },
+    {
+      "path": "migration/vendor-notices/native/dbus/1.16.2/LICENSES/LicenseRef-CMakeScripts.txt",
+      "bytes": 1411,
+      "sha256": "a4c1387064fda4c22bfca364b606eb4e0421efa37cad27c040a3d7ca7186d522"
+    },
+    {
+      "path": "migration/vendor-notices/native/dbus/1.16.2/LICENSES/LicenseRef-GAP.txt",
+      "bytes": 400,
+      "sha256": "cf4bc4c56dd0837f3d53b8c1467e0d7dbb95223de8bcfe83a4981c318a738ae3"
+    },
+    {
+      "path": "migration/vendor-notices/native/dbus/1.16.2/LICENSES/LicenseRef-pycrypto-orig.txt",
+      "bytes": 151,
+      "sha256": "2cb8f4f410f0ffc5dcfbadd188e20c859fdbb161e616cf2f3d34dfbf8c740547"
+    },
+    {
+      "path": "migration/vendor-notices/native/dbus/1.16.2/LICENSES/MIT.txt",
+      "bytes": 1078,
+      "sha256": "b85dcd3e453d05982552c52b5fc9e0bdd6d23c6f8e844b984a88af32570b0cc0"
+    },
+    {
+      "path": "migration/vendor-notices/native/dbus/1.16.2/LICENSES/TCL.txt",
+      "bytes": 2251,
+      "sha256": "36fc2d8a56a2a014ded51e298a7e63635eb4ec62e8bedb99c82b892542ac5e7d"
+    },
+    {
+      "path": "migration/vendor-notices/native/dbus/1.16.2/provenance.json",
+      "bytes": 2289,
+      "sha256": "9cc5477bf4edbfe2cd4463460a7ecd82f8d00981ebc78db95bfc3fc3e4f5498d"
+    },
+    {
+      "path": "migration/vendor-notices/native/gettext/1.0/COPYING",
+      "bytes": 35151,
+      "sha256": "e79e9c8a0c85d735ff98185918ec94ed7d175efc377012787aebcf3b80f0d90b"
+    },
+    {
+      "path": "migration/vendor-notices/native/gettext/1.0/gettext-runtime/COPYING",
+      "bytes": 495,
+      "sha256": "7ef2cdfe58e0c0460657b6598b49af29d4e03c1e41cbaf0e1da1eb8ad74b95d0"
+    },
+    {
+      "path": "migration/vendor-notices/native/gettext/1.0/gettext-runtime/intl/COPYING.LIB",
+      "bytes": 26419,
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+    },
+    {
+      "path": "migration/vendor-notices/native/gettext/1.0/gettext-runtime/libasprintf/COPYING",
+      "bytes": 65,
+      "sha256": "03133addae5b99a6148c538300e6d97074453089be1423b741bd081f18e2b298"
+    },
+    {
+      "path": "migration/vendor-notices/native/gettext/1.0/gettext-runtime/libasprintf/COPYING.LIB",
+      "bytes": 26419,
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+    },
+    {
+      "path": "migration/vendor-notices/native/gettext/1.0/provenance.json",
+      "bytes": 1189,
+      "sha256": "5d0447aba13d72a3fa40cf733c4187732d17e4b7554c9ae4c7dbb38c1bcaf2df"
+    },
+    {
+      "path": "migration/vendor-notices/native/glib/2.90.0/LICENSES/AFL-2.0.txt",
+      "bytes": 8987,
+      "sha256": "7ecc7db84298adb05d2cf10339c63a5315a1c5c270a68d97d7d40a53b508ccde"
+    },
+    {
+      "path": "migration/vendor-notices/native/glib/2.90.0/LICENSES/Apache-2.0.txt",
+      "bytes": 10280,
+      "sha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff"
+    },
+    {
+      "path": "migration/vendor-notices/native/glib/2.90.0/LICENSES/CC-BY-SA-3.0.txt",
+      "bytes": 22240,
+      "sha256": "3f941b3b89cf7b8370ceb83cc76d2120d471b58735d8ca60238a751a48d7f72f"
+    },
+    {
+      "path": "migration/vendor-notices/native/glib/2.90.0/LICENSES/CC0-1.0.txt",
+      "bytes": 7048,
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+    },
+    {
+      "path": "migration/vendor-notices/native/glib/2.90.0/LICENSES/GPL-2.0-or-later.txt",
+      "bytes": 17337,
+      "sha256": "aaf135472f81c5b4a0dca9367e5bb5e9750032b5bebe5442b36e4c0a47430df3"
+    },
+    {
+      "path": "migration/vendor-notices/native/glib/2.90.0/LICENSES/LGPL-2.1-only.txt",
+      "bytes": 25967,
+      "sha256": "fa6f36630bb1e0c571d34b2bbdf188d08495c9dbf58f28cac112f303fc1f58fb"
+    },
+    {
+      "path": "migration/vendor-notices/native/glib/2.90.0/LICENSES/LGPL-2.1-or-later.txt",
+      "bytes": 25967,
+      "sha256": "fa6f36630bb1e0c571d34b2bbdf188d08495c9dbf58f28cac112f303fc1f58fb"
+    },
+    {
+      "path": "migration/vendor-notices/native/glib/2.90.0/LICENSES/LLVM-exception.txt",
+      "bytes": 919,
+      "sha256": "e34c58338bd89d43e709e226610d8f32b3e3c47f4ad9a99a8dc1d4ac7842488e"
+    },
+    {
+      "path": "migration/vendor-notices/native/glib/2.90.0/LICENSES/LicenseRef-old-glib-tests.txt",
+      "bytes": 841,
+      "sha256": "fb261b2d5dbe76c4850f90da763210bc385e52428df6bbfd7b06295ac8a32914"
+    },
+    {
+      "path": "migration/vendor-notices/native/glib/2.90.0/LICENSES/MIT.txt",
+      "bytes": 1078,
+      "sha256": "b85dcd3e453d05982552c52b5fc9e0bdd6d23c6f8e844b984a88af32570b0cc0"
+    },
+    {
+      "path": "migration/vendor-notices/native/glib/2.90.0/LICENSES/MPL-1.1.txt",
+      "bytes": 23669,
+      "sha256": "6214f8b1300bb9f37b16ebc146f8f61af0187e0025042ff95c8b3030744a8795"
+    },
+    {
+      "path": "migration/vendor-notices/native/glib/2.90.0/provenance.json",
+      "bytes": 2288,
+      "sha256": "16b4ffcdcf41ae164ada39c4702834e2bd97ab36955a17565b803f5ca1abca29"
+    },
+    {
+      "path": "migration/vendor-notices/native/pcre2/10.48/COPYING",
+      "bytes": 97,
+      "sha256": "99272c55f3dcfa07a8a7e15a5c1a33096e4727de74241d65fa049fccfdd59507"
+    },
+    {
+      "path": "migration/vendor-notices/native/pcre2/10.48/provenance.json",
+      "bytes": 578,
+      "sha256": "fc7c6a0ae307dc9e265b13bf7d329fcd8fd7315d5042144a1fa7dfbb7b000a55"
+    }
+  ]
+}

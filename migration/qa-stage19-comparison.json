@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "source_helper_sha256": "30ce11b57011990fa726d2d86dc3c9718cdc48ec1ee805086927a5ac68dc5bf8",
+  "same_helper_as_stage19": true,
+  "checks": [
+    {
+      "command": "PATH=/Applications/Inkscape.app/Contents/MacOS:$PATH .venv/bin/pytest -q",
+      "passed": 1289,
+      "skipped": 12,
+      "seconds": 79.56
+    },
+    {
+      "command": ".venv/bin/pytest -q",
+      "passed": 1211,
+      "skipped": 90,
+      "seconds": 17.11
+    },
+    {
+      "command": ".venv/bin/pytest tests/test_managed_insert_helper.py -q",
+      "passed": 6
+    },
+    {
+      "command": ".venv/bin/ruff check .",
+      "result": "passed"
+    },
+    {
+      "command": ".venv/bin/ruff format --check .",
+      "formatted_files": 321
+    },
+    {
+      "command": ".venv/bin/mypy src",
+      "source_files": 122,
+      "result": "passed"
+    },
+    {
+      "command": ".venv/bin/python scripts/gen_llms_txt.py",
+      "llms_bytes": 14121,
+      "llms_full_bytes": 149076,
+      "changed": false
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    }
+  ],
+  "rust_checks": "No Rust code/binary change this checkpoint; stage18 evidence retained without claiming rerun.",
+  "native": "Separate reports 46 fixed effects/guards plus 38 fixed structure checks, not part of automated pytest."
+}

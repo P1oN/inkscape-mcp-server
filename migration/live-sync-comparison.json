@@ -1,0 +1,6 @@
+{
+  "observations": 45,
+  "normalization": "validated minted IDs, timestamp lifecycle, snapshot filenames and exact absolute input binding",
+  "differences": [],
+  "passed": true
+}

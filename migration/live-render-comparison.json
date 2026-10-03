@@ -1,0 +1,6 @@
+{
+  "observations": 60,
+  "normalization": "validated live path timestamp/nonce bindings only; semantic JSON",
+  "differences": [],
+  "passed": true
+}

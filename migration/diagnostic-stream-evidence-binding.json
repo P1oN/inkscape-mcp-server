@@ -1,0 +1,83 @@
+{
+  "evidence_verified": true,
+  "packaged": false,
+  "goal_complete": false,
+  "scope": "Bounded validation repr/key/tag diagnostics; stage33 failure and debug3oversized STDIO cases, Rust211/1ignored. Not global transport/RSS/output guarantee.",
+  "files": [
+    {
+      "path": "migration/results/diagnostic-stage33-before-fix/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/diagnostic-stage33-before-fix/server.trace.json",
+      "bytes": 1506849,
+      "sha256": "1b75933c6d00c45d2778fddcc14f7d7ae7d79688139bccc70f305afda5b807f3"
+    },
+    {
+      "path": "migration/results/diagnostic-stage33-before-fix/unknown-field-size.json",
+      "bytes": 48,
+      "sha256": "94304ca6031ef9a37405398f5682ac2acdd5a217e7ef3f6454dab3c235beb51c"
+    },
+    {
+      "path": "migration/results/diagnostic-stream-debug/comparison.json",
+      "bytes": 361,
+      "sha256": "814e66be52163bcb8f1d73b25099370298a15c7cdbd0c1ad47fbd0a7deb9241e"
+    },
+    {
+      "path": "migration/results/diagnostic-stream-debug/discriminator-size.json",
+      "bytes": 46,
+      "sha256": "f3715a90b44a34d25eb3ba726bf5ded6380980a16972d5652ab8604a34c71c1b"
+    },
+    {
+      "path": "migration/results/diagnostic-stream-debug/nested-wrong-scalar-size.json",
+      "bytes": 45,
+      "sha256": "f3dc67328a9bb8ebbd413e28029c1b4897e114675e572bc7e6e664fc828c3ac5"
+    },
+    {
+      "path": "migration/results/diagnostic-stream-debug/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/diagnostic-stream-debug/server.trace.json",
+      "bytes": 3509458,
+      "sha256": "666ff51d9114e497ebd82209ddec6fd85451880f671e8771e6ed22353469b5fc"
+    },
+    {
+      "path": "migration/results/diagnostic-stream-debug/unknown-field-size.json",
+      "bytes": 45,
+      "sha256": "1c188578936693b593feb047028edaa9f14708e749086fb45094b7ca3778f171"
+    },
+    {
+      "path": "migration/results/diagnostic-stream-review/.github/workflows/rust-migration.yml",
+      "bytes": 8476,
+      "sha256": "a7ee5eb46d2c4e43571fd2f1253c7a0c3f3908eab5b5cb808d8e218075d18621"
+    },
+    {
+      "path": "migration/results/diagnostic-stream-review/docs/AGENT_HANDOFF.md",
+      "bytes": 212246,
+      "sha256": "eb119a1b9b52c067531ab77ca3700c72bed5977d795d4ea4184e0ee275ab8c38"
+    },
+    {
+      "path": "migration/results/diagnostic-stream-review/docs/RUST_SECURITY_AUDIT.md",
+      "bytes": 17033,
+      "sha256": "4a921a00a00ae207589f729df50cc43da0da95038a950e582dacc128fe418db1"
+    },
+    {
+      "path": "migration/results/diagnostic-stream-review/rust/src/argument_validation.rs",
+      "bytes": 36861,
+      "sha256": "9efcafb4a67b86d24ccba08f403824ec853698189be20faab642e5680ab8f166"
+    },
+    {
+      "path": "migration/results/diagnostic-stream-review/rust-tests.log",
+      "bytes": 19799,
+      "sha256": "df81e1b216ae0975dc36df1e3a03fb12f6e541438e1e3289824c42d2e526f00d"
+    },
+    {
+      "path": "migration/results/diagnostic-stream-review/scripts/rust_diagnostic_limits_acceptance.py",
+      "bytes": 3294,
+      "sha256": "6aef80717342bf60fb7310c6443c94bae40208fca393e101232ebc5b89a04e96"
+    }
+  ]
+}

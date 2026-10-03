@@ -1,0 +1,1197 @@
+{
+  "startup_to_initialized": {
+    "python": {
+      "samples": [
+        508.680875,
+        519.397583,
+        511.932334,
+        520.601541,
+        529.683
+      ],
+      "median": 519.397583,
+      "unit": "ms"
+    },
+    "rust": {
+      "samples": [
+        7.21575,
+        35.752417,
+        34.525291,
+        40.355959,
+        41.110458
+      ],
+      "median": 35.752417,
+      "unit": "ms"
+    }
+  },
+  "server_rss_at_initialization": {
+    "python": {
+      "samples": [
+        92576,
+        92464,
+        92144,
+        92336,
+        92288
+      ],
+      "median": 92336,
+      "unit": "KiB"
+    },
+    "rust": {
+      "samples": [
+        12688,
+        12592,
+        12688,
+        12688,
+        12672
+      ],
+      "median": 12688,
+      "unit": "KiB"
+    }
+  },
+  "requests": [
+    {
+      "request_index": 0,
+      "method": "initialize",
+      "name": null,
+      "python": {
+        "samples": [
+          506.86025,
+          487.071792,
+          479.682708,
+          490.779875,
+          498.018125
+        ],
+        "median": 490.779875,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          5.232583,
+          0.258833,
+          0.268667,
+          0.276417,
+          0.256875
+        ],
+        "median": 0.268667,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 1,
+      "method": "tools/call",
+      "name": "get_workspace_info",
+      "python": {
+        "samples": [
+          18.262459,
+          16.38475,
+          16.796792,
+          17.674625,
+          16.95525
+        ],
+        "median": 16.95525,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          0.353,
+          0.302625,
+          0.28725,
+          0.299292,
+          0.279125
+        ],
+        "median": 0.299292,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 2,
+      "method": "tools/call",
+      "name": "open_document",
+      "python": {
+        "samples": [
+          3.757917,
+          3.963875,
+          4.126625,
+          4.291667,
+          4.242417
+        ],
+        "median": 4.126625,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          36.713792,
+          20.818667,
+          15.741375,
+          18.446584,
+          20.798125
+        ],
+        "median": 20.798125,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 3,
+      "method": "tools/call",
+      "name": "inspect_document",
+      "python": {
+        "samples": [
+          11.7175,
+          11.626958,
+          11.82525,
+          12.41825,
+          11.895875
+        ],
+        "median": 11.82525,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          1.688291,
+          1.10175,
+          1.001958,
+          1.10475,
+          1.064208
+        ],
+        "median": 1.10175,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 4,
+      "method": "tools/call",
+      "name": "list_snapshots",
+      "python": {
+        "samples": [
+          2.109458,
+          1.981792,
+          2.049708,
+          2.664375,
+          2.024625
+        ],
+        "median": 2.049708,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          0.206833,
+          0.160125,
+          0.162459,
+          0.23775,
+          0.169166
+        ],
+        "median": 0.169166,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 5,
+      "method": "tools/call",
+      "name": "set_fill",
+      "python": {
+        "samples": [
+          2.26925,
+          2.202042,
+          2.252125,
+          2.663,
+          2.158417
+        ],
+        "median": 2.252125,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          8.272959,
+          7.864167,
+          8.888417,
+          8.640875,
+          8.806875
+        ],
+        "median": 8.640875,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 6,
+      "method": "tools/call",
+      "name": "list_snapshots",
+      "python": {
+        "samples": [
+          2.06025,
+          1.853041,
+          1.926667,
+          1.991667,
+          1.866959
+        ],
+        "median": 1.926667,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          0.138541,
+          0.160625,
+          0.110125,
+          0.138583,
+          0.118917
+        ],
+        "median": 0.138541,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 7,
+      "method": "tools/call",
+      "name": "set_fill",
+      "python": {
+        "samples": [
+          530.472125,
+          527.97775,
+          532.001625,
+          539.294333,
+          539.187333
+        ],
+        "median": 532.001625,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          732.595917,
+          588.948375,
+          584.500458,
+          589.2125,
+          586.660791
+        ],
+        "median": 588.948375,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 8,
+      "method": "tools/call",
+      "name": "restore_snapshot",
+      "python": {
+        "samples": [
+          2.75775,
+          2.656417,
+          2.784541,
+          2.770291,
+          3.074792
+        ],
+        "median": 2.770291,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          31.967458,
+          36.936917,
+          34.939042,
+          35.952375,
+          34.740375
+        ],
+        "median": 34.939042,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 9,
+      "method": "tools/call",
+      "name": "apply_edits",
+      "python": {
+        "samples": [
+          517.04575,
+          525.627333,
+          640.991917,
+          525.400875,
+          529.399166
+        ],
+        "median": 525.627333,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          591.887459,
+          594.297875,
+          589.4335,
+          591.1325,
+          592.308042
+        ],
+        "median": 591.887459,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 10,
+      "method": "tools/call",
+      "name": "inspect_document",
+      "python": {
+        "samples": [
+          11.778209,
+          11.9,
+          16.434417,
+          12.04275,
+          12.389666
+        ],
+        "median": 12.04275,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          0.876417,
+          0.881375,
+          0.839125,
+          0.816042,
+          0.792917
+        ],
+        "median": 0.839125,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 11,
+      "method": "tools/call",
+      "name": "apply_edits",
+      "python": {
+        "samples": [
+          1.585834,
+          1.488625,
+          17.601583,
+          1.527833,
+          1.569833
+        ],
+        "median": 1.569833,
+        "unit": "ms",
+        "is_error_samples": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "rust": {
+        "samples": [
+          16.0145,
+          14.101875,
+          15.054416,
+          15.054792,
+          14.20375
+        ],
+        "median": 15.054416,
+        "unit": "ms",
+        "is_error_samples": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 12,
+      "method": "tools/call",
+      "name": "inspect_document",
+      "python": {
+        "samples": [
+          11.3825,
+          11.527542,
+          13.891542,
+          11.68775,
+          11.492792
+        ],
+        "median": 11.527542,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          0.759458,
+          0.773542,
+          0.737084,
+          0.752083,
+          0.70225
+        ],
+        "median": 0.752083,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 13,
+      "method": "tools/call",
+      "name": "delete_object",
+      "python": {
+        "samples": [
+          1.195167,
+          1.067125,
+          2.321084,
+          1.161375,
+          1.08425
+        ],
+        "median": 1.161375,
+        "unit": "ms",
+        "is_error_samples": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "rust": {
+        "samples": [
+          0.156834,
+          0.137625,
+          0.127667,
+          0.145459,
+          0.176708
+        ],
+        "median": 0.145459,
+        "unit": "ms",
+        "is_error_samples": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 14,
+      "method": "tools/call",
+      "name": "save_document_as",
+      "python": {
+        "samples": [
+          5.120083,
+          4.874583,
+          29.9205,
+          5.179542,
+          5.143583
+        ],
+        "median": 5.143583,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          20.159583,
+          19.972125,
+          22.083375,
+          20.097458,
+          22.119
+        ],
+        "median": 20.159583,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 15,
+      "method": "resources/read",
+      "name": null,
+      "python": {
+        "samples": [
+          1.348375,
+          1.325083,
+          1.662459,
+          1.348625,
+          1.39625
+        ],
+        "median": 1.348625,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          0.163542,
+          0.136083,
+          0.16,
+          0.150042,
+          0.13025
+        ],
+        "median": 0.150042,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 16,
+      "method": "tools/call",
+      "name": "render_preview",
+      "python": {
+        "samples": [
+          258.44275,
+          262.438375,
+          283.201625,
+          268.344875,
+          264.271625
+        ],
+        "median": 264.271625,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          277.056083,
+          277.523041,
+          276.928125,
+          284.572167,
+          281.450625
+        ],
+        "median": 277.523041,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 17,
+      "method": "tools/call",
+      "name": "export_document",
+      "python": {
+        "samples": [
+          265.189167,
+          261.997625,
+          283.362167,
+          267.898083,
+          269.534125
+        ],
+        "median": 267.898083,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          273.82375,
+          277.432417,
+          273.555708,
+          270.444666,
+          275.623375
+        ],
+        "median": 273.82375,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 18,
+      "method": "tools/call",
+      "name": "open_document",
+      "python": {
+        "samples": [
+          1.672125,
+          1.477209,
+          1.961875,
+          1.559792,
+          2.002541
+        ],
+        "median": 1.672125,
+        "unit": "ms",
+        "is_error_samples": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "rust": {
+        "samples": [
+          0.1125,
+          0.107666,
+          0.116583,
+          0.111375,
+          0.110708
+        ],
+        "median": 0.111375,
+        "unit": "ms",
+        "is_error_samples": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 19,
+      "method": "tools/call",
+      "name": "inspect_document",
+      "python": {
+        "samples": [
+          1.005125,
+          0.839083,
+          0.9085,
+          0.82625,
+          0.978375
+        ],
+        "median": 0.9085,
+        "unit": "ms",
+        "is_error_samples": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "rust": {
+        "samples": [
+          0.060292,
+          0.041041,
+          0.045834,
+          0.049209,
+          0.048875
+        ],
+        "median": 0.048875,
+        "unit": "ms",
+        "is_error_samples": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 20,
+      "method": "tools/call",
+      "name": "live_status",
+      "python": {
+        "samples": [
+          835.75125,
+          814.429042,
+          843.700125,
+          831.102125,
+          839.419458
+        ],
+        "median": 835.75125,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          0.049334,
+          0.048583,
+          0.03575,
+          0.044541,
+          0.044667
+        ],
+        "median": 0.044667,
+        "unit": "ms",
+        "is_error_samples": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "comparable_status": false
+    },
+    {
+      "request_index": 21,
+      "method": "tools/call",
+      "name": "open_document",
+      "python": {
+        "samples": [
+          3.936333,
+          3.825916,
+          3.935834,
+          3.89,
+          3.915334
+        ],
+        "median": 3.915334,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          17.26825,
+          16.756792,
+          17.363708,
+          17.130209,
+          16.36875
+        ],
+        "median": 17.130209,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 22,
+      "method": "tools/call",
+      "name": "inspect_document",
+      "python": {
+        "samples": [
+          25.643,
+          25.944834,
+          26.103542,
+          26.164958,
+          26.706042
+        ],
+        "median": 26.103542,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          2.815542,
+          2.758625,
+          2.762667,
+          2.667042,
+          2.685917
+        ],
+        "median": 2.758625,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 23,
+      "method": "tools/call",
+      "name": "open_document",
+      "python": {
+        "samples": [
+          16.285708,
+          16.662333,
+          16.151875,
+          16.113958,
+          16.742292
+        ],
+        "median": 16.285708,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          23.967792,
+          20.747083,
+          22.217583,
+          21.274666,
+          23.503708
+        ],
+        "median": 22.217583,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 24,
+      "method": "tools/call",
+      "name": "inspect_document",
+      "python": {
+        "samples": [
+          1420.06825,
+          1444.4205,
+          1486.02825,
+          1487.941709,
+          1485.181208
+        ],
+        "median": 1485.181208,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          191.488791,
+          190.6855,
+          190.037834,
+          193.395666,
+          192.413792
+        ],
+        "median": 191.488791,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 25,
+      "method": "tools/call",
+      "name": "open_document",
+      "python": {
+        "samples": [
+          190.632708,
+          185.391875,
+          185.257125,
+          188.108208,
+          192.707208
+        ],
+        "median": 188.108208,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          95.661333,
+          91.453041,
+          87.579666,
+          89.215292,
+          92.016125
+        ],
+        "median": 91.453041,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "comparable_status": true
+    },
+    {
+      "request_index": 26,
+      "method": "tools/call",
+      "name": "inspect_document",
+      "python": {
+        "samples": [
+          15869.131958,
+          15999.432333,
+          16386.404042,
+          16350.22775,
+          16241.939708
+        ],
+        "median": 16241.939708,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "rust": {
+        "samples": [
+          2067.401166,
+          2030.771542,
+          2030.834,
+          2031.694375,
+          2020.457792
+        ],
+        "median": 2030.834,
+        "unit": "ms",
+        "is_error_samples": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "comparable_status": true
+    }
+  ],
+  "raw_directories": {
+    "python": "migration/results/python-checkpoint",
+    "rust": "migration/results/rust-release-checkpoint"
+  },
+  "limitations": [
+    "Incomplete Rust migration: live_status is pending and not comparable.",
+    "Roundtrips include client JSON parsing, IPC, IO and Inkscape CLI.",
+    "RSS is a single initialization snapshot, not peak or child memory.",
+    "Sequential warm-cache local runs, no general speedup claim.",
+    "Argument/result parity comes from acceptance suites, not this script."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "passed": false,
+  "native_acceptance_complete": false,
+  "package": "stage38",
+  "binary_sha256": "d6614579efa32d8912e8bc73c552cf0597dcd74e4e6b1ae1448c167415a4f311",
+  "utc": "2026-10-03T14:05:42.993557+00:00",
+  "owned_root": "/private/tmp/imcp-native-zuk5ai0l",
+  "terminal_owned_launch": true,
+  "owned_processes_remaining": [],
+  "no_drawing_mutated": true,
+  "guard_bypassed": false,
+  "reason": "Owned startup refuses no primary monitor/CVDisplayLink. Read-only vendor GDK initially had2 monitors; simultaneous inherited/minimal controls later both had0; final CoreGraphics active list0. IOConsoleLocked=false. No demonstrated environment-specific defect. An active usable display is required.",
+  "screen_probe": "migration/results/native-screen-recheck-stage38",
+  "raw_launch": "migration/results/native-stage38",
+  "historical_results_not_transferred": true
+}

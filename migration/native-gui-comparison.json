@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage5",
+  "native_launch": true,
+  "packaged_insert_helper": true,
+  "native_UI_Undo_single_step": true,
+  "native_UI_Redo": true,
+  "all_inserted_IDs_removed_on_Undo": true,
+  "inserted_subtrees_restored_exactly": true,
+  "rendered_RGBA_restored_exactly": true,
+  "reconnect_requires_binding": true,
+  "unbound_mutation_refused": true,
+  "vendor_unchanged": true,
+  "owned_window_retained": true,
+  "remaining_native_acceptance": [
+    "selected style/text/structural effects",
+    "document-switch guards",
+    "uncertain/crash cases",
+    "socket-helper runtime"
+  ]
+}

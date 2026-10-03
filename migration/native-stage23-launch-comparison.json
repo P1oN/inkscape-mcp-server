@@ -1,0 +1,13 @@
+{
+  "passed": false,
+  "native_GUI_acceptance": false,
+  "state": "launch refused by existing primary-monitor guard",
+  "root": "/private/tmp/imcp-native-60hza24y",
+  "binary_sha256": "dfadfbc0a11cc14a1454c40d35956348070b353115ed726b8b450035b73afd1f",
+  "diagnostic": "\n(<unknown>:41511): Gdk-WARNING **: 09:48:56.481: Failed to initialize CVDisplayLink!\nMCP startup refused: no primary monitor; unlock the Mac and retry.\n",
+  "matching_owned_processes_after_terminal_launch": [],
+  "relaunch_attempted": false,
+  "user_GUI_changed": false,
+  "required_external_condition": "native macOS primary monitor available; do not bypass or unlock on behalf of user",
+  "old_native_evidence_transferred": false
+}

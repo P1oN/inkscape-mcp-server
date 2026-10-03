@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "observations": 87,
+  "cases": "empty",
+  "normalization": "none",
+  "scope": "Frozen schema argument matrix; cases=empty. No valid tool call or explicit GUI launch.",
+  "rust_binary_sha256": "9cfd86877fff427d82b06a8de7ab273201620ce8f2afb7f3f90126e2898fffef",
+  "discovery_sha256": "e83b34257858096e07c673e5a38eeadd8a371b0e4a63496181e893d8f48128b6",
+  "differences": [],
+  "workspace_changed": {
+    "python": false,
+    "rust": false
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "complete_argument_validation": false,
+  "stage": "ordered shapes, unknown fields and invalid tags",
+  "source_binary_sha256": "ba1fa9d52dd90e42b18879b7f78f53ff18125986d1bb9dc42182db727c2125e3",
+  "Rust_tests_passed": 186,
+  "ignored_child_entry": 1,
+  "clippy_all_targets": true,
+  "format": true,
+  "real_STDIO_matrices": [
+    {
+      "report": "migration/arguments-unknown-comparison.json",
+      "observations": 110,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-nested-unknown-comparison.json",
+      "observations": 6,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-invalid-tag-comparison.json",
+      "observations": 18,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-empty-unknown-rerun-comparison.json",
+      "observations": 87,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-required-objects-unknown-rerun-comparison.json",
+      "observations": 87,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-required-null-unknown-rerun-comparison.json",
+      "observations": 87,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-type-fields-unknown-rerun-comparison.json",
+      "observations": 418,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-missing-one-unknown-rerun-comparison.json",
+      "observations": 147,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    }
+  ],
+  "observations": 960,
+  "real_STDIO_starts": 16,
+  "normalization": "none",
+  "package_stage13_contains_this_change": false,
+  "remaining": [
+    "defaults/coercion materialization",
+    "ignored nested-field normalization",
+    "multi-type unions",
+    "all numeric/model validators and aliases",
+    "pathological scalar/input representations",
+    "reserved or injected names"
+  ],
+  "parity_reports": {
+    "read": "migration/read-arguments-unknown-comparison.json",
+    "edit": "migration/edit-arguments-unknown-comparison.json",
+    "repeat": "migration/repeat-arguments-unknown-comparison.json",
+    "batch-members": "migration/batch-members-arguments-unknown-comparison.json",
+    "discovery": "migration/discovery-arguments-unknown-comparison.json"
+  }
+}

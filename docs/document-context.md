@@ -1,9 +1,14 @@
+Current Rust implementation: rust/src/live_context.rs, live_session.rs and live_managed.rs.
+Legacy Python source paths and commands below describe historical implementation only;
+the Python MCP server is retired. Use README.md and CONTRIBUTING.md for current operation.
+
 # Managed macOS document context
 
 The managed GTK 3 session can identify and select a drawing window, then check that
-identity inside Inkscape immediately before dispatching an action. This is the remaining
-implementation scope from roadmap stage 2. **Native acceptance passed on 2026-10-01 with
-official Inkscape 1.4.3 (0d15f75). The integration remains experimental.**
+identity inside Inkscape immediately before dispatching an action. Current stage38 native
+acceptance passes on official Inkscape1.4.3, including continuous STDIO two-window mutation
+refusal and explicit rebinding. See RUST_MIGRATION_REPORT.md for scope and evidence.
+The integration remains experimental.
 
 ## Workflow
 
@@ -38,7 +43,7 @@ is not proof of rollback. Never restart or kill an unsaved GUI automatically.
 Official macOS Inkscape 1.4.3 exports document actions but omits the usual GTK window action
 paths. Its application actions operate on the currently active document; comparing exported
 SVGs cannot reliably distinguish two identical drawings. The implementation therefore uses
-a small GTK module (`src/inkscape_mcp/live/native/context.m`) and only public GTK/GIO/Cocoa
+a small GTK module (`runtime/native/context.m`) and only public GTK/GIO/Cocoa
 APIs. It does not depend on Inkscape's C++ object layout or modify drawing XML to assign IDs.
 
 The module exposes a fixed private D-Bus interface: list, get context, select and dispatch
@@ -55,10 +60,11 @@ resources. `/Applications/Inkscape.app` stays unchanged. The copy does not retai
 executable's hardened-runtime protection or signature; this remains an experimental integration,
 not a supported vendor plugin installation. Only the session's private bus is used.
 
-New sessions require official GTK 3 Inkscape, Apple command line tools (`clang`, `codesign`),
-and Homebrew glib development headers. `--doctor` checks these before advertising launch readiness.
-The module is compiled and the copy prepared on first launch; a content hash invalidates the
-cache after source or executable changes. Updating Inkscape's resource bundle requires saving
+Ready archive sessions require compatible official GTK3 Inkscape. The archive supplies a
+prebuilt bridge and private runtime/bus; end users do not install clang or Homebrew headers.
+The fixed supervisor prepares the owned copy on explicit launch. Source/package development
+still needs native tools. `./run-mcp.sh --doctor` checks packaged prerequisites. A content hash
+invalidates the cache after native source or executable changes. Updating Inkscape's resource bundle requires saving
 and restarting a managed GUI before use. A fresh session launch passed native acceptance.
 
 A GUI started by an older version is reused with its existing behavior and an explicit

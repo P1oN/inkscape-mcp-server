@@ -1,0 +1,382 @@
+{
+  "cases": [
+    {
+      "text": "",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "\n",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "\r\n",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n1\n",
+      "expected": {
+        "result": [
+          "rect"
+        ]
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n1",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "1\n",
+      "expected": {
+        "result": []
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n-1",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n-1\n",
+      "expected": {
+        "result": [
+          "rect"
+        ]
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n.5",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n.5\n",
+      "expected": {
+        "result": [
+          "rect"
+        ]
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n1.",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n1.\n",
+      "expected": {
+        "result": [
+          "rect"
+        ]
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n1e2",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n1e2\n",
+      "expected": {
+        "result": [
+          "rect"
+        ]
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n-1.5E-2",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n-1.5E-2\n",
+      "expected": {
+        "result": [
+          "rect"
+        ]
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n1,2",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n1,2\n",
+      "expected": {
+        "result": [
+          "rect"
+        ]
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n1, 2",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n1, 2\n",
+      "expected": {
+        "error": "unexpected selection response from managed Inkscape"
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\nnan",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\nnan\n",
+      "expected": {
+        "error": "unexpected selection response from managed Inkscape"
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\ninf",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\ninf\n",
+      "expected": {
+        "error": "unexpected selection response from managed Inkscape"
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n+1",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n+1\n",
+      "expected": {
+        "error": "unexpected selection response from managed Inkscape"
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n١",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n١\n",
+      "expected": {
+        "result": [
+          "rect"
+        ]
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n١.٢",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n١.٢\n",
+      "expected": {
+        "result": [
+          "rect"
+        ]
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n１",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n１\n",
+      "expected": {
+        "result": [
+          "rect"
+        ]
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n1e",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n1e\n",
+      "expected": {
+        "error": "unexpected selection response from managed Inkscape"
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\n\n",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\ngarbage",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\ngarbage\n",
+      "expected": {
+        "error": "unexpected selection response from managed Inkscape"
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\r1\n",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\r\n1\n",
+      "expected": {
+        "result": [
+          "rect"
+        ]
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\u000b1\n",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\f1\n",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\u001c1\n",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\u001d1\n",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\u001e1\n",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 01\n",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0 1\n",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0 1\n",
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "text": "rect cloned: false ref: 1 href: 0 total href: 0\nrect cloned: false ref: 1 href: 0 total href: 0\n0\nignored after fence",
+      "expected": {
+        "result": [
+          "rect"
+        ]
+      }
+    },
+    {
+      "text": "Привіт cloned: true ref: ١ href: 0 total href: 0\n0\n",
+      "expected": {
+        "result": [
+          "Привіт"
+        ]
+      }
+    },
+    {
+      "text": "id withspace cloned: true ref: 1 href: 0 total href: 0\n0\n",
+      "expected": {
+        "error": "unexpected selection response from managed Inkscape"
+      }
+    },
+    {
+      "text": "id\u001fspace cloned: true ref: 1 href: 0 total href: 0\n0\n",
+      "expected": {
+        "error": "unexpected selection response from managed Inkscape"
+      }
+    },
+    {
+      "text": "bad\npartial",
+      "expected": {
+        "error": "unexpected selection response from managed Inkscape"
+      }
+    },
+    {
+      "text": "1\ninvalid later\n",
+      "expected": {
+        "result": []
+      }
+    },
+    {
+      "text": " \trect cloned: false ref: 1 href: 0 total href: 0  \r\n 0\n",
+      "expected": {
+        "result": [
+          "rect"
+        ]
+      }
+    },
+    {
+      "text": "\u001frect cloned: false ref: 1 href: 0 total href: 0\u001f\n0\n",
+      "expected": {
+        "result": [
+          "rect"
+        ]
+      }
+    }
+  ]
+}

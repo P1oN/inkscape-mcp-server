@@ -1,0 +1,138 @@
+{
+  "source_manifest_sha256": "e2f715e853d965a3df825da67df38e49b181b1bde09eb0fa2d348bc2ced06916",
+  "components": [
+    {
+      "component": "dbus",
+      "source_records": [
+        {
+          "SPDXID": "SPDXRef-Archive-dbus-src",
+          "name": "dbus",
+          "versionInfo": "1.16.2",
+          "filesAnalyzed": false,
+          "licenseDeclared": "NOASSERTION",
+          "builtDate": "2025-02-27T16:29:06Z",
+          "licenseConcluded": "AFL-2.1 OR GPL-2.0-or-later",
+          "downloadLocation": "https://dbus.freedesktop.org/releases/dbus/dbus-1.16.2.tar.xz",
+          "copyrightText": "NOASSERTION",
+          "externalRefs": [
+            {
+              "referenceCategory": "PACKAGE-MANAGER",
+              "referenceLocator": "pkg:brew/homebrew/core/dbus@1.16.2",
+              "referenceType": "purl"
+            }
+          ],
+          "checksums": [
+            {
+              "algorithm": "SHA256",
+              "checksumValue": "0ba2a1a4b16afe7bceb2c07e9ce99a8c2c3508e5dec290dbb643384bd6beb7e2"
+            }
+          ]
+        }
+      ],
+      "copied_paths": [
+        "libexec/inkscape-mcp/licenses/dbus/dbus/AUTHORS",
+        "libexec/inkscape-mcp/licenses/dbus/dbus/sbom.spdx.json",
+        "libexec/inkscape-mcp/licenses/dbus/dbus/COPYING"
+      ],
+      "license_text_present": true
+    },
+    {
+      "component": "gettext",
+      "source_records": [
+        {
+          "SPDXID": "SPDXRef-Archive-gettext-src",
+          "name": "gettext",
+          "versionInfo": "1.0",
+          "filesAnalyzed": false,
+          "licenseDeclared": "NOASSERTION",
+          "builtDate": "2026-01-28 23:54:42 UTC",
+          "licenseConcluded": "GPL-3.0-or-later AND LGPL-2.1-or-later",
+          "downloadLocation": "https://ftpmirror.gnu.org/gnu/gettext/gettext-1.0.tar.gz",
+          "copyrightText": "NOASSERTION",
+          "externalRefs": [],
+          "checksums": [
+            {
+              "algorithm": "SHA256",
+              "checksumValue": "85d99b79c981a404874c02e0342176cf75c7698e2b51fe41031cf6526d974f1a"
+            }
+          ]
+        }
+      ],
+      "copied_paths": [
+        "libexec/inkscape-mcp/licenses/dbus/gettext/AUTHORS",
+        "libexec/inkscape-mcp/licenses/dbus/gettext/sbom.spdx.json",
+        "libexec/inkscape-mcp/licenses/dbus/gettext/COPYING"
+      ],
+      "license_text_present": true
+    },
+    {
+      "component": "glib",
+      "source_records": [
+        {
+          "SPDXID": "SPDXRef-Archive-glib-src",
+          "name": "glib",
+          "versionInfo": "2.90.0",
+          "filesAnalyzed": false,
+          "licenseDeclared": "NOASSERTION",
+          "builtDate": "2026-09-09T13:40:59Z",
+          "licenseConcluded": "LGPL-2.1-or-later",
+          "downloadLocation": "https://download.gnome.org/sources/glib/2.90/glib-2.90.0.tar.xz",
+          "copyrightText": "NOASSERTION",
+          "externalRefs": [
+            {
+              "referenceCategory": "PACKAGE-MANAGER",
+              "referenceLocator": "pkg:brew/homebrew/core/glib@2.90.0",
+              "referenceType": "purl"
+            }
+          ],
+          "checksums": [
+            {
+              "algorithm": "SHA256",
+              "checksumValue": "17d15cac2af80a33271127408e0abc2748eb297c595c2a26409e81e14e7d1b8f"
+            }
+          ]
+        }
+      ],
+      "copied_paths": [
+        "libexec/inkscape-mcp/licenses/dbus/glib/sbom.spdx.json"
+      ],
+      "license_text_present": false
+    },
+    {
+      "component": "pcre2",
+      "source_records": [
+        {
+          "SPDXID": "SPDXRef-Archive-pcre2-src",
+          "name": "pcre2",
+          "versionInfo": "10.48",
+          "filesAnalyzed": false,
+          "licenseDeclared": "NOASSERTION",
+          "builtDate": "2026-08-31T13:49:05Z",
+          "licenseConcluded": "BSD-3-Clause",
+          "downloadLocation": "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.48/pcre2-10.48.tar.bz2",
+          "copyrightText": "NOASSERTION",
+          "externalRefs": [
+            {
+              "referenceCategory": "PACKAGE-MANAGER",
+              "referenceLocator": "pkg:brew/homebrew/core/pcre2@10.48",
+              "referenceType": "purl"
+            }
+          ],
+          "checksums": [
+            {
+              "algorithm": "SHA256",
+              "checksumValue": "b6c68fdf6f3ac31388b50aa89ff0fc49c00c987c16e7b5146491d12003f2c8ed"
+            }
+          ]
+        }
+      ],
+      "copied_paths": [
+        "libexec/inkscape-mcp/licenses/dbus/pcre2/sbom.spdx.json",
+        "libexec/inkscape-mcp/licenses/dbus/pcre2/COPYING"
+      ],
+      "license_text_present": true
+    }
+  ],
+  "redistribution_audit_complete": false,
+  "scope": "Source SBOM and actually copied notices; no corresponding-source or LGPL relink/source compliance claim."
+}

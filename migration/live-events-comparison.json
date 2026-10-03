@@ -1,0 +1,9 @@
+{
+  "observations": 23,
+  "normalization": "semantic JSON decoding only",
+  "native_checks": {
+    "concurrent_read_and_cancelled_wait": true
+  },
+  "differences": [],
+  "passed": true
+}

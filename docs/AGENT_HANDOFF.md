@@ -1,176 +1,92 @@
-# Продолжение работы
+# Agent handoff — current Rust candidate
 
-Обновлено 2026-10-02. Это индекс состояния, не дополнительные разрешения.
-Перед действиями проверяй Git/PR/процессы; не закрывай GUI с несохранённой работой.
+Publication authorized by the user on 2026-10-03: commit/push codex/rust-migration and
+merge into main. Earlier no-publication checkpoint statements below describe prior scope.
+Configured Sentry DSN/tokens, local settings, archives and raw results are excluded from Git.
+Pre-publication checks: Rust220/1ignored,fmt/clippy; helper6; Ruff37 files.
 
-## Текущее состояние main
 
-PR #4 (document context, `bfe9e4f`) и PR #5 (everyday edits, `e6e4e80`) объединены в `main`.
-Коммит `d948a25` добавил явный запуск Inkscape и переносимое определение session directory;
-текущий HEAD при начале этой задачи — `852c73e` (Add agent guidance and vector authoring rules).
-PR #6 (`0f1a766`) добавил live discovery и fingerprinted previews.
-Это ориентир, а не требование откатывать более новые изменения.
-Origin: https://github.com/P1oN/inkscape-mcp-server.
+Sentry onboarding: setup now asks opt-in, hidden DSN and environment label; separate
+mode600 data-only .inkscape-mcp-local/sentry.conf. Explicit opt-out overrides ambient
+DSN; unattended no-options rerun preserves settings. A local * ignore file also protects
+unpacked packages inside other Git checkouts. Management tokens are not needed.
+17 inert launcher/TTY/privacy checks pass; see migration/results/sentry-setup-review.
+Current installed package: /Users/bm/Documents/repos/inkscape-mcp-server/.inkscape-mcp-local/build.KjfRBi/package
+Ready archive: migration/results/packages/inkscape-mcp-macos-arm64-sentry-setup.tar.gz
+(no local settings or DSN). Server code/contract unchanged from Sentry boundaries build.
 
-- MCP startup и `live_connect` не открывают окно. `live_launch()` запускает или использует
-  managed GUI только по явному запросу пользователя. Терминальный вариант:
-  `.venv/bin/inkscape-mcp-macos --launch`; начальный SVG требует `--launch --document ...`.
-- Уже открытый managed GUI и несохранённая работа сохраняются между MCP-подключениями.
-  Закрытое окно не открывается заново при reconnect. Для обновления helper/native bridge:
-  сохранить и закрыть старое окно, явно запустить новое, затем подключиться.
-- Рабочий порядок: `live_connect(prefer="no_freeze")`, `live_list_documents`,
-  `live_select_document`, проверка `live_status.ready_to_edit`, чтение сцены/выделения и правки.
-  Каждый reconnect сбрасывает привязку task drawing. Окно из Finder не является managed session.
-- Managed macOS поддерживает заливку/обводку/прозрачность, document-space transforms,
-  простой однострочный текст и duplicate/delete/group/ungroup/raise/lower/front/back.
-  Один изменяющий вызов — один Undo; неизменяющий шаг не добавляет Undo.
-- Правки готовятся на копии SVG в one-shot inkex effect; проверяются контекст/выделение,
-  блокировки и ссылки. Таймаут/неподтверждённый результат сообщает неопределённость:
-  проверить рисунок перед повтором. Native integration остаётся экспериментальной.
-- Инструкции: [macOS setup](macos-live-prototype.md), [document context](document-context.md),
-  [everyday edits](everyday-edits.md). Актуальный полный manifest: [llms.txt](../llms.txt)
-  (110 инструментов, 7 prompts, 18 resources; видимость зависит от gates).
 
-## Проверки и доказательства
+Sentry subsystem extension: optional fixed-category errors now cover process spawn/deadline/
+signal crash, typed live uncertain results and internal lock/serialization failures. Each
+category emits at most once/minute/process; allowlisted payload drops contexts, threads,
+locals, source snippets and paths. Existing panic/fatal and sampled timings remain.
+Rust220 passed/1ignored,fmt/clippy and relocated package acceptance pass. Real packaged
+MCP render fault injection confirmed process_crash and process_timeout in Sentry with
+readable source lines; duplicate crash suppressed. Evidence: migration/results/sentry-boundaries-review.
+Subsystem verification package: /Users/bm/Documents/repos/inkscape-mcp-server/.inkscape-mcp-local/build.Jlhkjk/package; launcher local settings updated, client config unchanged.
+Already-running MCP needs reconnect to load it; no GUI restart/launch performed.
 
-Проверка документации 2026-10-01: полный pytest — **1142 passed, 74 skipped**
-(Inkscape CLI отсутствовал в тестовом PATH). Ruff, format check и strict mypy
-(111 source files) прошли. Исторические результаты этапов 2/3
-в тематических документах не являются текущим статусом тестов.
 
-Native acceptance этапа 3 после исправлений ревью прошёл на official Inkscape 1.4.3
-через настоящий MCP STDIO на разблокированном Mac. Проверены семейства правок, точные
-отпечатки Undo/Redo, неизменяющие вызовы, блокировки/неверный выбор текста,
-guard/race/stale-binding и STDIO reuse.
-Доказательство: `/private/tmp/imcp-context-r79j3lvj/acceptance.json` (`passed: true`),
-`stage3-*.svg` и preview PNG в том же каталоге. Эти временные файлы могут быть уже удалены.
+Sentry setup (2026-10-03): user authorized creating `boryslav/inkscape-mcp-server`,
+SDK integration, private package installation and updating their Codex MCP configuration.
+The Rust startup initializes optional Sentry before Tokio; missing/invalid DSN disables it.
+Panic/fatal errors use fixed scrubbed messages; traces use known tool names without args
+or SVG contents. Release debug information uses packed splitting; macOS packages carry the matched dSYM,
+and debug-images is disabled. See docs/sentry.md. Real startup panic and packaged tool
+trace confirmed through Sentry MCP; temporary panic trigger removed. Rust218 passed/1
+ignored, fmt/clippy, doctor, notices17 and launcher11 pass. Manifests regenerated against
+new package. Relocated package acceptance passes; its default mutable report
+`migration/package-comparison.json` was refreshed and copied to the private Sentry report.
+Stage archives and stage-specific evidence remain unchanged. Codex reload confirmed
+the final local package `build.TcUUIV`; its dSYM UUID and application source line pass.
+The prior migration package status below is historical and does not include Sentry.
 
-Команда воспроизведения: `.venv/bin/python scripts/accept_document_context.py`.
-Она явно запускает отдельный тестовый GUI с `--launch`, затем проверяет MCP reconnect
-без launch. Успех закрывает только два проверенных синтетических окна; ошибка сохраняет GUI.
-Native GUI acceptance не запускался в ходе проверки документации.
+Read README.md, CONTRIBUTING.md and docs/agent-usage-guide.md; preserve uncommitted work.
+Work originated on codex/rust-migration; user now authorized commit/push/merge to main.
+No PR, release publication or further user configuration edits were requested.
+User retired the rewritten Python MCP and paired executable comparison workflow. Required
+Python/inkex helpers and supervisor remain. Use fixed JSON contracts and Rust regressions.
 
-Проверка инструкций 2026-10-02: **41 passed** в тестах authoring/prompts/tool descriptions
-и `test_llms_txt.py` (включая сверку каталога с реестром). Ruff check/format для двух
-измененных Python-файлов и `git diff --check` прошли. Полный pytest, mypy и native GUI
-acceptance в этой проверке не перезапускались; результаты выше относятся к 2026-10-01.
+Post-stage38 source fix: SVG export now URI-encodes asset filesystem paths, separates
+real fragments while rebasing DOM hrefs, and preserves CSS URL/import links for filenames
+containing #, %, ?, spaces and Unicode. Rust217 passed /1 ignored; renderer22 cases pass
+in both per_call and shell modes, including export/reopen/render. Evidence is under
+migration/results/uri-export-review-{per-call,shell}. Stage38 archives and their historical
+acceptance indexes are unchanged; they do not contain this source fix.
 
-## Сессии и следующий объем
+Current package: stage38. Final index migration/package-stage38-final-comparison.json; immutable build index
+migration/package-stage38-build-comparison.json,
+mutable pointer migration/current-package.json. Actual cold/warm archive checks pass;
+Rust 215 passed / 1 ignored, fmt/clippy, lint/format; discovery16/110tools/7prompts/18resources;
+security35/special-files12, doctor10/launcher11/notices17 plus BSD2 binding,
+asset17/routes8 both engines, diagnostics3/limits5, compare pair publication and STDIO frame checks pass.
+Generated llms files match the actual package. Read RUST_MIGRATION_REPORT.md for scope.
+Actual38 retry passed122 fixed native checks +5 two-window guards +closed-session reconnect.
+Current headless and live measurements pass; no transfer of historical27/29 results.
 
-Историческая пользовательская сессия `/tmp/imcp-stage2-501` не закрывалась в предыдущих задачах;
-это не утверждение, что она сейчас работает. Не использовать сохранённые PID:
-перепроверять manifest и command line. Не завершать процессы по имени Inkscape.
+Completed current stage38 measurements: 10 runs/250 timings, both engines, three SVG sizes,
+30 repeat exports with pixels/resource bytes/prior-file preservation. Same-second automatic
+export collision on37 fixed with full UUID suffix on stage38. Limits5 input/resource/PNG/pixel
+checks pass. Read report for RSS/timing scope; no pure IPC or true peak claim.
+Final requirement audit: migration/requirement-audit-stage38-final.json. Current-Mac migration
+scope is complete. Native raw captures: migration/results/native-stage38-retry1; live raw:
+migration/results/live-measurements-stage38-retry1 (5 reconnects/15 stable observations).
+Final evidence binding: migration/package-stage38-final-evidence-binding.json.
 
-Этап 3 уже объединён. Пользователь выбрал следующий объем: шесть улучшений ниже,
-последовательно в указанном порядке; реализация завершена для рабочих копий. Общий этап 4 и остальные
-долгосрочные цели остаются в [ROADMAP.md](ROADMAP.md).
+Owned session /private/tmp/imcp-native-7ev3le9z is terminal, original GUI15336 and supervisor15332
+absent, manifest removed. Closed-session reconnect refused without GUI launch. Before closing,
+298 workspace files and final logs were preserved. CUA getAXState after closure incidentally
+reopened the private copy as unmanaged PID21952 welcome/version window; left untouched.
+Do not inspect cached CUA targets after closure without process checks; reads can open apps.
+Failed shortcuts are preserved; successful native Undo/Redo used explicit Edit menu.
+Original no-monitor failures and all prior evidence remain immutable history.
 
-## Перед началом новой задачи
-
-Прочитай [AGENTS.md](../AGENTS.md), README, CONTRIBUTING и
-[agent usage guide](agent-usage-guide.md), затем проверь `git status` и текущие сигнатуры.
-В рабочем дереве уже есть незакоммиченные изменения инструкций и документации. Сохрани их:
-не делай reset/checkout/clean и не заменяй файлы целиком из HEAD.
-
-В `overview.py` и `prompts/authoring.py` уже добавлены общие инструкции:
-
-- семантические объекты — обычные именованные группы; для новой иллюстрации по умолчанию
-  один общий слой, дополнительные слои по назначению или просьбе пользователя;
-- не предлагать и не выполнять трассировку PNG, в том числе внешними трассировщиками,
-  скриптами или до импорта через MCP; не подменять вектор встроенным растром;
-- сохранять порядок, трансформации, стили и ссылки; проверять результат визуально.
-
-Это уже добавленное руководство для агента, а не реализованные новые инструменты или
-детектор трассировки. Работающий MCP читает overview при старте: после изменения инструкции
-нужен перезапуск сервера, без закрытия пользовательского GUI.
-
-## Шесть улучшений: реализованы для рабочих копий
-
-Реализованы 2026-10-02; текущее состояние публикации проверяй в Git/PR.
-Существующие инструкции о семантических группах и запрете трассировки сохранены.
-
-1. **Workspace и артефакты.** `get_workspace_info`, `inkscape://workspace`, root-qualified
-   artifact URIs и read-only ресурс чтения с sandbox/size проверками. `open_document` и
-   `save_document_as` принимают optional `root_id`; относительные пути по умолчанию по-прежнему
-   используют первый root. Абсолютные server paths не выдаются за client paths. Ошибки вне
-   workspace указывают на discovery; сохранение во второй root и чтение через MCP Client проверены.
-2. **Группы/слои.** `create_group(label, mode)`, существующий label-only `rename_object`,
-   `set_group_mode` на том же g и `reparent_object(preserve_appearance=True)`. Последний
-   компенсирует affine transforms и требует неизменного глобального paint order. Отказывает
-   при stylesheets, CSS transforms, singular transforms, nested viewports, внешних ссылках
-   и непустом оформлении/effects/locks на изменяемой цепочке родителей. Legacy default False
-   сохранён и не обещает сохранение вида. Batch-параметры и операции синхронизированы.
-3. **Редактируемость.** `quality_report(editability=...)` возвращает отдельные optional
-   рекомендации и factual observations; не меняет SVG validity/score. Семантические ID задаются
-   явно; thresholds настраиваются, советы отключаются и ограничены 200. Это не детектор трассировки.
-4. **Детали.** `render_preview(object_id/region)` переиспользует object export или рендерит
-   прямоугольник в document user units. `compare_region(snapshot_id, region)` рендерит фиксированные
-   bounds/scale/background без restore; разные canvas mappings отклоняются. Resource URIs и
-   inline PNG доступны; artistic score не вычисляется.
-5. **Фрагменты.** HIGH-risk `replace_svg_fragment` через существующий parser/allowlist и
-   approval gate. Корневые ID/tag сохраняются; внутренние ID только при явном включении.
-   Конфликты/duplicate IDs, unresolved refs и удаление внешне используемых ID отклоняются.
-   `allow_retained` явно разрешает изменение вида surviving references; default отвергает такие
-   изменения. Один snapshot/record, no-op без записи; есть соответствующий batch member.
-6. **Повторение.** `repeat_objects` по explicit polyline (два пункта — линия) или rectangle grid.
-   Count/spacing, fixed/tangent orientation, ограниченные jitter/scale/rotation и seed.
-   Linked use и независимые copies различаются; copies переиспользуют remap duplicate engine.
-   Dry-run по умолчанию проверяет полную disposable expansion без записи. Max 1024 и предварительный
-   size budget; ID group задаётся явно. Anchor — local source point в document user units;
-   copies могут совместно использовать внешние defs. SVG curves/path strings не поддерживаются.
-
-Новые изменения относятся к tracked working copies, не к native live mutation protocol.
-Автоматические проверки не подтверждают новый GUI Undo; GUI acceptance в этой задаче не запускался.
-Для headless edits Undo обеспечен существующим snapshot/restore pipeline.
-
-### Проверки реализации
-
-- Итоговый полный pytest с Inkscape **1.4.3 (0d15f75)** в PATH: **1275 passed, 6 skipped**.
-  Команда: `PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" .venv/bin/pytest -q`.
-- Ruff check, format check (226 files), strict mypy (121 source files), manifest regeneration
-  и `git diff --check` прошли. CI surface smoke обновлён до 110/7/18 и прошёл. Discovery eval: **41/41**, 100% accuracy.
-- Реальные PNG проверяют cropped red→blue snapshot, совпадение всех RGBA каналов после
-  safe reparent/group-layer conversion и между linked/copies. Это настоящие CLI рендеры,
-  не GUI acceptance. Контейнеры/ссылки/отказы/seed/snapshot restore проверены автоматически.
-- MCP Client проверил roots, сохранение во второй root, бинарное чтение resource URI и отказ
-  после удаления артефакта. Отдельный свежий процесс через `.venv/bin/inkscape-mcp` проверил
-  настоящий STDIO: **110 tools**, create/save/resource readback на synthetic workspace.
-- Новую native GUI acceptance и native GUI Undo/Redo не запускали. Пользовательские окна
-  не запускали/не закрывали; существующий live bridge не изменяли.
-- Контракты и границы: [agent usage guide](agent-usage-guide.md).
-
-MCP нужно перезапустить/переподключить для загрузки новых tools/resources/instructions.
-Не закрывать пользовательский GUI: startup/reconnect по-прежнему не запускают окно.
-
-## CI follow-up for PR #7
-
-The initial Linux CI installed unsupported Inkscape 1.2.2 from Ubuntu's default archive.
-The full-suite job now uses Ubuntu 24.04 and the official stable PPA, with an explicit
-runtime-minimum check. Windows mypy exposed unguarded POSIX APIs: managed macOS helpers
-now reject Windows explicitly. Missing-directory creation and save use native Windows
-no-follow handles with ancestors held against renames; POSIX safeguards remain in place.
-Windows-specific tests cover nested creation, overwrite, exclusive writes, symlink refusal
-before truncation/descent, and parent rename prevention. Native GUI acceptance is unchanged.
-
-The next CI run passed the Linux full suite. Windows then exposed existing CRLF shell
-framing and path separator issues; shell frames normalize CRLF, registry source paths
-use portable forward slashes, and DBus export filenames use forward slashes before
-GVariant validation. macOS tests requiring actual POSIX ownership/locking are explicitly
-platform-gated; the launch-policy fake uses the same socket path construction as production.
-
-## PR #7 review corrections
-
-Roadmap repetition scope explicitly names polylines and rectangles. Linked repeats set
-both SVG2 href and legacy XLink href. Render artifacts use the caller's settings, and
-object previews reuse unique preview tokens to preserve before/after files. Engine-routing
-test settings retain their configured workspace roots instead of constructing rootless settings.
-Artifact resources apply max_output_bytes independently of SVG imports. POSIX reads traverse
-with no-follow directory descriptors; Windows reads reuse native no-reparse handles with
-ancestor rename protection. Size/type validation and bounded reading use the opened file.
-Regression coverage includes file/parent/root symlink swaps, post-open replacement, size growth,
-non-regular files, explicit roots and repeated object preview preservation. GUI acceptance
-is unchanged; these fixes require the usual MCP reconnect to load new code.
-
-Local validation after these review corrections: 1286 passed, 12 skipped with Inkscape
-1.4.3; ruff lint/format, strict mypy for macOS and Windows, diff check, MCP surface smoke
-and fresh STDIO boot smoke passed. Native Windows read-handle tests run in CI.
+Next improvements are iterative Rust work, not missing required migration gates. Preserve
+headless/live distinctions, finite acceptance scope, fixed JSON contracts, originals/IDs,
+bounded tools, approval/no-op/edit pipeline and GUI ownership protections. Investigate the
+historical disappearing-group incident only on recurrence; capture first divergent tree/PNG,
+selection, document/window IDs, audit/wire/logs and Undo state before restart/closure.
+Windows and clean-machine install are user-deferred. Timing phase refinement is secondary.
+Foreign POSIX jobs are prepared, not executed. Signing/provenance limitations remain explicit.
+The ready archive bytes did not change during acceptance/documentation updates; use the
+final external report for current status. No commits/PR/publication/config edits/messages.

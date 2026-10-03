@@ -1,0 +1,342 @@
+{
+  "passed": true,
+  "cold": {
+    "observations": [
+      {
+        "label": "preview-128",
+        "size": [
+          128,
+          77
+        ],
+        "rgba_sha256": "71049b10a72bfbf05cacb83895b8511fe4737f120ef929936546288f11199aa0"
+      },
+      {
+        "label": "preview-64",
+        "size": [
+          64,
+          38
+        ],
+        "rgba_sha256": "a2c85793fb47a7cdbd10ab02f7fb7e79a2464c1575b0858de3651a31b7f39241"
+      },
+      {
+        "label": "preview-None",
+        "size": [
+          100,
+          60
+        ],
+        "rgba_sha256": "779f76ba4d3e4200de3a4d3efffb3b853a15d54e99616b09de709996154c2595"
+      },
+      {
+        "label": "fresh-red",
+        "size": [
+          100,
+          60
+        ],
+        "rgba_sha256": "b3abc550ad23ecdc1c5ed262cc56f1ee49bd520e611bb12c5a29d0ac364033a7"
+      },
+      {
+        "label": "plain-svg",
+        "sha256": "2adcfa2dda60e08067be1081147f940519502fb9be12e680d2bd8acd7f231f8f"
+      }
+    ],
+    "launches": [
+      {
+        "pid": 63866,
+        "argv": [
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-ldKtjm/input.svg",
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-ldKtjm/output.png",
+          "--export-width=128",
+          "--export-area-page"
+        ],
+        "start_ns": 872416427669541
+      },
+      {
+        "pid": 63877,
+        "argv": [
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-r27jeD/input.svg",
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-r27jeD/output.png",
+          "--export-width=64",
+          "--export-area-page"
+        ],
+        "start_ns": 872416953247666
+      },
+      {
+        "pid": 63879,
+        "argv": [
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-16AXbP/input.svg",
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-16AXbP/output.png",
+          "--export-area-page"
+        ],
+        "start_ns": 872417256234458
+      },
+      {
+        "pid": 63885,
+        "argv": [
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-render-ny8Ic5/output.png",
+          "--export-area-page",
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-render-ny8Ic5/input.svg"
+        ],
+        "start_ns": 872417560045166
+      },
+      {
+        "pid": 63893,
+        "argv": [
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-render-zNhyjY/output.png",
+          "--export-area-page",
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-render-zNhyjY/input.svg"
+        ],
+        "start_ns": 872417873740000
+      },
+      {
+        "pid": 63897,
+        "argv": [
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-qF6bH1/input.svg",
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-qF6bH1/output.png",
+          "--export-area-page"
+        ],
+        "start_ns": 872418175359083
+      },
+      {
+        "pid": 63899,
+        "argv": [
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-6cHrEP/input.svg",
+          "--export-type=svg",
+          "--export-plain-svg",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-6cHrEP/output.svg"
+        ],
+        "start_ns": 872418468453416
+      }
+    ],
+    "shell_count": 0,
+    "original_preserved": true,
+    "startup_no_engine": true,
+    "owned_shell_cleanup": true
+  },
+  "warm": {
+    "observations": [
+      {
+        "label": "preview-128",
+        "size": [
+          128,
+          77
+        ],
+        "rgba_sha256": "71049b10a72bfbf05cacb83895b8511fe4737f120ef929936546288f11199aa0"
+      },
+      {
+        "label": "preview-64",
+        "size": [
+          64,
+          38
+        ],
+        "rgba_sha256": "a2c85793fb47a7cdbd10ab02f7fb7e79a2464c1575b0858de3651a31b7f39241"
+      },
+      {
+        "label": "preview-None",
+        "size": [
+          100,
+          60
+        ],
+        "rgba_sha256": "779f76ba4d3e4200de3a4d3efffb3b853a15d54e99616b09de709996154c2595"
+      },
+      {
+        "label": "fresh-red",
+        "size": [
+          100,
+          60
+        ],
+        "rgba_sha256": "b3abc550ad23ecdc1c5ed262cc56f1ee49bd520e611bb12c5a29d0ac364033a7"
+      },
+      {
+        "label": "plain-svg",
+        "sha256": "2adcfa2dda60e08067be1081147f940519502fb9be12e680d2bd8acd7f231f8f"
+      }
+    ],
+    "launches": [
+      {
+        "pid": 63902,
+        "argv": [
+          "--shell"
+        ],
+        "start_ns": 872419051471083
+      }
+    ],
+    "shell_count": 1,
+    "original_preserved": true,
+    "startup_no_engine": true,
+    "owned_shell_cleanup": true
+  },
+  "startup_fault_fallback": {
+    "observations": [
+      {
+        "label": "preview-128",
+        "size": [
+          128,
+          77
+        ],
+        "rgba_sha256": "71049b10a72bfbf05cacb83895b8511fe4737f120ef929936546288f11199aa0"
+      },
+      {
+        "label": "preview-64",
+        "size": [
+          64,
+          38
+        ],
+        "rgba_sha256": "a2c85793fb47a7cdbd10ab02f7fb7e79a2464c1575b0858de3651a31b7f39241"
+      },
+      {
+        "label": "preview-None",
+        "size": [
+          100,
+          60
+        ],
+        "rgba_sha256": "779f76ba4d3e4200de3a4d3efffb3b853a15d54e99616b09de709996154c2595"
+      },
+      {
+        "label": "fresh-red",
+        "size": [
+          100,
+          60
+        ],
+        "rgba_sha256": "b3abc550ad23ecdc1c5ed262cc56f1ee49bd520e611bb12c5a29d0ac364033a7"
+      },
+      {
+        "label": "plain-svg",
+        "sha256": "2adcfa2dda60e08067be1081147f940519502fb9be12e680d2bd8acd7f231f8f"
+      }
+    ],
+    "launches": [
+      {
+        "pid": 63908,
+        "argv": [
+          "--shell"
+        ],
+        "start_ns": 872419796246250
+      },
+      {
+        "pid": 63909,
+        "argv": [
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-i6X50D/input.svg",
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-i6X50D/output.png",
+          "--export-width=128",
+          "--export-area-page"
+        ],
+        "start_ns": 872419810536791
+      },
+      {
+        "pid": 63912,
+        "argv": [
+          "--shell"
+        ],
+        "start_ns": 872420264085375
+      },
+      {
+        "pid": 63913,
+        "argv": [
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-EfoCmA/input.svg",
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-EfoCmA/output.png",
+          "--export-width=64",
+          "--export-area-page"
+        ],
+        "start_ns": 872420278064375
+      },
+      {
+        "pid": 63915,
+        "argv": [
+          "--shell"
+        ],
+        "start_ns": 872420579030458
+      },
+      {
+        "pid": 63916,
+        "argv": [
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-ozqDju/input.svg",
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-ozqDju/output.png",
+          "--export-area-page"
+        ],
+        "start_ns": 872420599333833
+      },
+      {
+        "pid": 63917,
+        "argv": [
+          "--shell"
+        ],
+        "start_ns": 872420916308333
+      },
+      {
+        "pid": 63918,
+        "argv": [
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-render-niFOAi/output.png",
+          "--export-area-page",
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-render-niFOAi/input.svg"
+        ],
+        "start_ns": 872420937370875
+      },
+      {
+        "pid": 63922,
+        "argv": [
+          "--shell"
+        ],
+        "start_ns": 872421273457458
+      },
+      {
+        "pid": 63923,
+        "argv": [
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-render-puMzMG/output.png",
+          "--export-area-page",
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-render-puMzMG/input.svg"
+        ],
+        "start_ns": 872421290877750
+      },
+      {
+        "pid": 63925,
+        "argv": [
+          "--shell"
+        ],
+        "start_ns": 872421592191083
+      },
+      {
+        "pid": 63926,
+        "argv": [
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-qgSkaH/input.svg",
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-qgSkaH/output.png",
+          "--export-area-page"
+        ],
+        "start_ns": 872421605858416
+      },
+      {
+        "pid": 63928,
+        "argv": [
+          "--shell"
+        ],
+        "start_ns": 872421912120291
+      },
+      {
+        "pid": 63929,
+        "argv": [
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-OBrvS9/input.svg",
+          "--export-type=svg",
+          "--export-plain-svg",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-OBrvS9/output.svg"
+        ],
+        "start_ns": 872421933440125
+      }
+    ],
+    "shell_count": 7,
+    "original_preserved": true,
+    "startup_no_engine": true,
+    "owned_shell_cleanup": true
+  },
+  "native_GUI_acceptance": false
+}

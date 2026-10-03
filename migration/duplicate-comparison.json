@@ -1,0 +1,6 @@
+{
+  "scenarios": 19,
+  "differences": [],
+  "passed": true,
+  "normalization": "Only validated fresh subtree ID six-hex suffixes are bound; full SVG bytes are hashed after those exact bindings."
+}

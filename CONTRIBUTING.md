@@ -1,70 +1,45 @@
-# Contributing to inkscape-mcp
+# Contributing to the Rust Inkscape MCP server
 
-Thanks for your interest in improving `inkscape-mcp`. This document covers the local dev loop and
-the conventions that keep the tool surface safe and predictable.
+Read AGENTS.md, docs/AGENT_HANDOFF.md, README.md and docs/agent-usage-guide.md first.
+Preserve uncommitted work. The Python MCP implementation and paired comparison workflow
+are retired; improve Rust against explicit contracts, invariants and regression scenarios.
 
-## Development setup
+## Development and checks
 
-Requires **Python ≥ 3.12** and [`uv`](https://docs.astral.sh/uv/). The render / export / geometry
-tools additionally need **Inkscape on `PATH`** (developed against 1.4.x); read / edit / validate
-tools work without it.
+Use pinned Rust tooling from rust/rust-toolchain.toml if present and Cargo.lock.
+Native libxml/clang development dependencies are required; on macOS point LIBXML2 at
+$(xcrun --show-sdk-path)/usr/lib/libxml2.tbd. Inkscape is required for CLI/native acceptance.
 
-```bash
-uv sync                 # install runtime + dev dependencies
-uv run inkscape-mcp     # start the STDIO MCP server
+```sh
+cargo fmt --check --manifest-path rust/Cargo.toml
+cargo clippy --locked --all-targets --manifest-path rust/Cargo.toml -- -D warnings
+cargo test --locked --manifest-path rust/Cargo.toml
 ```
 
-## Quality gates
+Python is development/packaging tooling and a private live runtime, not the MCP server.
+Use an existing pinned environment or `uv sync --group dev` for those tools:
 
-All four must pass before a change is merged (CI enforces them on Linux/macOS/Windows):
-
-```bash
-uv run pytest                       # full suite
-uv run ruff check .                 # lint (selects E,F,I,B,UP,S,RUF)
-uv run ruff format --check .        # format
-uv run mypy src                     # strict type check
+```sh
+python -m pytest runtime/tests
+ruff check scripts runtime
+ruff format --check scripts runtime
+python scripts/gen_llms_txt.py --binary /absolute/path/to/current/rust/binary
 ```
 
-For a focused headless run, use `uv run pytest -m "not inkscape"`. Apply formatting or lint
-fixes deliberately, then rerun the checks above. An existing `.venv/bin/` installation can
-run the same commands directly when `uv` is unavailable.
+Regenerate llms.txt and llms-full.txt whenever the exposed surface or instructions change.
+The generator queries the actual Rust STDIO server without launching a GUI.
+Frozen discovery JSON under migration/contracts is the current schema/instruction source;
+CI checks that contract without starting a Python server. No automatic parity work is required.
 
-The Linux full-suite job installs Inkscape from the official stable Ubuntu PPA on Ubuntu 24.04
-and checks the runtime minimum before running tests. The distro package can lag behind the
-supported version. Windows writes use native no-follow handles and hold ancestor directories
-against renames; POSIX writes retain `O_NOFOLLOW` and directory-relative creation. Native Windows
-handle safety tests run in the Windows headless job.
+Run package/doctor/launcher checks for packaging changes and real Inkscape render/export
+for engine changes. Native acceptance is separate from automated tests. Only explicitly
+owned synthetic GUI sessions may be changed or closed. Startup/reconnect must never launch GUI.
 
-Tests that need a real Inkscape binary are marked `@pytest.mark.inkscape` and auto-skip when no
-`inkscape` is on `PATH`, so the suite stays green on a host without it.
+## Required invariants
 
-Read [AGENTS.md](AGENTS.md) and [the current handoff](docs/AGENT_HANDOFF.md) before starting
-repository work; the handoff distinguishes shipped features from planned improvements.
-
-## Tool conventions (non-negotiable)
-
-The API is a surface of **small, strongly-typed tools** — never a portmanteau / `run_action(string)` /
-`do_task(prompt)` free-text hatch. When adding or changing a tool:
-
-- **One typed tool per capability**, with explicit parameters and type hints; the docstring is the
-  tool description (keep the risk-class line — annotations are derived from it).
-- **Declare a risk class** — `low` (read / render / export) · `medium` (write-new / style / text /
-  transform; reversible) · `high` (overwrite / delete / path geometry / Action chains; approval-gated)
-  · `restricted` (never ships).
-- **Reversible by construction** — every mutating op runs through the edit pipeline: pre-mutation
-  snapshot → apply → Operation Record. A genuine no-op writes nothing and reports `changed: false`.
-- **Originals are sacred** — work on the working copy; saving goes to a new path; overwrites are
-  approval-gated.
-- **Subprocess via argument lists, never shell strings.** Safe XML parsing only (no entity expansion).
-  Stay inside the workspace sandbox; no network; no arbitrary extension execution.
-
-If your change adds, renames, or removes a tool / resource / prompt, regenerate the LLM index:
-
-```bash
-uv run python scripts/gen_llms_txt.py    # refresh llms.txt / llms-full.txt
-```
-
-## Security
-
-Please report vulnerabilities privately — see [SECURITY.md](SECURITY.md). Do not open a public issue
-for a security report.
+Keep tools typed and bounded. Reuse the edit pipeline, snapshots, Operation Records,
+no-op handling and approval gates. Preserve originals, workspace/symlink protections,
+SVG IDs/references and appearance; reject unsafe structural edits before mutation.
+Use argument-list subprocesses, safe XML parsing and no arbitrary shell/code/extensions.
+Do not add bitmap tracing. Do not commit, publish or send messages without user authorization.
+Windows is backlog. Prepared CI jobs are not evidence of real target validation.

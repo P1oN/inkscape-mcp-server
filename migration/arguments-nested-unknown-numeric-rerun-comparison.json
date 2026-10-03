@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "observations": 6,
+  "cases": "nested-unknown",
+  "normalization": "none",
+  "scope": "Frozen schema argument matrix; cases=nested-unknown. No valid tool call or explicit GUI launch.",
+  "rust_binary_sha256": "04bece73f43a16d65172573fb724e33a712ea5db19437a950957e25a444c5a07",
+  "discovery_sha256": "e83b34257858096e07c673e5a38eeadd8a371b0e4a63496181e893d8f48128b6",
+  "differences": [],
+  "workspace_changed": {
+    "python": false,
+    "rust": false
+  }
+}

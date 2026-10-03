@@ -1,0 +1,278 @@
+{
+  "evidence_verified": true,
+  "packaged_license_supplement": false,
+  "goal_complete": false,
+  "scope": "Exact Astral runtime release and explicit uv transformations; pinned source recipe and observed native versions, 19 license texts prepared. Not wheel attribution, full rebuild or foreign target acceptance.",
+  "files": [
+    {
+      "path": "migration/cpython-stage35-provenance-comparison.json",
+      "bytes": 4553,
+      "sha256": "ab487e7d9554904c353ecb62b3b9ceea7c95101dcbde65c23eb3128bcc848d7e"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/PYTHON.json",
+      "bytes": 118432,
+      "sha256": "abf936bc31161e4f83e2b659dcaa9590c3c77ade3ab1abf046d768692e0c6af8"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/cpython-3.12.14+20260929-aarch64-apple-darwin-install_only_stripped.tar.gz",
+      "bytes": 25017608,
+      "sha256": "1bb3e53d231ee2c8881e8daf6426f4dd95bff0dda496af0f3af300357aa998d0"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/cpython-3.12.14+20260929-aarch64-apple-darwin-pgo+lto-full.tar.zst",
+      "bytes": 54996639,
+      "sha256": "332588681afefc98045995122657a64f8e708d0fb56e683733b1f7cc42157f97"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/full.tar",
+      "bytes": 245780480,
+      "sha256": "294ba0e3e4f883fe9a039bb8a7d241b6512fc8e6a8a09744cc6e9db5a12929c9"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/install-name-only.dylib",
+      "bytes": 18084008,
+      "sha256": "ac26ddcf6e4b7ce6166230598686cd68a0a79e3258c2637d1d996fda14e10831"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/macos_dylib.rs",
+      "bytes": 2008,
+      "sha256": "7792e1dcd20d3440326fc402fc48063d07950fbfb143f054e74a3863a2f4d807"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/native-version-observation.json",
+      "bytes": 186,
+      "sha256": "6df0e1c70762f0160bbcf6b30873b7299afff0ea2824340435ed8f46ea82f8a9"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/pbs-downloads.json",
+      "bytes": 19730,
+      "sha256": "4552ccd7e5459b9830a551fb804183944e467258904a78bfcb8438b28e9194e1"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/pbs-downloads.py",
+      "bytes": 1015,
+      "sha256": "f763cad4224a13c0622ae920fde6232ff49594482c41e8d663e5b36e09f583c4"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/release.json",
+      "bytes": 1898196,
+      "sha256": "d70dfe7386b0eaf9aa4ab51e67dbe90d2b2d9b91a8d9630451ea2daa711f6eb8"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/runtime-member-comparison.json",
+      "bytes": 38856,
+      "sha256": "ae8cc364e4eac7d3f9c8a427a9ff7dcf43940de13f99476a4752199f5f027698"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/simulated-libpython.dylib",
+      "bytes": 17979040,
+      "sha256": "d05b8b998a01c45373483e624aacfca9bb62c14bc94c421e68ce2c4d0c37189c"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/simulation/libpython3.12.dylib",
+      "bytes": 18084000,
+      "sha256": "d2c080ec982e4704f7b66fdda2e3a00dc8aaeedf8913fc546d0bf2e7ed09bd88"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/snapshots/docs/AGENT_HANDOFF.md",
+      "bytes": 216872,
+      "sha256": "0aa3d2ecee1664127d4982242d902d44e42d7a9327a3b511e3534194ed65065d"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/snapshots/docs/RUST_PACKAGING.md",
+      "bytes": 11528,
+      "sha256": "114b83378a875832ee4e9c1a824b474420ec15b5436a62652a50a8218d949f89"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/snapshots/docs/RUST_SECURITY_AUDIT.md",
+      "bytes": 21659,
+      "sha256": "e9352080021aeef151d2a4ea1dcbf9c8cc463a642e238ce8f3976d9f4614e0c7"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/snapshots/scripts/migration_cpython_provenance.py",
+      "bytes": 7149,
+      "sha256": "a4db9fde671aece3fdad57111f5ba713febf0b1a546110c60db846f47cb38643"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/snapshots/scripts/migration_package_notices.py",
+      "bytes": 13508,
+      "sha256": "ccf830b86245deb3df34388bc358b96dd4c6ea410457d63aa5a7d9fdf8d7b22e"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/stage35-runtime-final-verified.json",
+      "bytes": 39662,
+      "sha256": "c1e8d24110e20f53d09f05762034bdba1b0863935af1cf77793a9ec83f3fd5c1"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/stage35-runtime-guarded-verified.json",
+      "bytes": 39662,
+      "sha256": "c1e8d24110e20f53d09f05762034bdba1b0863935af1cf77793a9ec83f3fd5c1"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/stage35-runtime-verified.json",
+      "bytes": 39662,
+      "sha256": "c1e8d24110e20f53d09f05762034bdba1b0863935af1cf77793a9ec83f3fd5c1"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/supplement-collection.json",
+      "bytes": 167,
+      "sha256": "5fc9f35acee81252eaff3917390299af3c1d712c0b203c271f559c5c4c47369e"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/sysconfig-patch-verification.json",
+      "bytes": 348,
+      "sha256": "502f4ebd2cb8e3402a4e610ad1213a7c7690a590a735976a6870e7e9d9d02e35"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/sysconfig-statement-refusal.json",
+      "bytes": 68,
+      "sha256": "3b7fd3a119d7e2aa0b1d282ac8ff89ab00f36ab6d1b484adf13abab560047092"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/sysconfig.diff",
+      "bytes": 39955,
+      "sha256": "2320524c5e0725855b631a6176eefa9c38045552f9c31fb72217d333938e112f"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/upstream-libpython.dylib",
+      "bytes": 18084000,
+      "sha256": "f2e534d8f55979ecb20d47e7fc1d273f09d10c46acac20d122671b1741b4a2f7"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/uv-cursor.rs",
+      "bytes": 1800,
+      "sha256": "07d9941b380a28e49566a2f909458990e381d739b331a771b339bad006084f8e"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/uv-generated_mappings.rs",
+      "bytes": 11717,
+      "sha256": "7539a7e88587df13a08838602ac250b2e0453e7fb1c05f84780e0e9312a84e5a"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/uv-mod.rs",
+      "bytes": 14749,
+      "sha256": "5a3010a2b0e686e442a27475fa84e58b9eea16c339b8408e617204ee73e559cc"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/uv-parser.rs",
+      "bytes": 16246,
+      "sha256": "03740345be213330bed185d73eb615911c2ca56e32e51c7357ae6492837bad6f"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/uv-replacements.rs",
+      "bytes": 807,
+      "sha256": "1f83d7f03a275a33896e3a7b636fd09c14e49d3ecf19d992bcca7287a5721bab"
+    },
+    {
+      "path": "migration/results/cpython-source-audit/uv-sysconfig-directory.json",
+      "bytes": 5060,
+      "sha256": "4e9139acb4ef1f961c2131bc8411f53239c0ae5c5b75ecc040de1243679b18f0"
+    },
+    {
+      "path": "migration/vendor-notices/cpython/3.12.14-20260929-macos-arm64/PYTHON.json",
+      "bytes": 118432,
+      "sha256": "abf936bc31161e4f83e2b659dcaa9590c3c77ade3ab1abf046d768692e0c6af8"
+    },
+    {
+      "path": "migration/vendor-notices/cpython/3.12.14-20260929-macos-arm64/licenses/LICENSE.bdb.txt",
+      "bytes": 7293,
+      "sha256": "3bdff06e69991c94664f2ef5c5f8096f60b7dbec071756ea6cc26b445e06ec5b"
+    },
+    {
+      "path": "migration/vendor-notices/cpython/3.12.14-20260929-macos-arm64/licenses/LICENSE.bzip2.txt",
+      "bytes": 1743,
+      "sha256": "1f38bbc7caacafd65169276d759c0d88c991b753b643ce35d0e45ea1971dd441"
+    },
+    {
+      "path": "migration/vendor-notices/cpython/3.12.14-20260929-macos-arm64/licenses/LICENSE.cpython.txt",
+      "bytes": 36164,
+      "sha256": "86e61415828a8b5b06ec8d024e6f086ce155a8b85fd0c419c0ba4dc004e74fdd"
+    },
+    {
+      "path": "migration/vendor-notices/cpython/3.12.14-20260929-macos-arm64/licenses/LICENSE.expat.txt",
+      "bytes": 1144,
+      "sha256": "122f2c27000472a201d337b9b31f7eb2b52d091b02857061a8880371612d9534"
+    },
+    {
+      "path": "migration/vendor-notices/cpython/3.12.14-20260929-macos-arm64/licenses/LICENSE.libX11.txt",
+      "bytes": 47018,
+      "sha256": "2daec087a88e7c9b8082557cdeebad5bbb8155a4137472f0b22e269cd99d0c1e"
+    },
+    {
+      "path": "migration/vendor-notices/cpython/3.12.14-20260929-macos-arm64/licenses/LICENSE.libXau.txt",
+      "bytes": 1148,
+      "sha256": "56abe29bb1d9806a9e04fa9f80fed2c0f18027594df3f098148d814aef6bddfa"
+    },
+    {
+      "path": "migration/vendor-notices/cpython/3.12.14-20260929-macos-arm64/licenses/LICENSE.libedit.txt",
+      "bytes": 1614,
+      "sha256": "29cea33c32bbc9785142386377915612a2fa786482c46843383384aded2e09b1"
+    },
+    {
+      "path": "migration/vendor-notices/cpython/3.12.14-20260929-macos-arm64/licenses/LICENSE.libffi.txt",
+      "bytes": 1132,
+      "sha256": "deaf3a42effb551a5b140fa9afefed183a27f1341c6d1bf430d106a5e6931fc0"
+    },
+    {
+      "path": "migration/vendor-notices/cpython/3.12.14-20260929-macos-arm64/licenses/LICENSE.liblzma.txt",
+      "bytes": 660,
+      "sha256": "9a4062de0a2c388a98cf35a35d348b62fa97c838a71c3c28ee1a2d7d0a565b02"
+    },
+    {
+      "path": "migration/vendor-notices/cpython/3.12.14-20260929-macos-arm64/licenses/LICENSE.libuuid.txt",
+      "bytes": 1432,
+      "sha256": "122ee1f7e258f2c3c0e538a75c037684f420454bf3850ddc74ce750bbf5fe86b"
+    },
+    {
+      "path": "migration/vendor-notices/cpython/3.12.14-20260929-macos-arm64/licenses/LICENSE.libxcb.txt",
+      "bytes": 1337,
+      "sha256": "c5ffbfeaa501071ceeb97b7de2c0d703fdaa35de01c0fb6cbac1c28453a3e9fd"
+    },
+    {
+      "path": "migration/vendor-notices/cpython/3.12.14-20260929-macos-arm64/licenses/LICENSE.mpdecimal.txt",
+      "bytes": 1284,
+      "sha256": "669512af7219f58be03a398766d7c9da11a3b3df9d3f05cb74c5ceca25c8da3b"
+    },
+    {
+      "path": "migration/vendor-notices/cpython/3.12.14-20260929-macos-arm64/licenses/LICENSE.ncurses.txt",
+      "bytes": 1447,
+      "sha256": "87a4c4442337b8968ef956031c406b74f9cb7149b7ba87311bdaba534816201c"
+    },
+    {
+      "path": "migration/vendor-notices/cpython/3.12.14-20260929-macos-arm64/licenses/LICENSE.openssl-1.1.txt",
+      "bytes": 6120,
+      "sha256": "9c04cce50c4989d5601dd8b07f6ab922c40388b66ac736c9007cb1ed9d9dd560"
+    },
+    {
+      "path": "migration/vendor-notices/cpython/3.12.14-20260929-macos-arm64/licenses/LICENSE.openssl-3.txt",
+      "bytes": 10175,
+      "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a"
+    },
+    {
+      "path": "migration/vendor-notices/cpython/3.12.14-20260929-macos-arm64/licenses/LICENSE.sqlite.txt",
+      "bytes": 1481,
+      "sha256": "38bef3d28b24f145ea293bd3b6eb4b20396982abc8303128fb493986ea5bc719"
+    },
+    {
+      "path": "migration/vendor-notices/cpython/3.12.14-20260929-macos-arm64/licenses/LICENSE.tcl.txt",
+      "bytes": 2255,
+      "sha256": "c0a69a2bfd757361ec7e6143973b103c90409316b49e9c88db26ad6388e79f16"
+    },
+    {
+      "path": "migration/vendor-notices/cpython/3.12.14-20260929-macos-arm64/licenses/LICENSE.tix.txt",
+      "bytes": 2826,
+      "sha256": "3ac5cdd0bef6c43ce34c6a7ced452081d9e5a0bf94082b9f9147d23ec9e214f5"
+    },
+    {
+      "path": "migration/vendor-notices/cpython/3.12.14-20260929-macos-arm64/licenses/LICENSE.zlib.txt",
+      "bytes": 995,
+      "sha256": "818922b2620f12801a12bf78e399644a30990e66824abd8ca8ec24d451d6f92c"
+    },
+    {
+      "path": "migration/vendor-notices/cpython/3.12.14-20260929-macos-arm64/provenance.json",
+      "bytes": 4581,
+      "sha256": "f5071bcc73bf97c86b8488139f2e1a1e350748ba30a1762bafad646e4b434b62"
+    }
+  ]
+}

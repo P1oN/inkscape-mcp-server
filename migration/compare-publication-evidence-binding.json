@@ -1,0 +1,148 @@
+{
+  "evidence_verified": true,
+  "packaged": false,
+  "goal_complete": false,
+  "scope": "Stage33 second-source refusal partial PNG reproduction; current debug unchanged refusal inventory and blue/red pair readback; Rust213/1ignored. Not pair-level crash atomicity or exhaustive concurrent-race proof.",
+  "files": [
+    {
+      "path": "migration/results/compare-publication-debug/after.png",
+      "bytes": 144,
+      "sha256": "f13203835a588d5bc907b1f5dd2b7a0e345ba037b14c1f1631fc55e3abfaff4c"
+    },
+    {
+      "path": "migration/results/compare-publication-debug/before.png",
+      "bytes": 144,
+      "sha256": "8aaaac4101542e16a9f3a2f2e77589227c22b8ac3a3524d2aa48efb5ba2426ae"
+    },
+    {
+      "path": "migration/results/compare-publication-debug/comparison.json",
+      "bytes": 244,
+      "sha256": "d5029ff7e0999ea7828aef8e9a74cdc04231e94918631c787e501021ab05d502"
+    },
+    {
+      "path": "migration/results/compare-publication-debug/refusal-filesystem.json",
+      "bytes": 4406,
+      "sha256": "ba345d3dc5b4c9d859cc2055dbc59d1878e753da2916f545c0d3cf62910c6518"
+    },
+    {
+      "path": "migration/results/compare-publication-debug/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/compare-publication-debug/server.trace.json",
+      "bytes": 14093,
+      "sha256": "7a3c11f343938c9432fb04f6db15377607b984d2f82048a16afc655e4fb6ed0b"
+    },
+    {
+      "path": "migration/results/compare-publication-final/after.png",
+      "bytes": 144,
+      "sha256": "f13203835a588d5bc907b1f5dd2b7a0e345ba037b14c1f1631fc55e3abfaff4c"
+    },
+    {
+      "path": "migration/results/compare-publication-final/before.png",
+      "bytes": 144,
+      "sha256": "8aaaac4101542e16a9f3a2f2e77589227c22b8ac3a3524d2aa48efb5ba2426ae"
+    },
+    {
+      "path": "migration/results/compare-publication-final/comparison.json",
+      "bytes": 244,
+      "sha256": "1ea201e913206c17de6443c030a0861cf38179d37ab68e33f426986572027c8c"
+    },
+    {
+      "path": "migration/results/compare-publication-final/refusal-filesystem.json",
+      "bytes": 4406,
+      "sha256": "200bfda5f0b3b0537a69606e1680bacdd213d6b5f9bc8d6f2ecbc5adce25b1ea"
+    },
+    {
+      "path": "migration/results/compare-publication-final/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/compare-publication-final/server.trace.json",
+      "bytes": 14093,
+      "sha256": "43089499cf583fec4737f407c96d0ad9a89453766a9fa14de19ea6ffdf1e96ba"
+    },
+    {
+      "path": "migration/results/compare-publication-review/build.log",
+      "bytes": 163,
+      "sha256": "6ff56a0877cda560e88fabaf2517593dbfe836b576b89f160507b89a5ce899eb"
+    },
+    {
+      "path": "migration/results/compare-publication-review/clippy.log",
+      "bytes": 163,
+      "sha256": "576cd03d15be263c052b36c763d498a97ee067d3d189f931971c4044b6d4fe77"
+    },
+    {
+      "path": "migration/results/compare-publication-review/fmt.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/compare-publication-review/ruff-check.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "migration/results/compare-publication-review/ruff-format.log",
+      "bytes": 27,
+      "sha256": "dde85ab0ab657507e2a1c53a7cfe26e5ab8acfd4abe3547bac113731d2477097"
+    },
+    {
+      "path": "migration/results/compare-publication-review/rust-tests-final.log",
+      "bytes": 20077,
+      "sha256": "6e6d922fafa6e4d41d8ad0660968b8857391277b66cbf0b21881b93bd425ccca"
+    },
+    {
+      "path": "migration/results/compare-publication-review/rust-tests.log",
+      "bytes": 32,
+      "sha256": "835eb749db8ecc2784ffc25dc1ddcd83d05d8a5f2db74745983de33c5a4a7ab1"
+    },
+    {
+      "path": "migration/results/compare-publication-review/snapshots/.github/workflows/rust-migration.yml",
+      "bytes": 8665,
+      "sha256": "31c349b0977d70ccd13956167e7a57f9ecc7037b05a2a2de5ff4bfc588f04e2d"
+    },
+    {
+      "path": "migration/results/compare-publication-review/snapshots/docs/AGENT_HANDOFF.md",
+      "bytes": 213500,
+      "sha256": "d8dab113543a180c95279330fc001ee694822fb30e994b6e0b63f433343537c4"
+    },
+    {
+      "path": "migration/results/compare-publication-review/snapshots/docs/RUST_NEXT_PLAN.md",
+      "bytes": 7744,
+      "sha256": "6e0713648f175d0645c378da9d3b89aebdafdf17c1b9d3a35db8b5fe105b8d28"
+    },
+    {
+      "path": "migration/results/compare-publication-review/snapshots/docs/RUST_SECURITY_AUDIT.md",
+      "bytes": 18287,
+      "sha256": "bf781fca58056acfa9c50e6ec12b16cdd4a176f5d22c9dbd934881be0fdf15ca"
+    },
+    {
+      "path": "migration/results/compare-publication-review/snapshots/rust/src/render.rs",
+      "bytes": 35312,
+      "sha256": "2b333334ff5fb2bad83920b8a96c6fbfd2e6b0617ef18c78b69e986d06b5763e"
+    },
+    {
+      "path": "migration/results/compare-publication-review/snapshots/scripts/rust_compare_publication_acceptance.py",
+      "bytes": 4132,
+      "sha256": "0a05d97b1e83a2820f81b3014ac376b9f977748420e23f07d398d239c316d099"
+    },
+    {
+      "path": "migration/results/compare-stage33-before-fix/refusal-filesystem.json",
+      "bytes": 4629,
+      "sha256": "ee432ff459db133810c219bd8f96c01701019117f8cb81c363f67d96871f1a17"
+    },
+    {
+      "path": "migration/results/compare-stage33-before-fix/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/compare-stage33-before-fix/server.trace.json",
+      "bytes": 9269,
+      "sha256": "0f10b016f5bd567ad2821683b99d3cc3b933e7cbc04501f241ce8a0fde29a1bf"
+    }
+  ]
+}

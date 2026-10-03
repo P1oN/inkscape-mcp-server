@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "profiles": 10,
+  "ready_and_exit_codes": true,
+  "read_only_no_bytecode": true,
+  "missing_assets_named": true,
+  "link_and_architecture_guards": true,
+  "minimum_version_checked": true,
+  "GUI_launched": false
+}

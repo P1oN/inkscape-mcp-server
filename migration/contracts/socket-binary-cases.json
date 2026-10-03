@@ -1,0 +1,260 @@
+{
+  "cases": [
+    {
+      "input": {
+        "png_base64": null
+      },
+      "expected": {
+        "error": "LiveCapabilityUnsupported",
+        "message": "unavailable"
+      }
+    },
+    {
+      "input": {
+        "png_base64": 0
+      },
+      "expected": {
+        "error": "LiveCapabilityUnsupported",
+        "message": "unavailable"
+      }
+    },
+    {
+      "input": {
+        "png_base64": false
+      },
+      "expected": {
+        "error": "LiveCapabilityUnsupported",
+        "message": "unavailable"
+      }
+    },
+    {
+      "input": {
+        "png_base64": {}
+      },
+      "expected": {
+        "error": "LiveCapabilityUnsupported",
+        "message": "unavailable"
+      }
+    },
+    {
+      "input": {
+        "png_base64": []
+      },
+      "expected": {
+        "error": "LiveCapabilityUnsupported",
+        "message": "unavailable"
+      }
+    },
+    {
+      "input": {
+        "png_base64": ""
+      },
+      "expected": {
+        "error": "LiveCapabilityUnsupported",
+        "message": "unavailable"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "YQ=="
+      },
+      "expected": {
+        "hex": "61"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "YR=="
+      },
+      "expected": {
+        "hex": "61"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "YQ="
+      },
+      "expected": {
+        "error": "LiveConnectionError",
+        "message": "live render payload was malformed"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "YQ"
+      },
+      "expected": {
+        "error": "LiveConnectionError",
+        "message": "live render payload was malformed"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "YQ==="
+      },
+      "expected": {
+        "error": "LiveConnectionError",
+        "message": "live render payload was malformed"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "YWJj"
+      },
+      "expected": {
+        "hex": "616263"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "YWJj="
+      },
+      "expected": {
+        "error": "LiveConnectionError",
+        "message": "live render payload was malformed"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "YWJj===="
+      },
+      "expected": {
+        "error": "LiveConnectionError",
+        "message": "live render payload was malformed"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "===="
+      },
+      "expected": {
+        "error": "LiveConnectionError",
+        "message": "live render payload was malformed"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "AA==AA"
+      },
+      "expected": {
+        "error": "LiveConnectionError",
+        "message": "live render payload was malformed"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "AAA="
+      },
+      "expected": {
+        "hex": "0000"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "AAB="
+      },
+      "expected": {
+        "hex": "0000"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "AA==\n"
+      },
+      "expected": {
+        "error": "LiveConnectionError",
+        "message": "live render payload was malformed"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "AA== "
+      },
+      "expected": {
+        "error": "LiveConnectionError",
+        "message": "live render payload was malformed"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "YWJj=YWJj"
+      },
+      "expected": {
+        "error": "LiveConnectionError",
+        "message": "live render payload was malformed"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "ключ"
+      },
+      "expected": {
+        "error": "LiveConnectionError",
+        "message": "live render payload was malformed"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "A"
+      },
+      "expected": {
+        "error": "LiveConnectionError",
+        "message": "live render payload was malformed"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "AA"
+      },
+      "expected": {
+        "error": "LiveConnectionError",
+        "message": "live render payload was malformed"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "AAA"
+      },
+      "expected": {
+        "error": "LiveConnectionError",
+        "message": "live render payload was malformed"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "AA--"
+      },
+      "expected": {
+        "error": "LiveConnectionError",
+        "message": "live render payload was malformed"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "AA__"
+      },
+      "expected": {
+        "error": "LiveConnectionError",
+        "message": "live render payload was malformed"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "\\"
+      },
+      "expected": {
+        "error": "LiveConnectionError",
+        "message": "live render payload was malformed"
+      }
+    },
+    {
+      "input": {
+        "png_base64": "AA\u0000=="
+      },
+      "expected": {
+        "error": "LiveConnectionError",
+        "message": "live render payload was malformed"
+      }
+    }
+  ]
+}

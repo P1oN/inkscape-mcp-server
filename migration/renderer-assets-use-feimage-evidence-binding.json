@@ -1,0 +1,99 @@
+{
+  "evidence_verified": true,
+  "implementation_complete": false,
+  "current_package_updated": false,
+  "rust_tests": "205 passed/1 ignored",
+  "scope": "External SVG use fragments and feImage dependency staging, absref restore including namespace recreation; selected actual debug CLI11 cases. CSS/xml:base and package acceptance pending.",
+  "files": [
+    {
+      "path": "migration/results/renderer-assets-use-feimage-debug-v2/inside-absolute-export.svg",
+      "bytes": 343,
+      "sha256": "7f9841a6d8e69e568f06734f6b3688a901e70515041b772d514fcaa14b0f06e6"
+    },
+    {
+      "path": "migration/results/renderer-assets-use-feimage-debug-v2/inside-absolute.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-use-feimage-debug-v2/inside-feimage-export.svg",
+      "bytes": 465,
+      "sha256": "9e1d9926477dfcb65ea34a1688fe64271f87b61ad0db19540c23ee9f95ebadc0"
+    },
+    {
+      "path": "migration/results/renderer-assets-use-feimage-debug-v2/inside-feimage.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-use-feimage-debug-v2/inside-nested-svg-export.svg",
+      "bytes": 342,
+      "sha256": "fc0c21d5aa94b72c68e2364fa958e77e596eefc39ca68991310654405da796f8"
+    },
+    {
+      "path": "migration/results/renderer-assets-use-feimage-debug-v2/inside-nested-svg.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-use-feimage-debug-v2/inside-relative-export.svg",
+      "bytes": 343,
+      "sha256": "7f9841a6d8e69e568f06734f6b3688a901e70515041b772d514fcaa14b0f06e6"
+    },
+    {
+      "path": "migration/results/renderer-assets-use-feimage-debug-v2/inside-relative.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-use-feimage-debug-v2/inside-use-export.svg",
+      "bytes": 323,
+      "sha256": "9dcfa5a3a776653c7bdd1c66dd07f175af21620c3c585ebaf009ceb73679841e"
+    },
+    {
+      "path": "migration/results/renderer-assets-use-feimage-debug-v2/inside-use.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-use-feimage-debug-v2/probe.json",
+      "bytes": 2679,
+      "sha256": "ac929ac758ca11dec6d2c37f8a069b6efaf63dbf5df1478bb13beb315fdd0ef0"
+    },
+    {
+      "path": "migration/results/renderer-assets-use-feimage-debug-v2/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/renderer-assets-use-feimage-debug-v2/server.trace.json",
+      "bytes": 49864,
+      "sha256": "c8c3744f59e48f678b971ebc9b36c8e2485f33281349a154dcc2a15d6875b5b9"
+    },
+    {
+      "path": "migration/results/renderer-assets-use-feimage-review/docs/AGENT_HANDOFF.md",
+      "bytes": 208898,
+      "sha256": "3fa0f4082dd29b9e062722afa025c7eb62a8fe814443948b8b61570c9e84f297"
+    },
+    {
+      "path": "migration/results/renderer-assets-use-feimage-review/docs/RUST_SECURITY_AUDIT.md",
+      "bytes": 10380,
+      "sha256": "4faaf3f18cd5675a92de5d53bb4ead58c9f4b62fd327c0e2eb17b8cbf2c02e29"
+    },
+    {
+      "path": "migration/results/renderer-assets-use-feimage-review/rust/src/engine_input.rs",
+      "bytes": 23864,
+      "sha256": "13c5e2fe51a309ba3a11aa4b073ab5e8b1c05a0ebd32ba6807da8bf3f11fd792"
+    },
+    {
+      "path": "migration/results/renderer-assets-use-feimage-review/rust-tests.log",
+      "bytes": 19297,
+      "sha256": "3743c2c3d336dee41f7bde8e8bb801c93438c5b6a53acd92ffb1df9f74d2bb1f"
+    },
+    {
+      "path": "migration/results/renderer-assets-use-feimage-review/scripts/rust_renderer_asset_probe.py",
+      "bytes": 7904,
+      "sha256": "91741130cc0007a37852e40e641e975446db736ea7e6696fd0c5914ac98c1421"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage37",
+  "archive": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage37.tar.gz",
+  "archive_bytes": 46747464,
+  "archive_sha256": "a0fb8a77ab26fc58b20ea3703b8a9ac919bc85e97e455510d9ed845bf94c32d4",
+  "binary_sha256": "7da533716a45e84e2d47a2f44f22e4b545abc15dc3d3bc9468fa67c5997e00fd",
+  "package_files_verified": 2533,
+  "reports": [
+    "migration/package-stage37-cold-comparison.json",
+    "migration/package-stage37-warm-comparison.json",
+    "migration/doctor-stage37-comparison.json",
+    "migration/notices-stage37-comparison.json",
+    "migration/discovery-stage37-comparison.json",
+    "migration/results/launcher-stage37/comparison.json",
+    "migration/results/security-stage37/comparison.json",
+    "migration/results/security-stage37-special-files/comparison.json",
+    "migration/results/stdio-frame-stage37/comparison.json",
+    "migration/results/diagnostic-limits-stage37/comparison.json",
+    "migration/results/compare-publication-stage37/comparison.json",
+    "migration/results/renderer-assets-stage37/probe.json",
+    "migration/results/engine-routes-stage37/comparison.json",
+    "migration/results/stdio-frame-review/homebrew-license-stage37.json"
+  ],
+  "native_source_kit": "migration/results/homebrew-source-audit/source-kit-stage37.json",
+  "scope": "Actual37 cold/warm install, doctor10/launcher11/notices17 plusBSD2 binding/security35/files12/discovery16/asset17/routes8/diagnostic3/compare publication/STDIO frame cap. Rust215/1ignored. GUI/current performance not proved."
+}

@@ -1,0 +1,20 @@
+{
+  "passed": false,
+  "observations": 418,
+  "cases": "type-fields",
+  "normalization": "none",
+  "scope": "Frozen schema argument matrix; cases=type-fields. No valid tool call or explicit GUI launch.",
+  "rust_binary_sha256": "a3d3106ea02abfa826136cf2044206e2dec86effd449a484004da4a23af50b6b",
+  "discovery_sha256": "e83b34257858096e07c673e5a38eeadd8a371b0e4a63496181e893d8f48128b6",
+  "differences": [
+    {
+      "path": "/260/response/content/0/text",
+      "expected": "1 validation error for call[live_session_step]\naction\n  Input should be 'apply', 'insert_svg' or 'set_text' [type=enum, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+      "actual": "1 validation error for call[live_session_step]\naction\n  Input should be 'apply', 'insert_svg' or 'set_text' [type=literal_error, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+    }
+  ],
+  "workspace_changed": {
+    "python": false,
+    "rust": false
+  }
+}

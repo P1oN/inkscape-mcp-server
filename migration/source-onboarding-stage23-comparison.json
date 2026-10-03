@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "full_migration_complete": false,
+  "source_setup_build_doctor_launcher": true,
+  "clean_target_directory": true,
+  "existing_build_prerequisites_reused": true,
+  "existing_pinned_helper_environment_reused": true,
+  "uv_download_branch_exercised": false,
+  "fresh_os_or_foreign_host_exercised": false,
+  "empty_PATH_launcher": true,
+  "external_Cargo_target_and_directory_overridden": true,
+  "stale_implicit_release_artifact_absent": true,
+  "initial_PATH_failure_preserved": true,
+  "source_argument_refusals_preserve_configuration": true,
+  "discovery_configs": 16,
+  "edit_scenarios": 122,
+  "launcher_checks": 11,
+  "doctor_profiles": 10,
+  "notice_checks": 9,
+  "actual_archive_modes": [
+    "per_call",
+    "shell"
+  ],
+  "package": {
+    "passed": true,
+    "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage23",
+    "archive": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage23.tar.gz",
+    "archive_bytes": 46457637,
+    "archive_sha256": "149dc99066b4578eec13da115fc84b2c56d604979e5ce5ade67de327a0c6740d",
+    "binary_sha256": "dfadfbc0a11cc14a1454c40d35956348070b353115ed726b8b450035b73afd1f",
+    "regular_files": 2453,
+    "regular_bytes": 132709025,
+    "scope": "Source-built stage23 with empty-PATH setup/launcher and actual cold/warm archive/CLI/STDIO/doctor/notices acceptance; no native GUI or performance evidence",
+    "native_evidence_transferred": false
+  },
+  "native_gui": false,
+  "user_MCP_configuration_changed": false,
+  "GUI_launched_or_restarted": false,
+  "remaining_checklist": "docs/RUST_COMPLETION_CHECKLIST.md",
+  "quality_gates": {
+    "ruff": true,
+    "ruff_format_files": 325,
+    "mypy_sources": 122,
+    "git_diff_check": true,
+    "rust_source_changed": false,
+    "full_test_suites_rerun_this_checkpoint": false
+  }
+}

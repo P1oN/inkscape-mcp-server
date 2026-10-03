@@ -1,0 +1,385 @@
+{
+  "cases": [
+    {
+      "spec": {
+        "operation": "style",
+        "params": {
+          "style": {
+            "fill": "red"
+          },
+          "transform": null
+        }
+      },
+      "request": {
+        "nonce": "mcp_1234567890abcdef1234567890abcdef",
+        "operation": "style",
+        "selection": [
+          "r"
+        ],
+        "expected_ids": [
+          "g",
+          "r"
+        ],
+        "expected_fingerprint": "470160d69aeaf8bcfa863bee2270be50d0e91a6262150845520c47101e0b04b5",
+        "style": {
+          "fill": "red"
+        },
+        "transform": null
+      },
+      "expected": {
+        "result": {
+          "affected_ids": [
+            "r"
+          ],
+          "count": 1,
+          "detail": "style: one Undo step; unchanged calls add no step",
+          "undo_friendly": true
+        }
+      }
+    },
+    {
+      "spec": {
+        "operation": "style",
+        "params": {
+          "style": {
+            "fill": "blue",
+            "stroke": "none"
+          },
+          "transform": "rotate(12)"
+        }
+      },
+      "request": {
+        "nonce": "mcp_1234567890abcdef1234567890abcdef",
+        "operation": "style",
+        "selection": [
+          "r"
+        ],
+        "expected_ids": [
+          "g",
+          "r"
+        ],
+        "expected_fingerprint": "470160d69aeaf8bcfa863bee2270be50d0e91a6262150845520c47101e0b04b5",
+        "style": {
+          "fill": "blue",
+          "stroke": "none"
+        },
+        "transform": "rotate(12)"
+      },
+      "expected": {
+        "result": {
+          "affected_ids": [
+            "r"
+          ],
+          "count": 1,
+          "detail": "style: one Undo step; unchanged calls add no step",
+          "undo_friendly": true
+        }
+      }
+    },
+    {
+      "spec": {
+        "operation": "text",
+        "params": {
+          "text": "Привіт & literal <text>"
+        }
+      },
+      "request": {
+        "nonce": "mcp_1234567890abcdef1234567890abcdef",
+        "operation": "text",
+        "selection": [
+          "r"
+        ],
+        "expected_ids": [
+          "g",
+          "r"
+        ],
+        "expected_fingerprint": "470160d69aeaf8bcfa863bee2270be50d0e91a6262150845520c47101e0b04b5",
+        "text": "Привіт & literal <text>"
+      },
+      "expected": {
+        "result": {
+          "affected_ids": [
+            "r"
+          ],
+          "count": 1,
+          "detail": "text: one Undo step; unchanged calls add no step",
+          "undo_friendly": true
+        }
+      }
+    },
+    {
+      "spec": {
+        "operation": "duplicate",
+        "params": {}
+      },
+      "request": {
+        "nonce": "mcp_1234567890abcdef1234567890abcdef",
+        "operation": "duplicate",
+        "selection": [
+          "r"
+        ],
+        "expected_ids": [
+          "g",
+          "r"
+        ],
+        "expected_fingerprint": "470160d69aeaf8bcfa863bee2270be50d0e91a6262150845520c47101e0b04b5"
+      },
+      "expected": {
+        "result": {
+          "affected_ids": [
+            "r"
+          ],
+          "count": 1,
+          "detail": "duplicate: one Undo step; unchanged calls add no step",
+          "undo_friendly": true
+        }
+      }
+    },
+    {
+      "spec": {
+        "operation": "delete",
+        "params": {}
+      },
+      "request": {
+        "nonce": "mcp_1234567890abcdef1234567890abcdef",
+        "operation": "delete",
+        "selection": [
+          "r"
+        ],
+        "expected_ids": [
+          "g",
+          "r"
+        ],
+        "expected_fingerprint": "470160d69aeaf8bcfa863bee2270be50d0e91a6262150845520c47101e0b04b5"
+      },
+      "expected": {
+        "result": {
+          "affected_ids": [
+            "r"
+          ],
+          "count": 1,
+          "detail": "delete: one Undo step; unchanged calls add no step",
+          "undo_friendly": true
+        }
+      }
+    },
+    {
+      "spec": {
+        "operation": "group",
+        "params": {}
+      },
+      "request": {
+        "nonce": "mcp_1234567890abcdef1234567890abcdef",
+        "operation": "group",
+        "selection": [
+          "r"
+        ],
+        "expected_ids": [
+          "g",
+          "r"
+        ],
+        "expected_fingerprint": "470160d69aeaf8bcfa863bee2270be50d0e91a6262150845520c47101e0b04b5"
+      },
+      "expected": {
+        "result": {
+          "affected_ids": [
+            "r"
+          ],
+          "count": 1,
+          "detail": "group: one Undo step; unchanged calls add no step",
+          "undo_friendly": true
+        }
+      }
+    },
+    {
+      "spec": {
+        "operation": "ungroup",
+        "params": {}
+      },
+      "request": {
+        "nonce": "mcp_1234567890abcdef1234567890abcdef",
+        "operation": "ungroup",
+        "selection": [
+          "r"
+        ],
+        "expected_ids": [
+          "g",
+          "r"
+        ],
+        "expected_fingerprint": "470160d69aeaf8bcfa863bee2270be50d0e91a6262150845520c47101e0b04b5"
+      },
+      "expected": {
+        "result": {
+          "affected_ids": [
+            "r"
+          ],
+          "count": 1,
+          "detail": "ungroup: one Undo step; unchanged calls add no step",
+          "undo_friendly": true
+        }
+      }
+    },
+    {
+      "spec": {
+        "operation": "raise",
+        "params": {}
+      },
+      "request": {
+        "nonce": "mcp_1234567890abcdef1234567890abcdef",
+        "operation": "raise",
+        "selection": [
+          "r"
+        ],
+        "expected_ids": [
+          "g",
+          "r"
+        ],
+        "expected_fingerprint": "470160d69aeaf8bcfa863bee2270be50d0e91a6262150845520c47101e0b04b5"
+      },
+      "expected": {
+        "result": {
+          "affected_ids": [
+            "r"
+          ],
+          "count": 1,
+          "detail": "raise: one Undo step; unchanged calls add no step",
+          "undo_friendly": true
+        }
+      }
+    },
+    {
+      "spec": {
+        "operation": "lower",
+        "params": {}
+      },
+      "request": {
+        "nonce": "mcp_1234567890abcdef1234567890abcdef",
+        "operation": "lower",
+        "selection": [
+          "r"
+        ],
+        "expected_ids": [
+          "g",
+          "r"
+        ],
+        "expected_fingerprint": "470160d69aeaf8bcfa863bee2270be50d0e91a6262150845520c47101e0b04b5"
+      },
+      "expected": {
+        "result": {
+          "affected_ids": [
+            "r"
+          ],
+          "count": 1,
+          "detail": "lower: one Undo step; unchanged calls add no step",
+          "undo_friendly": true
+        }
+      }
+    },
+    {
+      "spec": {
+        "operation": "front",
+        "params": {}
+      },
+      "request": {
+        "nonce": "mcp_1234567890abcdef1234567890abcdef",
+        "operation": "front",
+        "selection": [
+          "r"
+        ],
+        "expected_ids": [
+          "g",
+          "r"
+        ],
+        "expected_fingerprint": "470160d69aeaf8bcfa863bee2270be50d0e91a6262150845520c47101e0b04b5"
+      },
+      "expected": {
+        "result": {
+          "affected_ids": [
+            "r"
+          ],
+          "count": 1,
+          "detail": "front: one Undo step; unchanged calls add no step",
+          "undo_friendly": true
+        }
+      }
+    },
+    {
+      "spec": {
+        "operation": "back",
+        "params": {}
+      },
+      "request": {
+        "nonce": "mcp_1234567890abcdef1234567890abcdef",
+        "operation": "back",
+        "selection": [
+          "r"
+        ],
+        "expected_ids": [
+          "g",
+          "r"
+        ],
+        "expected_fingerprint": "470160d69aeaf8bcfa863bee2270be50d0e91a6262150845520c47101e0b04b5"
+      },
+      "expected": {
+        "result": {
+          "affected_ids": [
+            "r"
+          ],
+          "count": 1,
+          "detail": "back: one Undo step; unchanged calls add no step",
+          "undo_friendly": true
+        }
+      }
+    },
+    {
+      "spec": {
+        "operation": "text",
+        "params": {
+          "text": "refuse"
+        },
+        "refusal": "invalid selection"
+      },
+      "request": {
+        "nonce": "mcp_1234567890abcdef1234567890abcdef",
+        "operation": "text",
+        "selection": [
+          "r"
+        ],
+        "expected_ids": [
+          "g",
+          "r"
+        ],
+        "expected_fingerprint": "470160d69aeaf8bcfa863bee2270be50d0e91a6262150845520c47101e0b04b5",
+        "text": "refuse"
+      },
+      "expected": {
+        "error": "Inkscape refused edit: invalid selection"
+      }
+    },
+    {
+      "spec": {
+        "operation": "text",
+        "params": {
+          "text": "refuse"
+        },
+        "refusal": "private /host/path"
+      },
+      "request": {
+        "nonce": "mcp_1234567890abcdef1234567890abcdef",
+        "operation": "text",
+        "selection": [
+          "r"
+        ],
+        "expected_ids": [
+          "g",
+          "r"
+        ],
+        "expected_fingerprint": "470160d69aeaf8bcfa863bee2270be50d0e91a6262150845520c47101e0b04b5",
+        "text": "refuse"
+      },
+      "expected": {
+        "error": "Inkscape refused edit: invalid document or selection"
+      }
+    }
+  ]
+}

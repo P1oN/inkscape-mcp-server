@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage21",
+  "archive": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage21.tar.gz",
+  "archive_bytes": 46493873,
+  "archive_sha256": "28e90a3c15d55a385702bb8c8df2cd834b6b69290d8ad0f004ac933b289e459d",
+  "binary_sha256": "c30527cf22c33ff3bd9291f7dff324dc5318338e36162b5d5355628ec6c33030",
+  "regular_files": 2451,
+  "regular_bytes": 132768713,
+  "changed_previous_paths": [
+    "libexec/inkscape-mcp/context.so",
+    "libexec/inkscape-mcp/package.json"
+  ],
+  "context_bridge_sha256": "4a09deebce9c96708ddd8c9b69896838c209b355a1feeb14ea7c400edac3b3db",
+  "native_evidence_transferred": false,
+  "scope": "Actual local stage21 build; native acceptance is recorded separately."
+}

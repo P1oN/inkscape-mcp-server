@@ -1,0 +1,91 @@
+{
+  "passed": true,
+  "scope": "reviewed/fault-injected FIFO regression, full Rust checks and fixed actual-package special-file refusals; not full race/foreign proof",
+  "files": [
+    {
+      "path": "migration/current-arguments-stage27-evidence-binding.json",
+      "bytes": 89493,
+      "sha256": "4ec2d85002f905171cde13287809016c8c0d27b9b8c9b641420175603f570958"
+    },
+    {
+      "path": "migration/package-stage27-build-comparison.json",
+      "bytes": 870,
+      "sha256": "9d8e9cba32ba8c9d99e9c6d07e7daea17d85d6480fdb5a940cbc74b575f2b1c9"
+    },
+    {
+      "path": "migration/results/filesystem-review-stage27/clippy.log",
+      "bytes": 163,
+      "sha256": "4c07a4cab6d8c66c174d35d79cbf63c89c48a762ce83635abcfe74f9446e6b43"
+    },
+    {
+      "path": "migration/results/filesystem-review-stage27/docs-AGENT_HANDOFF.md",
+      "bytes": 202426,
+      "sha256": "bb74180aeae24d1fe2d356b003ecb79118cbe03e72c03ce0fb0cba772faf475a"
+    },
+    {
+      "path": "migration/results/filesystem-review-stage27/docs-RUST_COMPLETION_CHECKLIST.md",
+      "bytes": 8130,
+      "sha256": "c4331bb1514b10b694921f0eb06ed079f30a42d834d9e4ab56abea29ad1af3d8"
+    },
+    {
+      "path": "migration/results/filesystem-review-stage27/docs-RUST_MIGRATION_REPORT.md",
+      "bytes": 258536,
+      "sha256": "a604fbbe831d93a14711d88453cdbdbeb6303b48fb7ec56d02102dbb8e27fb39"
+    },
+    {
+      "path": "migration/results/filesystem-review-stage27/fifo-injected-regression.log",
+      "bytes": 971,
+      "sha256": "52fc4bc4196a41a973fbd66199b13a68bbecaec87c7d42ee7d92061386ff512a"
+    },
+    {
+      "path": "migration/results/filesystem-review-stage27/fmt.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/filesystem-review-stage27/injected-fault.json",
+      "bytes": 404,
+      "sha256": "eca8390e326e0ba0453ec31d8518c12ca1503ebbca09c5478f438ad936ecd4e0"
+    },
+    {
+      "path": "migration/results/filesystem-review-stage27/migration-README.md",
+      "bytes": 205771,
+      "sha256": "328055eae1b2bc985e0f5f70aa8a4971a4f5ecdcaf571f7b3f986b50a54253c9"
+    },
+    {
+      "path": "migration/results/filesystem-review-stage27/rust-tests.log",
+      "bytes": 18737,
+      "sha256": "25a77b6d11210e726ce1a8ee157a7603f9a9562eae67648a1b9b6b9216354084"
+    },
+    {
+      "path": "migration/results/filesystem-review-stage27/workspace-injected-fault.rs",
+      "bytes": 36726,
+      "sha256": "18a00de0648afa2b3a39c48004fff542d69a05809eff1d8260e6562e77428a1c"
+    },
+    {
+      "path": "migration/results/filesystem-review-stage27/workspace-reviewed.rs",
+      "bytes": 36745,
+      "sha256": "3fcf442e81bb7cbb86ece1f5778d35672275262c4a445264bde006e063f1c93b"
+    },
+    {
+      "path": "migration/results/special-files-stage27/comparison.json",
+      "bytes": 1058,
+      "sha256": "1ce31a90b675351b51593b40119809d0b58ff55e677674f668397cfbfa7d6aba"
+    },
+    {
+      "path": "migration/results/special-files-stage27/harness-used.py",
+      "bytes": 3518,
+      "sha256": "1d20d1180664f7a61abebf31b62fb8857fc3a40f4b4bfaf1162c2409d3ffaecf"
+    },
+    {
+      "path": "migration/results/special-files-stage27/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/special-files-stage27/server.trace.json",
+      "bytes": 13129,
+      "sha256": "97fb2184808a4b9c66bc3e09e212f44331c404e032acd17d5dfbb6375339be09"
+    }
+  ]
+}

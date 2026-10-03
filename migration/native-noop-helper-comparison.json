@@ -1,0 +1,12 @@
+{
+  "before_output_bytes": 1149,
+  "after_output_bytes": 0,
+  "reply": {
+    "nonce": "mcp_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "ok": true,
+    "ids": [
+      "mcp_4ac107d6a8f24ba1873e3f8758833dd0"
+    ],
+    "fingerprint": "829898682ed2f554fcbf66a1c724967e21b1bc760979a22d86b4004686094cde"
+  }
+}

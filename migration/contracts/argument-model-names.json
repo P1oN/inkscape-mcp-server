@@ -1,0 +1,14 @@
+{
+  "validate_action_chain.steps.*": "ActionStep",
+  "run_action_chain.steps.*": "ActionStep",
+  "render_preview.region": "PreviewRegion",
+  "compare_region.region": "PreviewRegion",
+  "export_batch.specs.*": "ExportSpec",
+  "export_set.specs.*": "ExportSpec",
+  "find_objects.bbox": "BBox",
+  "quality_report.editability": "EditabilityOptions",
+  "repeat_objects.variation": "RepeatVariation",
+  "repeat_objects.anchor": "Point",
+  "transform_objects.selector": "TransformSelector",
+  "transform_objects.selector.bbox": "BBox"
+}

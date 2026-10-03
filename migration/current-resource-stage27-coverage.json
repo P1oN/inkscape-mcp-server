@@ -1,0 +1,288 @@
+{
+  "passed": true,
+  "binary_sha256": "62a75763d517af691c0cc1c9026d8963dc9bb33394d9dfdd76aa8fa9d5819f18",
+  "resources": {
+    "documents_index": {
+      "uri": "inkscape://documents",
+      "requests": 28,
+      "successes": 28,
+      "errors": 0,
+      "raw_files": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/applied-0.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/applied-1.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/applied-later-0.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/applied-later-1.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/audit-corrupt-0.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/audit-corrupt-1.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/discarded-0.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/discarded-1.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/head-written-0.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/head-written-1.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/identity-mismatch-0.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/identity-mismatch-1.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/journal-corrupt-0.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/journal-corrupt-1.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/journal-link-0.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/journal-link-1.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/legacy-no-journal-0.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/legacy-no-journal-1.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/multiple-0.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/multiple-1.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/prepared-0.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/prepared-1.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/snapshot-corrupt-0.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/snapshot-corrupt-1.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/unrelated-0.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/recovery/raw/unrelated-1.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/read/raw/rust-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/read/raw/rust-raw.json"
+      ]
+    },
+    "live_session": {
+      "uri": "inkscape://live/session",
+      "requests": 19,
+      "successes": 19,
+      "errors": 0,
+      "raw_files": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_connect/raw/rust.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_status/raw/rust-False-False-False.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_status/raw/rust-False-False-True.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_status/raw/rust-False-True-False.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_status/raw/rust-False-True-True.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_status/raw/rust-True-False-False.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_status/raw/rust-True-False-True.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_status/raw/rust-True-True-False.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_status/raw/rust-True-True-True.trace.json"
+      ]
+    },
+    "live_selection": {
+      "uri": "inkscape://live/selection",
+      "requests": 5,
+      "successes": 5,
+      "errors": 0,
+      "raw_files": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_connect/raw/rust.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_managed/raw/rust-False.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_managed/raw/rust-True.trace.json"
+      ]
+    },
+    "live_view": {
+      "uri": "inkscape://live/view",
+      "requests": 5,
+      "successes": 5,
+      "errors": 0,
+      "raw_files": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_connect/raw/rust.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_managed/raw/rust-False.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_managed/raw/rust-True.trace.json"
+      ]
+    },
+    "live_events": {
+      "uri": "inkscape://live/events",
+      "requests": 19,
+      "successes": 18,
+      "errors": 1,
+      "raw_files": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_events/raw/rust.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_managed/raw/rust-False.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_managed/raw/rust-True.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_render/raw/rust.trace.json"
+      ]
+    },
+    "live_operations": {
+      "uri": "inkscape://live/operations",
+      "requests": 27,
+      "successes": 27,
+      "errors": 0,
+      "raw_files": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_loop/raw/rust.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_managed/raw/rust-False.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_managed/raw/rust-True.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_mutation/raw/rust.trace.json"
+      ]
+    },
+    "prompts_index": {
+      "uri": "inkscape://prompts",
+      "requests": 4,
+      "successes": 4,
+      "errors": 0,
+      "raw_files": [
+        "migration/results/prompt-stage27/rust-core-live-false-raw.json",
+        "migration/results/prompt-stage27/rust-core-live-true-raw.json",
+        "migration/results/prompt-stage27/rust-full-live-false-raw.json",
+        "migration/results/prompt-stage27/rust-full-live-true-raw.json"
+      ]
+    },
+    "runtime_capabilities": {
+      "uri": "inkscape://runtime/capabilities",
+      "requests": 43,
+      "successes": 43,
+      "errors": 0,
+      "raw_files": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-absent-True-True-full-full-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-False-False-core-full-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-False-False-core-short-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-False-False-full-full-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-False-False-full-short-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-False-True-core-full-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-False-True-core-short-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-False-True-full-full-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-False-True-full-short-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-True-False-core-full-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-True-False-core-short-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-True-False-full-full-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-True-False-full-short-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-True-True-core-full-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-True-True-core-short-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-True-True-full-full-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-controlled-True-True-full-short-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/capability/raw/rust-real-True-True-full-full-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_managed/raw/rust-False.trace.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-live-synthetic-stage27/live_managed/raw/rust-True.trace.json"
+      ]
+    },
+    "runtime_intents": {
+      "uri": "inkscape://runtime/intents",
+      "requests": 8,
+      "successes": 8,
+      "errors": 0,
+      "raw_files": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/intent/raw/rust-core-live-false-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/intent/raw/rust-core-live-true-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/intent/raw/rust-full-live-false-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/intent/raw/rust-full-live-true-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/intent/raw/rust-core-live-false-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/intent/raw/rust-core-live-true-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/intent/raw/rust-full-live-false-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/intent/raw/rust-full-live-true-raw.json"
+      ]
+    },
+    "workspace": {
+      "uri": "inkscape://workspace",
+      "requests": 2,
+      "successes": 2,
+      "errors": 0,
+      "raw_files": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/read/raw/rust-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/read/raw/rust-raw.json"
+      ]
+    },
+    "document_summary": {
+      "uri": "inkscape://document/{doc_id}/summary",
+      "requests": 14,
+      "successes": 12,
+      "errors": 2,
+      "raw_files": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/read/raw/rust-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/read/raw/rust-raw.json"
+      ]
+    },
+    "document_tree": {
+      "uri": "inkscape://document/{doc_id}/tree",
+      "requests": 14,
+      "successes": 12,
+      "errors": 2,
+      "raw_files": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/read/raw/rust-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/read/raw/rust-raw.json"
+      ]
+    },
+    "document_layers": {
+      "uri": "inkscape://document/{doc_id}/layers",
+      "requests": 12,
+      "successes": 12,
+      "errors": 0,
+      "raw_files": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/read/raw/rust-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/read/raw/rust-raw.json"
+      ]
+    },
+    "document_objects": {
+      "uri": "inkscape://document/{doc_id}/objects",
+      "requests": 12,
+      "successes": 12,
+      "errors": 0,
+      "raw_files": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/read/raw/rust-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/read/raw/rust-raw.json"
+      ]
+    },
+    "document_styles": {
+      "uri": "inkscape://document/{doc_id}/styles",
+      "requests": 12,
+      "successes": 12,
+      "errors": 0,
+      "raw_files": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/read/raw/rust-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/read/raw/rust-raw.json"
+      ]
+    },
+    "document_fonts": {
+      "uri": "inkscape://document/{doc_id}/fonts",
+      "requests": 12,
+      "successes": 12,
+      "errors": 0,
+      "raw_files": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/read/raw/rust-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/read/raw/rust-raw.json"
+      ]
+    },
+    "document_assets": {
+      "uri": "inkscape://document/{doc_id}/assets",
+      "requests": 12,
+      "successes": 12,
+      "errors": 0,
+      "raw_files": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/read/raw/rust-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/read/raw/rust-raw.json"
+      ]
+    },
+    "artifact": {
+      "uri": "inkscape://artifact/{root_key}/{token}",
+      "requests": 86,
+      "successes": 84,
+      "errors": 2,
+      "raw_files": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/save/raw/rust-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-family-stage27-v2/set/raw/rust-raw.json.gz",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/batch/raw/rust-raw.json.gz",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/profile/raw/rust-raw.json.gz",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/read/raw/rust-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/render/raw/rust-raw.json.gz",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/batch/raw/rust-raw.json.gz",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/profile/raw/rust-raw.json.gz",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/read/raw/rust-raw.json",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/render/raw/rust-raw.json.gz",
+        "migration/results/noop-fix-stage26-release-edits/rust-raw.json",
+        "migration/results/package-stage27-cold/packaged-server.trace.json",
+        "migration/results/package-stage27-warm/packaged-server.trace.json"
+      ]
+    }
+  },
+  "resources_with_success_reply": 18,
+  "unmatched_reads": [
+    {
+      "uri": "inkscape://document/unknown/refs",
+      "raw": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/read/raw/rust-raw.json",
+      "error": true
+    },
+    {
+      "uri": "inkscape://unknown",
+      "raw": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-package-stage27-v2/read/raw/rust-raw.json",
+      "error": true
+    },
+    {
+      "uri": "inkscape://document/unknown/refs",
+      "raw": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/read/raw/rust-raw.json",
+      "error": true
+    },
+    {
+      "uri": "inkscape://unknown",
+      "raw": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/current-headless-release-stage27-v2/read/raw/rust-raw.json",
+      "error": true
+    }
+  ],
+  "source_coverage": "migration/current-live-stage27-coverage.json",
+  "scope": "Recorded named current traces only; no exhaustive MIME/error/binding/native proof",
+  "full_resource_compatibility_proven": false
+}

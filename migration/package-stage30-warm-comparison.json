@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "installed_from_archive": true,
+  "engine_mode": "shell",
+  "relocated_files": 2453,
+  "minimal_PATH": "empty",
+  "private_python_imports": true,
+  "helper_CLIs": 2,
+  "private_bus_exchange": true,
+  "stdio_surface": [
+    110,
+    7,
+    18
+  ],
+  "real_CLI_blue_pixels": true,
+  "real_CLI_export_resource": true,
+  "atomic_batch_and_rollback": true,
+  "repeat_fragment_batch_and_restore": true,
+  "approval_refusal": true,
+  "no_op_without_audit": true,
+  "no_op_without_transient_filesystem_writes": true,
+  "source_original_preserved": true,
+  "native_GUI_acceptance": false
+}

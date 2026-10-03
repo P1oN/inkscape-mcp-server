@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-02",
+  "reference_head": "c50a9248b3bca9177103373ce66d6dd1307bedd3",
+  "branch": "codex/rust-migration",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)",
+  "inkscape": "Inkscape 1.4.3 (0d15f75, 2025-12-25)",
+  "command": "LIBXML2=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/libxml2.tbd /Users/bm/.cargo/bin/cargo build --release --locked --manifest-path rust/Cargo.toml",
+  "profile": "release; thin LTO; stripped",
+  "binary": "rust/target/release/inkscape-mcp-rust",
+  "binary_sha256": "5aad582cd1a9bb1c8d254ff660404641f0bc948a4910b921af739df93fd3ee68",
+  "binary_bytes": 10895008,
+  "dependencies": "rust/target/release/inkscape-mcp-rust:\n\t/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 5027.0.69)\n\t/usr/lib/libxml2.2.dylib (compatibility version 10.0.0, current version 10.9.0)\n\t/usr/lib/libiconv.2.dylib (compatibility version 7.0.0, current version 7.0.0)\n\t/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1359.0.0)",
+  "limits": "Partial local developer build; not an installable package or live acceptance."
+}

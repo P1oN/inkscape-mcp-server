@@ -1,0 +1,290 @@
+{
+  "scenarios": 46,
+  "exact_parity": false,
+  "differences": [
+    {
+      "path": "/('absent', (True, True, 'full', 'full'))/fresh/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('absent', (True, True, 'full', 'full'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, False, 'core', 'full'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, False, 'core', 'short'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, False, 'full', 'full'))/fresh/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, False, 'full', 'full'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, False, 'full', 'short'))/fresh/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, False, 'full', 'short'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, True, 'core', 'full'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, True, 'core', 'short'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, True, 'full', 'full'))/fresh/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, True, 'full', 'full'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, True, 'full', 'short'))/fresh/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, True, 'full', 'short'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, False, 'core', 'full'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, False, 'core', 'short'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, False, 'full', 'full'))/fresh/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, False, 'full', 'full'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, False, 'full', 'short'))/fresh/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, False, 'full', 'short'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, True, 'core', 'full'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, True, 'core', 'short'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, True, 'full', 'full'))/fresh/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, True, 'full', 'full'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, True, 'full', 'short'))/fresh/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, True, 'full', 'short'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('real', (True, True, 'full', 'full'))/fresh/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('real', (True, True, 'full', 'full'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    }
+  ],
+  "intentional_runtime_identity_differences": [
+    {
+      "path": "/('absent', (True, True, 'full', 'full'))/fresh/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('absent', (True, True, 'full', 'full'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, False, 'core', 'full'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, False, 'core', 'short'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, False, 'full', 'full'))/fresh/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, False, 'full', 'full'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, False, 'full', 'short'))/fresh/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, False, 'full', 'short'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, True, 'core', 'full'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, True, 'core', 'short'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, True, 'full', 'full'))/fresh/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, True, 'full', 'full'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, True, 'full', 'short'))/fresh/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (False, True, 'full', 'short'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, False, 'core', 'full'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, False, 'core', 'short'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, False, 'full', 'full'))/fresh/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, False, 'full', 'full'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, False, 'full', 'short'))/fresh/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, False, 'full', 'short'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, True, 'core', 'full'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, True, 'core', 'short'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, True, 'full', 'full'))/fresh/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, True, 'full', 'full'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, True, 'full', 'short'))/fresh/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('controlled', (True, True, 'full', 'short'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('real', (True, True, 'full', 'full'))/fresh/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    },
+    {
+      "path": "/('real', (True, True, 'full', 'full'))/initial/python_version",
+      "expected": "3.12.14",
+      "actual": "not applicable (native Rust MCP)"
+    }
+  ],
+  "unexpected_differences": [],
+  "passed": true
+}

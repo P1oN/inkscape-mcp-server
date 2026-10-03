@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "native_acceptance_complete": false,
+  "package": "stage36",
+  "owned_root": "/private/tmp/imcp-native-jmmavsvf",
+  "reason": "Native bridge refused startup: no primary monitor. No bypass; terminal failed supervisor inspected, no surviving owned GUI. User asked whether Mac is unlocked with active screen.",
+  "incidental_UI_launch": "cua.getApp by display name started ordinary Inkscape PID8571; left untouched, no user documents edited.",
+  "remaining_work": "Native Undo/Redo/guards/reconnect acceptance awaits available monitor; independent work continues."
+}

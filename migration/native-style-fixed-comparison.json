@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "package": "stage5 with owned-profile helper overlay; new archive not yet built",
+  "repeated_style_native_noop": true,
+  "one_Undo_removes_changed_style_after_repeated_call": true,
+  "owned_profile_only": true,
+  "helper_sha256": "a65ed4c8647c3c832323b0f09ec5dcc7fc92e1b9def09e9d75405c9bb13a6c2b",
+  "original_stage5_failure_retained": "migration/native-style-comparison.json"
+}

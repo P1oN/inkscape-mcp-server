@@ -1,0 +1,43 @@
+{
+  "model_paths": 12,
+  "enum_paths": {
+    "live_session_step.action": "StepAction"
+  },
+  "tools": 110,
+  "scope": "Direct/nullable BaseModel paths, including nested/list paths; multi-model unions omitted.",
+  "model_names_sha256": "0ace5a735a964deed61e02fe2f2eddc9090d15de93523446f1301c44c0c789e1",
+  "generator_sha256": "f93308452599bc322edaa85a48562e7ad7e1994d0d5ebb1d626e16bcdc2d6c57",
+  "source_hashes": {
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/actions/chains.py": "7af32171fd89d9747a7350fcfe8b8094fa635f0bfcb6e15c89a20774dc9c24d5",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/document/inspect.py": "d61e5788327af24856c265af4c790d2ea25e297d0cc6b002ae1b8a4ddb5b4a8b",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/edit/repeat.py": "44bc14b8b03335a74b3cdd58460c3c43ee4b8d8e1d6d9335c411294efbd5d3c2",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/editability.py": "cacbd4b64d02afa1975bf58adf58ce7f32189760e121e7679b6c4d148986846f",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/live/loop.py": "e44ee3f1948d4e70dccaadb3d749466d1ed28ea5ea48f5daefa19a56d5c3cb61",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/render/batch.py": "e68fd625ae83aa7ae5da74ad49c35a2c6302ce83a154c48fbc00fbc7370641a2",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/render/detail.py": "77a6cf7bdbde5da5342db30afbbb32ab39bf65b6631d84e62fe653721b8e77d1",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/actions.py": "0d83f90ffc8103d36c49286327b0e815d7c73b3c1c52f6c4c2c573f5c2112887",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/batch.py": "98eec05de587a1b44647c7ffaefcbcdfa322908aa5465029777a2afebd4b32bd",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/compose.py": "db21f5655120d6b3800f23e7fb9ae2a46a3f349ed410029beee9197522762793",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/create.py": "d38734d8a25f8692a2c33dca359691e2c4d78a2e8a06f0c60d604b09c4792f99",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/discover.py": "645a5cc50d6133e79254f4d5f52fd6eb5d5e837bbf102149abc46a6f308a53dc",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/document.py": "c4db442c2ab140f60e28d02762bea3cd4cc02bd1ce906ef73c7f7c9701375188",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/dom.py": "e59a8abf32d740c90d0a11a7eebb59c933e70a106ad4dcfa2411c3cb1055ed64",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/export.py": "082be85aae08e57f04fffe62d044c092e224e0c0a42ad21c54074d77177b7999",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/export_batch.py": "233265fc963c0fd29ee7cbab99823a8ae3703223568e0609c9c6c6779ce7fbca",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/find.py": "65e5afb165380c515892c44e132c56f5eac9526612d52e3d6cda3fbca9c479ac",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/live.py": "c0c8bcb032c7da310ae27812282750663d6a02e266439e35475d6f1650f6c7f5",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/live_discovery.py": "47d1686d786f2d1c83a3a7dce1e04ecc31d3b6dfcd450a8f67a70fc7fe4d8b73",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/optimize.py": "fe0167e131b409e89268fb7579b9b3ac55527f98d483adfc0111e16823db945a",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/paths.py": "c992baa3b330c72145c347b6cc5c0a3e976c31ccacefc6ed4212d054a0bce195",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/profiles.py": "68f1f6e73e3c388e3451269e72221d8440ae31ec24186a46899f38f5913f3a09",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/quality.py": "75c35cef3e6d4c406a565325b0ce57429f932a9fb55713109925cde9fb9d3beb",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/save.py": "c1755ecbf4516ff2bc88dc3c4a9b43fe328490babb7a719c3831c1d97154fc85",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/snapshots.py": "6f866334793aef0504c43947a3f749ef424acdaf458ae72580fbf8039cbabfb6",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/style.py": "34581274b61f656678c63c8c705555ac14d6615bff008077f7858d58f3015165",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/system.py": "7f6a1262dc5405f3e0a6206473c1bbf73df14530c34f8626cf5ee45e6843ce46",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/text_object.py": "4adf6b9b461e93d01cb28904caa23dcdcadf10ad50c20a62cc5ffc01afcfb5e3",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/transform.py": "199a635140b05765086ef6f37c65b2ba8611ec3db596593f78be0a95a613d57f",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/transform_objects.py": "3186ad66cae365c56dc8a2acb1be0014ccfb59b73dd687e4be2b4940ed9a626d",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/src/inkscape_mcp/tools/validate.py": "025dbb473252c766daca00f658480522fb99cdaf6e58d196e41b2e22390bec00"
+  }
+}

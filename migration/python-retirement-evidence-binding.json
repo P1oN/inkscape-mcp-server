@@ -1,0 +1,301 @@
+{
+  "passed": true,
+  "scope": "User-authorized Python MCP retirement, retained runtime relocation, Rust-only tooling/docs and stage30 package checks; historical/native evidence not transferred",
+  "files": [
+    {
+      "path": "migration/results/python-retirement-review/pyproject.toml",
+      "bytes": 775,
+      "sha256": "a82d80db8b9137f855c8f6fe84744571f04bc57170b087164ddbf34a151c88dd"
+    },
+    {
+      "path": "migration/results/python-retirement-review/rust-tests.log",
+      "bytes": 18876,
+      "sha256": "e460474068d7846b4c866e96c7c2dc2444b00b46da73dfdb32103e0c225d60f8"
+    },
+    {
+      "path": "migration/results/python-retirement-review/README.md",
+      "bytes": 2800,
+      "sha256": "6549d569219c5c9a5a869bcf39607664255cd95f28096d4ee67ddad2935f3a6f"
+    },
+    {
+      "path": "migration/results/python-retirement-review/initial-path-fix-tests.log",
+      "bytes": 18902,
+      "sha256": "7027100e7a607e4ba687eb3163d897e875d92f960dc333361ca5a903a42889d2"
+    },
+    {
+      "path": "migration/results/python-retirement-review/gen_llms_txt.py",
+      "bytes": 3272,
+      "sha256": "fa21b30d7242e66ab85aa4aaf85e9b9a4ff96ebe746599a15e2f57a14829417b"
+    },
+    {
+      "path": "migration/results/python-retirement-review/CONTRIBUTING.md",
+      "bytes": 2318,
+      "sha256": "189c72eb3f71faed7cbad863710d41f108360d68309afe4637ed20529bad0668"
+    },
+    {
+      "path": "migration/results/python-retirement-review/AGENT_HANDOFF.md",
+      "bytes": 207203,
+      "sha256": "57f7e8a7c8fb060ef4b01c19f4c306ac7a646e7149a1e262b140eb9a6f35996d"
+    },
+    {
+      "path": "migration/results/python-retirement-review/AGENTS.md",
+      "bytes": 2180,
+      "sha256": "166f4d13d83747364a69d1586b3b17beb08872b45d0632927c3f3ad9b149c16c"
+    },
+    {
+      "path": "migration/results/python-retirement-review/RUST_MIGRATION_REPORT.md",
+      "bytes": 262575,
+      "sha256": "3be7087bd4c282110f54a56372c3f505b078bcba06c83132e6fe096162a7de23"
+    },
+    {
+      "path": "migration/results/python-retirement-review/snapshot/llms.txt",
+      "bytes": 11767,
+      "sha256": "9f9a4ed7f2a611a3a8201eca50b3cdfc262765307035a917d9931c1f3e5b59a7"
+    },
+    {
+      "path": "migration/results/python-retirement-review/snapshot/pyproject.toml",
+      "bytes": 775,
+      "sha256": "a82d80db8b9137f855c8f6fe84744571f04bc57170b087164ddbf34a151c88dd"
+    },
+    {
+      "path": "migration/results/python-retirement-review/snapshot/README.md",
+      "bytes": 2800,
+      "sha256": "6549d569219c5c9a5a869bcf39607664255cd95f28096d4ee67ddad2935f3a6f"
+    },
+    {
+      "path": "migration/results/python-retirement-review/snapshot/llms-full.txt",
+      "bytes": 796521,
+      "sha256": "acffb9c92c5072ca9a66bb2e0dd703968edda2905b378373b51c3bbad2c93bda"
+    },
+    {
+      "path": "migration/results/python-retirement-review/snapshot/CONTRIBUTING.md",
+      "bytes": 2318,
+      "sha256": "189c72eb3f71faed7cbad863710d41f108360d68309afe4637ed20529bad0668"
+    },
+    {
+      "path": "migration/results/python-retirement-review/snapshot/AGENTS.md",
+      "bytes": 2180,
+      "sha256": "166f4d13d83747364a69d1586b3b17beb08872b45d0632927c3f3ad9b149c16c"
+    },
+    {
+      "path": "migration/results/python-retirement-review/snapshot/docs/RUST_NEXT_PLAN.md",
+      "bytes": 6643,
+      "sha256": "9e57909f37758c4afe67b87682727d9b50639f2bdc9b6f19e8b7538339aab100"
+    },
+    {
+      "path": "migration/results/python-retirement-review/snapshot/docs/RUST_PACKAGING.md",
+      "bytes": 9833,
+      "sha256": "ac44c31dca6413140edaa6ca6ff25a3cae194b57b4ac065b687a68f325cabc57"
+    },
+    {
+      "path": "migration/results/python-retirement-review/snapshot/docs/AGENT_HANDOFF.md",
+      "bytes": 207203,
+      "sha256": "57f7e8a7c8fb060ef4b01c19f4c306ac7a646e7149a1e262b140eb9a6f35996d"
+    },
+    {
+      "path": "migration/results/python-retirement-review/snapshot/docs/RUST_MIGRATION_REPORT.md",
+      "bytes": 262575,
+      "sha256": "3be7087bd4c282110f54a56372c3f505b078bcba06c83132e6fe096162a7de23"
+    },
+    {
+      "path": "migration/results/python-retirement-review/snapshot/.github/workflows/rust-migration.yml",
+      "bytes": 7416,
+      "sha256": "74fad83cc590c6c39f33f1fc3c2e1cf70d145b6b9c3db086d1b2eb01448d2967"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/runtime/insert_payload.py",
+      "bytes": 4581,
+      "sha256": "ebed54c958266f2756d3f4250041bc1b8f4517ba0f700768244c5d4ec6489ff1"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/runtime/edit_errors.py",
+      "bytes": 1406,
+      "sha256": "ad3a63ad1cac09847005a5c3b0d23e8f010a653009eb51cb58df6b3b833eef97"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/scripts/migration_notices_acceptance.py",
+      "bytes": 4350,
+      "sha256": "ceaad26c43b21ae9894b3350e732e7e971c37a647056bb663cfe82752629bc43"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/scripts/migration_native_structure.py",
+      "bytes": 6462,
+      "sha256": "84ed2d16aeb6db4581563ddc416f99e0d995ab498d231d4891f92a7b9848c7f0"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/scripts/migration_native_capture.py",
+      "bytes": 2913,
+      "sha256": "b2db7f6d09f86afa6a0443a632832edee53049d2b63e84442a0166c3c8225fc8"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/scripts/migration_doctor_acceptance.py",
+      "bytes": 5694,
+      "sha256": "96a310342d4fe976e78ea478cf7afecdc6a5632c21e0bdcc9acbc2df52e68a4a"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/scripts/migration_helper_protocol_probe.py",
+      "bytes": 11457,
+      "sha256": "5a5a7a7b430ed8a33b388ae05fd7f24acc09d51bf8e67121f9820b1beb055404"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/scripts/migration_posix_builder_acceptance.py",
+      "bytes": 5727,
+      "sha256": "6ad2c1b777ef110eb182f1d7f285ee8d82ceb565b4b4f1b4f657a64d24b9de11"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/scripts/migration_build_macos_package.py",
+      "bytes": 14845,
+      "sha256": "cd0cd55e5710ee76b675407bf23261f39d30a79f3002f85f589d67554f385743"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/scripts/gen_llms_txt.py",
+      "bytes": 3272,
+      "sha256": "fa21b30d7242e66ab85aa4aaf85e9b9a4ff96ebe746599a15e2f57a14829417b"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/scripts/migration_verify_native.py",
+      "bytes": 9829,
+      "sha256": "b8fc4ad11e39c33cd0359049d716f2344e368ef499f6017facdc3f3cba885402"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/scripts/migration_special_file_acceptance.py",
+      "bytes": 3489,
+      "sha256": "947dd6e98cee1b8e0284cf3439d3e2835ed5a0a2fbaf08294c3d570977b3e609"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/scripts/migration_probe.py",
+      "bytes": 12384,
+      "sha256": "1554354a911fa142f3dd4a1c4b12607eeac285f1a5f012d8dfbf7f2b1196bad3"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/scripts/migration_package_acceptance.py",
+      "bytes": 17636,
+      "sha256": "f56fe4b18782f282b36138fe9f87fdd2d06b1ace43a307b512048fcc1eaf4ab9"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/scripts/migration_native_mutation.py",
+      "bytes": 5416,
+      "sha256": "4da2e26cac26cba821160d54119c7e7a20da7f9f7e7e985129914dde5834f508"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/scripts/migration_package_notices.py",
+      "bytes": 9186,
+      "sha256": "38ced4da54ab874a3d99a3bb98ca0f8a84cf43823b3739e8106e1e6e950dcb15"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/scripts/migration_launcher_acceptance.py",
+      "bytes": 6562,
+      "sha256": "66e40ebf6f9394e1645f56cd08e0cdf96733cd19eb56b84270892a45476d4532"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/scripts/migration_build_posix_package.py",
+      "bytes": 550,
+      "sha256": "0ff2f60e765c411e1d2ee3c0c358910e942031bdce1ec10142c0fdf5fbba2e64"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/scripts/migration_verify_native_transform.py",
+      "bytes": 6173,
+      "sha256": "737ba5508f0a18181cd378848da9a00817cec2d789404df0d1a90f2a06379be5"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/scripts/migration_native_gui_acceptance.py",
+      "bytes": 5473,
+      "sha256": "3bd457383b26f1ee57dd9b1c77244e31afe8ad229f1922e724ee970c4b1a2295"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/scripts/migration_compare.py",
+      "bytes": 3195,
+      "sha256": "b46146173e40504f9532df4356bafb944de68bcd40d8cac5f666ea3c02a3171d"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/scripts/migration_verify_native_structure.py",
+      "bytes": 7800,
+      "sha256": "273287c3482f9a4caea94902e08ef4790cbb0d2256dd0cd8e619f9b820bd29fb"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/rust/package/supervise.py",
+      "bytes": 10153,
+      "sha256": "9e83e7b3b3d6bd5d248b823e2d78a87090e2c7ad23acbe91e90f19d33b16f831"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/rust/src/live_dbus.rs",
+      "bytes": 25790,
+      "sha256": "b9c9aa846cf07bb9d1e783c51b59b508227f01dcfb662c466c3554d6c0044a7f"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/rust/src/live_managed.rs",
+      "bytes": 56265,
+      "sha256": "e2c43f48462b87e02c7197a113b04a160397de788a5571962b05f2f4c6e265a9"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/rust/src/live_install.rs",
+      "bytes": 4308,
+      "sha256": "b4f8f4bb6979a0efb1f4146e8925ca44b73550b0f67a2de2979fa8998cce71ed"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/runtime/tests/conftest.py",
+      "bytes": 98,
+      "sha256": "8659c4f6af34a32f61ecc29774fd873cf628e7e0828ce9ff04773418357a6cc6"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/runtime/tests/test_managed_insert_helper.py",
+      "bytes": 5147,
+      "sha256": "e2d86e48a612412ff22f2912707f8cff16b60f25f4145e83e3e90e26aba12450"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/runtime/helper_extension/inkscape_mcp_insert.py",
+      "bytes": 3934,
+      "sha256": "30ce11b57011990fa726d2d86dc3c9718cdc48ec1ee805086927a5ac68dc5bf8"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/runtime/helper_extension/inkscape_mcp_edit.py",
+      "bytes": 9913,
+      "sha256": "95ece984154bbb5aa12477a0c5678773b3946d10bb160e97f3a4fce5fe0d9a49"
+    },
+    {
+      "path": "migration/results/python-retirement-review/source/runtime/helper_extension/inkscape_mcp_live.py",
+      "bytes": 25528,
+      "sha256": "ebed9ca248c8a00ed12ac5b08ff801f7474465f1df57a5cf678af78d3674305b"
+    },
+    {
+      "path": "migration/python-retirement.json",
+      "bytes": 5265,
+      "sha256": "c628379a9e96ee4b58ac507e72b2230e84fd5c1ca7c2ca7480378b31ac98b8bd"
+    },
+    {
+      "path": "migration/package-stage30-build-comparison.json",
+      "bytes": 1012,
+      "sha256": "70b561693262f1f4525e04b9332cfeec8ddc2194e8308e8279b6492eed7993fb"
+    },
+    {
+      "path": "migration/package-stage30-cold-comparison.json",
+      "bytes": 606,
+      "sha256": "bb36e51771d0a3c112652c1d6397c1de33bc675c7b7642cad87b7d027c56481b"
+    },
+    {
+      "path": "migration/package-stage30-warm-comparison.json",
+      "bytes": 603,
+      "sha256": "c173e8eec0ebf5821ae893414e23790d5bb8d7ac706a983f968d6deb3f509394"
+    },
+    {
+      "path": "migration/doctor-stage30-comparison.json",
+      "bytes": 236,
+      "sha256": "fc696f24d4bd246214b6cfb4ae93a0cdf025833fbb24b4051aa51d4c81ead06d"
+    },
+    {
+      "path": "migration/notices-stage30-comparison.json",
+      "bytes": 25362,
+      "sha256": "7bcf2133594e444df5792047c0e08cc2796b3e8acf6ececd4cc1d794a254c8dc"
+    },
+    {
+      "path": "migration/discovery-stage30-comparison.json",
+      "bytes": 1897,
+      "sha256": "4d557f3264600ea2cadd6e00325aab0d095c8f8411733b3fad8f5d1c04f1393d"
+    },
+    {
+      "path": "migration/results/launcher-stage30/comparison.json",
+      "bytes": 1216,
+      "sha256": "29137182678de19ee3eacbeaeff1a2b946eeb3300948221fe65d982cbcd78ffa"
+    }
+  ]
+}

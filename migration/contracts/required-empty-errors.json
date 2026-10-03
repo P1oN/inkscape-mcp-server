@@ -1,0 +1,1046 @@
+[
+  {
+    "name": "stat_artifact",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[stat_artifact]\npath\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "stat_artifacts",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[stat_artifacts]\npaths\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "validate_action_chain",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[validate_action_chain]\nsteps\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "run_action_chain",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[run_action_chain]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsteps\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "run_raw_action",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[run_raw_action]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\naction\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "apply_edits",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[apply_edits]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nedits\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "set_document_svg",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[set_document_svg]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsvg\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "insert_svg_fragment",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[insert_svg_fragment]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsvg\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "compose_grid",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[compose_grid]\nrows\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncols\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncell\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "place_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[place_document]\ntarget_doc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nx\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ny\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "replace_svg_fragment",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[replace_svg_fragment]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsvg\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "create_rect",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_rect]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nx\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ny\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nwidth\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nheight\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "create_circle",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[create_circle]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncx\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncy\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nr\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "create_ellipse",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_ellipse]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncx\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncy\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nrx\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nry\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "create_line",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_line]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nx1\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ny1\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nx2\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ny2\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "create_polygon",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_polygon]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\npoints\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "create_polyline",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_polyline]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\npoints\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "create_path",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_path]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nd\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "create_text",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[create_text]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nx\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ny\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ntext\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "add_linear_gradient",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[add_linear_gradient]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nstops\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "add_radial_gradient",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[add_radial_gradient]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nstops\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "create_group",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[create_group]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "group_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[group_objects]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "reparent_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[reparent_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nnew_parent_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "create_use",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_use]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nhref_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "set_group_mode",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[set_group_mode]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nmode\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "how_do_i",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[how_do_i]\ngoal\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "open_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[open_document]\npath\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "create_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_document]\nwidth\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nheight\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "reload_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[reload_document]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "inspect_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[inspect_document]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "delete_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[delete_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "render_preview",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[render_preview]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "capture_frame",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[capture_frame]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "list_frames",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[list_frames]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "export_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[export_document]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nformat\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "export_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[export_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "compare_region",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[compare_region]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsnapshot_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nregion\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "export_batch",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[export_batch]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nspecs\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "export_set",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[export_set]\ndoc_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nspecs\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "find_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[find_objects]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "live_select_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[live_select_document]\nwindow_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndocument_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "live_set_viewport",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_set_viewport]\nmode\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "live_sync_to_workspace",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_sync_to_workspace]\ndest_path\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "live_insert_svg",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_insert_svg]\nsvg_fragment\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "live_set_selected_text",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_set_selected_text]\ntext\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "live_edit_selection",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_edit_selection]\noperation\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "live_diff_view",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[live_diff_view]\noperation_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "live_preview_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[live_preview_object]\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nexpected_fingerprint\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "svg_web_optimize",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[svg_web_optimize]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "optimize_set",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[optimize_set]\ndoc_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "simplify_path",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[simplify_path]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "boolean_union",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[boolean_union]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "boolean_difference",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[boolean_difference]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "combine_paths",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[combine_paths]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "break_apart",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[break_apart]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "stroke_to_path",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[stroke_to_path]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "cleanup_paths",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[cleanup_paths]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "export_web_profile",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[export_web_profile]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "create_icon_set",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[create_icon_set]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "export_print_profile",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[export_print_profile]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "quality_report",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[quality_report]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "quality_report_set",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[quality_report_set]\ndoc_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "save_document_as",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[save_document_as]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndest_path\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "create_snapshot",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[create_snapshot]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "list_snapshots",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[list_snapshots]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "restore_snapshot",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[restore_snapshot]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsnapshot_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "prune_snapshots",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[prune_snapshots]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "set_fill",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[set_fill]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncolor\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "set_stroke",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[set_stroke]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "set_opacity",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[set_opacity]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nopacity\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "replace_color",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[replace_color]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nfrom_color\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nto_color\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "apply_palette",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[apply_palette]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nmapping\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "replace_text",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[replace_text]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ntext\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "set_font",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[set_font]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "duplicate_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[duplicate_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "rename_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[rename_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "move_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[move_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndx\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndy\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "scale_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[scale_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsx\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "rotate_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[rotate_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndegrees\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "resize_canvas",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[resize_canvas]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nwidth\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nheight\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "normalize_viewbox",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[normalize_viewbox]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "fit_to_content",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[fit_to_content]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "tile",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "6 validation errors for call[tile]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nrows\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncols\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndx\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndy\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "repeat_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[repeat_objects]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nplacement\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ngroup_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "transform_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[transform_objects]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nselector\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\noperation\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  },
+  {
+    "name": "validate_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[validate_document]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    }
+  }
+]

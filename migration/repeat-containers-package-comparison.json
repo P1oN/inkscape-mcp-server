@@ -1,0 +1,266 @@
+{
+  "scenarios": 19,
+  "differences": [
+    {
+      "path": "/anchor/pixels",
+      "expected_length": 0,
+      "actual_length": 2
+    },
+    {
+      "path": "/anchor/records/0/previews/after",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_4-after.png",
+      "missing_key": true
+    },
+    {
+      "path": "/anchor/records/0/previews/before",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_4-before.png",
+      "missing_key": true
+    },
+    {
+      "path": "/anchor/reply/content/0/text/edit/preview_after",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_4-after.png"
+    },
+    {
+      "path": "/anchor/reply/content/0/text/edit/preview_before",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_4-before.png"
+    },
+    {
+      "path": "/anchor/reply/structuredContent/edit/preview_after",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_4-after.png"
+    },
+    {
+      "path": "/anchor/reply/structuredContent/edit/preview_before",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_4-before.png"
+    },
+    {
+      "path": "/copies/pixels",
+      "expected_length": 0,
+      "actual_length": 2
+    },
+    {
+      "path": "/copies/records/0/previews/after",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_2-after.png",
+      "missing_key": true
+    },
+    {
+      "path": "/copies/records/0/previews/before",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_2-before.png",
+      "missing_key": true
+    },
+    {
+      "path": "/copies/reply/content/0/text/edit/preview_after",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_2-after.png"
+    },
+    {
+      "path": "/copies/reply/content/0/text/edit/preview_before",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_2-before.png"
+    },
+    {
+      "path": "/copies/reply/structuredContent/edit/preview_after",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_2-after.png"
+    },
+    {
+      "path": "/copies/reply/structuredContent/edit/preview_before",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_2-before.png"
+    },
+    {
+      "path": "/jitter/pixels",
+      "expected_length": 0,
+      "actual_length": 2
+    },
+    {
+      "path": "/jitter/records/0/previews/after",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_6-after.png",
+      "missing_key": true
+    },
+    {
+      "path": "/jitter/records/0/previews/before",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_6-before.png",
+      "missing_key": true
+    },
+    {
+      "path": "/jitter/reply/content/0/text/edit/preview_after",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_6-after.png"
+    },
+    {
+      "path": "/jitter/reply/content/0/text/edit/preview_before",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_6-before.png"
+    },
+    {
+      "path": "/jitter/reply/structuredContent/edit/preview_after",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_6-after.png"
+    },
+    {
+      "path": "/jitter/reply/structuredContent/edit/preview_before",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_6-before.png"
+    },
+    {
+      "path": "/label/pixels",
+      "expected_length": 0,
+      "actual_length": 2
+    },
+    {
+      "path": "/label/records/0/previews/after",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_7-after.png",
+      "missing_key": true
+    },
+    {
+      "path": "/label/records/0/previews/before",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_7-before.png",
+      "missing_key": true
+    },
+    {
+      "path": "/label/reply/content/0/text/edit/preview_after",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_7-after.png"
+    },
+    {
+      "path": "/label/reply/content/0/text/edit/preview_before",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_7-before.png"
+    },
+    {
+      "path": "/label/reply/structuredContent/edit/preview_after",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_7-after.png"
+    },
+    {
+      "path": "/label/reply/structuredContent/edit/preview_before",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_7-before.png"
+    },
+    {
+      "path": "/linked/pixels",
+      "expected_length": 0,
+      "actual_length": 2
+    },
+    {
+      "path": "/linked/records/0/previews/after",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_1-after.png",
+      "missing_key": true
+    },
+    {
+      "path": "/linked/records/0/previews/before",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_1-before.png",
+      "missing_key": true
+    },
+    {
+      "path": "/linked/reply/content/0/text/edit/preview_after",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_1-after.png"
+    },
+    {
+      "path": "/linked/reply/content/0/text/edit/preview_before",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_1-before.png"
+    },
+    {
+      "path": "/linked/reply/structuredContent/edit/preview_after",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_1-after.png"
+    },
+    {
+      "path": "/linked/reply/structuredContent/edit/preview_before",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_1-before.png"
+    },
+    {
+      "path": "/rectangle/pixels",
+      "expected_length": 0,
+      "actual_length": 2
+    },
+    {
+      "path": "/rectangle/records/0/previews/after",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_5-after.png",
+      "missing_key": true
+    },
+    {
+      "path": "/rectangle/records/0/previews/before",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_5-before.png",
+      "missing_key": true
+    },
+    {
+      "path": "/rectangle/reply/content/0/text/edit/preview_after",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_5-after.png"
+    },
+    {
+      "path": "/rectangle/reply/content/0/text/edit/preview_before",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_5-before.png"
+    },
+    {
+      "path": "/rectangle/reply/structuredContent/edit/preview_after",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_5-after.png"
+    },
+    {
+      "path": "/rectangle/reply/structuredContent/edit/preview_before",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_5-before.png"
+    },
+    {
+      "path": "/tangent/pixels",
+      "expected_length": 0,
+      "actual_length": 2
+    },
+    {
+      "path": "/tangent/records/0/previews/after",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_3-after.png",
+      "missing_key": true
+    },
+    {
+      "path": "/tangent/records/0/previews/before",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_3-before.png",
+      "missing_key": true
+    },
+    {
+      "path": "/tangent/reply/content/0/text/edit/preview_after",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_3-after.png"
+    },
+    {
+      "path": "/tangent/reply/content/0/text/edit/preview_before",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_3-before.png"
+    },
+    {
+      "path": "/tangent/reply/structuredContent/edit/preview_after",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_3-after.png"
+    },
+    {
+      "path": "/tangent/reply/structuredContent/edit/preview_before",
+      "expected": null,
+      "actual": "artifacts/preview/op-op_3-before.png"
+    }
+  ],
+  "passed": false,
+  "rust_binary_sha256": "20d5cc37d2573eeebe2b9fc3fb1532ef2d53d76c5737288751865aa35fcd16fc"
+}

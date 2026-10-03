@@ -1,0 +1,101 @@
+{
+  "complete_argument_validation": false,
+  "stage": "numeric text grammar and schema bounds",
+  "source_binary_sha256": "04bece73f43a16d65172573fb724e33a712ea5db19437a950957e25a444c5a07",
+  "Rust_tests_passed": 187,
+  "ignored_child_entry": 1,
+  "clippy_all_targets": true,
+  "format": true,
+  "real_STDIO_matrices": [
+    {
+      "report": "migration/arguments-numeric-comparison.json",
+      "observations": 2250,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-empty-numeric-rerun-comparison.json",
+      "observations": 87,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-required-objects-numeric-rerun-comparison.json",
+      "observations": 87,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-required-null-numeric-rerun-comparison.json",
+      "observations": 87,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-type-fields-numeric-rerun-comparison.json",
+      "observations": 418,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-missing-one-numeric-rerun-comparison.json",
+      "observations": 147,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-unknown-numeric-rerun-comparison.json",
+      "observations": 110,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-nested-unknown-numeric-rerun-comparison.json",
+      "observations": 6,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    },
+    {
+      "report": "migration/arguments-invalid-tag-numeric-rerun-comparison.json",
+      "observations": 18,
+      "workspace_changed": {
+        "python": false,
+        "rust": false
+      }
+    }
+  ],
+  "observations": 3210,
+  "real_STDIO_starts": 18,
+  "normalization": "none",
+  "package_stage13_contains_this_change": false,
+  "remaining": [
+    "defaults/coercion materialization",
+    "ignored nested-field normalization",
+    "multi-type unions",
+    "custom model validators and aliases",
+    "exhaustive nested numeric bounds and large-integer limits",
+    "pathological scalar/input representations",
+    "reserved or injected names"
+  ],
+  "parity_reports": {
+    "read": "migration/read-arguments-numeric-comparison.json",
+    "edit": "migration/edit-arguments-numeric-comparison.json"
+  },
+  "full_migration_complete": false
+}

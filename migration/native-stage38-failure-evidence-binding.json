@@ -1,0 +1,228 @@
+{
+  "evidence_verified": true,
+  "native_acceptance_complete": false,
+  "goal_complete": false,
+  "scope": "Failed owned38 GUI startup and read-only display controls, terminal ownership and current doc snapshots. No GUI acceptance claim.",
+  "files": [
+    {
+      "path": "migration/native-stage38-launch-comparison.json",
+      "bytes": 875,
+      "sha256": "9787ed0bea4270831babe28e3e10eda8001400815ac38b5c2b5009453f492d31"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/concurrent-control.stderr.log",
+      "bytes": 104,
+      "sha256": "16554010733766965cb146bd8c13123810e943dbd12d4c945ea5dfa6c5fb41d4"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/concurrent-control.stdout.json",
+      "bytes": 229,
+      "sha256": "de6a3a47a5ca9188fcc691260528aa4bf54b2ae870613189bb8b2836efdb7c80"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/concurrent-minimal.stderr.log",
+      "bytes": 104,
+      "sha256": "80f3f4ddb035b926566f67fd7ad97548ee5ed0e2e27b2831085eecea7483f4b8"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/concurrent-minimal.stdout.json",
+      "bytes": 229,
+      "sha256": "72450b10369906296b807615615deba21521cbf8f1d50249223b31f4260e6020"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/display-power.json",
+      "bytes": 80,
+      "sha256": "b883d76fbf66f7f979326134b77498079500f9cbd01e95b89a50a845e305bed8"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/final-snapshots/docs/AGENT_HANDOFF.md",
+      "bytes": 3957,
+      "sha256": "521b958feb0d3bd68e3b3b2f2bf5c6f8bf005042286979ec9446458db85cb003"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/final-snapshots/docs/RUST_MIGRATION_REPORT.md",
+      "bytes": 13832,
+      "sha256": "4b454823b731508c1a5074576407ef5eaecedca7f9d81ffd9d9bbd5214d3b4f0"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/final-snapshots/docs/RUST_NEXT_PLAN.md",
+      "bytes": 4026,
+      "sha256": "c5f43c0da16df44ae8639abf96547b98ff246ff63a7db2978c99f167294bc242"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/final-snapshots/docs/RUST_SECURITY_AUDIT.md",
+      "bytes": 4604,
+      "sha256": "969ead2b067a0c19920745187bdd402dda80287ce3da10df34ce5fa0f36912f4"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/final-snapshots/docs/macos-live-prototype.md",
+      "bytes": 4182,
+      "sha256": "9571730f468db4e49859b8d63bd7a792ae43ebc1c2c0b49dcbee332a771d88dc"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/final-snapshots/migration/current-package.json",
+      "bytes": 771,
+      "sha256": "1beb8e05f8b00603a7bb45902d1f4b21ff4b1ba47eee2246408deb82dfc5d96f"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/gdk-minimal-env-process.json",
+      "bytes": 658,
+      "sha256": "2890217ac4ae34d036120d10cb7c25442f5bb190ee33959b7cf7ead5cec1ef3b"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/gdk-minimal-env.stderr.log",
+      "bytes": 104,
+      "sha256": "b355dd85caa175a2cb329bd2d3aae5675831fb06f603c641a22baa7a4106827b"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/gdk-minimal-env.stdout.json",
+      "bytes": 229,
+      "sha256": "170e41ce874e487535f9459a1d1d2df8629716b0920a00d4db2430665485889d"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/gdk-process.json",
+      "bytes": 156,
+      "sha256": "8560359ec757e11a13f71721928cc35a4101d54d2904900e2112be03efc17ca4"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/gdk.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/gdk.stdout.json",
+      "bytes": 228,
+      "sha256": "34b6f7edffee21c164c9e5e801e5622ff8d0814767122b002303de5d859d6356"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/gdk_probe.py",
+      "bytes": 1412,
+      "sha256": "5978958fa54da5a948f34e2b971907cb86597b3de911c6748aea92eb56987c37"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/private-inherited.stderr.log",
+      "bytes": 104,
+      "sha256": "6c64d1a27a5f210d099c05b5bcbe3c215e93e97d3506929377a00c2beb8d86b2"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/private-inherited.stdout.json",
+      "bytes": 229,
+      "sha256": "69421737fe0cf5e78efb527f608cc9b7a2f668945a6966ae13c51580de02ca00"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/restore-inkscape_mcp_managed_dir.stderr.log",
+      "bytes": 104,
+      "sha256": "63d4bddc2d371f7b3574a2cee3f1937c0d8cf2e3dad9667a06dbe68ca81367e6"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/restore-inkscape_mcp_managed_dir.stdout.json",
+      "bytes": 229,
+      "sha256": "e13644f136483991323ee9d51ca660f49a2f281ae3b736edccd78ee1e4d871c5"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/restore-inkscape_profile_dir.stderr.log",
+      "bytes": 104,
+      "sha256": "0609faddbc96719c2d3d26c22acbf9a831c44596f194d3c9c0ca254182f96511"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/restore-inkscape_profile_dir.stdout.json",
+      "bytes": 229,
+      "sha256": "1b67a1b155f7b508877c894a956b0d1fb8529519a675963e1032306d2046c70e"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/restore-lang.stderr.log",
+      "bytes": 104,
+      "sha256": "b46d0f1f8e48436ebf49c567f56c9a51dde64170d5d82066520e746a611e7f36"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/restore-lang.stdout.json",
+      "bytes": 229,
+      "sha256": "d12652957e970bbaf2287f332f36f289f99627c8467c6cff8f83a1615066c738"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/restore-path.stderr.log",
+      "bytes": 104,
+      "sha256": "133be2739c5e35efc06ceef7fe9dfedddf1f314d28791f84032d525cceeeb8b0"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/restore-path.stdout.json",
+      "bytes": 229,
+      "sha256": "67a3e1c8a47f54de61989861533b6ea3e17ca0d15a99319e12af885d6f6d1457"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/restore-tmpdir.stderr.log",
+      "bytes": 104,
+      "sha256": "fa6cf4be3d3e7ace483cedbdd24990ded460747b6d39eb44a872be97e80862f0"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/restore-tmpdir.stdout.json",
+      "bytes": 229,
+      "sha256": "ee63adb2cfc8a7a19e97a02c4293553aa885db17fa8e32c0dc97dd2649cb075d"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/root-lock.json",
+      "bytes": 124,
+      "sha256": "0e02a5ddf1977250a952c51591bbd4a05d33810d1a64f03c7df2601ea41c247b"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/screen.json",
+      "bytes": 247,
+      "sha256": "c2ad0082ef0e7aa69098514a2b97cc5fa78bf2c0958cd790d9abee5fd9ee4b7b"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/session.json",
+      "bytes": 564,
+      "sha256": "178e216ffbec64b47e03f82169ec74a6f34184c8c073d7d4c4e8bafcc403de2f"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/venv-minimal.stderr.log",
+      "bytes": 104,
+      "sha256": "10cb5e88e8d7c93c4dfd89e674f31c35e3333427c503d67d5365f13ed54df706"
+    },
+    {
+      "path": "migration/results/native-screen-recheck-stage38/venv-minimal.stdout.json",
+      "bytes": 229,
+      "sha256": "d08e175e5d1bbc370273cdfe3d834cd6c603ad47f3c97197f70252af6abe54df"
+    },
+    {
+      "path": "migration/results/native-stage38/launch.json",
+      "bytes": 214,
+      "sha256": "d000e9dcf72c42adcab65f5b5e7def3a3d3cb68b920be2cde71fdc7abf1fb7fb"
+    },
+    {
+      "path": "migration/results/native-stage38/mcp.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/native-stage38/mcp.trace.json",
+      "bytes": 6377,
+      "sha256": "559e340fd502e9449572b389ed514876008810279b21ac3fb86126417eec9eb2"
+    },
+    {
+      "path": "migration/results/native-stage38/saved-launch-diagnostics/bus.log",
+      "bytes": 99,
+      "sha256": "bffb45190bfda3a981d1392f6603158327b4b97099eda3f2cbd5ee18900e4f61"
+    },
+    {
+      "path": "migration/results/native-stage38/saved-launch-diagnostics/inkscape.stderr.log",
+      "bytes": 153,
+      "sha256": "675b3cd151941f27958080e2aac147de24c70e0d9745a70ac28319d9724710a3"
+    },
+    {
+      "path": "migration/results/native-stage38/saved-launch-diagnostics/inkscape.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/native-stage38/saved-launch-diagnostics/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/native-stage38/session.json",
+      "bytes": 1049,
+      "sha256": "3ac2d2f3893f98e43db4de65f3480b220090dc124cacd90f5d5108f25a492322"
+    }
+  ]
+}

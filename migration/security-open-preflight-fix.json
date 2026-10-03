@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "bug": "Refused XML open created managed copies and registry before parse",
+  "reproduced_on": "stage30",
+  "fixed_current_package": "stage31",
+  "initial_failure": "migration/results/security-stage30-before-fix",
+  "current_checks": [
+    "migration/package-stage31-cold-comparison.json",
+    "migration/package-stage31-warm-comparison.json",
+    "migration/doctor-stage31-comparison.json",
+    "migration/notices-stage31-comparison.json",
+    "migration/discovery-stage31-comparison.json",
+    "migration/results/launcher-stage31/comparison.json",
+    "migration/results/security-stage31/comparison.json",
+    "migration/results/security-stage31-special-files/comparison.json"
+  ],
+  "rust_tests": "202 passed/1 ignored",
+  "native_GUI_acceptance": false,
+  "full_security_audit_complete": false
+}

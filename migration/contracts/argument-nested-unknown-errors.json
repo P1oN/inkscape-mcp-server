@@ -1,0 +1,144 @@
+[
+  {
+    "name": "render_preview",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "6 validation errors for call[render_preview]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nregion.x\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nregion.y\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nregion.width\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nregion.height\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nregion.unexpected\n  Extra inputs are not permitted [type=extra_forbidden, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "region": {
+        "x": {},
+        "y": {},
+        "width": {},
+        "height": {},
+        "unexpected": 1
+      }
+    },
+    "case": "nested-region-0"
+  },
+  {
+    "name": "compare_region",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "7 validation errors for call[compare_region]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nsnapshot_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nregion.x\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nregion.y\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nregion.width\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nregion.height\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nregion.unexpected\n  Extra inputs are not permitted [type=extra_forbidden, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "snapshot_id": {},
+      "region": {
+        "x": {},
+        "y": {},
+        "width": {},
+        "height": {},
+        "unexpected": 1
+      }
+    },
+    "case": "nested-region-0"
+  },
+  {
+    "name": "repeat_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[repeat_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nplacement.polyline.points\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type\nplacement.polyline.unexpected\n  Extra inputs are not permitted [type=extra_forbidden, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ngroup_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {},
+      "placement": {
+        "kind": "polyline",
+        "points": {},
+        "unexpected": 1
+      },
+      "group_id": {}
+    },
+    "case": "nested-placement-0"
+  },
+  {
+    "name": "repeat_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "8 validation errors for call[repeat_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nplacement.rectangle.x\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nplacement.rectangle.y\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nplacement.rectangle.width\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nplacement.rectangle.height\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nplacement.rectangle.unexpected\n  Extra inputs are not permitted [type=extra_forbidden, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ngroup_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {},
+      "placement": {
+        "kind": "rectangle",
+        "x": {},
+        "y": {},
+        "width": {},
+        "height": {},
+        "unexpected": 1
+      },
+      "group_id": {}
+    },
+    "case": "nested-placement-1"
+  },
+  {
+    "name": "repeat_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[repeat_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nplacement\n  Unable to extract tag using discriminator 'kind' [type=union_tag_not_found, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_not_found\ngroup_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nvariation.unexpected\n  Extra inputs are not permitted [type=extra_forbidden, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {},
+      "placement": {},
+      "group_id": {},
+      "variation": {
+        "unexpected": 1
+      }
+    },
+    "case": "nested-variation-0"
+  },
+  {
+    "name": "repeat_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "7 validation errors for call[repeat_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nplacement\n  Unable to extract tag using discriminator 'kind' [type=union_tag_not_found, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_not_found\ngroup_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nanchor.x\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nanchor.y\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nanchor.unexpected\n  Extra inputs are not permitted [type=extra_forbidden, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {},
+      "placement": {},
+      "group_id": {},
+      "anchor": {
+        "x": {},
+        "y": {},
+        "unexpected": 1
+      }
+    },
+    "case": "nested-anchor-0"
+  }
+]

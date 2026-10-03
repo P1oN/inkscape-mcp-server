@@ -1,0 +1,12 @@
+{
+  "passed": false,
+  "stage": "stage6 clean managed session",
+  "native_launch": true,
+  "insertion_applied": true,
+  "insertion_returned_uncertain": true,
+  "unexpected_native_ID_on_anonymous_group": "g1",
+  "mutation_retried": false,
+  "raw_evidence": "migration/results/native-gui-stage6/insert.trace.json",
+  "inspection": "migration/results/native-gui-stage6/redone.scene.json",
+  "fix": "Rust confirms exact original element hierarchy and remapped IDs, permitting native-assigned IDs only at anonymous positions; verification pending new package"
+}

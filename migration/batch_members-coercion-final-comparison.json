@@ -1,0 +1,11 @@
+{
+  "scenarios": 24,
+  "differences": [],
+  "passed": true,
+  "binary_sha256": "e8533a74973a4803c2c2c1fd44e244687fddcffce4b915528b7496fe3c577deb",
+  "normalization": "validated minted IDs and UTC timestamps only; complete results, SVG bytes, history and RGBA pixels compared",
+  "coercion_requests": 48,
+  "ignored_model_extras": true,
+  "coercion_scope": "Schema-directed numeric strings, integer .0 tails and boolean strings",
+  "coercion_coverage": true
+}

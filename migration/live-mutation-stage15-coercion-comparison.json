@@ -1,0 +1,36 @@
+{
+  "observations": 62,
+  "rust_binary_sha256": "67fa96601d86d244c3f824f322081848ceb0bfb2844be01f0be1f01171fab5b7",
+  "normalization": "validated operation IDs/UTC timestamp relationships/preview path bindings only",
+  "differences": [
+    {
+      "path": "/lost-mutation-reply/content/0/text",
+      "expected": "live session communication failed",
+      "actual": "edit completion is uncertain; inspect the task drawing before retrying"
+    },
+    {
+      "path": "/lost-reply-log/operations/0/completion_uncertain",
+      "expected": false,
+      "actual": true
+    }
+  ],
+  "intentional_uncertain_reply_differences": [
+    {
+      "path": "/lost-mutation-reply/content/0/text",
+      "expected": "live session communication failed",
+      "actual": "edit completion is uncertain; inspect the task drawing before retrying"
+    },
+    {
+      "path": "/lost-reply-log/operations/0/completion_uncertain",
+      "expected": false,
+      "actual": true
+    }
+  ],
+  "unexpected_differences": [],
+  "passed": true,
+  "coercion_harness_sha256": "5876fc1297c9371b506a44a775d6a0aef434c8ccfecd48db5cdb79b6680c5ebb",
+  "coercion_requests": 20,
+  "ignored_model_extras": false,
+  "coercion_scope": "Schema-directed numeric strings, integer .0 tails and boolean strings",
+  "coercion_coverage": true
+}

@@ -1,0 +1,11 @@
+{
+  "scenarios": 19,
+  "differences": [],
+  "passed": true,
+  "rust_binary_sha256": "20d5cc37d2573eeebe2b9fc3fb1532ef2d53d76c5737288751865aa35fcd16fc",
+  "coercion_harness_sha256": "960b66e84f555175a61e7f9e4bef302d2a4a5d4a45d65a89f99325aa2c530de2",
+  "coercion_requests": 38,
+  "ignored_model_extras": true,
+  "coercion_scope": "Schema-directed numeric strings, integer .0 tails and boolean strings",
+  "coercion_coverage": true
+}

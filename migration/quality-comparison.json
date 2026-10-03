@@ -1,0 +1,21 @@
+{
+  "scenarios": 126,
+  "fixtures": [
+    "viewbox-missing",
+    "viewbox-zero",
+    "viewbox-negative",
+    "viewbox-invalid",
+    "clean",
+    "structure",
+    "metadata",
+    "refs",
+    "coords",
+    "rasters",
+    "fonts",
+    "bad",
+    "truncated"
+  ],
+  "normalization": "Only validated minted document IDs and JSON tool text decoding.",
+  "differences": [],
+  "passed": true
+}

@@ -1,0 +1,89 @@
+{
+  "evidence_verified": true,
+  "implementation_complete": false,
+  "current_package_updated": false,
+  "rust_tests": "204 passed/1 ignored",
+  "scope": "Intermediate headless raster dependency staging, current development debug CLI and unit tests. Nested SVG/CSS compatibility and archive validation pending.",
+  "files": [
+    {
+      "path": "migration/results/renderer-assets-first-fix-debug-v4/inside-absolute.png",
+      "bytes": 144,
+      "sha256": "352cacd2b00396271688da3a2b42d81a8061610676430dbfdd04fe92d9eb372e"
+    },
+    {
+      "path": "migration/results/renderer-assets-first-fix-debug-v4/inside-export.svg",
+      "bytes": 343,
+      "sha256": "7f9841a6d8e69e568f06734f6b3688a901e70515041b772d514fcaa14b0f06e6"
+    },
+    {
+      "path": "migration/results/renderer-assets-first-fix-debug-v4/probe.json",
+      "bytes": 1156,
+      "sha256": "bca7b492d6be66b785620677f5e5df30e195a8369a34de87384ceee55b2d31a8"
+    },
+    {
+      "path": "migration/results/renderer-assets-first-fix-debug-v4/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/renderer-assets-first-fix-debug-v4/server.trace.json",
+      "bytes": 18697,
+      "sha256": "d676c606daa56b20841e83f8e1243d077fb85859876a61fa045999070f3d2cd1"
+    },
+    {
+      "path": "migration/results/renderer-assets-first-fix-review/docs/AGENT_HANDOFF.md",
+      "bytes": 207833,
+      "sha256": "1cd4ff280daad5bc79e46384ddc7158c98f25fa7f78bd4395da8f05f81f3d448"
+    },
+    {
+      "path": "migration/results/renderer-assets-first-fix-review/docs/RUST_SECURITY_AUDIT.md",
+      "bytes": 7265,
+      "sha256": "d06b9db7de24176136177f27997fda64e71665959942b5faf62077e3fe13de46"
+    },
+    {
+      "path": "migration/results/renderer-assets-first-fix-review/rust/src/engine_input.rs",
+      "bytes": 15508,
+      "sha256": "f7dcc9d82ff3b65e0ba656debb8d0a4b51be0b43bd306044d494761a6bf49f18"
+    },
+    {
+      "path": "migration/results/renderer-assets-first-fix-review/rust/src/find.rs",
+      "bytes": 7293,
+      "sha256": "4266468e64faa5551e4b5d64ae4a4c485cf3f62e09f788fcbb64204647163eb0"
+    },
+    {
+      "path": "migration/results/renderer-assets-first-fix-review/rust/src/fit.rs",
+      "bytes": 5313,
+      "sha256": "4722450128f962148eff0e8e9de272d0a34026dc182d5158877b4638b1623a57"
+    },
+    {
+      "path": "migration/results/renderer-assets-first-fix-review/rust/src/main.rs",
+      "bytes": 29728,
+      "sha256": "31bdf8252bf1846d648fb6debfc620e53e95311796b821bcc8d42bfb318cfcf2"
+    },
+    {
+      "path": "migration/results/renderer-assets-first-fix-review/rust/src/paths.rs",
+      "bytes": 17805,
+      "sha256": "e78cdc443ede79412787dc28625958893b56a84823776fd7eb05d7d60ec40287"
+    },
+    {
+      "path": "migration/results/renderer-assets-first-fix-review/rust/src/preview.rs",
+      "bytes": 5350,
+      "sha256": "55fcd754b0f248fd33f17ea1f4fdf070ada149e71bbe35b98a292a36d613b6bf"
+    },
+    {
+      "path": "migration/results/renderer-assets-first-fix-review/rust/src/render.rs",
+      "bytes": 28669,
+      "sha256": "46c8e72e655d8f00666ea726520ff5337f948cdef3f44ac4d2b91f3d032cdd93"
+    },
+    {
+      "path": "migration/results/renderer-assets-first-fix-review/rust-tests.log",
+      "bytes": 19192,
+      "sha256": "88a6cd74d9ef851777da162a96ddc09c10a220069956dd6bdf710c69ab501a9b"
+    },
+    {
+      "path": "migration/results/renderer-assets-first-fix-review/scripts/rust_renderer_asset_probe.py",
+      "bytes": 6117,
+      "sha256": "d32c495dfac07d615a43a0caed0ebb797cc93cb8924b6c74f8f8af347cec4197"
+    }
+  ]
+}

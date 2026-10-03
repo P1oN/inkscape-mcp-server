@@ -1,0 +1,519 @@
+{
+  "svg": "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnM9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQvRFREL3NvZGlwb2RpLTAuMC5kdGQiIHM6ZG9jbmFtZT0iRHJhd2luZy5zdmciPjwhLS1ub3RlLS0+PD90ZXN0IHllcz8+PGcgaWQ9ImciPjxyZWN0IGlkPSJyIi8+PC9nPjwvc3ZnPg==",
+  "png": "c3ludGhldGljIHRyYW5zcG9ydCBieXRlcywgbm90IHBpeGVsIGFjY2VwdGFuY2U=",
+  "cases": [
+    {
+      "spec": {
+        "method": "active_document"
+      },
+      "expected": {
+        "result": {
+          "window_id": null,
+          "document_id": null,
+          "name": "Drawing.svg",
+          "path": null,
+          "object_count": 4
+        }
+      },
+      "calls": [
+        {
+          "action": "export-filename",
+          "parameter": "[<'<EXPORT>'>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "export-type",
+          "parameter": "[<'svg'>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "export-plain-svg",
+          "parameter": "[<true>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "export-do",
+          "parameter": "@av []",
+          "target": "/org/inkscape/Inkscape"
+        }
+      ]
+    },
+    {
+      "spec": {
+        "method": "document_svg"
+      },
+      "expected": {
+        "result": "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:s=\"http://sodipodi.sourceforge.net/DTD/sodipodi-0.0.dtd\" s:docname=\"Drawing.svg\"><!--note--><?test yes?><g id=\"g\"><rect id=\"r\"/></g></svg>"
+      },
+      "calls": [
+        {
+          "action": "export-filename",
+          "parameter": "[<'<EXPORT>'>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "export-type",
+          "parameter": "[<'svg'>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "export-plain-svg",
+          "parameter": "[<true>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "export-do",
+          "parameter": "@av []",
+          "target": "/org/inkscape/Inkscape"
+        }
+      ]
+    },
+    {
+      "spec": {
+        "method": "render_view"
+      },
+      "expected": {
+        "result": {
+          "bytes": "c3ludGhldGljIHRyYW5zcG9ydCBieXRlcywgbm90IHBpeGVsIGFjY2VwdGFuY2U="
+        }
+      },
+      "calls": [
+        {
+          "action": "export-filename",
+          "parameter": "[<'<EXPORT>'>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "export-type",
+          "parameter": "[<'png'>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "export-area-page",
+          "parameter": "[<true>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "export-do",
+          "parameter": "@av []",
+          "target": "/org/inkscape/Inkscape"
+        }
+      ]
+    },
+    {
+      "spec": {
+        "method": "render_view",
+        "scale": 2.0
+      },
+      "expected": {
+        "result": {
+          "bytes": "c3ludGhldGljIHRyYW5zcG9ydCBieXRlcywgbm90IHBpeGVsIGFjY2VwdGFuY2U="
+        }
+      },
+      "calls": [
+        {
+          "action": "export-filename",
+          "parameter": "[<'<EXPORT>'>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "export-type",
+          "parameter": "[<'png'>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "export-area-page",
+          "parameter": "[<true>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "export-dpi",
+          "parameter": "[<192.0>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "export-do",
+          "parameter": "@av []",
+          "target": "/org/inkscape/Inkscape"
+        }
+      ]
+    },
+    {
+      "spec": {
+        "method": "render_view",
+        "region": [
+          1.0,
+          -2.0,
+          30.5,
+          12.0
+        ],
+        "scale": 0.5
+      },
+      "expected": {
+        "result": {
+          "bytes": "c3ludGhldGljIHRyYW5zcG9ydCBieXRlcywgbm90IHBpeGVsIGFjY2VwdGFuY2U="
+        }
+      },
+      "calls": [
+        {
+          "action": "export-filename",
+          "parameter": "[<'<EXPORT>'>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "export-type",
+          "parameter": "[<'png'>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "export-area",
+          "parameter": "[<'1.0:-2.0:31.5:10.0'>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "export-dpi",
+          "parameter": "[<48.0>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "export-do",
+          "parameter": "@av []",
+          "target": "/org/inkscape/Inkscape"
+        }
+      ]
+    },
+    {
+      "spec": {
+        "method": "render_view",
+        "region": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "expected": {
+        "result": {
+          "bytes": "c3ludGhldGljIHRyYW5zcG9ydCBieXRlcywgbm90IHBpeGVsIGFjY2VwdGFuY2U="
+        }
+      },
+      "calls": [
+        {
+          "action": "export-filename",
+          "parameter": "[<'<EXPORT>'>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "export-type",
+          "parameter": "[<'png'>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "export-area",
+          "parameter": "[<'0.0:0.0:0.0:0.0'>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "export-do",
+          "parameter": "@av []",
+          "target": "/org/inkscape/Inkscape"
+        }
+      ]
+    },
+    {
+      "spec": {
+        "method": "set_viewport",
+        "mode": "fit_page"
+      },
+      "expected": {
+        "result": {
+          "mode": "fit_page",
+          "applied": true,
+          "detail": "fit page (DBus, no-freeze)"
+        }
+      },
+      "calls": [
+        {
+          "introspect": true
+        },
+        {
+          "action": "canvas-zoom-page",
+          "parameter": "@av []",
+          "target": "/org/inkscape/Inkscape/window/17"
+        }
+      ]
+    },
+    {
+      "spec": {
+        "method": "set_viewport",
+        "mode": "fit_selection"
+      },
+      "expected": {
+        "result": {
+          "mode": "fit_selection",
+          "applied": true,
+          "detail": "fit selection (DBus, no-freeze)"
+        }
+      },
+      "calls": [
+        {
+          "introspect": true
+        },
+        {
+          "action": "canvas-zoom-selection",
+          "parameter": "@av []",
+          "target": "/org/inkscape/Inkscape/window/17"
+        }
+      ]
+    },
+    {
+      "spec": {
+        "method": "set_viewport",
+        "mode": "zoom",
+        "zoom": 2.0,
+        "center": [
+          3.0,
+          4.0
+        ]
+      },
+      "expected": {
+        "result": {
+          "mode": "zoom",
+          "applied": true,
+          "detail": "zoom (DBus, no-freeze)"
+        }
+      },
+      "calls": [
+        {
+          "introspect": true
+        },
+        {
+          "action": "canvas-zoom-absolute",
+          "parameter": "[<2.0>]",
+          "target": "/org/inkscape/Inkscape/window/17"
+        }
+      ]
+    },
+    {
+      "spec": {
+        "method": "set_viewport",
+        "mode": "pan",
+        "hardened": true
+      },
+      "expected": {
+        "error": "DBus cannot pan the viewport; use the extension-socket transport"
+      },
+      "calls": [
+        {
+          "introspect": true
+        }
+      ]
+    },
+    {
+      "spec": {
+        "method": "selection"
+      },
+      "expected": {
+        "error": "DBus cannot read selection ids; use the extension-socket transport"
+      },
+      "calls": []
+    },
+    {
+      "spec": {
+        "method": "inspect_selection"
+      },
+      "expected": {
+        "error": "DBus cannot inspect the selection; use the extension-socket transport"
+      },
+      "calls": []
+    },
+    {
+      "spec": {
+        "method": "apply_selection",
+        "style": {
+          "fill": "#ff0000",
+          "stroke": "blue"
+        }
+      },
+      "expected": {
+        "result": {
+          "affected_ids": [],
+          "count": 0,
+          "detail": "applied fill, stroke to the selection (DBus, no-freeze)",
+          "undo_friendly": true
+        }
+      },
+      "calls": [
+        {
+          "action": "object-set-property",
+          "parameter": "[<'fill, #ff0000'>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "object-set-property",
+          "parameter": "[<'stroke, blue'>]",
+          "target": "/org/inkscape/Inkscape"
+        }
+      ]
+    },
+    {
+      "spec": {
+        "method": "apply_selection",
+        "transform": "translate(-2,3.5) rotate(90) scale(0.5)"
+      },
+      "expected": {
+        "result": {
+          "affected_ids": [],
+          "count": 0,
+          "detail": "applied translate, rotate, scale to the selection (DBus, no-freeze)",
+          "undo_friendly": true
+        }
+      },
+      "calls": [
+        {
+          "action": "transform-translate",
+          "parameter": "[<'-2,3.5'>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "transform-rotate",
+          "parameter": "[<'90'>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "transform-scale",
+          "parameter": "[<'0.5'>]",
+          "target": "/org/inkscape/Inkscape"
+        }
+      ]
+    },
+    {
+      "spec": {
+        "method": "apply_selection",
+        "transform": "  rotate(-0.0)   "
+      },
+      "expected": {
+        "result": {
+          "affected_ids": [],
+          "count": 0,
+          "detail": "applied rotate to the selection (DBus, no-freeze)",
+          "undo_friendly": true
+        }
+      },
+      "calls": [
+        {
+          "action": "transform-rotate",
+          "parameter": "[<'-0.0'>]",
+          "target": "/org/inkscape/Inkscape"
+        }
+      ]
+    },
+    {
+      "spec": {
+        "method": "apply_selection",
+        "style": {
+          "fill": "red"
+        },
+        "transform": "rotate(12)"
+      },
+      "expected": {
+        "result": {
+          "affected_ids": [],
+          "count": 0,
+          "detail": "applied fill, rotate to the selection (DBus, no-freeze)",
+          "undo_friendly": true
+        }
+      },
+      "calls": [
+        {
+          "action": "object-set-property",
+          "parameter": "[<'fill, red'>]",
+          "target": "/org/inkscape/Inkscape"
+        },
+        {
+          "action": "transform-rotate",
+          "parameter": "[<'12'>]",
+          "target": "/org/inkscape/Inkscape"
+        }
+      ]
+    },
+    {
+      "spec": {
+        "method": "apply_selection"
+      },
+      "expected": {
+        "error": "supply at least one style or transform parameter"
+      },
+      "calls": []
+    },
+    {
+      "spec": {
+        "method": "apply_selection",
+        "transform": "matrix(1,0,0,1,0,0)"
+      },
+      "expected": {
+        "error": "unsupported transform for the DBus action path"
+      },
+      "calls": []
+    },
+    {
+      "spec": {
+        "method": "apply_selection",
+        "transform": "translate(1e2,3)"
+      },
+      "expected": {
+        "error": "unsupported transform for the DBus action path"
+      },
+      "calls": []
+    },
+    {
+      "spec": {
+        "method": "apply_selection",
+        "style": {
+          "fill": "red"
+        },
+        "transform": "invalid",
+        "hardened": true
+      },
+      "expected": {
+        "error": "unsupported transform for the DBus action path"
+      },
+      "calls": [
+        {
+          "action": "object-set-property",
+          "parameter": "[<'fill, red'>]",
+          "target": "/org/inkscape/Inkscape"
+        }
+      ]
+    },
+    {
+      "spec": {
+        "method": "apply_selection",
+        "transform": "rotate(2) bad",
+        "hardened": true
+      },
+      "expected": {
+        "error": "unsupported transform for the DBus action path"
+      },
+      "calls": [
+        {
+          "action": "transform-rotate",
+          "parameter": "[<'2'>]",
+          "target": "/org/inkscape/Inkscape"
+        }
+      ]
+    },
+    {
+      "spec": {
+        "method": "apply_selection",
+        "style": {
+          "fill": "red'unsafe"
+        }
+      },
+      "expected": {
+        "error": "unsafe value rejected before DBus activation"
+      },
+      "calls": []
+    }
+  ]
+}

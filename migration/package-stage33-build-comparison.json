@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage33",
+  "archive": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage33.tar.gz",
+  "archive_bytes": 46520575,
+  "archive_sha256": "3a765a5c99bec2b3084fbf6da745763664e37b36c4f32b8f1bfd6d516c23042d",
+  "binary_sha256": "027c13224918b83478aa20885a78d0efb3cfbf4c547165015e110495efa35f8f",
+  "reports": [
+    "migration/doctor-stage33-comparison.json",
+    "migration/notices-stage33-comparison.json",
+    "migration/discovery-stage33-comparison.json",
+    "migration/package-stage33-cold-comparison.json",
+    "migration/package-stage33-warm-comparison.json",
+    "migration/results/launcher-stage33/comparison.json",
+    "migration/results/security-stage33/comparison.json",
+    "migration/results/security-stage33-special-files/comparison.json",
+    "migration/results/renderer-assets-stage33/probe.json",
+    "migration/results/renderer-assets-stage33-warm/probe.json",
+    "migration/results/engine-routes-stage33/comparison.json",
+    "migration/results/engine-routes-stage33-warm/comparison.json"
+  ],
+  "scope": "Private bounded SVG/raster/CSS/import staging and output preflight. Archive cold/warm, assets17/routes8 both engines, security35/files12/doctor10/launcher11/notices9 with102 crates/discovery16. No new GUI/performance proof."
+}

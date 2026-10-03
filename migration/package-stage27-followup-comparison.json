@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "full_migration_complete": false,
+  "scope": "Current stage27 archive with DOM no-op fix; CLI/STDIO/package checks only",
+  "build_report": "migration/package-stage27-build-comparison.json",
+  "fixed_release_byte_identity": true,
+  "release_edit_scenarios": 122,
+  "source_Rust_test_count": 198,
+  "source_Rust_ignored": 1,
+  "cold_archive": "migration/package-stage27-cold-comparison.json",
+  "warm_archive": "migration/package-stage27-warm-comparison.json",
+  "full_tree_noop_mtime_preserved_both_modes": true,
+  "discovery_exact_configs": 16,
+  "doctor_profiles": 10,
+  "notice_checks": 9,
+  "launcher_checks": 11,
+  "native_GUI_acceptance": false,
+  "performance_acceptance": false,
+  "historical_evidence_transferred": false,
+  "user_MCP_configuration_changed": false,
+  "GUI_launched": false
+}

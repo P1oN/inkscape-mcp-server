@@ -1,0 +1,6 @@
+{
+  "scenarios": 24,
+  "differences": [],
+  "passed": true,
+  "normalization": "validated minted IDs and UTC timestamps only; complete results, SVG bytes, history and RGBA pixels compared"
+}

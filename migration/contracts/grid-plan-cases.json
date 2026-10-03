@@ -1,0 +1,618 @@
+[
+  {
+    "svg": "<rect width=\"100\" height=\"20\"/>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": true
+    },
+    "assets": 4,
+    "longest": 100.0,
+    "factor": 0.48,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<rect width=\"100\" height=\"20\"/>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": false
+    },
+    "assets": 4,
+    "longest": 100.0,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<circle cx=\"10\" cy=\"20\" r=\"8\"/>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": true
+    },
+    "assets": 4,
+    "longest": 16.0,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<circle cx=\"10\" cy=\"20\" r=\"8\"/>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": false
+    },
+    "assets": 4,
+    "longest": 16.0,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<ellipse rx=\"10\" ry=\"20\"/>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": true
+    },
+    "assets": 4,
+    "longest": 40.0,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<ellipse rx=\"10\" ry=\"20\"/>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": false
+    },
+    "assets": 4,
+    "longest": 40.0,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<line x1=\"50\" y1=\"20\" x2=\"-10\" y2=\"-30\"/>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": true
+    },
+    "assets": 4,
+    "longest": 60.0,
+    "factor": 0.8,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<line x1=\"50\" y1=\"20\" x2=\"-10\" y2=\"-30\"/>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": false
+    },
+    "assets": 4,
+    "longest": 60.0,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<g><rect x=\"-20\" y=\"-10\" width=\"10\" height=\"20\"/><rect x=\"20\" y=\"30\" width=\"10\" height=\"5\"/></g>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": true
+    },
+    "assets": 4,
+    "longest": 50.0,
+    "factor": 0.96,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<g><rect x=\"-20\" y=\"-10\" width=\"10\" height=\"20\"/><rect x=\"20\" y=\"30\" width=\"10\" height=\"5\"/></g>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": false
+    },
+    "assets": 4,
+    "longest": 50.0,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<rect width=\"100px\" height=\"40\"/>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": true
+    },
+    "assets": 4,
+    "longest": null,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<rect width=\"100px\" height=\"40\"/>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": false
+    },
+    "assets": 4,
+    "longest": null,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<rect width=\"-1\" height=\"20\"/>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": true
+    },
+    "assets": 4,
+    "longest": null,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<rect width=\"-1\" height=\"20\"/>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": false
+    },
+    "assets": 4,
+    "longest": null,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<rect width=\"0\" height=\"0\"/>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": true
+    },
+    "assets": 4,
+    "longest": 0.0,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<rect width=\"0\" height=\"0\"/>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": false
+    },
+    "assets": 4,
+    "longest": 0.0,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<rect x=\"\" width=\"100\" height=\" \"/>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": true
+    },
+    "assets": 4,
+    "longest": 100.0,
+    "factor": 0.48,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<rect x=\"\" width=\"100\" height=\" \"/>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": false
+    },
+    "assets": 4,
+    "longest": 100.0,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<rect width=\"100\" height=\"20\" transform=\"scale(10)\"/>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": true
+    },
+    "assets": 4,
+    "longest": 100.0,
+    "factor": 0.48,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<rect width=\"100\" height=\"20\" transform=\"scale(10)\"/>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": false
+    },
+    "assets": 4,
+    "longest": 100.0,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<path d=\"M0 0L100 100\"/>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": true
+    },
+    "assets": 4,
+    "longest": null,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<path d=\"M0 0L100 100\"/>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": false
+    },
+    "assets": 4,
+    "longest": null,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<g><rect width=\"bad\"/><circle r=\"10\"/></g>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": true
+    },
+    "assets": 4,
+    "longest": 20.0,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<g><rect width=\"bad\"/><circle r=\"10\"/></g>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": false
+    },
+    "assets": 4,
+    "longest": 20.0,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<g><rect width=\"20\" height=\"20\"/><use x=\"25\"/></g>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": true
+    },
+    "assets": 4,
+    "longest": 25.0,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<g><rect width=\"20\" height=\"20\"/><use x=\"25\"/></g>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": false
+    },
+    "assets": 4,
+    "longest": 25.0,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<rect x=\"1e308\" width=\"1e308\"/>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": true
+    },
+    "assets": 4,
+    "longest": null,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  },
+  {
+    "svg": "<rect x=\"1e308\" width=\"1e308\"/>",
+    "args": {
+      "rows": 2,
+      "cols": 3,
+      "cell": 64.0,
+      "gap": 4.0,
+      "padding": 8.0,
+      "scale_to_fit": false
+    },
+    "assets": 4,
+    "longest": null,
+    "factor": 1.0,
+    "origin": [
+      8.0,
+      76.0
+    ],
+    "canvas": [
+      216.0,
+      148.0
+    ]
+  }
+]

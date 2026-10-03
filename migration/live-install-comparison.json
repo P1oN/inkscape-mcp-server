@@ -1,0 +1,7 @@
+{
+  "profiles": 5,
+  "observations": 18,
+  "normalization": "none; complete wire fields, asset byte hashes and probe requests",
+  "differences": [],
+  "passed": true
+}

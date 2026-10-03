@@ -1,0 +1,256 @@
+{
+  "passed": true,
+  "binary_sha256": "62a75763d517af691c0cc1c9026d8963dc9bb33394d9dfdd76aa8fa9d5819f18",
+  "measurements": {
+    "process-benchmark-stage27": {
+      "comparison": "migration/process-benchmark-stage27-comparison.json",
+      "requests": 200,
+      "sampler_errors": 0,
+      "inspection_envelopes_equal": true,
+      "observations": {
+        "python": {
+          "runs": 5,
+          "requests_per_run": [
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "samples": 4367,
+          "sample_errors": 0,
+          "sample_error_details": [],
+          "memory_observations_complete": true,
+          "gap_median_ms": 25.028458,
+          "gap_max_ms": 349.289875,
+          "startup_ms_range": [
+            840.426042,
+            982.549375
+          ]
+        },
+        "rust": {
+          "runs": 5,
+          "requests_per_run": [
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "samples": 1088,
+          "sample_errors": 0,
+          "sample_error_details": [],
+          "memory_observations_complete": true,
+          "gap_median_ms": 24.640583,
+          "gap_max_ms": 261.849125,
+          "startup_ms_range": [
+            13.477083,
+            23.101625
+          ]
+        }
+      },
+      "metadata": {
+        "platform": "macOS-27.0-arm64-arm-64bit",
+        "machine": "arm64",
+        "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage27",
+        "binary_sha256": "62a75763d517af691c0cc1c9026d8963dc9bb33394d9dfdd76aa8fa9d5819f18",
+        "harness_sha256": "f63f71d84f32131cd6cd80210b9f8239c057cf2768f110b04132d7cad6754933",
+        "repeats": 5,
+        "counts": [
+          100,
+          10000,
+          100000
+        ],
+        "sampling_interval_target_ns": 20000000,
+        "diagnostic_cli": false,
+        "engine_mode": "per_call",
+        "python_entrypoint": null,
+        "limitations": [
+          "sampled peaks can miss short-lived children or between-sample peaks",
+          "RSS sums include shared pages; footprint is also summed, not unique pages",
+          "startup includes Popen, sampler setup and real initialize roundtrip",
+          "request roundtrip includes client JSON, pipes and scheduling",
+          "CPU converted from Mach ticks with mach_timebase_info; raw *_ticks retained",
+          "start/exit/child elapsed identities are raw Mach ticks",
+          "root child CPU counters cover reaped children and may lag",
+          "boundary descendant CPU covers children still live; excludes already exited children",
+          "physical disk counters can be zero for cached IO; not logical filesystem IO",
+          "diagnostic wrapper runs measure actual vendor CLI wall and child CPU separately",
+          "diagnostic wrapper bootstrap adds overhead; do not use as direct speed comparison",
+          "outside-CLI remainder contains server, IPC, filesystem and wrapper bootstrap",
+          "server CPU, physical IO and ping are observations, not exclusive wall phases",
+          "engine_mode recorded explicitly, live disabled; no GUI operations measured"
+        ]
+      }
+    },
+    "process-benchmark-warm-stage27": {
+      "comparison": "migration/process-benchmark-warm-stage27-comparison.json",
+      "requests": 160,
+      "sampler_errors": 0,
+      "inspection_envelopes_equal": true,
+      "observations": {
+        "python": {
+          "runs": 5,
+          "requests_per_run": [
+            16,
+            16,
+            16,
+            16,
+            16
+          ],
+          "samples": 419,
+          "sample_errors": 0,
+          "sample_error_details": [],
+          "memory_observations_complete": true,
+          "gap_median_ms": 23.136,
+          "gap_max_ms": 25.208417,
+          "startup_ms_range": [
+            690.706,
+            767.659541
+          ]
+        },
+        "rust": {
+          "runs": 5,
+          "requests_per_run": [
+            16,
+            16,
+            16,
+            16,
+            16
+          ],
+          "samples": 297,
+          "sample_errors": 0,
+          "sample_error_details": [],
+          "memory_observations_complete": true,
+          "gap_median_ms": 6.6905,
+          "gap_max_ms": 25.35675,
+          "startup_ms_range": [
+            6.402459,
+            6.958792
+          ]
+        }
+      },
+      "metadata": {
+        "platform": "macOS-27.0-arm64-arm-64bit",
+        "machine": "arm64",
+        "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage27",
+        "binary_sha256": "62a75763d517af691c0cc1c9026d8963dc9bb33394d9dfdd76aa8fa9d5819f18",
+        "harness_sha256": "f63f71d84f32131cd6cd80210b9f8239c057cf2768f110b04132d7cad6754933",
+        "repeats": 5,
+        "counts": [
+          100
+        ],
+        "sampling_interval_target_ns": 20000000,
+        "diagnostic_cli": false,
+        "engine_mode": "shell",
+        "python_entrypoint": null,
+        "limitations": [
+          "sampled peaks can miss short-lived children or between-sample peaks",
+          "RSS sums include shared pages; footprint is also summed, not unique pages",
+          "startup includes Popen, sampler setup and real initialize roundtrip",
+          "request roundtrip includes client JSON, pipes and scheduling",
+          "CPU converted from Mach ticks with mach_timebase_info; raw *_ticks retained",
+          "start/exit/child elapsed identities are raw Mach ticks",
+          "root child CPU counters cover reaped children and may lag",
+          "boundary descendant CPU covers children still live; excludes already exited children",
+          "physical disk counters can be zero for cached IO; not logical filesystem IO",
+          "diagnostic wrapper runs measure actual vendor CLI wall and child CPU separately",
+          "diagnostic wrapper bootstrap adds overhead; do not use as direct speed comparison",
+          "outside-CLI remainder contains server, IPC, filesystem and wrapper bootstrap",
+          "server CPU, physical IO and ping are observations, not exclusive wall phases",
+          "engine_mode recorded explicitly, live disabled; no GUI operations measured"
+        ]
+      }
+    },
+    "process-benchmark-cli-stage27": {
+      "comparison": "migration/process-benchmark-cli-stage27-comparison.json",
+      "requests": 160,
+      "sampler_errors": 0,
+      "inspection_envelopes_equal": true,
+      "observations": {
+        "python": {
+          "runs": 5,
+          "requests_per_run": [
+            16,
+            16,
+            16,
+            16,
+            16
+          ],
+          "samples": 759,
+          "sample_errors": 0,
+          "sample_error_details": [],
+          "memory_observations_complete": true,
+          "gap_median_ms": 25.058979,
+          "gap_max_ms": 25.659584,
+          "startup_ms_range": [
+            709.64,
+            744.441959
+          ]
+        },
+        "rust": {
+          "runs": 5,
+          "requests_per_run": [
+            16,
+            16,
+            16,
+            16,
+            16
+          ],
+          "samples": 650,
+          "sample_errors": 0,
+          "sample_error_details": [],
+          "memory_observations_complete": true,
+          "gap_median_ms": 23.8835,
+          "gap_max_ms": 25.444375,
+          "startup_ms_range": [
+            5.905334,
+            6.331916
+          ]
+        }
+      },
+      "metadata": {
+        "platform": "macOS-27.0-arm64-arm-64bit",
+        "machine": "arm64",
+        "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage27",
+        "binary_sha256": "62a75763d517af691c0cc1c9026d8963dc9bb33394d9dfdd76aa8fa9d5819f18",
+        "harness_sha256": "f63f71d84f32131cd6cd80210b9f8239c057cf2768f110b04132d7cad6754933",
+        "repeats": 5,
+        "counts": [
+          100
+        ],
+        "sampling_interval_target_ns": 20000000,
+        "diagnostic_cli": true,
+        "engine_mode": "per_call",
+        "python_entrypoint": null,
+        "limitations": [
+          "sampled peaks can miss short-lived children or between-sample peaks",
+          "RSS sums include shared pages; footprint is also summed, not unique pages",
+          "startup includes Popen, sampler setup and real initialize roundtrip",
+          "request roundtrip includes client JSON, pipes and scheduling",
+          "CPU converted from Mach ticks with mach_timebase_info; raw *_ticks retained",
+          "start/exit/child elapsed identities are raw Mach ticks",
+          "root child CPU counters cover reaped children and may lag",
+          "boundary descendant CPU covers children still live; excludes already exited children",
+          "physical disk counters can be zero for cached IO; not logical filesystem IO",
+          "diagnostic wrapper runs measure actual vendor CLI wall and child CPU separately",
+          "diagnostic wrapper bootstrap adds overhead; do not use as direct speed comparison",
+          "outside-CLI remainder contains server, IPC, filesystem and wrapper bootstrap",
+          "server CPU, physical IO and ping are observations, not exclusive wall phases",
+          "engine_mode recorded explicitly, live disabled; no GUI operations measured"
+        ]
+      }
+    }
+  },
+  "requests_total": 520,
+  "native_GUI_exercised": false,
+  "full_migration_complete": false,
+  "exclusive_server_IPC_logical_file_attribution": false,
+  "limitations": [
+    "Local warm OS caches and background owned retained sessions; no cache flush or isolated host load",
+    "20ms sampling target, observed gaps retained; sampled RSS sums include shared pages and can miss peaks",
+    "Diagnostic CLI wrapper adds bootstrap overhead; use normal direct per-call/shell for end-to-end comparison",
+    "Outside CLI includes server, files, IPC and wrapper; not pure IPC",
+    "No overall edit/render/export speedup or large-response memory reduction claimed"
+  ]
+}

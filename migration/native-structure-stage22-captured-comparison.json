@@ -1,0 +1,186 @@
+{
+  "passed": true,
+  "checks": {
+    "group-apply-before_unique_ids": true,
+    "group-apply_unique_ids": true,
+    "group-undone_unique_ids": true,
+    "group-redone_unique_ids": true,
+    "group_counts": true,
+    "group_undo_exact_scene": true,
+    "group_redo_exact_scene": true,
+    "group_undo_exact_rgba": true,
+    "group_redo_exact_rgba": true,
+    "group_appearance_preserved": true,
+    "group_applied_audit": true,
+    "group_plain_wrapper_and_paint_order": true,
+    "ungroup-apply-before_unique_ids": true,
+    "ungroup-apply_unique_ids": true,
+    "ungroup-undone_unique_ids": true,
+    "ungroup-redone_unique_ids": true,
+    "ungroup_counts": true,
+    "ungroup_undo_exact_scene": true,
+    "ungroup_redo_exact_scene": true,
+    "ungroup_undo_exact_rgba": true,
+    "ungroup_redo_exact_rgba": true,
+    "ungroup_appearance_preserved": true,
+    "ungroup_applied_audit": true,
+    "delete-apply-before_unique_ids": true,
+    "delete-apply_unique_ids": true,
+    "delete-undone_unique_ids": true,
+    "delete-redone_unique_ids": true,
+    "delete_counts": true,
+    "delete_undo_exact_scene": true,
+    "delete_redo_exact_scene": true,
+    "delete_undo_exact_rgba": true,
+    "delete_redo_exact_rgba": true,
+    "delete_changes_pixels": true,
+    "delete_removes_geometry": true,
+    "delete_applied_audit": true,
+    "delete-restored_unique_ids": true,
+    "delete_final_restoration_scene": true,
+    "delete_final_restoration_rgba": true
+  },
+  "artifacts": {
+    "native-group-apply-before.svg": {
+      "bytes": 1815,
+      "sha256": "187baf87b90db06e442a4f8034e166db05d139da8d50be586ace8f631e2446ce"
+    },
+    "live-view-20261002T223741_756185Z-b139024e.png": {
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    "native-group-apply.svg": {
+      "bytes": 1935,
+      "sha256": "a1f405369049975cae5c88cd8644bf7654b94e234f6a2723e826f90f04e3bded"
+    },
+    "live-view-20261002T223743_463615Z-7b8c58fe.png": {
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    "native-group-undone.svg": {
+      "bytes": 1815,
+      "sha256": "187baf87b90db06e442a4f8034e166db05d139da8d50be586ace8f631e2446ce"
+    },
+    "live-view-20261002T223849_840340Z-7bd4960f.png": {
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    "native-group-redone.svg": {
+      "bytes": 1935,
+      "sha256": "a1f405369049975cae5c88cd8644bf7654b94e234f6a2723e826f90f04e3bded"
+    },
+    "live-view-20261002T223906_743746Z-db6b2c26.png": {
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    "native-ungroup-apply-before.svg": {
+      "bytes": 1935,
+      "sha256": "a1f405369049975cae5c88cd8644bf7654b94e234f6a2723e826f90f04e3bded"
+    },
+    "live-view-20261002T223928_534762Z-4269b927.png": {
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    "native-ungroup-apply.svg": {
+      "bytes": 1815,
+      "sha256": "187baf87b90db06e442a4f8034e166db05d139da8d50be586ace8f631e2446ce"
+    },
+    "live-view-20261002T223930_230575Z-1ccbf802.png": {
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    "native-ungroup-undone.svg": {
+      "bytes": 1935,
+      "sha256": "a1f405369049975cae5c88cd8644bf7654b94e234f6a2723e826f90f04e3bded"
+    },
+    "live-view-20261002T223945_251434Z-7f467d6b.png": {
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    "native-ungroup-redone.svg": {
+      "bytes": 1815,
+      "sha256": "187baf87b90db06e442a4f8034e166db05d139da8d50be586ace8f631e2446ce"
+    },
+    "live-view-20261002T224004_245262Z-7e573f06.png": {
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    "native-delete-apply-before.svg": {
+      "bytes": 1815,
+      "sha256": "187baf87b90db06e442a4f8034e166db05d139da8d50be586ace8f631e2446ce"
+    },
+    "live-view-20261002T224032_684735Z-a6b61dd9.png": {
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    "native-delete-apply.svg": {
+      "bytes": 1125,
+      "sha256": "fd8ba7fdd13f0251ca85e3a862cacdd3fd798447b28c4994a1d11158150b23fb"
+    },
+    "live-view-20261002T224034_368189Z-dcb80998.png": {
+      "bytes": 6041,
+      "sha256": "7082640f0cae012a660c893bc5e1f1c30f8d76dd59f9738ded732ef995725865"
+    },
+    "native-delete-undone.svg": {
+      "bytes": 1815,
+      "sha256": "187baf87b90db06e442a4f8034e166db05d139da8d50be586ace8f631e2446ce"
+    },
+    "live-view-20261002T224049_130573Z-5aed973f.png": {
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    },
+    "native-delete-redone.svg": {
+      "bytes": 1125,
+      "sha256": "fd8ba7fdd13f0251ca85e3a862cacdd3fd798447b28c4994a1d11158150b23fb"
+    },
+    "live-view-20261002T224103_062557Z-535a378d.png": {
+      "bytes": 6041,
+      "sha256": "7082640f0cae012a660c893bc5e1f1c30f8d76dd59f9738ded732ef995725865"
+    },
+    "native-delete-restored.svg": {
+      "bytes": 1815,
+      "sha256": "187baf87b90db06e442a4f8034e166db05d139da8d50be586ace8f631e2446ce"
+    },
+    "live-view-20261002T224117_890924Z-b6d2c8d3.png": {
+      "bytes": 6130,
+      "sha256": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33"
+    }
+  },
+  "session": {
+    "root": "/private/tmp/imcp-native-l3sosx3s",
+    "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage22",
+    "profile": "/private/tmp/imcp-native-l3sosx3s/profile",
+    "vendor_executable_sha256": "ad03b220889be90ed3276102dac39638de75cca91c364d58b482dac85395c193",
+    "state": "owned-native-fixed-effects-passed-retained",
+    "env": {
+      "HOME": "/private/tmp/imcp-native-l3sosx3s/home",
+      "TMPDIR": "/private/tmp/imcp-native-l3sosx3s",
+      "PATH": "",
+      "LANG": "en_US.UTF-8",
+      "INKSCAPE_PROFILE_DIR": "/private/tmp/imcp-native-l3sosx3s/profile",
+      "INKSCAPE_MCP_WORKSPACE_ROOTS": "/private/tmp/imcp-native-l3sosx3s/workspace",
+      "INKSCAPE_MCP_LIVE_ENABLED": "1",
+      "INKSCAPE_MCP_TOOL_PROFILE": "full",
+      "INKSCAPE_MCP_MANAGED_DIR": "/private/tmp/imcp-native-l3sosx3s/session",
+      "INKSCAPE_MCP_LIVE_RENDEZVOUS": "/private/tmp/imcp-native-l3sosx3s/absent-rendezvous",
+      "INKSCAPE_MCP_PROCESS_TIMEOUT_S": "10"
+    },
+    "manifest": {
+      "address": "unix:path=/private/tmp/imcp-native-l3sosx3s/session/bus.sock",
+      "inkscape_pid": 30645,
+      "supervisor_pid": 30626,
+      "context_bridge": true
+    },
+    "document": {
+      "window_id": "fc3f641c-5f10-4903-84d8-e313db7e5c7b",
+      "document_id": "e2453f0b-1f33-4730-8675-0e01e629bce1",
+      "name": "New document 1 - Inkscape",
+      "path": null,
+      "object_count": null
+    },
+    "binary_sha256": "ea78a3430065316c47fcb0362d21feba62e29b93a65c1dd3d854fd418af97ccb"
+  },
+  "captured_only": true,
+  "order_only": false,
+  "scope": "One fixed current-package synthetic native group/ungroup/delete sequence with AX Undo/Redo. Does not establish the root cause of stage18 crash, other native effects or lost-result/document-switch behavior. Order-only mode checks lower on two identical overlapping group copies; it establishes XML paint order and preserved pixels, not differing-color occlusion."
+}

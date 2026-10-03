@@ -1,0 +1,179 @@
+{
+  "cases": [
+    {
+      "kind": "string",
+      "value": "",
+      "expected": {
+        "text": "[<''>]"
+      }
+    },
+    {
+      "kind": "string",
+      "value": "path.svg",
+      "expected": {
+        "text": "[<'path.svg'>]"
+      }
+    },
+    {
+      "kind": "string",
+      "value": "Привіт",
+      "expected": {
+        "text": "[<'Привіт'>]"
+      }
+    },
+    {
+      "kind": "string",
+      "value": "#ff0000",
+      "expected": {
+        "text": "[<'#ff0000'>]"
+      }
+    },
+    {
+      "kind": "string",
+      "value": "fill, #ff0000",
+      "expected": {
+        "text": "[<'fill, #ff0000'>]"
+      }
+    },
+    {
+      "kind": "string",
+      "value": "literal$`value;safe",
+      "expected": {
+        "text": "[<'literal$`value;safe'>]"
+      }
+    },
+    {
+      "kind": "string",
+      "value": "double\"quote",
+      "expected": {
+        "text": "[<'double\"quote'>]"
+      }
+    },
+    {
+      "kind": "string",
+      "value": "single'quote",
+      "expected": {
+        "error": "unsafe value rejected before DBus activation"
+      }
+    },
+    {
+      "kind": "string",
+      "value": "back\\slash",
+      "expected": {
+        "error": "unsafe value rejected before DBus activation"
+      }
+    },
+    {
+      "kind": "string",
+      "value": "line\nfeed",
+      "expected": {
+        "error": "unsafe value rejected before DBus activation"
+      }
+    },
+    {
+      "kind": "string",
+      "value": "nul\u0000",
+      "expected": {
+        "error": "unsafe value rejected before DBus activation"
+      }
+    },
+    {
+      "kind": "string",
+      "value": "delete",
+      "expected": {
+        "error": "unsafe value rejected before DBus activation"
+      }
+    },
+    {
+      "kind": "bool",
+      "value": false,
+      "expected": {
+        "text": "[<false>]"
+      }
+    },
+    {
+      "kind": "bool",
+      "value": true,
+      "expected": {
+        "text": "[<true>]"
+      }
+    },
+    {
+      "kind": "double",
+      "value": 0,
+      "expected": {
+        "text": "[<0.0>]"
+      }
+    },
+    {
+      "kind": "double",
+      "value": -0.0,
+      "expected": {
+        "text": "[<-0.0>]"
+      }
+    },
+    {
+      "kind": "double",
+      "value": 1,
+      "expected": {
+        "text": "[<1.0>]"
+      }
+    },
+    {
+      "kind": "double",
+      "value": 1.5,
+      "expected": {
+        "text": "[<1.5>]"
+      }
+    },
+    {
+      "kind": "double",
+      "value": 1e-09,
+      "expected": {
+        "text": "[<1e-09>]"
+      }
+    },
+    {
+      "kind": "double",
+      "value": 1e+16,
+      "expected": {
+        "text": "[<1e+16>]"
+      }
+    },
+    {
+      "kind": "double",
+      "value": -1e+308,
+      "expected": {
+        "text": "[<-1e+308>]"
+      }
+    },
+    {
+      "kind": "double",
+      "value": "nan",
+      "expected": {
+        "error": "non-finite value rejected before DBus activation"
+      }
+    },
+    {
+      "kind": "double",
+      "value": "inf",
+      "expected": {
+        "error": "non-finite value rejected before DBus activation"
+      }
+    },
+    {
+      "kind": "double",
+      "value": "-inf",
+      "expected": {
+        "error": "non-finite value rejected before DBus activation"
+      }
+    },
+    {
+      "kind": "empty",
+      "value": null,
+      "expected": {
+        "text": "@av []"
+      }
+    }
+  ]
+}

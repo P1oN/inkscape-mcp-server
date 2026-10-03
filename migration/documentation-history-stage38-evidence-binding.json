@@ -1,0 +1,35 @@
+{
+  "scope": "Preserved full historical docs before consolidation. Old Python/oracle commands are historical and retired.",
+  "files": [
+    {
+      "path": "docs/history/AGENT_HANDOFF_LOG.md",
+      "bytes": 220587,
+      "sha256": "44ff0c1f9692c64e0c72d302067c2785d35693430ccf2bb3b3c5e9338dfdd859"
+    },
+    {
+      "path": "docs/history/MACOS_LIVE_PROTOTYPE_LOG.md",
+      "bytes": 16348,
+      "sha256": "18699c46563fc05657a6b7dba8422a22ff2a28f62160afd4580e3bef1501f90d"
+    },
+    {
+      "path": "docs/history/RUST_MIGRATION_LOG.md",
+      "bytes": 266554,
+      "sha256": "e24889adf1c2eb397f37a0f8bc48b041ed6375b540968b43bc1e9c56bbb80b59"
+    },
+    {
+      "path": "docs/history/RUST_PACKAGING_LOG.md",
+      "bytes": 13931,
+      "sha256": "cfdff169ffa3fd7fd1a257d76c25c6863f5498837f15b4d6fcc08d96cf006c9b"
+    },
+    {
+      "path": "docs/history/RUST_REVIEW_LOG.md",
+      "bytes": 10266,
+      "sha256": "d3c94ca74baa724070ad7d9c1faf3d7689c645fd3524e55de1e982af8a9bcda4"
+    },
+    {
+      "path": "docs/history/RUST_SECURITY_AUDIT_LOG.md",
+      "bytes": 25374,
+      "sha256": "d253629b9c924f1243b8fccdc312e55c2b87b308ed7562ae4b80c1f7c5fb72d5"
+    }
+  ]
+}

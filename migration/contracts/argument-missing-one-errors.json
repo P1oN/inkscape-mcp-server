@@ -1,0 +1,2497 @@
+[
+  {
+    "name": "run_action_chain",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[run_action_chain]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'steps': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsteps\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "steps": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "run_action_chain",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[run_action_chain]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nsteps\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-steps"
+  },
+  {
+    "name": "run_raw_action",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[run_raw_action]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'action': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\naction\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "action": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "run_raw_action",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[run_raw_action]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\naction\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-action"
+  },
+  {
+    "name": "apply_edits",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[apply_edits]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'edits': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nedits\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "edits": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "apply_edits",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[apply_edits]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nedits\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-edits"
+  },
+  {
+    "name": "set_document_svg",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[set_document_svg]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'svg': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsvg\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "svg": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "set_document_svg",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[set_document_svg]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nsvg\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-svg"
+  },
+  {
+    "name": "insert_svg_fragment",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[insert_svg_fragment]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'svg': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsvg\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "svg": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "insert_svg_fragment",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[insert_svg_fragment]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nsvg\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-svg"
+  },
+  {
+    "name": "compose_grid",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[compose_grid]\nrows\n  Missing required argument [type=missing_argument, input_value={'cols': {}, 'cell': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncols\n  Input should be a valid integer [type=int_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/int_type\ncell\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "cols": {},
+      "cell": {}
+    },
+    "case": "missing-rows"
+  },
+  {
+    "name": "compose_grid",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[compose_grid]\nrows\n  Input should be a valid integer [type=int_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/int_type\ncols\n  Missing required argument [type=missing_argument, input_value={'rows': {}, 'cell': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncell\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "rows": {},
+      "cell": {}
+    },
+    "case": "missing-cols"
+  },
+  {
+    "name": "compose_grid",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[compose_grid]\nrows\n  Input should be a valid integer [type=int_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/int_type\ncols\n  Input should be a valid integer [type=int_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/int_type\ncell\n  Missing required argument [type=missing_argument, input_value={'rows': {}, 'cols': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "rows": {},
+      "cols": {}
+    },
+    "case": "missing-cell"
+  },
+  {
+    "name": "place_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[place_document]\ntarget_doc_id\n  Missing required argument [type=missing_argument, input_value={'x': {}, 'y': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ny\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "x": {},
+      "y": {}
+    },
+    "case": "missing-target_doc_id"
+  },
+  {
+    "name": "place_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[place_document]\ntarget_doc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nx\n  Missing required argument [type=missing_argument, input_value={'target_doc_id': {}, 'y': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ny\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "target_doc_id": {},
+      "y": {}
+    },
+    "case": "missing-x"
+  },
+  {
+    "name": "place_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[place_document]\ntarget_doc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ny\n  Missing required argument [type=missing_argument, input_value={'target_doc_id': {}, 'x': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "target_doc_id": {},
+      "x": {}
+    },
+    "case": "missing-y"
+  },
+  {
+    "name": "replace_svg_fragment",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[replace_svg_fragment]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_id': {}, 'svg': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nsvg\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_id": {},
+      "svg": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "replace_svg_fragment",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[replace_svg_fragment]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'svg': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsvg\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "svg": {}
+    },
+    "case": "missing-object_id"
+  },
+  {
+    "name": "replace_svg_fragment",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[replace_svg_fragment]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nsvg\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'object_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {}
+    },
+    "case": "missing-svg"
+  },
+  {
+    "name": "create_rect",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_rect]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'x': {}, 'y': {}, 'width': {}, 'height': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ny\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nwidth\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nheight\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "x": {},
+      "y": {},
+      "width": {},
+      "height": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "create_rect",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_rect]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nx\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'y': {}, 'width': {}, 'height': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ny\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nwidth\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nheight\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "y": {},
+      "width": {},
+      "height": {}
+    },
+    "case": "missing-x"
+  },
+  {
+    "name": "create_rect",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_rect]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ny\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'x': {}, 'width': {}, 'height': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nwidth\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nheight\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "x": {},
+      "width": {},
+      "height": {}
+    },
+    "case": "missing-y"
+  },
+  {
+    "name": "create_rect",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_rect]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ny\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nwidth\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'x': {}, 'y': {}, 'height': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nheight\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "x": {},
+      "y": {},
+      "height": {}
+    },
+    "case": "missing-width"
+  },
+  {
+    "name": "create_rect",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_rect]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ny\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nwidth\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nheight\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'x': {}, 'y': {}, 'width': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "x": {},
+      "y": {},
+      "width": {}
+    },
+    "case": "missing-height"
+  },
+  {
+    "name": "create_circle",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[create_circle]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'cx': {}, 'cy': {}, 'r': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ncy\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nr\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "cx": {},
+      "cy": {},
+      "r": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "create_circle",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[create_circle]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ncx\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'cy': {}, 'r': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncy\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nr\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "cy": {},
+      "r": {}
+    },
+    "case": "missing-cx"
+  },
+  {
+    "name": "create_circle",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[create_circle]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ncx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ncy\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'cx': {}, 'r': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nr\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "cx": {},
+      "r": {}
+    },
+    "case": "missing-cy"
+  },
+  {
+    "name": "create_circle",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[create_circle]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ncx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ncy\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nr\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'cx': {}, 'cy': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "cx": {},
+      "cy": {}
+    },
+    "case": "missing-r"
+  },
+  {
+    "name": "create_ellipse",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_ellipse]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'cx': {}, 'cy': {}, 'rx': {}, 'ry': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ncy\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nrx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nry\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "cx": {},
+      "cy": {},
+      "rx": {},
+      "ry": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "create_ellipse",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_ellipse]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ncx\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'cy': {}, 'rx': {}, 'ry': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncy\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nrx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nry\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "cy": {},
+      "rx": {},
+      "ry": {}
+    },
+    "case": "missing-cx"
+  },
+  {
+    "name": "create_ellipse",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_ellipse]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ncx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ncy\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'cx': {}, 'rx': {}, 'ry': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nrx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nry\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "cx": {},
+      "rx": {},
+      "ry": {}
+    },
+    "case": "missing-cy"
+  },
+  {
+    "name": "create_ellipse",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_ellipse]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ncx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ncy\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nrx\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'cx': {}, 'cy': {}, 'ry': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nry\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "cx": {},
+      "cy": {},
+      "ry": {}
+    },
+    "case": "missing-rx"
+  },
+  {
+    "name": "create_ellipse",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_ellipse]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ncx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ncy\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nrx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nry\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'cx': {}, 'cy': {}, 'rx': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "cx": {},
+      "cy": {},
+      "rx": {}
+    },
+    "case": "missing-ry"
+  },
+  {
+    "name": "create_line",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_line]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'x1': {}, 'y1': {}, 'x2': {}, 'y2': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nx1\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ny1\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nx2\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ny2\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "x1": {},
+      "y1": {},
+      "x2": {},
+      "y2": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "create_line",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_line]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nx1\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'y1': {}, 'x2': {}, 'y2': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ny1\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nx2\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ny2\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "y1": {},
+      "x2": {},
+      "y2": {}
+    },
+    "case": "missing-x1"
+  },
+  {
+    "name": "create_line",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_line]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nx1\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ny1\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'x1': {}, 'x2': {}, 'y2': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nx2\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ny2\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "x1": {},
+      "x2": {},
+      "y2": {}
+    },
+    "case": "missing-y1"
+  },
+  {
+    "name": "create_line",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_line]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nx1\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ny1\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nx2\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'x1': {}, 'y1': {}, 'y2': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ny2\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "x1": {},
+      "y1": {},
+      "y2": {}
+    },
+    "case": "missing-x2"
+  },
+  {
+    "name": "create_line",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "5 validation errors for call[create_line]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nx1\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ny1\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nx2\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ny2\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'x1': {}, 'y1': {}, 'x2': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "x1": {},
+      "y1": {},
+      "x2": {}
+    },
+    "case": "missing-y2"
+  },
+  {
+    "name": "create_polygon",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_polygon]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'points': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\npoints\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "points": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "create_polygon",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_polygon]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\npoints\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-points"
+  },
+  {
+    "name": "create_polyline",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_polyline]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'points': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\npoints\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "points": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "create_polyline",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_polyline]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\npoints\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-points"
+  },
+  {
+    "name": "create_path",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_path]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'d': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nd\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "d": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "create_path",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_path]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nd\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-d"
+  },
+  {
+    "name": "create_text",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[create_text]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'x': {}, 'y': {}, 'text': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ny\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ntext\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "x": {},
+      "y": {},
+      "text": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "create_text",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[create_text]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nx\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'y': {}, 'text': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ny\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ntext\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "y": {},
+      "text": {}
+    },
+    "case": "missing-x"
+  },
+  {
+    "name": "create_text",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[create_text]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ny\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'x': {}, 'text': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ntext\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "x": {},
+      "text": {}
+    },
+    "case": "missing-y"
+  },
+  {
+    "name": "create_text",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[create_text]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ny\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ntext\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'x': {}, 'y': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "x": {},
+      "y": {}
+    },
+    "case": "missing-text"
+  },
+  {
+    "name": "add_linear_gradient",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[add_linear_gradient]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'stops': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nstops\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "stops": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "add_linear_gradient",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[add_linear_gradient]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nstops\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-stops"
+  },
+  {
+    "name": "add_radial_gradient",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[add_radial_gradient]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'stops': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nstops\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "stops": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "add_radial_gradient",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[add_radial_gradient]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nstops\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-stops"
+  },
+  {
+    "name": "group_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[group_objects]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_ids': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_ids": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "group_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[group_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-object_ids"
+  },
+  {
+    "name": "reparent_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[reparent_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_id': {}, 'new_parent_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nnew_parent_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_id": {},
+      "new_parent_id": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "reparent_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[reparent_object]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'new_parent_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nnew_parent_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "new_parent_id": {}
+    },
+    "case": "missing-object_id"
+  },
+  {
+    "name": "reparent_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[reparent_object]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nnew_parent_id\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'object_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {}
+    },
+    "case": "missing-new_parent_id"
+  },
+  {
+    "name": "create_use",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_use]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'href_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nhref_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "href_id": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "create_use",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_use]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nhref_id\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-href_id"
+  },
+  {
+    "name": "set_group_mode",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[set_group_mode]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_id': {}, 'mode': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nmode\n  Input should be 'group' or 'layer' [type=literal_error, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_id": {},
+      "mode": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "set_group_mode",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[set_group_mode]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'mode': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nmode\n  Input should be 'group' or 'layer' [type=literal_error, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "mode": {}
+    },
+    "case": "missing-object_id"
+  },
+  {
+    "name": "set_group_mode",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[set_group_mode]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nmode\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'object_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {}
+    },
+    "case": "missing-mode"
+  },
+  {
+    "name": "create_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_document]\nwidth\n  Missing required argument [type=missing_argument, input_value={'height': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nheight\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "height": {}
+    },
+    "case": "missing-width"
+  },
+  {
+    "name": "create_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[create_document]\nwidth\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\nheight\n  Missing required argument [type=missing_argument, input_value={'width': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "width": {}
+    },
+    "case": "missing-height"
+  },
+  {
+    "name": "delete_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[delete_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_ids': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_ids": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "delete_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[delete_object]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-object_ids"
+  },
+  {
+    "name": "export_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[export_document]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'format': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nformat\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "format": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "export_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[export_document]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nformat\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-format"
+  },
+  {
+    "name": "export_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[export_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_id": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "export_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[export_object]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-object_id"
+  },
+  {
+    "name": "compare_region",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "6 validation errors for call[compare_region]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'snapshot_id': {}, 'region': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsnapshot_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nregion.x\n  Field required [type=missing, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nregion.y\n  Field required [type=missing, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nregion.width\n  Field required [type=missing, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nregion.height\n  Field required [type=missing, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "snapshot_id": {},
+      "region": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "compare_region",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "6 validation errors for call[compare_region]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nsnapshot_id\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'region': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nregion.x\n  Field required [type=missing, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nregion.y\n  Field required [type=missing, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nregion.width\n  Field required [type=missing, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nregion.height\n  Field required [type=missing, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "region": {}
+    },
+    "case": "missing-snapshot_id"
+  },
+  {
+    "name": "compare_region",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[compare_region]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nsnapshot_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nregion\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'snapshot_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "snapshot_id": {}
+    },
+    "case": "missing-region"
+  },
+  {
+    "name": "export_batch",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[export_batch]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'specs': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nspecs\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "specs": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "export_batch",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[export_batch]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nspecs\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-specs"
+  },
+  {
+    "name": "export_set",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[export_set]\ndoc_ids\n  Missing required argument [type=missing_argument, input_value={'specs': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nspecs\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "specs": {}
+    },
+    "case": "missing-doc_ids"
+  },
+  {
+    "name": "export_set",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[export_set]\ndoc_ids\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type\nspecs\n  Missing required argument [type=missing_argument, input_value={'doc_ids': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_ids": {}
+    },
+    "case": "missing-specs"
+  },
+  {
+    "name": "live_select_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[live_select_document]\nwindow_id\n  Missing required argument [type=missing_argument, input_value={'document_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndocument_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "document_id": {}
+    },
+    "case": "missing-window_id"
+  },
+  {
+    "name": "live_select_document",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[live_select_document]\nwindow_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ndocument_id\n  Missing required argument [type=missing_argument, input_value={'window_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "window_id": {}
+    },
+    "case": "missing-document_id"
+  },
+  {
+    "name": "live_preview_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[live_preview_object]\nobject_id\n  Missing required argument [type=missing_argument, input_value={'expected_fingerprint': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nexpected_fingerprint\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "expected_fingerprint": {}
+    },
+    "case": "missing-object_id"
+  },
+  {
+    "name": "live_preview_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[live_preview_object]\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nexpected_fingerprint\n  Missing required argument [type=missing_argument, input_value={'object_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_id": {}
+    },
+    "case": "missing-expected_fingerprint"
+  },
+  {
+    "name": "simplify_path",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[simplify_path]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_ids': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_ids": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "simplify_path",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[simplify_path]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-object_ids"
+  },
+  {
+    "name": "boolean_union",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[boolean_union]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_ids': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_ids": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "boolean_union",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[boolean_union]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-object_ids"
+  },
+  {
+    "name": "boolean_difference",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[boolean_difference]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_ids': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_ids": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "boolean_difference",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[boolean_difference]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-object_ids"
+  },
+  {
+    "name": "combine_paths",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[combine_paths]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_ids': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_ids": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "combine_paths",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[combine_paths]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-object_ids"
+  },
+  {
+    "name": "break_apart",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[break_apart]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_ids': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_ids": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "break_apart",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[break_apart]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-object_ids"
+  },
+  {
+    "name": "stroke_to_path",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[stroke_to_path]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_ids': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_ids": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "stroke_to_path",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[stroke_to_path]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-object_ids"
+  },
+  {
+    "name": "cleanup_paths",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[cleanup_paths]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_ids': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_ids": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "cleanup_paths",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[cleanup_paths]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-object_ids"
+  },
+  {
+    "name": "save_document_as",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[save_document_as]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'dest_path': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndest_path\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "dest_path": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "save_document_as",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[save_document_as]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ndest_path\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-dest_path"
+  },
+  {
+    "name": "restore_snapshot",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[restore_snapshot]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'snapshot_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsnapshot_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "snapshot_id": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "restore_snapshot",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[restore_snapshot]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nsnapshot_id\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-snapshot_id"
+  },
+  {
+    "name": "set_fill",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[set_fill]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_ids': {}, 'color': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type\ncolor\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_ids": {},
+      "color": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "set_fill",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[set_fill]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'color': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncolor\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "color": {}
+    },
+    "case": "missing-object_ids"
+  },
+  {
+    "name": "set_fill",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[set_fill]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type\ncolor\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'object_ids': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_ids": {}
+    },
+    "case": "missing-color"
+  },
+  {
+    "name": "set_stroke",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[set_stroke]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_ids': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_ids": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "set_stroke",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[set_stroke]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-object_ids"
+  },
+  {
+    "name": "set_opacity",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[set_opacity]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_ids': {}, 'opacity': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type\nopacity\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_ids": {},
+      "opacity": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "set_opacity",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[set_opacity]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'opacity': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nopacity\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "opacity": {}
+    },
+    "case": "missing-object_ids"
+  },
+  {
+    "name": "set_opacity",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[set_opacity]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type\nopacity\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'object_ids': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_ids": {}
+    },
+    "case": "missing-opacity"
+  },
+  {
+    "name": "replace_color",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[replace_color]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'from_color': {}, 'to_color': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nfrom_color\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nto_color\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "from_color": {},
+      "to_color": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "replace_color",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[replace_color]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nfrom_color\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'to_color': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nto_color\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "to_color": {}
+    },
+    "case": "missing-from_color"
+  },
+  {
+    "name": "replace_color",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[replace_color]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nfrom_color\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nto_color\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'from_color': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "from_color": {}
+    },
+    "case": "missing-to_color"
+  },
+  {
+    "name": "apply_palette",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "1 validation error for call[apply_palette]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'mapping': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "mapping": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "apply_palette",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[apply_palette]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nmapping\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-mapping"
+  },
+  {
+    "name": "replace_text",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[replace_text]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_id': {}, 'text': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ntext\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_id": {},
+      "text": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "replace_text",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[replace_text]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'text': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ntext\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "text": {}
+    },
+    "case": "missing-object_id"
+  },
+  {
+    "name": "replace_text",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[replace_text]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ntext\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'object_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {}
+    },
+    "case": "missing-text"
+  },
+  {
+    "name": "set_font",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[set_font]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_ids': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Input should be a valid list [type=list_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_ids": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "set_font",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[set_font]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_ids\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-object_ids"
+  },
+  {
+    "name": "duplicate_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[duplicate_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_id": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "duplicate_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[duplicate_object]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-object_id"
+  },
+  {
+    "name": "rename_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[rename_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_id": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "rename_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[rename_object]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {}
+    },
+    "case": "missing-object_id"
+  },
+  {
+    "name": "move_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[move_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_id': {}, 'dx': {}, 'dy': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ndx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ndy\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_id": {},
+      "dx": {},
+      "dy": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "move_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[move_object]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'dx': {}, 'dy': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ndy\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "dx": {},
+      "dy": {}
+    },
+    "case": "missing-object_id"
+  },
+  {
+    "name": "move_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[move_object]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ndx\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'object_id': {}, 'dy': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndy\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {},
+      "dy": {}
+    },
+    "case": "missing-dx"
+  },
+  {
+    "name": "move_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[move_object]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ndx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ndy\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'object_id': {}, 'dx': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {},
+      "dx": {}
+    },
+    "case": "missing-dy"
+  },
+  {
+    "name": "scale_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[scale_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_id': {}, 'sx': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nsx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_id": {},
+      "sx": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "scale_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[scale_object]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'sx': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "sx": {}
+    },
+    "case": "missing-object_id"
+  },
+  {
+    "name": "scale_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[scale_object]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nsx\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'object_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {}
+    },
+    "case": "missing-sx"
+  },
+  {
+    "name": "rotate_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[rotate_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_id': {}, 'degrees': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ndegrees\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_id": {},
+      "degrees": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "rotate_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[rotate_object]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'degrees': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndegrees\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "degrees": {}
+    },
+    "case": "missing-object_id"
+  },
+  {
+    "name": "rotate_object",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[rotate_object]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ndegrees\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'object_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {}
+    },
+    "case": "missing-degrees"
+  },
+  {
+    "name": "resize_canvas",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[resize_canvas]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'width': {}, 'height': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nwidth\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nheight\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "width": {},
+      "height": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "resize_canvas",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[resize_canvas]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nwidth\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'height': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nheight\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "height": {}
+    },
+    "case": "missing-width"
+  },
+  {
+    "name": "resize_canvas",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[resize_canvas]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nwidth\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nheight\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'width': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "width": {}
+    },
+    "case": "missing-height"
+  },
+  {
+    "name": "tile",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "6 validation errors for call[tile]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_id': {}, 'rows':... {}, 'dx': {}, 'dy': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nrows\n  Input should be a valid integer [type=int_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/int_type\ncols\n  Input should be a valid integer [type=int_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/int_type\ndx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ndy\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_id": {},
+      "rows": {},
+      "cols": {},
+      "dx": {},
+      "dy": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "tile",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "6 validation errors for call[tile]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'rows': {}... {}, 'dx': {}, 'dy': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nrows\n  Input should be a valid integer [type=int_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/int_type\ncols\n  Input should be a valid integer [type=int_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/int_type\ndx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ndy\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "rows": {},
+      "cols": {},
+      "dx": {},
+      "dy": {}
+    },
+    "case": "missing-object_id"
+  },
+  {
+    "name": "tile",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "6 validation errors for call[tile]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nrows\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'object_id... {}, 'dx': {}, 'dy': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncols\n  Input should be a valid integer [type=int_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/int_type\ndx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ndy\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {},
+      "cols": {},
+      "dx": {},
+      "dy": {}
+    },
+    "case": "missing-rows"
+  },
+  {
+    "name": "tile",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "6 validation errors for call[tile]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nrows\n  Input should be a valid integer [type=int_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/int_type\ncols\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'object_id... {}, 'dx': {}, 'dy': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ndy\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {},
+      "rows": {},
+      "dx": {},
+      "dy": {}
+    },
+    "case": "missing-cols"
+  },
+  {
+    "name": "tile",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "6 validation errors for call[tile]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nrows\n  Input should be a valid integer [type=int_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/int_type\ncols\n  Input should be a valid integer [type=int_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/int_type\ndx\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'object_id...}, 'cols': {}, 'dy': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndy\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {},
+      "rows": {},
+      "cols": {},
+      "dy": {}
+    },
+    "case": "missing-dx"
+  },
+  {
+    "name": "tile",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "6 validation errors for call[tile]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nrows\n  Input should be a valid integer [type=int_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/int_type\ncols\n  Input should be a valid integer [type=int_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/int_type\ndx\n  Input should be a valid number [type=float_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/float_type\ndy\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'object_id...}, 'cols': {}, 'dx': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {},
+      "rows": {},
+      "cols": {},
+      "dx": {}
+    },
+    "case": "missing-dy"
+  },
+  {
+    "name": "repeat_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[repeat_objects]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'object_id': {}, 'placement': {}, 'group_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nplacement\n  Unable to extract tag using discriminator 'kind' [type=union_tag_not_found, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_not_found\ngroup_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "object_id": {},
+      "placement": {},
+      "group_id": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "repeat_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[repeat_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'placement': {}, 'group_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nplacement\n  Unable to extract tag using discriminator 'kind' [type=union_tag_not_found, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_not_found\ngroup_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "placement": {},
+      "group_id": {}
+    },
+    "case": "missing-object_id"
+  },
+  {
+    "name": "repeat_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[repeat_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nplacement\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'object_id': {}, 'group_id': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ngroup_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {},
+      "group_id": {}
+    },
+    "case": "missing-placement"
+  },
+  {
+    "name": "repeat_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "4 validation errors for call[repeat_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nobject_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nplacement\n  Unable to extract tag using discriminator 'kind' [type=union_tag_not_found, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_not_found\ngroup_id\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'object_id': {}, 'placement': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "object_id": {},
+      "placement": {}
+    },
+    "case": "missing-group_id"
+  },
+  {
+    "name": "transform_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[transform_objects]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={'selector': {}, 'operation': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\noperation\n  Unable to extract tag using discriminator 'op' [type=union_tag_not_found, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_not_found"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "selector": {},
+      "operation": {}
+    },
+    "case": "missing-doc_id"
+  },
+  {
+    "name": "transform_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "3 validation errors for call[transform_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\nselector\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'operation': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\noperation\n  Unable to extract tag using discriminator 'op' [type=union_tag_not_found, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/union_tag_not_found"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "operation": {}
+    },
+    "case": "missing-selector"
+  },
+  {
+    "name": "transform_objects",
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "2 validation errors for call[transform_objects]\ndoc_id\n  Input should be a valid string [type=string_type, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\noperation\n  Missing required argument [type=missing_argument, input_value={'doc_id': {}, 'selector': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument"
+        }
+      ],
+      "isError": true
+    },
+    "arguments": {
+      "doc_id": {},
+      "selector": {}
+    },
+    "case": "missing-operation"
+  }
+]

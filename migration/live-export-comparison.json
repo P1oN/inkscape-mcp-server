@@ -1,0 +1,6 @@
+{
+  "observations": 17,
+  "normalization": "second-resolution path timestamp validated against process lifetime; PNG bytes and pixels compared",
+  "differences": [],
+  "passed": true
+}

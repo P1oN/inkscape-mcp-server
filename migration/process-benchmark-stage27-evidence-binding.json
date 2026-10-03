@@ -1,0 +1,676 @@
+{
+  "passed": true,
+  "scope": "normal per-call/shell and diagnostic CLI measurement plus corrected prompt fixtures; no native/pure IPC/full migration proof",
+  "files": [
+    {
+      "path": "migration/current-live-stage27-evidence-binding.json",
+      "bytes": 59662,
+      "sha256": "8d881fe5293e35dcbe786ff3e6c5b5f07a4a51ec9531a5b97ca4182b43461bbf"
+    },
+    {
+      "path": "migration/package-stage27-build-comparison.json",
+      "bytes": 870,
+      "sha256": "9d8e9cba32ba8c9d99e9c6d07e7daea17d85d6480fdb5a940cbc74b575f2b1c9"
+    },
+    {
+      "path": "migration/process-benchmark-cli-stage27-comparison.json",
+      "bytes": 58307,
+      "sha256": "af3f4b0f7841ecb4a691206667d49f031484e5befce638ae1985255797297abe"
+    },
+    {
+      "path": "migration/process-benchmark-stage27-comparison.json",
+      "bytes": 62369,
+      "sha256": "bb6a8aa279639845ab307d36caac5568364e2a6c61654cec5ad74cd4b41c7978"
+    },
+    {
+      "path": "migration/process-benchmark-stage27-followup.json",
+      "bytes": 10037,
+      "sha256": "d091d8c8e8e9903d0bdfc7db40b312e2598bd2c440b666c65c4b9dffdf2a0d64"
+    },
+    {
+      "path": "migration/process-benchmark-warm-stage27-comparison.json",
+      "bytes": 53663,
+      "sha256": "2ec84ab24e97191cb81cbd230582f7c779a9234f72876f5c9c6313aa8f93f067"
+    },
+    {
+      "path": "migration/prompt-stage27-comparison.json",
+      "bytes": 4086,
+      "sha256": "6f03a5c7d5f1bcd8298e18cfc3d82f3ebea4d06b099c28e205cc430501d0e169"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/environment.json",
+      "bytes": 1669,
+      "sha256": "a44581956f37c00d9a16a89bfa8efdc42e1b2f73a2688696976a06cba521c0aa"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/harness-used.py",
+      "bytes": 19207,
+      "sha256": "f63f71d84f32131cd6cd80210b9f8239c057cf2768f110b04132d7cad6754933"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/invocation.json",
+      "bytes": 484,
+      "sha256": "c57d8de32a208f9daebae0a88dc7499d6f12bf13d3a21b637647089c8b6a8d68"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/python-0.json.gz",
+      "bytes": 87861,
+      "sha256": "8ed7cf3b933a0682c3515d61546696ce70861fe7e4429cdb38df89b34e02fec9"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/python-0.partial.json.gz",
+      "bytes": 86796,
+      "sha256": "73e84debcc56399ecd6579595e6df5d28b0570e881708b549f1b3c895b3496be"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/python-0.stderr.log",
+      "bytes": 9339,
+      "sha256": "a66e0ff096fdc76d14150b24c36976e330b0296558e56da6020e8cb5de9e864d"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/python-1.json.gz",
+      "bytes": 88139,
+      "sha256": "6273408886aa839e77883e444353378482262f6bdd1154d9b30bb02d13133f85"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/python-1.partial.json.gz",
+      "bytes": 87056,
+      "sha256": "79202b5a452d5cbfb40ed9b09209b862c57536bfa9522431349c82d136b6a8ee"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/python-1.stderr.log",
+      "bytes": 9342,
+      "sha256": "ef096a55f49df9f073b64e6ce8ba8638454fe00eafe9fc867752387a2c1ee86e"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/python-2.json.gz",
+      "bytes": 87965,
+      "sha256": "34fb4cc71a689f5c47ece34ae1374a1879822f2cc07d0baba9fdc93bc02eedc7"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/python-2.partial.json.gz",
+      "bytes": 86908,
+      "sha256": "d1941ed2ce393ce5aed55a6b217c49c7a4e5fd33434c63bfbf4d946af0ad75d2"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/python-2.stderr.log",
+      "bytes": 9335,
+      "sha256": "f9c5a819095125dbafaa90458d78046a5e1e17787db23e0d63ee8ce28fae0829"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/python-3.json.gz",
+      "bytes": 88069,
+      "sha256": "102603c28a80662d2e03daf52eb41163b33333291c6ce5281e386c1b8ddcba2e"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/python-3.partial.json.gz",
+      "bytes": 87005,
+      "sha256": "0b41dfb586738864c03063f0686e2db8bcc829c4d3970101d50fba450ee51e74"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/python-3.stderr.log",
+      "bytes": 9339,
+      "sha256": "9a65eccd2b29451ab4c8169c4a25bf4ef89055c95cb27e6a6fa539faa85bd6cc"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/python-4.json.gz",
+      "bytes": 87854,
+      "sha256": "1e1b43b8e3c64f656bc89bc50c856d3a93ca33f6ba693eaff351998254d94203"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/python-4.partial.json.gz",
+      "bytes": 86790,
+      "sha256": "8ebc80b166e28dfe010c3d8055556562ff96f4b1d056a67fd0a94592be89f765"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/python-4.stderr.log",
+      "bytes": 9340,
+      "sha256": "50e14de8047318e364b8b539e705f6f451bc3e05181685ca06c4fb67bff82aec"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/rust-0.json.gz",
+      "bytes": 88664,
+      "sha256": "dc2671c77eca02557f5af032aa2bca2d4ead8e1d20b039656ce76db3a09f7f4d"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/rust-0.partial.json.gz",
+      "bytes": 87593,
+      "sha256": "ad097262cf39dc684e3d015dbdc2fb8998ae33cd501bdc90f7ac042c47ccb2aa"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/rust-0.stderr.log",
+      "bytes": 392,
+      "sha256": "f6135b150aa51295b11b76e3e9f0f41cae201a95b6882d0aa241b1eba3056ebf"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/rust-1.json.gz",
+      "bytes": 88909,
+      "sha256": "f1b5f5eab1005abeafea9516238b6d4ec83d839ec7146b7473f4e1a3ba346206"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/rust-1.partial.json.gz",
+      "bytes": 87842,
+      "sha256": "5f53d5088b3c4a428cb01882982bac65cc55be29081f6c022c8a8514184eb515"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/rust-1.stderr.log",
+      "bytes": 392,
+      "sha256": "5014ff0036a604df5e0c878a32a4fbccae09e1239b41ae09bba8ba16f56d9bc4"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/rust-2.json.gz",
+      "bytes": 88533,
+      "sha256": "32ebd39a707796a778382c17c293831e5392c3eae41c3f464ed333c22a8b2a93"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/rust-2.partial.json.gz",
+      "bytes": 87479,
+      "sha256": "367fa557316020e2f07c65aa7d11d52da2233ef6cc0d283e7a5d088d6edee377"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/rust-2.stderr.log",
+      "bytes": 390,
+      "sha256": "6638ccedcfe3d2610afffe89c70427ca9a8954061931f0456e700726e681f60f"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/rust-3.json.gz",
+      "bytes": 88502,
+      "sha256": "79d1e5c4d83c6d1012f8c9c99168d2aea6257cf6dbffa44959b13ea427d27855"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/rust-3.partial.json.gz",
+      "bytes": 87441,
+      "sha256": "0825081ac3b6dba2cc2c567c462ca4dc467cf2969736dc809c53891c29e4b63f"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/rust-3.stderr.log",
+      "bytes": 392,
+      "sha256": "05c834b3f314e894bfd4db0fd60bd8a1d25750f9235ac8412a05fff1ab052e57"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/rust-4.json.gz",
+      "bytes": 88480,
+      "sha256": "40d14ba4a3137c9edabc86a4efd11022d898aec047ee518c8dfd6a9aa20a66df"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/rust-4.partial.json.gz",
+      "bytes": 87433,
+      "sha256": "873ec784260e1b2a2909d9c9adfca40e5d35100cab50cf5531cb9297ea692c77"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/rust-4.stderr.log",
+      "bytes": 392,
+      "sha256": "2ae3b175b8d56ce26f669774b3da7b02eae9e7752195a176d7fced38c7bdb8ab"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/summary.json",
+      "bytes": 25338,
+      "sha256": "652c53e23c8059b0906eac127d8174bdc1bea5f733d78167f2187c95cb4a20a3"
+    },
+    {
+      "path": "migration/results/process-benchmark-cli-stage27/verifier-used.py",
+      "bytes": 5558,
+      "sha256": "6c156385468f0308b7d375a2d83979fdac4b8d26838eee5d8ea025d35a0442a5"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/environment.json",
+      "bytes": 1693,
+      "sha256": "00cc5699cf7c532092204ee11c4a97268bbe4cd02104794a59cb7208a189e2ad"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/harness-used.py",
+      "bytes": 19207,
+      "sha256": "f63f71d84f32131cd6cd80210b9f8239c057cf2768f110b04132d7cad6754933"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/invocation.json",
+      "bytes": 504,
+      "sha256": "3a98017ad975cabb7e2bf07255ea04930968ddb0fa3814fecc9ba52e04b0f282"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/python-0.json.gz",
+      "bytes": 2928870,
+      "sha256": "f1818a2302d33543e1fa50c9bf41e6c4667cb61b1695b4d548025cb50ce4da2b"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/python-0.partial.json.gz",
+      "bytes": 2928262,
+      "sha256": "b951029275eff97a9f2967fa6c31eee993228308d94ae0bd213c663a4a21be9e"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/python-0.stderr.log",
+      "bytes": 11031,
+      "sha256": "5dbc9bfae01edac9483b1f00b38f687d4f963d13dac1442bd48d70aab9828771"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/python-1.json.gz",
+      "bytes": 2930342,
+      "sha256": "605e619abfe66d377db9644c2ecd7695502e0a1676f4016a61f187cab8209df1"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/python-1.partial.json.gz",
+      "bytes": 2929758,
+      "sha256": "bbcfada5383146aaec9bd325c7c2b7b7125ca8eb9042e0c4c5e709f46e1dd3b9"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/python-1.stderr.log",
+      "bytes": 11032,
+      "sha256": "0beeac3ef90997d0e5bed1033c90892ec7784755f59c413452fcc200d89be226"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/python-2.json.gz",
+      "bytes": 2928309,
+      "sha256": "986ada32570294c19445fe29889d7b271bfc4fb5b4ad45fc751ed4ca4068e1b5"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/python-2.partial.json.gz",
+      "bytes": 2927713,
+      "sha256": "452a7678b9f7b94526b33ec569008ac23d945f3c738043967e3d6b835e52b4ce"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/python-2.stderr.log",
+      "bytes": 11031,
+      "sha256": "a2e74452ef0bc4bd4f63d3d1e12d94e6c03da16f724cd0742208b31e01100ac5"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/python-3.json.gz",
+      "bytes": 2929875,
+      "sha256": "4cf2b5f925de69ba63b0ab95ddc32a347b0dd4110cbaee4aae070f9d3cf5c774"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/python-3.partial.json.gz",
+      "bytes": 2929265,
+      "sha256": "17497dff77f1d39602cef867e69f824c2bf610ca32ec28508b61c11ff141e825"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/python-3.stderr.log",
+      "bytes": 11031,
+      "sha256": "d67d4057b65a42f45046c6f022cc07bd8fec6a2bad65e0b37e4ee83a97150b64"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/python-4.json.gz",
+      "bytes": 2931028,
+      "sha256": "10b20059a56b7b1290c7bc6151ae8c0579f3f0fe724e1935e9a096c656cd8832"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/python-4.partial.json.gz",
+      "bytes": 2930447,
+      "sha256": "a36f5412f5a71f481e35d257ef32e88de4d17001023acaafc12691dde9ea8b42"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/python-4.stderr.log",
+      "bytes": 11031,
+      "sha256": "292008417350c99303e7b075acba950680bb619512d980c76eefdee19858f931"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/rust-0.json.gz",
+      "bytes": 2907354,
+      "sha256": "c1cc653fbd09042d2e92e0a7de5cf8ebe4b4127404fab579996634d678b1b69e"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/rust-0.partial.json.gz",
+      "bytes": 2906691,
+      "sha256": "c44c54071d1e4ddbcc8fdcb9812b8a4f78a6ee5f11782231191781f9eab83ae1"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/rust-0.stderr.log",
+      "bytes": 392,
+      "sha256": "8eb19538787892c2b7e424be667fb53bbddff26797a70b465c83845886049b78"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/rust-1.json.gz",
+      "bytes": 2906955,
+      "sha256": "90e1c1e311278574d32664b3faab5430c7a9c1327f671a88910b450f1aadf359"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/rust-1.partial.json.gz",
+      "bytes": 2906304,
+      "sha256": "d7b7f56f43c3f481059fff1f5bdd23b27e601c45068c2c20a4d6eaa73b3fe47d"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/rust-1.stderr.log",
+      "bytes": 389,
+      "sha256": "bd91888baf0711ca28ac9da1d1e63419f2f79e6717c0b7dd86628d153182a7fb"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/rust-2.json.gz",
+      "bytes": 2907209,
+      "sha256": "b2fbbf7850f2f2c542311f4f7aa62ba55638bd32bb8accf7aadec9d71a827ae6"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/rust-2.partial.json.gz",
+      "bytes": 2906551,
+      "sha256": "8afdc5b214bfef7031762ac7f7f3537b650ef45cbe306a8b44c3965e22d2bfb2"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/rust-2.stderr.log",
+      "bytes": 391,
+      "sha256": "fb14ec4e67928ef3beed1d1f55416dc9b74cc081d824a6a42ff692b874aa3679"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/rust-3.json.gz",
+      "bytes": 2906898,
+      "sha256": "58ce48c7f5bb23169c1533cd29ce7c1ac07de0c87230df49588437ca33492c96"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/rust-3.partial.json.gz",
+      "bytes": 2906246,
+      "sha256": "242c758340919ea4fa8cea982ba150fd2d63e04d57253ebcd25e69c0440d97c4"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/rust-3.stderr.log",
+      "bytes": 387,
+      "sha256": "cff5bf9e18584ddd13ea38bf71be76850990ce5c4810bfa1600f5551d36a1cda"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/rust-4.json.gz",
+      "bytes": 2907627,
+      "sha256": "72033d78e1bc552e9b5a294d0c47400c94d0a430d5b682c6688c254b23ee3f44"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/rust-4.partial.json.gz",
+      "bytes": 2906963,
+      "sha256": "c7bd9e486a8d0b9281fbcaf2bfd8d1d45ab4c4069e5b2f497b4dee19654aa1cb"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/rust-4.stderr.log",
+      "bytes": 392,
+      "sha256": "254d41b45221ac15b7bd979f5d2785ab7c7254b04d3d035b630150e66a1d3b75"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/summary.json",
+      "bytes": 25891,
+      "sha256": "36d8e2ed20b9e1fe6ddd77741b9278c5b8da05b022d6d26616db735ceb50ef4a"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27/verifier-used.py",
+      "bytes": 5558,
+      "sha256": "6c156385468f0308b7d375a2d83979fdac4b8d26838eee5d8ea025d35a0442a5"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27-review/docs-AGENT_HANDOFF.md",
+      "bytes": 201302,
+      "sha256": "ef3730278af31d174671d1c002de87f430f52184c39076c0acdb326ab0451925"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27-review/docs-RUST_COMPLETION_CHECKLIST.md",
+      "bytes": 7872,
+      "sha256": "84e53cfcfddc5e1c275b14458506bd60db67fc2db3e1fc61ed05d361f0ac044a"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27-review/docs-RUST_MIGRATION_REPORT.md",
+      "bytes": 254290,
+      "sha256": "84d653f4dd31871616566acf869f2a3928527e3fe7e67702c097c1b423bc671a"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27-review/docs-RUST_PHASE_MEASUREMENTS.md",
+      "bytes": 13364,
+      "sha256": "199a3371bd03441889bd5e029dc2e8b8a0fe8c8239018c54a7d6f8eaece6ee3d"
+    },
+    {
+      "path": "migration/results/process-benchmark-stage27-review/migration-README.md",
+      "bytes": 204821,
+      "sha256": "01d7ca594cc8ff20dcc918561cb3856e1cb0980cd2303b0fb1a03686f20c3770"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/environment.json",
+      "bytes": 1667,
+      "sha256": "4786b5aeb1dfc9e456986ac5300514d4ba95f226e58cb80945eb87b3283a0eb8"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/harness-used.py",
+      "bytes": 19207,
+      "sha256": "f63f71d84f32131cd6cd80210b9f8239c057cf2768f110b04132d7cad6754933"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/invocation.json",
+      "bytes": 483,
+      "sha256": "0acec2667ab21375c3e6cc3d74aa9f729f2b1fbdce63bc56e917bc492e75d84d"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/python-0.json.gz",
+      "bytes": 82678,
+      "sha256": "a613dd25b885e3e01bbf570bc47783faa7dffed776db09367f72b2da18744568"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/python-0.partial.json.gz",
+      "bytes": 82278,
+      "sha256": "bf93c4834e5a373dc2d5c9cf9979f1b1d68c7df06713a5f1945becc18140595e"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/python-0.stderr.log",
+      "bytes": 9339,
+      "sha256": "0fcfb0dbda8520a63e2c5e39b95cc6ec639bfa029082e16af29b0916c5669dfa"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/python-1.json.gz",
+      "bytes": 82379,
+      "sha256": "8f24853da612e71638ac7b0d3b69b8aae876a6f86c70fd598800784d090f4517"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/python-1.partial.json.gz",
+      "bytes": 81981,
+      "sha256": "c6a7689fa4867aa514fad9967d76818abfba2bd64b3d45a5a86866c362e64f73"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/python-1.stderr.log",
+      "bytes": 9337,
+      "sha256": "e99e04c59f71d1cb8d77d83159769f1442519a8f6c3b5010b6fd94256ee6b544"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/python-2.json.gz",
+      "bytes": 82634,
+      "sha256": "91f9cb56db5a08778050ac151595c6747de41965c72a8afe68bf59924200ff59"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/python-2.partial.json.gz",
+      "bytes": 82240,
+      "sha256": "1a264d27afa95592aa9625aace70c311931524bef1ef4a75d994b137e8a6de06"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/python-2.stderr.log",
+      "bytes": 9339,
+      "sha256": "6b95ec5d2f4a22616a0c880e3dfe335a45621bcf99b0d4ae15dd1808b3c357cc"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/python-3.json.gz",
+      "bytes": 82435,
+      "sha256": "4c8fb21cc0bc8fd5a76ab871e4d8a44c1d379f88e98c76fcb8f9aa0f7014cf02"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/python-3.partial.json.gz",
+      "bytes": 82041,
+      "sha256": "1307172f3bfe11a50dd672fd69783ac76870fb5dc630b0f699fb94d4d07bbe92"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/python-3.stderr.log",
+      "bytes": 9340,
+      "sha256": "064de1851b599e5827fcb90aebfaf57cccbe6bdf8a2e39d5cff707d275e8bd59"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/python-4.json.gz",
+      "bytes": 82466,
+      "sha256": "4fbf0c827e87e1ab09d34e5a86ff7749f9d0903bec5e87b9cb3d9a371282173b"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/python-4.partial.json.gz",
+      "bytes": 82075,
+      "sha256": "c06c4e163fca6c47959386bc55ab49203d18944629b524931a54d300bb826c0a"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/python-4.stderr.log",
+      "bytes": 9338,
+      "sha256": "fa8888b3bd72c00bd224541b75aa4799c30e94d7fa9eaac07b5bf5227e864120"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/rust-0.json.gz",
+      "bytes": 80994,
+      "sha256": "af7e024d98c31cc9f8d0e3cda94f62cdcf3e4cdee9cc6151018b919b064dd547"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/rust-0.partial.json.gz",
+      "bytes": 80574,
+      "sha256": "9cbeafd5e6ff7191ddb4f4b788160749abd7525757847e3c158da0336ee09dad"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/rust-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/rust-1.json.gz",
+      "bytes": 81023,
+      "sha256": "3935a69f1a14b523364766b35120b6382ed05ce08e97077749865308d980cb81"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/rust-1.partial.json.gz",
+      "bytes": 80605,
+      "sha256": "c2fc3aaee3c96def993a10150036c5a99d442770235f53acf6bbfd5a3ebb2336"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/rust-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/rust-2.json.gz",
+      "bytes": 81116,
+      "sha256": "6424ad362daec30fbc12c058a7beae82d5bcf5d645acdc728ad4fca0c4780791"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/rust-2.partial.json.gz",
+      "bytes": 80690,
+      "sha256": "f9846555d3a7dd4a94e12a3f77f2cba61249ce48d9eabac2982606521b105981"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/rust-2.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/rust-3.json.gz",
+      "bytes": 81035,
+      "sha256": "91efd9ca18df376ca71eb8c879ee2032405172ab2eb042aefa6757abc8ba86cc"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/rust-3.partial.json.gz",
+      "bytes": 80614,
+      "sha256": "08f46f525aa59825afec6226a23e1434de2cb5ca4506dab5bc30b92e5b1265d4"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/rust-3.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/rust-4.json.gz",
+      "bytes": 81249,
+      "sha256": "1f36768b88641e428b7244be5cdc3917d7016ecc431b046e874dd99e4ad417aa"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/rust-4.partial.json.gz",
+      "bytes": 80826,
+      "sha256": "c6f6cb31fe5d6a83ec408f03edff15316bb0ad6ed8686049a02e927362e297ee"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/rust-4.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/summary.json",
+      "bytes": 20890,
+      "sha256": "996d0b70a01771a9956c3455803fbb44196c59b4c09b9235569ff15ddd163919"
+    },
+    {
+      "path": "migration/results/process-benchmark-warm-stage27/verifier-used.py",
+      "bytes": 5558,
+      "sha256": "6c156385468f0308b7d375a2d83979fdac4b8d26838eee5d8ea025d35a0442a5"
+    },
+    {
+      "path": "migration/results/prompt-stage27/harness-used.py",
+      "bytes": 4340,
+      "sha256": "cbc06df23b06cde1c42e0834af9b3b0aecc3e260ad2af249ccb7b1eec94fd874"
+    },
+    {
+      "path": "migration/results/prompt-stage27/python-core-live-false-raw.json",
+      "bytes": 356889,
+      "sha256": "82e494d754771be0d3a005c2a9e236c7a275acd4c39d846e5fd5e6b99970f5f6"
+    },
+    {
+      "path": "migration/results/prompt-stage27/python-core-live-false.stderr.log",
+      "bytes": 16501,
+      "sha256": "8243f8aac4333e2f000e215956ceca455af597486f2e6734b75a5ae2cba76b5a"
+    },
+    {
+      "path": "migration/results/prompt-stage27/python-core-live-true-raw.json",
+      "bytes": 356889,
+      "sha256": "4f68aeaa74302f8d3ee33cd8fe77e57b34447f9a1f3392646415bc8cd07d20f9"
+    },
+    {
+      "path": "migration/results/prompt-stage27/python-core-live-true.stderr.log",
+      "bytes": 16501,
+      "sha256": "c7f009ad04a78f4080b9d275074e8643a25857acd040cf90d306097d8d879813"
+    },
+    {
+      "path": "migration/results/prompt-stage27/python-full-live-false-raw.json",
+      "bytes": 676359,
+      "sha256": "0de60db5f317c4b75fed5a9256f1fdb43e91eaa2ea9644970409b83505cd825e"
+    },
+    {
+      "path": "migration/results/prompt-stage27/python-full-live-false.stderr.log",
+      "bytes": 16501,
+      "sha256": "c7f009ad04a78f4080b9d275074e8643a25857acd040cf90d306097d8d879813"
+    },
+    {
+      "path": "migration/results/prompt-stage27/python-full-live-true-raw.json",
+      "bytes": 870627,
+      "sha256": "bbc71cd40ce420d3b86ef8742278190b21322d8f079fe9dd2aa62c12b90f9447"
+    },
+    {
+      "path": "migration/results/prompt-stage27/python-full-live-true.stderr.log",
+      "bytes": 16501,
+      "sha256": "0fb40af0ec2273daa14f200ff76aad74b6025b487576f52acb60e6309878f6cc"
+    },
+    {
+      "path": "migration/results/prompt-stage27/rust-core-live-false-raw.json",
+      "bytes": 356860,
+      "sha256": "315d1941124391468b9b53cbf8840e89fabb20b30a8e595050e64c3eb6a53a03"
+    },
+    {
+      "path": "migration/results/prompt-stage27/rust-core-live-false.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/prompt-stage27/rust-core-live-true-raw.json",
+      "bytes": 356862,
+      "sha256": "883081ade0780dce082e679421bf98f4da180605abf3a466818db906bacfd6dd"
+    },
+    {
+      "path": "migration/results/prompt-stage27/rust-core-live-true.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/prompt-stage27/rust-full-live-false-raw.json",
+      "bytes": 676327,
+      "sha256": "c8d42e214d5f5c09f14e3281c63d2880988da275808d1e6ddf1a3487fd62fc41"
+    },
+    {
+      "path": "migration/results/prompt-stage27/rust-full-live-false.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/prompt-stage27/rust-full-live-true-raw.json",
+      "bytes": 870598,
+      "sha256": "560dfa6f8ed3b3671ce8baffd9fedb261182bbf09d1589eaa9a4588ab756a9b5"
+    },
+    {
+      "path": "migration/results/prompt-stage27/rust-full-live-true.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

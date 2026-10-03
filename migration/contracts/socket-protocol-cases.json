@@ -1,0 +1,967 @@
+{
+  "version": 5,
+  "max_message": 67108864,
+  "commands": [
+    "hello",
+    "ping",
+    "get_active_document",
+    "get_selection",
+    "inspect_selection",
+    "get_document_svg",
+    "render_view",
+    "apply_to_selection",
+    "insert_svg",
+    "set_selected_text",
+    "export_selection",
+    "set_viewport",
+    "get_scene",
+    "get_state_token"
+  ],
+  "requests": [
+    {
+      "command": "hello",
+      "token": "token",
+      "params": {},
+      "encoded": "{\"v\":5,\"cmd\":\"hello\",\"token\":\"token\",\"params\":{}}\n"
+    },
+    {
+      "command": "hello",
+      "token": "unicode-ключ",
+      "params": {
+        "text": "Привіт\n\"\\",
+        "style": {
+          "fill": "#ff0000"
+        }
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"hello\",\"token\":\"unicode-ключ\",\"params\":{\"text\":\"Привіт\\n\\\"\\\\\",\"style\":{\"fill\":\"#ff0000\"}}}\n"
+    },
+    {
+      "command": "hello",
+      "token": "literal$`token",
+      "params": {
+        "region": [
+          -1,
+          2,
+          100,
+          50
+        ],
+        "scale": 1.5,
+        "null": null
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"hello\",\"token\":\"literal$`token\",\"params\":{\"region\":[-1,2,100,50],\"scale\":1.5,\"null\":null}}\n"
+    },
+    {
+      "command": "ping",
+      "token": "token",
+      "params": {},
+      "encoded": "{\"v\":5,\"cmd\":\"ping\",\"token\":\"token\",\"params\":{}}\n"
+    },
+    {
+      "command": "ping",
+      "token": "unicode-ключ",
+      "params": {
+        "text": "Привіт\n\"\\",
+        "style": {
+          "fill": "#ff0000"
+        }
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"ping\",\"token\":\"unicode-ключ\",\"params\":{\"text\":\"Привіт\\n\\\"\\\\\",\"style\":{\"fill\":\"#ff0000\"}}}\n"
+    },
+    {
+      "command": "ping",
+      "token": "literal$`token",
+      "params": {
+        "region": [
+          -1,
+          2,
+          100,
+          50
+        ],
+        "scale": 1.5,
+        "null": null
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"ping\",\"token\":\"literal$`token\",\"params\":{\"region\":[-1,2,100,50],\"scale\":1.5,\"null\":null}}\n"
+    },
+    {
+      "command": "get_active_document",
+      "token": "token",
+      "params": {},
+      "encoded": "{\"v\":5,\"cmd\":\"get_active_document\",\"token\":\"token\",\"params\":{}}\n"
+    },
+    {
+      "command": "get_active_document",
+      "token": "unicode-ключ",
+      "params": {
+        "text": "Привіт\n\"\\",
+        "style": {
+          "fill": "#ff0000"
+        }
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"get_active_document\",\"token\":\"unicode-ключ\",\"params\":{\"text\":\"Привіт\\n\\\"\\\\\",\"style\":{\"fill\":\"#ff0000\"}}}\n"
+    },
+    {
+      "command": "get_active_document",
+      "token": "literal$`token",
+      "params": {
+        "region": [
+          -1,
+          2,
+          100,
+          50
+        ],
+        "scale": 1.5,
+        "null": null
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"get_active_document\",\"token\":\"literal$`token\",\"params\":{\"region\":[-1,2,100,50],\"scale\":1.5,\"null\":null}}\n"
+    },
+    {
+      "command": "get_selection",
+      "token": "token",
+      "params": {},
+      "encoded": "{\"v\":5,\"cmd\":\"get_selection\",\"token\":\"token\",\"params\":{}}\n"
+    },
+    {
+      "command": "get_selection",
+      "token": "unicode-ключ",
+      "params": {
+        "text": "Привіт\n\"\\",
+        "style": {
+          "fill": "#ff0000"
+        }
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"get_selection\",\"token\":\"unicode-ключ\",\"params\":{\"text\":\"Привіт\\n\\\"\\\\\",\"style\":{\"fill\":\"#ff0000\"}}}\n"
+    },
+    {
+      "command": "get_selection",
+      "token": "literal$`token",
+      "params": {
+        "region": [
+          -1,
+          2,
+          100,
+          50
+        ],
+        "scale": 1.5,
+        "null": null
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"get_selection\",\"token\":\"literal$`token\",\"params\":{\"region\":[-1,2,100,50],\"scale\":1.5,\"null\":null}}\n"
+    },
+    {
+      "command": "inspect_selection",
+      "token": "token",
+      "params": {},
+      "encoded": "{\"v\":5,\"cmd\":\"inspect_selection\",\"token\":\"token\",\"params\":{}}\n"
+    },
+    {
+      "command": "inspect_selection",
+      "token": "unicode-ключ",
+      "params": {
+        "text": "Привіт\n\"\\",
+        "style": {
+          "fill": "#ff0000"
+        }
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"inspect_selection\",\"token\":\"unicode-ключ\",\"params\":{\"text\":\"Привіт\\n\\\"\\\\\",\"style\":{\"fill\":\"#ff0000\"}}}\n"
+    },
+    {
+      "command": "inspect_selection",
+      "token": "literal$`token",
+      "params": {
+        "region": [
+          -1,
+          2,
+          100,
+          50
+        ],
+        "scale": 1.5,
+        "null": null
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"inspect_selection\",\"token\":\"literal$`token\",\"params\":{\"region\":[-1,2,100,50],\"scale\":1.5,\"null\":null}}\n"
+    },
+    {
+      "command": "get_document_svg",
+      "token": "token",
+      "params": {},
+      "encoded": "{\"v\":5,\"cmd\":\"get_document_svg\",\"token\":\"token\",\"params\":{}}\n"
+    },
+    {
+      "command": "get_document_svg",
+      "token": "unicode-ключ",
+      "params": {
+        "text": "Привіт\n\"\\",
+        "style": {
+          "fill": "#ff0000"
+        }
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"get_document_svg\",\"token\":\"unicode-ключ\",\"params\":{\"text\":\"Привіт\\n\\\"\\\\\",\"style\":{\"fill\":\"#ff0000\"}}}\n"
+    },
+    {
+      "command": "get_document_svg",
+      "token": "literal$`token",
+      "params": {
+        "region": [
+          -1,
+          2,
+          100,
+          50
+        ],
+        "scale": 1.5,
+        "null": null
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"get_document_svg\",\"token\":\"literal$`token\",\"params\":{\"region\":[-1,2,100,50],\"scale\":1.5,\"null\":null}}\n"
+    },
+    {
+      "command": "render_view",
+      "token": "token",
+      "params": {},
+      "encoded": "{\"v\":5,\"cmd\":\"render_view\",\"token\":\"token\",\"params\":{}}\n"
+    },
+    {
+      "command": "render_view",
+      "token": "unicode-ключ",
+      "params": {
+        "text": "Привіт\n\"\\",
+        "style": {
+          "fill": "#ff0000"
+        }
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"render_view\",\"token\":\"unicode-ключ\",\"params\":{\"text\":\"Привіт\\n\\\"\\\\\",\"style\":{\"fill\":\"#ff0000\"}}}\n"
+    },
+    {
+      "command": "render_view",
+      "token": "literal$`token",
+      "params": {
+        "region": [
+          -1,
+          2,
+          100,
+          50
+        ],
+        "scale": 1.5,
+        "null": null
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"render_view\",\"token\":\"literal$`token\",\"params\":{\"region\":[-1,2,100,50],\"scale\":1.5,\"null\":null}}\n"
+    },
+    {
+      "command": "apply_to_selection",
+      "token": "token",
+      "params": {},
+      "encoded": "{\"v\":5,\"cmd\":\"apply_to_selection\",\"token\":\"token\",\"params\":{}}\n"
+    },
+    {
+      "command": "apply_to_selection",
+      "token": "unicode-ключ",
+      "params": {
+        "text": "Привіт\n\"\\",
+        "style": {
+          "fill": "#ff0000"
+        }
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"apply_to_selection\",\"token\":\"unicode-ключ\",\"params\":{\"text\":\"Привіт\\n\\\"\\\\\",\"style\":{\"fill\":\"#ff0000\"}}}\n"
+    },
+    {
+      "command": "apply_to_selection",
+      "token": "literal$`token",
+      "params": {
+        "region": [
+          -1,
+          2,
+          100,
+          50
+        ],
+        "scale": 1.5,
+        "null": null
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"apply_to_selection\",\"token\":\"literal$`token\",\"params\":{\"region\":[-1,2,100,50],\"scale\":1.5,\"null\":null}}\n"
+    },
+    {
+      "command": "insert_svg",
+      "token": "token",
+      "params": {},
+      "encoded": "{\"v\":5,\"cmd\":\"insert_svg\",\"token\":\"token\",\"params\":{}}\n"
+    },
+    {
+      "command": "insert_svg",
+      "token": "unicode-ключ",
+      "params": {
+        "text": "Привіт\n\"\\",
+        "style": {
+          "fill": "#ff0000"
+        }
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"insert_svg\",\"token\":\"unicode-ключ\",\"params\":{\"text\":\"Привіт\\n\\\"\\\\\",\"style\":{\"fill\":\"#ff0000\"}}}\n"
+    },
+    {
+      "command": "insert_svg",
+      "token": "literal$`token",
+      "params": {
+        "region": [
+          -1,
+          2,
+          100,
+          50
+        ],
+        "scale": 1.5,
+        "null": null
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"insert_svg\",\"token\":\"literal$`token\",\"params\":{\"region\":[-1,2,100,50],\"scale\":1.5,\"null\":null}}\n"
+    },
+    {
+      "command": "set_selected_text",
+      "token": "token",
+      "params": {},
+      "encoded": "{\"v\":5,\"cmd\":\"set_selected_text\",\"token\":\"token\",\"params\":{}}\n"
+    },
+    {
+      "command": "set_selected_text",
+      "token": "unicode-ключ",
+      "params": {
+        "text": "Привіт\n\"\\",
+        "style": {
+          "fill": "#ff0000"
+        }
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"set_selected_text\",\"token\":\"unicode-ключ\",\"params\":{\"text\":\"Привіт\\n\\\"\\\\\",\"style\":{\"fill\":\"#ff0000\"}}}\n"
+    },
+    {
+      "command": "set_selected_text",
+      "token": "literal$`token",
+      "params": {
+        "region": [
+          -1,
+          2,
+          100,
+          50
+        ],
+        "scale": 1.5,
+        "null": null
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"set_selected_text\",\"token\":\"literal$`token\",\"params\":{\"region\":[-1,2,100,50],\"scale\":1.5,\"null\":null}}\n"
+    },
+    {
+      "command": "export_selection",
+      "token": "token",
+      "params": {},
+      "encoded": "{\"v\":5,\"cmd\":\"export_selection\",\"token\":\"token\",\"params\":{}}\n"
+    },
+    {
+      "command": "export_selection",
+      "token": "unicode-ключ",
+      "params": {
+        "text": "Привіт\n\"\\",
+        "style": {
+          "fill": "#ff0000"
+        }
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"export_selection\",\"token\":\"unicode-ключ\",\"params\":{\"text\":\"Привіт\\n\\\"\\\\\",\"style\":{\"fill\":\"#ff0000\"}}}\n"
+    },
+    {
+      "command": "export_selection",
+      "token": "literal$`token",
+      "params": {
+        "region": [
+          -1,
+          2,
+          100,
+          50
+        ],
+        "scale": 1.5,
+        "null": null
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"export_selection\",\"token\":\"literal$`token\",\"params\":{\"region\":[-1,2,100,50],\"scale\":1.5,\"null\":null}}\n"
+    },
+    {
+      "command": "set_viewport",
+      "token": "token",
+      "params": {},
+      "encoded": "{\"v\":5,\"cmd\":\"set_viewport\",\"token\":\"token\",\"params\":{}}\n"
+    },
+    {
+      "command": "set_viewport",
+      "token": "unicode-ключ",
+      "params": {
+        "text": "Привіт\n\"\\",
+        "style": {
+          "fill": "#ff0000"
+        }
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"set_viewport\",\"token\":\"unicode-ключ\",\"params\":{\"text\":\"Привіт\\n\\\"\\\\\",\"style\":{\"fill\":\"#ff0000\"}}}\n"
+    },
+    {
+      "command": "set_viewport",
+      "token": "literal$`token",
+      "params": {
+        "region": [
+          -1,
+          2,
+          100,
+          50
+        ],
+        "scale": 1.5,
+        "null": null
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"set_viewport\",\"token\":\"literal$`token\",\"params\":{\"region\":[-1,2,100,50],\"scale\":1.5,\"null\":null}}\n"
+    },
+    {
+      "command": "get_scene",
+      "token": "token",
+      "params": {},
+      "encoded": "{\"v\":5,\"cmd\":\"get_scene\",\"token\":\"token\",\"params\":{}}\n"
+    },
+    {
+      "command": "get_scene",
+      "token": "unicode-ключ",
+      "params": {
+        "text": "Привіт\n\"\\",
+        "style": {
+          "fill": "#ff0000"
+        }
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"get_scene\",\"token\":\"unicode-ключ\",\"params\":{\"text\":\"Привіт\\n\\\"\\\\\",\"style\":{\"fill\":\"#ff0000\"}}}\n"
+    },
+    {
+      "command": "get_scene",
+      "token": "literal$`token",
+      "params": {
+        "region": [
+          -1,
+          2,
+          100,
+          50
+        ],
+        "scale": 1.5,
+        "null": null
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"get_scene\",\"token\":\"literal$`token\",\"params\":{\"region\":[-1,2,100,50],\"scale\":1.5,\"null\":null}}\n"
+    },
+    {
+      "command": "get_state_token",
+      "token": "token",
+      "params": {},
+      "encoded": "{\"v\":5,\"cmd\":\"get_state_token\",\"token\":\"token\",\"params\":{}}\n"
+    },
+    {
+      "command": "get_state_token",
+      "token": "unicode-ключ",
+      "params": {
+        "text": "Привіт\n\"\\",
+        "style": {
+          "fill": "#ff0000"
+        }
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"get_state_token\",\"token\":\"unicode-ключ\",\"params\":{\"text\":\"Привіт\\n\\\"\\\\\",\"style\":{\"fill\":\"#ff0000\"}}}\n"
+    },
+    {
+      "command": "get_state_token",
+      "token": "literal$`token",
+      "params": {
+        "region": [
+          -1,
+          2,
+          100,
+          50
+        ],
+        "scale": 1.5,
+        "null": null
+      },
+      "encoded": "{\"v\":5,\"cmd\":\"get_state_token\",\"token\":\"literal$`token\",\"params\":{\"region\":[-1,2,100,50],\"scale\":1.5,\"null\":null}}\n"
+    }
+  ],
+  "responses": [
+    {
+      "frame": {
+        "v": 5,
+        "ok": true,
+        "result": {}
+      },
+      "result": {}
+    },
+    {
+      "frame": {
+        "v": 5.0,
+        "ok": true,
+        "result": {
+          "unicode": "Привіт",
+          "items": [
+            1,
+            null
+          ]
+        }
+      },
+      "result": {
+        "unicode": "Привіт",
+        "items": [
+          1,
+          null
+        ]
+      }
+    },
+    {
+      "frame": {
+        "v": 5,
+        "ok": false,
+        "error": "host path must not surface"
+      },
+      "error": "live helper rejected the request"
+    },
+    {
+      "frame": {
+        "v": 5,
+        "ok": true,
+        "result": [],
+        "extra": "ignored"
+      },
+      "error": "malformed success response"
+    },
+    {
+      "frame": {
+        "v": 5,
+        "ok": true
+      },
+      "error": "malformed success response"
+    },
+    {
+      "frame": {
+        "v": 5,
+        "result": {}
+      },
+      "error": "response missing ok discriminator"
+    },
+    {
+      "frame": {
+        "v": 5,
+        "ok": 1,
+        "result": {}
+      },
+      "error": "response missing ok discriminator"
+    },
+    {
+      "frame": {
+        "v": 5,
+        "ok": "true",
+        "result": {}
+      },
+      "error": "response missing ok discriminator"
+    },
+    {
+      "frame": {
+        "v": 5,
+        "ok": null
+      },
+      "error": "response missing ok discriminator"
+    },
+    {
+      "frame": {
+        "v": "5",
+        "ok": true,
+        "result": {}
+      },
+      "error": "protocol version mismatch"
+    },
+    {
+      "frame": {
+        "v": true,
+        "ok": true,
+        "result": {}
+      },
+      "error": "protocol version mismatch"
+    },
+    {
+      "frame": {
+        "v": 4,
+        "ok": true,
+        "result": {}
+      },
+      "error": "protocol version mismatch"
+    },
+    {
+      "frame": {
+        "v": 6,
+        "ok": true,
+        "result": {}
+      },
+      "error": "protocol version mismatch"
+    },
+    {
+      "frame": {
+        "ok": true,
+        "result": {}
+      },
+      "error": "protocol version mismatch"
+    },
+    {
+      "frame": {},
+      "error": "protocol version mismatch"
+    }
+  ],
+  "rendezvous": [
+    {
+      "value": {
+        "port": 1,
+        "token": "secret"
+      },
+      "expected": {
+        "port": 1,
+        "token": "secret",
+        "pid": null
+      }
+    },
+    {
+      "value": {
+        "port": 65535,
+        "token": "secret"
+      },
+      "expected": {
+        "port": 65535,
+        "token": "secret",
+        "pid": null
+      }
+    },
+    {
+      "value": {
+        "port": 0,
+        "token": "secret"
+      },
+      "expected": null
+    },
+    {
+      "value": {
+        "port": -1,
+        "token": "secret"
+      },
+      "expected": null
+    },
+    {
+      "value": {
+        "port": 65536,
+        "token": "secret"
+      },
+      "expected": null
+    },
+    {
+      "value": {
+        "port": 1234,
+        "token": "secret"
+      },
+      "expected": {
+        "port": 1234,
+        "token": "secret",
+        "pid": null
+      }
+    },
+    {
+      "value": {
+        "port": "1234",
+        "token": "secret"
+      },
+      "expected": {
+        "port": 1234,
+        "token": "secret",
+        "pid": null
+      }
+    },
+    {
+      "value": {
+        "port": "1234.0",
+        "token": "secret"
+      },
+      "expected": {
+        "port": 1234,
+        "token": "secret",
+        "pid": null
+      }
+    },
+    {
+      "value": {
+        "port": 1234.0,
+        "token": "secret"
+      },
+      "expected": {
+        "port": 1234,
+        "token": "secret",
+        "pid": null
+      }
+    },
+    {
+      "value": {
+        "port": true,
+        "token": "secret"
+      },
+      "expected": {
+        "port": 1,
+        "token": "secret",
+        "pid": null
+      }
+    },
+    {
+      "value": {
+        "port": null,
+        "token": "secret"
+      },
+      "expected": null
+    },
+    {
+      "value": {
+        "port": "bad",
+        "token": "secret"
+      },
+      "expected": null
+    },
+    {
+      "value": {
+        "port": 1.5,
+        "token": "secret"
+      },
+      "expected": null
+    },
+    {
+      "value": {
+        "port": "1e3",
+        "token": "secret"
+      },
+      "expected": null
+    },
+    {
+      "value": {
+        "port": "1_234",
+        "token": "secret"
+      },
+      "expected": {
+        "port": 1234,
+        "token": "secret",
+        "pid": null
+      }
+    },
+    {
+      "value": {
+        "port": "+1234",
+        "token": "secret"
+      },
+      "expected": {
+        "port": 1234,
+        "token": "secret",
+        "pid": null
+      }
+    },
+    {
+      "value": {
+        "port": " 1234 ",
+        "token": "secret"
+      },
+      "expected": {
+        "port": 1234,
+        "token": "secret",
+        "pid": null
+      }
+    },
+    {
+      "value": {
+        "port": "01",
+        "token": "secret"
+      },
+      "expected": {
+        "port": 1,
+        "token": "secret",
+        "pid": null
+      }
+    },
+    {
+      "value": {
+        "port": "1.000",
+        "token": "secret"
+      },
+      "expected": {
+        "port": 1,
+        "token": "secret",
+        "pid": null
+      }
+    },
+    {
+      "value": {
+        "port": "1234.00",
+        "token": "secret"
+      },
+      "expected": {
+        "port": 1234,
+        "token": "secret",
+        "pid": null
+      }
+    },
+    {
+      "value": {
+        "port": "1234.0001",
+        "token": "secret"
+      },
+      "expected": null
+    },
+    {
+      "value": {
+        "port": "１２３４",
+        "token": "secret"
+      },
+      "expected": null
+    },
+    {
+      "value": {
+        "port": "0x4",
+        "token": "secret"
+      },
+      "expected": null
+    },
+    {
+      "value": {
+        "port": 1234,
+        "token": ""
+      },
+      "expected": null
+    },
+    {
+      "value": {
+        "port": 1234,
+        "token": " "
+      },
+      "expected": {
+        "port": 1234,
+        "token": " ",
+        "pid": null
+      }
+    },
+    {
+      "value": {
+        "port": 1234,
+        "token": null
+      },
+      "expected": null
+    },
+    {
+      "value": {
+        "port": 1234,
+        "token": 1
+      },
+      "expected": null
+    },
+    {
+      "value": {
+        "port": 1234,
+        "token": "ключ"
+      },
+      "expected": {
+        "port": 1234,
+        "token": "ключ",
+        "pid": null
+      }
+    },
+    {
+      "value": {
+        "port": 1234,
+        "token": "secret",
+        "protocol_version": 4
+      },
+      "expected": null
+    },
+    {
+      "value": {
+        "port": 1234,
+        "token": "secret",
+        "protocol_version": 6
+      },
+      "expected": null
+    },
+    {
+      "value": {
+        "port": 1234,
+        "token": "secret",
+        "protocol_version": "5"
+      },
+      "expected": {
+        "port": 1234,
+        "token": "secret",
+        "pid": null
+      }
+    },
+    {
+      "value": {
+        "port": 1234,
+        "token": "secret",
+        "protocol_version": 5.0
+      },
+      "expected": {
+        "port": 1234,
+        "token": "secret",
+        "pid": null
+      }
+    },
+    {
+      "value": {
+        "port": 1234,
+        "token": "secret",
+        "protocol_version": null
+      },
+      "expected": null
+    },
+    {
+      "value": {
+        "port": 1234,
+        "token": "secret",
+        "pid": null
+      },
+      "expected": {
+        "port": 1234,
+        "token": "secret",
+        "pid": null
+      }
+    },
+    {
+      "value": {
+        "port": 1234,
+        "token": "secret",
+        "pid": 1234
+      },
+      "expected": {
+        "port": 1234,
+        "token": "secret",
+        "pid": 1234
+      }
+    },
+    {
+      "value": {
+        "port": 1234,
+        "token": "secret",
+        "pid": "1234"
+      },
+      "expected": {
+        "port": 1234,
+        "token": "secret",
+        "pid": 1234
+      }
+    },
+    {
+      "value": {
+        "port": 1234,
+        "token": "secret",
+        "pid": true
+      },
+      "expected": {
+        "port": 1234,
+        "token": "secret",
+        "pid": 1
+      }
+    },
+    {
+      "value": {
+        "port": 1234,
+        "token": "secret",
+        "pid": "bad"
+      },
+      "expected": null
+    },
+    {
+      "value": {
+        "port": 1234,
+        "token": "secret",
+        "pid": 1.5
+      },
+      "expected": null
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "observations": 51,
+  "normalization": "validated minted IDs and timestamp lifetime only; full wire/record fields and decoded RGBA pixels",
+  "differences": [],
+  "encoded_png_representation_differences": [
+    {
+      "path": "/connected-selection/png_sha256",
+      "expected": "301e0a9b777933ee5e64919077beaf1b6e7cb3e6c3bea5cac4330fb544a5c635",
+      "actual": "70379ea03e979c4161a70b54d39bd50316edb6939e254f1fd00c43e2351278de"
+    },
+    {
+      "path": "/connected-selection/size_bytes",
+      "expected": 107,
+      "actual": 115
+    },
+    {
+      "path": "/diff-0/png_sha256",
+      "expected": "abc58d5127d7cdf313beb9ec8ee839860a9c6bfbc48c8b8eb6a3f7d8bb63de6f",
+      "actual": "2e82814e16ffc27e58df3a74d7b5f9cf5ba79fdd688bfe322540a97739a266dc"
+    },
+    {
+      "path": "/diff-1/png_sha256",
+      "expected": "4ff6ab670a58c14270e034e2090d9a432caa263a14e0a25785386b0c12f880b5",
+      "actual": "1c5ce851caad0d2f81ca59ff120c6486ba3f93014be26ebf4096049ce035fc47"
+    },
+    {
+      "path": "/diff-10/png_sha256",
+      "expected": "4c42c82d1cd9c29b98d1fb0256f3c605b160baa786cc18b9790c69af78d2849f",
+      "actual": "891520bd62ad450ffb2c56d4f678eefa52939d1810fca16eeafd9f893b3344c4"
+    },
+    {
+      "path": "/diff-10/size_bytes",
+      "expected": 79,
+      "actual": 87
+    },
+    {
+      "path": "/diff-11/png_sha256",
+      "expected": "4c42c82d1cd9c29b98d1fb0256f3c605b160baa786cc18b9790c69af78d2849f",
+      "actual": "891520bd62ad450ffb2c56d4f678eefa52939d1810fca16eeafd9f893b3344c4"
+    },
+    {
+      "path": "/diff-11/size_bytes",
+      "expected": 79,
+      "actual": 87
+    },
+    {
+      "path": "/diff-2/png_sha256",
+      "expected": "4ff6ab670a58c14270e034e2090d9a432caa263a14e0a25785386b0c12f880b5",
+      "actual": "1c5ce851caad0d2f81ca59ff120c6486ba3f93014be26ebf4096049ce035fc47"
+    },
+    {
+      "path": "/diff-3/png_sha256",
+      "expected": "4ff6ab670a58c14270e034e2090d9a432caa263a14e0a25785386b0c12f880b5",
+      "actual": "1c5ce851caad0d2f81ca59ff120c6486ba3f93014be26ebf4096049ce035fc47"
+    },
+    {
+      "path": "/diff-4/png_sha256",
+      "expected": "4ff6ab670a58c14270e034e2090d9a432caa263a14e0a25785386b0c12f880b5",
+      "actual": "1c5ce851caad0d2f81ca59ff120c6486ba3f93014be26ebf4096049ce035fc47"
+    },
+    {
+      "path": "/diff-5/png_sha256",
+      "expected": "abc58d5127d7cdf313beb9ec8ee839860a9c6bfbc48c8b8eb6a3f7d8bb63de6f",
+      "actual": "2e82814e16ffc27e58df3a74d7b5f9cf5ba79fdd688bfe322540a97739a266dc"
+    },
+    {
+      "path": "/diff-6/png_sha256",
+      "expected": "abc58d5127d7cdf313beb9ec8ee839860a9c6bfbc48c8b8eb6a3f7d8bb63de6f",
+      "actual": "2e82814e16ffc27e58df3a74d7b5f9cf5ba79fdd688bfe322540a97739a266dc"
+    },
+    {
+      "path": "/diff-7/png_sha256",
+      "expected": "c1403a0661973621560c0686619bff927e9b7cf2e46178d82568ac35c316a96d",
+      "actual": "b3188a451b38ce2a1cc20f640df5ba99852af07c093cdc8270628f082f9c8ec1"
+    },
+    {
+      "path": "/diff-8/png_sha256",
+      "expected": "ae12d2fc6baeadbe80b19d24c63640a3df0103560c7818f0f5e9b1d6e5bb5a5a",
+      "actual": "62a582fe2bbf6e154ee09d97fda4debf466d6ed630f2785f258ff3d035dc50ee"
+    },
+    {
+      "path": "/diff-9/png_sha256",
+      "expected": "f8cfb3a0a8a86cd50c3ca5dc42bd00f8e11a3085b72ba688a23465e6a60a21dc",
+      "actual": "e7d6e51528a6a6c8f186410ef337cb179f698897a9412797fb55e09062576e3d"
+    },
+    {
+      "path": "/diff-9/size_bytes",
+      "expected": 79,
+      "actual": 78
+    },
+    {
+      "path": "/repeat-appends-link/png_sha256",
+      "expected": "abc58d5127d7cdf313beb9ec8ee839860a9c6bfbc48c8b8eb6a3f7d8bb63de6f",
+      "actual": "2e82814e16ffc27e58df3a74d7b5f9cf5ba79fdd688bfe322540a97739a266dc"
+    }
+  ],
+  "passed": true
+}

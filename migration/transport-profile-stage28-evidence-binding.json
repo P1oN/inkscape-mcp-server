@@ -1,0 +1,1446 @@
+{
+  "passed": true,
+  "scope": "initial rejected and corrected diagnostic transport/file/process capture with exact source/binary snapshots; not pure IPC/full/native proof",
+  "files": [
+    {
+      "path": "migration/filesystem-review-stage27-evidence-binding.json",
+      "bytes": 3522,
+      "sha256": "ea965675ec3eb4beced5af260742e9418f0331b077cb521be8fc631e19cc3475"
+    },
+    {
+      "path": "migration/package-stage27-build-comparison.json",
+      "bytes": 870,
+      "sha256": "9d8e9cba32ba8c9d99e9c6d07e7daea17d85d6480fdb5a940cbc74b575f2b1c9"
+    },
+    {
+      "path": "migration/phase-profile-stage28-v2-comparison.json",
+      "bytes": 27403,
+      "sha256": "82867e6742dce22c6e9ae35e2494cc9a3cb8c16ca1d907d0fe4ee80a5bf94843"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/environment.json",
+      "bytes": 1675,
+      "sha256": "80fb89342f2eeb0c86d1233f89f81dd7a6f7909c8a7898dff571bf757570e5ce"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/initial-validation-failure.json",
+      "bytes": 237,
+      "sha256": "4d78a4f14911eaff3bda5ba26fdf39fab177ece227f71e5357d67c409a99f6ff"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/initial-verifier-used.py",
+      "bytes": 6234,
+      "sha256": "950b328612f7d7018af159c9aefe2d99e742ef45bb691822d672fd0f0d1fb519"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/python-0.json.gz",
+      "bytes": 87179,
+      "sha256": "a0acb63ec82bfc6dd30b190323b3d477b1c7aaea6a3f907a5838ae9a9b47b1ec"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/python-0.partial.json.gz",
+      "bytes": 86793,
+      "sha256": "dc27574284654d149a87eeafc3d9fe281b02aa1ccdb3e03976290da6010f68de"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/python-0.stderr.log",
+      "bytes": 9341,
+      "sha256": "2de82e54e0c9e05773e572993df5468a1f14fe322fbaec49cf7d148e3beb0e2e"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/python-1.json.gz",
+      "bytes": 85922,
+      "sha256": "9c041133b1f3ce5cf2f86da6fbecd271758f209b405027710ae6e7a940be40ee"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/python-1.partial.json.gz",
+      "bytes": 85520,
+      "sha256": "dee762708afcafc058f66cc0e5d51ee83f8613d9c306cf074bbdff9b563ce724"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/python-1.stderr.log",
+      "bytes": 9339,
+      "sha256": "e5fe13256c9f47bb783fc03e9a584758eb93258b98022c853f5224e367302d62"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/python-2.json.gz",
+      "bytes": 85924,
+      "sha256": "e3ec1b00ca8765aafe076b9848297e0180269d6aa97623d3794f28b5c5983473"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/python-2.partial.json.gz",
+      "bytes": 85525,
+      "sha256": "ef0393aeaecf1f6ec392674e3af57434353395d6aabfb70bb5006f0814f81baa"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/python-2.stderr.log",
+      "bytes": 9340,
+      "sha256": "66bbbf274d54c232be3f7e79a95882879afc4d1b9ae5195d0fd579972a17a423"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/python-3.json.gz",
+      "bytes": 85840,
+      "sha256": "f84f06a482933960b2f768f3420e0faa221970723457c8941f683c9f203b37da"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/python-3.partial.json.gz",
+      "bytes": 85430,
+      "sha256": "53d5f397e17c276c465d8357ecb44b8838c7434e76dc5678ed8a190538757236"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/python-3.stderr.log",
+      "bytes": 9340,
+      "sha256": "411f256f35f447f1d6b84f20ba65524c44d3f14e62ef542a903e3eea91316ca9"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/python-4.json.gz",
+      "bytes": 85963,
+      "sha256": "b4e8baba54af5ced591d4e46fd421cb430430300cdb328244846aa2d35ba06c8"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/python-4.partial.json.gz",
+      "bytes": 85559,
+      "sha256": "66b201d76addb1c9b3f496544ebf86f8acd7d4f8e329afb701b489ad550a7200"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/python-4.stderr.log",
+      "bytes": 9339,
+      "sha256": "92ec57bc888b608b66d6a0a2e34a6113ad20e9b35e7fdf83adc864e63e9fd7d6"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/rust-0.json.gz",
+      "bytes": 86116,
+      "sha256": "72ac2c7efeac67e02cb9b761d398e7ef9398d8674619404265457484c9c6673b"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/rust-0.partial.json.gz",
+      "bytes": 85676,
+      "sha256": "aaaffc368872c0d07a53d1ddc22411621fa1822b3b56590ed3d8b4cf4cf74611"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/rust-0.stderr.log",
+      "bytes": 226443,
+      "sha256": "98ba699b57d0a6d30d510d4dbdca97206fb9de765be8eca1f23e1e579d632a82"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/rust-1.json.gz",
+      "bytes": 86690,
+      "sha256": "514045cbbcb9130354540691d26e29c557f4b12cb87d75db01d925102e4019dc"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/rust-1.partial.json.gz",
+      "bytes": 86259,
+      "sha256": "3336f8fc4de9ab17fca7ae7928ba6bfab195b05caa86132099cc3c313d41adfd"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/rust-1.stderr.log",
+      "bytes": 226446,
+      "sha256": "4d7d66572e21ea4c001f13beb7cc794e8eb498e6b90881f127425fc21375c60b"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/rust-2.json.gz",
+      "bytes": 86064,
+      "sha256": "22ed346099fd630b51a99574cb51a4a335ddc02bd37fec9f21261543fce2f38a"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/rust-2.partial.json.gz",
+      "bytes": 85619,
+      "sha256": "4cd82c7eef274ef62a7675cc85864054b8fed81fd69dce6b61493e499a6aa80d"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/rust-2.stderr.log",
+      "bytes": 226443,
+      "sha256": "23101372172d562dfe4a14f7a9dc3163361b750f4be5e6740801a3af46df5c0a"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/rust-3.json.gz",
+      "bytes": 86359,
+      "sha256": "18c8d479f2b99f813710f164b4d1289a5151d3983d9ab3bddbfbd592b85d6457"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/rust-3.partial.json.gz",
+      "bytes": 85919,
+      "sha256": "ecdb066c5856d0c98a2ad40f4af877bb8d0f4985a7ca4ceed464fc54255eb560"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/rust-3.stderr.log",
+      "bytes": 226443,
+      "sha256": "9d6e3abc88551c8f38155ac28fe17dba54c6b2f0a4852cbda5bbac6e7996642a"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/rust-4.json.gz",
+      "bytes": 86440,
+      "sha256": "bb7d631cf898509ebda576410ad3322361f5c54b69454b47911765e7a70a7d81"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/rust-4.partial.json.gz",
+      "bytes": 86009,
+      "sha256": "cb497026fe4f8dc963a1e04df6bde751c7f8b8ea32d337fa67312bd85cf76b58"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/rust-4.stderr.log",
+      "bytes": 226441,
+      "sha256": "b3d8798cbd0cb519fa773fefa58c235f02f9dbb798d80d31a5509c4c8752a03d"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28/summary.json",
+      "bytes": 20998,
+      "sha256": "0c8f9cad500e4c4235be5010d99d4691125e3880a3006f12f7096e1485090a8d"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/build.log",
+      "bytes": 3192,
+      "sha256": "a1bed77eb0243b6116df7571b6b006d847ac16dec516491f4e39cd9b2c29df33"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/diagnostic-binary",
+      "bytes": 12836448,
+      "sha256": "1e93fd0bfe10c5f87eab915c0403939d81142aff46ac16e7cd2ce0979d9f99e9"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/instrumentation.json",
+      "bytes": 1828,
+      "sha256": "836179f96b604ea2e97c4e39e81bc71bb5ec3b499be97edf9ed14331073bf878"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/Cargo.lock",
+      "bytes": 27518,
+      "sha256": "e6929040ff5ef89b7f9430e4b6a9c1616f513851fe0131b4e0716ed7f091d87a"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/Cargo.toml",
+      "bytes": 839,
+      "sha256": "5494e6b78deb62178807d8e3f76b56aecfe6b4278ab0595d3bd40aca08b5bcbb"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/actions.rs",
+      "bytes": 13943,
+      "sha256": "af9c9363006640aed84a7f46566c0d4953da79f1270e2033d67f44596ef854e4"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/adopt.rs",
+      "bytes": 13809,
+      "sha256": "ccaa96214405c2a3f0fa1609c8e5e46c16fa4048e779006bd4902abbc81d7454"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/argument_normalization.rs",
+      "bytes": 7385,
+      "sha256": "e105f20f517288ca6f051fa3202908cc419196a1292861b9f3706a09b6ced5a7"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/argument_numbers.rs",
+      "bytes": 2166,
+      "sha256": "2b8ea0f1262c2a34bd569966ef8589873aa58cae95508eca624c3d39f721f044"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/argument_validation.rs",
+      "bytes": 32098,
+      "sha256": "6f4071a786dcf298cf611c4d031c73de0001287177bd37793d43b5db6e05d86b"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/arguments.rs",
+      "bytes": 1579,
+      "sha256": "28e9029a6a410870539caf829fc4e9b71b9bbb22677f43b25840d1a387952cae"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/artifact_stat.rs",
+      "bytes": 3452,
+      "sha256": "312df99bbdca9eeae5360e70d5019b5d815ed1d5ff30821fd55c18ea533bdec2"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/batch.rs",
+      "bytes": 6721,
+      "sha256": "7b529cea48ed04642d6cb97b8aab0793f74c19d0be0751c25374acfd5642335e"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/canvas.rs",
+      "bytes": 10992,
+      "sha256": "3b7825a10bb68f374d4cb70f834f130a54b2847dbe9f331475373899ea797d30"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/collection.rs",
+      "bytes": 8132,
+      "sha256": "e84457deb5f224910414a7688aec829636a6a5a10c1fef9be385a1d9128da8c0"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/contract.rs",
+      "bytes": 2504,
+      "sha256": "abacb51a6b995b51b9e629b13e21e9fd7280e022f6fbc7390fac3965b7b867aa"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/create.rs",
+      "bytes": 13703,
+      "sha256": "046cd54751abcaf330c19f162b2419fa7c02dd4c576d005180d808e3e72b7e2b"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/css.rs",
+      "bytes": 3518,
+      "sha256": "3b811ca78d60bb423a6ffe5413ba7e12ca7c3aa267a2e86f8cc889b06f85961c"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/decimal.rs",
+      "bytes": 2348,
+      "sha256": "95fefd80999fc4b3b7fb0237033f96e0742763fe710955d99c0ba8d80e4fe8e2"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/delete.rs",
+      "bytes": 4740,
+      "sha256": "5734d8c710c612d986c57ab7ffcee5e5fab044191bb9bacb4c77b739e131d2fc"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/doctor.rs",
+      "bytes": 14355,
+      "sha256": "4c2747c552311d615b96ce18f0e7b2cd2ec03c88064a2033a33c89df74192ad8"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/document.rs",
+      "bytes": 12238,
+      "sha256": "8afe1e5fcbde2b1399b76a888b27a018f822b6bfd73bf87d7e8df48f8eda8a3f"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/duplicate.rs",
+      "bytes": 13930,
+      "sha256": "f8a30a4d664413f14b8212cf438e2c0f79d85ba6cf8a60f44beca77fd5120473"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/editability.rs",
+      "bytes": 7264,
+      "sha256": "2feca556876442483e7fef6012a24d5dbdabc7e8ffc5540504f8ef7d768c44d4"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/engine.rs",
+      "bytes": 16194,
+      "sha256": "951a678ecedf15a3261cbf707794fbc48e5ef17bb1c54e7c89ce7f7a5bd73429"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/export_batch.rs",
+      "bytes": 7154,
+      "sha256": "135c044a0b7e234cb62a39578d37528187531c34d4e0a47ce0c11e2b58c1b29b"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/find.rs",
+      "bytes": 7287,
+      "sha256": "e83478f99daf945f26f49b7d9d8ff6300243721d8ef3f4d44ab10676526912db"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/fit.rs",
+      "bytes": 5090,
+      "sha256": "5231b59d434f5a7fc90f2c21950594f7441e89f116d74d7df8e5a2772a5a83e1"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/fonts.rs",
+      "bytes": 3994,
+      "sha256": "8ede64d74a3c420c607c517766c79a654465a5460aa4ab284ef00f5debd7280f"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/fragment.rs",
+      "bytes": 11279,
+      "sha256": "7ba8e4d1e66a140ded192a52779f05d9fc285662e40c55deb6bcd286817552e7"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/frames.rs",
+      "bytes": 5978,
+      "sha256": "9d3effb6ab6c5b3664bdd88232866090b64980c05d322f45f300b7a57b890ac6"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/geometry.rs",
+      "bytes": 9574,
+      "sha256": "98ce037b6bcd3a3a103875f84633be54eff6fdfc07d48370651500e2957ebd39"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/gradient.rs",
+      "bytes": 9390,
+      "sha256": "f7c1bc205a7efad00d68170e7faed0effeebab2719eb5f418c0205b9171575a6"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/grid.rs",
+      "bytes": 8198,
+      "sha256": "c53c3b19f39f3d1ea0ddf4b4ad61cd103737d176109c37875de47ddd7208f86d"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/grid_plan.rs",
+      "bytes": 7235,
+      "sha256": "c493a234234e0f00b361e92d60f8009bbd535d406ac9af24fd7573c44a7820f0"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/group.rs",
+      "bytes": 5696,
+      "sha256": "2c2e48fb1703fc3087094d31073410ad1001d60f699fe9bb49b9db271894a4d7"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/identity.rs",
+      "bytes": 11185,
+      "sha256": "b38af90fff45d97d022dd51610ad54d07101f2a2fafb708352094ecebb546444"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/inspect.rs",
+      "bytes": 15221,
+      "sha256": "83a09e32b25b2df6b6e7196e42cc2ce7f6d73335bb967ae8da1566f824660944"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/intents.rs",
+      "bytes": 4692,
+      "sha256": "270cbf13cea27ebe0e6bb00717e22084ee85899b408b4beab10b477f5b7cd4f3"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live.rs",
+      "bytes": 15414,
+      "sha256": "2d925f478beb417eff58030d95c3a2f69ca1a21a8b2300731b052f4326c5fa37"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_arm.rs",
+      "bytes": 4864,
+      "sha256": "f6d5724f9316cc08744103be8b1a8d2ed4f8c1af74cd745bfcba094c9b791898"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_attach.rs",
+      "bytes": 7229,
+      "sha256": "b366629d3f3c5e7afdad0520b312974e3efc85062dde181d42ffb877228d8b0d"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_bus.rs",
+      "bytes": 20482,
+      "sha256": "5449cabfbde2af94c4d00c766eadcd78126daa576c980dd04148b9221d2be719"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_cache.rs",
+      "bytes": 3889,
+      "sha256": "790ec30fd9aeb949bae2872b6307fa29c77f2f1e4a7b5a69151cdc597ec39706"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_context.rs",
+      "bytes": 9831,
+      "sha256": "90bccb8f55b9c9d76cb9bbd5fa15fbbe27466349a6f4e2fda9ee3d3c571de8b2"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_dbus.rs",
+      "bytes": 25700,
+      "sha256": "9b7a1cfaa6ac53862a3b3b9e0f795162bfa3f9c929adf0e129136dabed5758b8"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_diff.rs",
+      "bytes": 14604,
+      "sha256": "403c038efa0ab1c0e0244c44414adad43930a175560b3f45a892f05830310965"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_discovery.rs",
+      "bytes": 19129,
+      "sha256": "4c9ba7e39b7ca8713b642492167bcd045daace6610268a0a8fa8f4c58c974b2d"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_effect.rs",
+      "bytes": 18288,
+      "sha256": "1c37f3b8b911c836396972f3585e5d7bc3e90d38841d96e78d0bf96b5e822932"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_events.rs",
+      "bytes": 4479,
+      "sha256": "2ee5b32490132ce2922d47659a054891136352c39855d1a37f0f7d3c320d5152"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_insert.rs",
+      "bytes": 14117,
+      "sha256": "f3b380951f076402db5043a81a5533c9648b6575c6fe1cdd57b8a5981d6b25d9"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_install.rs",
+      "bytes": 4336,
+      "sha256": "4da86cf7049a086bbc668d2d74018201d53a595168017a01f4e2d373a4adf599"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_launch.rs",
+      "bytes": 7885,
+      "sha256": "6e17f71b63809f15f3d7eae93979bb506628c341677eac5792d70428872980ad"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_loop.rs",
+      "bytes": 4435,
+      "sha256": "cbc46ce606f22f43d2ec1529e7ea10858958491919dbd931aaa6b697db3b76cd"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_managed.rs",
+      "bytes": 56274,
+      "sha256": "f882ef0dd3eecf67b9875ce7ef5b3dab56ecb719c5bdd7b837f9a7cb79d244f3"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_models.rs",
+      "bytes": 10133,
+      "sha256": "9b923fa74fb96ca62a82aa403a7e49a473323ddfea4b8d292dd5ed7adb38bc03"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_mutation.rs",
+      "bytes": 12334,
+      "sha256": "e10c0afbd55a94c04e617c4f183acd325deb5fc57ef15572e0de2347c73740c2"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_probe.rs",
+      "bytes": 13379,
+      "sha256": "3d84711a0ab70b2576a0834ade7f334bdafd58db17cbc17f837ae85d11abba9b"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_protocol.rs",
+      "bytes": 8780,
+      "sha256": "c616ba12b7631afc7a25251656ec530a83ed57cbf6ec0c4541072db006a6d6c1"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_records.rs",
+      "bytes": 12556,
+      "sha256": "105e82606d815333d09a2cf6e640e530a4128822e27e9f0d8d346ec38b586c7f"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_render.rs",
+      "bytes": 9441,
+      "sha256": "fc2134fce836904f7ed57ef7e67049a6c8bef1caa7d7026e6e7b9bf29db2393b"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_scene.rs",
+      "bytes": 7668,
+      "sha256": "a97f28ee928ffc2268bcfa38d8e0fceac5c952ff2eb066f7ab9fb895f32ebba6"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_selection.rs",
+      "bytes": 3623,
+      "sha256": "c439877d16bbd95ba6b6b4f62188a85bc5b88005c869e095ee4eecc1fe714e2d"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_session.rs",
+      "bytes": 15986,
+      "sha256": "7ca555c3c9d976a0065547577b463ed97b7770bcd4d88d38b0ef14b8fde7f93d"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_socket.rs",
+      "bytes": 32369,
+      "sha256": "659cdd8e6182ce40e61e314e3bfdda86b2942331b07658b77b422b113d4cb031"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_sync.rs",
+      "bytes": 3000,
+      "sha256": "1a4bc25e6d2155e8ceed1796cd544672c6e69cfb9447a40ca2e6a22d5996dbcb"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_transport.rs",
+      "bytes": 8782,
+      "sha256": "0741b5cf31789980a253791495a003b2731df0523b0a6ed97f2913ea96b8fee9"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/live_view.rs",
+      "bytes": 3618,
+      "sha256": "be8223b55bb94051b4a01e0503ed3190e8df62bc80e090794d11aefefa92c23a"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/main.rs",
+      "bytes": 29867,
+      "sha256": "51b01de30ef5f05e5592a16e8364647c35c68fe521944ad4deefc0305aa3c3fb"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/optimization_analysis.rs",
+      "bytes": 5595,
+      "sha256": "8147488e5936f55371b11fa945c6530735f9bfdd7b124f610dc047c80ef38460"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/optimize.rs",
+      "bytes": 11874,
+      "sha256": "76422ead89002d69adbdc7c2f31e80831bc307db95ba1f6dbb11155009c09da6"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/palette_colors.json",
+      "bytes": 2258,
+      "sha256": "ccd1cf8321d6d7e8f97d35d6e78203ecf51a1b7a62a158f77580007f556dbf97"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/paths.rs",
+      "bytes": 17467,
+      "sha256": "7e3d3816f81ce734c3785aff4c73330b83805b68db486f2aa4f0e2c566589796"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/phase_profile.rs",
+      "bytes": 3791,
+      "sha256": "efd22510ad73c576e4b1319aaa3963df16f7293389ffadca809b63cd5a192634"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/placement.rs",
+      "bytes": 9258,
+      "sha256": "14cdeed355f69cfa3881f36611815c7ab0e3e348422672a3f6ce6a577be95b4a"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/preview.rs",
+      "bytes": 5332,
+      "sha256": "9d7c14b7753e220f84f55d351ca48138ce13dd34695dce6437523867b38eeef4"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/process.rs",
+      "bytes": 11524,
+      "sha256": "648a018909a01599199c6b9049f57292b8b84fd7be5e6e334ae9f84bf8321f60"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/profiles.rs",
+      "bytes": 6049,
+      "sha256": "b1c81fa5e856812976d3b4750dea9e983b9e44c883cf6aad36e52177fa1e32db"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/prompts.rs",
+      "bytes": 3150,
+      "sha256": "9ad7d96fc145963ed24316c1a2a417ea02feeb7d1336d3ff1f7335853c5d9492"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/quality.rs",
+      "bytes": 7032,
+      "sha256": "f70bff65e5d7b10c1d485a3befcd9369e9c7a6adbb67574ac6048911bec0baa0"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/recolor.rs",
+      "bytes": 7398,
+      "sha256": "6b804c281eb8061915b9aefdb14cc09c309e5b417e915e01c421ba355aa6800b"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/recovery.rs",
+      "bytes": 16926,
+      "sha256": "601adb1a758027c6e2dd4561313735de866a05aa650f601a170c7f6c566ed931"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/render.rs",
+      "bytes": 29667,
+      "sha256": "c5b98b99de2da8a41f1e8a15138e73f73bd9e308761e33102bb5bd7248fc2fea"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/reparent.rs",
+      "bytes": 19420,
+      "sha256": "c88ff247d9a0105e7b15edfe4f9488b657d9e9b7830f8b57b21a0991be1033ac"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/repeat.rs",
+      "bytes": 16589,
+      "sha256": "b0a6dcee9049397d4cb9b0a6a40c20a9c0556cf116e8f2038ec5cb29ce878ae8"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/repeat_plan.rs",
+      "bytes": 12448,
+      "sha256": "efc61a7f5717e1e6b8d3444afc83cda97908bc5e1502124a261ee53e52b2c822"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/retention.rs",
+      "bytes": 20162,
+      "sha256": "5ed187e10b9adef190717f12406a907acbc10ad4fb9dcd083f849a4a2c7238b2"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/runtime.rs",
+      "bytes": 14859,
+      "sha256": "8723d1b61b310e0c1c2418f7421236764d1440d33ed2db276c283286a0ae776d"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/save.rs",
+      "bytes": 8917,
+      "sha256": "65afb69df48c650c073e16db05a052de0e01f8f94669a824d067105dab7e578f"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/structure.rs",
+      "bytes": 7343,
+      "sha256": "6e36abf2fc6a60ccf53528b80833cad47984447d25188fa2ddc204d7c630fe2b"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/style.rs",
+      "bytes": 11756,
+      "sha256": "28c8dbc450bd7aa8b11a9e8647a18f1e6843c411c19aaf9651713c6f9666e983"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/text.rs",
+      "bytes": 9467,
+      "sha256": "8363ac8c40c113b0ca541fd5732168a93b91e4199ee922e25b87e28baaa1fbaf"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/tile.rs",
+      "bytes": 8099,
+      "sha256": "800501e963eb2d857c8768b060babe3f6d604d1f9e01009bc8efae79cbe4dd25"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/transaction.rs",
+      "bytes": 30314,
+      "sha256": "2203d1861aa2b6e9dd9053b15a5b2f2d5fd380982e783ca83ccea890afcdb2d6"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/transform.rs",
+      "bytes": 6559,
+      "sha256": "aa8702c5d375f2280fb2eda3d27851b365633ccdd5356927c8975db50fa486eb"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/transform_objects.rs",
+      "bytes": 6632,
+      "sha256": "2f80938647b807f9cc33bc89fa6f5da8ef7b88f5d7359b2f1ee8f9df42806032"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/transport_profile.rs",
+      "bytes": 3838,
+      "sha256": "8fe5c61a4d91054d972afc912b5d94bb4a6f67382965af65128a93b349e916e9"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/use_object.rs",
+      "bytes": 5796,
+      "sha256": "3528dce8baafcc6e91714f47f144676e11912a3444484ae29fd65e475ce5ed14"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/validate.rs",
+      "bytes": 13242,
+      "sha256": "8998d1375ce8816bae6c2189a26a061de8a6209239b9719240f51e1de1825812"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/workspace.rs",
+      "bytes": 38774,
+      "sha256": "64e59d650b3cc7cdecd1e2955a79dc36196a8ba8c4346e76937f7bbbfc635e8b"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy/rust/src/xml.rs",
+      "bytes": 7355,
+      "sha256": "9bb503010ac6c7c4a28df2e929af83a0be528f11c574345f48956ce1ca97841a"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/build-corrected.log",
+      "bytes": 202,
+      "sha256": "85d2da13695bd15a8071365f5460d68a822d2c29690aad12d0e832f84e6ab514"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/build.log",
+      "bytes": 3039,
+      "sha256": "6243d524ed4191e9d23177f6616e5ba4d62c503fc0331274aaac1bcf42f54e12"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/clippy.log",
+      "bytes": 2160,
+      "sha256": "ecd2413ef6cf4c16c392037a3466f3fb7ba555823da3f7e7b6b41bafae6515db"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/diagnostic-binary",
+      "bytes": 12836448,
+      "sha256": "86fed1e04a80bb90c2b960d260ab052dbb18c20ebb062dea467c7762974b28c5"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/instrumentation-built.json",
+      "bytes": 9543,
+      "sha256": "6eed0a7cf68f68a2c85afa9c4c040e3eceb48ebfbf05e1ddfa1a8b51427c227e"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/instrumentation.json",
+      "bytes": 1828,
+      "sha256": "836179f96b604ea2e97c4e39e81bc71bb5ec3b499be97edf9ed14331073bf878"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/Cargo.lock",
+      "bytes": 27518,
+      "sha256": "e6929040ff5ef89b7f9430e4b6a9c1616f513851fe0131b4e0716ed7f091d87a"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/Cargo.toml",
+      "bytes": 839,
+      "sha256": "5494e6b78deb62178807d8e3f76b56aecfe6b4278ab0595d3bd40aca08b5bcbb"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/actions.rs",
+      "bytes": 13943,
+      "sha256": "af9c9363006640aed84a7f46566c0d4953da79f1270e2033d67f44596ef854e4"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/adopt.rs",
+      "bytes": 13809,
+      "sha256": "ccaa96214405c2a3f0fa1609c8e5e46c16fa4048e779006bd4902abbc81d7454"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/argument_normalization.rs",
+      "bytes": 7385,
+      "sha256": "e105f20f517288ca6f051fa3202908cc419196a1292861b9f3706a09b6ced5a7"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/argument_numbers.rs",
+      "bytes": 2166,
+      "sha256": "2b8ea0f1262c2a34bd569966ef8589873aa58cae95508eca624c3d39f721f044"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/argument_validation.rs",
+      "bytes": 32098,
+      "sha256": "6f4071a786dcf298cf611c4d031c73de0001287177bd37793d43b5db6e05d86b"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/arguments.rs",
+      "bytes": 1579,
+      "sha256": "28e9029a6a410870539caf829fc4e9b71b9bbb22677f43b25840d1a387952cae"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/artifact_stat.rs",
+      "bytes": 3452,
+      "sha256": "312df99bbdca9eeae5360e70d5019b5d815ed1d5ff30821fd55c18ea533bdec2"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/batch.rs",
+      "bytes": 6721,
+      "sha256": "7b529cea48ed04642d6cb97b8aab0793f74c19d0be0751c25374acfd5642335e"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/canvas.rs",
+      "bytes": 10992,
+      "sha256": "3b7825a10bb68f374d4cb70f834f130a54b2847dbe9f331475373899ea797d30"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/collection.rs",
+      "bytes": 8132,
+      "sha256": "e84457deb5f224910414a7688aec829636a6a5a10c1fef9be385a1d9128da8c0"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/contract.rs",
+      "bytes": 2504,
+      "sha256": "abacb51a6b995b51b9e629b13e21e9fd7280e022f6fbc7390fac3965b7b867aa"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/create.rs",
+      "bytes": 13703,
+      "sha256": "046cd54751abcaf330c19f162b2419fa7c02dd4c576d005180d808e3e72b7e2b"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/css.rs",
+      "bytes": 3518,
+      "sha256": "3b811ca78d60bb423a6ffe5413ba7e12ca7c3aa267a2e86f8cc889b06f85961c"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/decimal.rs",
+      "bytes": 2348,
+      "sha256": "95fefd80999fc4b3b7fb0237033f96e0742763fe710955d99c0ba8d80e4fe8e2"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/delete.rs",
+      "bytes": 4740,
+      "sha256": "5734d8c710c612d986c57ab7ffcee5e5fab044191bb9bacb4c77b739e131d2fc"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/doctor.rs",
+      "bytes": 14355,
+      "sha256": "4c2747c552311d615b96ce18f0e7b2cd2ec03c88064a2033a33c89df74192ad8"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/document.rs",
+      "bytes": 12238,
+      "sha256": "8afe1e5fcbde2b1399b76a888b27a018f822b6bfd73bf87d7e8df48f8eda8a3f"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/duplicate.rs",
+      "bytes": 13930,
+      "sha256": "f8a30a4d664413f14b8212cf438e2c0f79d85ba6cf8a60f44beca77fd5120473"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/editability.rs",
+      "bytes": 7264,
+      "sha256": "2feca556876442483e7fef6012a24d5dbdabc7e8ffc5540504f8ef7d768c44d4"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/engine.rs",
+      "bytes": 16194,
+      "sha256": "951a678ecedf15a3261cbf707794fbc48e5ef17bb1c54e7c89ce7f7a5bd73429"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/export_batch.rs",
+      "bytes": 7154,
+      "sha256": "135c044a0b7e234cb62a39578d37528187531c34d4e0a47ce0c11e2b58c1b29b"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/find.rs",
+      "bytes": 7287,
+      "sha256": "e83478f99daf945f26f49b7d9d8ff6300243721d8ef3f4d44ab10676526912db"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/fit.rs",
+      "bytes": 5090,
+      "sha256": "5231b59d434f5a7fc90f2c21950594f7441e89f116d74d7df8e5a2772a5a83e1"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/fonts.rs",
+      "bytes": 3994,
+      "sha256": "8ede64d74a3c420c607c517766c79a654465a5460aa4ab284ef00f5debd7280f"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/fragment.rs",
+      "bytes": 11279,
+      "sha256": "7ba8e4d1e66a140ded192a52779f05d9fc285662e40c55deb6bcd286817552e7"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/frames.rs",
+      "bytes": 5978,
+      "sha256": "9d3effb6ab6c5b3664bdd88232866090b64980c05d322f45f300b7a57b890ac6"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/geometry.rs",
+      "bytes": 9574,
+      "sha256": "98ce037b6bcd3a3a103875f84633be54eff6fdfc07d48370651500e2957ebd39"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/gradient.rs",
+      "bytes": 9390,
+      "sha256": "f7c1bc205a7efad00d68170e7faed0effeebab2719eb5f418c0205b9171575a6"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/grid.rs",
+      "bytes": 8198,
+      "sha256": "c53c3b19f39f3d1ea0ddf4b4ad61cd103737d176109c37875de47ddd7208f86d"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/grid_plan.rs",
+      "bytes": 7235,
+      "sha256": "c493a234234e0f00b361e92d60f8009bbd535d406ac9af24fd7573c44a7820f0"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/group.rs",
+      "bytes": 5696,
+      "sha256": "2c2e48fb1703fc3087094d31073410ad1001d60f699fe9bb49b9db271894a4d7"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/identity.rs",
+      "bytes": 11185,
+      "sha256": "b38af90fff45d97d022dd51610ad54d07101f2a2fafb708352094ecebb546444"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/inspect.rs",
+      "bytes": 15221,
+      "sha256": "83a09e32b25b2df6b6e7196e42cc2ce7f6d73335bb967ae8da1566f824660944"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/intents.rs",
+      "bytes": 4692,
+      "sha256": "270cbf13cea27ebe0e6bb00717e22084ee85899b408b4beab10b477f5b7cd4f3"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live.rs",
+      "bytes": 15414,
+      "sha256": "2d925f478beb417eff58030d95c3a2f69ca1a21a8b2300731b052f4326c5fa37"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_arm.rs",
+      "bytes": 4864,
+      "sha256": "f6d5724f9316cc08744103be8b1a8d2ed4f8c1af74cd745bfcba094c9b791898"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_attach.rs",
+      "bytes": 7229,
+      "sha256": "b366629d3f3c5e7afdad0520b312974e3efc85062dde181d42ffb877228d8b0d"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_bus.rs",
+      "bytes": 20482,
+      "sha256": "5449cabfbde2af94c4d00c766eadcd78126daa576c980dd04148b9221d2be719"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_cache.rs",
+      "bytes": 3889,
+      "sha256": "790ec30fd9aeb949bae2872b6307fa29c77f2f1e4a7b5a69151cdc597ec39706"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_context.rs",
+      "bytes": 9831,
+      "sha256": "90bccb8f55b9c9d76cb9bbd5fa15fbbe27466349a6f4e2fda9ee3d3c571de8b2"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_dbus.rs",
+      "bytes": 25700,
+      "sha256": "9b7a1cfaa6ac53862a3b3b9e0f795162bfa3f9c929adf0e129136dabed5758b8"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_diff.rs",
+      "bytes": 14604,
+      "sha256": "403c038efa0ab1c0e0244c44414adad43930a175560b3f45a892f05830310965"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_discovery.rs",
+      "bytes": 19129,
+      "sha256": "4c9ba7e39b7ca8713b642492167bcd045daace6610268a0a8fa8f4c58c974b2d"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_effect.rs",
+      "bytes": 18288,
+      "sha256": "1c37f3b8b911c836396972f3585e5d7bc3e90d38841d96e78d0bf96b5e822932"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_events.rs",
+      "bytes": 4479,
+      "sha256": "2ee5b32490132ce2922d47659a054891136352c39855d1a37f0f7d3c320d5152"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_insert.rs",
+      "bytes": 14117,
+      "sha256": "f3b380951f076402db5043a81a5533c9648b6575c6fe1cdd57b8a5981d6b25d9"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_install.rs",
+      "bytes": 4336,
+      "sha256": "4da86cf7049a086bbc668d2d74018201d53a595168017a01f4e2d373a4adf599"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_launch.rs",
+      "bytes": 7885,
+      "sha256": "6e17f71b63809f15f3d7eae93979bb506628c341677eac5792d70428872980ad"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_loop.rs",
+      "bytes": 4435,
+      "sha256": "cbc46ce606f22f43d2ec1529e7ea10858958491919dbd931aaa6b697db3b76cd"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_managed.rs",
+      "bytes": 56274,
+      "sha256": "f882ef0dd3eecf67b9875ce7ef5b3dab56ecb719c5bdd7b837f9a7cb79d244f3"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_models.rs",
+      "bytes": 10133,
+      "sha256": "9b923fa74fb96ca62a82aa403a7e49a473323ddfea4b8d292dd5ed7adb38bc03"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_mutation.rs",
+      "bytes": 12334,
+      "sha256": "e10c0afbd55a94c04e617c4f183acd325deb5fc57ef15572e0de2347c73740c2"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_probe.rs",
+      "bytes": 13379,
+      "sha256": "3d84711a0ab70b2576a0834ade7f334bdafd58db17cbc17f837ae85d11abba9b"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_protocol.rs",
+      "bytes": 8780,
+      "sha256": "c616ba12b7631afc7a25251656ec530a83ed57cbf6ec0c4541072db006a6d6c1"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_records.rs",
+      "bytes": 12556,
+      "sha256": "105e82606d815333d09a2cf6e640e530a4128822e27e9f0d8d346ec38b586c7f"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_render.rs",
+      "bytes": 9441,
+      "sha256": "fc2134fce836904f7ed57ef7e67049a6c8bef1caa7d7026e6e7b9bf29db2393b"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_scene.rs",
+      "bytes": 7668,
+      "sha256": "a97f28ee928ffc2268bcfa38d8e0fceac5c952ff2eb066f7ab9fb895f32ebba6"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_selection.rs",
+      "bytes": 3623,
+      "sha256": "c439877d16bbd95ba6b6b4f62188a85bc5b88005c869e095ee4eecc1fe714e2d"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_session.rs",
+      "bytes": 15986,
+      "sha256": "7ca555c3c9d976a0065547577b463ed97b7770bcd4d88d38b0ef14b8fde7f93d"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_socket.rs",
+      "bytes": 32369,
+      "sha256": "659cdd8e6182ce40e61e314e3bfdda86b2942331b07658b77b422b113d4cb031"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_sync.rs",
+      "bytes": 3000,
+      "sha256": "1a4bc25e6d2155e8ceed1796cd544672c6e69cfb9447a40ca2e6a22d5996dbcb"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_transport.rs",
+      "bytes": 8782,
+      "sha256": "0741b5cf31789980a253791495a003b2731df0523b0a6ed97f2913ea96b8fee9"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/live_view.rs",
+      "bytes": 3618,
+      "sha256": "be8223b55bb94051b4a01e0503ed3190e8df62bc80e090794d11aefefa92c23a"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/main.rs",
+      "bytes": 29867,
+      "sha256": "51b01de30ef5f05e5592a16e8364647c35c68fe521944ad4deefc0305aa3c3fb"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/optimization_analysis.rs",
+      "bytes": 5595,
+      "sha256": "8147488e5936f55371b11fa945c6530735f9bfdd7b124f610dc047c80ef38460"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/optimize.rs",
+      "bytes": 11874,
+      "sha256": "76422ead89002d69adbdc7c2f31e80831bc307db95ba1f6dbb11155009c09da6"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/palette_colors.json",
+      "bytes": 2258,
+      "sha256": "ccd1cf8321d6d7e8f97d35d6e78203ecf51a1b7a62a158f77580007f556dbf97"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/paths.rs",
+      "bytes": 17467,
+      "sha256": "7e3d3816f81ce734c3785aff4c73330b83805b68db486f2aa4f0e2c566589796"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/phase_profile.rs",
+      "bytes": 3791,
+      "sha256": "efd22510ad73c576e4b1319aaa3963df16f7293389ffadca809b63cd5a192634"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/placement.rs",
+      "bytes": 9258,
+      "sha256": "14cdeed355f69cfa3881f36611815c7ab0e3e348422672a3f6ce6a577be95b4a"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/preview.rs",
+      "bytes": 5332,
+      "sha256": "9d7c14b7753e220f84f55d351ca48138ce13dd34695dce6437523867b38eeef4"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/process.rs",
+      "bytes": 11524,
+      "sha256": "648a018909a01599199c6b9049f57292b8b84fd7be5e6e334ae9f84bf8321f60"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/profiles.rs",
+      "bytes": 6049,
+      "sha256": "b1c81fa5e856812976d3b4750dea9e983b9e44c883cf6aad36e52177fa1e32db"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/prompts.rs",
+      "bytes": 3150,
+      "sha256": "9ad7d96fc145963ed24316c1a2a417ea02feeb7d1336d3ff1f7335853c5d9492"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/quality.rs",
+      "bytes": 7032,
+      "sha256": "f70bff65e5d7b10c1d485a3befcd9369e9c7a6adbb67574ac6048911bec0baa0"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/recolor.rs",
+      "bytes": 7398,
+      "sha256": "6b804c281eb8061915b9aefdb14cc09c309e5b417e915e01c421ba355aa6800b"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/recovery.rs",
+      "bytes": 16926,
+      "sha256": "601adb1a758027c6e2dd4561313735de866a05aa650f601a170c7f6c566ed931"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/render.rs",
+      "bytes": 29667,
+      "sha256": "c5b98b99de2da8a41f1e8a15138e73f73bd9e308761e33102bb5bd7248fc2fea"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/reparent.rs",
+      "bytes": 19420,
+      "sha256": "c88ff247d9a0105e7b15edfe4f9488b657d9e9b7830f8b57b21a0991be1033ac"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/repeat.rs",
+      "bytes": 16589,
+      "sha256": "b0a6dcee9049397d4cb9b0a6a40c20a9c0556cf116e8f2038ec5cb29ce878ae8"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/repeat_plan.rs",
+      "bytes": 12448,
+      "sha256": "efc61a7f5717e1e6b8d3444afc83cda97908bc5e1502124a261ee53e52b2c822"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/retention.rs",
+      "bytes": 20162,
+      "sha256": "5ed187e10b9adef190717f12406a907acbc10ad4fb9dcd083f849a4a2c7238b2"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/runtime.rs",
+      "bytes": 14859,
+      "sha256": "8723d1b61b310e0c1c2418f7421236764d1440d33ed2db276c283286a0ae776d"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/save.rs",
+      "bytes": 8917,
+      "sha256": "65afb69df48c650c073e16db05a052de0e01f8f94669a824d067105dab7e578f"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/structure.rs",
+      "bytes": 7343,
+      "sha256": "6e36abf2fc6a60ccf53528b80833cad47984447d25188fa2ddc204d7c630fe2b"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/style.rs",
+      "bytes": 11756,
+      "sha256": "28c8dbc450bd7aa8b11a9e8647a18f1e6843c411c19aaf9651713c6f9666e983"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/text.rs",
+      "bytes": 9467,
+      "sha256": "8363ac8c40c113b0ca541fd5732168a93b91e4199ee922e25b87e28baaa1fbaf"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/tile.rs",
+      "bytes": 8099,
+      "sha256": "800501e963eb2d857c8768b060babe3f6d604d1f9e01009bc8efae79cbe4dd25"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/transaction.rs",
+      "bytes": 30314,
+      "sha256": "2203d1861aa2b6e9dd9053b15a5b2f2d5fd380982e783ca83ccea890afcdb2d6"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/transform.rs",
+      "bytes": 6559,
+      "sha256": "aa8702c5d375f2280fb2eda3d27851b365633ccdd5356927c8975db50fa486eb"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/transform_objects.rs",
+      "bytes": 6632,
+      "sha256": "2f80938647b807f9cc33bc89fa6f5da8ef7b88f5d7359b2f1ee8f9df42806032"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/transport_profile.rs",
+      "bytes": 4062,
+      "sha256": "34d815c83708b44610cab321f10c2f270fddf1e594ed466414451f94fa4f4e6b"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/use_object.rs",
+      "bytes": 5796,
+      "sha256": "3528dce8baafcc6e91714f47f144676e11912a3444484ae29fd65e475ce5ed14"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/validate.rs",
+      "bytes": 13242,
+      "sha256": "8998d1375ce8816bae6c2189a26a061de8a6209239b9719240f51e1de1825812"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/workspace.rs",
+      "bytes": 38774,
+      "sha256": "64e59d650b3cc7cdecd1e2955a79dc36196a8ba8c4346e76937f7bbbfc635e8b"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/diagnostic-copy-v2/rust/src/xml.rs",
+      "bytes": 7355,
+      "sha256": "9bb503010ac6c7c4a28df2e929af83a0be528f11c574345f48956ce1ca97841a"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/docs-AGENT_HANDOFF.md",
+      "bytes": 202996,
+      "sha256": "a74ddb396e2f5e4d11f8f2b0830ed440a9ca3d72311d913875224b0528d96d36"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/docs-RUST_MIGRATION_REPORT.md",
+      "bytes": 259229,
+      "sha256": "727e8e3a378513c0c22622a14682abdcde4bccf06e33b384ba310b2b5e7c57e6"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/docs-RUST_PHASE_MEASUREMENTS.md",
+      "bytes": 16423,
+      "sha256": "c9dc5a647a688e0dde0d50d3a0ea720f0c359f9f5604d4472f21011cf5319b3c"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/followup.json",
+      "bytes": 839,
+      "sha256": "10ada8b759d6634500d33ecb9d0c794026247c56f349a3197d2edcc454e0e424"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/migration-README.md",
+      "bytes": 206341,
+      "sha256": "b9f1b62a61f004d7c7bb8d5e860cbd465348e91a48a1d5892fbab04c355feea2"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/migration_phase_profile.rs",
+      "bytes": 3787,
+      "sha256": "5329f8f411d7572d990980897ab671bed58db113489539da4ff8e85494e6c7e6"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/migration_prepare_phase_profile.py",
+      "bytes": 6505,
+      "sha256": "197a40bb9fc9c4e040f474d5ebc1975fe15dbc491eb1c81ec5b5cb1df04623ef"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/migration_process_benchmark.py",
+      "bytes": 19207,
+      "sha256": "f63f71d84f32131cd6cd80210b9f8239c057cf2768f110b04132d7cad6754933"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/migration_transport_profile.rs",
+      "bytes": 4062,
+      "sha256": "34d815c83708b44610cab321f10c2f270fddf1e594ed466414451f94fa4f4e6b"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/migration_verify_large_response.py",
+      "bytes": 5558,
+      "sha256": "6c156385468f0308b7d375a2d83979fdac4b8d26838eee5d8ea025d35a0442a5"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/migration_verify_phase_profile.py",
+      "bytes": 7682,
+      "sha256": "c473362a64c3b1093a6e47e6975c29aa7311a21aca6a9d8e9eada51cf3213879"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-review/migration_verify_transport_profile.py",
+      "bytes": 6780,
+      "sha256": "2591952e35ddee4165a58193bbe2927c8f01ee802e337e3db2f41fa6f091ae36"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/environment.json",
+      "bytes": 1678,
+      "sha256": "35725bce80b89e2ec86402900a88093b327e2435c92aaeac86a7baf38808a386"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/python-0.json.gz",
+      "bytes": 87573,
+      "sha256": "73e7476ab16fc98c78754dc0fd40642a2b105d98ecb302223f1ecf374a7b572d"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/python-0.partial.json.gz",
+      "bytes": 87181,
+      "sha256": "735cc54f88e4c248f4b085f1e16073ee9407d97dd0b06ab474c83edd44acade9"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/python-0.stderr.log",
+      "bytes": 9339,
+      "sha256": "52ccead191037b16e8545b8b3e15c0d511b31032259545e7d613c6313ad0a520"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/python-1.json.gz",
+      "bytes": 86408,
+      "sha256": "c0f06c216cc515d2d8bf73a019aadc9f97a345bc89c7968342ea822363b25a1a"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/python-1.partial.json.gz",
+      "bytes": 86010,
+      "sha256": "89f94a0120288b6a5fd3e6a08c3add604223d02d379b406d32fdcce1d3d42f8d"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/python-1.stderr.log",
+      "bytes": 9337,
+      "sha256": "06dd41646f113fa103614b0a4adaf0bdc0b6b51b2dec1ec6d10f3d3008f0bc0e"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/python-2.json.gz",
+      "bytes": 86417,
+      "sha256": "8c364cb4c01c197c49e5eab3a8666f15fa44500f14523a03c4959202d8ab66e1"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/python-2.partial.json.gz",
+      "bytes": 86018,
+      "sha256": "5ded2b361eecf77f3ed667cc9e8406f67d9d6026d7960da044a3d3d629ac6ddc"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/python-2.stderr.log",
+      "bytes": 9339,
+      "sha256": "afc17b6f711b878fb59d89a6549903fd09d1c5295f1f899902dde87715d253f4"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/python-3.json.gz",
+      "bytes": 86441,
+      "sha256": "6e7d6bf2558c98c053804c82c90d8ebee63139b789955326d6f56aebb49dfdf4"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/python-3.partial.json.gz",
+      "bytes": 86047,
+      "sha256": "2bf5fa58cfa40bfe841cc0442573da013d1b4e03d90f02ad9ddaf190d23ea2c5"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/python-3.stderr.log",
+      "bytes": 9338,
+      "sha256": "c12bb012658333eed7463040d9ca32b99a2acb21f206ee1f3caf4e7db2ac01b2"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/python-4.json.gz",
+      "bytes": 86282,
+      "sha256": "061a40e48b4d0fc167d0893f6c351065d00f084d6fca31d191fcb61c560e03b2"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/python-4.partial.json.gz",
+      "bytes": 85887,
+      "sha256": "59b44aa464fbfeba2d2654104c9d20fe87c2a85b1976332e1ceeeb75df2b68db"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/python-4.stderr.log",
+      "bytes": 9339,
+      "sha256": "4b355f3fd601191c7208a706e1aa5edf1c6bf96c316c0ca2cf23ac58d120989b"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/rust-0.json.gz",
+      "bytes": 87011,
+      "sha256": "dde0e9ef7f3b7f5f306e24327d3f98590e456614cadcb7eeec36ad76e4cc8098"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/rust-0.partial.json.gz",
+      "bytes": 86578,
+      "sha256": "d5eba652431be50fc8ec34047f9ed387160179bab8066967f6f6401a02e668c9"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/rust-0.stderr.log",
+      "bytes": 226445,
+      "sha256": "4b6206c9ec0b25f2db959f9d34f91af4d73386e286b488230d893a4a43631ab2"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/rust-1.json.gz",
+      "bytes": 86746,
+      "sha256": "6edb4eae65548886c377215d9bc70b3679683180618d91f9c6e4f589a9294fca"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/rust-1.partial.json.gz",
+      "bytes": 86316,
+      "sha256": "f788d4eb6315ddad31e08370cd80f27410adaf8b1dad4b83f97e3fee512a767a"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/rust-1.stderr.log",
+      "bytes": 226446,
+      "sha256": "263e6a90e1a75ce02016210bcc3c45906267219d1c88fca4f2fc3f74fa0380ee"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/rust-2.json.gz",
+      "bytes": 86812,
+      "sha256": "f9ab503cd62d2cbc85d2eb4244663d440a2ebbde663b749ab4e5c5c6efc314bc"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/rust-2.partial.json.gz",
+      "bytes": 86375,
+      "sha256": "d60a5cd4f2a60381ec1d984a0de13458bb71483612966ead8e014e89607ce800"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/rust-2.stderr.log",
+      "bytes": 226445,
+      "sha256": "cfd3b7435d1b28dbc02ff233bd61ddc73114bc7643043afb4ec21f49e8a0301b"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/rust-3.json.gz",
+      "bytes": 86672,
+      "sha256": "c05d389d1d382f7b404e08a6c43e0f6fd7d4727c3c44dec12756815e3cd10232"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/rust-3.partial.json.gz",
+      "bytes": 86235,
+      "sha256": "c54d409ab47fa64df2ca5f5d34fe72be58b63eb840596b98d3f8ed93ed153aa2"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/rust-3.stderr.log",
+      "bytes": 226444,
+      "sha256": "965a7027c79d5f0ca3c4e01b5cf51341d05b87e82937d6b3b6c714290409496f"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/rust-4.json.gz",
+      "bytes": 86583,
+      "sha256": "1a3759e797d686d1b1f41b38e5a420359b8bb690ddc0ad379abed3a269acd07a"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/rust-4.partial.json.gz",
+      "bytes": 86150,
+      "sha256": "6f5dd7bcd1d1d880857a7112acebb66059da0bbf78b6bd8f86b0718769b7ab9a"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/rust-4.stderr.log",
+      "bytes": 226446,
+      "sha256": "4042aa96ea9889d3760f4e8820e2cdf0c636f434c1881bf8fc387a85300848ba"
+    },
+    {
+      "path": "migration/results/transport-profile-stage28-v2/summary.json",
+      "bytes": 20996,
+      "sha256": "9d705b9f4e0963656300125393fb2c1dce5b9901121b25c6a07f915712143a3e"
+    },
+    {
+      "path": "migration/transport-profile-stage28-v2-comparison.json",
+      "bytes": 29265,
+      "sha256": "c87cf06423e9adf2992299bc35f739c5744c959b7e16f362ae2e94d266f36133"
+    },
+    {
+      "path": "migration/transport-profile-stage28-v2-envelope-comparison.json",
+      "bytes": 53781,
+      "sha256": "e19e585554fc04c73239be36729c47d1b4c1686edba104dd2638594315943573"
+    }
+  ]
+}

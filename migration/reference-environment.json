@@ -1,0 +1,38 @@
+{
+  "reference_head": "c50a9248b3bca9177103373ce66d6dd1307bedd3",
+  "branch": "codex/rust-migration",
+  "reference_command": [
+    ".venv/bin/inkscape-mcp"
+  ],
+  "python": "3.12.14",
+  "system": "macOS-27.0-arm64-arm-64bit",
+  "architecture": "arm64",
+  "packages": {
+    "fastmcp": "3.4.2",
+    "mcp": "1.27.2",
+    "lxml": "6.1.1",
+    "pydantic": "2.13.4",
+    "Pillow": "12.2.0"
+  },
+  "inkscape": "Inkscape 1.4.3 (0d15f75, 2025-12-25)",
+  "rust": "rustc 1.99.0 (b940084d7 2026-09-28)",
+  "capture": "Actual MCP STDIO; no discovery normalization",
+  "contract_sha256": {
+    "live-false_raw-false_core_full.json": "194b5283128e6263dd5e6367dd20263051161cb8b6db2adf589302dbdf37fd21",
+    "live-false_raw-false_core_short.json": "9ca8a48a581e0a5c3f8877e5a3ea68e09691acf32d61fcabf82d10f7ba307a5c",
+    "live-false_raw-false_full_full.json": "aba952d504abbf22bffb56176be61e8ea1181256605c824c7126f2e17ec8719e",
+    "live-false_raw-false_full_short.json": "d908fed82cc4951d229da4494ff32bd4b5b0069267dc274a10d42d06ec507f1c",
+    "live-false_raw-true_core_full.json": "194b5283128e6263dd5e6367dd20263051161cb8b6db2adf589302dbdf37fd21",
+    "live-false_raw-true_core_short.json": "9ca8a48a581e0a5c3f8877e5a3ea68e09691acf32d61fcabf82d10f7ba307a5c",
+    "live-false_raw-true_full_full.json": "9723e175a3eafc3aa5b208be1a248188d099c8289252ac71dcf2b5f453b818d4",
+    "live-false_raw-true_full_short.json": "b9d2de8aebe34ba2b436daa8f2171e5d481296e85cb3df42ae2268d305b44e5d",
+    "live-true_raw-false_core_full.json": "194b5283128e6263dd5e6367dd20263051161cb8b6db2adf589302dbdf37fd21",
+    "live-true_raw-false_core_short.json": "9ca8a48a581e0a5c3f8877e5a3ea68e09691acf32d61fcabf82d10f7ba307a5c",
+    "live-true_raw-false_full_full.json": "ce33438e433a04b04cd8e2dbc1daede6c2d8531a2b45781a4b22ab0d8b1b991f",
+    "live-true_raw-false_full_short.json": "3927ef9a44bb5a00763cd02bacbaaf78c4a60418593bafb5fb242f50742e842f",
+    "live-true_raw-true_core_full.json": "194b5283128e6263dd5e6367dd20263051161cb8b6db2adf589302dbdf37fd21",
+    "live-true_raw-true_core_short.json": "9ca8a48a581e0a5c3f8877e5a3ea68e09691acf32d61fcabf82d10f7ba307a5c",
+    "live-true_raw-true_full_full.json": "e83b34257858096e07c673e5a38eeadd8a371b0e4a63496181e893d8f48128b6",
+    "live-true_raw-true_full_short.json": "fa14ec24bee48e36e579859d91909e1eca2ef307960462c7e072a41882f6551d"
+  }
+}

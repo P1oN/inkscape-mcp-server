@@ -1,0 +1,1636 @@
+{
+  "runs": [
+    {
+      "run": "run-0.json.gz",
+      "startup_to_initialized_ms": 517.349917,
+      "processes_at_initialization": [
+        {
+          "pid": 52121,
+          "ppid": 51944,
+          "rss_kib": 92720,
+          "command": "/Users/bm/Documents/repos/inkscape-mcp-server/.venv/bin/python"
+        }
+      ],
+      "calls": [
+        {
+          "method": "initialize",
+          "name": null,
+          "args": null,
+          "roundtrip_ms": 514.850666
+        },
+        {
+          "method": "tools/call",
+          "name": "get_workspace_info",
+          "args": {},
+          "roundtrip_ms": 17.528084
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "fixture.svg"
+          },
+          "roundtrip_ms": 3.806167
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_8426de0c"
+          },
+          "roundtrip_ms": 11.83625
+        },
+        {
+          "method": "tools/call",
+          "name": "list_snapshots",
+          "args": {
+            "doc_id": "d_8426de0c"
+          },
+          "roundtrip_ms": 2.008125
+        },
+        {
+          "method": "tools/call",
+          "name": "set_fill",
+          "args": {
+            "doc_id": "d_8426de0c",
+            "object_ids": [
+              "r1"
+            ],
+            "color": "#3366cc"
+          },
+          "roundtrip_ms": 2.262333
+        },
+        {
+          "method": "tools/call",
+          "name": "list_snapshots",
+          "args": {
+            "doc_id": "d_8426de0c"
+          },
+          "roundtrip_ms": 1.95125
+        },
+        {
+          "method": "tools/call",
+          "name": "set_fill",
+          "args": {
+            "doc_id": "d_8426de0c",
+            "object_ids": [
+              "r1"
+            ],
+            "color": "#ff0000"
+          },
+          "roundtrip_ms": 791.708417
+        },
+        {
+          "method": "tools/call",
+          "name": "restore_snapshot",
+          "args": {
+            "doc_id": "d_8426de0c",
+            "snapshot_id": "snap_2742a023"
+          },
+          "roundtrip_ms": 3.45375
+        },
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "args": {
+            "doc_id": "d_8426de0c",
+            "edits": [
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "r1"
+                ],
+                "color": "#00ff00"
+              },
+              {
+                "op": "set_opacity",
+                "object_ids": [
+                  "r1"
+                ],
+                "opacity": 0.5
+              }
+            ]
+          },
+          "roundtrip_ms": 551.839667
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_8426de0c"
+          },
+          "roundtrip_ms": 12.427666
+        },
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "args": {
+            "doc_id": "d_8426de0c",
+            "edits": [
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "r1"
+                ],
+                "color": "#0000ff"
+              },
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "absent"
+                ],
+                "color": "#0000ff"
+              }
+            ]
+          },
+          "roundtrip_ms": 1.76175
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_8426de0c"
+          },
+          "roundtrip_ms": 11.728708
+        },
+        {
+          "method": "tools/call",
+          "name": "delete_object",
+          "args": {
+            "doc_id": "d_8426de0c",
+            "object_ids": [
+              "r1"
+            ]
+          },
+          "roundtrip_ms": 1.247958
+        },
+        {
+          "method": "tools/call",
+          "name": "save_document_as",
+          "args": {
+            "doc_id": "d_8426de0c",
+            "dest_path": "out/saved.svg"
+          },
+          "roundtrip_ms": 5.450791
+        },
+        {
+          "method": "resources/read",
+          "name": null,
+          "args": null,
+          "roundtrip_ms": 1.461334
+        },
+        {
+          "method": "tools/call",
+          "name": "render_preview",
+          "args": {
+            "doc_id": "d_8426de0c",
+            "width_px": 128,
+            "inline": false
+          },
+          "roundtrip_ms": 289.19625
+        },
+        {
+          "method": "tools/call",
+          "name": "export_document",
+          "args": {
+            "doc_id": "d_8426de0c",
+            "format": "png",
+            "out_dir": "out",
+            "width_px": 128
+          },
+          "roundtrip_ms": 286.782667
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "../escape.svg"
+          },
+          "roundtrip_ms": 1.627458
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_missing"
+          },
+          "roundtrip_ms": 0.893541
+        },
+        {
+          "method": "tools/call",
+          "name": "live_status",
+          "args": {},
+          "roundtrip_ms": 914.953959
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-100.svg"
+          },
+          "roundtrip_ms": 4.1415
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_a81d3d8e"
+          },
+          "roundtrip_ms": 27.333708
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-10000.svg"
+          },
+          "roundtrip_ms": 18.146583
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_e5e34eed"
+          },
+          "roundtrip_ms": 1497.816792
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-100000.svg"
+          },
+          "roundtrip_ms": 200.267667
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_71326475"
+          },
+          "roundtrip_ms": 16401.420292
+        }
+      ],
+      "errors": [
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "object id not found in document"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "delete_object",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "high-risk operation requires explicit approval"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "path rejected: outside workspace; call get_workspace_info and choose a relative path under a configured server root (relative paths default to the first root)"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "document id not found"
+              }
+            ],
+            "isError": true
+          }
+        }
+      ]
+    },
+    {
+      "run": "run-1.json.gz",
+      "startup_to_initialized_ms": 664.617292,
+      "processes_at_initialization": [
+        {
+          "pid": 52209,
+          "ppid": 51944,
+          "rss_kib": 92320,
+          "command": "/Users/bm/Documents/repos/inkscape-mcp-server/.venv/bin/python"
+        }
+      ],
+      "calls": [
+        {
+          "method": "initialize",
+          "name": null,
+          "args": null,
+          "roundtrip_ms": 615.125833
+        },
+        {
+          "method": "tools/call",
+          "name": "get_workspace_info",
+          "args": {},
+          "roundtrip_ms": 17.027708
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "fixture.svg"
+          },
+          "roundtrip_ms": 4.065458
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_48629531"
+          },
+          "roundtrip_ms": 11.935458
+        },
+        {
+          "method": "tools/call",
+          "name": "list_snapshots",
+          "args": {
+            "doc_id": "d_48629531"
+          },
+          "roundtrip_ms": 2.018083
+        },
+        {
+          "method": "tools/call",
+          "name": "set_fill",
+          "args": {
+            "doc_id": "d_48629531",
+            "object_ids": [
+              "r1"
+            ],
+            "color": "#3366cc"
+          },
+          "roundtrip_ms": 2.403
+        },
+        {
+          "method": "tools/call",
+          "name": "list_snapshots",
+          "args": {
+            "doc_id": "d_48629531"
+          },
+          "roundtrip_ms": 1.926458
+        },
+        {
+          "method": "tools/call",
+          "name": "set_fill",
+          "args": {
+            "doc_id": "d_48629531",
+            "object_ids": [
+              "r1"
+            ],
+            "color": "#ff0000"
+          },
+          "roundtrip_ms": 743.233667
+        },
+        {
+          "method": "tools/call",
+          "name": "restore_snapshot",
+          "args": {
+            "doc_id": "d_48629531",
+            "snapshot_id": "snap_977db4bd"
+          },
+          "roundtrip_ms": 3.134917
+        },
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "args": {
+            "doc_id": "d_48629531",
+            "edits": [
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "r1"
+                ],
+                "color": "#00ff00"
+              },
+              {
+                "op": "set_opacity",
+                "object_ids": [
+                  "r1"
+                ],
+                "opacity": 0.5
+              }
+            ]
+          },
+          "roundtrip_ms": 567.035375
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_48629531"
+          },
+          "roundtrip_ms": 12.761333
+        },
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "args": {
+            "doc_id": "d_48629531",
+            "edits": [
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "r1"
+                ],
+                "color": "#0000ff"
+              },
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "absent"
+                ],
+                "color": "#0000ff"
+              }
+            ]
+          },
+          "roundtrip_ms": 1.89725
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_48629531"
+          },
+          "roundtrip_ms": 11.880084
+        },
+        {
+          "method": "tools/call",
+          "name": "delete_object",
+          "args": {
+            "doc_id": "d_48629531",
+            "object_ids": [
+              "r1"
+            ]
+          },
+          "roundtrip_ms": 1.164584
+        },
+        {
+          "method": "tools/call",
+          "name": "save_document_as",
+          "args": {
+            "doc_id": "d_48629531",
+            "dest_path": "out/saved.svg"
+          },
+          "roundtrip_ms": 5.2515
+        },
+        {
+          "method": "resources/read",
+          "name": null,
+          "args": null,
+          "roundtrip_ms": 1.663916
+        },
+        {
+          "method": "tools/call",
+          "name": "render_preview",
+          "args": {
+            "doc_id": "d_48629531",
+            "width_px": 128,
+            "inline": false
+          },
+          "roundtrip_ms": 288.82475
+        },
+        {
+          "method": "tools/call",
+          "name": "export_document",
+          "args": {
+            "doc_id": "d_48629531",
+            "format": "png",
+            "out_dir": "out",
+            "width_px": 128
+          },
+          "roundtrip_ms": 288.994958
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "../escape.svg"
+          },
+          "roundtrip_ms": 1.745417
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_missing"
+          },
+          "roundtrip_ms": 0.982709
+        },
+        {
+          "method": "tools/call",
+          "name": "live_status",
+          "args": {},
+          "roundtrip_ms": 918.203458
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-100.svg"
+          },
+          "roundtrip_ms": 3.933416
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_d6205129"
+          },
+          "roundtrip_ms": 25.986
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-10000.svg"
+          },
+          "roundtrip_ms": 16.756541
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_a13ef434"
+          },
+          "roundtrip_ms": 1494.24975
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-100000.svg"
+          },
+          "roundtrip_ms": 208.405625
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_78d60242"
+          },
+          "roundtrip_ms": 16479.147
+        }
+      ],
+      "errors": [
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "object id not found in document"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "delete_object",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "high-risk operation requires explicit approval"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "path rejected: outside workspace; call get_workspace_info and choose a relative path under a configured server root (relative paths default to the first root)"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "document id not found"
+              }
+            ],
+            "isError": true
+          }
+        }
+      ]
+    },
+    {
+      "run": "run-2.json.gz",
+      "startup_to_initialized_ms": 680.835833,
+      "processes_at_initialization": [
+        {
+          "pid": 52304,
+          "ppid": 51944,
+          "rss_kib": 92208,
+          "command": "/Users/bm/Documents/repos/inkscape-mcp-server/.venv/bin/python"
+        }
+      ],
+      "calls": [
+        {
+          "method": "initialize",
+          "name": null,
+          "args": null,
+          "roundtrip_ms": 632.938458
+        },
+        {
+          "method": "tools/call",
+          "name": "get_workspace_info",
+          "args": {},
+          "roundtrip_ms": 22.0875
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "fixture.svg"
+          },
+          "roundtrip_ms": 3.87725
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_db9a5b47"
+          },
+          "roundtrip_ms": 12.099667
+        },
+        {
+          "method": "tools/call",
+          "name": "list_snapshots",
+          "args": {
+            "doc_id": "d_db9a5b47"
+          },
+          "roundtrip_ms": 1.981042
+        },
+        {
+          "method": "tools/call",
+          "name": "set_fill",
+          "args": {
+            "doc_id": "d_db9a5b47",
+            "object_ids": [
+              "r1"
+            ],
+            "color": "#3366cc"
+          },
+          "roundtrip_ms": 2.16625
+        },
+        {
+          "method": "tools/call",
+          "name": "list_snapshots",
+          "args": {
+            "doc_id": "d_db9a5b47"
+          },
+          "roundtrip_ms": 1.997625
+        },
+        {
+          "method": "tools/call",
+          "name": "set_fill",
+          "args": {
+            "doc_id": "d_db9a5b47",
+            "object_ids": [
+              "r1"
+            ],
+            "color": "#ff0000"
+          },
+          "roundtrip_ms": 772.223166
+        },
+        {
+          "method": "tools/call",
+          "name": "restore_snapshot",
+          "args": {
+            "doc_id": "d_db9a5b47",
+            "snapshot_id": "snap_64c9a6a3"
+          },
+          "roundtrip_ms": 3.203459
+        },
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "args": {
+            "doc_id": "d_db9a5b47",
+            "edits": [
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "r1"
+                ],
+                "color": "#00ff00"
+              },
+              {
+                "op": "set_opacity",
+                "object_ids": [
+                  "r1"
+                ],
+                "opacity": 0.5
+              }
+            ]
+          },
+          "roundtrip_ms": 586.614833
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_db9a5b47"
+          },
+          "roundtrip_ms": 13.656541
+        },
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "args": {
+            "doc_id": "d_db9a5b47",
+            "edits": [
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "r1"
+                ],
+                "color": "#0000ff"
+              },
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "absent"
+                ],
+                "color": "#0000ff"
+              }
+            ]
+          },
+          "roundtrip_ms": 1.91
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_db9a5b47"
+          },
+          "roundtrip_ms": 12.929625
+        },
+        {
+          "method": "tools/call",
+          "name": "delete_object",
+          "args": {
+            "doc_id": "d_db9a5b47",
+            "object_ids": [
+              "r1"
+            ]
+          },
+          "roundtrip_ms": 1.6255
+        },
+        {
+          "method": "tools/call",
+          "name": "save_document_as",
+          "args": {
+            "doc_id": "d_db9a5b47",
+            "dest_path": "out/saved.svg"
+          },
+          "roundtrip_ms": 5.944834
+        },
+        {
+          "method": "resources/read",
+          "name": null,
+          "args": null,
+          "roundtrip_ms": 1.630709
+        },
+        {
+          "method": "tools/call",
+          "name": "render_preview",
+          "args": {
+            "doc_id": "d_db9a5b47",
+            "width_px": 128,
+            "inline": false
+          },
+          "roundtrip_ms": 301.314417
+        },
+        {
+          "method": "tools/call",
+          "name": "export_document",
+          "args": {
+            "doc_id": "d_db9a5b47",
+            "format": "png",
+            "out_dir": "out",
+            "width_px": 128
+          },
+          "roundtrip_ms": 291.675917
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "../escape.svg"
+          },
+          "roundtrip_ms": 1.558459
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_missing"
+          },
+          "roundtrip_ms": 0.865959
+        },
+        {
+          "method": "tools/call",
+          "name": "live_status",
+          "args": {},
+          "roundtrip_ms": 907.236875
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-100.svg"
+          },
+          "roundtrip_ms": 3.911583
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_98b3eefd"
+          },
+          "roundtrip_ms": 34.139834
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-10000.svg"
+          },
+          "roundtrip_ms": 17.31325
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_9910694a"
+          },
+          "roundtrip_ms": 1501.757334
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-100000.svg"
+          },
+          "roundtrip_ms": 194.072166
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_f2023a38"
+          },
+          "roundtrip_ms": 16589.312625
+        }
+      ],
+      "errors": [
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "object id not found in document"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "delete_object",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "high-risk operation requires explicit approval"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "path rejected: outside workspace; call get_workspace_info and choose a relative path under a configured server root (relative paths default to the first root)"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "document id not found"
+              }
+            ],
+            "isError": true
+          }
+        }
+      ]
+    },
+    {
+      "run": "run-3.json.gz",
+      "startup_to_initialized_ms": 686.30525,
+      "processes_at_initialization": [
+        {
+          "pid": 52383,
+          "ppid": 51944,
+          "rss_kib": 92400,
+          "command": "/Users/bm/Documents/repos/inkscape-mcp-server/.venv/bin/python"
+        }
+      ],
+      "calls": [
+        {
+          "method": "initialize",
+          "name": null,
+          "args": null,
+          "roundtrip_ms": 646.280417
+        },
+        {
+          "method": "tools/call",
+          "name": "get_workspace_info",
+          "args": {},
+          "roundtrip_ms": 17.072
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "fixture.svg"
+          },
+          "roundtrip_ms": 3.88725
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_45d4db19"
+          },
+          "roundtrip_ms": 12.250708
+        },
+        {
+          "method": "tools/call",
+          "name": "list_snapshots",
+          "args": {
+            "doc_id": "d_45d4db19"
+          },
+          "roundtrip_ms": 2.035042
+        },
+        {
+          "method": "tools/call",
+          "name": "set_fill",
+          "args": {
+            "doc_id": "d_45d4db19",
+            "object_ids": [
+              "r1"
+            ],
+            "color": "#3366cc"
+          },
+          "roundtrip_ms": 2.38575
+        },
+        {
+          "method": "tools/call",
+          "name": "list_snapshots",
+          "args": {
+            "doc_id": "d_45d4db19"
+          },
+          "roundtrip_ms": 1.951042
+        },
+        {
+          "method": "tools/call",
+          "name": "set_fill",
+          "args": {
+            "doc_id": "d_45d4db19",
+            "object_ids": [
+              "r1"
+            ],
+            "color": "#ff0000"
+          },
+          "roundtrip_ms": 762.105083
+        },
+        {
+          "method": "tools/call",
+          "name": "restore_snapshot",
+          "args": {
+            "doc_id": "d_45d4db19",
+            "snapshot_id": "snap_0c5ac68a"
+          },
+          "roundtrip_ms": 3.37275
+        },
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "args": {
+            "doc_id": "d_45d4db19",
+            "edits": [
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "r1"
+                ],
+                "color": "#00ff00"
+              },
+              {
+                "op": "set_opacity",
+                "object_ids": [
+                  "r1"
+                ],
+                "opacity": 0.5
+              }
+            ]
+          },
+          "roundtrip_ms": 595.23675
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_45d4db19"
+          },
+          "roundtrip_ms": 13.405959
+        },
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "args": {
+            "doc_id": "d_45d4db19",
+            "edits": [
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "r1"
+                ],
+                "color": "#0000ff"
+              },
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "absent"
+                ],
+                "color": "#0000ff"
+              }
+            ]
+          },
+          "roundtrip_ms": 2.2205
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_45d4db19"
+          },
+          "roundtrip_ms": 12.286334
+        },
+        {
+          "method": "tools/call",
+          "name": "delete_object",
+          "args": {
+            "doc_id": "d_45d4db19",
+            "object_ids": [
+              "r1"
+            ]
+          },
+          "roundtrip_ms": 1.673
+        },
+        {
+          "method": "tools/call",
+          "name": "save_document_as",
+          "args": {
+            "doc_id": "d_45d4db19",
+            "dest_path": "out/saved.svg"
+          },
+          "roundtrip_ms": 6.17825
+        },
+        {
+          "method": "resources/read",
+          "name": null,
+          "args": null,
+          "roundtrip_ms": 1.538958
+        },
+        {
+          "method": "tools/call",
+          "name": "render_preview",
+          "args": {
+            "doc_id": "d_45d4db19",
+            "width_px": 128,
+            "inline": false
+          },
+          "roundtrip_ms": 295.138792
+        },
+        {
+          "method": "tools/call",
+          "name": "export_document",
+          "args": {
+            "doc_id": "d_45d4db19",
+            "format": "png",
+            "out_dir": "out",
+            "width_px": 128
+          },
+          "roundtrip_ms": 292.418583
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "../escape.svg"
+          },
+          "roundtrip_ms": 1.708875
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_missing"
+          },
+          "roundtrip_ms": 0.895083
+        },
+        {
+          "method": "tools/call",
+          "name": "live_status",
+          "args": {},
+          "roundtrip_ms": 976.38325
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-100.svg"
+          },
+          "roundtrip_ms": 4.081834
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_5fd4ba7e"
+          },
+          "roundtrip_ms": 26.82075
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-10000.svg"
+          },
+          "roundtrip_ms": 16.785666
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_81e71c4a"
+          },
+          "roundtrip_ms": 1507.764875
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-100000.svg"
+          },
+          "roundtrip_ms": 207.218042
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_b995c149"
+          },
+          "roundtrip_ms": 16872.780875
+        }
+      ],
+      "errors": [
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "object id not found in document"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "delete_object",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "high-risk operation requires explicit approval"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "path rejected: outside workspace; call get_workspace_info and choose a relative path under a configured server root (relative paths default to the first root)"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "document id not found"
+              }
+            ],
+            "isError": true
+          }
+        }
+      ]
+    },
+    {
+      "run": "run-4.json.gz",
+      "startup_to_initialized_ms": 662.538417,
+      "processes_at_initialization": [
+        {
+          "pid": 52479,
+          "ppid": 51944,
+          "rss_kib": 92432,
+          "command": "/Users/bm/Documents/repos/inkscape-mcp-server/.venv/bin/python"
+        }
+      ],
+      "calls": [
+        {
+          "method": "initialize",
+          "name": null,
+          "args": null,
+          "roundtrip_ms": 628.226166
+        },
+        {
+          "method": "tools/call",
+          "name": "get_workspace_info",
+          "args": {},
+          "roundtrip_ms": 17.725084
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "fixture.svg"
+          },
+          "roundtrip_ms": 4.148833
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_17ba3f99"
+          },
+          "roundtrip_ms": 12.535083
+        },
+        {
+          "method": "tools/call",
+          "name": "list_snapshots",
+          "args": {
+            "doc_id": "d_17ba3f99"
+          },
+          "roundtrip_ms": 2.496375
+        },
+        {
+          "method": "tools/call",
+          "name": "set_fill",
+          "args": {
+            "doc_id": "d_17ba3f99",
+            "object_ids": [
+              "r1"
+            ],
+            "color": "#3366cc"
+          },
+          "roundtrip_ms": 2.373958
+        },
+        {
+          "method": "tools/call",
+          "name": "list_snapshots",
+          "args": {
+            "doc_id": "d_17ba3f99"
+          },
+          "roundtrip_ms": 2.163917
+        },
+        {
+          "method": "tools/call",
+          "name": "set_fill",
+          "args": {
+            "doc_id": "d_17ba3f99",
+            "object_ids": [
+              "r1"
+            ],
+            "color": "#ff0000"
+          },
+          "roundtrip_ms": 783.977125
+        },
+        {
+          "method": "tools/call",
+          "name": "restore_snapshot",
+          "args": {
+            "doc_id": "d_17ba3f99",
+            "snapshot_id": "snap_b529e8f6"
+          },
+          "roundtrip_ms": 3.261042
+        },
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "args": {
+            "doc_id": "d_17ba3f99",
+            "edits": [
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "r1"
+                ],
+                "color": "#00ff00"
+              },
+              {
+                "op": "set_opacity",
+                "object_ids": [
+                  "r1"
+                ],
+                "opacity": 0.5
+              }
+            ]
+          },
+          "roundtrip_ms": 602.718083
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_17ba3f99"
+          },
+          "roundtrip_ms": 13.701917
+        },
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "args": {
+            "doc_id": "d_17ba3f99",
+            "edits": [
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "r1"
+                ],
+                "color": "#0000ff"
+              },
+              {
+                "op": "set_fill",
+                "object_ids": [
+                  "absent"
+                ],
+                "color": "#0000ff"
+              }
+            ]
+          },
+          "roundtrip_ms": 2.172083
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_17ba3f99"
+          },
+          "roundtrip_ms": 12.799375
+        },
+        {
+          "method": "tools/call",
+          "name": "delete_object",
+          "args": {
+            "doc_id": "d_17ba3f99",
+            "object_ids": [
+              "r1"
+            ]
+          },
+          "roundtrip_ms": 1.442583
+        },
+        {
+          "method": "tools/call",
+          "name": "save_document_as",
+          "args": {
+            "doc_id": "d_17ba3f99",
+            "dest_path": "out/saved.svg"
+          },
+          "roundtrip_ms": 6.120459
+        },
+        {
+          "method": "resources/read",
+          "name": null,
+          "args": null,
+          "roundtrip_ms": 1.70625
+        },
+        {
+          "method": "tools/call",
+          "name": "render_preview",
+          "args": {
+            "doc_id": "d_17ba3f99",
+            "width_px": 128,
+            "inline": false
+          },
+          "roundtrip_ms": 292.573708
+        },
+        {
+          "method": "tools/call",
+          "name": "export_document",
+          "args": {
+            "doc_id": "d_17ba3f99",
+            "format": "png",
+            "out_dir": "out",
+            "width_px": 128
+          },
+          "roundtrip_ms": 296.327042
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "../escape.svg"
+          },
+          "roundtrip_ms": 1.981666
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_missing"
+          },
+          "roundtrip_ms": 0.871
+        },
+        {
+          "method": "tools/call",
+          "name": "live_status",
+          "args": {},
+          "roundtrip_ms": 985.449834
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-100.svg"
+          },
+          "roundtrip_ms": 4.337167
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_a102c9d7"
+          },
+          "roundtrip_ms": 27.791375
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-10000.svg"
+          },
+          "roundtrip_ms": 18.305792
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_44fdbd67"
+          },
+          "roundtrip_ms": 1523.978792
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "args": {
+            "path": "size-100000.svg"
+          },
+          "roundtrip_ms": 209.580583
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "args": {
+            "doc_id": "d_7fe783fc"
+          },
+          "roundtrip_ms": 16748.63975
+        }
+      ],
+      "errors": [
+        {
+          "method": "tools/call",
+          "name": "apply_edits",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "object id not found in document"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "delete_object",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "high-risk operation requires explicit approval"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "open_document",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "path rejected: outside workspace; call get_workspace_info and choose a relative path under a configured server root (relative paths default to the first root)"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "inspect_document",
+          "response": {
+            "content": [
+              {
+                "type": "text",
+                "text": "document id not found"
+              }
+            ],
+            "isError": true
+          }
+        }
+      ]
+    }
+  ],
+  "median_startup_ms": 664.617292,
+  "note": "Real JSON-RPC roundtrips include IPC, IO, engine and client JSON parsing. No separate server attribution or peak child-process memory claim. RSS snapshot is only at initialization. Raw traces are retained in migration/results/python-baseline"
+}

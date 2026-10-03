@@ -1,0 +1,449 @@
+{
+  "passed": false,
+  "observations": 87,
+  "normalization": "none",
+  "scope": "All 87 required signatures called with an empty object. Baseline native typed kernels may probe runtime/create Action-map cache; no explicit GUI launch. See retained traces and workspace inventories.",
+  "rust_binary_sha256": "488dbf10c50443dfe4b1ef172c04d137ad1d19f5b3d7eda0ab1f4cc358b0f0c3",
+  "discovery_sha256": "e83b34257858096e07c673e5a38eeadd8a371b0e4a63496181e893d8f48128b6",
+  "differences": [
+    {
+      "path": "/0/response/content/0/text",
+      "expected": "1 validation error for call[stat_artifact]\npath\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "path must be a string"
+    },
+    {
+      "path": "/1/response/content/0/text",
+      "expected": "1 validation error for call[stat_artifacts]\npaths\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "paths must be a list of strings"
+    },
+    {
+      "path": "/2/response/content/0/text",
+      "expected": "1 validation error for call[validate_action_chain]\nsteps\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "steps must be a list"
+    },
+    {
+      "path": "/3/response/content/0/text",
+      "expected": "2 validation errors for call[run_action_chain]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsteps\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/4/response/content/0/text",
+      "expected": "2 validation errors for call[run_raw_action]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\naction\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/5/response/content/0/text",
+      "expected": "2 validation errors for call[apply_edits]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nedits\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/6/response/content/0/text",
+      "expected": "2 validation errors for call[set_document_svg]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsvg\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/7/response/content/0/text",
+      "expected": "2 validation errors for call[insert_svg_fragment]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsvg\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/8/response/content/0/text",
+      "expected": "3 validation errors for call[compose_grid]\nrows\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncols\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncell\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "compose_grid requires EXACTLY ONE of doc_ids OR object_ids (with source_doc_id)"
+    },
+    {
+      "path": "/9/response/content/0/text",
+      "expected": "3 validation errors for call[place_document]\ntarget_doc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nx\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ny\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "target_doc_id must be a string"
+    },
+    {
+      "path": "/10/response/content/0/text",
+      "expected": "3 validation errors for call[replace_svg_fragment]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsvg\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/11/response/content/0/text",
+      "expected": "5 validation errors for call[create_rect]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nx\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ny\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nwidth\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nheight\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/12/response/content/0/text",
+      "expected": "4 validation errors for call[create_circle]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncx\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncy\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nr\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/13/response/content/0/text",
+      "expected": "5 validation errors for call[create_ellipse]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncx\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncy\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nrx\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nry\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/14/response/content/0/text",
+      "expected": "5 validation errors for call[create_line]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nx1\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ny1\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nx2\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ny2\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/15/response/content/0/text",
+      "expected": "2 validation errors for call[create_polygon]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\npoints\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/16/response/content/0/text",
+      "expected": "2 validation errors for call[create_polyline]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\npoints\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/17/response/content/0/text",
+      "expected": "2 validation errors for call[create_path]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nd\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/18/response/content/0/text",
+      "expected": "4 validation errors for call[create_text]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nx\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ny\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ntext\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/19/response/content/0/text",
+      "expected": "2 validation errors for call[add_linear_gradient]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nstops\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/20/response/content/0/text",
+      "expected": "2 validation errors for call[add_radial_gradient]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nstops\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/21/response/content/0/text",
+      "expected": "1 validation error for call[create_group]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/22/response/content/0/text",
+      "expected": "2 validation errors for call[group_objects]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/23/response/content/0/text",
+      "expected": "3 validation errors for call[reparent_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nnew_parent_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/24/response/content/0/text",
+      "expected": "2 validation errors for call[create_use]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nhref_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/25/response/content/0/text",
+      "expected": "3 validation errors for call[set_group_mode]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nmode\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/26/response/content/0/text",
+      "expected": "1 validation error for call[how_do_i]\ngoal\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "goal must be a string"
+    },
+    {
+      "path": "/27/response/content/0/text",
+      "expected": "1 validation error for call[open_document]\npath\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "path must be a string"
+    },
+    {
+      "path": "/28/response/content/0/text",
+      "expected": "2 validation errors for call[create_document]\nwidth\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nheight\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "width must be a finite number greater than 0"
+    },
+    {
+      "path": "/29/response/content/0/text",
+      "expected": "1 validation error for call[reload_document]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/30/response/content/0/text",
+      "expected": "1 validation error for call[inspect_document]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/31/response/content/0/text",
+      "expected": "2 validation errors for call[delete_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/32/response/content/0/text",
+      "expected": "1 validation error for call[render_preview]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/33/response/content/0/text",
+      "expected": "1 validation error for call[capture_frame]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/34/response/content/0/text",
+      "expected": "1 validation error for call[list_frames]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/35/response/content/0/text",
+      "expected": "2 validation errors for call[export_document]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nformat\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/36/response/content/0/text",
+      "expected": "2 validation errors for call[export_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/37/response/content/0/text",
+      "expected": "3 validation errors for call[compare_region]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsnapshot_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nregion\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/38/response/content/0/text",
+      "expected": "2 validation errors for call[export_batch]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nspecs\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/39/response/content/0/text",
+      "expected": "2 validation errors for call[export_set]\ndoc_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nspecs\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_ids must be a list"
+    },
+    {
+      "path": "/40/response/content/0/text",
+      "expected": "1 validation error for call[find_objects]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/41/response/content/0/text",
+      "expected": "2 validation errors for call[live_select_document]\nwindow_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndocument_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "no live session available; call live_connect to connect (or check_live_support to probe what this host supports)"
+    },
+    {
+      "path": "/42/response/content/0/text",
+      "expected": "1 validation error for call[live_set_viewport]\nmode\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "mode is required"
+    },
+    {
+      "path": "/43/response/content/0/text",
+      "expected": "1 validation error for call[live_sync_to_workspace]\ndest_path\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "dest_path must be a string"
+    },
+    {
+      "path": "/44/response/content/0/text",
+      "expected": "1 validation error for call[live_insert_svg]\nsvg_fragment\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "svg_fragment is required"
+    },
+    {
+      "path": "/45/response/content/0/text",
+      "expected": "1 validation error for call[live_set_selected_text]\ntext\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "text is required"
+    },
+    {
+      "path": "/46/response/content/0/text",
+      "expected": "1 validation error for call[live_edit_selection]\noperation\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "operation is required"
+    },
+    {
+      "path": "/47/response/content/0/text",
+      "expected": "1 validation error for call[live_diff_view]\noperation_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "operation_id must be a string"
+    },
+    {
+      "path": "/48/response/content/0/text",
+      "expected": "2 validation errors for call[live_preview_object]\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nexpected_fingerprint\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "no live session available; call live_connect to connect (or check_live_support to probe what this host supports)"
+    },
+    {
+      "path": "/49/response/content/0/text",
+      "expected": "1 validation error for call[svg_web_optimize]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/50/response/content/0/text",
+      "expected": "1 validation error for call[optimize_set]\ndoc_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_ids must be a list"
+    },
+    {
+      "path": "/51/response/content/0/text",
+      "expected": "2 validation errors for call[simplify_path]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/52/response/content/0/text",
+      "expected": "2 validation errors for call[boolean_union]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/53/response/content/0/text",
+      "expected": "2 validation errors for call[boolean_difference]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/54/response/content/0/text",
+      "expected": "2 validation errors for call[combine_paths]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/55/response/content/0/text",
+      "expected": "2 validation errors for call[break_apart]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/56/response/content/0/text",
+      "expected": "2 validation errors for call[stroke_to_path]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/57/response/content/0/text",
+      "expected": "2 validation errors for call[cleanup_paths]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/58/response/content/0/text",
+      "expected": "1 validation error for call[export_web_profile]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/59/response/content/0/text",
+      "expected": "1 validation error for call[create_icon_set]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/60/response/content/0/text",
+      "expected": "1 validation error for call[export_print_profile]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/61/response/content/0/text",
+      "expected": "1 validation error for call[quality_report]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/62/response/content/0/text",
+      "expected": "1 validation error for call[quality_report_set]\ndoc_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_ids must be a list"
+    },
+    {
+      "path": "/63/response/content/0/text",
+      "expected": "2 validation errors for call[save_document_as]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndest_path\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/64/response/content/0/text",
+      "expected": "1 validation error for call[create_snapshot]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/65/response/content/0/text",
+      "expected": "1 validation error for call[list_snapshots]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/66/response/content/0/text",
+      "expected": "2 validation errors for call[restore_snapshot]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsnapshot_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/67/response/content/0/text",
+      "expected": "1 validation error for call[prune_snapshots]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/68/response/content/0/text",
+      "expected": "3 validation errors for call[set_fill]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncolor\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/69/response/content/0/text",
+      "expected": "2 validation errors for call[set_stroke]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/70/response/content/0/text",
+      "expected": "3 validation errors for call[set_opacity]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nopacity\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/71/response/content/0/text",
+      "expected": "3 validation errors for call[replace_color]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nfrom_color\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nto_color\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/72/response/content/0/text",
+      "expected": "2 validation errors for call[apply_palette]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nmapping\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/73/response/content/0/text",
+      "expected": "3 validation errors for call[replace_text]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ntext\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/74/response/content/0/text",
+      "expected": "2 validation errors for call[set_font]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_ids\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/75/response/content/0/text",
+      "expected": "2 validation errors for call[duplicate_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/76/response/content/0/text",
+      "expected": "2 validation errors for call[rename_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/77/response/content/0/text",
+      "expected": "4 validation errors for call[move_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndx\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndy\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/78/response/content/0/text",
+      "expected": "3 validation errors for call[scale_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nsx\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/79/response/content/0/text",
+      "expected": "3 validation errors for call[rotate_object]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndegrees\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/80/response/content/0/text",
+      "expected": "3 validation errors for call[resize_canvas]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nwidth\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nheight\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/81/response/content/0/text",
+      "expected": "1 validation error for call[normalize_viewbox]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/82/response/content/0/text",
+      "expected": "1 validation error for call[fit_to_content]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/83/response/content/0/text",
+      "expected": "6 validation errors for call[tile]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nrows\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ncols\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndx\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ndy\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/84/response/content/0/text",
+      "expected": "4 validation errors for call[repeat_objects]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nobject_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nplacement\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\ngroup_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/85/response/content/0/text",
+      "expected": "3 validation errors for call[transform_objects]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\nselector\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument\noperation\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    },
+    {
+      "path": "/86/response/content/0/text",
+      "expected": "1 validation error for call[validate_document]\ndoc_id\n  Missing required argument [type=missing_argument, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing_argument",
+      "actual": "doc_id must be a string"
+    }
+  ],
+  "workspace_changed": {
+    "python": false,
+    "rust": true
+  }
+}

@@ -1,0 +1,724 @@
+{
+  "cases": [
+    {
+      "guarded": false,
+      "selected": null,
+      "current": null,
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": null,
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "A"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": null,
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "12345678-1234-1234-1234-123456789abc",
+        "name": "B"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": null,
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "renamed"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": null,
+      "current": {
+        "window_id": "abcdefab-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "other window"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "A"
+      },
+      "current": null,
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "A"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "A"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "A"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "12345678-1234-1234-1234-123456789abc",
+        "name": "B"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "A"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "renamed"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "A"
+      },
+      "current": {
+        "window_id": "abcdefab-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "other window"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "12345678-1234-1234-1234-123456789abc",
+        "name": "B"
+      },
+      "current": null,
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "12345678-1234-1234-1234-123456789abc",
+        "name": "B"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "A"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "12345678-1234-1234-1234-123456789abc",
+        "name": "B"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "12345678-1234-1234-1234-123456789abc",
+        "name": "B"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "12345678-1234-1234-1234-123456789abc",
+        "name": "B"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "renamed"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "12345678-1234-1234-1234-123456789abc",
+        "name": "B"
+      },
+      "current": {
+        "window_id": "abcdefab-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "other window"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "renamed"
+      },
+      "current": null,
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "renamed"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "A"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "renamed"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "12345678-1234-1234-1234-123456789abc",
+        "name": "B"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "renamed"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "renamed"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "renamed"
+      },
+      "current": {
+        "window_id": "abcdefab-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "other window"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": {
+        "window_id": "abcdefab-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "other window"
+      },
+      "current": null,
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": {
+        "window_id": "abcdefab-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "other window"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "A"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": {
+        "window_id": "abcdefab-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "other window"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "12345678-1234-1234-1234-123456789abc",
+        "name": "B"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": {
+        "window_id": "abcdefab-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "other window"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "renamed"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": false,
+      "selected": {
+        "window_id": "abcdefab-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "other window"
+      },
+      "current": {
+        "window_id": "abcdefab-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "other window"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": true,
+      "selected": null,
+      "current": null,
+      "expected": {
+        "error": "choose the task drawing with live_select_document before editing"
+      }
+    },
+    {
+      "guarded": true,
+      "selected": null,
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "A"
+      },
+      "expected": {
+        "error": "choose the task drawing with live_select_document before editing"
+      }
+    },
+    {
+      "guarded": true,
+      "selected": null,
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "12345678-1234-1234-1234-123456789abc",
+        "name": "B"
+      },
+      "expected": {
+        "error": "choose the task drawing with live_select_document before editing"
+      }
+    },
+    {
+      "guarded": true,
+      "selected": null,
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "renamed"
+      },
+      "expected": {
+        "error": "choose the task drawing with live_select_document before editing"
+      }
+    },
+    {
+      "guarded": true,
+      "selected": null,
+      "current": {
+        "window_id": "abcdefab-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "other window"
+      },
+      "expected": {
+        "error": "choose the task drawing with live_select_document before editing"
+      }
+    },
+    {
+      "guarded": true,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "A"
+      },
+      "current": null,
+      "expected": {
+        "error": "task drawing changed; call live_select_document before editing"
+      }
+    },
+    {
+      "guarded": true,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "A"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "A"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": true,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "A"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "12345678-1234-1234-1234-123456789abc",
+        "name": "B"
+      },
+      "expected": {
+        "error": "task drawing changed; call live_select_document before editing"
+      }
+    },
+    {
+      "guarded": true,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "A"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "renamed"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": true,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "A"
+      },
+      "current": {
+        "window_id": "abcdefab-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "other window"
+      },
+      "expected": {
+        "error": "task drawing changed; call live_select_document before editing"
+      }
+    },
+    {
+      "guarded": true,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "12345678-1234-1234-1234-123456789abc",
+        "name": "B"
+      },
+      "current": null,
+      "expected": {
+        "error": "task drawing changed; call live_select_document before editing"
+      }
+    },
+    {
+      "guarded": true,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "12345678-1234-1234-1234-123456789abc",
+        "name": "B"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "A"
+      },
+      "expected": {
+        "error": "task drawing changed; call live_select_document before editing"
+      }
+    },
+    {
+      "guarded": true,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "12345678-1234-1234-1234-123456789abc",
+        "name": "B"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "12345678-1234-1234-1234-123456789abc",
+        "name": "B"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": true,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "12345678-1234-1234-1234-123456789abc",
+        "name": "B"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "renamed"
+      },
+      "expected": {
+        "error": "task drawing changed; call live_select_document before editing"
+      }
+    },
+    {
+      "guarded": true,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "12345678-1234-1234-1234-123456789abc",
+        "name": "B"
+      },
+      "current": {
+        "window_id": "abcdefab-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "other window"
+      },
+      "expected": {
+        "error": "task drawing changed; call live_select_document before editing"
+      }
+    },
+    {
+      "guarded": true,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "renamed"
+      },
+      "current": null,
+      "expected": {
+        "error": "task drawing changed; call live_select_document before editing"
+      }
+    },
+    {
+      "guarded": true,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "renamed"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "A"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": true,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "renamed"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "12345678-1234-1234-1234-123456789abc",
+        "name": "B"
+      },
+      "expected": {
+        "error": "task drawing changed; call live_select_document before editing"
+      }
+    },
+    {
+      "guarded": true,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "renamed"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "renamed"
+      },
+      "expected": {
+        "result": null
+      }
+    },
+    {
+      "guarded": true,
+      "selected": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "renamed"
+      },
+      "current": {
+        "window_id": "abcdefab-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "other window"
+      },
+      "expected": {
+        "error": "task drawing changed; call live_select_document before editing"
+      }
+    },
+    {
+      "guarded": true,
+      "selected": {
+        "window_id": "abcdefab-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "other window"
+      },
+      "current": null,
+      "expected": {
+        "error": "task drawing changed; call live_select_document before editing"
+      }
+    },
+    {
+      "guarded": true,
+      "selected": {
+        "window_id": "abcdefab-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "other window"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "A"
+      },
+      "expected": {
+        "error": "task drawing changed; call live_select_document before editing"
+      }
+    },
+    {
+      "guarded": true,
+      "selected": {
+        "window_id": "abcdefab-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "other window"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "12345678-1234-1234-1234-123456789abc",
+        "name": "B"
+      },
+      "expected": {
+        "error": "task drawing changed; call live_select_document before editing"
+      }
+    },
+    {
+      "guarded": true,
+      "selected": {
+        "window_id": "abcdefab-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "other window"
+      },
+      "current": {
+        "window_id": "12345678-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "renamed"
+      },
+      "expected": {
+        "error": "task drawing changed; call live_select_document before editing"
+      }
+    },
+    {
+      "guarded": true,
+      "selected": {
+        "window_id": "abcdefab-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "other window"
+      },
+      "current": {
+        "window_id": "abcdefab-1234-1234-1234-123456789abc",
+        "document_id": "abcdefab-1234-1234-1234-123456789abc",
+        "name": "other window"
+      },
+      "expected": {
+        "result": null
+      }
+    }
+  ]
+}

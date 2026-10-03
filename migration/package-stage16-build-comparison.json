@@ -1,0 +1,226 @@
+{
+  "candidate": true,
+  "directory": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage16",
+  "archive": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage16.tar.gz",
+  "archive_bytes": 46307090,
+  "archive_sha256": "b49f97bfa7f6b15c4ff62fa3a3fbe8ea9a8082260ce6f027eb800114876c3c6a",
+  "package_manifest_sha256": "088af8100095fb47a18e6b2340a9844450ab2a3538d40a24d8ed131100c9fd4e",
+  "manifest": {
+    "target": "macos-arm64",
+    "python": "3.12.14 (main, Sep 29 2026, 14:50:19) [Clang 22.1.3 ]",
+    "runtime_source": "/Users/bm/.local/share/uv/python/cpython-3.12.14-macos-aarch64-none",
+    "python_deps": [
+      {
+        "name": "lxml",
+        "version": "6.1.1"
+      },
+      {
+        "name": "numpy",
+        "version": "2.5.3"
+      },
+      {
+        "name": "cssselect",
+        "version": "1.5.0"
+      },
+      {
+        "name": "tinycss2",
+        "version": "1.5.1"
+      },
+      {
+        "name": "webencodings",
+        "version": "0.6.1"
+      },
+      {
+        "name": "pillow",
+        "version": "12.2.0"
+      }
+    ],
+    "dbus_inputs": [
+      {
+        "source": "/opt/homebrew/Cellar/dbus/1.16.2_1/bin/dbus-daemon",
+        "source_sha256": "2bfdf7f76ce430999c5fa1f96351bfa8c216a21e0a214de2e64da909a2ad946a",
+        "output": "dbus/bin/dbus-daemon",
+        "dependencies": [
+          "@loader_path/../lib/libdbus-1.3.dylib",
+          "/usr/lib/libexpat.1.dylib",
+          "/usr/lib/libSystem.B.dylib"
+        ]
+      },
+      {
+        "source": "/opt/homebrew/Cellar/glib/2.90.0/bin/gdbus",
+        "source_sha256": "8296818d88d73967245e2ea4fd3f54d52c76bb97bb4302c6b4225725f59f1b6d",
+        "output": "dbus/bin/gdbus",
+        "dependencies": [
+          "@loader_path/../lib/libgio-2.0.0.dylib",
+          "@loader_path/../lib/libglib-2.0.0.dylib",
+          "@loader_path/../lib/libgobject-2.0.0.dylib",
+          "@loader_path/../lib/libintl.8.dylib",
+          "/usr/lib/libSystem.B.dylib"
+        ]
+      },
+      {
+        "source": "/opt/homebrew/Cellar/dbus/1.16.2_1/lib/libdbus-1.3.dylib",
+        "source_sha256": "f3d78e9101769830a5742bf71a8405bb1157fdbd06e0716a08245465d83c8c7b",
+        "output": "dbus/lib/libdbus-1.3.dylib",
+        "dependencies": [
+          "@loader_path/libdbus-1.3.dylib",
+          "/usr/lib/libSystem.B.dylib"
+        ]
+      },
+      {
+        "source": "/opt/homebrew/Cellar/glib/2.90.0/lib/libgio-2.0.0.dylib",
+        "source_sha256": "5d8f14923364f92487298692cc7ee76d8ee1348e5c6a13f009f285ff96091089",
+        "output": "dbus/lib/libgio-2.0.0.dylib",
+        "dependencies": [
+          "@loader_path/libgio-2.0.0.dylib",
+          "@loader_path/libglib-2.0.0.dylib",
+          "@loader_path/libgobject-2.0.0.dylib",
+          "@loader_path/libgmodule-2.0.0.dylib",
+          "/usr/lib/libz.1.dylib",
+          "@loader_path/libintl.8.dylib",
+          "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+          "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+          "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+          "/usr/lib/libresolv.9.dylib",
+          "/usr/lib/libSystem.B.dylib",
+          "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices",
+          "/usr/lib/libobjc.A.dylib"
+        ]
+      },
+      {
+        "source": "/opt/homebrew/Cellar/glib/2.90.0/lib/libglib-2.0.0.dylib",
+        "source_sha256": "934e63c138b92bb530478bc5d17abc694e99ee98ecd6252e583a6f612fc3c860",
+        "output": "dbus/lib/libglib-2.0.0.dylib",
+        "dependencies": [
+          "@loader_path/libglib-2.0.0.dylib",
+          "/usr/lib/libiconv.2.dylib",
+          "@loader_path/libintl.8.dylib",
+          "/usr/lib/libSystem.B.dylib",
+          "@loader_path/libpcre2-8.0.dylib",
+          "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+          "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices",
+          "/usr/lib/libobjc.A.dylib"
+        ]
+      },
+      {
+        "source": "/opt/homebrew/Cellar/glib/2.90.0/lib/libgobject-2.0.0.dylib",
+        "source_sha256": "c67441953b60d4ab806e5c3d9d8cb489f8fd5cce0907e130ae469e36e243a539",
+        "output": "dbus/lib/libgobject-2.0.0.dylib",
+        "dependencies": [
+          "@loader_path/libgobject-2.0.0.dylib",
+          "@loader_path/libglib-2.0.0.dylib",
+          "/usr/lib/libffi.dylib",
+          "/usr/lib/libSystem.B.dylib"
+        ]
+      },
+      {
+        "source": "/opt/homebrew/Cellar/gettext/1.0/lib/libintl.8.dylib",
+        "source_sha256": "0c6d618e75fea85cc3d631e164a71766fba9341d19ce1f723300c52e63037c51",
+        "output": "dbus/lib/libintl.8.dylib",
+        "dependencies": [
+          "@loader_path/libintl.8.dylib",
+          "/usr/lib/libiconv.2.dylib",
+          "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+          "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices",
+          "/usr/lib/libSystem.B.dylib"
+        ]
+      },
+      {
+        "source": "/opt/homebrew/Cellar/glib/2.90.0/lib/libgmodule-2.0.0.dylib",
+        "source_sha256": "9cfdb91f022a950042d5181d5a3046ae01a2cd1ae87c9ebfa03c3fa98d838189",
+        "output": "dbus/lib/libgmodule-2.0.0.dylib",
+        "dependencies": [
+          "@loader_path/libgmodule-2.0.0.dylib",
+          "@loader_path/libglib-2.0.0.dylib",
+          "/usr/lib/libSystem.B.dylib"
+        ]
+      },
+      {
+        "source": "/opt/homebrew/Cellar/pcre2/10.48/lib/libpcre2-8.0.dylib",
+        "source_sha256": "6b698ffc744550e149829d94045912448b8ac4b692cb267dce9fc2f3ed60659d",
+        "output": "dbus/lib/libpcre2-8.0.dylib",
+        "dependencies": [
+          "@loader_path/libpcre2-8.0.dylib",
+          "/usr/lib/libSystem.B.dylib"
+        ]
+      }
+    ],
+    "release_signed": false,
+    "notarized": false,
+    "source_head": "c50a9248b3bca9177103373ce66d6dd1307bedd3"
+  },
+  "regular_files": 2258,
+  "regular_bytes": 130126927,
+  "rust_binary_sha256": "20d5cc37d2573eeebe2b9fc3fb1532ef2d53d76c5737288751865aa35fcd16fc",
+  "archive_install_cold": {
+    "passed": true,
+    "installed_from_archive": true,
+    "engine_mode": "per_call",
+    "relocated_files": 2258,
+    "minimal_PATH": "empty",
+    "private_python_imports": true,
+    "helper_CLIs": 2,
+    "private_bus_exchange": true,
+    "stdio_surface": [
+      110,
+      7,
+      18
+    ],
+    "real_CLI_blue_pixels": true,
+    "real_CLI_export_resource": true,
+    "atomic_batch_and_rollback": true,
+    "repeat_fragment_batch_and_restore": true,
+    "approval_refusal": true,
+    "no_op_without_audit": true,
+    "source_original_preserved": true,
+    "native_GUI_acceptance": false
+  },
+  "archive_install_warm": {
+    "passed": true,
+    "installed_from_archive": true,
+    "engine_mode": "shell",
+    "relocated_files": 2258,
+    "minimal_PATH": "empty",
+    "private_python_imports": true,
+    "helper_CLIs": 2,
+    "private_bus_exchange": true,
+    "stdio_surface": [
+      110,
+      7,
+      18
+    ],
+    "real_CLI_blue_pixels": true,
+    "real_CLI_export_resource": true,
+    "atomic_batch_and_rollback": true,
+    "repeat_fragment_batch_and_restore": true,
+    "approval_refusal": true,
+    "no_op_without_audit": true,
+    "source_original_preserved": true,
+    "native_GUI_acceptance": false
+  },
+  "doctor": {
+    "passed": true,
+    "profiles": 10,
+    "ready_and_exit_codes": true,
+    "read_only_no_bytecode": true,
+    "missing_assets_named": true,
+    "link_and_architecture_guards": true,
+    "minimum_version_checked": true,
+    "GUI_launched": false
+  },
+  "native_GUI_acceptance": false,
+  "native_GUI_scope": "Stage16 GUI/Undo has not been executed; scoped stage13 evidence remains historical",
+  "full_migration_complete": false,
+  "Rust_QA": {
+    "passed": 191,
+    "ignored_child_helper": 1,
+    "clippy_all_targets": true,
+    "format": true
+  },
+  "discovery": "migration/discovery-containers-comparison.json",
+  "argument_validation": "migration/argument-containers-comparison.json",
+  "positive_repeat": "migration/repeat-containers-package-cli-comparison.json",
+  "previous_package_evidence": "migration/package-stage15-build-comparison.json",
+  "signed_release": false,
+  "notarized": false
+}

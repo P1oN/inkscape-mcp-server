@@ -1,0 +1,7 @@
+{
+  "observations": 26,
+  "rust_binary_sha256": "dfadfbc0a11cc14a1454c40d35956348070b353115ed726b8b450035b73afd1f",
+  "normalization": "validated UTC connected_at binding only",
+  "differences": [],
+  "passed": true
+}

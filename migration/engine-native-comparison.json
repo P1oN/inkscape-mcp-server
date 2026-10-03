@@ -1,0 +1,342 @@
+{
+  "passed": true,
+  "cold": {
+    "observations": [
+      {
+        "label": "preview-128",
+        "size": [
+          128,
+          77
+        ],
+        "rgba_sha256": "71049b10a72bfbf05cacb83895b8511fe4737f120ef929936546288f11199aa0"
+      },
+      {
+        "label": "preview-64",
+        "size": [
+          64,
+          38
+        ],
+        "rgba_sha256": "a2c85793fb47a7cdbd10ab02f7fb7e79a2464c1575b0858de3651a31b7f39241"
+      },
+      {
+        "label": "preview-None",
+        "size": [
+          100,
+          60
+        ],
+        "rgba_sha256": "779f76ba4d3e4200de3a4d3efffb3b853a15d54e99616b09de709996154c2595"
+      },
+      {
+        "label": "fresh-red",
+        "size": [
+          100,
+          60
+        ],
+        "rgba_sha256": "b3abc550ad23ecdc1c5ed262cc56f1ee49bd520e611bb12c5a29d0ac364033a7"
+      },
+      {
+        "label": "plain-svg",
+        "sha256": "2adcfa2dda60e08067be1081147f940519502fb9be12e680d2bd8acd7f231f8f"
+      }
+    ],
+    "launches": [
+      {
+        "pid": 59151,
+        "argv": [
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-yDEmwi/input.svg",
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-yDEmwi/output.png",
+          "--export-width=128",
+          "--export-area-page"
+        ],
+        "start_ns": 871307693168125
+      },
+      {
+        "pid": 59154,
+        "argv": [
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-TZTERS/input.svg",
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-TZTERS/output.png",
+          "--export-width=64",
+          "--export-area-page"
+        ],
+        "start_ns": 871308142066708
+      },
+      {
+        "pid": 59156,
+        "argv": [
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-A2Ejiw/input.svg",
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-A2Ejiw/output.png",
+          "--export-area-page"
+        ],
+        "start_ns": 871308423424916
+      },
+      {
+        "pid": 59159,
+        "argv": [
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-render-yrskZr/output.png",
+          "--export-area-page",
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-render-yrskZr/input.svg"
+        ],
+        "start_ns": 871308718428708
+      },
+      {
+        "pid": 59166,
+        "argv": [
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-render-L6Ncgk/output.png",
+          "--export-area-page",
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-render-L6Ncgk/input.svg"
+        ],
+        "start_ns": 871309040491750
+      },
+      {
+        "pid": 59172,
+        "argv": [
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-tGEdkQ/input.svg",
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-tGEdkQ/output.png",
+          "--export-area-page"
+        ],
+        "start_ns": 871309332949125
+      },
+      {
+        "pid": 59174,
+        "argv": [
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-J9q5wi/input.svg",
+          "--export-type=svg",
+          "--export-plain-svg",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-J9q5wi/output.svg"
+        ],
+        "start_ns": 871309614039791
+      }
+    ],
+    "shell_count": 0,
+    "original_preserved": true,
+    "startup_no_engine": true,
+    "owned_shell_cleanup": true
+  },
+  "warm": {
+    "observations": [
+      {
+        "label": "preview-128",
+        "size": [
+          128,
+          77
+        ],
+        "rgba_sha256": "71049b10a72bfbf05cacb83895b8511fe4737f120ef929936546288f11199aa0"
+      },
+      {
+        "label": "preview-64",
+        "size": [
+          64,
+          38
+        ],
+        "rgba_sha256": "a2c85793fb47a7cdbd10ab02f7fb7e79a2464c1575b0858de3651a31b7f39241"
+      },
+      {
+        "label": "preview-None",
+        "size": [
+          100,
+          60
+        ],
+        "rgba_sha256": "779f76ba4d3e4200de3a4d3efffb3b853a15d54e99616b09de709996154c2595"
+      },
+      {
+        "label": "fresh-red",
+        "size": [
+          100,
+          60
+        ],
+        "rgba_sha256": "b3abc550ad23ecdc1c5ed262cc56f1ee49bd520e611bb12c5a29d0ac364033a7"
+      },
+      {
+        "label": "plain-svg",
+        "sha256": "2adcfa2dda60e08067be1081147f940519502fb9be12e680d2bd8acd7f231f8f"
+      }
+    ],
+    "launches": [
+      {
+        "pid": 59179,
+        "argv": [
+          "--shell"
+        ],
+        "start_ns": 871310171864041
+      }
+    ],
+    "shell_count": 1,
+    "original_preserved": true,
+    "startup_no_engine": true,
+    "owned_shell_cleanup": true
+  },
+  "startup_fault_fallback": {
+    "observations": [
+      {
+        "label": "preview-128",
+        "size": [
+          128,
+          77
+        ],
+        "rgba_sha256": "71049b10a72bfbf05cacb83895b8511fe4737f120ef929936546288f11199aa0"
+      },
+      {
+        "label": "preview-64",
+        "size": [
+          64,
+          38
+        ],
+        "rgba_sha256": "a2c85793fb47a7cdbd10ab02f7fb7e79a2464c1575b0858de3651a31b7f39241"
+      },
+      {
+        "label": "preview-None",
+        "size": [
+          100,
+          60
+        ],
+        "rgba_sha256": "779f76ba4d3e4200de3a4d3efffb3b853a15d54e99616b09de709996154c2595"
+      },
+      {
+        "label": "fresh-red",
+        "size": [
+          100,
+          60
+        ],
+        "rgba_sha256": "b3abc550ad23ecdc1c5ed262cc56f1ee49bd520e611bb12c5a29d0ac364033a7"
+      },
+      {
+        "label": "plain-svg",
+        "sha256": "2adcfa2dda60e08067be1081147f940519502fb9be12e680d2bd8acd7f231f8f"
+      }
+    ],
+    "launches": [
+      {
+        "pid": 59186,
+        "argv": [
+          "--shell"
+        ],
+        "start_ns": 871311063858541
+      },
+      {
+        "pid": 59189,
+        "argv": [
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-8ereen/input.svg",
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-8ereen/output.png",
+          "--export-width=128",
+          "--export-area-page"
+        ],
+        "start_ns": 871311083226666
+      },
+      {
+        "pid": 59190,
+        "argv": [
+          "--shell"
+        ],
+        "start_ns": 871311528116541
+      },
+      {
+        "pid": 59191,
+        "argv": [
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-WUd2WS/input.svg",
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-WUd2WS/output.png",
+          "--export-width=64",
+          "--export-area-page"
+        ],
+        "start_ns": 871311546056125
+      },
+      {
+        "pid": 59193,
+        "argv": [
+          "--shell"
+        ],
+        "start_ns": 871311825832541
+      },
+      {
+        "pid": 59194,
+        "argv": [
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-BWvPqh/input.svg",
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-BWvPqh/output.png",
+          "--export-area-page"
+        ],
+        "start_ns": 871311843577500
+      },
+      {
+        "pid": 59198,
+        "argv": [
+          "--shell"
+        ],
+        "start_ns": 871312133745708
+      },
+      {
+        "pid": 59199,
+        "argv": [
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-render-05BXj8/output.png",
+          "--export-area-page",
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-render-05BXj8/input.svg"
+        ],
+        "start_ns": 871312151836083
+      },
+      {
+        "pid": 59200,
+        "argv": [
+          "--shell"
+        ],
+        "start_ns": 871312484421583
+      },
+      {
+        "pid": 59201,
+        "argv": [
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-render-Xt7mEn/output.png",
+          "--export-area-page",
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-render-Xt7mEn/input.svg"
+        ],
+        "start_ns": 871312508405750
+      },
+      {
+        "pid": 59203,
+        "argv": [
+          "--shell"
+        ],
+        "start_ns": 871312806378875
+      },
+      {
+        "pid": 59204,
+        "argv": [
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-hGK2oA/input.svg",
+          "--export-type=png",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-hGK2oA/output.png",
+          "--export-area-page"
+        ],
+        "start_ns": 871312825066208
+      },
+      {
+        "pid": 59206,
+        "argv": [
+          "--shell"
+        ],
+        "start_ns": 871313108584833
+      },
+      {
+        "pid": 59207,
+        "argv": [
+          "/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-FjZlje/input.svg",
+          "--export-type=svg",
+          "--export-plain-svg",
+          "--export-filename=/private/var/folders/hy/pnfnrl5j1j7_19nnfhkzj5hh0000gn/T/imcp-export-FjZlje/output.svg"
+        ],
+        "start_ns": 871313126179666
+      }
+    ],
+    "shell_count": 7,
+    "original_preserved": true,
+    "startup_no_engine": true,
+    "owned_shell_cleanup": true
+  },
+  "native_GUI_acceptance": false
+}

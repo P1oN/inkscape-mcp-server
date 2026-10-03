@@ -1,0 +1,36 @@
+{
+  "prepared": true,
+  "executed_remote": false,
+  "remote_runs": 0,
+  "YAML_parsed": true,
+  "workflow_sha256": "b4779fca6fb20c42e76514c1f8276651373cb9303f3dc7b89e5cb36513320984",
+  "targets": [
+    {
+      "runner": "ubuntu-24.04",
+      "target": "x86_64-unknown-linux-gnu"
+    },
+    {
+      "runner": "ubuntu-24.04-arm",
+      "target": "aarch64-unknown-linux-gnu"
+    },
+    {
+      "runner": "macos-15-intel",
+      "target": "x86_64-apple-darwin"
+    },
+    {
+      "runner": "macos-15",
+      "target": "aarch64-apple-darwin"
+    }
+  ],
+  "local_current_Mac": {
+    "Rust_tests": 175,
+    "format": true,
+    "clippy_all_targets": true,
+    "release_build": true,
+    "real_STDIO_discovery_matches": 16
+  },
+  "Linux_local": "Docker daemon unavailable; not executed",
+  "Windows": "Native filesystem and other POSIX ports pending; no Rust Windows build claim",
+  "artifact_scope": "Validation executable, locked dependencies and discovery/build evidence; not an installable cross-platform bundle",
+  "runner_label_source": "https://docs.github.com/en/actions/reference/runners/github-hosted-runners"
+}

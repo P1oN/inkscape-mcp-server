@@ -1,0 +1,1038 @@
+{
+  "passed": true,
+  "rows": [
+    {
+      "run": 0,
+      "id": 6,
+      "label": "open-small",
+      "tool": "open_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 92000,
+        "handler": 18137000,
+        "after_handler": 13609000,
+        "write_acceptance": 2000,
+        "flush_completion": 30000
+      },
+      "server_before_write_ns": 31838000,
+      "write_flush_ns": 32000,
+      "transport_flush_envelope_ns": 31870000,
+      "outside_before_write_ns": 108917,
+      "roundtrip_ns": 31946917
+    },
+    {
+      "run": 0,
+      "id": 7,
+      "label": "inspect-small",
+      "tool": "inspect_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 33000,
+        "handler": 2279000,
+        "after_handler": 8655000,
+        "write_acceptance": 2000,
+        "flush_completion": 38000
+      },
+      "server_before_write_ns": 10967000,
+      "write_flush_ns": 40000,
+      "transport_flush_envelope_ns": 11007000,
+      "outside_before_write_ns": 129084,
+      "roundtrip_ns": 11096084
+    },
+    {
+      "run": 0,
+      "id": 8,
+      "label": "no-op",
+      "tool": "set_fill",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 32000,
+        "handler": 824000,
+        "after_handler": 3166000,
+        "write_acceptance": 1000,
+        "flush_completion": 27000
+      },
+      "server_before_write_ns": 4022000,
+      "write_flush_ns": 28000,
+      "transport_flush_envelope_ns": 4050000,
+      "outside_before_write_ns": 78250,
+      "roundtrip_ns": 4100250
+    },
+    {
+      "run": 0,
+      "id": 9,
+      "label": "single-edit",
+      "tool": "set_fill",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 20000,
+        "handler": 791923000,
+        "after_handler": 21884000,
+        "write_acceptance": 3000,
+        "flush_completion": 25000
+      },
+      "server_before_write_ns": 813827000,
+      "write_flush_ns": 28000,
+      "transport_flush_envelope_ns": 813855000,
+      "outside_before_write_ns": 120000,
+      "roundtrip_ns": 813947000
+    },
+    {
+      "run": 0,
+      "id": 10,
+      "label": "atomic-batch",
+      "tool": "apply_edits",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 33000,
+        "handler": 668121000,
+        "after_handler": 22823000,
+        "write_acceptance": 3000,
+        "flush_completion": 25000
+      },
+      "server_before_write_ns": 690977000,
+      "write_flush_ns": 28000,
+      "transport_flush_envelope_ns": 691005000,
+      "outside_before_write_ns": 116417,
+      "roundtrip_ns": 691093417
+    },
+    {
+      "run": 0,
+      "id": 11,
+      "label": "render",
+      "tool": "render_preview",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 32000,
+        "handler": 301479000,
+        "after_handler": 6049000,
+        "write_acceptance": 3000,
+        "flush_completion": 26000
+      },
+      "server_before_write_ns": 307560000,
+      "write_flush_ns": 29000,
+      "transport_flush_envelope_ns": 307589000,
+      "outside_before_write_ns": 118666,
+      "roundtrip_ns": 307678666
+    },
+    {
+      "run": 0,
+      "id": 12,
+      "label": "export",
+      "tool": "export_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 31000,
+        "handler": 296600000,
+        "after_handler": 6572000,
+        "write_acceptance": 2000,
+        "flush_completion": 23000
+      },
+      "server_before_write_ns": 303203000,
+      "write_flush_ns": 25000,
+      "transport_flush_envelope_ns": 303228000,
+      "outside_before_write_ns": 96959,
+      "roundtrip_ns": 303299959
+    },
+    {
+      "run": 0,
+      "id": 13,
+      "label": "save",
+      "tool": "save_document_as",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 31000,
+        "handler": 20525000,
+        "after_handler": 12431000,
+        "write_acceptance": 2000,
+        "flush_completion": 24000
+      },
+      "server_before_write_ns": 32987000,
+      "write_flush_ns": 26000,
+      "transport_flush_envelope_ns": 33013000,
+      "outside_before_write_ns": 92292,
+      "roundtrip_ns": 33079292
+    },
+    {
+      "run": 0,
+      "id": 15,
+      "label": "open-100",
+      "tool": "open_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 18000,
+        "handler": 17275000,
+        "after_handler": 7002000,
+        "write_acceptance": 2000,
+        "flush_completion": 22000
+      },
+      "server_before_write_ns": 24295000,
+      "write_flush_ns": 24000,
+      "transport_flush_envelope_ns": 24319000,
+      "outside_before_write_ns": 83667,
+      "roundtrip_ns": 24378667
+    },
+    {
+      "run": 0,
+      "id": 16,
+      "label": "inspect-100",
+      "tool": "inspect_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 22000,
+        "handler": 2166000,
+        "after_handler": 6087000,
+        "write_acceptance": 2000,
+        "flush_completion": 376000
+      },
+      "server_before_write_ns": 8275000,
+      "write_flush_ns": 378000,
+      "transport_flush_envelope_ns": 8653000,
+      "outside_before_write_ns": 363750,
+      "roundtrip_ns": 8638750
+    },
+    {
+      "run": 1,
+      "id": 6,
+      "label": "open-small",
+      "tool": "open_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 21000,
+        "handler": 16892000,
+        "after_handler": 7628000,
+        "write_acceptance": 3000,
+        "flush_completion": 20000
+      },
+      "server_before_write_ns": 24541000,
+      "write_flush_ns": 23000,
+      "transport_flush_envelope_ns": 24564000,
+      "outside_before_write_ns": 92125,
+      "roundtrip_ns": 24633125
+    },
+    {
+      "run": 1,
+      "id": 7,
+      "label": "inspect-small",
+      "tool": "inspect_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 30000,
+        "handler": 1082000,
+        "after_handler": 6297000,
+        "write_acceptance": 1000,
+        "flush_completion": 28000
+      },
+      "server_before_write_ns": 7409000,
+      "write_flush_ns": 29000,
+      "transport_flush_envelope_ns": 7438000,
+      "outside_before_write_ns": 88708,
+      "roundtrip_ns": 7497708
+    },
+    {
+      "run": 1,
+      "id": 8,
+      "label": "no-op",
+      "tool": "set_fill",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 19000,
+        "handler": 464000,
+        "after_handler": 2441000,
+        "write_acceptance": 1000,
+        "flush_completion": 28000
+      },
+      "server_before_write_ns": 2924000,
+      "write_flush_ns": 29000,
+      "transport_flush_envelope_ns": 2953000,
+      "outside_before_write_ns": 57042,
+      "roundtrip_ns": 2981042
+    },
+    {
+      "run": 1,
+      "id": 9,
+      "label": "single-edit",
+      "tool": "set_fill",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 14000,
+        "handler": 783191000,
+        "after_handler": 21694000,
+        "write_acceptance": 2000,
+        "flush_completion": 31000
+      },
+      "server_before_write_ns": 804899000,
+      "write_flush_ns": 33000,
+      "transport_flush_envelope_ns": 804932000,
+      "outside_before_write_ns": 112750,
+      "roundtrip_ns": 805011750
+    },
+    {
+      "run": 1,
+      "id": 10,
+      "label": "atomic-batch",
+      "tool": "apply_edits",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 42000,
+        "handler": 668089000,
+        "after_handler": 25174000,
+        "write_acceptance": 4000,
+        "flush_completion": 40000
+      },
+      "server_before_write_ns": 693305000,
+      "write_flush_ns": 44000,
+      "transport_flush_envelope_ns": 693349000,
+      "outside_before_write_ns": 130875,
+      "roundtrip_ns": 693435875
+    },
+    {
+      "run": 1,
+      "id": 11,
+      "label": "render",
+      "tool": "render_preview",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 33000,
+        "handler": 321237000,
+        "after_handler": 6062000,
+        "write_acceptance": 2000,
+        "flush_completion": 26000
+      },
+      "server_before_write_ns": 327332000,
+      "write_flush_ns": 28000,
+      "transport_flush_envelope_ns": 327360000,
+      "outside_before_write_ns": 98875,
+      "roundtrip_ns": 327430875
+    },
+    {
+      "run": 1,
+      "id": 12,
+      "label": "export",
+      "tool": "export_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 39000,
+        "handler": 289173000,
+        "after_handler": 6782000,
+        "write_acceptance": 4000,
+        "flush_completion": 57000
+      },
+      "server_before_write_ns": 295994000,
+      "write_flush_ns": 61000,
+      "transport_flush_envelope_ns": 296055000,
+      "outside_before_write_ns": 137916,
+      "roundtrip_ns": 296131916
+    },
+    {
+      "run": 1,
+      "id": 13,
+      "label": "save",
+      "tool": "save_document_as",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 34000,
+        "handler": 18496000,
+        "after_handler": 12692000,
+        "write_acceptance": 3000,
+        "flush_completion": 29000
+      },
+      "server_before_write_ns": 31222000,
+      "write_flush_ns": 32000,
+      "transport_flush_envelope_ns": 31254000,
+      "outside_before_write_ns": 114167,
+      "roundtrip_ns": 31336167
+    },
+    {
+      "run": 1,
+      "id": 15,
+      "label": "open-100",
+      "tool": "open_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 19000,
+        "handler": 14945000,
+        "after_handler": 6798000,
+        "write_acceptance": 2000,
+        "flush_completion": 20000
+      },
+      "server_before_write_ns": 21762000,
+      "write_flush_ns": 22000,
+      "transport_flush_envelope_ns": 21784000,
+      "outside_before_write_ns": 81500,
+      "roundtrip_ns": 21843500
+    },
+    {
+      "run": 1,
+      "id": 16,
+      "label": "inspect-100",
+      "tool": "inspect_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 20000,
+        "handler": 2159000,
+        "after_handler": 6300000,
+        "write_acceptance": 3000,
+        "flush_completion": 382000
+      },
+      "server_before_write_ns": 8479000,
+      "write_flush_ns": 385000,
+      "transport_flush_envelope_ns": 8864000,
+      "outside_before_write_ns": 362000,
+      "roundtrip_ns": 8841000
+    },
+    {
+      "run": 2,
+      "id": 6,
+      "label": "open-small",
+      "tool": "open_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 23000,
+        "handler": 21583000,
+        "after_handler": 7494000,
+        "write_acceptance": 2000,
+        "flush_completion": 24000
+      },
+      "server_before_write_ns": 29100000,
+      "write_flush_ns": 26000,
+      "transport_flush_envelope_ns": 29126000,
+      "outside_before_write_ns": 94625,
+      "roundtrip_ns": 29194625
+    },
+    {
+      "run": 2,
+      "id": 7,
+      "label": "inspect-small",
+      "tool": "inspect_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 32000,
+        "handler": 1182000,
+        "after_handler": 6061000,
+        "write_acceptance": 1000,
+        "flush_completion": 34000
+      },
+      "server_before_write_ns": 7275000,
+      "write_flush_ns": 35000,
+      "transport_flush_envelope_ns": 7310000,
+      "outside_before_write_ns": 81625,
+      "roundtrip_ns": 7356625
+    },
+    {
+      "run": 2,
+      "id": 8,
+      "label": "no-op",
+      "tool": "set_fill",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 21000,
+        "handler": 494000,
+        "after_handler": 2154000,
+        "write_acceptance": 1000,
+        "flush_completion": 15000
+      },
+      "server_before_write_ns": 2669000,
+      "write_flush_ns": 16000,
+      "transport_flush_envelope_ns": 2685000,
+      "outside_before_write_ns": 58875,
+      "roundtrip_ns": 2727875
+    },
+    {
+      "run": 2,
+      "id": 9,
+      "label": "single-edit",
+      "tool": "set_fill",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 14000,
+        "handler": 818297000,
+        "after_handler": 22055000,
+        "write_acceptance": 3000,
+        "flush_completion": 28000
+      },
+      "server_before_write_ns": 840366000,
+      "write_flush_ns": 31000,
+      "transport_flush_envelope_ns": 840397000,
+      "outside_before_write_ns": 94375,
+      "roundtrip_ns": 840460375
+    },
+    {
+      "run": 2,
+      "id": 10,
+      "label": "atomic-batch",
+      "tool": "apply_edits",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 40000,
+        "handler": 643373000,
+        "after_handler": 22957000,
+        "write_acceptance": 3000,
+        "flush_completion": 35000
+      },
+      "server_before_write_ns": 666370000,
+      "write_flush_ns": 38000,
+      "transport_flush_envelope_ns": 666408000,
+      "outside_before_write_ns": 105250,
+      "roundtrip_ns": 666475250
+    },
+    {
+      "run": 2,
+      "id": 11,
+      "label": "render",
+      "tool": "render_preview",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 36000,
+        "handler": 298292000,
+        "after_handler": 6214000,
+        "write_acceptance": 3000,
+        "flush_completion": 31000
+      },
+      "server_before_write_ns": 304542000,
+      "write_flush_ns": 34000,
+      "transport_flush_envelope_ns": 304576000,
+      "outside_before_write_ns": 97125,
+      "roundtrip_ns": 304639125
+    },
+    {
+      "run": 2,
+      "id": 12,
+      "label": "export",
+      "tool": "export_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 37000,
+        "handler": 315864000,
+        "after_handler": 7027000,
+        "write_acceptance": 3000,
+        "flush_completion": 28000
+      },
+      "server_before_write_ns": 322928000,
+      "write_flush_ns": 31000,
+      "transport_flush_envelope_ns": 322959000,
+      "outside_before_write_ns": 115166,
+      "roundtrip_ns": 323043166
+    },
+    {
+      "run": 2,
+      "id": 13,
+      "label": "save",
+      "tool": "save_document_as",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 29000,
+        "handler": 20222000,
+        "after_handler": 12662000,
+        "write_acceptance": 2000,
+        "flush_completion": 26000
+      },
+      "server_before_write_ns": 32913000,
+      "write_flush_ns": 28000,
+      "transport_flush_envelope_ns": 32941000,
+      "outside_before_write_ns": 110833,
+      "roundtrip_ns": 33023833
+    },
+    {
+      "run": 2,
+      "id": 15,
+      "label": "open-100",
+      "tool": "open_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 15000,
+        "handler": 16965000,
+        "after_handler": 6893000,
+        "write_acceptance": 1000,
+        "flush_completion": 22000
+      },
+      "server_before_write_ns": 23873000,
+      "write_flush_ns": 23000,
+      "transport_flush_envelope_ns": 23896000,
+      "outside_before_write_ns": 79333,
+      "roundtrip_ns": 23952333
+    },
+    {
+      "run": 2,
+      "id": 16,
+      "label": "inspect-100",
+      "tool": "inspect_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 25000,
+        "handler": 2212000,
+        "after_handler": 6333000,
+        "write_acceptance": 2000,
+        "flush_completion": 392000
+      },
+      "server_before_write_ns": 8570000,
+      "write_flush_ns": 394000,
+      "transport_flush_envelope_ns": 8964000,
+      "outside_before_write_ns": 535583,
+      "roundtrip_ns": 9105583
+    },
+    {
+      "run": 3,
+      "id": 6,
+      "label": "open-small",
+      "tool": "open_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 21000,
+        "handler": 23337000,
+        "after_handler": 10778000,
+        "write_acceptance": 2000,
+        "flush_completion": 24000
+      },
+      "server_before_write_ns": 34136000,
+      "write_flush_ns": 26000,
+      "transport_flush_envelope_ns": 34162000,
+      "outside_before_write_ns": 92833,
+      "roundtrip_ns": 34228833
+    },
+    {
+      "run": 3,
+      "id": 7,
+      "label": "inspect-small",
+      "tool": "inspect_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 22000,
+        "handler": 1165000,
+        "after_handler": 8914000,
+        "write_acceptance": 3000,
+        "flush_completion": 32000
+      },
+      "server_before_write_ns": 10101000,
+      "write_flush_ns": 35000,
+      "transport_flush_envelope_ns": 10136000,
+      "outside_before_write_ns": 102917,
+      "roundtrip_ns": 10203917
+    },
+    {
+      "run": 3,
+      "id": 8,
+      "label": "no-op",
+      "tool": "set_fill",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 30000,
+        "handler": 532000,
+        "after_handler": 3123000,
+        "write_acceptance": 2000,
+        "flush_completion": 27000
+      },
+      "server_before_write_ns": 3685000,
+      "write_flush_ns": 29000,
+      "transport_flush_envelope_ns": 3714000,
+      "outside_before_write_ns": 65292,
+      "roundtrip_ns": 3750292
+    },
+    {
+      "run": 3,
+      "id": 9,
+      "label": "single-edit",
+      "tool": "set_fill",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 17000,
+        "handler": 781835000,
+        "after_handler": 22323000,
+        "write_acceptance": 4000,
+        "flush_completion": 32000
+      },
+      "server_before_write_ns": 804175000,
+      "write_flush_ns": 36000,
+      "transport_flush_envelope_ns": 804211000,
+      "outside_before_write_ns": 110084,
+      "roundtrip_ns": 804285084
+    },
+    {
+      "run": 3,
+      "id": 10,
+      "label": "atomic-batch",
+      "tool": "apply_edits",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 37000,
+        "handler": 640967000,
+        "after_handler": 22679000,
+        "write_acceptance": 3000,
+        "flush_completion": 23000
+      },
+      "server_before_write_ns": 663683000,
+      "write_flush_ns": 26000,
+      "transport_flush_envelope_ns": 663709000,
+      "outside_before_write_ns": 103833,
+      "roundtrip_ns": 663786833
+    },
+    {
+      "run": 3,
+      "id": 11,
+      "label": "render",
+      "tool": "render_preview",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 33000,
+        "handler": 296429000,
+        "after_handler": 6211000,
+        "write_acceptance": 3000,
+        "flush_completion": 27000
+      },
+      "server_before_write_ns": 302673000,
+      "write_flush_ns": 30000,
+      "transport_flush_envelope_ns": 302703000,
+      "outside_before_write_ns": 108458,
+      "roundtrip_ns": 302781458
+    },
+    {
+      "run": 3,
+      "id": 12,
+      "label": "export",
+      "tool": "export_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 29000,
+        "handler": 301200000,
+        "after_handler": 6968000,
+        "write_acceptance": 3000,
+        "flush_completion": 27000
+      },
+      "server_before_write_ns": 308197000,
+      "write_flush_ns": 30000,
+      "transport_flush_envelope_ns": 308227000,
+      "outside_before_write_ns": 127542,
+      "roundtrip_ns": 308324542
+    },
+    {
+      "run": 3,
+      "id": 13,
+      "label": "save",
+      "tool": "save_document_as",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 31000,
+        "handler": 19512000,
+        "after_handler": 13179000,
+        "write_acceptance": 2000,
+        "flush_completion": 26000
+      },
+      "server_before_write_ns": 32722000,
+      "write_flush_ns": 28000,
+      "transport_flush_envelope_ns": 32750000,
+      "outside_before_write_ns": 105750,
+      "roundtrip_ns": 32827750
+    },
+    {
+      "run": 3,
+      "id": 15,
+      "label": "open-100",
+      "tool": "open_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 23000,
+        "handler": 15307000,
+        "after_handler": 7067000,
+        "write_acceptance": 2000,
+        "flush_completion": 20000
+      },
+      "server_before_write_ns": 22397000,
+      "write_flush_ns": 22000,
+      "transport_flush_envelope_ns": 22419000,
+      "outside_before_write_ns": 76500,
+      "roundtrip_ns": 22473500
+    },
+    {
+      "run": 3,
+      "id": 16,
+      "label": "inspect-100",
+      "tool": "inspect_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 24000,
+        "handler": 2305000,
+        "after_handler": 6475000,
+        "write_acceptance": 3000,
+        "flush_completion": 380000
+      },
+      "server_before_write_ns": 8804000,
+      "write_flush_ns": 383000,
+      "transport_flush_envelope_ns": 9187000,
+      "outside_before_write_ns": 379625,
+      "roundtrip_ns": 9183625
+    },
+    {
+      "run": 4,
+      "id": 6,
+      "label": "open-small",
+      "tool": "open_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 22000,
+        "handler": 19103000,
+        "after_handler": 7564000,
+        "write_acceptance": 3000,
+        "flush_completion": 21000
+      },
+      "server_before_write_ns": 26689000,
+      "write_flush_ns": 24000,
+      "transport_flush_envelope_ns": 26713000,
+      "outside_before_write_ns": 91292,
+      "roundtrip_ns": 26780292
+    },
+    {
+      "run": 4,
+      "id": 7,
+      "label": "inspect-small",
+      "tool": "inspect_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 26000,
+        "handler": 1232000,
+        "after_handler": 6228000,
+        "write_acceptance": 1000,
+        "flush_completion": 34000
+      },
+      "server_before_write_ns": 7486000,
+      "write_flush_ns": 35000,
+      "transport_flush_envelope_ns": 7521000,
+      "outside_before_write_ns": 116834,
+      "roundtrip_ns": 7602834
+    },
+    {
+      "run": 4,
+      "id": 8,
+      "label": "no-op",
+      "tool": "set_fill",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 40000,
+        "handler": 510000,
+        "after_handler": 2257000,
+        "write_acceptance": 2000,
+        "flush_completion": 26000
+      },
+      "server_before_write_ns": 2807000,
+      "write_flush_ns": 28000,
+      "transport_flush_envelope_ns": 2835000,
+      "outside_before_write_ns": 65625,
+      "roundtrip_ns": 2872625
+    },
+    {
+      "run": 4,
+      "id": 9,
+      "label": "single-edit",
+      "tool": "set_fill",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 20000,
+        "handler": 794787000,
+        "after_handler": 21730000,
+        "write_acceptance": 3000,
+        "flush_completion": 24000
+      },
+      "server_before_write_ns": 816537000,
+      "write_flush_ns": 27000,
+      "transport_flush_envelope_ns": 816564000,
+      "outside_before_write_ns": 88833,
+      "roundtrip_ns": 816625833
+    },
+    {
+      "run": 4,
+      "id": 10,
+      "label": "atomic-batch",
+      "tool": "apply_edits",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 36000,
+        "handler": 634672000,
+        "after_handler": 21964000,
+        "write_acceptance": 2000,
+        "flush_completion": 25000
+      },
+      "server_before_write_ns": 656672000,
+      "write_flush_ns": 27000,
+      "transport_flush_envelope_ns": 656699000,
+      "outside_before_write_ns": 95583,
+      "roundtrip_ns": 656767583
+    },
+    {
+      "run": 4,
+      "id": 11,
+      "label": "render",
+      "tool": "render_preview",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 31000,
+        "handler": 283344000,
+        "after_handler": 6007000,
+        "write_acceptance": 2000,
+        "flush_completion": 22000
+      },
+      "server_before_write_ns": 289382000,
+      "write_flush_ns": 24000,
+      "transport_flush_envelope_ns": 289406000,
+      "outside_before_write_ns": 98125,
+      "roundtrip_ns": 289480125
+    },
+    {
+      "run": 4,
+      "id": 12,
+      "label": "export",
+      "tool": "export_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 27000,
+        "handler": 301245000,
+        "after_handler": 6721000,
+        "write_acceptance": 4000,
+        "flush_completion": 58000
+      },
+      "server_before_write_ns": 307993000,
+      "write_flush_ns": 62000,
+      "transport_flush_envelope_ns": 308055000,
+      "outside_before_write_ns": 123750,
+      "roundtrip_ns": 308116750
+    },
+    {
+      "run": 4,
+      "id": 13,
+      "label": "save",
+      "tool": "save_document_as",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 35000,
+        "handler": 20595000,
+        "after_handler": 12675000,
+        "write_acceptance": 3000,
+        "flush_completion": 24000
+      },
+      "server_before_write_ns": 33305000,
+      "write_flush_ns": 27000,
+      "transport_flush_envelope_ns": 33332000,
+      "outside_before_write_ns": 116750,
+      "roundtrip_ns": 33421750
+    },
+    {
+      "run": 4,
+      "id": 15,
+      "label": "open-100",
+      "tool": "open_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 18000,
+        "handler": 17828000,
+        "after_handler": 7086000,
+        "write_acceptance": 3000,
+        "flush_completion": 20000
+      },
+      "server_before_write_ns": 24932000,
+      "write_flush_ns": 23000,
+      "transport_flush_envelope_ns": 24955000,
+      "outside_before_write_ns": 95834,
+      "roundtrip_ns": 25027834
+    },
+    {
+      "run": 4,
+      "id": 16,
+      "label": "inspect-100",
+      "tool": "inspect_document",
+      "parts_ns": {
+        "read_frame_observation": 0,
+        "before_handler": 24000,
+        "handler": 2176000,
+        "after_handler": 6486000,
+        "write_acceptance": 2000,
+        "flush_completion": 441000
+      },
+      "server_before_write_ns": 8686000,
+      "write_flush_ns": 443000,
+      "transport_flush_envelope_ns": 9129000,
+      "outside_before_write_ns": 406541,
+      "roundtrip_ns": 9092541
+    }
+  ],
+  "medians_ms": {
+    "atomic-batch": {
+      "server_before_write_ns": 666.37,
+      "write_flush_ns": 0.028,
+      "transport_flush_envelope_ns": 666.408,
+      "outside_before_write_ns": 0.10525,
+      "roundtrip_ns": 666.47525
+    },
+    "export": {
+      "server_before_write_ns": 307.993,
+      "write_flush_ns": 0.031,
+      "transport_flush_envelope_ns": 308.055,
+      "outside_before_write_ns": 0.12375,
+      "roundtrip_ns": 308.11675
+    },
+    "inspect-100": {
+      "server_before_write_ns": 8.57,
+      "write_flush_ns": 0.385,
+      "transport_flush_envelope_ns": 8.964,
+      "outside_before_write_ns": 0.379625,
+      "roundtrip_ns": 9.092541
+    },
+    "inspect-small": {
+      "server_before_write_ns": 7.486,
+      "write_flush_ns": 0.035,
+      "transport_flush_envelope_ns": 7.521,
+      "outside_before_write_ns": 0.102917,
+      "roundtrip_ns": 7.602834
+    },
+    "no-op": {
+      "server_before_write_ns": 2.924,
+      "write_flush_ns": 0.028,
+      "transport_flush_envelope_ns": 2.953,
+      "outside_before_write_ns": 0.065292,
+      "roundtrip_ns": 2.981042
+    },
+    "open-100": {
+      "server_before_write_ns": 23.873,
+      "write_flush_ns": 0.023,
+      "transport_flush_envelope_ns": 23.896,
+      "outside_before_write_ns": 0.0815,
+      "roundtrip_ns": 23.952333
+    },
+    "open-small": {
+      "server_before_write_ns": 29.1,
+      "write_flush_ns": 0.026,
+      "transport_flush_envelope_ns": 29.126,
+      "outside_before_write_ns": 0.092833,
+      "roundtrip_ns": 29.194625
+    },
+    "render": {
+      "server_before_write_ns": 304.542,
+      "write_flush_ns": 0.029,
+      "transport_flush_envelope_ns": 304.576,
+      "outside_before_write_ns": 0.098875,
+      "roundtrip_ns": 304.639125
+    },
+    "save": {
+      "server_before_write_ns": 32.913,
+      "write_flush_ns": 0.028,
+      "transport_flush_envelope_ns": 32.941,
+      "outside_before_write_ns": 0.110833,
+      "roundtrip_ns": 33.023833
+    },
+    "single-edit": {
+      "server_before_write_ns": 813.827,
+      "write_flush_ns": 0.031,
+      "transport_flush_envelope_ns": 813.855,
+      "outside_before_write_ns": 0.110084,
+      "roundtrip_ns": 813.947
+    }
+  },
+  "clock_policy": "Child uses CLOCK_MONOTONIC; compare durations with client perf_counter, never absolute origins",
+  "scope": "Diagnostic Rust IO/handler boundaries; write/flush overlaps client IO",
+  "limitations": [
+    "Read events observe bytes returned by Tokio, not kernel arrival",
+    "Write acceptance can precede pipe completion; flush boundary separately observed",
+    "Extra frame JSON decode and handler diagnostic dump contribute overhead",
+    "Outside includes client JSON, pipe transfer and scheduling",
+    "Write/flush can overlap client roundtrip; never add it to outside_before_write",
+    "Child read-to-first-write + residual sum to roundtrip; not pure IPC",
+    "Component medians need not sum; individual child intervals sum exactly"
+  ]
+}

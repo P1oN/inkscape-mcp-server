@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage23",
+  "archive": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage23.tar.gz",
+  "archive_bytes": 46457637,
+  "archive_sha256": "149dc99066b4578eec13da115fc84b2c56d604979e5ce5ade67de327a0c6740d",
+  "binary_sha256": "dfadfbc0a11cc14a1454c40d35956348070b353115ed726b8b450035b73afd1f",
+  "regular_files": 2453,
+  "regular_bytes": 132709025,
+  "scope": "Source-built stage23 with empty-PATH setup/launcher and actual cold/warm archive/CLI/STDIO/doctor/notices acceptance; no native GUI or performance evidence",
+  "native_evidence_transferred": false
+}

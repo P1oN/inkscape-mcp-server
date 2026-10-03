@@ -1,0 +1,86 @@
+{
+  "compose_artwork": {
+    "description": "On-ramp the generative loop: create → draw → render(inline) → validate → export.\n\nOrients the agent to build new artwork toward `goal` from a blank canvas using the typed\nauthoring tools, preview the inline raster, validate, then export. Guidance only — it executes\nnothing and adds no authority; the work flows through the gated tools it names.",
+    "messages": [
+      {
+        "role": "user",
+        "content": {
+          "type": "text",
+          "text": "You are composing NEW vector artwork in inkscape-mcp. Work toward this goal:\n  __MIGRATION_GOAL_SLOT_9a6c0__\n\nVector authoring. Do not propose or perform bitmap tracing or automatic raster-to-vector\nconversion when working through this MCP. This applies to Inkscape Trace Bitmap, external\ntracers (such as VTracer or Potrace), shell commands, scripts and preprocessing before SVG\nadoption; importing their traced output through MCP does not satisfy this rule. Treat a PNG\nor other bitmap as a visual reference only. Reconstruct the artwork with deliberately\nauthored, editable shapes, Bezier curves, fills and gradients, organized into semantic groups.\nDo not substitute an embedded bitmap for vector artwork. Render, compare with the reference\nand refine; be honest about remaining differences rather than promise pixel-identical results.\n\nFollow the create → draw → render → validate → export loop with the typed tools (each is small, typed, risk-classed, and reversible — every mutation writes a snapshot + Operation Record, so you can `restore_snapshot` at any point):\n\n1. CREATE — `create_document(width, height, viewBox=None, background=None)` to start a blank SVG in the workspace; it returns a `doc_id` the other tools take. (To work on an existing file instead, `open_document` and skip this step.)\n2. DRAW — add geometry with the shape tools: `create_rect`, `create_circle`, `create_ellipse`, `create_line`, `create_polygon`, `create_polyline`, `create_path` (arbitrary `d`), and `create_text` for labels. Each returns the new object's `id`.\n3. PAINT — set color with `set_fill` / `set_stroke` (+ `set_opacity`). For gradients, first define one with `add_linear_gradient` / `add_radial_gradient` (each returns a gradient id), then `set_fill(doc_id, [object_id], color='url(#<gradient_id>)')` to paint the object with it.\n4. COMPOSE — organize with `create_group` / `group_objects` (wrap existing ids) and `reparent_object`; instance a shape with `create_use`. Lost track of an id? `find_objects` resolves ids by fill/stroke/tag/text/id-prefix/bbox, and `inspect_document` gives the whole tree.\nEditable artwork structure. Unless the user requests otherwise, make each semantic object\n(cat, sofa, tree, flower, cloud, etc.) an ordinary named SVG group, selectable as a whole.\nUse stable unique ids and readable inkscape:label names. For new illustrations, prefer one\ngeneral artwork layer containing these groups; reserve additional layers for genuine scene\norganization, not one layer per object. Inkscape layers expose their children to selection;\nSelect All may be scoped to the current layer. Do not silently convert existing layers or\nflatten groups, merge paths, or introduce masks merely to organize objects. Preserve paint\norder, transforms, clipping, masks and styles when regrouping; render and compare afterwards.\nA group/layer conversion changes inkscape:groupmode on the same <g>, not its geometry;\npreserve its id, children, styles, visibility, locks and position in the parent.\nLayer highlight colours are editor UI metadata, not artwork fill colours.\n\n5. RENDER — `render_preview(doc_id)` returns the rasterized image INLINE so you can SEE the current result and decide what to adjust. Iterate steps 2-5 until it matches `goal`.\n6. VALIDATE — `validate_document(doc_id)` to confirm the SVG is well-formed before handing off (and `quality_report` for metrics).\n7. EXPORT — `export_document(doc_id, ...)` for the final PNG/PDF/etc (or `export_object` for one element, `export_batch` / `create_icon_set` for many sizes). Exports are artifact-only and never overwrite the source.\n\nEverything is reversible: if an edit goes wrong, `list_snapshots` then `restore_snapshot` rolls the document back. There is no raw-Action or code path — only the typed tools above."
+        }
+      }
+    ]
+  },
+  "restyle_artwork": {
+    "description": "On-ramp the OBJECT-TARGETED restyle loop: find → set_fill/set_stroke → render → export.\n\nOrients the agent to restyle SPECIFIC objects toward `goal` — address them with `find_objects`,\nchange each one's fill/stroke/opacity, preview, then export. This is the per-object companion to\nthe document-wide `theme_recoloring` prompt (which swaps colors across the WHOLE document via\n`replace_color` / `apply_palette`). Guidance only; adds no authority.",
+    "messages": [
+      {
+        "role": "user",
+        "content": {
+          "type": "text",
+          "text": "You are RESTYLING existing objects in an open document. Work toward this goal:\n  __MIGRATION_GOAL_SLOT_9a6c0__\n\nThis is the OBJECT-TARGETED restyle loop — change specific elements you have addressed. (To recolor the WHOLE document at once, prefer the `theme_recoloring` prompt: `replace_color` for one swap, `apply_palette` for a whole mapping.) Every edit below is medium-risk and reversible (snapshot + Operation Record; `restore_snapshot` to roll back):\n\n1. OPEN — `open_document` for a `doc_id` if you don't have one.\n2. ADDRESS — `find_objects(doc_id, ...)` to get the ids to restyle, filtering by fill, stroke, tag, text, id-prefix, or bbox (e.g. all red shapes, or all `<text>`). `inspect_document` shows the full tree + the distinct colors in the styles section.\n3. RESTYLE — for EACH addressed id apply the change: `set_fill` (paint, incl. `url(#<gradient_id>)` after `add_linear_gradient` / `add_radial_gradient`), `set_stroke` (stroke paint + width), `set_opacity` (0..1). For text, `set_font` / `replace_text`.\n4. BROAD SWAP (optional) — when the same color should change everywhere, `replace_color` (one from→to) or `apply_palette` (a mapping) restyle document-wide in one reversible op; scope either to subtrees with `scope_ids=[...]`.\n5. RENDER — `render_preview(doc_id)` returns the raster INLINE; inspect it and iterate steps 2-5 until the result matches `goal`.\n6. EXPORT — `export_document(doc_id, ...)` (or `export_object` for one element) for the final artifact. Exports never overwrite the source.\n\nColors are validated (CSS-injection punctuation rejected) and matched across both inline styles and presentation attributes. There is no raw-Action or code path — only the typed tools above."
+        }
+      }
+    ]
+  },
+  "prepare_web_export": {
+    "description": "Orient the agent on exporting a document as web-ready assets (PNG + plain SVG).",
+    "messages": [
+      {
+        "role": "user",
+        "content": {
+          "type": "text",
+          "text": "Goal: produce web-ready assets from the open document.\n\n1. `open_document` (if not already open) to get a `doc_id`.\n2. (Optional) `quality_report` to spot oversized embedded rasters, missing fonts, or viewBox issues before exporting.\n3. (Optional) `svg_web_optimize` to strip editor metadata, drop unused defs/ids/empty groups, and reduce coordinate precision — reversible (snapshot + Operation Record).\n4. `export_web_profile(doc_id, width_px=...)` for one PNG raster plus a plain SVG (default width 1024). For several sizes/formats at once, use `export_batch` with a typed list of specs (dry-run first to preview sizes).\n\nAll exports are artifact-only and never overwrite the original; returned paths are workspace-relative."
+        }
+      }
+    ]
+  },
+  "prepare_icon_set": {
+    "description": "Orient the agent on producing a multi-size square PNG icon set.",
+    "messages": [
+      {
+        "role": "user",
+        "content": {
+          "type": "text",
+          "text": "Goal: produce a multi-size square PNG icon set from the open document.\n\n1. `open_document` to get a `doc_id`; check it is roughly square via `inspect_document` (icons render best from a square viewBox).\n2. (Optional) `svg_web_optimize` to shrink the source before rasterizing.\n3. `create_icon_set(doc_id, sizes=[...])` — one PNG per size (defaults to 16/32/48/64/128/256). Each size must be a positive integer within the configured pixel cap; an out-of-range size is refused before any render and no partial set is written.\n\nOutputs are artifact-only, workspace-relative, and never overwrite the original."
+        }
+      }
+    ]
+  },
+  "prepare_print_export": {
+    "description": "Orient the agent on exporting a print-ready vector PDF.",
+    "messages": [
+      {
+        "role": "user",
+        "content": {
+          "type": "text",
+          "text": "Goal: produce a print-ready vector PDF of the open document.\n\n1. `open_document` to get a `doc_id`.\n2. (Optional) `quality_report` / `validate_document` to catch missing fonts or external asset references that would break a print hand-off.\n3. `resize_canvas` / `normalize_viewbox` if the page area needs correcting first (reversible edits).\n4. `export_print_profile(doc_id)` for a page-area vector PDF.\n\nThe PDF is artifact-only and workspace-relative; the original is never touched."
+        }
+      }
+    ]
+  },
+  "theme_recoloring": {
+    "description": "Orient the agent on recoloring a document to a brand/theme palette.",
+    "messages": [
+      {
+        "role": "user",
+        "content": {
+          "type": "text",
+          "text": "Goal: recolor the open document to a brand/theme palette.\n\n1. `open_document` to get a `doc_id`; read the current colours via `inspect_document` (the styles section lists distinct fill/stroke colours).\n2. For a single swap, `replace_color(doc_id, from_color, to_color)`. For a whole palette in one reversible operation, `apply_palette(doc_id, mapping={from: to, ...})`.\n3. Scope a change to specific subtrees with `scope_ids=[...]` when only part of the drawing should change.\n\nColours are validated (CSS-injection punctuation is rejected) and matched across both inline styles and presentation attributes. Every recolor is medium-risk and reversible: a pre-mutation snapshot plus a before/after preview linked to an Operation Record."
+        }
+      }
+    ]
+  },
+  "live_canvas_assist": {
+    "description": "Entry point for the live-view co-pilot loop: perceive→decide→act→observe (approval-gated).\n\nOrients the agent to drive a running Inkscape via the live tools toward `goal`, one bounded,\ncancelable iteration at a time. Acts are semantic-only and approval-gated; the loop adds no new\nauthority.",
+    "messages": [
+      {
+        "role": "user",
+        "content": {
+          "type": "text",
+          "text": "You are a live-canvas co-pilot for a RUNNING Inkscape instance. Work toward this goal:\n  __MIGRATION_GOAL_SLOT_9a6c0__\n\nDrive the canvas with ONE bounded perceive→decide→act→observe iteration at a time, using `live_session_step`. You — not the tool — decide each act; the tool embeds no autonomy. The loop is bounded and cancelable BY CONSTRUCTION: each `live_session_step` is exactly one iteration, you choose whether to call it again, and you may stop at any point. There is no server-side autonomous run.\n\nManaged macOS: after connecting, use `live_list_documents` and `live_select_document` to choose the task drawing. Check `live_status.ready_to_edit`. A window switch or document replacement refuses writes; inspect and select again. Reconnect clears the binding, while preserving the GUI and unsaved work.\n\nLoop:\n1. PERCEIVE — call `live_session_step` with NO action first to read the structured `LiveScene` (selection ids + bboxes, viewport, canvas, visible objects) and a frame. Reason over STRUCTURE, not pixels.\n2. DECIDE — pick ONE semantic act from the fixed set: `apply` (validated style and/or transform on the selection), `insert_svg` (a safe-parsed SVG fragment), or `set_text` (replace the selected text). There is NO raw-Action or code path.\n3. ACT — call `live_session_step` again with that `action`, its validated params, and an `approval_token`. Mutating a running session is HIGH risk: the act is REFUSED without an approval token. Every act flows through the same governed write path as the standalone live write tools, producing a Live Operation Record with before/after frames.\n4. OBSERVE — the step returns the after-scene plus a focused before/after `live_diff_view` linked to the operation. Inspect it, then decide whether to iterate.\n\nBetween iterations, use `live_wait_for_change` to react to the user's own GUI edits where the transport supports change notifications, instead of busy-looping. Connect with `live_connect` first; it never opens a window. On managed macOS use `live_launch` only when the user asks to open Inkscape. Sync results into the workspace with `live_sync_to_workspace` when you want a tracked, snapshotted copy. Never attempt to mutate without an approval token, and keep every act within the fixed set."
+        }
+      }
+    ]
+  }
+}

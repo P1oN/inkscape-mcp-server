@@ -1,0 +1,1165 @@
+{
+  "passed": true,
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19",
+  "helper_root": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers",
+  "helper_override": false,
+  "fixture_limits": "Two epilog siblings are included only in changed cases. Vendor inkex's baseline deepcopy reverses their order and emits SVG even on no-op/refusal. The failed all-epilog observations are retained separately; this does not establish no-op compatibility for documents with multiple epilog siblings.",
+  "fixed_input_sha256": "59b766fa7fdf7dc020cf031d364f63a9ec0e412cd3deb6e8323f5c66a4d92c96",
+  "source_hashes": {
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3": "746f3c20e5d05c32d55e36234b2c3213a757eabcbebeed9248a112ba4e9f18dd",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py": "30ce11b57011990fa726d2d86dc3c9718cdc48ec1ee805086927a5ac68dc5bf8",
+    "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions/inkex/base.py": "197900d761784bc34eaa0cadb2269b7c96bac78c8d73683ebd1b9aab3232eb21",
+    "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions/inkex/extensions.py": "4e32b89f460b67d2fad3ac3f420dc615f6566faee805bbd7abeaf60e8589a4a3",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_edit.inx": "953c960282626671f48824958881d91d6c465d4d8415cb0ebd3cdb58563d7869",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_edit.py": "95ece984154bbb5aa12477a0c5678773b3946d10bb160e97f3a4fce5fe0d9a49",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_edit_errors.py": "ad3a63ad1cac09847005a5c3b0d23e8f010a653009eb51cb58df6b3b833eef97",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.inx": "002d4b0c07c72aac4db105c5dc8fc60e9f55934fe11274a4f8edcbc65a362e04",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert_payload.py": "ebed54c958266f2756d3f4250041bc1b8f4517ba0f700768244c5d4ec6489ff1",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_live.inx": "4f92cf35015cefd2ac7c086b627b040cea41a810ac7c78c0e788c18d49b054af",
+    "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_live.py": "ebed9ca248c8a00ed12ac5b08ff801f7474465f1df57a5cf678af78d3674305b"
+  },
+  "observations": [
+    {
+      "name": "style-noop",
+      "mode": "file",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py",
+        "--id=selected",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-style-noop/input.svg"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-style-noop/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-style-noop",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-style-noop"
+      },
+      "elapsed_ns": 137353833,
+      "input_sha256": "59b766fa7fdf7dc020cf031d364f63a9ec0e412cd3deb6e8323f5c66a4d92c96",
+      "input_has_epilog": false,
+      "exit_code": 0,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": true,
+        "ids": [
+          "selected"
+        ],
+        "fingerprint": "0dcdac5547f74f75942a927401286524f66d4bdc0454f5ef50fed7a7155254ad"
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true
+      },
+      "passed": true
+    },
+    {
+      "name": "style-change",
+      "mode": "file",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py",
+        "--id=selected",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-style-change/input.svg"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-style-change/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-style-change",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-style-change"
+      },
+      "elapsed_ns": 78311542,
+      "input_sha256": "8ddc62c2af8d086bf68203a7a2a4bfee4749d4038db601b68f5a2dede247360a",
+      "input_has_epilog": true,
+      "exit_code": 0,
+      "stdout_bytes": 291,
+      "stdout_sha256": "b73c39e588e6b0ca4ad310ca90829ace0b196653a4dd991928db5d53f09e1500",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": true,
+        "ids": [
+          "selected"
+        ],
+        "fingerprint": "3ab955af87e8ed494863504f6edcbeacd65f150408765c942d99ed5dc86e1e9c"
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true,
+        "document_prolog_epilog_preserved": true,
+        "document_doctype_preserved": true,
+        "svg_unique_ids": true,
+        "existing_ids_retained": true,
+        "result_fingerprint_matches_output": true,
+        "changed_style": true
+      },
+      "passed": true
+    },
+    {
+      "name": "style-with-stylesheet",
+      "mode": "file",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py",
+        "--id=selected",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-style-with-stylesheet/input.svg"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-style-with-stylesheet/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-style-with-stylesheet",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-style-with-stylesheet"
+      },
+      "elapsed_ns": 73379875,
+      "input_sha256": "9573e000dbe5f92da1ee0dc9706ef9a12c4d0db690de339014d938b313bedf0a",
+      "input_has_epilog": true,
+      "exit_code": 0,
+      "stdout_bytes": 343,
+      "stdout_sha256": "3c5a6024e24aa9854a8b0f933d9446d189562f1d6c4b3cdb611372debf45a72b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": true,
+        "ids": [
+          "selected"
+        ],
+        "fingerprint": "caa593de3651dd1f5e4a3d89d5b6da8cca90b9a17d033c08b30adea0046ac331"
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true,
+        "document_prolog_epilog_preserved": true,
+        "document_doctype_preserved": true,
+        "svg_unique_ids": true,
+        "existing_ids_retained": true,
+        "result_fingerprint_matches_output": true,
+        "changed_style": true
+      },
+      "passed": true
+    },
+    {
+      "name": "style-with-stylesheet-transform",
+      "mode": "file",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py",
+        "--id=selected",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-style-with-stylesheet-transform/input.svg"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-style-with-stylesheet-transform/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-style-with-stylesheet-transform",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-style-with-stylesheet-transform"
+      },
+      "elapsed_ns": 68879500,
+      "input_sha256": "9573e000dbe5f92da1ee0dc9706ef9a12c4d0db690de339014d938b313bedf0a",
+      "input_has_epilog": true,
+      "exit_code": 0,
+      "stdout_bytes": 371,
+      "stdout_sha256": "0e8ff7b6b9638d013a58e9680b4d38887b16d63db8b30be45574504a9f089bca",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": true,
+        "ids": [
+          "selected"
+        ],
+        "fingerprint": "c964cb1e494af8f86a4a0f8a98d826b1318dc48cdd9dcdc02bc7c1eaccf18a29"
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true,
+        "document_prolog_epilog_preserved": true,
+        "document_doctype_preserved": true,
+        "svg_unique_ids": true,
+        "existing_ids_retained": true,
+        "result_fingerprint_matches_output": true,
+        "changed_style": true,
+        "changed_transform": true
+      },
+      "passed": true
+    },
+    {
+      "name": "selection-mismatch",
+      "mode": "file",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py",
+        "--id=text",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-selection-mismatch/input.svg"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-selection-mismatch/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-selection-mismatch",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-selection-mismatch"
+      },
+      "elapsed_ns": 67719541,
+      "input_sha256": "59b766fa7fdf7dc020cf031d364f63a9ec0e412cd3deb6e8323f5c66a4d92c96",
+      "input_has_epilog": false,
+      "exit_code": 0,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": false,
+        "error": "selection changed before edit"
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true
+      },
+      "passed": true
+    },
+    {
+      "name": "id-mismatch",
+      "mode": "file",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py",
+        "--id=selected",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-id-mismatch/input.svg"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-id-mismatch/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-id-mismatch",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-id-mismatch"
+      },
+      "elapsed_ns": 66330041,
+      "input_sha256": "59b766fa7fdf7dc020cf031d364f63a9ec0e412cd3deb6e8323f5c66a4d92c96",
+      "input_has_epilog": false,
+      "exit_code": 0,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": false,
+        "error": "document changed before insertion"
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true
+      },
+      "passed": true
+    },
+    {
+      "name": "fingerprint-mismatch",
+      "mode": "file",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py",
+        "--id=selected",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-fingerprint-mismatch/input.svg"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-fingerprint-mismatch/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-fingerprint-mismatch",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-fingerprint-mismatch"
+      },
+      "elapsed_ns": 68900541,
+      "input_sha256": "59b766fa7fdf7dc020cf031d364f63a9ec0e412cd3deb6e8323f5c66a4d92c96",
+      "input_has_epilog": false,
+      "exit_code": 0,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": false,
+        "error": "drawing content changed before insertion"
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true
+      },
+      "passed": true
+    },
+    {
+      "name": "text-change",
+      "mode": "file",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py",
+        "--id=text",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-text-change/input.svg"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-text-change/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-text-change",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-text-change"
+      },
+      "elapsed_ns": 67988875,
+      "input_sha256": "8ddc62c2af8d086bf68203a7a2a4bfee4749d4038db601b68f5a2dede247360a",
+      "input_has_epilog": true,
+      "exit_code": 0,
+      "stdout_bytes": 290,
+      "stdout_sha256": "35e7c6b051b2e001e196c27d3f507f1b84f3d8557dba7a624c2499d2f8f690ba",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": true,
+        "ids": [
+          "text"
+        ],
+        "fingerprint": "0eacdc9171909ae46dabf7d4084c4688f34a5032e818252914a6b017893a822f"
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true,
+        "document_prolog_epilog_preserved": true,
+        "document_doctype_preserved": true,
+        "svg_unique_ids": true,
+        "existing_ids_retained": true,
+        "result_fingerprint_matches_output": true,
+        "changed_text": true
+      },
+      "passed": true
+    },
+    {
+      "name": "text-noop",
+      "mode": "file",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py",
+        "--id=text",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-text-noop/input.svg"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-text-noop/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-text-noop",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-text-noop"
+      },
+      "elapsed_ns": 71472042,
+      "input_sha256": "59b766fa7fdf7dc020cf031d364f63a9ec0e412cd3deb6e8323f5c66a4d92c96",
+      "input_has_epilog": false,
+      "exit_code": 0,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": true,
+        "ids": [
+          "text"
+        ],
+        "fingerprint": "0dcdac5547f74f75942a927401286524f66d4bdc0454f5ef50fed7a7155254ad"
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true
+      },
+      "passed": true
+    },
+    {
+      "name": "duplicate",
+      "mode": "file",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py",
+        "--id=selected",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-duplicate/input.svg"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-duplicate/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-duplicate",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-duplicate"
+      },
+      "elapsed_ns": 69247708,
+      "input_sha256": "8ddc62c2af8d086bf68203a7a2a4bfee4749d4038db601b68f5a2dede247360a",
+      "input_has_epilog": true,
+      "exit_code": 0,
+      "stdout_bytes": 386,
+      "stdout_sha256": "d69e8f660ae618ac5757b165ac28bc1d049277fe41103a9a3c86f54783e17304",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": true,
+        "ids": [
+          "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+        ],
+        "fingerprint": "df31fa6a11341c45c03d6e3690f61570c5d6fc7175c51503d720fc51675a2226"
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true,
+        "document_prolog_epilog_preserved": true,
+        "document_doctype_preserved": true,
+        "svg_unique_ids": true,
+        "existing_ids_retained": true,
+        "result_fingerprint_matches_output": true
+      },
+      "passed": true
+    },
+    {
+      "name": "insert",
+      "mode": "file",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-insert/input.svg"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-insert/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-insert",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-insert"
+      },
+      "elapsed_ns": 65340542,
+      "input_sha256": "8ddc62c2af8d086bf68203a7a2a4bfee4749d4038db601b68f5a2dede247360a",
+      "input_has_epilog": true,
+      "exit_code": 0,
+      "stdout_bytes": 400,
+      "stdout_sha256": "ec1bcbc2e1495fb60e1acd6a1cf559610cc7f4e720bb819882b2a1757c467d3f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": true,
+        "ids": [
+          "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+        ]
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true,
+        "document_prolog_epilog_preserved": true,
+        "document_doctype_preserved": true,
+        "svg_unique_ids": true,
+        "existing_ids_retained": true,
+        "inserted_wrapper": true,
+        "inserted_child": true
+      },
+      "passed": true
+    },
+    {
+      "name": "insert-refused",
+      "mode": "file",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-insert-refused/input.svg"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-insert-refused/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-insert-refused",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/file-insert-refused"
+      },
+      "elapsed_ns": 69863125,
+      "input_sha256": "59b766fa7fdf7dc020cf031d364f63a9ec0e412cd3deb6e8323f5c66a4d92c96",
+      "input_has_epilog": false,
+      "exit_code": 251,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "07d91c29b2a4633183f8a15ea047810de4f70ab1ccc76f9ab3f33dce3d94f6df",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": false,
+        "error": "ValueError"
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true
+      },
+      "passed": true
+    },
+    {
+      "name": "style-noop",
+      "mode": "stdin",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py",
+        "--id=selected"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-style-noop/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-style-noop",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-style-noop"
+      },
+      "elapsed_ns": 70941666,
+      "input_sha256": "59b766fa7fdf7dc020cf031d364f63a9ec0e412cd3deb6e8323f5c66a4d92c96",
+      "input_has_epilog": false,
+      "exit_code": 0,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": true,
+        "ids": [
+          "selected"
+        ],
+        "fingerprint": "0dcdac5547f74f75942a927401286524f66d4bdc0454f5ef50fed7a7155254ad"
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true
+      },
+      "passed": true
+    },
+    {
+      "name": "style-change",
+      "mode": "stdin",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py",
+        "--id=selected"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-style-change/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-style-change",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-style-change"
+      },
+      "elapsed_ns": 70783166,
+      "input_sha256": "8ddc62c2af8d086bf68203a7a2a4bfee4749d4038db601b68f5a2dede247360a",
+      "input_has_epilog": true,
+      "exit_code": 0,
+      "stdout_bytes": 291,
+      "stdout_sha256": "b73c39e588e6b0ca4ad310ca90829ace0b196653a4dd991928db5d53f09e1500",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": true,
+        "ids": [
+          "selected"
+        ],
+        "fingerprint": "3ab955af87e8ed494863504f6edcbeacd65f150408765c942d99ed5dc86e1e9c"
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true,
+        "document_prolog_epilog_preserved": true,
+        "document_doctype_preserved": true,
+        "svg_unique_ids": true,
+        "existing_ids_retained": true,
+        "result_fingerprint_matches_output": true,
+        "changed_style": true
+      },
+      "passed": true
+    },
+    {
+      "name": "style-with-stylesheet",
+      "mode": "stdin",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py",
+        "--id=selected"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-style-with-stylesheet/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-style-with-stylesheet",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-style-with-stylesheet"
+      },
+      "elapsed_ns": 76228750,
+      "input_sha256": "9573e000dbe5f92da1ee0dc9706ef9a12c4d0db690de339014d938b313bedf0a",
+      "input_has_epilog": true,
+      "exit_code": 0,
+      "stdout_bytes": 343,
+      "stdout_sha256": "3c5a6024e24aa9854a8b0f933d9446d189562f1d6c4b3cdb611372debf45a72b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": true,
+        "ids": [
+          "selected"
+        ],
+        "fingerprint": "caa593de3651dd1f5e4a3d89d5b6da8cca90b9a17d033c08b30adea0046ac331"
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true,
+        "document_prolog_epilog_preserved": true,
+        "document_doctype_preserved": true,
+        "svg_unique_ids": true,
+        "existing_ids_retained": true,
+        "result_fingerprint_matches_output": true,
+        "changed_style": true
+      },
+      "passed": true
+    },
+    {
+      "name": "style-with-stylesheet-transform",
+      "mode": "stdin",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py",
+        "--id=selected"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-style-with-stylesheet-transform/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-style-with-stylesheet-transform",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-style-with-stylesheet-transform"
+      },
+      "elapsed_ns": 78361166,
+      "input_sha256": "9573e000dbe5f92da1ee0dc9706ef9a12c4d0db690de339014d938b313bedf0a",
+      "input_has_epilog": true,
+      "exit_code": 0,
+      "stdout_bytes": 371,
+      "stdout_sha256": "0e8ff7b6b9638d013a58e9680b4d38887b16d63db8b30be45574504a9f089bca",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": true,
+        "ids": [
+          "selected"
+        ],
+        "fingerprint": "c964cb1e494af8f86a4a0f8a98d826b1318dc48cdd9dcdc02bc7c1eaccf18a29"
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true,
+        "document_prolog_epilog_preserved": true,
+        "document_doctype_preserved": true,
+        "svg_unique_ids": true,
+        "existing_ids_retained": true,
+        "result_fingerprint_matches_output": true,
+        "changed_style": true,
+        "changed_transform": true
+      },
+      "passed": true
+    },
+    {
+      "name": "selection-mismatch",
+      "mode": "stdin",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py",
+        "--id=text"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-selection-mismatch/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-selection-mismatch",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-selection-mismatch"
+      },
+      "elapsed_ns": 74765625,
+      "input_sha256": "59b766fa7fdf7dc020cf031d364f63a9ec0e412cd3deb6e8323f5c66a4d92c96",
+      "input_has_epilog": false,
+      "exit_code": 0,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": false,
+        "error": "selection changed before edit"
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true
+      },
+      "passed": true
+    },
+    {
+      "name": "id-mismatch",
+      "mode": "stdin",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py",
+        "--id=selected"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-id-mismatch/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-id-mismatch",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-id-mismatch"
+      },
+      "elapsed_ns": 74633541,
+      "input_sha256": "59b766fa7fdf7dc020cf031d364f63a9ec0e412cd3deb6e8323f5c66a4d92c96",
+      "input_has_epilog": false,
+      "exit_code": 0,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": false,
+        "error": "document changed before insertion"
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true
+      },
+      "passed": true
+    },
+    {
+      "name": "fingerprint-mismatch",
+      "mode": "stdin",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py",
+        "--id=selected"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-fingerprint-mismatch/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-fingerprint-mismatch",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-fingerprint-mismatch"
+      },
+      "elapsed_ns": 73625208,
+      "input_sha256": "59b766fa7fdf7dc020cf031d364f63a9ec0e412cd3deb6e8323f5c66a4d92c96",
+      "input_has_epilog": false,
+      "exit_code": 0,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": false,
+        "error": "drawing content changed before insertion"
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true
+      },
+      "passed": true
+    },
+    {
+      "name": "text-change",
+      "mode": "stdin",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py",
+        "--id=text"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-text-change/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-text-change",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-text-change"
+      },
+      "elapsed_ns": 75061208,
+      "input_sha256": "8ddc62c2af8d086bf68203a7a2a4bfee4749d4038db601b68f5a2dede247360a",
+      "input_has_epilog": true,
+      "exit_code": 0,
+      "stdout_bytes": 290,
+      "stdout_sha256": "35e7c6b051b2e001e196c27d3f507f1b84f3d8557dba7a624c2499d2f8f690ba",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": true,
+        "ids": [
+          "text"
+        ],
+        "fingerprint": "0eacdc9171909ae46dabf7d4084c4688f34a5032e818252914a6b017893a822f"
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true,
+        "document_prolog_epilog_preserved": true,
+        "document_doctype_preserved": true,
+        "svg_unique_ids": true,
+        "existing_ids_retained": true,
+        "result_fingerprint_matches_output": true,
+        "changed_text": true
+      },
+      "passed": true
+    },
+    {
+      "name": "text-noop",
+      "mode": "stdin",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py",
+        "--id=text"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-text-noop/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-text-noop",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-text-noop"
+      },
+      "elapsed_ns": 74254167,
+      "input_sha256": "59b766fa7fdf7dc020cf031d364f63a9ec0e412cd3deb6e8323f5c66a4d92c96",
+      "input_has_epilog": false,
+      "exit_code": 0,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": true,
+        "ids": [
+          "text"
+        ],
+        "fingerprint": "0dcdac5547f74f75942a927401286524f66d4bdc0454f5ef50fed7a7155254ad"
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true
+      },
+      "passed": true
+    },
+    {
+      "name": "duplicate",
+      "mode": "stdin",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py",
+        "--id=selected"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-duplicate/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-duplicate",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-duplicate"
+      },
+      "elapsed_ns": 68559584,
+      "input_sha256": "8ddc62c2af8d086bf68203a7a2a4bfee4749d4038db601b68f5a2dede247360a",
+      "input_has_epilog": true,
+      "exit_code": 0,
+      "stdout_bytes": 386,
+      "stdout_sha256": "d69e8f660ae618ac5757b165ac28bc1d049277fe41103a9a3c86f54783e17304",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": true,
+        "ids": [
+          "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+        ],
+        "fingerprint": "df31fa6a11341c45c03d6e3690f61570c5d6fc7175c51503d720fc51675a2226"
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true,
+        "document_prolog_epilog_preserved": true,
+        "document_doctype_preserved": true,
+        "svg_unique_ids": true,
+        "existing_ids_retained": true,
+        "result_fingerprint_matches_output": true
+      },
+      "passed": true
+    },
+    {
+      "name": "insert",
+      "mode": "stdin",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-insert/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-insert",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-insert"
+      },
+      "elapsed_ns": 68945334,
+      "input_sha256": "8ddc62c2af8d086bf68203a7a2a4bfee4749d4038db601b68f5a2dede247360a",
+      "input_has_epilog": true,
+      "exit_code": 0,
+      "stdout_bytes": 400,
+      "stdout_sha256": "ec1bcbc2e1495fb60e1acd6a1cf559610cc7f4e720bb819882b2a1757c467d3f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": true,
+        "ids": [
+          "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa_0"
+        ]
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true,
+        "document_prolog_epilog_preserved": true,
+        "document_doctype_preserved": true,
+        "svg_unique_ids": true,
+        "existing_ids_retained": true,
+        "inserted_wrapper": true,
+        "inserted_child": true
+      },
+      "passed": true
+    },
+    {
+      "name": "insert-refused",
+      "mode": "stdin",
+      "command": [
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/python/bin/python3",
+        "-B",
+        "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage19/libexec/inkscape-mcp/helpers/inkscape_mcp_insert.py"
+      ],
+      "env": {
+        "HOME": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-insert-refused/home",
+        "TMPDIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-insert-refused",
+        "PATH": "",
+        "LANG": "en_US.UTF-8",
+        "PYTHONPATH": "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "INKSCAPE_MCP_MANAGED_DIR": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/helper-stylesheet-transform-stage19/stdin-insert-refused"
+      },
+      "elapsed_ns": 70535167,
+      "input_sha256": "59b766fa7fdf7dc020cf031d364f63a9ec0e412cd3deb6e8323f5c66a4d92c96",
+      "input_has_epilog": false,
+      "exit_code": 251,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "07d91c29b2a4633183f8a15ea047810de4f70ab1ccc76f9ab3f33dce3d94f6df",
+      "result": {
+        "nonce": "mcp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "ok": false,
+        "error": "ValueError"
+      },
+      "checks": {
+        "result_identity": true,
+        "result_success": true,
+        "stdout_presence": true,
+        "input_unchanged": true,
+        "request_unchanged": true,
+        "atomic_result_complete": true,
+        "result_private": true,
+        "returncode": true
+      },
+      "passed": true
+    }
+  ],
+  "scope": "Real packaged Python/vendor inkex executed offline with the recorded helper root. No GUI, effect dispatch or native Undo tested; no Rust helper implemented.",
+  "sources": [
+    "https://inkscape.gitlab.io/extensions/documentation/authors/inx-overview.html",
+    "https://wiki.inkscape.org/wiki/Script_extensions"
+  ]
+}

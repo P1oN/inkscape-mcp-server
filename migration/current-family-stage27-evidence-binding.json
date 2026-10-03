@@ -1,0 +1,2691 @@
+{
+  "passed": true,
+  "scope": "15 current headless cohort comparisons and named trace coverage; not full 110-tool behavior/native/argument proof",
+  "files": [
+    {
+      "path": "migration/current-family-stage27-coverage-with-package.json",
+      "bytes": 24615,
+      "sha256": "4b2e716152fc12612062da0b1fe691bc5bb6f721102b57cc54ea09ec8ad0b600"
+    },
+    {
+      "path": "migration/current-family-stage27-coverage.json",
+      "bytes": 23462,
+      "sha256": "04f9497c443c4e074d1b784c43ca61576605a9bcd2bd116154523e52cd12cd49"
+    },
+    {
+      "path": "migration/package-stage27-build-comparison.json",
+      "bytes": 870,
+      "sha256": "9d8e9cba32ba8c9d99e9c6d07e7daea17d85d6480fdb5a940cbc74b575f2b1c9"
+    },
+    {
+      "path": "migration/package-stage27-evidence-binding.json",
+      "bytes": 17283,
+      "sha256": "193000c6b58b51897b74e2f86566f909dfee339f6b18108f2d52f10cb401f7a3"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/adopt/comparison.json",
+      "bytes": 62,
+      "sha256": "f351c66021825a96311e19ff77c71ba6a7fd21c8b757194fa5d9feca91da0b4d"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/adopt/migration_adopt_acceptance.py",
+      "bytes": 9113,
+      "sha256": "2b16fb53fe3be222ea13b35d3bad4cc0527b7b4dd6348b53051ceaf31d01a504"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/adopt/original-harness.py",
+      "bytes": 8881,
+      "sha256": "ddc1d88ea78748d22ceee28596566150a76b21ae952be56546b890b41db645ca"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/adopt/process.json",
+      "bytes": 282,
+      "sha256": "d6a2e73c79c5eed9a82ce1573a4a0c76364f7ec12ab94f4d8e61c94f5efbdd33"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/adopt/raw/native-id-guards.json",
+      "bytes": 627,
+      "sha256": "854ce2fbef79bb4a08829738aa0e2070f1101ccf123aed645399934ab33aa228"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/adopt/raw/python-observed.json",
+      "bytes": 60276,
+      "sha256": "aab5a443c57c242adcd901e59944047d3bbe58fe91177f8b7782ba5c4c29aff0"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/adopt/raw/python-raw.json",
+      "bytes": 121676,
+      "sha256": "9ff6e1433e7d7facac0b3a574acb1c04691b3519e6ddb73835cb3c50fa3a5b27"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/adopt/raw/python.stderr.log",
+      "bytes": 59327,
+      "sha256": "97d42482e386540dc5fe3df227b089f33ea958b6474129b2f175fa84fdf7b54e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/adopt/raw/rust-observed.json",
+      "bytes": 60276,
+      "sha256": "aab5a443c57c242adcd901e59944047d3bbe58fe91177f8b7782ba5c4c29aff0"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/adopt/raw/rust-raw.json",
+      "bytes": 126251,
+      "sha256": "21c69a6afccc885c076a846c217ead56123d12c9f46a7590c705c70dc0a3986f"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/adopt/raw/rust.stderr.log",
+      "bytes": 2341,
+      "sha256": "b57c71350d89c680264a56b427f65ba28e4f487725ccf2c5c75068aa26630e5b"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/adopt/rewrite.json",
+      "bytes": 386,
+      "sha256": "86b8fa36aaeac6cacf2686f4158b8ac32a9e1b1f7a016eb0647dda50aa264c4c"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/adopt/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/adopt/stdout.log",
+      "bytes": 57,
+      "sha256": "9a996b3b6e34945b43e82db7ad74d41493a0a2bfe59b0f0f5f3f5e51f5915cd6"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/comparison.json",
+      "bytes": 278,
+      "sha256": "e52966ab852a84b64b5c56a50aaf058cf4ad3c3e313e42b791fa52fbd06ce61b"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/migration_batch_members_acceptance.py",
+      "bytes": 12255,
+      "sha256": "5ed95d26838b83114e27602e9166ac215d933e91526c7bc8dcf8e2ceedf96486"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/original-harness.py",
+      "bytes": 12023,
+      "sha256": "b5daf39503a5b58a7417bbf0c446982766a037a08ed87ec08520b17d80e9f17c"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/process.json",
+      "bytes": 298,
+      "sha256": "a31662d018d0b3769000d85f981a0278eb015d818540cb16789762b5cc596aad"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-copies.svg",
+      "bytes": 1663,
+      "sha256": "310888a3629692ff7b88f64bc3f50d2a856a7e8024fb8da4db3c5ea874cf20c4"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-create-fragment.svg",
+      "bytes": 617,
+      "sha256": "da054e7b22466e7552977cbcb335f26c9c1fea46127890fcaf1c53d5a90ca0ea"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-create-repeat.svg",
+      "bytes": 1010,
+      "sha256": "e10b6e710f3ab129d9c7e2b52c95c5664a1df513db41cb0ffe919d52729ef23a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-eager-duplicate-fragment-id.svg",
+      "bytes": 531,
+      "sha256": "bb45c9671b2905e5a66918f7e5356b3b14be959640085f0bae29d64d3fd8e613"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-eager-invalid-color.svg",
+      "bytes": 531,
+      "sha256": "bb45c9671b2905e5a66918f7e5356b3b14be959640085f0bae29d64d3fd8e613"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-eager-root-id.svg",
+      "bytes": 531,
+      "sha256": "bb45c9671b2905e5a66918f7e5356b3b14be959640085f0bae29d64d3fd8e613"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-fragment-approval.svg",
+      "bytes": 531,
+      "sha256": "bb45c9671b2905e5a66918f7e5356b3b14be959640085f0bae29d64d3fd8e613"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-fragment-id-conflict.svg",
+      "bytes": 531,
+      "sha256": "bb45c9671b2905e5a66918f7e5356b3b14be959640085f0bae29d64d3fd8e613"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-fragment-late-missing.svg",
+      "bytes": 531,
+      "sha256": "bb45c9671b2905e5a66918f7e5356b3b14be959640085f0bae29d64d3fd8e613"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-fragment-noop.svg",
+      "bytes": 531,
+      "sha256": "bb45c9671b2905e5a66918f7e5356b3b14be959640085f0bae29d64d3fd8e613"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-fragment-reference-refusal.svg",
+      "bytes": 531,
+      "sha256": "bb45c9671b2905e5a66918f7e5356b3b14be959640085f0bae29d64d3fd8e613"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-fragment-removed-reference.svg",
+      "bytes": 531,
+      "sha256": "bb45c9671b2905e5a66918f7e5356b3b14be959640085f0bae29d64d3fd8e613"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-fragment-repeat.svg",
+      "bytes": 978,
+      "sha256": "c0f1d96264619dc0a78eb10de18ba8eafcc628914d25037f427be774dbafa656"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-fragment.svg",
+      "bytes": 571,
+      "sha256": "3d7553e7375f8c37f7fa08cdc04510e76d1f0238d6180865f695f5d51f401829"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-linked.svg",
+      "bytes": 977,
+      "sha256": "0c8edf9cb9e900b80ae558b8dd8be4bd162fb3f75ba5d9bf800e1276b92fc1dd"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-repeat-created-target.svg",
+      "bytes": 997,
+      "sha256": "888c31e50f56ea35e8bc3752b680b2b700a11bb6727c5debf48fedde4654a272"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-repeat-fragment.svg",
+      "bytes": 978,
+      "sha256": "c0f1d96264619dc0a78eb10de18ba8eafcc628914d25037f427be774dbafa656"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-repeat-group-conflict.svg",
+      "bytes": 531,
+      "sha256": "bb45c9671b2905e5a66918f7e5356b3b14be959640085f0bae29d64d3fd8e613"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-repeat-late-missing.svg",
+      "bytes": 531,
+      "sha256": "bb45c9671b2905e5a66918f7e5356b3b14be959640085f0bae29d64d3fd8e613"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-repeat-locked.svg",
+      "bytes": 613,
+      "sha256": "7252d23f2bd666e6bcfd98dfd0967ba69fc315d861454e43ed6acb1fdd6b4e22"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-repeat-singular.svg",
+      "bytes": 571,
+      "sha256": "2fedf5ef36b94e353871192f650ec9a0f06100c7ee0722e635ff02f2e42c8bb3"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-repeat-stylesheet.svg",
+      "bytes": 557,
+      "sha256": "c58c8b48f398f17eecfc352090540631610d8d00b1c85d37cc4332fa6de9d177"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-seeded.svg",
+      "bytes": 1296,
+      "sha256": "c40580fe6dca5d6bbf824512beac90e5bc5c346a96f4d071e1634e698ecaa288"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python-tangent.svg",
+      "bytes": 1292,
+      "sha256": "048f266728c31227cde46856dc4f832841a8f177b5e3f3ff7c0a2c999c41e4a3"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python.observed.json",
+      "bytes": 60922,
+      "sha256": "82a7dfdaeb472783f0b76989c3ecf04d1339e6065e7c72d30e088ef13f1050b9"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python.stderr.log",
+      "bytes": 50419,
+      "sha256": "922281fa8255718eabdda77484ce89adad140497c5f701f5afdd0c6745da360f"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/python.trace.json",
+      "bytes": 115768,
+      "sha256": "76f4620cd17260e93b5cf6f7bcf302bbde82e76d29800ca1aba71bb3576836a9"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-copies.svg",
+      "bytes": 1663,
+      "sha256": "526a282744dc87755f7c97a263134cb8b3a3cd5dc2987a14d3a52bdf707b36ca"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-create-fragment.svg",
+      "bytes": 617,
+      "sha256": "da054e7b22466e7552977cbcb335f26c9c1fea46127890fcaf1c53d5a90ca0ea"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-create-repeat.svg",
+      "bytes": 1010,
+      "sha256": "e10b6e710f3ab129d9c7e2b52c95c5664a1df513db41cb0ffe919d52729ef23a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-eager-duplicate-fragment-id.svg",
+      "bytes": 531,
+      "sha256": "bb45c9671b2905e5a66918f7e5356b3b14be959640085f0bae29d64d3fd8e613"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-eager-invalid-color.svg",
+      "bytes": 531,
+      "sha256": "bb45c9671b2905e5a66918f7e5356b3b14be959640085f0bae29d64d3fd8e613"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-eager-root-id.svg",
+      "bytes": 531,
+      "sha256": "bb45c9671b2905e5a66918f7e5356b3b14be959640085f0bae29d64d3fd8e613"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-fragment-approval.svg",
+      "bytes": 531,
+      "sha256": "bb45c9671b2905e5a66918f7e5356b3b14be959640085f0bae29d64d3fd8e613"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-fragment-id-conflict.svg",
+      "bytes": 531,
+      "sha256": "bb45c9671b2905e5a66918f7e5356b3b14be959640085f0bae29d64d3fd8e613"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-fragment-late-missing.svg",
+      "bytes": 531,
+      "sha256": "bb45c9671b2905e5a66918f7e5356b3b14be959640085f0bae29d64d3fd8e613"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-fragment-noop.svg",
+      "bytes": 531,
+      "sha256": "bb45c9671b2905e5a66918f7e5356b3b14be959640085f0bae29d64d3fd8e613"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-fragment-reference-refusal.svg",
+      "bytes": 531,
+      "sha256": "bb45c9671b2905e5a66918f7e5356b3b14be959640085f0bae29d64d3fd8e613"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-fragment-removed-reference.svg",
+      "bytes": 531,
+      "sha256": "bb45c9671b2905e5a66918f7e5356b3b14be959640085f0bae29d64d3fd8e613"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-fragment-repeat.svg",
+      "bytes": 978,
+      "sha256": "c0f1d96264619dc0a78eb10de18ba8eafcc628914d25037f427be774dbafa656"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-fragment.svg",
+      "bytes": 571,
+      "sha256": "3d7553e7375f8c37f7fa08cdc04510e76d1f0238d6180865f695f5d51f401829"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-linked.svg",
+      "bytes": 977,
+      "sha256": "0c8edf9cb9e900b80ae558b8dd8be4bd162fb3f75ba5d9bf800e1276b92fc1dd"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-repeat-created-target.svg",
+      "bytes": 997,
+      "sha256": "888c31e50f56ea35e8bc3752b680b2b700a11bb6727c5debf48fedde4654a272"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-repeat-fragment.svg",
+      "bytes": 978,
+      "sha256": "c0f1d96264619dc0a78eb10de18ba8eafcc628914d25037f427be774dbafa656"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-repeat-group-conflict.svg",
+      "bytes": 531,
+      "sha256": "bb45c9671b2905e5a66918f7e5356b3b14be959640085f0bae29d64d3fd8e613"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-repeat-late-missing.svg",
+      "bytes": 531,
+      "sha256": "bb45c9671b2905e5a66918f7e5356b3b14be959640085f0bae29d64d3fd8e613"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-repeat-locked.svg",
+      "bytes": 613,
+      "sha256": "7252d23f2bd666e6bcfd98dfd0967ba69fc315d861454e43ed6acb1fdd6b4e22"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-repeat-singular.svg",
+      "bytes": 571,
+      "sha256": "2fedf5ef36b94e353871192f650ec9a0f06100c7ee0722e635ff02f2e42c8bb3"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-repeat-stylesheet.svg",
+      "bytes": 557,
+      "sha256": "c58c8b48f398f17eecfc352090540631610d8d00b1c85d37cc4332fa6de9d177"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-seeded.svg",
+      "bytes": 1296,
+      "sha256": "c40580fe6dca5d6bbf824512beac90e5bc5c346a96f4d071e1634e698ecaa288"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust-tangent.svg",
+      "bytes": 1292,
+      "sha256": "048f266728c31227cde46856dc4f832841a8f177b5e3f3ff7c0a2c999c41e4a3"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust.observed.json",
+      "bytes": 60922,
+      "sha256": "82a7dfdaeb472783f0b76989c3ecf04d1339e6065e7c72d30e088ef13f1050b9"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust.stderr.log",
+      "bytes": 1952,
+      "sha256": "69d1d448da16c37c22d9411a3fc9da468fe87367922bced6838b9364bf681daf"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/raw/rust.trace.json",
+      "bytes": 115763,
+      "sha256": "8ba23d490beaa87b15553aec93e4535d82af576e8e5d8e6f8c3a79d2bfea864e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/rewrite.json",
+      "bytes": 394,
+      "sha256": "4cd2934cdb78fb8c2957aba598bc5c0f720617dcb3c07d17022404f1bbd9a861"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/batch_members/stdout.log",
+      "bytes": 56,
+      "sha256": "825f06c08bb7196c3ca18af06a9eca43fffb9406c3962fc4b88bd760bb32b8ce"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/comparison.json",
+      "bytes": 51931,
+      "sha256": "4fc27e3367881c313d308167c5f2a7afcca0d5080ea10d752b66fd1f09f876c7"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/coverage-used.py",
+      "bytes": 6537,
+      "sha256": "63be5f1dce5afb2b3729ae07f5440303ad156b894c4eacbcff4453be045e55d2"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/create/comparison.json",
+      "bytes": 2332,
+      "sha256": "11b5c41998667b67123b1a417733569c40e1177a251deaed2256e30e98f6328b"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/create/migration_create_acceptance.py",
+      "bytes": 25564,
+      "sha256": "367045606b4067610824b64a1ddb85d9a41575a6303c9b14f8eb76b61e74ea77"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/create/original-harness.py",
+      "bytes": 25332,
+      "sha256": "9f3a0b494f386ff8e7d3fb7dd218daaf62e9364e0f35ff16e69a19145be831cb"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/create/process.json",
+      "bytes": 284,
+      "sha256": "0061b0f5cd922ccf3d480185ba13bacbc2e6546b5cb9fb7a7ca876e623d6f493"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/create/raw/native-grouping-guards.json",
+      "bytes": 1909,
+      "sha256": "60ccffd45364666aeda15a2a53b28df946313f81f7683f71f38365255363c691"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/create/raw/python-observed.json",
+      "bytes": 106646,
+      "sha256": "f4fde02fe6c072f0ad41c10ea338f1ae43822ac9220b3e6b111d25a1149e0a1a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/create/raw/python-raw.json",
+      "bytes": 200914,
+      "sha256": "d859fc41bee4bd70021a82d429ac779cf90eeeb18e6724b69463a0247ee03f48"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/create/raw/python.stderr.log",
+      "bytes": 61019,
+      "sha256": "385c435254ce69291acbaa06c26a3f43f5e775ae691925e699c7057da00200f0"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/create/raw/rust-observed.json",
+      "bytes": 106646,
+      "sha256": "f911fc04bba783d75d2c33da344a74043416a226287e70229950d08e32667c8a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/create/raw/rust-raw.json",
+      "bytes": 215061,
+      "sha256": "3e6e8b09e381597f9e40099945ce2a2846647b97fd873104a90c8209ad6ac3dd"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/create/raw/rust.stderr.log",
+      "bytes": 5865,
+      "sha256": "b26b867e8aa6940949474dcb0b66a8fd1d91c50b09243288cc62b40aed5b0f48"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/create/rewrite.json",
+      "bytes": 387,
+      "sha256": "c46dd0b428a8b64705478ed90f8eb48552237d47af6c03dd8edf4afd8972ad2c"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/create/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/create/stdout.log",
+      "bytes": 56,
+      "sha256": "e44cd94fb8d51168438deb0c2486e03a742c5c5d56a41a585d0652a1c6d73de2"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/comparison.json",
+      "bytes": 197,
+      "sha256": "dd23ac443dff028658bb3b5470972735a61a405a5cbcbd2ca6b34d8bea72efc6"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/migration_duplicate_acceptance.py",
+      "bytes": 15099,
+      "sha256": "80124b58d22cd7b0be7b9c26a501fcb5255461e581657990fdda78cda6b478de"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/original-harness.py",
+      "bytes": 14867,
+      "sha256": "a8adbb52316ff58d920cec4263d1ce0917ab4c1b2288f5411ac4056b94f22052"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/process.json",
+      "bytes": 290,
+      "sha256": "57fac0a7d59f3a7c0439e254e07ab2d46e8a35f08bba12485cf5b3db740c560c"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/native-reference-guards.json",
+      "bytes": 1883,
+      "sha256": "df70be2449b9d5cab2fdf088af33e4bb7d9adbb8988b964e8bc37059a68fdd60"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/python-batch-rollback-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/python-batch-working.svg",
+      "bytes": 352,
+      "sha256": "7f4fa528f530d44a93ed23ffe674dde15197c352dd534fc2e60daf2592a28eea"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/python-conflict-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/python-connector-working.svg",
+      "bytes": 529,
+      "sha256": "06cb16c8d3adbb5ab8cc71a34b9a29b0bf2c197f7ff34b58dab026606c68f320"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/python-duplicate-clone-working.svg",
+      "bytes": 1113,
+      "sha256": "b48313b37e0a7ba8514c963cec9219fc398bd685f8738b5ea3f5623334d2846b"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/python-effects-and-markers-working.svg",
+      "bytes": 1075,
+      "sha256": "85507b540c71bf4302ea66c04151d4f2a935ab8fd4dd13e3272cc4b6ef77af8b"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/python-empty-id-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/python-group-auto-working.svg",
+      "bytes": 787,
+      "sha256": "509b6388169ede349424b860ce853629aaacadc9ddda856299140c040b879aec"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/python-group-internal-external-working.svg",
+      "bytes": 783,
+      "sha256": "bb760709df6c150f4a146fd77d4bbdb34e845b8c2ec67513f72c98be9953d65f"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/python-inherited-xlink-working.svg",
+      "bytes": 357,
+      "sha256": "a67d155a596b5c777905e342ea73a5b4ec7ff31f04e828d60b24d349b87905c2"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/python-invalid-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/python-leaf-auto-working.svg",
+      "bytes": 327,
+      "sha256": "a05fc70b3f12f349f5d3c21c4187885da303e55c5d12638b3652d59a041feee7"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/python-leaf-explicit-working.svg",
+      "bytes": 323,
+      "sha256": "b4ec6f6ca4b0b1e9a0bba57754332b403c024a08766a6e7dee5be6b73e8d4da2"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/python-local-namespace-working.svg",
+      "bytes": 500,
+      "sha256": "30f5765921b1545cb8b335d60390312054281a5273f9dcab5d3ec7526a3f22a0"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/python-missing-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/python-mixed-text-working.svg",
+      "bytes": 330,
+      "sha256": "b8474f1d1da07b0e180ed075335d20e11b33643f95e1cf57faf69eb0f666feda"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/python-observed.json",
+      "bytes": 51206,
+      "sha256": "58884e0ea02ddf51fe47bf1ce2394270cdcb0942384ac0e2daa6206afa543a1a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/python-paint-url-whitespace-working.svg",
+      "bytes": 785,
+      "sha256": "27a36ee4d6552d388e6f67b5aa3a2da2a1eabe7e0d7f9f839d367dc4dfbdf9cd"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/python-raw.json",
+      "bytes": 79947,
+      "sha256": "fae93306c7ce72a1f31042aa013deae9448bf3a7baf48a091e55d6b72c48a4ba"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/python-root-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/python-tail-comments-working.svg",
+      "bytes": 387,
+      "sha256": "89ec0a063a6d8e7b89e720f2445a785a9e668e387e955327542303d75dd95a05"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/python.stderr.log",
+      "bytes": 44136,
+      "sha256": "5f29a302d21cc33c59ac2182fda8f02bb7bedcfc4262ea9961b00b92ba3206d6"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/rust-batch-rollback-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/rust-batch-working.svg",
+      "bytes": 352,
+      "sha256": "7f4fa528f530d44a93ed23ffe674dde15197c352dd534fc2e60daf2592a28eea"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/rust-conflict-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/rust-connector-working.svg",
+      "bytes": 529,
+      "sha256": "cb5caa32b4be29080bf0e7f08b825492f2848bae62d9190ec2b384c29193217f"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/rust-duplicate-clone-working.svg",
+      "bytes": 1113,
+      "sha256": "a4b7aca1ed83baf24580ffe97560253d37e2df661a0a3bb9d3da2237086d8571"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/rust-effects-and-markers-working.svg",
+      "bytes": 1075,
+      "sha256": "f6029b70670e785516add2ad2a0f87831eef659baa39eaf62ee6a56fc61c1691"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/rust-empty-id-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/rust-group-auto-working.svg",
+      "bytes": 787,
+      "sha256": "e47a1bf31cdd9a4e8121af51a798695f5645fa4fc812206ff037e860071e1f0f"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/rust-group-internal-external-working.svg",
+      "bytes": 783,
+      "sha256": "28e86b050b1513db7bf4ca1cc7a02ed8c0ca8651fe53f8f61fb5921e3a686ddc"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/rust-inherited-xlink-working.svg",
+      "bytes": 357,
+      "sha256": "a67d155a596b5c777905e342ea73a5b4ec7ff31f04e828d60b24d349b87905c2"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/rust-invalid-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/rust-leaf-auto-working.svg",
+      "bytes": 327,
+      "sha256": "4ca5f31bab20a1eb7f2d58448b6e4869364354830de079aab0f575c8a3e4aec1"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/rust-leaf-explicit-working.svg",
+      "bytes": 323,
+      "sha256": "b4ec6f6ca4b0b1e9a0bba57754332b403c024a08766a6e7dee5be6b73e8d4da2"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/rust-local-namespace-working.svg",
+      "bytes": 500,
+      "sha256": "0840896b742c8e0b9a1b943bb433b34aedc34530e7ca47b9ddb9f733b76441a0"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/rust-missing-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/rust-mixed-text-working.svg",
+      "bytes": 330,
+      "sha256": "a79c017a411b1334d3d715f684e5bfebd587a0932cecdd2f3be50b8034c7e04f"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/rust-observed.json",
+      "bytes": 51206,
+      "sha256": "58884e0ea02ddf51fe47bf1ce2394270cdcb0942384ac0e2daa6206afa543a1a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/rust-paint-url-whitespace-working.svg",
+      "bytes": 785,
+      "sha256": "3194a4c384c168f1d50864a514db2c13a26334fcfae9a51cdce44a89d02b968a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/rust-raw.json",
+      "bytes": 93830,
+      "sha256": "8e719a50ba668959bd15f56d28637937a9e2e23375318bf919bc578926951ce6"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/rust-root-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/rust-tail-comments-working.svg",
+      "bytes": 387,
+      "sha256": "89ec0a063a6d8e7b89e720f2445a785a9e668e387e955327542303d75dd95a05"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/raw/rust.stderr.log",
+      "bytes": 2732,
+      "sha256": "a090a34b92006cd825d0aa182c0abff6b19b2f185c3e79f1fe9b8204610cb1fa"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/rewrite.json",
+      "bytes": 390,
+      "sha256": "00a50b49b385482fe61ca46c4162a1e9cb2932cccbcaa7350455403963eb9a48"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/duplicate/stdout.log",
+      "bytes": 50,
+      "sha256": "684152797f26f8a9971e4d8c2ed044a18a14c5a7a7adbf68dbc1394fd0892ddc"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/fragment/comparison.json",
+      "bytes": 154,
+      "sha256": "c0aec5065c416949d09d1a59c0b46866c49a8184041f097bf85c4867c3185c9b"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/fragment/migration_fragment_acceptance.py",
+      "bytes": 9768,
+      "sha256": "1bbcfd1326fb8d2f0145b501e8e9c9fc69039f0a639548ad9a72dc324c09b3f5"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/fragment/original-harness.py",
+      "bytes": 9536,
+      "sha256": "2cb1348bfea8a82662b5fe5c5aa9b03fa5ded0f859705b2edbfa143a4849df1b"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/fragment/process.json",
+      "bytes": 288,
+      "sha256": "47cf1470be3b87d797a03d6541bbe7127e25ed86370d6fd917b200a0d34f25a3"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/fragment/raw/native-reference-guards.json",
+      "bytes": 607,
+      "sha256": "477a65d74a94316a280b87f6f9c5333cc3ac63338e7f14333ec9d17a6c62bef7"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/fragment/raw/python-observed.json",
+      "bytes": 43854,
+      "sha256": "857883e3faf9dbf49dd236e12b4004a292a494a442ba67f73700a177bde631fa"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/fragment/raw/python-raw.json",
+      "bytes": 99042,
+      "sha256": "79d4baa46164e85f239e4a6349e89db251c5f690fd43866db08459ae12f4d11d"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/fragment/raw/python.stderr.log",
+      "bytes": 42136,
+      "sha256": "dea4431575837862f86f9f701eacd8bb30962b7c989ceff662c318fe30e2c614"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/fragment/raw/rust-observed.json",
+      "bytes": 43854,
+      "sha256": "857883e3faf9dbf49dd236e12b4004a292a494a442ba67f73700a177bde631fa"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/fragment/raw/rust-raw.json",
+      "bytes": 103680,
+      "sha256": "64cbf0bd97ee269e9c134d2cbe681cbeda51b8b6f406b86ffdd5bfed2bd4d0a3"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/fragment/raw/rust.stderr.log",
+      "bytes": 1171,
+      "sha256": "07b2464c9b0392dca3ddc09263b1fc2e9c073e60f292e3009b36400fb732437d"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/fragment/rewrite.json",
+      "bytes": 389,
+      "sha256": "327c1465ab971dbf1ed99a0a5c22fd3396f8e657afa8c05ac847de188c7f16fa"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/fragment/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/fragment/stdout.log",
+      "bytes": 53,
+      "sha256": "437f3e53fa8d448af7aa664e81a4c9d704b48ea5e5bba9c6b9d18360224e16a3"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/grid/comparison.json",
+      "bytes": 62,
+      "sha256": "2e434c2809f5704b4e28d92adf42a5147e069f726026fbe348e66f5d3d1fb44d"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/grid/migration_grid_acceptance.py",
+      "bytes": 10009,
+      "sha256": "dd7aa3d86e84262b6cb80f324a575668e4de7b06374d4a5727244dc7200c338a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/grid/original-harness.py",
+      "bytes": 9777,
+      "sha256": "e3be5293995fe2c7dd36ed1bab4e3c378c7c82e47cb06694bfaadf6d2dee8263"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/grid/process.json",
+      "bytes": 280,
+      "sha256": "b72c6dd71bae79df42141c323aad04bcfc37d044d22860dc65a6efde93be18c1"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/grid/raw/python-observed.json",
+      "bytes": 30846,
+      "sha256": "fcbaaa383dd7b8d9091bc386732c93eb844fd04fad4aa619151bc06d18496bd7"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/grid/raw/python-raw.json",
+      "bytes": 71175,
+      "sha256": "23e44d696d5c8e7fb4995a5540ad7ea3cd3349e1c1fbe2b5f0420d72333d5d3f"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/grid/raw/python.stderr.log",
+      "bytes": 33073,
+      "sha256": "89db09ed3915c7e4fa75e89b3507f45646a674a4da24a6c285950431eb7e6d25"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/grid/raw/rust-observed.json",
+      "bytes": 30846,
+      "sha256": "fcbaaa383dd7b8d9091bc386732c93eb844fd04fad4aa619151bc06d18496bd7"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/grid/raw/rust-raw.json",
+      "bytes": 71179,
+      "sha256": "453257d0b6d2625c47cea0e591392884dfc059a428b0aeff307fd62e6ac75e37"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/grid/raw/rust.stderr.log",
+      "bytes": 1173,
+      "sha256": "3edaf8d0523ee54e4c37e68be5f10ca17c2551efefe9d0801e824b64ac0e4e25"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/grid/rewrite.json",
+      "bytes": 385,
+      "sha256": "d6da6e83b236d9f25259fffbbd6dd3927f0ea77a85ba80516652fef338d942d3"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/grid/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/grid/stdout.log",
+      "bytes": 49,
+      "sha256": "4691e1113cce749ecfdfbd66e277eb5ce68637ce77702b7d0b8f22104e5b915b"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/initial-preparation-note.json",
+      "bytes": 346,
+      "sha256": "a87356a5cd0552f7048b2b1bc3050886bbf7d5dc25e48d6d6c7fde26fd282383"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/optimize/comparison.json",
+      "bytes": 62,
+      "sha256": "6e002d5c1e6128ae2392cf3578c11cc0a2eec75ea588a2b8f97fd3ae698ab867"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/optimize/migration_optimize_acceptance.py",
+      "bytes": 8547,
+      "sha256": "a3c57e2f6e024405e999166c7a83edab5933fb7b8ab2c0bec0c8cdf291281cfc"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/optimize/original-harness.py",
+      "bytes": 8315,
+      "sha256": "8ea87b6f16d1a6f862ec9d93be00cb38a2dbc3bb1080c38a98c713d326dd4f22"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/optimize/process.json",
+      "bytes": 288,
+      "sha256": "b990745449608ee06d43b4ac8e7c0f542b617b7c748ebf6ba0fca29d6a85e513"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/optimize/raw/native-reference-guards.json",
+      "bytes": 1617,
+      "sha256": "a19b459e5eed9dca14a20f28a628b649c81d9d1d84605822816fee7af6ca4afa"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/optimize/raw/python-observed.json",
+      "bytes": 114208,
+      "sha256": "6aba38c4ae02f2c8f970de777fe62b215857bb27c673e1d9fa9036a43a4e50a7"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/optimize/raw/python-raw.json",
+      "bytes": 192827,
+      "sha256": "451a4f1323bbf8e1fb53c8833ce1997dad2a7de862b74c3d770d4d2b5bcd33c1"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/optimize/raw/python.stderr.log",
+      "bytes": 67427,
+      "sha256": "385995ec7704670a2fbb0d13c8d363eeb6f9857e6b08dc65570a6a3c3b90f7db"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/optimize/raw/rust-observed.json",
+      "bytes": 114208,
+      "sha256": "6aba38c4ae02f2c8f970de777fe62b215857bb27c673e1d9fa9036a43a4e50a7"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/optimize/raw/rust-raw.json",
+      "bytes": 203296,
+      "sha256": "815bc8c3fa4a62774f9f0e72f07a2eda9782de89cedf7c7cb9d08600efd9d43b"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/optimize/raw/rust.stderr.log",
+      "bytes": 3124,
+      "sha256": "3433083a08ba336338e87c51d4ed7ac7d889d75eb29e91ea1743d3499c1444d0"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/optimize/rewrite.json",
+      "bytes": 389,
+      "sha256": "ee2d2d5f793904c8ff4abfada21e7132122d5b0c116b4eb879a7974683998356"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/optimize/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/optimize/stdout.log",
+      "bytes": 54,
+      "sha256": "5aca3ae8b681ff6979d73606684a600da153191990ff332899d9b51e50f61046"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/place/comparison.json",
+      "bytes": 61,
+      "sha256": "5ce59a2346ee8e962137cc1f5c1cbf16b84a43268ac08fc01f8d3987be03cfc2"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/place/migration_place_acceptance.py",
+      "bytes": 11786,
+      "sha256": "daad613c0558a796761299975048d8f0d946cc93c264891cc8e12a006be1f293"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/place/original-harness.py",
+      "bytes": 11554,
+      "sha256": "97854d2df51afc1f0be3a79290ab417c42f2c8b769a6becad6c04b3d80c7a423"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/place/process.json",
+      "bytes": 282,
+      "sha256": "9ef9e593810f7a30fbf1d91c4bc638a2e4e0e01188f84783608dd6ac11604162"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/place/raw/native-context-guards.json",
+      "bytes": 1716,
+      "sha256": "5a01962d1bb7da49d60a302562666b5dce3dfe653e264c9a6a11a05cb9d47949"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/place/raw/python-observed.json",
+      "bytes": 21074,
+      "sha256": "2848aa66811ed4caf92df075c89a9314258708e89d8c2e6dec1f3da23735bf4e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/place/raw/python-raw.json",
+      "bytes": 55570,
+      "sha256": "7b708c59c7ef81c2d716bed3fc0ae3342e3db81a390fe2746b179c54fda521ad"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/place/raw/python.stderr.log",
+      "bytes": 25471,
+      "sha256": "3c957178cc70539ccb54f4eafb3cc7ac49b3cf9b07393ea789a3acccaa5a0da0"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/place/raw/rust-observed.json",
+      "bytes": 21074,
+      "sha256": "2848aa66811ed4caf92df075c89a9314258708e89d8c2e6dec1f3da23735bf4e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/place/raw/rust-raw.json",
+      "bytes": 78016,
+      "sha256": "42714c65b71ed7e8f2426157cc057ecfd99d596516681729545201ee867a3bf2"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/place/raw/rust.stderr.log",
+      "bytes": 782,
+      "sha256": "5847ab0b722d8f9bcc99d0e412af2de2ad2ccc2f6b85392b255c5457a029a1b5"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/place/rewrite.json",
+      "bytes": 386,
+      "sha256": "30e96de17c87ad9f9186a4ad59427b6d5be2046877c547c1dac2ffab43d5f913"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/place/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/place/stdout.log",
+      "bytes": 53,
+      "sha256": "bc4d9dadd26b0c36b2d887ad859f1b0f0f387b2c86dbf8a446cf3a8d08a2af05"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/progress.json",
+      "bytes": 51779,
+      "sha256": "a99359f701c5cbe4a50d604272c59a42bbae2f0700326fca38ebd479af2e160d"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/comparison.json",
+      "bytes": 36394,
+      "sha256": "5cb29af9ec6163ef7f4d5a64ba9b464472c04d0017b39bff77ca4db89fddb8d1"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/migration_recovery_acceptance.py",
+      "bytes": 8959,
+      "sha256": "151be04cec9caf0cd92f99538dffe47285c75b3acd4224cac0bb3200dca681a2"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/original-harness.py",
+      "bytes": 8959,
+      "sha256": "151be04cec9caf0cd92f99538dffe47285c75b3acd4224cac0bb3200dca681a2"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/process.json",
+      "bytes": 696,
+      "sha256": "d1bd37a51a800d8ec1e9e52cee564f2356e1f2d41c8fdf3059dde29669f934d2"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/applied-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/applied-0.trace.json",
+      "bytes": 6355,
+      "sha256": "204b6017e5db57ea81bbd99c1e2de6f5535b4d778ed3d4b4865d05519513c58f"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/applied-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/applied-1.trace.json",
+      "bytes": 6355,
+      "sha256": "30735223373c523f646910da4b65642d1acdf8d4998907fca00a39434af1a07e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/applied-later-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/applied-later-0.trace.json",
+      "bytes": 6355,
+      "sha256": "35e5395ee9cbb9ff020569f8fd413b8a7322dfb34cc273a477f1046086e152fa"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/applied-later-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/applied-later-1.trace.json",
+      "bytes": 6355,
+      "sha256": "e4d1269b8d53d643078b832ba1dcc819da1b434312f6505295637f15ba69cc83"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/applied-later.fixture.json",
+      "bytes": 2061,
+      "sha256": "6a7d90fd8e40bd566a441f0192162302495e1f23160e093cfdb452fd68f70271"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/applied.fixture.json",
+      "bytes": 2055,
+      "sha256": "2b3ca402da804dcfb3ed4b739eded906c824f6fdff580173abe3ff6e4b7d696f"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/audit-corrupt-0.stderr.log",
+      "bytes": 42,
+      "sha256": "99d9716586b5a94b471a6c209f239a976e45a1d51647c8612cb24ad0e1b86e18"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/audit-corrupt-0.trace.json",
+      "bytes": 6355,
+      "sha256": "111d8db64a4baec283febaa54d3f1f984ae9778a6db977bdb9435c6b299666cc"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/audit-corrupt-1.stderr.log",
+      "bytes": 42,
+      "sha256": "99d9716586b5a94b471a6c209f239a976e45a1d51647c8612cb24ad0e1b86e18"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/audit-corrupt-1.trace.json",
+      "bytes": 6355,
+      "sha256": "3d84cc7d8aafdc941381c1fbe4bbce0704d936eba4ba2aa018fd9c0d52070831"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/audit-corrupt.fixture.json",
+      "bytes": 2060,
+      "sha256": "aa60c9b22fab5bfa534743ccb9a75721e4308e92b675f0242ce66ae0884b51ae"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/discarded-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/discarded-0.trace.json",
+      "bytes": 6356,
+      "sha256": "d5024a4b4e531c30195b26ce9ddca9179e5affaa2aa4828f5c26f499ffca8eb9"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/discarded-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/discarded-1.trace.json",
+      "bytes": 6355,
+      "sha256": "30c1b0c0755a5471f6e2c0d09e048111d394f553feda39ce3a95eadf7d9a2963"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/discarded.fixture.json",
+      "bytes": 2057,
+      "sha256": "18801c0c25c9b363991861419c8fe8757ee8cfebdd0b40e1876cf810731f505a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/head-written-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/head-written-0.trace.json",
+      "bytes": 6356,
+      "sha256": "407b1a0cfcf61bd5d2ede63ecd0f805329b6667a094c25b579a57f6898cbf0f6"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/head-written-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/head-written-1.trace.json",
+      "bytes": 6354,
+      "sha256": "c4d1f5b736cd88280a4f11a11491ce4a872f3e35145d8f68549bfd9af4e1dc1d"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/head-written.fixture.json",
+      "bytes": 2060,
+      "sha256": "320d43fe4aa4521d77a0b9a26df35c5a646d694ffe8f56eae8466f08e7d2310e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/identity-mismatch-0.stderr.log",
+      "bytes": 42,
+      "sha256": "99d9716586b5a94b471a6c209f239a976e45a1d51647c8612cb24ad0e1b86e18"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/identity-mismatch-0.trace.json",
+      "bytes": 6355,
+      "sha256": "73086f75ab46e4bb2399c5ae7d6fddb292110ec987bcbb11bce7de44a89b49f1"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/identity-mismatch-1.stderr.log",
+      "bytes": 42,
+      "sha256": "99d9716586b5a94b471a6c209f239a976e45a1d51647c8612cb24ad0e1b86e18"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/identity-mismatch-1.trace.json",
+      "bytes": 6355,
+      "sha256": "dd7c04ab83a5835cfa9c0c25b962606a5a958c9420a1733b444d60435c879f23"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/identity-mismatch.fixture.json",
+      "bytes": 2065,
+      "sha256": "a3f615dffcf2089e44d5eefe2b87e13a53f7b6c954d1a9e6dc076ffa7fab50cc"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/journal-corrupt-0.stderr.log",
+      "bytes": 42,
+      "sha256": "99d9716586b5a94b471a6c209f239a976e45a1d51647c8612cb24ad0e1b86e18"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/journal-corrupt-0.trace.json",
+      "bytes": 6355,
+      "sha256": "468ca4bcca06a452f3e03309d21c1a5aa6abe7d94028669971c3c86c3afc932b"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/journal-corrupt-1.stderr.log",
+      "bytes": 42,
+      "sha256": "99d9716586b5a94b471a6c209f239a976e45a1d51647c8612cb24ad0e1b86e18"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/journal-corrupt-1.trace.json",
+      "bytes": 6355,
+      "sha256": "a4d4ddfde2dea8640716a925dfef497cde32a7152503ea9ed29b74e8f05f2fb7"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/journal-corrupt.fixture.json",
+      "bytes": 2062,
+      "sha256": "168fcda98be18130b7bf1ba2fa5661d1965041e79a5b0fbee75241f174cb912d"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/journal-link-0.stderr.log",
+      "bytes": 42,
+      "sha256": "99d9716586b5a94b471a6c209f239a976e45a1d51647c8612cb24ad0e1b86e18"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/journal-link-0.trace.json",
+      "bytes": 6355,
+      "sha256": "c754709ef0c3bbdfc93b5d9a9292f55894882a15c3d97eabaf2ec781dd70cd57"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/journal-link-1.stderr.log",
+      "bytes": 42,
+      "sha256": "99d9716586b5a94b471a6c209f239a976e45a1d51647c8612cb24ad0e1b86e18"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/journal-link-1.trace.json",
+      "bytes": 6355,
+      "sha256": "0f5cc48d1ff1ef634101638857933a780f934265074a8263c7073284a0825110"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/journal-link.fixture.json",
+      "bytes": 1880,
+      "sha256": "b2c63014c2ae0af508c224a5e5c73cf9ca0d9b14999443fed48331f035e49605"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/legacy-no-journal-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/legacy-no-journal-0.trace.json",
+      "bytes": 6355,
+      "sha256": "058dc9986f18c3f65b9b5012ead82d14ccc3bfe6a9f8d972ffeb8f6c73ee146e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/legacy-no-journal-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/legacy-no-journal-1.trace.json",
+      "bytes": 6355,
+      "sha256": "0854ae800020b0da99fd932218d90c0e82dcee6b9eef94444bd245b2a08b9b59"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/legacy-no-journal.fixture.json",
+      "bytes": 1885,
+      "sha256": "1d7735020275fb50e0d7b826b0396c2c6c294e58b41ee0c83b11938534dd9401"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/multiple-0.stderr.log",
+      "bytes": 42,
+      "sha256": "99d9716586b5a94b471a6c209f239a976e45a1d51647c8612cb24ad0e1b86e18"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/multiple-0.trace.json",
+      "bytes": 6355,
+      "sha256": "1baeb46f3b97652ebaa0171c0a5782d5c35cd0476ff8fd1b750beaaca169e483"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/multiple-1.stderr.log",
+      "bytes": 42,
+      "sha256": "99d9716586b5a94b471a6c209f239a976e45a1d51647c8612cb24ad0e1b86e18"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/multiple-1.trace.json",
+      "bytes": 6355,
+      "sha256": "26c92cee39f74da48f6bb1a46359109f6df6e25524e96495015ccb1e3457df7e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/multiple.fixture.json",
+      "bytes": 2236,
+      "sha256": "96ef56af83a7003ab5787925d5c3817587008831315a8fc082c25702ea987b85"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/prepared-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/prepared-0.trace.json",
+      "bytes": 6356,
+      "sha256": "eb8cd9dc0fc616e137b5b40d3b8612055f486288487cb42a38ab9fed3d87bb35"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/prepared-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/prepared-1.trace.json",
+      "bytes": 6355,
+      "sha256": "ed59271674435dc0163d15a34aa30fd330aed99184a2457a9dcad073fbae9334"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/prepared.fixture.json",
+      "bytes": 2056,
+      "sha256": "52ed12f4ab841230f480416234c1cfd927201c75470b7b7ecbe19866342a1faf"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/snapshot-corrupt-0.stderr.log",
+      "bytes": 42,
+      "sha256": "99d9716586b5a94b471a6c209f239a976e45a1d51647c8612cb24ad0e1b86e18"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/snapshot-corrupt-0.trace.json",
+      "bytes": 6355,
+      "sha256": "06ff16f83d8df522aaa56fa41d28d57e4c8bdf393ca0c22eb9c1618d892e6d1e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/snapshot-corrupt-1.stderr.log",
+      "bytes": 42,
+      "sha256": "99d9716586b5a94b471a6c209f239a976e45a1d51647c8612cb24ad0e1b86e18"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/snapshot-corrupt-1.trace.json",
+      "bytes": 6355,
+      "sha256": "517475354947c4b699d8d16079b8582b51790f309d13b13866c551b8c6a0abd5"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/snapshot-corrupt.fixture.json",
+      "bytes": 2064,
+      "sha256": "91f0429a3fa24afcae7d657dad9a752c7150315bf8fe955d7e32dcbff317f7fd"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/unrelated-0.stderr.log",
+      "bytes": 42,
+      "sha256": "99d9716586b5a94b471a6c209f239a976e45a1d51647c8612cb24ad0e1b86e18"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/unrelated-0.trace.json",
+      "bytes": 6355,
+      "sha256": "25b3e825c81be913fa28086e38df754ee99106c94078cfde621eb8e4be4a8438"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/unrelated-1.stderr.log",
+      "bytes": 42,
+      "sha256": "99d9716586b5a94b471a6c209f239a976e45a1d51647c8612cb24ad0e1b86e18"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/unrelated-1.trace.json",
+      "bytes": 6355,
+      "sha256": "25605890c8cb7be5d44d17f4e5ec48fb32aee7dcd963fd9317573c537f5274a3"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/raw/unrelated.fixture.json",
+      "bytes": 2057,
+      "sha256": "8a805e8dcf5c39aaa62e909385801b15d53f52a1cf9e527e038c13ecf613c0b4"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/rewrite.json",
+      "bytes": 389,
+      "sha256": "6288d604cc0e12d45c7a2c334a2295141215fd49e6fc2672093fd583e7c357c1"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/recovery/stdout.log",
+      "bytes": 58,
+      "sha256": "facb93b1cdf688b46d9ed769ce1417d8904dcf86aed1c3cb75d6f117b1e86559"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/comparison.json",
+      "bytes": 61,
+      "sha256": "7fddbd38ea10d3196b5fa5a7ecf833c984cd576162e1fcc145fe2dfff56bcb7c"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/migration_reparent_acceptance.py",
+      "bytes": 13528,
+      "sha256": "e9d156f8d62cd4510a8b36f8b5fd5890de07b9529b28603daae53aac7259df7e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/original-harness.py",
+      "bytes": 13296,
+      "sha256": "eecba1f1d5044535cf6a8047ed998ecac264da3aa2a866a8933d49d5941175f5"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/process.json",
+      "bytes": 288,
+      "sha256": "447708449cc97a8a41b97fa4e9a673d1981f4c691c0ebd10dc6e62884bf4b0cf"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/native-legacy-guards.json",
+      "bytes": 1884,
+      "sha256": "0e38c3f0f7063f93d6b7d00826efd2a383d4d7aa6665550d533c314ab11719b0"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-ancestor-effect-working.svg",
+      "bytes": 247,
+      "sha256": "941822bad6a75c2e8b084ddcd2fdc006d035f02d0c5c344ffd41676c654f50a9"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-ancestor-lock-working.svg",
+      "bytes": 250,
+      "sha256": "8537893a203e91783e15a48cc48b33f3b2a1dd57a21bb78f318a4c704ac9a22c"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-ancestor-reference-working.svg",
+      "bytes": 252,
+      "sha256": "b1ab35398c08ec6ac168dec9c55f8b4bac7ab711dfa51479d9dc9a3e4ca64133"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-ancestor-style-working.svg",
+      "bytes": 246,
+      "sha256": "6bc9de5644bb648b6227e19bc3ca3f109d98b627111b3aa69b97456ba2bb6ee8"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-bad-arity-working.svg",
+      "bytes": 263,
+      "sha256": "80a303f25166a6bdb05a0b834eec35357fdf9d1848387beefa60f635164b1b85"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-bad-number-working.svg",
+      "bytes": 257,
+      "sha256": "f51e28899432955b1424e875a4ac05fc511270ea7733586ea82f17898a7a17fd"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-bad-transform-working.svg",
+      "bytes": 253,
+      "sha256": "50268214b3966f45ba505028aa189f73eec0ac52746b36afa90758253c4691ab"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-batch-rollback-working.svg",
+      "bytes": 234,
+      "sha256": "12a4192a58af6f21452700b1a9acc95ad49458f53242a274077e87109a18ff50"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-batch-working.svg",
+      "bytes": 312,
+      "sha256": "93657894f27f1723c59d8b9dc29a880fbabcbefe2c4870bb8b0972868c8e1412"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-css-transform-working.svg",
+      "bytes": 268,
+      "sha256": "0771a9be4b44d0bfb8ab251a9b2f1844f803e643e8f295c01eac504a12c30cdf"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-descendant-working.svg",
+      "bytes": 234,
+      "sha256": "12a4192a58af6f21452700b1a9acc95ad49458f53242a274077e87109a18ff50"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-exponents-working.svg",
+      "bytes": 443,
+      "sha256": "1faace38c653e92e63b551ba2fff6930d941a84cc46594e6cec5892ba20b2448"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-external-href-working.svg",
+      "bytes": 250,
+      "sha256": "e7e91d384c9244c2a1f5eae59e7f36f0313298271f67f46c3c59ecd32fc759bf"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-external-url-working.svg",
+      "bytes": 268,
+      "sha256": "3bf02094017c1a630c95f644c211cbdbe405639163444a48c2b16e6151ed71c2"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-identity-working.svg",
+      "bytes": 305,
+      "sha256": "2529095e4e96adfafb7561f26aa30af372491bb4bc93fe8eb33fee41531fa959"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-inherited-namespace-working.svg",
+      "bytes": 411,
+      "sha256": "c9e291a224d4496c0c2931e09324b8adf587a57c47da2abec127d6b09e84ce47"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-legacy-descendant-working.svg",
+      "bytes": 234,
+      "sha256": "12a4192a58af6f21452700b1a9acc95ad49458f53242a274077e87109a18ff50"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-legacy-neutral-working.svg",
+      "bytes": 273,
+      "sha256": "54ee855e2f8816f34f2b36c98c6205ab9b81bd3c649b6a84492d12f43e5b11ca"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-legacy-root-working.svg",
+      "bytes": 234,
+      "sha256": "12a4192a58af6f21452700b1a9acc95ad49458f53242a274077e87109a18ff50"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-legacy-self-working.svg",
+      "bytes": 234,
+      "sha256": "12a4192a58af6f21452700b1a9acc95ad49458f53242a274077e87109a18ff50"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-matrix-working.svg",
+      "bytes": 377,
+      "sha256": "705a5d33f7a38f33c794658d62f8af6481d7ca2228e78056fae152a73dc42f5f"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-metadata-working.svg",
+      "bytes": 339,
+      "sha256": "019de010d686b9a90042594042bd3dfb558d3060668f18ff9cc3b8554a77f1df"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-missing-parent-working.svg",
+      "bytes": 234,
+      "sha256": "12a4192a58af6f21452700b1a9acc95ad49458f53242a274077e87109a18ff50"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-missing-working.svg",
+      "bytes": 234,
+      "sha256": "12a4192a58af6f21452700b1a9acc95ad49458f53242a274077e87109a18ff50"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-mixed-tail-working.svg",
+      "bytes": 320,
+      "sha256": "ad7d521a7f607752d3499b00dd8cc91014029a35a3a4246dbff04d1f39bb903e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-namespace-collision-working.svg",
+      "bytes": 435,
+      "sha256": "affc81fdfc15fa5447fcb16d91aeafe071d14681da69a68761ae6d2a1a2f352a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-nested-svg-working.svg",
+      "bytes": 233,
+      "sha256": "78424c381d8e2e5b2031d8e1aedd8959e5b574038c4aa69cff6aa02d91f55ad6"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-non-group-working.svg",
+      "bytes": 252,
+      "sha256": "570e2581ab7defc2ee41fc2523d70440ac75c7f7ed79d2acd4acfdb800adaef7"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-nonfinite-working.svg",
+      "bytes": 259,
+      "sha256": "65de54e480c90e17b65a3b4f833d7a34674b70bcd967ce7373d4ad613d90bfbe"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-noop-stylesheet-working.svg",
+      "bytes": 261,
+      "sha256": "4f1e5ac7ad4c6fdc07570ccd4269f3a7ddf1d0db693479ab03ba5054c42fd77e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-noop-working.svg",
+      "bytes": 234,
+      "sha256": "12a4192a58af6f21452700b1a9acc95ad49458f53242a274077e87109a18ff50"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-observed.json",
+      "bytes": 76560,
+      "sha256": "1f3b1c7cc540d22661c3b7f3591d13cdf005a1bf31bd562a11c8760746d8fac7"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-paint-order-working.svg",
+      "bytes": 263,
+      "sha256": "360b68641deaec7eed253984ec94cec31f905b08d23057a6d0e1a3e103f053b3"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-raw.json",
+      "bytes": 142687,
+      "sha256": "a1b34dac6a02f30ee7bd004c0e9c0353c837a3b9425c8821192b1b0cb35f1da8"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-root-working.svg",
+      "bytes": 234,
+      "sha256": "12a4192a58af6f21452700b1a9acc95ad49458f53242a274077e87109a18ff50"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-rotation-working.svg",
+      "bytes": 466,
+      "sha256": "a01de4473230b58b8f44f4fcbb449d4355dd197f0e528fe1a627b0d429e80966"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-self-working.svg",
+      "bytes": 234,
+      "sha256": "12a4192a58af6f21452700b1a9acc95ad49458f53242a274077e87109a18ff50"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-singular-old-working.svg",
+      "bytes": 255,
+      "sha256": "cd2908fe36e444558277486cea0ea9d35c55efc577d9221b20fd0b48eea8a577"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-singular-working.svg",
+      "bytes": 255,
+      "sha256": "c3959b236efee03d8b04c78b44b2d6cae5378a4a9ac64fd47cea3ed5aa05ea10"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-skews-working.svg",
+      "bytes": 434,
+      "sha256": "d881fe86cc7d3e6b9ce788e32762647a5e8972f78d06891cb32d6f2d4099b3ce"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-stylesheet-working.svg",
+      "bytes": 261,
+      "sha256": "4f1e5ac7ad4c6fdc07570ccd4269f3a7ddf1d0db693479ab03ba5054c42fd77e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python-translate-scale-working.svg",
+      "bytes": 360,
+      "sha256": "dc4a91d3eb149026287883642149a8e3a1ab54600f643eb920506e6d53e777a3"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/python.stderr.log",
+      "bytes": 82384,
+      "sha256": "4605a577f9da04372c5bf01367b15ce0fa2dc6f174ab0feeb3398cba84c3827f"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-ancestor-effect-working.svg",
+      "bytes": 247,
+      "sha256": "941822bad6a75c2e8b084ddcd2fdc006d035f02d0c5c344ffd41676c654f50a9"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-ancestor-lock-working.svg",
+      "bytes": 250,
+      "sha256": "8537893a203e91783e15a48cc48b33f3b2a1dd57a21bb78f318a4c704ac9a22c"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-ancestor-reference-working.svg",
+      "bytes": 252,
+      "sha256": "b1ab35398c08ec6ac168dec9c55f8b4bac7ab711dfa51479d9dc9a3e4ca64133"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-ancestor-style-working.svg",
+      "bytes": 246,
+      "sha256": "6bc9de5644bb648b6227e19bc3ca3f109d98b627111b3aa69b97456ba2bb6ee8"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-bad-arity-working.svg",
+      "bytes": 263,
+      "sha256": "80a303f25166a6bdb05a0b834eec35357fdf9d1848387beefa60f635164b1b85"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-bad-number-working.svg",
+      "bytes": 257,
+      "sha256": "f51e28899432955b1424e875a4ac05fc511270ea7733586ea82f17898a7a17fd"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-bad-transform-working.svg",
+      "bytes": 253,
+      "sha256": "50268214b3966f45ba505028aa189f73eec0ac52746b36afa90758253c4691ab"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-batch-rollback-working.svg",
+      "bytes": 234,
+      "sha256": "12a4192a58af6f21452700b1a9acc95ad49458f53242a274077e87109a18ff50"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-batch-working.svg",
+      "bytes": 312,
+      "sha256": "93657894f27f1723c59d8b9dc29a880fbabcbefe2c4870bb8b0972868c8e1412"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-css-transform-working.svg",
+      "bytes": 268,
+      "sha256": "0771a9be4b44d0bfb8ab251a9b2f1844f803e643e8f295c01eac504a12c30cdf"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-descendant-working.svg",
+      "bytes": 234,
+      "sha256": "12a4192a58af6f21452700b1a9acc95ad49458f53242a274077e87109a18ff50"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-exponents-working.svg",
+      "bytes": 443,
+      "sha256": "1faace38c653e92e63b551ba2fff6930d941a84cc46594e6cec5892ba20b2448"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-external-href-working.svg",
+      "bytes": 250,
+      "sha256": "e7e91d384c9244c2a1f5eae59e7f36f0313298271f67f46c3c59ecd32fc759bf"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-external-url-working.svg",
+      "bytes": 268,
+      "sha256": "3bf02094017c1a630c95f644c211cbdbe405639163444a48c2b16e6151ed71c2"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-identity-working.svg",
+      "bytes": 305,
+      "sha256": "2529095e4e96adfafb7561f26aa30af372491bb4bc93fe8eb33fee41531fa959"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-inherited-namespace-working.svg",
+      "bytes": 411,
+      "sha256": "c9e291a224d4496c0c2931e09324b8adf587a57c47da2abec127d6b09e84ce47"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-legacy-descendant-working.svg",
+      "bytes": 234,
+      "sha256": "12a4192a58af6f21452700b1a9acc95ad49458f53242a274077e87109a18ff50"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-legacy-neutral-working.svg",
+      "bytes": 273,
+      "sha256": "54ee855e2f8816f34f2b36c98c6205ab9b81bd3c649b6a84492d12f43e5b11ca"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-legacy-root-working.svg",
+      "bytes": 234,
+      "sha256": "12a4192a58af6f21452700b1a9acc95ad49458f53242a274077e87109a18ff50"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-legacy-self-working.svg",
+      "bytes": 234,
+      "sha256": "12a4192a58af6f21452700b1a9acc95ad49458f53242a274077e87109a18ff50"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-matrix-working.svg",
+      "bytes": 377,
+      "sha256": "705a5d33f7a38f33c794658d62f8af6481d7ca2228e78056fae152a73dc42f5f"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-metadata-working.svg",
+      "bytes": 339,
+      "sha256": "019de010d686b9a90042594042bd3dfb558d3060668f18ff9cc3b8554a77f1df"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-missing-parent-working.svg",
+      "bytes": 234,
+      "sha256": "12a4192a58af6f21452700b1a9acc95ad49458f53242a274077e87109a18ff50"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-missing-working.svg",
+      "bytes": 234,
+      "sha256": "12a4192a58af6f21452700b1a9acc95ad49458f53242a274077e87109a18ff50"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-mixed-tail-working.svg",
+      "bytes": 320,
+      "sha256": "ad7d521a7f607752d3499b00dd8cc91014029a35a3a4246dbff04d1f39bb903e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-namespace-collision-working.svg",
+      "bytes": 435,
+      "sha256": "affc81fdfc15fa5447fcb16d91aeafe071d14681da69a68761ae6d2a1a2f352a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-nested-svg-working.svg",
+      "bytes": 233,
+      "sha256": "78424c381d8e2e5b2031d8e1aedd8959e5b574038c4aa69cff6aa02d91f55ad6"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-non-group-working.svg",
+      "bytes": 252,
+      "sha256": "570e2581ab7defc2ee41fc2523d70440ac75c7f7ed79d2acd4acfdb800adaef7"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-nonfinite-working.svg",
+      "bytes": 259,
+      "sha256": "65de54e480c90e17b65a3b4f833d7a34674b70bcd967ce7373d4ad613d90bfbe"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-noop-stylesheet-working.svg",
+      "bytes": 261,
+      "sha256": "4f1e5ac7ad4c6fdc07570ccd4269f3a7ddf1d0db693479ab03ba5054c42fd77e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-noop-working.svg",
+      "bytes": 234,
+      "sha256": "12a4192a58af6f21452700b1a9acc95ad49458f53242a274077e87109a18ff50"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-observed.json",
+      "bytes": 76560,
+      "sha256": "1f3b1c7cc540d22661c3b7f3591d13cdf005a1bf31bd562a11c8760746d8fac7"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-paint-order-working.svg",
+      "bytes": 263,
+      "sha256": "360b68641deaec7eed253984ec94cec31f905b08d23057a6d0e1a3e103f053b3"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-raw.json",
+      "bytes": 156584,
+      "sha256": "e77e567139f86500f66de4a42a1ce197139b1969b232bff7d3e0d71e85dbf283"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-root-working.svg",
+      "bytes": 234,
+      "sha256": "12a4192a58af6f21452700b1a9acc95ad49458f53242a274077e87109a18ff50"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-rotation-working.svg",
+      "bytes": 466,
+      "sha256": "a01de4473230b58b8f44f4fcbb449d4355dd197f0e528fe1a627b0d429e80966"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-self-working.svg",
+      "bytes": 234,
+      "sha256": "12a4192a58af6f21452700b1a9acc95ad49458f53242a274077e87109a18ff50"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-singular-old-working.svg",
+      "bytes": 255,
+      "sha256": "cd2908fe36e444558277486cea0ea9d35c55efc577d9221b20fd0b48eea8a577"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-singular-working.svg",
+      "bytes": 255,
+      "sha256": "c3959b236efee03d8b04c78b44b2d6cae5378a4a9ac64fd47cea3ed5aa05ea10"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-skews-working.svg",
+      "bytes": 434,
+      "sha256": "d881fe86cc7d3e6b9ce788e32762647a5e8972f78d06891cb32d6f2d4099b3ce"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-stylesheet-working.svg",
+      "bytes": 261,
+      "sha256": "4f1e5ac7ad4c6fdc07570ccd4269f3a7ddf1d0db693479ab03ba5054c42fd77e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust-translate-scale-working.svg",
+      "bytes": 360,
+      "sha256": "dc4a91d3eb149026287883642149a8e3a1ab54600f643eb920506e6d53e777a3"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/raw/rust.stderr.log",
+      "bytes": 2345,
+      "sha256": "3f34ac602c0659528bbd624e0037fbcf8f6ab5ee97347acf9ffaac9ece8813b1"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/rewrite.json",
+      "bytes": 389,
+      "sha256": "8b59af774e56c52b7ed2cc9121319977bb913128bdcae404a77ba0c751080526"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/reparent/stdout.log",
+      "bytes": 49,
+      "sha256": "929dbbf078520b6fbb6aefb9cd0ac82af2cf5b11079268796430175c2bef71d5"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/comparison.json",
+      "bytes": 153,
+      "sha256": "0964e2b1e843bee6e254f07e405d5cbff15a424411848b69afa5ddefc077b8b9"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/migration_repeat_acceptance.py",
+      "bytes": 9560,
+      "sha256": "9982393534db96a4ac05a18a5bb70e23a6f49d2e90ea13e5077538f658571343"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/original-harness.py",
+      "bytes": 9328,
+      "sha256": "dd9ebb6b5f21418960c4fa44898911d82366dffca40800df30517c4ddfc97374"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/process.json",
+      "bytes": 284,
+      "sha256": "396ad2c0b52240c53952ec65d66bc71c7c1273c9b9235571336864950e4b63f6"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/python-anchor.svg",
+      "bytes": 1156,
+      "sha256": "13b57d733f1daf797fa230da3533d360726d6c246cdc814543036e18a7cbb60d"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/python-animated.svg",
+      "bytes": 697,
+      "sha256": "e086df23352c30ea6594b10741df3ab714fea087696d1c75bdcf1ce9bf7f5928"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/python-copies.svg",
+      "bytes": 2388,
+      "sha256": "dacd90a6c2179520a73f812f73bb788cdcd63859ff532f9b8c707884c99f7583"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/python-copy-dry.svg",
+      "bytes": 669,
+      "sha256": "0b54fd880dbaf550d51bcf7b73a1ec1b5d160068df7db70c74ba7f9113fd507a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/python-default-dry.svg",
+      "bytes": 669,
+      "sha256": "0b54fd880dbaf550d51bcf7b73a1ec1b5d160068df7db70c74ba7f9113fd507a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/python-duplicate-id.svg",
+      "bytes": 669,
+      "sha256": "2bb849faf9ae2594b6c824cbade6f2f5652f4932778e4fae2139365efbc50360"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/python-group-conflict.svg",
+      "bytes": 669,
+      "sha256": "0b54fd880dbaf550d51bcf7b73a1ec1b5d160068df7db70c74ba7f9113fd507a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/python-invalid-id.svg",
+      "bytes": 669,
+      "sha256": "0b54fd880dbaf550d51bcf7b73a1ec1b5d160068df7db70c74ba7f9113fd507a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/python-invalid-mode.svg",
+      "bytes": 669,
+      "sha256": "0b54fd880dbaf550d51bcf7b73a1ec1b5d160068df7db70c74ba7f9113fd507a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/python-jitter.svg",
+      "bytes": 1376,
+      "sha256": "6fea5655343afefb3a0692c5ea1c38ed8b3d29d42c454cb7407776b27dd1acd3"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/python-label.svg",
+      "bytes": 1140,
+      "sha256": "3e1cf0a59c015487ee3f1c5e1a237f90aba5484e367773ae08d9af49cf765e47"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/python-linked-conflict.svg",
+      "bytes": 684,
+      "sha256": "c57ae7b1a2483d455bf55de1680c259ded584713cf506309b4a2791eafbf878f"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/python-linked.svg",
+      "bytes": 1140,
+      "sha256": "2d9ee15faed4ad5935bc98bf52484ad1b36838023932cd41553c4fe908bae0f4"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/python-missing.svg",
+      "bytes": 669,
+      "sha256": "0b54fd880dbaf550d51bcf7b73a1ec1b5d160068df7db70c74ba7f9113fd507a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/python-observed.json",
+      "bytes": 45293,
+      "sha256": "d91f8fece8db6853c3fd7d2a9fbe4670f3a7072d74654751fe2274b5cdd6881e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/python-raw.json",
+      "bytes": 86071,
+      "sha256": "41f58c0e7b567b7b03fa50936e797fe5304e8208561214ab15d6f8951e6a246a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/python-rectangle.svg",
+      "bytes": 1421,
+      "sha256": "ffffdede8aa96ea25b4b9eb3d4903cd74fe81d6867362fa45c043dc67111b86c"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/python-singular.svg",
+      "bytes": 666,
+      "sha256": "99de8a4e87dbce1dc6fcceb99a5e9a67a1277b504206fc60d25afc91514b33d1"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/python-stylesheet.svg",
+      "bytes": 695,
+      "sha256": "25ea076b574d95841aa890772e2b517f6a3223321db106e4f42fa8983cc0e689"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/python-tangent.svg",
+      "bytes": 1373,
+      "sha256": "87d0314c59a39711bc767b8b53483c751e529316cecc1e6b921119b65fd6ebd6"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/python-unresolved.svg",
+      "bytes": 681,
+      "sha256": "580c3e72c05b400482731276078edca09e183af52ec9904c22a6f70d5876fcf4"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/python.stderr.log",
+      "bytes": 32682,
+      "sha256": "b474d0465c52c3ef9d4804668b55080698747931a2aa73d479550ff55bf51538"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/rust-anchor.svg",
+      "bytes": 1156,
+      "sha256": "13b57d733f1daf797fa230da3533d360726d6c246cdc814543036e18a7cbb60d"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/rust-animated.svg",
+      "bytes": 697,
+      "sha256": "e086df23352c30ea6594b10741df3ab714fea087696d1c75bdcf1ce9bf7f5928"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/rust-copies.svg",
+      "bytes": 2388,
+      "sha256": "f3c533ae1195bdad9103b9a96c70b77806ee07e115120e052e35a1fae08fe248"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/rust-copy-dry.svg",
+      "bytes": 669,
+      "sha256": "0b54fd880dbaf550d51bcf7b73a1ec1b5d160068df7db70c74ba7f9113fd507a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/rust-default-dry.svg",
+      "bytes": 669,
+      "sha256": "0b54fd880dbaf550d51bcf7b73a1ec1b5d160068df7db70c74ba7f9113fd507a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/rust-duplicate-id.svg",
+      "bytes": 669,
+      "sha256": "2bb849faf9ae2594b6c824cbade6f2f5652f4932778e4fae2139365efbc50360"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/rust-group-conflict.svg",
+      "bytes": 669,
+      "sha256": "0b54fd880dbaf550d51bcf7b73a1ec1b5d160068df7db70c74ba7f9113fd507a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/rust-invalid-id.svg",
+      "bytes": 669,
+      "sha256": "0b54fd880dbaf550d51bcf7b73a1ec1b5d160068df7db70c74ba7f9113fd507a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/rust-invalid-mode.svg",
+      "bytes": 669,
+      "sha256": "0b54fd880dbaf550d51bcf7b73a1ec1b5d160068df7db70c74ba7f9113fd507a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/rust-jitter.svg",
+      "bytes": 1376,
+      "sha256": "6fea5655343afefb3a0692c5ea1c38ed8b3d29d42c454cb7407776b27dd1acd3"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/rust-label.svg",
+      "bytes": 1140,
+      "sha256": "3e1cf0a59c015487ee3f1c5e1a237f90aba5484e367773ae08d9af49cf765e47"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/rust-linked-conflict.svg",
+      "bytes": 684,
+      "sha256": "c57ae7b1a2483d455bf55de1680c259ded584713cf506309b4a2791eafbf878f"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/rust-linked.svg",
+      "bytes": 1140,
+      "sha256": "2d9ee15faed4ad5935bc98bf52484ad1b36838023932cd41553c4fe908bae0f4"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/rust-missing.svg",
+      "bytes": 669,
+      "sha256": "0b54fd880dbaf550d51bcf7b73a1ec1b5d160068df7db70c74ba7f9113fd507a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/rust-observed.json",
+      "bytes": 45293,
+      "sha256": "d91f8fece8db6853c3fd7d2a9fbe4670f3a7072d74654751fe2274b5cdd6881e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/rust-raw.json",
+      "bytes": 86050,
+      "sha256": "c0c1dbaee3234bd8d229f2f7ae11d74d80a7d3b80e8c9d844adf3787e324633a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/rust-rectangle.svg",
+      "bytes": 1421,
+      "sha256": "ffffdede8aa96ea25b4b9eb3d4903cd74fe81d6867362fa45c043dc67111b86c"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/rust-singular.svg",
+      "bytes": 666,
+      "sha256": "99de8a4e87dbce1dc6fcceb99a5e9a67a1277b504206fc60d25afc91514b33d1"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/rust-stylesheet.svg",
+      "bytes": 695,
+      "sha256": "25ea076b574d95841aa890772e2b517f6a3223321db106e4f42fa8983cc0e689"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/rust-tangent.svg",
+      "bytes": 1373,
+      "sha256": "87d0314c59a39711bc767b8b53483c751e529316cecc1e6b921119b65fd6ebd6"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/rust-unresolved.svg",
+      "bytes": 681,
+      "sha256": "580c3e72c05b400482731276078edca09e183af52ec9904c22a6f70d5876fcf4"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/raw/rust.stderr.log",
+      "bytes": 1370,
+      "sha256": "0914f85efec4082f32ce5f1cf0b4b1849f67e3a6c626abfc6f70a27672d0136a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/rewrite.json",
+      "bytes": 387,
+      "sha256": "0b1a803d9c590c59a4d3c82a8938d61a80aaa8d03ea2f3042af1cfd4376ea76c"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/repeat/stdout.log",
+      "bytes": 47,
+      "sha256": "bd07f087c5d69e8ae36efaecca24469e9c12014d6c4f0b33b238f5615f84962c"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/ruff-format.log",
+      "bytes": 28,
+      "sha256": "2eca218ed789f50b3cf5c7db573752e305df6b1384d9c4bfb3fc910772d110d9"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/ruff.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/runner-used.py",
+      "bytes": 5734,
+      "sha256": "13dc1a8611de4d7dc9fe92a5ed7566f5779fd8a28383171b4f156809b0009f13"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/save/comparison.json",
+      "bytes": 1327,
+      "sha256": "b71c9b0489ef780a44027035cf7f73d4623974ad6d863b66e05897c744c16cc2"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/save/migration_save_acceptance.py",
+      "bytes": 10893,
+      "sha256": "53428de928ced80ab898110cf0c6f42cae7ce6539c4498cbe3a04564851009c8"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/save/original-harness.py",
+      "bytes": 10661,
+      "sha256": "1f40ffa71472f72980fa02b88602b7a38a9f0ba93806da41851c50bf7a9197d5"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/save/process.json",
+      "bytes": 280,
+      "sha256": "66d9f3e7ac20063a1953bc72880cb158ea6ccbcf1735b3e5a7c32054b8f175dd"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/save/raw/python-observed.json",
+      "bytes": 31543,
+      "sha256": "e5968d4a6def6574a9349b1cb8b9cc804b5dc6eeb2e0b27179a8498d134f59bb"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/save/raw/python-raw.json",
+      "bytes": 67831,
+      "sha256": "850aa8185bd1aa6d8dbbde6a5a4cac810cf482d807b9b41c6efdc964af03166b"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/save/raw/python.stderr.log",
+      "bytes": 22649,
+      "sha256": "f039fd2829d93e94ae5ca21c82cdc8f2a8a7bbd9698141054a28d428b07ed98b"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/save/raw/rust-observed.json",
+      "bytes": 31543,
+      "sha256": "e5968d4a6def6574a9349b1cb8b9cc804b5dc6eeb2e0b27179a8498d134f59bb"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/save/raw/rust-raw.json",
+      "bytes": 67806,
+      "sha256": "c5a15bb7a4547093781a54e192bc8f1e0b46627235536eac8a3286f7cb237777"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/save/raw/rust.stderr.log",
+      "bytes": 195,
+      "sha256": "db24b835a60db5f687004fe5d212f07b00ae59135ba8bcf4b0dfd9f0175ff035"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/save/rewrite.json",
+      "bytes": 385,
+      "sha256": "93e6522587ee68286353dd90506503a43bd8b05e7b2c2db671c9ab559f366123"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/save/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/save/stdout.log",
+      "bytes": 45,
+      "sha256": "0ec90f5783d3cb191333645e7a5581143bde5df5a7533fbae84887cfe1b7e135"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/set/comparison.json",
+      "bytes": 455,
+      "sha256": "6114917c96ee1a136553f375dd675e3a8f35ca4ec5655b0c70692a53adfa7a93"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/set/migration_set_acceptance.py",
+      "bytes": 6902,
+      "sha256": "e4278751b03aeada797f8a28037394048bb858786fc972918e27db13c3b102f3"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/set/original-harness.py",
+      "bytes": 6670,
+      "sha256": "30c9e33570cc97f800af3c945ff38358289b7aad4003d85be49f61f7cff69685"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/set/process.json",
+      "bytes": 278,
+      "sha256": "231c4af6572e92e4706c3affe137648e4a2ef833da8d110619e2ceef71e3ed16"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/set/raw/python-raw.json.gz",
+      "bytes": 7936,
+      "sha256": "fcc22bf293afedda76e067e739cdcaa08099a13748f694525cffe6361dc57b0b"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/set/raw/python.stderr.log",
+      "bytes": 15886,
+      "sha256": "90bfcdc97148dd9273eea0dd2b639cdbf1c7ccef5086728303f7a3cc0d826cf5"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/set/raw/rust-raw.json.gz",
+      "bytes": 7926,
+      "sha256": "35818ef1b0703321ec0fd4d396d138191eb7e232e3bf7c43e5278247f5534126"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/set/raw/rust.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/set/rewrite.json",
+      "bytes": 384,
+      "sha256": "af230811f38f34c73d33838e6fb764577c86b35021627801cecc6b0ef9f1ba78"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/set/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/set/stdout.log",
+      "bytes": 44,
+      "sha256": "82e4da0bd66e3a6257ac26f55396d6a7b42155d63b34b679447eb1e570e37582"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/source-snapshot/docs/AGENT_HANDOFF.md",
+      "bytes": 199411,
+      "sha256": "e15b6662cbdd54dc836f583d7f04991bf87c2f527ca7ec4c9584d890354eeb0c"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/source-snapshot/docs/RUST_COMPLETION_CHECKLIST.md",
+      "bytes": 7670,
+      "sha256": "f0acb59c4c72d263121e59c73c1fae79031afa13505d97ede7bb3f279a8c2eb5"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/source-snapshot/docs/RUST_MIGRATION_REPORT.md",
+      "bytes": 247853,
+      "sha256": "c428e2250494d05b715e9e6ea55ab6f5c54a96335098b76604285398cf6d5f60"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/source-snapshot/migration/README.md",
+      "bytes": 203816,
+      "sha256": "d53c002cc218fc22cb03b133a1b8a27e5b1b19ab76f10cfb0aefe16c111400e2"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/comparison.json",
+      "bytes": 61,
+      "sha256": "9bc853aa0a2313df2f1829246332f503471a487777d8a5e60dc443b2e963bc2d"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/migration_tile_acceptance.py",
+      "bytes": 9938,
+      "sha256": "8454a3b485ac9ad37fb19349cb9ec06a2d1caeadddfafe2c49b7fba91fc5f1e4"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/original-harness.py",
+      "bytes": 9619,
+      "sha256": "c90ff4935eed24dacc055927542db129d20e14e74355a35325773dd68c7ec7f5"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/process.json",
+      "bytes": 280,
+      "sha256": "0016fed490a574a54e5f3f368f4b6e0d80ab317f0e0e1b76ffeaa782c5a93a0b"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/native-limit.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/native-size-guard-raw.json",
+      "bytes": 8663,
+      "sha256": "147ebf8ae42e67a2eb5d84752a141ca9fd50101b659e3df51bb5c206202ccd67"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/native-size-guard.json",
+      "bytes": 289,
+      "sha256": "fd6382759c1132009bcd912082c215f9285277fdc5f03a654211e81aaed091d7"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-1024-cap-then-root-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-1024-cells-working.svg",
+      "bytes": 100258,
+      "sha256": "5e48c7420ba82a807a0ea7b8d315d87cc24e9822640a7164e87dac0630c625bf"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-128-cells-working.svg",
+      "bytes": 12658,
+      "sha256": "a72bf1f0ce9951edae5b14d8be759244f2251882fcd0c3cb51cfc15379889afb"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-batch-rollback-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-batch-working.svg",
+      "bytes": 752,
+      "sha256": "4c9a4160732414dff1969a18f1474d86eb38c95d3c97a1e98d410b4d91eac10d"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-coerced-counts-working.svg",
+      "bytes": 745,
+      "sha256": "1bfaa98765a4510c64dd889274380b1bacf185ba449866e60f9abe2c49547799"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-cols-negative-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-fractional-working.svg",
+      "bytes": 766,
+      "sha256": "d37c85aa62dd1a12a672715cb13175e1321ff4ee62aacbcb5e13011f4fb8ff71"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-group-working.svg",
+      "bytes": 1432,
+      "sha256": "610bda632d934a08228d67bbe189e832f5cab18ee3b3ab26dd3445b509f54fa5"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-large-product-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-leaf-working.svg",
+      "bytes": 745,
+      "sha256": "5bd298fa184559c66aef22ad3931fbe31a7adcee723d09a3a1bd0b53d3a68a9b"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-missing-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-negative-working.svg",
+      "bytes": 750,
+      "sha256": "5ee15b8f883cb8512da8c062efb85effe8cb77ddd6ea10c9317258660a0e2550"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-nonfinite-x-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-nonfinite-y-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-observed.json",
+      "bytes": 64572,
+      "sha256": "0c78d38da9ae096ab3f00863efcc4003f56eb30d65f673ad8a40a3b4356bae83"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-one-cell-stylesheet-working.svg",
+      "bytes": 249,
+      "sha256": "7333e3c7acd66b4b49718faf2ffebf49f394b7edb413e1b7e73c566f3acf6ca4"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-one-cell-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-one-column-working.svg",
+      "bytes": 452,
+      "sha256": "11bc6fc7ef55d3a1744ffc4b28fb7af33bfdbf2646dc1f1132f86d5a6c486b3f"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-one-row-working.svg",
+      "bytes": 549,
+      "sha256": "f144f27764de80fa372ae8a36ca5dd11686063cf290a87d6ed9ea8a66f3f9e90"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-over-cap-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-overflow-offset-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-raw.json",
+      "bytes": 104319,
+      "sha256": "dad88cd078f785d27dbad091e5f2f93f1d0f45cfa5e4b46485442f39c5868bea"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-root-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-rows-zero-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-scaled-working.svg",
+      "bytes": 817,
+      "sha256": "f0927497a5ed94e3361981589f5250a20d644c71d4070d00d4c773fb7988d273"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-tail-working.svg",
+      "bytes": 801,
+      "sha256": "95942a2a0d5cbe240acefa8ca80e8e01e51158a579bf40a4a2acc288de040e00"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-text-working.svg",
+      "bytes": 780,
+      "sha256": "54672ef38cc7b80d8b20384eba36f862909d1437e78d236b0fe14cc7001da5b6"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python-zero-working.svg",
+      "bytes": 603,
+      "sha256": "bc8eb8d4b4fdc226ba5560a09f959def39caa13cfbad64e275decb4d318193f2"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/python.stderr.log",
+      "bytes": 51740,
+      "sha256": "d2e712f0b3cf801f8483ae8fc85ced98140b145355256b2d6246513dc83daa0a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-1024-cap-then-root-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-1024-cells-working.svg",
+      "bytes": 100258,
+      "sha256": "e3ae50ced739b9e261954e6e156f59eead2f75d450c9d79ee45330e72b74e870"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-128-cells-working.svg",
+      "bytes": 12658,
+      "sha256": "86c3fc0774b1ce0fda05396a0d411ff522d65711da43905dd8cbc982fdb6e64a"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-batch-rollback-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-batch-working.svg",
+      "bytes": 752,
+      "sha256": "71ffcc0fe7545a453770cda8385482fba6447e28c3b9b3c31c214c53a505d682"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-coerced-counts-working.svg",
+      "bytes": 745,
+      "sha256": "0282cf7f74ac9e492c29d7d747826b47d06834312c1c913c47f76a6106f25f1e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-cols-negative-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-fractional-working.svg",
+      "bytes": 766,
+      "sha256": "e0010cc9dfa5f694f415864fae176dc5eedf8a85851e10f2a60ca582cec47207"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-group-working.svg",
+      "bytes": 1432,
+      "sha256": "336a30d0036a6f212c87d06f0ef0730f6c981659d8bdacb0575b589d5828a1f2"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-large-product-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-leaf-working.svg",
+      "bytes": 745,
+      "sha256": "71fb82d34ee9c0c7984ff6d4ed0973be8ebf968fca61a7a76395f4542eefef2c"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-missing-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-negative-working.svg",
+      "bytes": 750,
+      "sha256": "32dac472f5a59f9e6392e6ca5aca877400839e178fab1e15753452a61c92079f"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-nonfinite-x-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-nonfinite-y-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-observed.json",
+      "bytes": 64572,
+      "sha256": "0c78d38da9ae096ab3f00863efcc4003f56eb30d65f673ad8a40a3b4356bae83"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-one-cell-stylesheet-working.svg",
+      "bytes": 249,
+      "sha256": "7333e3c7acd66b4b49718faf2ffebf49f394b7edb413e1b7e73c566f3acf6ca4"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-one-cell-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-one-column-working.svg",
+      "bytes": 452,
+      "sha256": "4ec749d8952bd101c2eba967480c22132e50fe5e9797b78ad562454a0b101480"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-one-row-working.svg",
+      "bytes": 549,
+      "sha256": "8d69afc6d2070e3368c3aaf6cdb09b4950e22871f6fbf0d6fa3cd113199748db"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-over-cap-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-overflow-offset-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-raw.json",
+      "bytes": 104309,
+      "sha256": "3771610c27b2db4ec9b4f39c2f32aecd317e5387bf6c9ee2feea6465a7fb3c73"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-root-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-rows-zero-working.svg",
+      "bytes": 219,
+      "sha256": "f6ec62452fe14be6d5db210069ab7e47461526631c916455b2e2b83b1b92fc2e"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-scaled-working.svg",
+      "bytes": 817,
+      "sha256": "06cd8a9d865121448d55aab7847362ae7a194a7fc324acc7732d5f68ed8d9f58"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-tail-working.svg",
+      "bytes": 801,
+      "sha256": "fce7386395ea10fa039fbea53a44c32ce91e4227866d3448f93b1e96cb3e9389"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-text-working.svg",
+      "bytes": 780,
+      "sha256": "a3ea18c0dbf70e1cb5006c1f05f5a5e01eecbe1935dda27f4389851c8512ed38"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust-zero-working.svg",
+      "bytes": 603,
+      "sha256": "2a5a528c76d277f2a45a89c790550ccee27b34ddf16ce3b2d9a80f949716e489"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/raw/rust.stderr.log",
+      "bytes": 2734,
+      "sha256": "588026264eade01dce466fc5d1c317b2790a45560b6317cb2853cfb1f268619c"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/rewrite.json",
+      "bytes": 385,
+      "sha256": "178d6ac86ebe460e445cb027f1be69b421b3402e0df63bcfce5a588a076e4bd0"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/tile/stdout.log",
+      "bytes": 45,
+      "sha256": "9e05a26030e26940e01f6bc1a00db7e1f21e7d6ea9830d1c9b2fc237121748a1"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/transform/comparison.json",
+      "bytes": 62,
+      "sha256": "c2167198e65e847f9ba53c7427b1d1f1b2604937a5e1fc7d4a1b0021befe2741"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/transform/migration_transform_acceptance.py",
+      "bytes": 7127,
+      "sha256": "175a5f460ac27eeccdb15a2b5683b5246d7abba709348b865a46853bef498313"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/transform/original-harness.py",
+      "bytes": 6895,
+      "sha256": "127b16d0b6d58b9acc91a3377f3ba4cdd7beaeba5d2fbee07c5a1e594104863c"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/transform/process.json",
+      "bytes": 290,
+      "sha256": "8906fee310aeb965b0e2b6bd313fe93f28fde0fd64879ee10fb370895efe9edd"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/transform/raw/python-observed.json",
+      "bytes": 52982,
+      "sha256": "bca5bc173144037fc04efc44168d781a7625a181a5fd6b9a6ce881fbe0930716"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/transform/raw/python-raw.json",
+      "bytes": 103249,
+      "sha256": "be3ac86dc845bf33b721c82d1d281af63779fc09a8f8357c1f003c47d0ba7f41"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/transform/raw/python.stderr.log",
+      "bytes": 50683,
+      "sha256": "17609cc7f9f16709d41059730968cceb803fc3546dba6557c2cf41f9e88e5cd5"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/transform/raw/rust-observed.json",
+      "bytes": 52982,
+      "sha256": "bca5bc173144037fc04efc44168d781a7625a181a5fd6b9a6ce881fbe0930716"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/transform/raw/rust-raw.json",
+      "bytes": 103250,
+      "sha256": "9a5f3ffb589f91fd2b648090ae8448dbfa1df5658ac50888fd76b27f67c9c264"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/transform/raw/rust.stderr.log",
+      "bytes": 2149,
+      "sha256": "21b523d0584d24f4189d192252d688da3e263bde34b9d3762270dcafa6c45fc5"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/transform/rewrite.json",
+      "bytes": 390,
+      "sha256": "35f7bd158007746d6294ee7a339d00afec7d474491da8c4d5a7f59bce5e7cf33"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/transform/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/current-family-stage27-v2/transform/stdout.log",
+      "bytes": 54,
+      "sha256": "62b8ba2f8dd8c6aa58b2a58fe9b4c7beed9227155b5ab6581e0adfbc9b2dea2f"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage27/bin/inkscape-mcp",
+      "bytes": 12836480,
+      "sha256": "62a75763d517af691c0cc1c9026d8963dc9bb33394d9dfdd76aa8fa9d5819f18"
+    }
+  ]
+}

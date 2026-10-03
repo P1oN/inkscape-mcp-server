@@ -15,9 +15,11 @@ Check current code and Git status before relying on recorded counts or validatio
   deliberately author editable vector geometry. Do not substitute embedded raster artwork.
 - Use ordinary named groups for semantic objects by default; layers organize the scene.
   Respect user-requested structure and preserve existing artwork. See the shared guidance in
-  `src/inkscape_mcp/overview.py`; do not create conflicting copies of the policy.
+  the MCP instructions in `migration/contracts/` and `docs/agent-usage-guide.md`; do not create conflicting copies of the policy.
 - MCP startup/reconnect must not launch Inkscape. Launch requires a user request. Do not close
   user windows or kill Inkscape processes; native acceptance uses separate synthetic documents.
+- The legacy Python MCP server and paired parity workflow are retired by user instruction;
+  evolve Rust with regression and invariant checks, not repeated Python comparisons.
 - Run appropriate checks from CONTRIBUTING, update docs, and regenerate `llms.txt` and
   `llms-full.txt` when the exposed surface changes. Distinguish automated tests from native GUI
   acceptance. Restart the MCP server to load changed instructions, preserving the existing GUI.

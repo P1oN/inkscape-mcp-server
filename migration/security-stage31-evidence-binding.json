@@ -1,0 +1,691 @@
+{
+  "passed": true,
+  "scope": "Stage31 XML preflight fix: current source/docs snapshots, initial stage30 failure, actual package security and manifest evidence. No new GUI/performance acceptance. Complete audit remains pending.",
+  "files": [
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage31/bin/inkscape-mcp",
+      "bytes": 12836448,
+      "sha256": "c607e902790d223c942951a186c4f519b2ce807fd696491196ded97e82492ff6"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage31.tar.gz",
+      "bytes": 46466227,
+      "sha256": "1a203e43942438c5ea2796de9af951c64cb5765a9dc181be2c6c9a5ec7687168"
+    },
+    {
+      "path": "migration/results/security-stage30-before-fix/malformed-filesystem.json",
+      "bytes": 2626,
+      "sha256": "2a12fe358a353d513bfb0ff3338e3cad2c3d9f93d141e9494a4425a9a63f9faf"
+    },
+    {
+      "path": "migration/results/security-stage30-before-fix/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/security-stage30-before-fix/server.trace.json",
+      "bytes": 6434,
+      "sha256": "9d1b0b54320e20a02f71a7da9ad2fb163bc7b279ba68c7783f865b1f61f18416"
+    },
+    {
+      "path": "migration/results/security-stage31/comparison.json",
+      "bytes": 1589,
+      "sha256": "44d3c0d9be3baefa109c0bccf6ddd63e16664c9ef325a333ce221b9274cfccf6"
+    },
+    {
+      "path": "migration/results/security-stage31/depth-filesystem.json",
+      "bytes": 1074,
+      "sha256": "c3c233c1e9a2b5d146682d438447f8f71b614291e6be637beee3466b0f3cfe80"
+    },
+    {
+      "path": "migration/results/security-stage31/malformed-filesystem.json",
+      "bytes": 1074,
+      "sha256": "c3c233c1e9a2b5d146682d438447f8f71b614291e6be637beee3466b0f3cfe80"
+    },
+    {
+      "path": "migration/results/security-stage31/namespace-filesystem.json",
+      "bytes": 1074,
+      "sha256": "c3c233c1e9a2b5d146682d438447f8f71b614291e6be637beee3466b0f3cfe80"
+    },
+    {
+      "path": "migration/results/security-stage31/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/security-stage31/server.trace.json",
+      "bytes": 304863,
+      "sha256": "1084083528e2d8aa27adba5ae1410917bb455ec493c6891c1d525b8aef223ae4"
+    },
+    {
+      "path": "migration/results/security-stage31-manifest-check/llms-full.txt",
+      "bytes": 796521,
+      "sha256": "acffb9c92c5072ca9a66bb2e0dd703968edda2905b378373b51c3bbad2c93bda"
+    },
+    {
+      "path": "migration/results/security-stage31-manifest-check/llms.txt",
+      "bytes": 11767,
+      "sha256": "9f9a4ed7f2a611a3a8201eca50b3cdfc262765307035a917d9931c1f3e5b59a7"
+    },
+    {
+      "path": "migration/results/security-stage31-review/.github/workflows/rust-migration.yml",
+      "bytes": 7919,
+      "sha256": "aa3651f6804e79bb1bfae2b074aac6e807f39e70abee1730cebd57c9bf8e21f3"
+    },
+    {
+      "path": "migration/results/security-stage31-review/AGENTS.md",
+      "bytes": 2180,
+      "sha256": "166f4d13d83747364a69d1586b3b17beb08872b45d0632927c3f3ad9b149c16c"
+    },
+    {
+      "path": "migration/results/security-stage31-review/CONTRIBUTING.md",
+      "bytes": 2318,
+      "sha256": "189c72eb3f71faed7cbad863710d41f108360d68309afe4637ed20529bad0668"
+    },
+    {
+      "path": "migration/results/security-stage31-review/README.md",
+      "bytes": 2812,
+      "sha256": "0100ae52bae593d0d242c14f894711a8ddb5573a7ec49a348479317ddc3cfc3b"
+    },
+    {
+      "path": "migration/results/security-stage31-review/docs/AGENT_HANDOFF.md",
+      "bytes": 207094,
+      "sha256": "a8ca00237ebdd811ec5943c1ef251362c94c63c6b300f829d63dc53b3be5971c"
+    },
+    {
+      "path": "migration/results/security-stage31-review/docs/RUST_COMPLETION_CHECKLIST.md",
+      "bytes": 2165,
+      "sha256": "d3e52dd5796eed6d8d862ca9ce82e4277ac42e2832df748bdd8ce1dc1fa0f4ae"
+    },
+    {
+      "path": "migration/results/security-stage31-review/docs/RUST_MIGRATION_REPORT.md",
+      "bytes": 263005,
+      "sha256": "1c3d0c39c0383f4a78e63fd22628ee64384638305451b6791e0b45f1c225bc37"
+    },
+    {
+      "path": "migration/results/security-stage31-review/docs/RUST_NEXT_PLAN.md",
+      "bytes": 6747,
+      "sha256": "25c41757bb766a45d886c84bc80f8f3de38232cba1870aad8365c60ecac3a28d"
+    },
+    {
+      "path": "migration/results/security-stage31-review/docs/RUST_SECURITY_AUDIT.md",
+      "bytes": 3977,
+      "sha256": "ecb0af4229354064fcb035b4aea75feef853fd9f445d8a699d95f64c55fb3e17"
+    },
+    {
+      "path": "migration/results/security-stage31-review/docs/agent-usage-guide.md",
+      "bytes": 20198,
+      "sha256": "8d425ae58db52cf56f6bf484637caaad50c3e30edb2fc425f3a897f132246efe"
+    },
+    {
+      "path": "migration/results/security-stage31-review/migration/current-package.json",
+      "bytes": 399,
+      "sha256": "957fd1204d16409719bf297ff901b28ec46413d42a39410d235390dcc8ac8ba1"
+    },
+    {
+      "path": "migration/results/security-stage31-review/migration/discovery-stage31-comparison.json",
+      "bytes": 1897,
+      "sha256": "4d557f3264600ea2cadd6e00325aab0d095c8f8411733b3fad8f5d1c04f1393d"
+    },
+    {
+      "path": "migration/results/security-stage31-review/migration/doctor-stage31-comparison.json",
+      "bytes": 236,
+      "sha256": "fc696f24d4bd246214b6cfb4ae93a0cdf025833fbb24b4051aa51d4c81ead06d"
+    },
+    {
+      "path": "migration/results/security-stage31-review/migration/notices-stage31-comparison.json",
+      "bytes": 25362,
+      "sha256": "7bcf2133594e444df5792047c0e08cc2796b3e8acf6ececd4cc1d794a254c8dc"
+    },
+    {
+      "path": "migration/results/security-stage31-review/migration/package-stage31-build-comparison.json",
+      "bytes": 1113,
+      "sha256": "5d8bd4d837d625ca4a3b2f970efd6d12e5ba403b0795987d5f24e6ab59070614"
+    },
+    {
+      "path": "migration/results/security-stage31-review/migration/package-stage31-cold-comparison.json",
+      "bytes": 606,
+      "sha256": "bb36e51771d0a3c112652c1d6397c1de33bc675c7b7642cad87b7d027c56481b"
+    },
+    {
+      "path": "migration/results/security-stage31-review/migration/package-stage31-warm-comparison.json",
+      "bytes": 603,
+      "sha256": "c173e8eec0ebf5821ae893414e23790d5bb8d7ac706a983f968d6deb3f509394"
+    },
+    {
+      "path": "migration/results/security-stage31-review/migration/results/launcher-stage31/comparison.json",
+      "bytes": 1216,
+      "sha256": "042c1f7b773cbc88ed76e9d09122955830c474b61bc174dcc43c48b94383e701"
+    },
+    {
+      "path": "migration/results/security-stage31-review/migration/results/security-open-fix-debug/rust-tests.log",
+      "bytes": 18980,
+      "sha256": "d395e58846928be4c866bcea19e5c32f7aa72036b1631bfc7cecc74669df9a51"
+    },
+    {
+      "path": "migration/results/security-stage31-review/migration/results/security-stage31/comparison.json",
+      "bytes": 1589,
+      "sha256": "44d3c0d9be3baefa109c0bccf6ddd63e16664c9ef325a333ce221b9274cfccf6"
+    },
+    {
+      "path": "migration/results/security-stage31-review/migration/results/security-stage31-special-files/comparison.json",
+      "bytes": 1041,
+      "sha256": "ad51c0bc2cb6cdd821ddf914a57004471755ea205842de0b2c98d5ba501023d7"
+    },
+    {
+      "path": "migration/results/security-stage31-review/migration/security-open-preflight-fix.json",
+      "bytes": 822,
+      "sha256": "a1799e0dc9b7afc6caf01858d8a69ee2735acc54c7f59057deaede0b974d8ae8"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/Cargo.lock",
+      "bytes": 27518,
+      "sha256": "e6929040ff5ef89b7f9430e4b6a9c1616f513851fe0131b4e0716ed7f091d87a"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/Cargo.toml",
+      "bytes": 839,
+      "sha256": "5494e6b78deb62178807d8e3f76b56aecfe6b4278ab0595d3bd40aca08b5bcbb"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/actions.rs",
+      "bytes": 13943,
+      "sha256": "af9c9363006640aed84a7f46566c0d4953da79f1270e2033d67f44596ef854e4"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/adopt.rs",
+      "bytes": 13827,
+      "sha256": "12cf44c7ac4f140939275471ae134aa0fb1f9fed6946ce313de9bd5ea2a478d8"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/argument_normalization.rs",
+      "bytes": 7385,
+      "sha256": "e105f20f517288ca6f051fa3202908cc419196a1292861b9f3706a09b6ced5a7"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/argument_numbers.rs",
+      "bytes": 2166,
+      "sha256": "2b8ea0f1262c2a34bd569966ef8589873aa58cae95508eca624c3d39f721f044"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/argument_validation.rs",
+      "bytes": 32098,
+      "sha256": "6f4071a786dcf298cf611c4d031c73de0001287177bd37793d43b5db6e05d86b"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/arguments.rs",
+      "bytes": 1579,
+      "sha256": "28e9029a6a410870539caf829fc4e9b71b9bbb22677f43b25840d1a387952cae"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/artifact_stat.rs",
+      "bytes": 3452,
+      "sha256": "312df99bbdca9eeae5360e70d5019b5d815ed1d5ff30821fd55c18ea533bdec2"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/batch.rs",
+      "bytes": 6721,
+      "sha256": "7b529cea48ed04642d6cb97b8aab0793f74c19d0be0751c25374acfd5642335e"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/canvas.rs",
+      "bytes": 11071,
+      "sha256": "5615d6ecf5c78962e2839e26ff935cfc797ad0a221439298598ca6388b020419"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/collection.rs",
+      "bytes": 8181,
+      "sha256": "24d5c48c2955a656b34f78ad5bde06b327cf2761f4b811dda3fb621c444a53db"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/contract.rs",
+      "bytes": 2504,
+      "sha256": "abacb51a6b995b51b9e629b13e21e9fd7280e022f6fbc7390fac3965b7b867aa"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/create.rs",
+      "bytes": 13801,
+      "sha256": "2c662310853dfee9a36acdb37905f8b7e2a4c89884f74b87d4c8758d31a964c3"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/css.rs",
+      "bytes": 3542,
+      "sha256": "d7b1e845febb49766aba11b97a2b4eca5f3eaae69c7f05b3f91006c5b9466c32"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/decimal.rs",
+      "bytes": 2348,
+      "sha256": "95fefd80999fc4b3b7fb0237033f96e0742763fe710955d99c0ba8d80e4fe8e2"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/delete.rs",
+      "bytes": 4752,
+      "sha256": "10679480c41736830633636931ad59f82563fe947220904b0ecc11277fa5c689"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/doctor.rs",
+      "bytes": 14355,
+      "sha256": "4c2747c552311d615b96ce18f0e7b2cd2ec03c88064a2033a33c89df74192ad8"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/document.rs",
+      "bytes": 14366,
+      "sha256": "fa900c6c0687d3e3d9a716e911592ffadec477654375116dda6be3f181157b77"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/duplicate.rs",
+      "bytes": 14046,
+      "sha256": "1f455905b6d4f3f0d7ba22d2f8e30030757856a1471e12bd456870dc5e3828f2"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/editability.rs",
+      "bytes": 7282,
+      "sha256": "7d3a9b7b9aee081647d4be4c014b3b3097adb6066903dd9fc383858626925c96"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/engine.rs",
+      "bytes": 16194,
+      "sha256": "951a678ecedf15a3261cbf707794fbc48e5ef17bb1c54e7c89ce7f7a5bd73429"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/export_batch.rs",
+      "bytes": 7154,
+      "sha256": "135c044a0b7e234cb62a39578d37528187531c34d4e0a47ce0c11e2b58c1b29b"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/find.rs",
+      "bytes": 7287,
+      "sha256": "e83478f99daf945f26f49b7d9d8ff6300243721d8ef3f4d44ab10676526912db"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/fit.rs",
+      "bytes": 5165,
+      "sha256": "5552649be730c8186fac4b7e6775b16f04bd5e343d6cf79b1045dfdf76fe73fd"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/fonts.rs",
+      "bytes": 3994,
+      "sha256": "8ede64d74a3c420c607c517766c79a654465a5460aa4ab284ef00f5debd7280f"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/fragment.rs",
+      "bytes": 11315,
+      "sha256": "e64f567db65cf23a1d442ff5deb57236b8074212dbcc619bce062e6d36aeb22e"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/frames.rs",
+      "bytes": 5978,
+      "sha256": "9d3effb6ab6c5b3664bdd88232866090b64980c05d322f45f300b7a57b890ac6"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/geometry.rs",
+      "bytes": 9633,
+      "sha256": "adb5293b0da82c07a16535bb053a99899d64690373ef9b616e36e96eae8ffea4"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/gradient.rs",
+      "bytes": 9390,
+      "sha256": "f7c1bc205a7efad00d68170e7faed0effeebab2719eb5f418c0205b9171575a6"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/grid.rs",
+      "bytes": 8210,
+      "sha256": "ef1b6183e092beb851d9f79365ee9a71ba984624f20100daa149b591f35a358e"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/grid_plan.rs",
+      "bytes": 7241,
+      "sha256": "0cbff13db2b812ec929ff8b18df74ffaa11b797e92d79247bf9ae093e3a9aee9"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/group.rs",
+      "bytes": 5702,
+      "sha256": "9f1acf3c637169cf015251d1095b48f125e494cbbe70e49182a8f417161bd674"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/identity.rs",
+      "bytes": 11273,
+      "sha256": "5ee7a73e0d45478d1641bbfad4e3ebe5e7f73f110e5dcd919e4380e07294aa0d"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/inspect.rs",
+      "bytes": 15335,
+      "sha256": "71a4dc534a954cc3d207d7a042cc72567ce6966a997d5408b8bb0fc483a384aa"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/intents.rs",
+      "bytes": 4692,
+      "sha256": "270cbf13cea27ebe0e6bb00717e22084ee85899b408b4beab10b477f5b7cd4f3"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live.rs",
+      "bytes": 15414,
+      "sha256": "2d925f478beb417eff58030d95c3a2f69ca1a21a8b2300731b052f4326c5fa37"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_arm.rs",
+      "bytes": 4864,
+      "sha256": "f6d5724f9316cc08744103be8b1a8d2ed4f8c1af74cd745bfcba094c9b791898"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_attach.rs",
+      "bytes": 7229,
+      "sha256": "b366629d3f3c5e7afdad0520b312974e3efc85062dde181d42ffb877228d8b0d"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_bus.rs",
+      "bytes": 20482,
+      "sha256": "5449cabfbde2af94c4d00c766eadcd78126daa576c980dd04148b9221d2be719"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_cache.rs",
+      "bytes": 3889,
+      "sha256": "790ec30fd9aeb949bae2872b6307fa29c77f2f1e4a7b5a69151cdc597ec39706"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_context.rs",
+      "bytes": 9831,
+      "sha256": "90bccb8f55b9c9d76cb9bbd5fa15fbbe27466349a6f4e2fda9ee3d3c571de8b2"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_dbus.rs",
+      "bytes": 25790,
+      "sha256": "b9c9aa846cf07bb9d1e783c51b59b508227f01dcfb662c466c3554d6c0044a7f"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_diff.rs",
+      "bytes": 14604,
+      "sha256": "403c038efa0ab1c0e0244c44414adad43930a175560b3f45a892f05830310965"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_discovery.rs",
+      "bytes": 19153,
+      "sha256": "c778f3396d8d0eab3f92135a6bd5b832a9d327633af53fc61547145a5538a775"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_effect.rs",
+      "bytes": 18288,
+      "sha256": "1c37f3b8b911c836396972f3585e5d7bc3e90d38841d96e78d0bf96b5e822932"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_events.rs",
+      "bytes": 4479,
+      "sha256": "2ee5b32490132ce2922d47659a054891136352c39855d1a37f0f7d3c320d5152"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_insert.rs",
+      "bytes": 14159,
+      "sha256": "692a4f14efd321b4e9ec754270069a62d76781faf706b91b33c613f1b5339ba3"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_install.rs",
+      "bytes": 4308,
+      "sha256": "b4f8f4bb6979a0efb1f4146e8925ca44b73550b0f67a2de2979fa8998cce71ed"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_launch.rs",
+      "bytes": 7885,
+      "sha256": "6e17f71b63809f15f3d7eae93979bb506628c341677eac5792d70428872980ad"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_loop.rs",
+      "bytes": 4435,
+      "sha256": "cbc46ce606f22f43d2ec1529e7ea10858958491919dbd931aaa6b697db3b76cd"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_managed.rs",
+      "bytes": 56265,
+      "sha256": "e2c43f48462b87e02c7197a113b04a160397de788a5571962b05f2f4c6e265a9"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_models.rs",
+      "bytes": 10133,
+      "sha256": "9b923fa74fb96ca62a82aa403a7e49a473323ddfea4b8d292dd5ed7adb38bc03"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_mutation.rs",
+      "bytes": 12334,
+      "sha256": "e10c0afbd55a94c04e617c4f183acd325deb5fc57ef15572e0de2347c73740c2"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_probe.rs",
+      "bytes": 13379,
+      "sha256": "3d84711a0ab70b2576a0834ade7f334bdafd58db17cbc17f837ae85d11abba9b"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_protocol.rs",
+      "bytes": 8780,
+      "sha256": "c616ba12b7631afc7a25251656ec530a83ed57cbf6ec0c4541072db006a6d6c1"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_records.rs",
+      "bytes": 12556,
+      "sha256": "105e82606d815333d09a2cf6e640e530a4128822e27e9f0d8d346ec38b586c7f"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_render.rs",
+      "bytes": 9441,
+      "sha256": "fc2134fce836904f7ed57ef7e67049a6c8bef1caa7d7026e6e7b9bf29db2393b"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_scene.rs",
+      "bytes": 7860,
+      "sha256": "02bc13ee8e2b546cb6b77d4b55243a25dfb1b71f676c9c4b8e1a91f930c04dd0"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_selection.rs",
+      "bytes": 3623,
+      "sha256": "c439877d16bbd95ba6b6b4f62188a85bc5b88005c869e095ee4eecc1fe714e2d"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_session.rs",
+      "bytes": 15986,
+      "sha256": "7ca555c3c9d976a0065547577b463ed97b7770bcd4d88d38b0ef14b8fde7f93d"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_socket.rs",
+      "bytes": 32369,
+      "sha256": "659cdd8e6182ce40e61e314e3bfdda86b2942331b07658b77b422b113d4cb031"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_sync.rs",
+      "bytes": 3000,
+      "sha256": "1a4bc25e6d2155e8ceed1796cd544672c6e69cfb9447a40ca2e6a22d5996dbcb"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_transport.rs",
+      "bytes": 8782,
+      "sha256": "0741b5cf31789980a253791495a003b2731df0523b0a6ed97f2913ea96b8fee9"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/live_view.rs",
+      "bytes": 3618,
+      "sha256": "be8223b55bb94051b4a01e0503ed3190e8df62bc80e090794d11aefefa92c23a"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/main.rs",
+      "bytes": 29710,
+      "sha256": "614070576041166777fb67ec7889d76a94153f890cee9bcdd7a64cd39864073b"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/optimization_analysis.rs",
+      "bytes": 5654,
+      "sha256": "8632dae28011d72e9bbf1b2652c4082eaf64e2b6ca9394407b57d2306b0573c3"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/optimize.rs",
+      "bytes": 11937,
+      "sha256": "c28a8759a2d67033f7bc41fce0bdac94b7079150d5596dd12300cce69e544b0d"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/palette_colors.json",
+      "bytes": 2258,
+      "sha256": "ccd1cf8321d6d7e8f97d35d6e78203ecf51a1b7a62a158f77580007f556dbf97"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/paths.rs",
+      "bytes": 17561,
+      "sha256": "ce9915abea3144ae11da27b402b27427d73b77d84543592ede4549cd10ab6f8b"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/placement.rs",
+      "bytes": 9379,
+      "sha256": "d309ba4fa0c6ec10a67eae3c88d6f6aee027065fb5e1f57e18e245d23fff8c15"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/preview.rs",
+      "bytes": 5344,
+      "sha256": "3802678bba92295d51f0c4b6af2434bf5efde290f2a4ff20e3377ddd9dbf4802"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/process.rs",
+      "bytes": 11268,
+      "sha256": "1b9bcba8e03e915d7b7828cc31bb44af1357c24c2e2caebb6c56b25d4203f2bc"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/profiles.rs",
+      "bytes": 6049,
+      "sha256": "b1c81fa5e856812976d3b4750dea9e983b9e44c883cf6aad36e52177fa1e32db"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/prompts.rs",
+      "bytes": 3150,
+      "sha256": "9ad7d96fc145963ed24316c1a2a417ea02feeb7d1336d3ff1f7335853c5d9492"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/quality.rs",
+      "bytes": 7038,
+      "sha256": "e118860777644212673b8720ba2eadefbeceaabc32250bd6cd31c33f371624dd"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/recolor.rs",
+      "bytes": 7422,
+      "sha256": "7c0266bb389162a8a0395596ef855577b0d7a5086a97a82b014825fe943fea9e"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/recovery.rs",
+      "bytes": 16926,
+      "sha256": "601adb1a758027c6e2dd4561313735de866a05aa650f601a170c7f6c566ed931"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/render.rs",
+      "bytes": 29667,
+      "sha256": "c5b98b99de2da8a41f1e8a15138e73f73bd9e308761e33102bb5bd7248fc2fea"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/reparent.rs",
+      "bytes": 19450,
+      "sha256": "a1cd2d52c7be2ed8ace1e4165c41f7bb3659efbf32d9ac2468d25214d21b9148"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/repeat.rs",
+      "bytes": 16631,
+      "sha256": "37af4e25e7e09707f1ded05332086b70b33263d0ae2b4176c0d0bd635db6bd26"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/repeat_plan.rs",
+      "bytes": 12448,
+      "sha256": "efc61a7f5717e1e6b8d3444afc83cda97908bc5e1502124a261ee53e52b2c822"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/retention.rs",
+      "bytes": 20162,
+      "sha256": "5ed187e10b9adef190717f12406a907acbc10ad4fb9dcd083f849a4a2c7238b2"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/runtime.rs",
+      "bytes": 14859,
+      "sha256": "8723d1b61b310e0c1c2418f7421236764d1440d33ed2db276c283286a0ae776d"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/save.rs",
+      "bytes": 8917,
+      "sha256": "65afb69df48c650c073e16db05a052de0e01f8f94669a824d067105dab7e578f"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/structure.rs",
+      "bytes": 7349,
+      "sha256": "29f32112bcbb723964c05181776dd6a80f386079e8f384b7f1ad482ca7f906cf"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/style.rs",
+      "bytes": 14475,
+      "sha256": "9e8238e4819a4d38afd868056e7190e7c4a77c550fe3f8c96127e06b9dbcde55"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/text.rs",
+      "bytes": 9479,
+      "sha256": "3019852cad02723a640383ffe99e234b9d7bdf7bc0ebc99ab9b3c6080218faa4"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/tile.rs",
+      "bytes": 8141,
+      "sha256": "a158ed6402bdfd2a115161cde2f8771b6856e1e79d05f064256f452ed2aca4d0"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/transaction.rs",
+      "bytes": 30314,
+      "sha256": "2203d1861aa2b6e9dd9053b15a5b2f2d5fd380982e783ca83ccea890afcdb2d6"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/transform.rs",
+      "bytes": 6571,
+      "sha256": "28f7eac02097160599c56c03f4f136082c547ac8c8d5c0cfe17de36f96ce8134"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/transform_objects.rs",
+      "bytes": 6632,
+      "sha256": "2f80938647b807f9cc33bc89fa6f5da8ef7b88f5d7359b2f1ee8f9df42806032"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/use_object.rs",
+      "bytes": 5802,
+      "sha256": "00c2ae9b6b77f6816281aa72bb0df37b4eec352994b400c6b6ddbcecf104c580"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/validate.rs",
+      "bytes": 13278,
+      "sha256": "4c7e7caf269e5732a1ef925f3195e8708da2ea97f8fda8d06ddc64391fcd2c4e"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/workspace.rs",
+      "bytes": 36745,
+      "sha256": "3fcf442e81bb7cbb86ece1f5778d35672275262c4a445264bde006e063f1c93b"
+    },
+    {
+      "path": "migration/results/security-stage31-review/rust/src/xml.rs",
+      "bytes": 7593,
+      "sha256": "83bb3f9f56adb1fd5b7f523a40d71000d4ebd3649e7e23c97a38434010eef770"
+    },
+    {
+      "path": "migration/results/security-stage31-review/scripts/gen_llms_txt.py",
+      "bytes": 3272,
+      "sha256": "fa21b30d7242e66ab85aa4aaf85e9b9a4ff96ebe746599a15e2f57a14829417b"
+    },
+    {
+      "path": "migration/results/security-stage31-review/scripts/migration_special_file_acceptance.py",
+      "bytes": 3489,
+      "sha256": "947dd6e98cee1b8e0284cf3439d3e2835ed5a0a2fbaf08294c3d570977b3e609"
+    },
+    {
+      "path": "migration/results/security-stage31-review/scripts/rust_security_acceptance.py",
+      "bytes": 6840,
+      "sha256": "a12636d1ac5ecf0d5b27113bb97c890427667e49f1fab8e0884396502cf0e131"
+    },
+    {
+      "path": "migration/results/security-stage31-special-files/comparison.json",
+      "bytes": 1041,
+      "sha256": "ad51c0bc2cb6cdd821ddf914a57004471755ea205842de0b2c98d5ba501023d7"
+    },
+    {
+      "path": "migration/results/security-stage31-special-files/server.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/security-stage31-special-files/server.trace.json",
+      "bytes": 13130,
+      "sha256": "97e9f8401e5b35e85a5a9c722c73cb600feb3467d932be56c489134f804f6c88"
+    }
+  ]
+}

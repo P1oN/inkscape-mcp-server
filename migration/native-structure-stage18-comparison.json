@@ -1,0 +1,34 @@
+{
+  "passed": false,
+  "group_checks_passed": true,
+  "checks": {
+    "group_count_7_8_7_8": true,
+    "group_Undo_exact_tree": true,
+    "group_Redo_exact_tree": true,
+    "group_appearance_preserved": true,
+    "group_Undo_exact_RGBA": true,
+    "group_Redo_exact_RGBA": true,
+    "group_applied_audit": true,
+    "ungroup_never_sent": true
+  },
+  "scope": "Owned stage18 native group/Undo/Redo only; broader structure acceptance failed during read-only preflight before ungroup",
+  "ungroup": false,
+  "delete": false,
+  "failure": "Vendor crash/emergency save during or after native Select All following group Redo; live_get_scene timed out. Cause unproven. No ungroup mutation sent. Exact PID remains live in crash UI; no restart/close/kill attempted.",
+  "emergency_parse": {
+    "emergency.svg": "Start tag expected, '<' not found, line 4, column 1 (emergency.svg, line 4)",
+    "group-redone.svg": "valid XML"
+  },
+  "artifact_sha256": {
+    "native-group-selection-apply.svg": "6b956970c1cf5e6f623949e756e3a6f833811595b15c1ddf33fd3834fb6ea42b",
+    "live-view-20261002T193403_286498Z-23985bb2.png": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33",
+    "live-view-20261002T193401_236343Z-2b43e3fd.png": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33",
+    "live-view-20261002T193456_706593Z-52fc25e0.png": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33",
+    "native-group-selection-apply-before.svg": "67bee3e7d18a99ae9d35422a2a5076482c91d4e693121b8660ce6154a73c60ce",
+    "live-view-20261002T193436_288185Z-52ac9c66.png": "761c37d0ca9a89d2b636d38e08d5f4c78edc5dac2a8bcbf190c0d78382038f33",
+    "native-group-redone.svg": "6b956970c1cf5e6f623949e756e3a6f833811595b15c1ddf33fd3834fb6ea42b",
+    "native-group-undone.svg": "67bee3e7d18a99ae9d35422a2a5076482c91d4e693121b8660ce6154a73c60ce"
+  },
+  "rust_binary_sha256": "c30527cf22c33ff3bd9291f7dff324dc5318338e36162b5d5355628ec6c33030",
+  "full_migration_complete": false
+}

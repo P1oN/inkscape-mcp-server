@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "package": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage35",
+  "archive": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage35.tar.gz",
+  "archive_bytes": 46613307,
+  "archive_sha256": "68ef2c82937ef1a2ab973f7a80e7878344af434228aecd223110768558043db5",
+  "binary_sha256": "3ad57c33d9e4530d2ddb7b7bb66fdc7975b853deb4b5a0d360b29719f39145c4",
+  "package_files_verified": 2508,
+  "reports": [
+    "migration/doctor-stage35-comparison.json",
+    "migration/notices-stage35-comparison.json",
+    "migration/discovery-stage35-comparison.json",
+    "migration/package-stage35-cold-comparison.json",
+    "migration/package-stage35-warm-comparison.json",
+    "migration/results/launcher-stage35/comparison.json",
+    "migration/results/security-stage35/comparison.json",
+    "migration/results/security-stage35-special-files/comparison.json",
+    "migration/results/renderer-assets-stage35/probe.json",
+    "migration/results/renderer-assets-stage35-warm/probe.json",
+    "migration/results/engine-routes-stage35/comparison.json",
+    "migration/results/engine-routes-stage35-warm/comparison.json",
+    "migration/results/diagnostic-limits-stage35/comparison.json",
+    "migration/results/compare-publication-stage35/comparison.json"
+  ],
+  "scope": "Rust213/1ignored, bounded validation diagnostics and deferred compare pair publication; cold/warm archive, asset17/routes8 both engines, security35/files12/doctor10/launcher11/notices15 (102 crates and exact4 native source notice supplements)/discovery16. No new GUI/performance proof; corresponding-source patches and private CPython provenance remain open."
+}

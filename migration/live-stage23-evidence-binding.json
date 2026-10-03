@@ -1,0 +1,196 @@
+{
+  "passed": true,
+  "scope": "134 synthetic live observations plus failed terminal native launch, not native GUI/history completion",
+  "files": [
+    {
+      "path": "migration/live-connect-stage23-comparison.json",
+      "bytes": 218,
+      "sha256": "a5180af1368e344999e8e715ce2fac94e15ca25e6c66cd12d074c61f85749630"
+    },
+    {
+      "path": "migration/live-loop-stage23-comparison.json",
+      "bytes": 1800,
+      "sha256": "7b39ece174d6f8b2e0812f3ffa976ddadc3fd17938ccd24072341edeee321eff"
+    },
+    {
+      "path": "migration/live-mutation-stage23-comparison.json",
+      "bytes": 1014,
+      "sha256": "4d41d7c021196fed348e14db9f1e85e000cfb45a251b59ebbdd5c9cf16078967"
+    },
+    {
+      "path": "migration/live-stage23-followup-comparison.json",
+      "bytes": 840,
+      "sha256": "31de06aec6a9b3ff6be03010760df02d630e3dddd846c1b830bfd124e2f2cbd8"
+    },
+    {
+      "path": "migration/native-stage23-launch-comparison.json",
+      "bytes": 707,
+      "sha256": "9d1a03094c7ff1ea036fa6e1863e52457c8cddccf280d70803c331130a02d09f"
+    },
+    {
+      "path": "migration/package-stage23-build-comparison.json",
+      "bytes": 741,
+      "sha256": "65fbe26feabe282f55304db02d5378a2193ca2c386fe0d840decb182013492e5"
+    },
+    {
+      "path": "migration/results/live-connect-stage23/python.stderr.log",
+      "bytes": 6311,
+      "sha256": "3157a12cd660282fa997ec2b3d5cee2610fea53e96b651b3d269913c858228b8"
+    },
+    {
+      "path": "migration/results/live-connect-stage23/python.trace.json",
+      "bytes": 29368,
+      "sha256": "541aed29cb033588d1f429b5626f586739577430344a693fc6fdca749051bece"
+    },
+    {
+      "path": "migration/results/live-connect-stage23/rust.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/live-connect-stage23/rust.trace.json",
+      "bytes": 29283,
+      "sha256": "981451425b28a3875a9afb31a20a5c3011026fa3ab65015c39fb6b73b6fb3114"
+    },
+    {
+      "path": "migration/results/live-loop-stage23/python.stderr.log",
+      "bytes": 12490,
+      "sha256": "31e65bf16169c49b092cea1af7899a602410ae89f397d8ced34da9cbb33c2668"
+    },
+    {
+      "path": "migration/results/live-loop-stage23/python.trace.json",
+      "bytes": 74931,
+      "sha256": "7170fe8204c311f185bd1e52795dc87382decdb905b70d4c9274c1266f0ec6e1"
+    },
+    {
+      "path": "migration/results/live-loop-stage23/rust.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/live-loop-stage23/rust.trace.json",
+      "bytes": 74901,
+      "sha256": "3eaea26c0041f602a2112cc6a92a36c602c2c744a28b45669e483991a87b3443"
+    },
+    {
+      "path": "migration/results/live-mutation-stage23/python.stderr.log",
+      "bytes": 19913,
+      "sha256": "83931d6b85d1e6957798a8ff9d9101048faddec35c966b3931c9d9a578b0cae2"
+    },
+    {
+      "path": "migration/results/live-mutation-stage23/python.trace.json",
+      "bytes": 1232034,
+      "sha256": "14ff4c1dcc1398af8b73a99c704cbf07cde5fc30c8a552db975ad7db2c848725"
+    },
+    {
+      "path": "migration/results/live-mutation-stage23/rust.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/live-mutation-stage23/rust.trace.json",
+      "bytes": 1231993,
+      "sha256": "34cf46415ac195125d421140f19af8b08e17a9baff72278d1faf96147df88ebb"
+    },
+    {
+      "path": "migration/results/native-gui-stage23/bus.log",
+      "bytes": 99,
+      "sha256": "05b8ddb0c8921ac3de95c1c9f94eb7d419046cb76c25fd06eb2bb5e9b380aa4a"
+    },
+    {
+      "path": "migration/results/native-gui-stage23/inkscape.stderr.log",
+      "bytes": 153,
+      "sha256": "d31135c4fafaeadb4146271a440f7f2a1c63cf7bf16b2c6f4f3829a0c6cfa48b"
+    },
+    {
+      "path": "migration/results/native-gui-stage23/inkscape.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/native-gui-stage23/launch.json",
+      "bytes": 214,
+      "sha256": "d000e9dcf72c42adcab65f5b5e7def3a3d3cb68b920be2cde71fdc7abf1fb7fb"
+    },
+    {
+      "path": "migration/results/native-gui-stage23/mcp.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/native-gui-stage23/mcp.trace.json",
+      "bytes": 6377,
+      "sha256": "74c0bbdb794f3dae96f8c55432b3e5f891f7c9e7348fabe500bed12927db7de7"
+    },
+    {
+      "path": "migration/results/native-gui-stage23/migration_live_connect_acceptance.py",
+      "bytes": 7850,
+      "sha256": "9432060a60c40a3d871f799bc29678b1dc912615c0bb0bfcfa8f090529c02ace"
+    },
+    {
+      "path": "migration/results/native-gui-stage23/migration_live_loop_acceptance.py",
+      "bytes": 13608,
+      "sha256": "ad9e2f4cc0fb50fd3a2bdf1ff0bd4516b679ea87ed4923ff4023554a82817dba"
+    },
+    {
+      "path": "migration/results/native-gui-stage23/migration_live_mutation_acceptance.py",
+      "bytes": 17032,
+      "sha256": "911dfc72b5fda9cb05949d42db49e3af9784c8bedfd750b0cd1ec26cdb0d4884"
+    },
+    {
+      "path": "migration/results/native-gui-stage23/migration_native_gui_acceptance.py",
+      "bytes": 5375,
+      "sha256": "660dc3f4066c4ce6bc0d7f5b99a07bec748c3f46a9c0881b4747d08631490221"
+    },
+    {
+      "path": "migration/results/native-gui-stage23/session.json",
+      "bytes": 962,
+      "sha256": "393eca5b4c1f706b4cc0164062d331b13f2248ee0241212006490a67749d4bfe"
+    },
+    {
+      "path": "migration/results/native-gui-stage23/source-snapshot/docs/AGENT_HANDOFF.md",
+      "bytes": 196731,
+      "sha256": "64bfa2c05ebfe46a4e7e1b1fb3217ce2bd62d6429d9d0555f90dc5d336c6e624"
+    },
+    {
+      "path": "migration/results/native-gui-stage23/source-snapshot/docs/RUST_COMPLETION_CHECKLIST.md",
+      "bytes": 7136,
+      "sha256": "a04054f4804470b6563c6762556f42789c4f9cf123a7a41171417719d07e2751"
+    },
+    {
+      "path": "migration/results/native-gui-stage23/source-snapshot/docs/RUST_MIGRATION_REPORT.md",
+      "bytes": 242478,
+      "sha256": "44735ed0f6fcc97208db2511a9cca292c4274cde0ee5d795ec67c92b9aa8dfb0"
+    },
+    {
+      "path": "migration/results/native-gui-stage23/source-snapshot/migration/README.md",
+      "bytes": 201895,
+      "sha256": "9ca2dadeacfdb59069a3c5a8946948f68e06c42566bfa66d7412236d0c66c34d"
+    },
+    {
+      "path": "migration/results/native-gui-stage23/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage23/FILES.json",
+      "bytes": 463780,
+      "sha256": "053ce6b2ee824525ede0175335336d0f2a91a2a54921848ef649d78b639c5943"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage23/bin/inkscape-mcp",
+      "bytes": 12836496,
+      "sha256": "dfadfbc0a11cc14a1454c40d35956348070b353115ed726b8b450035b73afd1f"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage23/libexec/inkscape-mcp/context.so",
+      "bytes": 53768,
+      "sha256": "4a09deebce9c96708ddd8c9b69896838c209b355a1feeb14ea7c400edac3b3db"
+    },
+    {
+      "path": "migration/results/packages/inkscape-mcp-macos-arm64-stage23/libexec/inkscape-mcp/supervise.py",
+      "bytes": 10153,
+      "sha256": "9e83e7b3b3d6bd5d248b823e2d78a87090e2c7ad23acbe91e90f19d33b16f831"
+    }
+  ]
+}

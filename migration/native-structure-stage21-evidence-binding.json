@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "acceptance_passed": false,
+  "evidence_hashes": {
+    "migration/results/native-structure-stage21/group-apply.ownership.json": "70f8ab49e57c4363846f80ff3a0f7cc3671ad1317dbf2e9898f9f94578f6c6a1",
+    "migration/results/native-structure-stage21/session.json": "68f2acccb1e89b6b9a9f1167343ff9e02f2a7d2ae1746a966371a826319b26a2",
+    "migration/results/native-structure-stage21/context-investigation.status.json": "1b535652a8da11b1b46ffe14c50934c608497fb9baa0a20d20937f67540b9b54",
+    "migration/results/native-structure-stage21/context-investigation.selection.json": "2514162479b04323fd90aad72c468ca490dc9f857a84f1414ae24d008dbe9d56",
+    "migration/results/native-structure-stage21/context-investigation.scene.json": "214d04ee2ef040207b627c4f62a8a5f95575128607b5862d1b188c5e6e29bacb",
+    "migration/results/native-structure-stage21/group-apply-before.sync.json": "c36e26a8a1a1046d31345688c6651637fc99cfaa4b4bb9a76e159aad871473b1",
+    "migration/results/native-structure-stage21/group-apply.selection.json": "964c083e08a1a03fcd57b5f607df154b055810dd7896004e0a769abe7ff1c291",
+    "migration/results/native-structure-stage21/group-apply.trace.json": "c86b51665ea1e37469e70b44dca68cb239aaaf22e0e2ad04a352447223c9df95",
+    "migration/results/native-structure-stage21/group-apply.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "migration/results/native-structure-stage21/group-apply-before.scene.json": "a6bf02c653b70321069edb01fb1160d99b22d7c3c59121c7b2c769c2d55a999c",
+    "migration/results/native-structure-stage21/context-investigation.sync.json": "fa5205c042cb14e61a88c7034b762e549069ff381c6ffffc9ada3e705c7ed336",
+    "migration/results/native-structure-stage21/insert.json": "7932756657991e6a62640bf02268ef4c4e17e625d98cabc3392f8bf1bfcf03bd",
+    "migration/results/native-structure-stage21/context-investigation.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "migration/results/native-structure-stage21/context-investigation.trace.json": "ee536f409e921463d30feab9f0510437bbe191d2545b98f3b369e5ce03dbad1f",
+    "migration/results/native-structure-stage21/duplicate.json": "501aa8bb57d1daf921ec4b6c93c26593bf2446c223621623687c9a99ca1ea2da",
+    "migration/results/native-structure-stage21/context-captured-artifacts/live-view-20261002T210832_720389Z-aa5d34d3.png": "e197bfb508e754625d4b2f21c0772384fa2c51c68a4a7bfeb59ff66ef3c53121",
+    "migration/results/native-structure-stage21/context-captured-artifacts/native-context-investigation.svg": "cb56e0aad8c56109d47c2424ec3c66059062cc58c6af995ced5b484673d481a2",
+    "migration/results/native-structure-stage21/context-captured-artifacts/native-group-apply-before.svg": "cb56e0aad8c56109d47c2424ec3c66059062cc58c6af995ced5b484673d481a2",
+    "migration/results/native-structure-stage21/context-captured-artifacts/live-view-20261002T210456_448444Z-60d7f3f1.png": "e197bfb508e754625d4b2f21c0772384fa2c51c68a4a7bfeb59ff66ef3c53121",
+    "migration/native-structure-stage21-comparison.json": "63e8f0c8cb781f2eea0bff434b8d89cf8f9a21cacc7e21e5eb020c9696fe9284",
+    "scripts/migration_native_structure.py": "84ed2d16aeb6db4581563ddc416f99e0d995ab498d231d4891f92a7b9848c7f0",
+    "migration/results/live-process-benchmark-stage21/rust-4/raw.json.gz": "240c7263b8ba6e90d5fb2d078e42da918d36e460bcfb1353cc92ab08e73cd0c3",
+    "migration/results/packages/inkscape-mcp-macos-arm64-stage21/FILES.json": "717cb07e0f1b84e3b87ba0de85f628a88382dc5fe8fdd379d87f913916722dae"
+  },
+  "scope": "Hashes verify retained failure evidence only; not native acceptance."
+}

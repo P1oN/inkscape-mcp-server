@@ -1,0 +1,31 @@
+{
+  "observations": 62,
+  "rust_binary_sha256": "dfadfbc0a11cc14a1454c40d35956348070b353115ed726b8b450035b73afd1f",
+  "normalization": "validated operation IDs/UTC timestamp relationships/preview path bindings only",
+  "differences": [
+    {
+      "path": "/lost-mutation-reply/content/0/text",
+      "expected": "live session communication failed",
+      "actual": "edit completion is uncertain; inspect the task drawing before retrying"
+    },
+    {
+      "path": "/lost-reply-log/operations/0/completion_uncertain",
+      "expected": false,
+      "actual": true
+    }
+  ],
+  "intentional_uncertain_reply_differences": [
+    {
+      "path": "/lost-mutation-reply/content/0/text",
+      "expected": "live session communication failed",
+      "actual": "edit completion is uncertain; inspect the task drawing before retrying"
+    },
+    {
+      "path": "/lost-reply-log/operations/0/completion_uncertain",
+      "expected": false,
+      "actual": true
+    }
+  ],
+  "unexpected_differences": [],
+  "passed": true
+}

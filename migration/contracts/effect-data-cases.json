@@ -1,0 +1,218 @@
+{
+  "fingerprints": [
+    {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\"><g id=\"g\"><rect id=\"r\"/></g></svg>",
+      "expected": "470160d69aeaf8bcfa863bee2270be50d0e91a6262150845520c47101e0b04b5"
+    },
+    {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" id=\"ui\" version=\"1\"><g id=\"g\"><rect id=\"r\"/></g></svg>",
+      "expected": "470160d69aeaf8bcfa863bee2270be50d0e91a6262150845520c47101e0b04b5"
+    },
+    {
+      "svg": "<a:svg xmlns:a=\"http://www.w3.org/2000/svg\"><a:g id=\"g\"><a:rect id=\"r\"/></a:g></a:svg>",
+      "expected": "470160d69aeaf8bcfa863bee2270be50d0e91a6262150845520c47101e0b04b5"
+    },
+    {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\"><metadata>UI</metadata><namedview x=\"1\"/><g id=\"g\"><rect id=\"r\"/></g></svg>",
+      "expected": "470160d69aeaf8bcfa863bee2270be50d0e91a6262150845520c47101e0b04b5"
+    },
+    {
+      "svg": "<svg width=\"1\" height=\"2\"><rect z=\"1\" a=\"2\"/></svg>",
+      "expected": "b2c42af30617b6b88fc37dd2f0c9a22f545c3be8accddd15db20cc1cb0ff7643"
+    },
+    {
+      "svg": "<svg height=\"2\" width=\"1\"><rect a=\"2\" z=\"1\"/></svg>",
+      "expected": "b2c42af30617b6b88fc37dd2f0c9a22f545c3be8accddd15db20cc1cb0ff7643"
+    },
+    {
+      "svg": "<svg xmlns:i=\"urn:ink\" i:ui=\"ignored\" id=\"ui\" version=\"1\"><g i:label=\"Name\" id=\"g\"/></svg>",
+      "expected": "c96a98ea6f0bbe4409df9c097d2f5e1ca5d2fa3ffdc39526dcf763c898f2f316"
+    },
+    {
+      "svg": "<svg> text <text> Привіт <tspan> hi </tspan> tail </text> end </svg>",
+      "expected": "7cefb80e25e7b6f4a41603c37ccf93300afe56d071af4c8d0d8109b4ed098b59"
+    },
+    {
+      "svg": "<svg>left<!--comment-->after<?pi data?>more<g/>tail</svg>",
+      "expected": "df3e40f0b8047a0e816cf3f331da1cb5d09f5df5739458e73554914ef7cb370d"
+    },
+    {
+      "svg": "<!DOCTYPE svg [<!ENTITY e \"secret\">]><svg>before&e;after<text>&e;tail</text>end</svg>",
+      "expected": "9694ccbbc94f6d2fc27cef9dbb746bb0bc3d8cc210d1769b0a6dbd4b0258bb13"
+    },
+    {
+      "svg": "<svg><text>quote&quot; slash\\ newline&#10; tab&#9; [, :]</text></svg>",
+      "expected": "5b2982939110c19cfc69d825e0c01b00947c293647bfa01308eec5fb950679ea"
+    }
+  ],
+  "replies": [
+    {
+      "text": "{\"nonce\": \"mcp_test\", \"ok\": true, \"ids\": [\"r\"], \"fingerprint\": \"abc\"}",
+      "expected": {
+        "accepted": true,
+        "reply": {
+          "nonce": "mcp_test",
+          "ok": true,
+          "ids": [
+            "r"
+          ],
+          "fingerprint": "abc"
+        }
+      }
+    },
+    {
+      "text": "{\"nonce\": \"mcp_test\", \"ok\": true, \"ids\": [], \"fingerprint\": \"abc\"}",
+      "expected": {
+        "accepted": true,
+        "reply": {
+          "nonce": "mcp_test",
+          "ok": true,
+          "ids": [],
+          "fingerprint": "abc"
+        }
+      }
+    },
+    {
+      "text": "{\"nonce\": \"mcp_test\", \"ok\": true, \"ids\": [\"r\", \"r\", \"\"], \"fingerprint\": \"abc\"}",
+      "expected": {
+        "accepted": true,
+        "reply": {
+          "nonce": "mcp_test",
+          "ok": true,
+          "ids": [
+            "r",
+            "r",
+            ""
+          ],
+          "fingerprint": "abc"
+        }
+      }
+    },
+    {
+      "text": "{\"nonce\": \"stale\", \"ok\": true, \"ids\": [\"r\"], \"fingerprint\": \"abc\"}",
+      "expected": {
+        "error": "invalid edit reply; inspect the task drawing before retrying"
+      }
+    },
+    {
+      "text": "{\"nonce\": \"mcp_test\", \"ok\": 1, \"ids\": [\"r\"], \"fingerprint\": \"abc\"}",
+      "expected": {
+        "error": "invalid edit reply; inspect the task drawing before retrying"
+      }
+    },
+    {
+      "text": "{\"nonce\": \"mcp_test\", \"ok\": \"true\", \"ids\": [\"r\"], \"fingerprint\": \"abc\"}",
+      "expected": {
+        "error": "invalid edit reply; inspect the task drawing before retrying"
+      }
+    },
+    {
+      "text": "{\"nonce\": \"mcp_test\", \"ok\": true, \"ids\": [1], \"fingerprint\": \"abc\"}",
+      "expected": {
+        "error": "invalid edit reply; inspect the task drawing before retrying"
+      }
+    },
+    {
+      "text": "{\"nonce\": \"mcp_test\", \"ok\": true, \"ids\": \"r\", \"fingerprint\": \"abc\"}",
+      "expected": {
+        "error": "invalid edit reply; inspect the task drawing before retrying"
+      }
+    },
+    {
+      "text": "{\"nonce\": \"mcp_test\", \"ok\": true, \"ids\": [\"r\"], \"fingerprint\": null}",
+      "expected": {
+        "error": "invalid edit reply; inspect the task drawing before retrying"
+      }
+    },
+    {
+      "text": "{\"nonce\": \"mcp_test\", \"ok\": false}",
+      "expected": {
+        "accepted": true,
+        "reply": {
+          "nonce": "mcp_test",
+          "ok": false
+        }
+      }
+    },
+    {
+      "text": "{\"nonce\": \"mcp_test\", \"ok\": false, \"error\": \"reason\"}",
+      "expected": {
+        "accepted": true,
+        "reply": {
+          "nonce": "mcp_test",
+          "ok": false,
+          "error": "reason"
+        }
+      }
+    },
+    {
+      "text": "{\"nonce\": \"mcp_test\", \"ok\": false, \"error\": null}",
+      "expected": {
+        "error": "invalid edit reply; inspect the task drawing before retrying"
+      }
+    },
+    {
+      "text": "null",
+      "expected": {
+        "error": "invalid edit reply; inspect the task drawing before retrying"
+      }
+    },
+    {
+      "text": "[]",
+      "expected": {
+        "error": "invalid edit reply; inspect the task drawing before retrying"
+      }
+    },
+    {
+      "text": "{}",
+      "expected": {
+        "error": "invalid edit reply; inspect the task drawing before retrying"
+      }
+    },
+    {
+      "text": "\"string\"",
+      "expected": {
+        "error": "invalid edit reply; inspect the task drawing before retrying"
+      }
+    },
+    {
+      "text": "{invalid",
+      "expected": {
+        "error": "invalid edit reply; inspect the task drawing before retrying"
+      }
+    },
+    {
+      "text": "",
+      "expected": {
+        "error": "invalid edit reply; inspect the task drawing before retrying"
+      }
+    }
+  ],
+  "refusals": [
+    "CSS transforms and nested SVG viewports are unsupported",
+    "definitions are not editable selections",
+    "document changed before insertion",
+    "document contains duplicate ids",
+    "drawing content changed before insertion",
+    "edit identity collision",
+    "group requires consecutive siblings to preserve stacking",
+    "group requires objects in the same layer or parent",
+    "invalid edit identity",
+    "invalid selection",
+    "invalid style edit",
+    "invalid style value",
+    "mixed formatting or multiple text runs; select simple single-run text",
+    "non-finite transform",
+    "replacement must be a single line of text",
+    "select drawable objects",
+    "select exactly one text object",
+    "select objects inside the layer, not the layer itself",
+    "selected objects are referenced; detach references before deleting",
+    "selection changed before edit",
+    "selection contains locked objects or belongs to a locked layer",
+    "structural edits with stylesheets require inline styles first",
+    "text paths and flowed text are unsupported",
+    "ungroup supports plain groups without inherited style or effects",
+    "unsupported edit operation"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "prepared_only": true,
+  "remote_CI_executed": false,
+  "native_Linux_or_Intel_package_executed_locally": false,
+  "Windows_build_prepared": false,
+  "targets": [
+    {
+      "runner": "ubuntu-24.04",
+      "target": "x86_64-unknown-linux-gnu",
+      "package": "linux-x86_64"
+    },
+    {
+      "runner": "ubuntu-24.04-arm",
+      "target": "aarch64-unknown-linux-gnu",
+      "package": "linux-arm64"
+    },
+    {
+      "runner": "macos-15-intel",
+      "target": "x86_64-apple-darwin",
+      "package": "macos-x86_64"
+    },
+    {
+      "runner": "macos-15",
+      "target": "aarch64-apple-darwin",
+      "package": "macos-arm64"
+    }
+  ],
+  "package_build_acceptance_steps": [
+    "Build native installable archive",
+    "Install actual archive with empty PATH and real CLI acceptance",
+    "Retain candidate archive and build/acceptance evidence"
+  ],
+  "workflow_sha256": "28830d4dae26d67a183116059708bb2f9daf70b9708cb8bec4d715e5db01c1c4",
+  "helper_requirements_sha256": "5842b8847807579fd9f43a4dc0204a2c7dc68f137bf8a075d746568123140dbb",
+  "action_pins": {
+    "setup_uv_v6_8_0": "d0cc045d04ccac9d8b7881df0226f9e82c39688e",
+    "uv": "0.12.22"
+  },
+  "primary_sources": [
+    "https://docs.github.com/en/actions/reference/runners/github-hosted-runners",
+    "https://docs.astral.sh/uv/concepts/python-versions/",
+    "https://github.com/NixOS/patchelf",
+    "https://ppa.launchpadcontent.net/inkscape.dev/stable/ubuntu/dists/noble/main/binary-arm64/Packages.gz"
+  ],
+  "remaining": [
+    "Actual remote or isolated native Linux/Intel runner execution",
+    "Minimum OS/glibc and dependency ABI verification",
+    "Redistribution/source-license audit",
+    "Windows native reparse/rename-handle port and package jobs"
+  ]
+}
