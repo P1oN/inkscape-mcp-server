@@ -1,5 +1,11 @@
 # Agent handoff — current Rust candidate
 
+User-authorized Release v0.1.0 published as an Apple Silicon preview, tag at verified
+source 5345f619add78004d3ecc9ca83abd5a6205788db. Archive and SHA-256 attached;
+GitHub asset digest matches 48af10da30278ae1f4131d1b74c707be15551b3dc15160a75c83aa2ac91d024d.
+https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.0
+No additional platforms or native GUI validation claimed.
+
 Apple Silicon GitHub build verified: run 37154851232 succeeded for source
 5345f619add78004d3ecc9ca83abd5a6205788db. Downloadable artifact 11285725976
 contains archive/checksum; SHA-256

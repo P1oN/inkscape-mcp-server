@@ -1,5 +1,9 @@
 # Download a GitHub build for Apple Silicon
 
+For a persistent download, open [Release v0.1.0](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.0)
+and download the archive and checksum from **Assets**. This first release is marked
+prerelease; it contains the exact CI-verified archive described below.
+
 The [Rust checks and native packages workflow](https://github.com/P1oN/inkscape-mcp-server/actions/workflows/rust-migration.yml)
 automatically builds **macOS arm64 (M chips)** after relevant pushes to `main` and for
 pull requests. It can also be started manually with **Run workflow → macos-arm64**.
@@ -31,8 +35,8 @@ no DSN or management token, and local settings are not packaged.
 Downloadable installable artifacts are uploaded only after all required checks succeed.
 A separate `build-evidence-aarch64-apple-darwin` artifact retains diagnostic results even
 when a run fails. Successful packages have a 30-day retention period; rerun the workflow
-if a download expires. These are Actions artifacts, not Git-tracked binaries or published
-GitHub Releases. A GitHub login may be required to download an artifact.
+if a download expires. Actions artifacts are separate from the published Release assets above and are not
+Git-tracked binaries. A GitHub login may be required to download an Actions artifact.
 
 The Apple Silicon job runs on `macos-15`, verifies the native compiler architecture,
 uses Cargo.lock and pinned Rust/private runtime dependencies, and checks Rust, helpers,
