@@ -124,9 +124,16 @@ def bundle_dbus(library, manifest):
     while queue:
         source = queue.pop(0)
         deps = dependencies(source)
+        # otool -L includes a dylib's own install ID. It is metadata, not a
+        # dependency to resolve; install_name_tool -id replaces it below.
+        identity = (
+            command("/usr/bin/otool", "-D", str(source)).splitlines()[1:]
+            if source.suffix == ".dylib"
+            else []
+        )
         graph[source] = []
         for dep in deps:
-            if system(dep):
+            if system(dep) or dep in identity:
                 continue
             target = resolve_macho_dependency(source, dep)
             graph[source].append((dep, target))
