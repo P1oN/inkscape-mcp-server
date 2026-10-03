@@ -1,5 +1,18 @@
 # Agent handoff — current Rust candidate
 
+Apple Silicon GitHub build verified: run 37154851232 succeeded for source
+5345f619add78004d3ecc9ca83abd5a6205788db. Downloadable artifact 11285725976
+contains archive/checksum; SHA-256
+48af10da30278ae1f4131d1b74c707be15551b3dc15160a75c83aa2ac91d024d.
+CI passed Rust220/1ignored, helper6, exact discovery, packaging/notices, security,
+source setup, Sentry wizard, launcher/doctor and archive per_call/shell acceptance.
+Downloaded archive additionally passed local empty-PATH per_call acceptance,
+private runtime/bus, real CLI rendering/export and transaction invariants:
+migration/results/github-build-5345f61-cold.json. No local settings in archive.
+This is CLI/package acceptance, not new native GUI evidence.
+Run: https://github.com/P1oN/inkscape-mcp-server/actions/runs/37154851232
+
+
 GitHub builds: rust-migration.yml now defaults to macos-15 Apple Silicon on relevant
 main pushes/PRs and manual dispatch. Manual all-posix retains the other prepared targets.
 Verified installable archives/checksums upload only on success, separately from always-retained

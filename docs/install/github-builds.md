@@ -6,6 +6,10 @@ pull requests. It can also be started manually with **Run workflow → macos-arm
 Manual `all-posix` additionally selects the prepared Intel Mac and Linux jobs; their
 existence does not prove compatibility before they have passed on their own runners.
 
+First verified Apple Silicon build: [successful run 37154851232](https://github.com/P1oN/inkscape-mcp-server/actions/runs/37154851232),
+source `5345f619add78004d3ecc9ca83abd5a6205788db`. Its downloaded archive also
+passed installation and real CLI acceptance on the development Mac.
+
 Open a successful run and download **Artifacts → inkscape-mcp-macos-arm64**. Unzip the
 artifact: it contains `inkscape-mcp-macos-arm64.tar.gz` and its `.sha256` file. With both
 files in the same directory:
