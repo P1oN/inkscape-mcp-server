@@ -1,5 +1,10 @@
 # Agent handoff — current Rust candidate
 
+User requested a Release source archive for local bootstrap. build_source_archive.py
+exports committed sources with SOURCE_REVISION, excluding Git metadata/local settings.
+Package builder handles source downloads without .git and does not inherit parent-repo
+identity. Source archive acceptance must use a truly extracted, Git-free copy.
+
 User-authorized source bootstrap publication to main (2026-10-04): setup.sh --bootstrap on Apple Silicon
 macOS15+ provisions missing Rust1.99/private Python3.12.14 with pinned rustup/uv inputs,
 and six SHA-256-pinned temporary bottles without installing Homebrew. Bridge/server compile

@@ -87,6 +87,27 @@ def main(output):
                 raise RuntimeError("native path escaped input tree")
         checks.append("bottle mapping and escape refusal")
 
+        source = root / "extracted-source"
+        source.mkdir()
+        original_cwd = Path.cwd()
+        try:
+            os.chdir(source)
+            with patch.object(builder, "command", side_effect=RuntimeError("Git must not run")):
+                require(builder.source_revision() is None, "unmarked source download needs Git")
+                revision = source / "SOURCE_REVISION"
+                revision.write_text("inkscape-mcp-source-v1\n" + "a" * 40 + "\n")
+                require(builder.source_revision() == "a" * 40, "archive revision lost")
+                revision.write_text("inkscape-mcp-source-v1\n$(touch SHOULD_NOT_EXIST)\n")
+                try:
+                    builder.source_revision()
+                except RuntimeError:
+                    pass
+                else:
+                    raise RuntimeError("invalid source revision accepted")
+        finally:
+            os.chdir(original_cwd)
+        checks.append("git-free source revision and invalid metadata refusal")
+
         # Substitute only the downloader in an isolated copy: force a genuine
         # shell failure before installation and observe its EXIT cleanup.
         checkout = root / "checkout"

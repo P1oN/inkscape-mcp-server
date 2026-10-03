@@ -40,6 +40,26 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def source_revision():
+    # A source download has no .git directory. Do not accidentally inherit the
+    # identity of an unrelated repository containing the extracted source tree.
+    if Path(".git").exists():
+        return command("git", "rev-parse", "HEAD").strip()
+    metadata = Path("SOURCE_REVISION")
+    if metadata.exists():
+        if metadata.is_symlink() or not metadata.is_file() or metadata.stat().st_size > 128:
+            raise RuntimeError("invalid source revision metadata")
+        lines = metadata.read_text().splitlines()
+        if (
+            len(lines) != 2
+            or lines[0] != "inkscape-mcp-source-v1"
+            or not re.fullmatch(r"[0-9a-f]{40}", lines[1])
+        ):
+            raise RuntimeError("invalid source revision metadata")
+        return lines[1]
+    return None
+
+
 def build_context_bridge(source, headers, destination):
     # A stable install name avoids embedding the developer's output directory.
     argv = (
@@ -366,7 +386,7 @@ def build(output, binary=None):
         "dbus_inputs": [],
         "release_signed": False,
         "notarized": False,
-        "source_head": command("git", "rev-parse", "HEAD").strip(),
+        "source_head": source_revision(),
     }
     for name in DEPS:
         dist = distribution(name)

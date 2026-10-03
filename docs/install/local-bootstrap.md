@@ -1,6 +1,8 @@
 # Local source installation on Apple Silicon
 
-From this source checkout, run:
+Download `inkscape-mcp-source-bootstrap.tar.gz` from the Release, verify its checksum,
+and unpack it into a permanent location. No Git clone is required. From the extracted
+`inkscape-mcp-source-bootstrap` directory (or a source checkout), run:
 
 ```sh
 ./setup.sh --bootstrap
@@ -15,7 +17,10 @@ Normal subsequent `./setup.sh` runs reuse the saved package and only write confi
 Diagnostics are explicit; `--check` runs doctor before saving configuration.
 
 Automatic bootstrap currently supports **Apple Silicon, macOS 15 or newer**.
-The published v0.1.0 archive does not contain this installer. Use the current `main` source checkout for this installation path.
+The published v0.1.0 ready-binary archive does not contain this installer. Use the source
+bootstrap archive or the current `main` source checkout for this installation path.
+The source archive includes SOURCE_REVISION metadata; ordinary GitHub source archives
+without this metadata still build, recording an unknown source commit rather than failing.
 
 The build uses Apple Xcode or Command Line Tools. If these are missing, the installer
 opens Apple's installation dialog and stops with a rerun instruction; it does not accept
