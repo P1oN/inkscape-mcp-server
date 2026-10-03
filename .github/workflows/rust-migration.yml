@@ -1,16 +1,32 @@
 name: Rust checks and native packages
 
-# Prepared build/package/acceptance jobs; no remote CI result is claimed.
+# Automatic Apple Silicon builds; other POSIX targets are available by manual dispatch.
 # Windows is intentionally pending the native reparse/rename-handle port.
 "on":
   workflow_dispatch:
+    inputs:
+      targets:
+        description: Platforms to build
+        type: choice
+        default: macos-arm64
+        options:
+          - macos-arm64
+          - all-posix
+  push:
+    branches: [main]
+    paths:
+      - "rust/**"
+      - "migration/**"
+      - "scripts/**"
+      - "setup.sh"
+      - "run-mcp.sh"
+      - "runtime/**"
+      - ".github/workflows/rust-migration.yml"
   pull_request:
     paths:
       - "rust/**"
       - "migration/**"
-      - "scripts/migration_*.py"
-      - "scripts/rust_*.py"
-      - "scripts/build-local-package.sh"
+      - "scripts/**"
       - "setup.sh"
       - "run-mcp.sh"
       - "runtime/**"
@@ -27,22 +43,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - runner: ubuntu-24.04
-            target: x86_64-unknown-linux-gnu
-            package: linux-x86_64
-          - runner: ubuntu-24.04-arm
-            target: aarch64-unknown-linux-gnu
-            package: linux-arm64
-          - runner: macos-15-intel
-            target: x86_64-apple-darwin
-            package: macos-x86_64
-          - runner: macos-15
-            target: aarch64-apple-darwin
-            package: macos-arm64
+        include: ${{ fromJSON(github.event_name == 'workflow_dispatch' && inputs.targets == 'all-posix' && '[{"runner":"ubuntu-24.04","target":"x86_64-unknown-linux-gnu","package":"linux-x86_64"},{"runner":"ubuntu-24.04-arm","target":"aarch64-unknown-linux-gnu","package":"linux-arm64"},{"runner":"macos-15-intel","target":"x86_64-apple-darwin","package":"macos-x86_64"},{"runner":"macos-15","target":"aarch64-apple-darwin","package":"macos-arm64"}]' || '[{"runner":"macos-15","target":"aarch64-apple-darwin","package":"macos-arm64"}]') }}
     env:
       RUSTUP_TOOLCHAIN: 1.99.0
       CARGO_TERM_COLOR: always
+      SENTRY_DSN: ""
+      SENTRY_TRACES_SAMPLE_RATE: "0"
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: Install Linux XML build dependencies
@@ -131,6 +137,8 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/inkscape-mcp-source-workspace"
           ./setup.sh --build --workspace "$RUNNER_TEMP/inkscape-mcp-source-workspace"
+      - name: Private Sentry setup and hidden input acceptance
+        run: .packaging-venv/bin/python scripts/launcher_sentry_acceptance.py --output migration/results/ci-sentry-setup
       - name: Empty-PATH launcher/configuration acceptance
         env:
           PACKAGE: ${{ matrix.package }}
@@ -143,13 +151,33 @@ jobs:
           .packaging-venv/bin/python scripts/migration_package_acceptance.py --archive "dist/inkscape-mcp-$PACKAGE.tar.gz" --output migration/results/ci-package-cold --report migration/results/ci-package-cold.json
           .packaging-venv/bin/python scripts/migration_package_acceptance.py --archive "dist/inkscape-mcp-$PACKAGE.tar.gz" --engine-mode shell --output migration/results/ci-package-shell --report migration/results/ci-package-shell.json
           .packaging-venv/bin/python scripts/migration_doctor_acceptance.py --package "dist/inkscape-mcp-$PACKAGE" --output migration/results/ci-doctor --report migration/results/ci-doctor.json
-      - name: Retain candidate archive and build/acceptance evidence
+      - name: Compute archive checksum
+        env:
+          PACKAGE: ${{ matrix.package }}
+        run: |
+          .packaging-venv/bin/python - <<'PY'
+          import hashlib, os
+          from pathlib import Path
+          archive = Path("dist") / ("inkscape-mcp-" + os.environ["PACKAGE"] + ".tar.gz")
+          checksum = hashlib.sha256(archive.read_bytes()).hexdigest()
+          Path(str(archive) + ".sha256").write_text(checksum + "  " + archive.name + "\n")
+          PY
+      - name: Upload verified installable package
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: inkscape-mcp-${{ matrix.package }}
+          path: |
+            dist/*.tar.gz
+            dist/*.tar.gz.sha256
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0
+      - name: Retain build and acceptance evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: candidate-package-${{ matrix.target }}
+          name: build-evidence-${{ matrix.target }}
           path: |
-            dist/*.tar.gz
             dist/*/FILES.json
             dist/*/libexec/inkscape-mcp/package.json
             rust/Cargo.lock
@@ -160,5 +188,8 @@ jobs:
             migration/results/ci-package-*.json
             migration/results/ci-doctor/
             migration/results/ci-doctor.json
+            migration/results/ci-notices.json
+            migration/results/ci-launcher/
+            migration/results/ci-sentry-setup/
           if-no-files-found: error
           retention-days: 14

@@ -7,6 +7,10 @@ Operation Records, atomic rollback and genuine no-op behavior remain part of the
 
 ## Install and run
 
+For M-chip Macs, download a successful **inkscape-mcp-macos-arm64** artifact from
+[GitHub Actions](https://github.com/P1oN/inkscape-mcp-server/actions/workflows/rust-migration.yml).
+See [download and checksum instructions](docs/install/github-builds.md).
+
 Install Inkscape 1.4 or newer. From this checkout:
 
 ```sh

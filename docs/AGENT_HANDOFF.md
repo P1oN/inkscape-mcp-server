@@ -1,5 +1,13 @@
 # Agent handoff — current Rust candidate
 
+GitHub builds: rust-migration.yml now defaults to macos-15 Apple Silicon on relevant
+main pushes/PRs and manual dispatch. Manual all-posix retains the other prepared targets.
+Verified installable archives/checksums upload only on success, separately from always-retained
+build evidence; DSN disabled in CI. Includes hidden-input Sentry setup acceptance. See
+docs/install/github-builds.md. Workflow linted with actionlint; actual run status is visible
+in GitHub Actions and must not be inferred from local checks.
+
+
 Publication authorized by the user on 2026-10-03: commit/push codex/rust-migration and
 merge into main. Earlier no-publication checkpoint statements below describe prior scope.
 Configured Sentry DSN/tokens, local settings, archives and raw results are excluded from Git.
