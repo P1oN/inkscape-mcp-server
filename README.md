@@ -7,14 +7,14 @@ Operation Records, atomic rollback and genuine no-op behavior remain part of the
 
 ## Install and run
 
-For M-chip Macs, download the archive and checksum from
-[GitHub Releases](https://github.com/P1oN/inkscape-mcp-server/releases).
+For M-chip Macs running macOS 15+, download `inkscape-mcp-source-bootstrap.tar.gz`
+and its checksum from [Release v0.1.1](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.1).
 See [download and checksum instructions](docs/install/github-builds.md).
 
-Install Inkscape 1.4 or newer. From the unpacked package:
+Install Inkscape 1.4 or newer. From the unpacked source archive:
 
 ```sh
-./setup.sh
+./setup.sh --bootstrap
 ./run-mcp.sh
 ```
 

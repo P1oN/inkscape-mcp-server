@@ -1,8 +1,29 @@
 # Download a GitHub build for Apple Silicon
 
-For a persistent download, open [Release v0.1.0](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.0)
-and download the archive and checksum from **Assets**. This first release is marked
-prerelease; it contains the exact CI-verified archive described below.
+For local installation on Apple Silicon macOS 15+, open
+[Release v0.1.1](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.1)
+and download `inkscape-mcp-source-bootstrap.tar.gz` and its `.sha256` file from **Assets**.
+With both files in the same directory:
+
+```sh
+shasum -a 256 -c inkscape-mcp-source-bootstrap.tar.gz.sha256
+tar -xzf inkscape-mcp-source-bootstrap.tar.gz
+cd inkscape-mcp-source-bootstrap
+./setup.sh --bootstrap
+./run-mcp.sh --doctor
+```
+
+Install Inkscape first. Setup builds locally, downloads missing build tools into a private
+temporary directory and removes those tools afterward. The packaged helper Python stays
+available for runtime use. If Apple Command Line Tools are missing, complete their installation
+dialog and rerun setup. See [local bootstrap](local-bootstrap.md) for prerequisites and limits.
+The exact Git-free release archive passed a fresh-tools build, temporary-tool cleanup,
+license-notice checks and empty-PATH MCP/D-Bus/render/export/transaction acceptance on the
+development Mac. This is local automated acceptance; native GUI and clean-machine Apple
+tool installation were not revalidated.
+
+The earlier [Release v0.1.0](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.0)
+keeps the prebuilt archive described below. Both releases are marked prerelease.
 
 The [Rust checks and native packages workflow](https://github.com/P1oN/inkscape-mcp-server/actions/workflows/rust-migration.yml)
 automatically builds **macOS arm64 (M chips)** after relevant pushes to `main` and for

@@ -5,6 +5,14 @@ exports committed sources with SOURCE_REVISION, excluding Git metadata/local set
 Package builder handles source downloads without .git and does not inherit parent-repo
 identity. Source archive acceptance must use a truly extracted, Git-free copy.
 
+Published source preview [v0.1.1](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.1)
+at db190b9c8ac106e7686d0aa18f492e058a632313. Uploaded source archive SHA-256:
+a8696c1a71d828a8be01a618aed5323017ba591f68c264f000153bec61485bc3.
+Exact extracted archive passed --fresh-tools compilation and cleanup, notices17 and
+empty-PATH per_call MCP/bus/render/export/transaction acceptance. Evidence:
+migration/results/source-bootstrap-notices.json, source-bootstrap-cold.json and
+source-archive-guards (nine synthetic guards). No new native GUI acceptance.
+
 User-authorized source bootstrap publication to main (2026-10-04): setup.sh --bootstrap on Apple Silicon
 macOS15+ provisions missing Rust1.99/private Python3.12.14 with pinned rustup/uv inputs,
 and six SHA-256-pinned temporary bottles without installing Homebrew. Bridge/server compile
