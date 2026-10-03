@@ -4,7 +4,9 @@ GitHub builds: rust-migration.yml now defaults to macos-15 Apple Silicon on rele
 main pushes/PRs and manual dispatch. Manual all-posix retains the other prepared targets.
 Verified installable archives/checksums upload only on success, separately from always-retained
 build evidence; DSN disabled in CI. Includes hidden-input Sentry setup acceptance. See
-docs/install/github-builds.md. Workflow linted with actionlint; actual run status is visible
+docs/install/github-builds.md. First remote run exposed a missing test Python environment; CI now installs pinned
+private Python/dependencies before Rust tests, and engine fixtures use a manifest-relative
+interpreter path rather than the calling directory. Workflow linted with actionlint; actual run status is visible
 in GitHub Actions and must not be inferred from local checks.
 
 

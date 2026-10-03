@@ -71,6 +71,16 @@ jobs:
         run: cargo fmt --check --manifest-path rust/Cargo.toml
       - name: Clippy
         run: cargo clippy --locked --all-targets --manifest-path rust/Cargo.toml -- -D warnings
+      - name: Install pinned packaging Python manager
+        uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6.8.0
+        with:
+          version: "0.12.22"
+          enable-cache: false
+      - name: Install private helper build runtime and pinned dependencies
+        run: |
+          uv python install 3.12.14
+          uv venv --managed-python --python 3.12.14 .venv
+          uv pip install --python .venv/bin/python --only-binary :all: -r rust/package/helper-requirements.txt
       - name: Native tests
         run: cargo test --locked --manifest-path rust/Cargo.toml
       - name: Build release executable
@@ -101,61 +111,51 @@ jobs:
         run: |
           brew install glib dbus
           brew install --cask inkscape
-      - name: Install pinned packaging Python manager
-        uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6.8.0
-        with:
-          version: "0.12.22"
-          enable-cache: false
-      - name: Install private helper build runtime and pinned dependencies
-        run: |
-          uv python install 3.12.14
-          uv venv --managed-python --python 3.12.14 .packaging-venv
-          uv pip install --python .packaging-venv/bin/python --only-binary :all: -r rust/package/helper-requirements.txt
       - name: Retained live helper regressions
         run: |
-          uv pip install --python .packaging-venv/bin/python 'pytest>=8.0'
-          .packaging-venv/bin/python -m pytest runtime/tests
+          uv pip install --python .venv/bin/python 'pytest>=8.0'
+          .venv/bin/python -m pytest runtime/tests
       - name: Build native installable archive
         env:
           PACKAGE: ${{ matrix.package }}
         run: |
-          .packaging-venv/bin/python scripts/migration_build_posix_package.py --output "dist/inkscape-mcp-$PACKAGE" --archive "dist/inkscape-mcp-$PACKAGE.tar.gz"
-          .packaging-venv/bin/python scripts/migration_notices_acceptance.py --package "dist/inkscape-mcp-$PACKAGE" --report migration/results/ci-notices.json
+          .venv/bin/python scripts/migration_build_posix_package.py --output "dist/inkscape-mcp-$PACKAGE" --archive "dist/inkscape-mcp-$PACKAGE.tar.gz"
+          .venv/bin/python scripts/migration_notices_acceptance.py --package "dist/inkscape-mcp-$PACKAGE" --report migration/results/ci-notices.json
       - name: Rust STDIO security and resource invariants
         env:
           PACKAGE: ${{ matrix.package }}
         run: |
-          .packaging-venv/bin/python scripts/rust_security_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-security
-          .packaging-venv/bin/python scripts/rust_diagnostic_limits_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-diagnostic-limits
-          .packaging-venv/bin/python scripts/rust_stdio_frame_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-stdio-frame
-          .packaging-venv/bin/python scripts/rust_compare_publication_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-compare-publication
-          .packaging-venv/bin/python scripts/migration_special_file_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-special-files
-          .packaging-venv/bin/python scripts/rust_renderer_asset_probe.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-renderer-assets --require-isolation
-          .packaging-venv/bin/python scripts/rust_engine_routes_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-engine-routes
+          .venv/bin/python scripts/rust_security_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-security
+          .venv/bin/python scripts/rust_diagnostic_limits_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-diagnostic-limits
+          .venv/bin/python scripts/rust_stdio_frame_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-stdio-frame
+          .venv/bin/python scripts/rust_compare_publication_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-compare-publication
+          .venv/bin/python scripts/migration_special_file_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-special-files
+          .venv/bin/python scripts/rust_renderer_asset_probe.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-renderer-assets --require-isolation
+          .venv/bin/python scripts/rust_engine_routes_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-engine-routes
       - name: Source checkout setup without manual environment configuration
         shell: bash
         run: |
           mkdir -p "$RUNNER_TEMP/inkscape-mcp-source-workspace"
           ./setup.sh --build --workspace "$RUNNER_TEMP/inkscape-mcp-source-workspace"
       - name: Private Sentry setup and hidden input acceptance
-        run: .packaging-venv/bin/python scripts/launcher_sentry_acceptance.py --output migration/results/ci-sentry-setup
+        run: .venv/bin/python scripts/launcher_sentry_acceptance.py --output migration/results/ci-sentry-setup
       - name: Empty-PATH launcher/configuration acceptance
         env:
           PACKAGE: ${{ matrix.package }}
         run: |
-          .packaging-venv/bin/python scripts/migration_launcher_acceptance.py --package "dist/inkscape-mcp-$PACKAGE" --output migration/results/ci-launcher
+          .venv/bin/python scripts/migration_launcher_acceptance.py --package "dist/inkscape-mcp-$PACKAGE" --output migration/results/ci-launcher
       - name: Install actual archive with empty PATH and real CLI acceptance
         env:
           PACKAGE: ${{ matrix.package }}
         run: |
-          .packaging-venv/bin/python scripts/migration_package_acceptance.py --archive "dist/inkscape-mcp-$PACKAGE.tar.gz" --output migration/results/ci-package-cold --report migration/results/ci-package-cold.json
-          .packaging-venv/bin/python scripts/migration_package_acceptance.py --archive "dist/inkscape-mcp-$PACKAGE.tar.gz" --engine-mode shell --output migration/results/ci-package-shell --report migration/results/ci-package-shell.json
-          .packaging-venv/bin/python scripts/migration_doctor_acceptance.py --package "dist/inkscape-mcp-$PACKAGE" --output migration/results/ci-doctor --report migration/results/ci-doctor.json
+          .venv/bin/python scripts/migration_package_acceptance.py --archive "dist/inkscape-mcp-$PACKAGE.tar.gz" --output migration/results/ci-package-cold --report migration/results/ci-package-cold.json
+          .venv/bin/python scripts/migration_package_acceptance.py --archive "dist/inkscape-mcp-$PACKAGE.tar.gz" --engine-mode shell --output migration/results/ci-package-shell --report migration/results/ci-package-shell.json
+          .venv/bin/python scripts/migration_doctor_acceptance.py --package "dist/inkscape-mcp-$PACKAGE" --output migration/results/ci-doctor --report migration/results/ci-doctor.json
       - name: Compute archive checksum
         env:
           PACKAGE: ${{ matrix.package }}
         run: |
-          .packaging-venv/bin/python - <<'PY'
+          .venv/bin/python - <<'PY'
           import hashlib, os
           from pathlib import Path
           archive = Path("dist") / ("inkscape-mcp-" + os.environ["PACKAGE"] + ".tar.gz")

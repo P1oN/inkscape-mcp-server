@@ -376,7 +376,10 @@ mod tests {
     fn fake() -> (tempfile::TempDir, PathBuf) {
         let dir = tempfile::tempdir().unwrap();
         let binary = dir.path().join("inkscape");
-        let python = std::env::current_dir().unwrap().join("../.venv/bin/python");
+        let python = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .parent()
+            .unwrap()
+            .join(".venv/bin/python");
         let python = if python.is_file() {
             python
         } else {

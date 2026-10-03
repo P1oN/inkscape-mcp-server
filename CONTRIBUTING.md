@@ -17,7 +17,11 @@ cargo test --locked --manifest-path rust/Cargo.toml
 ```
 
 Python is development/packaging tooling and a private live runtime, not the MCP server.
-Use an existing pinned environment or `uv sync --group dev` for those tools:
+Before Rust tests, create `.venv` with the pinned helper interpreter and dependencies
+(the synthetic process/bus fixtures use it), for example `uv venv --managed-python
+--python 3.12.14 .venv` then `uv pip install --python .venv/bin/python
+-r rust/package/helper-requirements.txt`. Use `uv sync --group dev` for the additional
+development tools:
 
 ```sh
 python -m pytest runtime/tests
