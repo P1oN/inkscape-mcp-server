@@ -84,6 +84,31 @@ def copy(source, target):
     shutil.copy2(source, target, follow_symlinks=True)
 
 
+def resolve_macho_dependency(source, dep):
+    """Resolve declared loader paths; refuse missing or ambiguous RPATH candidates."""
+    if dep.startswith("/"):
+        return Path(dep).resolve()
+    if dep.startswith("@loader_path/"):
+        return (source.parent / dep.removeprefix("@loader_path/")).resolve()
+    if dep.startswith("@rpath/"):
+        commands = command("/usr/bin/otool", "-l", str(source))
+        rpaths = re.findall(r"cmd LC_RPATH\s+cmdsize \d+\s+path (.*?) \(offset \d+\)", commands)
+        candidates = set()
+        for rpath in rpaths:
+            if rpath.startswith("@loader_path/"):
+                base = source.parent / rpath.removeprefix("@loader_path/")
+            elif rpath.startswith("/"):
+                base = Path(rpath)
+            else:
+                continue
+            candidate = (base / dep.removeprefix("@rpath/")).resolve()
+            if candidate.is_file():
+                candidates.add(candidate)
+        if len(candidates) == 1:
+            return candidates.pop()
+    raise RuntimeError("unresolved or ambiguous development D-Bus dependency: " + dep)
+
+
 def bundle_dbus(library, manifest):
     root = library / "dbus"
     mapping, queue = {}, []
@@ -99,13 +124,12 @@ def bundle_dbus(library, manifest):
     while queue:
         source = queue.pop(0)
         deps = dependencies(source)
-        graph[source] = deps
+        graph[source] = []
         for dep in deps:
             if system(dep):
                 continue
-            if not dep.startswith("/"):
-                raise RuntimeError("unresolved development D-Bus dependency: " + dep)
-            target = Path(dep).resolve()
+            target = resolve_macho_dependency(source, dep)
+            graph[source].append((dep, target))
             if target == source or target in mapping:
                 continue
             if (
@@ -123,10 +147,7 @@ def bundle_dbus(library, manifest):
     for source, dest in mapping.items():
         if dest.suffix == ".dylib":
             command("/usr/bin/install_name_tool", "-id", "@loader_path/" + dest.name, str(dest))
-        for dep in graph[source]:
-            if system(dep):
-                continue
-            target = Path(dep).resolve()
+        for dep, target in graph[source]:
             relative = os.path.relpath(mapping[target], dest.parent)
             command(
                 "/usr/bin/install_name_tool", "-change", dep, "@loader_path/" + relative, str(dest)

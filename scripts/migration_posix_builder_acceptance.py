@@ -90,6 +90,43 @@ def exercise(root, scenario):
     }
 
 
+def macho_paths(root):
+    source = root / "bin/dbus-daemon"
+    source.parent.mkdir(parents=True)
+    source.write_bytes(b"fixture")
+    library = root / "lib/libdbus.dylib"
+    library.parent.mkdir()
+    library.write_bytes(b"fixture")
+    alternate = root / "other/libdbus.dylib"
+    alternate.parent.mkdir()
+    alternate.write_bytes(b"other")
+    for rpath in (str(library.parent), "@loader_path/../lib"):
+        with patch.object(
+            builder, "command", return_value=f"cmd LC_RPATH\ncmdsize 48\npath {rpath} (offset 12)\n"
+        ):
+            require(
+                builder.resolve_macho_dependency(source, "@rpath/libdbus.dylib") == library,
+                "RPATH resolved incorrectly",
+            )
+    require(
+        builder.resolve_macho_dependency(source, "@loader_path/../lib/libdbus.dylib") == library,
+        "loader path resolved incorrectly",
+    )
+    for reply in (
+        "",
+        (
+            f"cmd LC_RPATH\ncmdsize 48\npath {library.parent} (offset 12)\n"
+            f"cmd LC_RPATH\ncmdsize 48\npath {alternate.parent} (offset 12)\n"
+        ),
+    ):
+        with patch.object(builder, "command", return_value=reply):
+            try:
+                builder.resolve_macho_dependency(source, "@rpath/libdbus.dylib")
+            except RuntimeError:
+                continue
+            raise RuntimeError("missing/ambiguous RPATH accepted")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
@@ -113,6 +150,7 @@ def main():
         raise RuntimeError("unsupported native target accepted")
     results = []
     with TemporaryDirectory(prefix="imcp-elf-logic-") as temp:
+        macho_paths(Path(temp).resolve() / "macho")
         for scenario in ("valid", "missing", "collision"):
             root = Path(temp).resolve() / scenario
             root.mkdir()
@@ -125,6 +163,7 @@ def main():
             "target_selections": selections,
             "unsupported_targets_refused": 2,
             "synthetic_ELF_cases": len(results),
+            "synthetic_MachO_path_cases": 5,
             "actual_Linux_execution": False,
             "native_GUI_launched": False,
             "scope": "Synthetic command replies only; not Linux ABI/loader acceptance",

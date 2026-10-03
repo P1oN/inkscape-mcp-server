@@ -115,6 +115,8 @@ jobs:
         run: |
           uv pip install --python .venv/bin/python 'pytest>=8.0'
           .venv/bin/python -m pytest runtime/tests
+      - name: Synthetic package dependency resolver regressions
+        run: .venv/bin/python scripts/migration_posix_builder_acceptance.py --output migration/results/ci-builder --report migration/results/ci-builder.json
       - name: Build native installable archive
         env:
           PACKAGE: ${{ matrix.package }}
