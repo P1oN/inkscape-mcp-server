@@ -4,7 +4,10 @@ GitHub builds: rust-migration.yml now defaults to macos-15 Apple Silicon on rele
 main pushes/PRs and manual dispatch. Manual all-posix retains the other prepared targets.
 Verified installable archives/checksums upload only on success, separately from always-retained
 build evidence; DSN disabled in CI. Includes hidden-input Sentry setup acceptance. See
-docs/install/github-builds.md. Remote packaging also exposed Homebrew D-Bus @rpath inputs; builder now resolves
+docs/install/github-builds.md. Runner GLib 2.88.3 has an exact SHA-256-verified GNOME notice supplement alongside
+local 2.90.0. Notice acceptance selects SBOM versions while retaining URL/hash/path
+refusals and mandatory runtime license checks.
+Remote packaging also exposed Homebrew D-Bus @rpath inputs; builder now resolves
 declared Mach-O loader paths, refuses missing/ambiguous inputs, then relocates and
 rechecks the owned dependency closure. Synthetic resolver regressions run in CI.
 First remote run exposed a missing test Python environment; CI now installs pinned

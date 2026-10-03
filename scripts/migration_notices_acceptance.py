@@ -117,15 +117,22 @@ def main(package, report):
             for notice in supplement["notices"]
         }
         prefix = "libexec/inkscape-mcp/licenses/native-source/"
+        required = {
+            "glib": ["LICENSES/LGPL-2.1-or-later.txt"],
+            "dbus": ["LICENSES/AFL-2.1.txt", "LICENSES/GPL-2.0-or-later.txt"],
+            "gettext": ["gettext-runtime/intl/COPYING.LIB"],
+            "pcre2": ["COPYING"],
+        }
+        versions = {
+            row["source"]["name"]: row["source"]["version"]
+            for row in inventory["native_source_supplements"]
+        }
         checks["runtime_license_texts_packaged"] = all(
-            prefix + relative in native_paths
-            for relative in [
-                "glib/2.90.0/LICENSES/LGPL-2.1-or-later.txt",
-                "dbus/1.16.2/LICENSES/AFL-2.1.txt",
-                "dbus/1.16.2/LICENSES/GPL-2.0-or-later.txt",
-                "gettext/1.0/gettext-runtime/intl/COPYING.LIB",
-                "pcre2/10.48/COPYING",
-            ]
+            name in versions
+            and all(
+                prefix + name + "/" + versions[name] + "/" + path in native_paths for path in paths
+            )
+            for name, paths in required.items()
         )
 
     if inventory["target"].startswith("macos"):
@@ -147,8 +154,14 @@ def main(package, report):
                 }
 
             rows, gaps = native_source_notices(fixture, record, vendor)
-            checks["exact_native_source_supplements"] = len(rows) == 4 and not gaps
-            selected = vendor / "glib/2.90.0/provenance.json"
+            checks["exact_native_source_supplements"] = {row["source"]["name"] for row in rows} == {
+                "glib",
+                "dbus",
+                "gettext",
+                "pcre2",
+            } and not gaps
+            glib = next(row["source"] for row in rows if row["source"]["name"] == "glib")
+            selected = vendor / "glib" / glib["version"] / "provenance.json"
             saved = selected.read_bytes()
             for scenario in ("archive_checksum", "upstream_url", "notice_checksum", "traversal"):
                 value = json.loads(saved)

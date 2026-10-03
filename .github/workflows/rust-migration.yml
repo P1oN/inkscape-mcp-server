@@ -180,6 +180,7 @@ jobs:
         with:
           name: build-evidence-${{ matrix.target }}
           path: |
+            dist/*/LICENSE-INVENTORY.json
             dist/*/FILES.json
             dist/*/libexec/inkscape-mcp/package.json
             rust/Cargo.lock
