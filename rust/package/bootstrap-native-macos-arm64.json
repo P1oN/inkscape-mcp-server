@@ -1,0 +1,91 @@
+{
+  "target": "macos-arm64",
+  "minimum_macos": 15,
+  "bottle_tag": "arm64_sequoia",
+  "bottles": [
+    {
+      "name": "glib",
+      "version": "2.90.0",
+      "url": "https://ghcr.io/v2/homebrew/core/glib/blobs/sha256:91df2202a093cd00b90fa9919f1c1e61e8f78d8ddd9a307009af6d4007072180",
+      "sha256": "91df2202a093cd00b90fa9919f1c1e61e8f78d8ddd9a307009af6d4007072180",
+      "formula_url": "https://formulae.brew.sh/api/formula/glib.json",
+      "source": {
+        "url": "https://download.gnome.org/sources/glib/2.90/glib-2.90.0.tar.xz",
+        "tag": null,
+        "revision": null,
+        "using": null,
+        "checksum": "17d15cac2af80a33271127408e0abc2748eb297c595c2a26409e81e14e7d1b8f"
+      }
+    },
+    {
+      "name": "dbus",
+      "version": "1.16.2_1",
+      "url": "https://ghcr.io/v2/homebrew/core/dbus/blobs/sha256:5a51451acabb5ae56b5682e88a82dfa43cc6a2b653ca068198546bb72324bd0c",
+      "sha256": "5a51451acabb5ae56b5682e88a82dfa43cc6a2b653ca068198546bb72324bd0c",
+      "formula_url": "https://formulae.brew.sh/api/formula/dbus.json",
+      "source": {
+        "url": "https://dbus.freedesktop.org/releases/dbus/dbus-1.16.2.tar.xz",
+        "tag": null,
+        "revision": null,
+        "using": null,
+        "checksum": "0ba2a1a4b16afe7bceb2c07e9ce99a8c2c3508e5dec290dbb643384bd6beb7e2"
+      }
+    },
+    {
+      "name": "gettext",
+      "version": "1.0",
+      "url": "https://ghcr.io/v2/homebrew/core/gettext/blobs/sha256:98a116d35792ccd730360ffc8c0d8fc5799b2282b96bb7696192c573f064a331",
+      "sha256": "98a116d35792ccd730360ffc8c0d8fc5799b2282b96bb7696192c573f064a331",
+      "formula_url": "https://formulae.brew.sh/api/formula/gettext.json",
+      "source": {
+        "url": "https://ftpmirror.gnu.org/gettext/gettext-1.0.tar.gz",
+        "tag": null,
+        "revision": null,
+        "using": null,
+        "checksum": "85d99b79c981a404874c02e0342176cf75c7698e2b51fe41031cf6526d974f1a"
+      }
+    },
+    {
+      "name": "pcre2",
+      "version": "10.49",
+      "url": "https://ghcr.io/v2/homebrew/core/pcre2/blobs/sha256:0ec47d18c50f5770db2b3f07b5b85644284cc6ee8e07e23b11d2727e95932b77",
+      "sha256": "0ec47d18c50f5770db2b3f07b5b85644284cc6ee8e07e23b11d2727e95932b77",
+      "formula_url": "https://formulae.brew.sh/api/formula/pcre2.json",
+      "source": {
+        "url": "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.49/pcre2-10.49.tar.bz2",
+        "tag": null,
+        "revision": null,
+        "using": null,
+        "checksum": "53c156e1ba416a20da8e65395daa132da0d80e76910424caca3fcdae7831d384"
+      }
+    },
+    {
+      "name": "json-c",
+      "version": "0.19",
+      "url": "https://ghcr.io/v2/homebrew/core/json-c/blobs/sha256:5624048dbb067f1a6d3784081029c3d738edeefd57188ce6724bb93d01aa53aa",
+      "sha256": "5624048dbb067f1a6d3784081029c3d738edeefd57188ce6724bb93d01aa53aa",
+      "formula_url": "https://formulae.brew.sh/api/formula/json-c.json",
+      "source": {
+        "url": "https://s3.amazonaws.com/json-c_releases/releases/json-c-0.19.tar.gz",
+        "tag": null,
+        "revision": null,
+        "using": null,
+        "checksum": "37ad0249902e301bd9052bf712e511fcc6acff4ecaad4b5900aad9ce564e26de"
+      }
+    },
+    {
+      "name": "libunistring",
+      "version": "1.4.2",
+      "url": "https://ghcr.io/v2/homebrew/core/libunistring/blobs/sha256:513bf2378982459bf3daf286cec9d50d3f491686f8caa8749604de3be4e6db77",
+      "sha256": "513bf2378982459bf3daf286cec9d50d3f491686f8caa8749604de3be4e6db77",
+      "formula_url": "https://formulae.brew.sh/api/formula/libunistring.json",
+      "source": {
+        "url": "https://ftpmirror.gnu.org/libunistring/libunistring-1.4.2.tar.gz",
+        "tag": null,
+        "revision": null,
+        "using": null,
+        "checksum": "e82664b170064e62331962126b259d452d53b227bb4a93ab20040d846fec01d8"
+      }
+    }
+  ]
+}

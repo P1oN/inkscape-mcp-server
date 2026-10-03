@@ -117,6 +117,9 @@ jobs:
           .venv/bin/python -m pytest runtime/tests
       - name: Synthetic package dependency resolver regressions
         run: .venv/bin/python scripts/migration_posix_builder_acceptance.py --output migration/results/ci-builder --report migration/results/ci-builder.json
+      - name: Bootstrap input and cleanup guards
+        if: matrix.target == 'aarch64-apple-darwin'
+        run: .venv/bin/python scripts/bootstrap_acceptance.py --output migration/results/ci-bootstrap-guards
       - name: Build native installable archive
         env:
           PACKAGE: ${{ matrix.package }}
@@ -138,7 +141,11 @@ jobs:
         shell: bash
         run: |
           mkdir -p "$RUNNER_TEMP/inkscape-mcp-source-workspace"
-          ./setup.sh --build --workspace "$RUNNER_TEMP/inkscape-mcp-source-workspace"
+          if [ "$RUNNER_OS" = macOS ] && [ "$(uname -m)" = arm64 ]; then
+            ./setup.sh --bootstrap --workspace "$RUNNER_TEMP/inkscape-mcp-source-workspace"
+          else
+            ./setup.sh --build --workspace "$RUNNER_TEMP/inkscape-mcp-source-workspace"
+          fi
       - name: Private Sentry setup and hidden input acceptance
         run: .venv/bin/python scripts/launcher_sentry_acceptance.py --output migration/results/ci-sentry-setup
       - name: Empty-PATH launcher/configuration acceptance
@@ -194,5 +201,6 @@ jobs:
             migration/results/ci-notices.json
             migration/results/ci-launcher/
             migration/results/ci-sentry-setup/
+            migration/results/ci-bootstrap-guards/
           if-no-files-found: error
           retention-days: 14

@@ -32,5 +32,9 @@
       "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
     }
   ],
-  "scope": "Exact upstream source notice supplement; not a complete corresponding-source/build-patch audit."
+  "scope": "Exact upstream source notice supplement; not a complete corresponding-source/build-patch audit.",
+  "equivalent_source_urls": [
+    "https://ftpmirror.gnu.org/gnu/gettext/gettext-1.0.tar.gz",
+    "https://ftpmirror.gnu.org/gettext/gettext-1.0.tar.gz"
+  ]
 }

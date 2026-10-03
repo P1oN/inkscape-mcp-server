@@ -67,7 +67,7 @@ def main():
         stored = config.read_bytes()
         require(config.stat().st_mode & 0o777 == 0o600, "configuration is not private")
         require(str(workspace.resolve()) in config.read_text(), "literal workspace changed")
-        checks.append("real package doctor and literal-path setup with empty user tool PATH")
+        checks.append("config-only literal-path setup with empty user tool PATH")
         wire = Wire(
             ["/bin/bash", str(source / "run-mcp.sh")], environment, args.output / "mcp.stderr.log"
         )

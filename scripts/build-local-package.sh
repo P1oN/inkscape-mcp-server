@@ -42,7 +42,7 @@ if [ "$platform" = macos ]; then
     [ -f "$sdk/usr/lib/libxml2.tbd" ] || fail 'The Apple SDK is missing libxml2.'
     export LIBXML2="$sdk/usr/lib/libxml2.tbd"
     headers=false
-    for prefix in /opt/homebrew /usr/local; do
+    for prefix in "${INKSCAPE_MCP_BUILD_GLIB_PREFIX:-/nonexistent}" /opt/homebrew /usr/local; do
         if [ -f "$prefix/include/glib-2.0/gio/gio.h" ]; then headers=true; fi
         if [ -d "$prefix/bin" ]; then export PATH="$PATH:$prefix/bin"; fi
     done
@@ -63,7 +63,7 @@ printf 'Preparing native source build in %s\n' "$build_root" >&2
 # Reuse only a runtime whose exact version and six wheel versions match the pinned recipe.
 check='import sys,platform,importlib.metadata as m; from pathlib import Path; assert sys.version_info[:3] == (3,12,14); cpu=platform.machine(); assert {"arm64":"aarch64"}.get(cpu,cpu)==sys.argv[1]; pairs=[line.strip().split("==") for line in Path("rust/package/helper-requirements.txt").read_text().splitlines() if line.strip() and not line.lstrip().startswith("#")]; assert all(m.version(name)==version for name,version in pairs)'
 python=
-for candidate in "$repo/.packaging-venv/bin/python" "$repo/.venv/bin/python"; do
+for candidate in "${INKSCAPE_MCP_BUILD_PYTHON:-/nonexistent}" "$repo/.packaging-venv/bin/python" "$repo/.venv/bin/python"; do
     if [ -x "$candidate" ] && "$candidate" -I -c "$check" "$architecture" >/dev/null 2>&1; then
         python=$candidate
         break
@@ -85,9 +85,10 @@ if [ -z "$python" ]; then
     "$python" -I -c "$check" "$architecture" || fail 'The prepared Python helper runtime differs from the pinned native recipe.'
 fi
 printf '%s\n' 'Building the locked Rust server and private helper/native package...' >&2
+target_dir=${INKSCAPE_MCP_BUILD_TARGET_DIR:-$repo/rust/target}
 "$cargo" build --locked --release --manifest-path rust/Cargo.toml \
-    --target "$native_target" --target-dir "$repo/rust/target" >&2
+    --target "$native_target" --target-dir "$target_dir" >&2
 "$python" scripts/migration_build_posix_package.py --output "$build_root/package" \
     --archive "$build_root/package.tar.gz" \
-    --binary "$repo/rust/target/$native_target/release/inkscape-mcp-rust" >&2
+    --binary "$target_dir/$native_target/release/inkscape-mcp-rust" >&2
 printf '%s\n' "$build_root/package"

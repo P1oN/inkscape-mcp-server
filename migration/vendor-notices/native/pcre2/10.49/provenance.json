@@ -1,0 +1,27 @@
+{
+  "name": "pcre2",
+  "version": "10.49",
+  "url": "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.49/pcre2-10.49.tar.bz2",
+  "sha256": "53c156e1ba416a20da8e65395daa132da0d80e76910424caca3fcdae7831d384",
+  "bytes": 2185271,
+  "archive": "pcre2-10.49.tar.bz2",
+  "notices": [
+    {
+      "path": "COPYING",
+      "bytes": 97,
+      "sha256": "99272c55f3dcfa07a8a7e15a5c1a33096e4727de74241d65fa049fccfdd59507"
+    },
+    {
+      "path": "LICENCE.md",
+      "bytes": 4011,
+      "sha256": "197d8a73ffee0d6b09adba2f9c677b5f5aede24edf89258a68e48248d010d811"
+    },
+    {
+      "path": "deps/sljit/LICENSE",
+      "bytes": 1444,
+      "sha256": "5f216505c0f6ea3273caec89e766eef93cdeb7bbb0c429f9360116d7c938feeb"
+    }
+  ],
+  "source_notice_links": [],
+  "scope": "Exact upstream source notice supplement; not a complete corresponding-source/build-patch audit."
+}

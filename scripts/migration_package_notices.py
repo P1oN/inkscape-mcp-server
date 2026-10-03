@@ -80,12 +80,15 @@ def native_source_notices(output, copy_notice, vendor=Path("migration/vendor-not
             gaps.append("missing exact native source notice supplement: " + name + " " + version)
             continue
         provenance = json.loads((root / "provenance.json").read_text())
+        source_urls = provenance.get("equivalent_source_urls", [provenance["url"]])
         checksums = [c["checksumValue"] for c in source["checksums"] if c["algorithm"] == "SHA256"]
         if (
             provenance["name"] != name
             or provenance["version"] != version
             or checksums != [provenance["sha256"]]
-            or provenance["url"] != source["downloadLocation"]
+            or not source_urls
+            or provenance["url"] != source_urls[0]
+            or source["downloadLocation"] not in source_urls
         ):
             raise RuntimeError("native source notice provenance differs: " + name)
         notices = []

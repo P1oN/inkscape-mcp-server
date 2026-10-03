@@ -1,5 +1,35 @@
 # Agent handoff — current Rust candidate
 
+User-authorized source bootstrap publication to main (2026-10-04): setup.sh --bootstrap on Apple Silicon
+macOS15+ provisions missing Rust1.99/private Python3.12.14 with pinned rustup/uv inputs,
+and six SHA-256-pinned temporary bottles without installing Homebrew. Bridge/server compile
+locally; owned temporary tools/cache/target/native directory is removed on exit. Existing
+installations and prior packages stay intact; packaged helper Python remains required.
+Apple CLT/Xcode is a shared prerequisite: missing SDK starts Apple's installer dialog and
+asks the user to rerun, without accepting OS authorization or uninstalling Apple tools.
+
+Forced fresh-tools acceptance (no reused Rust/Python): temporary root removed, package
+.inkscape-mcp-local/build.mecp7C/package survives; launcher11, notices17, per_call and shell
+empty-PATH archive installs/private Python/bus/real CLI/transaction checks pass. Raw evidence:
+migration/results/bootstrap-fresh-tools.json, bootstrap-fresh-cold.json, bootstrap-fresh-shell.json.
+Eight synthetic download/archive/path/failure-cleanup guards and setup20 pass; workflow linted.
+Native placeholder relocation preserves SBOMs/build provenance. PCRE2 10.49 source notices
+include LICENCE.md/sljit license; equivalent gettext source URLs were content-hash verified.
+See docs/install/local-bootstrap.md. No native GUI or truly clean Apple-tool installation
+acceptance; no quarantine removal, notarization or one-prompt guarantee. Current Release
+v0.1.0 is unchanged. CI bootstrap step is configured; its remote status must be checked separately.
+
+
+Pending config-only onboarding fix: default setup does not execute server/doctor,
+Python imports or Inkscape. --check explicitly diagnoses before saving; --build is
+required for a fresh source build; reruns reuse the saved package path. No quarantine
+removal or TCC changes. 20 inert setup/privacy/TTY checks; hidden-input harness now
+waits for terminal ECHO-off. User confirmed v0.1.0 Release shows Gatekeeper “cannot check for malicious software”
+during setup. Config-only setup avoids diagnostic imports but is not a Gatekeeper fix.
+No one-prompt guarantee is asserted for ad-hoc signatures. v0.1.0 unchanged.
+Real rebuilt archive passes launcher11 and empty-PATH per_call CLI/MCP/runtime/bus
+acceptance (migration/results/config-only-cold.json); no new GUI/signing acceptance.
+
 User-authorized Release v0.1.0 published as an Apple Silicon preview, tag at verified
 source 5345f619add78004d3ecc9ca83abd5a6205788db. Archive and SHA-256 attached;
 GitHub asset digest matches 48af10da30278ae1f4131d1b74c707be15551b3dc15160a75c83aa2ac91d024d.

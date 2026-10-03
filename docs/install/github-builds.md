@@ -26,6 +26,11 @@ cd inkscape-mcp-macos-arm64
 ./run-mcp.sh --doctor
 ```
 
+For the updated launcher, default setup only writes private configuration; diagnostics
+are explicit with `./setup.sh --check` or `./run-mcp.sh --doctor`. Source rebuilding
+is explicit with `./setup.sh --build`. The historical v0.1.0 archive still runs doctor
+during setup; these launcher changes are not in that published archive.
+
 Install Inkscape first. The package includes Rust server, private Python/inkex helpers,
 prebuilt bridge, D-Bus dependencies and matching debug symbols. Users do not install a
 compiler, Python, uv/pip or Homebrew. Configure the MCP client with the absolute path to

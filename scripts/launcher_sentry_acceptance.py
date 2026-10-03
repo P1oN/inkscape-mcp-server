@@ -9,6 +9,7 @@ import select
 import shutil
 import subprocess
 import sys
+import termios
 import time
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -30,7 +31,8 @@ def main(output):
         (package / "libexec/inkscape-mcp/package.json").write_text("{}")
         binary = package / "bin/inkscape-mcp"
         binary.write_text(
-            "#!" + sys.executable + "\nimport json, os, sys\n"
+            "#!" + sys.executable + "\nimport json, os, sys\nfrom pathlib import Path\n"
+            f"Path({str(root / 'server-started')!r}).write_text('started')\n"
             'print(json.dumps({"doctor": "--doctor" in sys.argv, '
             '"dsn": os.environ.get("SENTRY_DSN"), '
             '"environment": os.environ.get("SENTRY_ENVIRONMENT")}))\n'
@@ -68,6 +70,19 @@ def main(output):
             checks.append(label)
 
         require(run("setup.sh", *base).returncode == 0, "legacy noninteractive setup")
+        marker = root / "server-started"
+        require(not marker.exists(), "default setup does not execute package code")
+        require(
+            run("setup.sh", *base, "--check").returncode == 0 and marker.exists(),
+            "explicit setup check executes doctor",
+        )
+        marker.unlink()
+        (checkout / "rust").mkdir()
+        (checkout / "rust/Cargo.toml").write_text("synthetic source checkout")
+        require(
+            run("setup.sh", *base[2:]).returncode == 0 and not marker.exists(),
+            "rerun reuses configured package without execution or rebuild",
+        )
         require(
             json.loads(run("run-mcp.sh").stdout)["dsn"] == "ambient-value",
             "legacy environment retained without local setting",
@@ -187,6 +202,11 @@ def main(output):
                         if not chunk:
                             raise RuntimeError("terminal closed before prompt")
                         transcript.extend(chunk)
+                if prompt.startswith("Sentry DSN"):
+                    while termios.tcgetattr(master)[3] & termios.ECHO:
+                        if time.monotonic() >= deadline:
+                            raise RuntimeError("hidden input did not disable terminal echo")
+                        time.sleep(0.005)
                 os.write(master, (answer + "\n").encode())
             process.wait(timeout=10)
             while select.select([master], [], [], 0.1)[0]:

@@ -84,10 +84,35 @@ def copy(source, target):
     shutil.copy2(source, target, follow_symlinks=True)
 
 
+def native_input_path(path):
+    """Map pinned bottle paths into the installer-owned build input tree."""
+    root = os.environ.get("INKSCAPE_MCP_BUILD_NATIVE_ROOT")
+    if not root:
+        return Path(path).resolve()
+    root = Path(root).resolve(strict=True)
+    path = path.replace("@@HOMEBREW_CELLAR@@", "/opt/homebrew/Cellar")
+    path = path.replace("@@HOMEBREW_PREFIX@@", "/opt/homebrew")
+    if path.startswith("/opt/homebrew/Cellar/"):
+        candidate = root / path.removeprefix("/opt/homebrew/Cellar/")
+    elif path.startswith("/opt/homebrew/opt/"):
+        relative = Path(path.removeprefix("/opt/homebrew/opt/"))
+        versions = list((root / relative.parts[0]).glob("*"))
+        versions = [version for version in versions if version.is_dir()]
+        if len(versions) != 1:
+            raise RuntimeError("ambiguous native formula version")
+        candidate = versions[0].joinpath(*relative.parts[1:])
+    else:
+        return Path(path).resolve()
+    candidate = candidate.resolve()
+    if not candidate.is_relative_to(root):
+        raise RuntimeError("native input path escaped private tree")
+    return candidate
+
+
 def resolve_macho_dependency(source, dep):
     """Resolve declared loader paths; refuse missing or ambiguous RPATH candidates."""
-    if dep.startswith("/"):
-        return Path(dep).resolve()
+    if dep.startswith(("/", "@@HOMEBREW_CELLAR@@/", "@@HOMEBREW_PREFIX@@/")):
+        return native_input_path(dep)
     if dep.startswith("@loader_path/"):
         return (source.parent / dep.removeprefix("@loader_path/")).resolve()
     if dep.startswith("@rpath/"):
@@ -97,8 +122,8 @@ def resolve_macho_dependency(source, dep):
         for rpath in rpaths:
             if rpath.startswith("@loader_path/"):
                 base = source.parent / rpath.removeprefix("@loader_path/")
-            elif rpath.startswith("/"):
-                base = Path(rpath)
+            elif rpath.startswith(("/", "@@HOMEBREW_CELLAR@@/", "@@HOMEBREW_PREFIX@@/")):
+                base = native_input_path(rpath)
             else:
                 continue
             candidate = (base / dep.removeprefix("@rpath/")).resolve()
@@ -177,11 +202,29 @@ def bundle_dbus(library, manifest):
     for source in mapping:
         # Homebrew Cellar metadata/licenses are development provenance only.
         formula = next(
-            (parent for parent in source.parents if (parent / "INSTALL_RECEIPT.json").is_file()),
+            (
+                parent
+                for parent in source.parents
+                if (parent / "INSTALL_RECEIPT.json").is_file()
+                or (
+                    (parent / "sbom.spdx.json").is_file()
+                    and (parent / ".brew" / (parent.parent.name + ".rb")).is_file()
+                )
+            ),
             None,
         )
         if formula:
-            for name in ("COPYING", "COPYING.LIB", "LICENSE", "AUTHORS", "sbom.spdx.json"):
+            for name in (
+                "COPYING",
+                "COPYING.LIB",
+                "LICENSE",
+                "LICENCE.md",
+                "AUTHORS",
+                "sbom.spdx.json",
+                "LGPL-2.1-or-later.txt",
+                "GPL-2.0-or-later.txt",
+                "AFL-2.1.txt",
+            ):
                 if (formula / name).is_file():
                     copy(formula / name, licenses / formula.parent.name / name)
             for name in ("INSTALL_RECEIPT.json", ".brew/" + formula.parent.name + ".rb"):
@@ -359,7 +402,11 @@ def build(output, binary=None):
     headers = next(
         (
             p
-            for p in (Path("/opt/homebrew"), Path("/usr/local"))
+            for p in (
+                Path(os.environ.get("INKSCAPE_MCP_BUILD_GLIB_PREFIX", "/nonexistent")),
+                Path("/opt/homebrew"),
+                Path("/usr/local"),
+            )
             if (p / "include/glib-2.0/gio/gio.h").is_file()
         ),
         None,
@@ -374,6 +421,9 @@ def build(output, binary=None):
     else:
         bundle_elf(output, library, manifest)
     copy(Path("LICENSE"), output / "LICENSE")
+    native_root = os.environ.get("INKSCAPE_MCP_BUILD_NATIVE_ROOT")
+    if native_root:
+        copy(Path(native_root) / "inputs.json", library / "licenses/bootstrap/native-inputs.json")
     manifest["license_inventory"] = collect_notices(output, target)
     (library / "package.json").write_text(json.dumps(manifest, indent=2) + "\n")
     files = {}

@@ -12,7 +12,7 @@ ask() {
 single_line() {
     case "$1" in *$'\n'*|*$'\r'*) fail "Paths cannot contain newline characters.";; esac
 }
-package= workspace= inkscape= engine=per_call live=true build=false
+package= workspace= inkscape= engine=per_call live=true build=false check=false bootstrap=false
 sentry= sentry_dsn_file= sentry_environment=
 while [ "$#" -gt 0 ]; do
     case "$1" in
@@ -26,15 +26,18 @@ while [ "$#" -gt 0 ]; do
             esac
             shift 2;;
         --build) build=true; shift;;
+        --check) check=true; shift;;
+        --bootstrap) bootstrap=true; build=true; shift;;
         --help)
             printf '%s\n' 'Usage: ./setup.sh [--package DIRECTORY] [--workspace DIRECTORY]' \
                 '                  [--inkscape BINARY_OR_APP] [--live true|false]' \
-                '                  [--engine per_call|shell] [--build]' \
+                '                  [--engine per_call|shell] [--build|--bootstrap] [--check]' \
                 '                  [--sentry true|false] [--sentry-dsn-file FILE]' \
                 '                  [--sentry-environment LABEL]' \
                 'Interactive setup asks about optional error reporting (default off).' \
                 'DSN input is hidden; use a file rather than putting it in shell history.' \
-                'Builds from a checkout or uses an unpacked package; saves settings and runs doctor.' \
+                'Saves settings without launching the server, Python, libraries or Inkscape.' \
+                '--check runs doctor; --build builds with existing tools; --bootstrap downloads missing tools privately.' \
                 'Source builds need native developer prerequisites; archives need only Inkscape.' \
                 'Does not launch Inkscape or change MCP client settings.'
             exit 0;;
@@ -74,9 +77,27 @@ single_line "$inkscape"
 inkscape_dir=$(cd -- "$(dirname -- "$inkscape")" && pwd -P)
 single_line "$inkscape_dir"
 case "$inkscape_dir" in *:*) fail "The Inkscape directory cannot contain (:).";; esac
-if [ "$build" = true ] || { [ -z "$package" ] && [ -f "$repo/rust/Cargo.toml" ]; }; then
+# Reuse the configured package; rerunning setup must not create a new runtime path.
+previous_config=$repo/.inkscape-mcp-local/setup.conf
+if [ -z "$package" ] && [ "$build" = false ] && [ -f "$previous_config" ] &&
+    [ ! -L "$previous_config" ] && [ ! -L "$repo/.inkscape-mcp-local" ]; then
+    {
+        IFS= read -r previous_version && IFS= read -r previous_binary || true
+    } < "$previous_config"
+    if [ "${previous_version:-}" = inkscape-mcp-setup-v1 ]; then
+        case "${previous_binary:-}" in
+            /*/bin/inkscape-mcp)
+                if [ -x "$previous_binary" ]; then
+                    package=${previous_binary%/bin/inkscape-mcp}
+                fi;;
+        esac
+    fi
+fi
+if [ "$build" = true ]; then
     # The build recipe contains fixed commands; its stdout contains only one package path.
-    package=$(PATH="$inkscape_dir:${PATH:-/usr/bin:/bin}" "$repo/scripts/build-local-package.sh")
+    builder=$repo/scripts/build-local-package.sh
+    [ "$bootstrap" = false ] || builder=$repo/scripts/bootstrap-local-package.sh
+    package=$(PATH="$inkscape_dir:${PATH:-/usr/bin:/bin}" "$builder")
 fi
 if [ -z "$package" ]; then
     ask 'Directory of the unpacked Rust package' --package
@@ -88,9 +109,11 @@ single_line "$package"
 binary=$package/bin/inkscape-mcp
 [ -x "$binary" ] && [ -f "$package/libexec/inkscape-mcp/package.json" ] || \
     fail "Expected a complete package containing bin/inkscape-mcp and libexec/inkscape-mcp/package.json."
-printf '%s\n' 'Checking the package and Inkscape (no GUI launch)...' >&2
-PATH="$inkscape_dir:${PATH:-/usr/bin:/bin}" INKSCAPE_MCP_WORKSPACE_ROOTS="$workspace" \
-    "$binary" --doctor >&2 || fail "Doctor failed; configuration was not saved."
+if [ "$check" = true ]; then
+    printf '%s\n' 'Checking the package and Inkscape (no GUI launch)...' >&2
+    PATH="$inkscape_dir:${PATH:-/usr/bin:/bin}" INKSCAPE_MCP_WORKSPACE_ROOTS="$workspace" \
+        "$binary" --doctor >&2 || fail "Doctor failed; configuration was not saved."
+fi
 config_dir=$repo/.inkscape-mcp-local
 [ ! -L "$config_dir" ] || fail "Configuration directory must not be a symlink."
 (umask 077; mkdir -p -- "$config_dir")

@@ -7,19 +7,27 @@ Operation Records, atomic rollback and genuine no-op behavior remain part of the
 
 ## Install and run
 
-For M-chip Macs, download a successful **inkscape-mcp-macos-arm64** artifact from
-[GitHub Actions](https://github.com/P1oN/inkscape-mcp-server/actions/workflows/rust-migration.yml).
+For M-chip Macs, download the archive and checksum from
+[GitHub Releases](https://github.com/P1oN/inkscape-mcp-server/releases).
 See [download and checksum instructions](docs/install/github-builds.md).
 
-Install Inkscape 1.4 or newer. From this checkout:
+Install Inkscape 1.4 or newer. From the unpacked package:
 
 ```sh
 ./setup.sh
 ./run-mcp.sh
 ```
 
-Setup detects Inkscape, asks for an existing SVG workspace and saves local configuration;
-no manual env editing is required. A source build needs Rust and native build dependencies;
+Setup detects Inkscape, asks for an existing SVG workspace and saves local configuration
+without executing the server, Python imports or Inkscape. Use `./setup.sh --check` or
+`./run-mcp.sh --doctor` for an explicit runtime diagnosis. Rerunning setup reuses the
+configured package. From a source checkout on Apple Silicon macOS 15+, use
+`./setup.sh --bootstrap` to download missing tools into a private temporary directory,
+build locally and remove build tools afterward. Existing tool installations stay intact;
+private Python required by live helpers stays inside the package. Apple Command Line Tools
+are a system prerequisite; if missing, complete their Apple installation dialog and rerun.
+Use `./setup.sh --build` when all developer prerequisites are already installed.
+No manual env editing is required. See [local bootstrap](docs/install/local-bootstrap.md). A source build needs Rust and native build dependencies;
 the private helper runtime is prepared from pinned dependencies. A ready macOS arm64 archive
 needs only Inkscape. Exact prerequisites, archive paths and limits are documented in
 [installation instructions](docs/RUST_MIGRATION_REPORT.md#install-and-check-the-current-local-candidate).
