@@ -56,6 +56,7 @@ def main(package, output, report_path):
         verify_files(installed)
         observations = 1
         missing_cases = [
+            ("missing-supervisor", "../../bin/inkscape-mcp-supervisor", "fixed_supervisor"),
             ("missing-bridge", "context.so", "prebuilt_context_architecture"),
             ("missing-runtime", "python/bin/python3", "private_python_architecture"),
             ("missing-helper", "helpers/inkscape_mcp_insert.py", "fixed_helper_assets"),

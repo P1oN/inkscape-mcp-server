@@ -39,6 +39,7 @@ def main(output, working_tree=False):
                         "skills",
                         "docs",
                         "rust/src",
+                        "rust/tests",
                         "rust/build.rs",
                         "uninstall.sh",
                     ],

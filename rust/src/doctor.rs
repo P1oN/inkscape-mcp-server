@@ -202,7 +202,15 @@ pub fn report() -> Value {
                 compatible_binary(&library.join("context.so")),
             );
         }
-        checks.insert("fixed_supervisor", regular(&library.join("supervise.py")));
+        checks.insert(
+            "fixed_supervisor",
+            library
+                .parent()
+                .and_then(Path::parent)
+                .is_some_and(|package| {
+                    compatible_binary(&package.join("bin/inkscape-mcp-supervisor"))
+                }),
+        );
         checks.insert(
             "private_bus_config",
             regular(&library.join("dbus/session.conf")),

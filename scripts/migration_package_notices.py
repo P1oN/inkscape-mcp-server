@@ -10,7 +10,7 @@ import tarfile
 import tomllib
 from pathlib import Path, PurePosixPath
 
-PREFIXES = ("license", "copying", "copyright", "notice", "unlicense")
+PREFIXES = ("license", "licence", "copying", "copyright", "notice", "unlicense")
 TRIPLES = {
     "macos-arm64": "aarch64-apple-darwin",
     "macos-x86_64": "x86_64-apple-darwin",

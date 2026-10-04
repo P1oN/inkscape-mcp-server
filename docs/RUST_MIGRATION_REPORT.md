@@ -67,7 +67,7 @@ tracing and arbitrary shell/code/extension/network execution are not exposed.
 
 `runtime/helper_extension` retains fixed Python/inkex effect helpers;
 `runtime/insert_payload.py` and `runtime/edit_errors.py` support their private protocol.
-`rust/package/supervise.py` supervises an explicitly launched owned GUI/bus. These are not
+`rust/src/bin/inkscape-mcp-supervisor.rs` supervises an explicitly launched owned GUI/bus. These are not
 another MCP server. The archive carries private CPython 3.12.14 and six pinned wheels.
 `runtime/native/context.m` supplies the Objective-C/GTK context bridge; prebuilt bridge,
 D-Bus/gdbus and their library closure are included. The private effect transaction

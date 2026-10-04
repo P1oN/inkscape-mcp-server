@@ -42,6 +42,8 @@ def main(output):
             '"environment": os.environ.get("SENTRY_ENVIRONMENT")}))\n'
         )
         binary.chmod(0o700)
+        shutil.copy2(binary, binary.parent / "inkscape-mcp-client")
+        shutil.copy2(binary, binary.parent / "inkscape-mcp-supervisor")
         vendor = root / "vendor"
         vendor.mkdir()
         inkscape = vendor / "inkscape"
@@ -286,6 +288,8 @@ def main(output):
         manifest.write_text("{}")
         (checkout / "bin").mkdir()
         shutil.copy2(binary, checkout / "bin/inkscape-mcp")
+        shutil.copy2(binary, checkout / "bin/inkscape-mcp-client")
+        shutil.copy2(binary, checkout / "bin/inkscape-mcp-supervisor")
         (checkout / "libexec/inkscape-mcp").mkdir(parents=True)
         (checkout / "libexec/inkscape-mcp/package.json").write_text("{}")
         require(

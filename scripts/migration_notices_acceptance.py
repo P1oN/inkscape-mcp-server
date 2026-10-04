@@ -18,7 +18,15 @@ def main(package, report):
     checks = {}
     with TemporaryDirectory(prefix="imcp-notices-") as temporary:
         root = Path(temporary)
-        for scenario in ("valid", "checksum", "traversal", "symlink", "duplicate", "oversized"):
+        for scenario in (
+            "valid",
+            "valid-licence",
+            "checksum",
+            "traversal",
+            "symlink",
+            "duplicate",
+            "oversized",
+        ):
             archive = root / (scenario + ".crate")
             with tarfile.open(archive, "w:gz") as stream:
                 metadata = b'[package]\nname="fixture"\nversion="1.0.0"\nlicense="MIT"\n'
@@ -26,6 +34,8 @@ def main(package, report):
                 entry.size = len(metadata)
                 stream.addfile(entry, io.BytesIO(metadata))
                 legal = tarfile.TarInfo("fixture-1.0.0/LICENSE")
+                if scenario == "valid-licence":
+                    legal.name = "fixture-1.0.0/LICENCE"
                 if scenario == "traversal":
                     legal.name = "fixture-1.0.0/../../LICENSE"
                 if scenario == "symlink":
@@ -50,7 +60,7 @@ def main(package, report):
                 failure = str(exception)
             checks[scenario] = (
                 failure is None and metadata["license"] == "MIT" and len(notices) == 1
-                if scenario == "valid"
+                if scenario in ("valid", "valid-licence")
                 else failure is not None
             )
         checks["no_archive_extraction"] = not (root / "fixture-1.0.0").exists()

@@ -109,7 +109,7 @@ mod transform_objects;
 mod use_object;
 mod validate;
 mod workspace;
-mod xml;
+use inkscape_mcp_rust::xml;
 
 use base64::{Engine, engine::general_purpose::STANDARD};
 use rmcp::{ErrorData, RoleServer, ServerHandler, ServiceExt, model::*, service::RequestContext};

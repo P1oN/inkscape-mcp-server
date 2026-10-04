@@ -37,7 +37,7 @@ def ownership(session):
         "owned GUI PID/parent/path changed",
     )
     require(
-        str(Path(session["package"]) / "libexec/inkscape-mcp/supervise.py") in rows[parent][1],
+        str(Path(session["package"]) / "bin/inkscape-mcp-supervisor") in rows[parent][1],
         "owned supervisor changed",
     )
     return {"manifest": actual, "ps": raw}

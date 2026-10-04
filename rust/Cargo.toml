@@ -2,6 +2,7 @@
 name = "inkscape-mcp-rust"
 version = "0.1.0"
 edition = "2024"
+default-run = "inkscape-mcp-rust"
 rust-version = "1.88"
 license = "MIT"
 description = "Native Rust migration of the Inkscape STDIO MCP server"
@@ -23,6 +24,8 @@ tempfile = "=3.27.0"
 png = "=0.18.1"
 cssparser = "=0.38.0"
 sentry = { version = "=0.49.3", default-features = false, features = ["backtrace", "contexts", "panic", "transport", "release-health", "logs", "metrics"] }
+toml = "=0.8.23"
+plist = "=1.8.0"
 
 [profile.release]
 lto = "thin"

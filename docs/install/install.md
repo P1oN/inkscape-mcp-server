@@ -27,7 +27,7 @@ Connection is optional and includes a bounded server handshake before client reg
 See [client management](client-management.md) for commands and scope.
 
 Without build, `--check`, or client connection, ready-package setup only saves configuration.
-`--check` runs doctor before saving; `--connect-client` executes packaged Python and starts
+`--check` runs doctor before saving; `--connect-client` executes the native Rust client CLI and starts
 a separate MCP process for the handshake. Source first setup compiles/packages the runtime.
 None of these paths launches Inkscape GUI. Doctor executes Inkscape CLI and imports private
 Python/inkex/native modules, so macOS may assess those components. Saving settings alone

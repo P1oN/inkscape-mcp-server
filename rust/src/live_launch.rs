@@ -124,11 +124,13 @@ pub fn launch(cap: usize) -> Result<Attached, String> {
     }
     drop(supervisor);
     let library = library()?;
-    let python = library.join("python/bin/python3");
-    let script = library.join("supervise.py");
+    let supervisor = library
+        .parent()
+        .and_then(Path::parent)
+        .ok_or(ERROR)?
+        .join("bin/inkscape-mcp-supervisor");
     for path in [
-        &python,
-        &script,
+        &supervisor,
         &library.join("context.so"),
         &library.join("dbus/bin/dbus-daemon"),
     ] {
@@ -144,10 +146,8 @@ pub fn launch(cap: usize) -> Result<Attached, String> {
     let output = workspace()
         .lock_file(0, log.strip_prefix("/").map_err(|_| ERROR)?)
         .map_err(|_| ERROR)?;
-    let mut command = Command::new(python);
+    let mut command = Command::new(supervisor);
     command
-        .arg("-I")
-        .arg(script)
         .arg(&root)
         .arg(binary)
         .stdin(Stdio::null())

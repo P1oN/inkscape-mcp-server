@@ -1,4 +1,5 @@
 #!/bin/bash
+# The wrapper delegates to the native manager; helper Python is not required.
 set -euo pipefail
 repo=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
 if [ "$#" -ne 2 ] || [ "$1" != --client ]; then

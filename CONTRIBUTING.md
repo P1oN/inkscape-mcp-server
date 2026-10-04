@@ -69,11 +69,56 @@ It reuses existing pinned host tools/caches; it does not claim clean-machine or 
 Use `build_source_archive.py --working-tree` only for explicitly unpublished local snapshots;
 default source export continues to contain committed files only.
 Working-tree archives omit SOURCE_REVISION and report an unknown revision. The install
-regressions in `runtime/tests/test_install_management.py` cover archive identity, Git worktree
-build watches and uninstall rollback; run them with the helper tests above.
+regressions in `runtime/tests/test_install_management.py` cover archive identity and Git
+worktree build watches; run them with the helper tests above. Client management regressions,
+including uninstall rollback and request deadlines, are Rust tests in
+`rust/src/bin/inkscape-mcp-client.rs`. Cargo builds the server, client manager and supervisor;
+package construction requires all three binaries in the same target directory. Run
+`scripts/client_management_acceptance.py --binary PATH --output DIRECTORY` and
+`scripts/client_package_acceptance.py --package DIRECTORY --output DIRECTORY` for client
+CLI guards and relocated ready-package management without Python on client PATH and with
+a damaged helper runtime. Both use isolated profiles; Claude remains synthetic.
 
 Documentation-only changes need link/command consistency and `git diff --check`; do not
 rerun runtime or native GUI acceptance unless code, MCP schemas or initialization guidance
 also changes. Keep release instructions separate from PR sources, and label historical
 checkpoint reports. The handoff records the evidence source/revision and validation limits;
 the active plan records remaining work, without transferring old GUI results to new builds.
+
+## Managed supervisor regressions
+
+Cargo builds the separate `inkscape-mcp-supervisor` executable alongside the server/client
+manager; the package builder requires all three in the same target directory. The supervisor
+is invoked only by explicit `live_launch`, with the fixed session root and detected vendor
+binary. Startup, client checks, reconnect and doctor must never invoke it.
+
+`cargo test` includes supervisor filesystem/preparation and child lifecycle tests plus a
+macOS integration test running the real supervisor with synthetic native processes, empty
+PATH and no Python runtime. The fixture compiler is test tooling only, never runtime code.
+Helpers still require the bundled interpreter; do not confuse supervisor independence with
+removing that interpreter from ready packages.
+
+For explicitly authorized native acceptance, use
+`scripts/migration_native_gui_acceptance.py --package DIRECTORY --output DIRECTORY --close-owned`.
+It isolates HOME/profile/workspace/session, checks launch/connect/context and the unchanged
+vendor executable, then gracefully quits only the blank GUI whose unique private-bus owner,
+PID and supervisor ancestry were verified. It checks manifest removal and owned-bus shutdown.
+Without the flag the historical runner retains its owned window for follow-up acceptance.
+Never use process-name termination or operate on pre-existing user windows.
+
+## Shared SVG helper regressions
+
+Stage 3 exposes `inkscape_mcp_rust::helper_svg` and the hardened XML parser as a
+library for future native helpers. `cargo test` includes `rust/tests/helper_svg.rs`:
+frozen fingerprint wire values, safe fragment preparation, typed selection/edit
+plans, reference/size/work bounds, affine compensation and genuine planned no-ops.
+The server already reuses fingerprint/insertion preflight; headless reparenting
+shares affine arithmetic. See [live helper kernels](docs/live-helper-kernels.md)
+for live semantics, conservative refusals and consumer obligations.
+
+The planner returns semantic steps, not a replacement native extension. Python/inkex
+helpers still apply live edits. Stage 4 must separately validate application, root
+and mixed-content preservation, native Undo and stale-state refusal on owned
+synthetic drawings before changing that route. No GUI acceptance is implied by
+library tests. Exposed MCP contracts/instructions are unchanged by extraction;
+manifest regeneration is required only when those surfaces change.

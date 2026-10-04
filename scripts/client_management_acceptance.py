@@ -16,10 +16,10 @@ from migration_probe import require
 
 def main(binary, output):
     output.mkdir(parents=True, exist_ok=False)
-    helper = Path("scripts/mcp_client.py").resolve()
+    helper = binary.resolve().parent / "inkscape-mcp-client"
     checks = []
     with TemporaryDirectory(prefix="imcp-client-guards-") as temporary:
-        root = Path(temporary)
+        root = Path(temporary).resolve()
         home = root / "home"
         home.mkdir()
         repo = root / "source space"
@@ -61,8 +61,6 @@ def main(binary, output):
         def run(client, action, success=True):
             result = subprocess.run(
                 [
-                    sys.executable,
-                    "-I",
                     str(helper),
                     "--repo",
                     str(repo),

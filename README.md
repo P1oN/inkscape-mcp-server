@@ -62,12 +62,15 @@ Build options cannot be combined with `--package DIRECTORY`.
 Skill updates merge against a saved upstream baseline and preserve installed content on
 conflicts. Uninstall disconnects the matching client entry and archives local settings,
 builds and an owned default-location skill; drawings remain in the workspace.
+Client `config`, `check`, `connect`, `disconnect` and `uninstall` use the packaged native
+Rust CLI through `scripts/mcp-client.sh`. Management does not depend on Python;
+disconnect/uninstall remain available with a damaged helper runtime.
 See [client management and clean reinstall](docs/install/client-management.md) for
 manual configuration, standalone checks, legacy skill handling and recovery.
 
 Startup/reconnect/doctor never launch Inkscape. Explicit GUI launch requires a user request.
 Live operations use the selected open drawing; headless operations use working copies.
-Clean-machine installation, real Claude Code client acceptance and new native GUI checks
+Clean-machine installation, real Claude Code client acceptance and broader native GUI checks
 remain follow-up work; [current status](docs/AGENT_HANDOFF.md) records validation scope.
 
 ## Optional agent skill
@@ -101,9 +104,12 @@ Revision and build IDs are compiled automatically into telemetry and package met
 
 The legacy Python MCP server, its tests and paired Python/Rust comparison scripts are retired.
 Development now uses Rust regression/invariant tests, true STDIO and package/native acceptance.
-Python remains only for live helper extensions, the managed supervisor and development/package
-scripts. See [CONTRIBUTING.md](CONTRIBUTING.md), [runtime components](runtime/README.md),
-[current plan](docs/RUST_NEXT_PLAN.md) and [handoff](docs/AGENT_HANDOFF.md).
+The managed GUI session now runs through a separate native Rust supervisor. Python remains
+only for Inkscape helper extensions and development/package scripts. Shared Rust SVG
+preparation kernels now cover fingerprints, fragments and typed live edit plans;
+see [their semantics and limits](docs/live-helper-kernels.md). The Python extensions
+still apply native edits pending the next INX stage. See [CONTRIBUTING.md](CONTRIBUTING.md), [runtime components](runtime/README.md),
+[Python removal roadmap and current plan](docs/RUST_NEXT_PLAN.md) and [handoff](docs/AGENT_HANDOFF.md).
 Historical migration reports and raw evidence are retained as history, not an active Python oracle.
 
 Use editable vector geometry and ordinary named groups for semantic objects; layers organize

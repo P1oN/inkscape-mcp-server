@@ -55,7 +55,7 @@ def main(output, phase):
         "owned native PID/parent/path changed",
     )
     require(
-        str(package / "libexec/inkscape-mcp/supervise.py") in rows[pids[0]][1]
+        str(package / "bin/inkscape-mcp-supervisor") in rows[pids[0]][1]
         and str(root / "session") in rows[pids[0]][1],
         "owned supervisor changed",
     )

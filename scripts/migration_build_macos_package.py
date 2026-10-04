@@ -106,7 +106,7 @@ def copy(source, target):
 
 def bundle_agent_skill(output):
     """Keep optional skill installation available in ready runtime packages."""
-    for script in ("install-skill.sh", "mcp-client.sh", "mcp_client.py"):
+    for script in ("install-skill.sh", "mcp-client.sh"):
         copy(Path("scripts") / script, output / "scripts" / script)
     copy(Path("uninstall.sh"), output / "uninstall.sh")
     for skill_file in ("SKILL.md", "agents/openai.yaml"):
@@ -418,9 +418,18 @@ def build(output, binary=None):
     source = Path("runtime")
     for relative, name in HELPERS.items():
         copy(source / relative, library / "helpers" / name)
-    copy(Path("rust/package/supervise.py"), library / "supervise.py")
     server_binary = binary or Path("rust/target/release/inkscape-mcp-rust")
     copy(server_binary, output / "bin/inkscape-mcp")
+    client_binary = server_binary.parent / "inkscape-mcp-client"
+    if not client_binary.is_file():
+        raise RuntimeError("Rust client CLI missing; build both Cargo binaries")
+    copy(client_binary, output / "bin/inkscape-mcp-client")
+    manifest["client_manager"] = "bin/inkscape-mcp-client"
+    supervisor_binary = server_binary.parent / "inkscape-mcp-supervisor"
+    if not supervisor_binary.is_file():
+        raise RuntimeError("Rust supervisor missing; build all Cargo binaries")
+    copy(supervisor_binary, output / "bin/inkscape-mcp-supervisor")
+    manifest["managed_supervisor"] = "bin/inkscape-mcp-supervisor"
     if sys.platform == "darwin":
         # Cargo consolidates DWARF before temporary LTO objects are removed.
         # Keep its UUID-matched bundle beside the relocated executable so the

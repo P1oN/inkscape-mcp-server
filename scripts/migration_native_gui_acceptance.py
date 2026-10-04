@@ -2,16 +2,156 @@
 """Owned native managed session acceptance. Never terminate Inkscape by process name."""
 
 import argparse
+import ast
 import hashlib
 import json
 import subprocess
+import time
 from pathlib import Path
 from tempfile import mkdtemp
 
 from migration_probe import Wire, data, require, write
 
 
-def main(package, output):
+def close_owned_session(package, output, evidence):
+    root = Path(evidence["root"])
+    session = root / "session"
+    env = evidence["env"]
+    manifest = evidence["manifest"]
+    document = evidence["document"]
+    require(
+        json.loads((session / "session.json").read_text()) == manifest,
+        "owned session manifest changed; refuse quit",
+    )
+    gdbus = package / "libexec/inkscape-mcp/dbus/bin/gdbus"
+
+    def dbus(destination, path, method, *arguments):
+        result = subprocess.run(
+            [
+                str(gdbus),
+                "call",
+                "--address",
+                manifest["address"],
+                "--dest",
+                destination,
+                "--object-path",
+                path,
+                "--method",
+                method,
+                *arguments,
+            ],
+            env=env,
+            capture_output=True,
+            text=True,
+            timeout=10,
+            check=True,
+        )
+        return result.stdout
+
+    owner = ast.literal_eval(
+        dbus(
+            "org.freedesktop.DBus",
+            "/org/freedesktop/DBus",
+            "org.freedesktop.DBus.GetNameOwner",
+            "org.inkscape.Inkscape",
+        )
+    )[0]
+    require(owner.startswith(":"), "quit must target a unique existing bus owner")
+    # Darwin D-Bus lacks peer PID credentials on some builds. Verify
+    # exact owned ancestry/path plus the same bound context in that case.
+    pid = manifest["inkscape_pid"]
+    pid_source = "D-Bus peer credentials"
+    try:
+        pid_reply = dbus(
+            "org.freedesktop.DBus",
+            "/org/freedesktop/DBus",
+            "org.freedesktop.DBus.GetConnectionUnixProcessID",
+            owner,
+        )
+        require(
+            int(pid_reply.strip().removeprefix("(uint32 ").removesuffix(",)")) == pid,
+            "bus owner PID differs from the owned GUI",
+        )
+    except subprocess.CalledProcessError as error:
+        require("UnixProcessIdUnknown" in error.stderr, "unexpected bus ownership failure")
+        contexts = ast.literal_eval(
+            dbus(
+                owner,
+                "/org/inkscape/Inkscape/MCPContext",
+                "org.inkscape.MCP.Context1.ListDocuments",
+            )
+        )[0]
+        require(
+            len(contexts) == 1
+            and contexts[0][0] == document["window_id"]
+            and contexts[0][1] == document["document_id"],
+            "owned context changed; refuse quit",
+        )
+        pid_source = (
+            "exact supervisor ancestry/private binary and bound context (Darwin PID unavailable)"
+        )
+    ps = subprocess.check_output(["/bin/ps", "-p", str(pid), "-o", "ppid=,command="], text=True)
+    parent, command = ps.strip().split(None, 1)
+    require(
+        parent == str(manifest["supervisor_pid"])
+        and command
+        == str(session / "context-bridge/Inkscape.app/Contents/MacOS/inkscape") + " --with-gui",
+        "owned GUI parent/path changed; refuse quit",
+    )
+    actions = ast.literal_eval(dbus(owner, "/org/inkscape/Inkscape", "org.gtk.Actions.List"))[0]
+    require("quit" in actions, "owned GUI has no graceful quit action")
+    dbus(owner, "/org/inkscape/Inkscape", "org.gtk.Actions.Activate", "quit", "[]", "{}")
+    deadline = time.monotonic() + 15
+    while (session / "session.json").exists() and time.monotonic() < deadline:
+        time.sleep(0.05)
+    require(not (session / "session.json").exists(), "supervisor did not clean its manifest")
+    # gdbus cannot contact this private bus after the owned GUI has exited.
+    result = subprocess.run(
+        [
+            str(gdbus),
+            "call",
+            "--address",
+            manifest["address"],
+            "--dest",
+            "org.freedesktop.DBus",
+            "--object-path",
+            "/org/freedesktop/DBus",
+            "--method",
+            "org.freedesktop.DBus.ListNames",
+        ],
+        env=env,
+        capture_output=True,
+        timeout=5,
+    )
+    require(result.returncode != 0, "owned private bus survived GUI exit")
+    deadline = time.monotonic() + 5
+    while time.monotonic() < deadline:
+        alive = subprocess.run(
+            ["/bin/ps", "-p", f"{pid},{manifest['supervisor_pid']}", "-o", "pid="],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if not alive.stdout.strip():
+            break
+        time.sleep(0.05)
+    require(not alive.stdout.strip(), "owned GUI/supervisor did not exit")
+    evidence.update(state="gracefully-closed", graceful_gui_exit=True, bus_cleaned=True)
+    write(output / "session.json", evidence)
+    write(
+        output / "shutdown-acceptance.json",
+        {
+            "passed": True,
+            "unique_owned_PID": pid,
+            "ownership_evidence": pid_source,
+            "graceful_quit": True,
+            "manifest_removed": True,
+            "owned_bus_stopped": True,
+        },
+    )
+
+
+def main(package, output, close_owned=False):
     output.mkdir(parents=True, exist_ok=True)
     require(
         not (output / "session.json").exists(),
@@ -97,6 +237,20 @@ def main(package, output):
         require(selected["ready_to_edit"], "synthetic task drawing not ready")
         evidence.update(state="connected-owned-blank", document=document)
         write(output / "session.json", evidence)
+        # The supervisor owns the GUI independently of the STDIO server lifecycle.
+        wire.close()
+        wire = Wire([str(package / "bin/inkscape-mcp")], env, output / "reconnect.stderr.log")
+        wire.initialize()
+        require(
+            json.loads((session / "session.json").read_text()) == manifest,
+            "reconnect changed the owned session",
+        )
+        reconnected = data(wire.call("live_connect", {"prefer": "no_freeze"}))
+        require(
+            reconnected["connected"] and reconnected["transport"] == "managed-dbus",
+            "reconnect failed to attach without launch",
+        )
+        write(output / "reconnected.json", reconnected)
         # This phase proves real packaged launch/context binding. Mutation/Undo follows
         # only after this ownership record can be independently inspected.
         require(
@@ -112,12 +266,16 @@ def main(package, output):
                 "private_bus": True,
                 "context_guard": True,
                 "document_binding": True,
+                "reconnect_without_launch": True,
                 "vendor_unchanged": True,
                 "Undo_Redo_tested": False,
             },
         )
+        if close_owned:
+            close_owned_session(package, output, evidence)
         print(
-            "Owned native GUI launch/context acceptance passed; synthetic window retained.",
+            "Owned native GUI launch/context acceptance passed; "
+            "synthetic window retained unless --close-owned.",
             flush=True,
         )
     finally:
@@ -133,5 +291,10 @@ if __name__ == "__main__":
     parser.add_argument(
         "--output", type=Path, default=Path("migration/results/native-gui-acceptance")
     )
+    parser.add_argument(
+        "--close-owned",
+        action="store_true",
+        help="Gracefully quit only this verified owned blank GUI and check supervisor cleanup",
+    )
     args = parser.parse_args()
-    main(args.package.resolve(), args.output)
+    main(args.package.resolve(), args.output, args.close_owned)
