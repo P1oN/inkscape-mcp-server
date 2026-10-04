@@ -35,6 +35,9 @@ Regenerate llms.txt and llms-full.txt whenever the exposed surface or instructio
 The generator queries the actual Rust STDIO server without launching a GUI.
 Frozen discovery JSON under migration/contracts is the current schema/instruction source;
 CI checks that contract without starting a Python server. No automatic parity work is required.
+Use the pinned `.venv/bin/python` for discovery checks. Each configuration retains a
+`.trace.json` with completed requests and the pending request if the probe fails, alongside
+server stderr. Do not hide response timeouts by retrying or weakening contract comparison.
 
 Run package/doctor/launcher checks for packaging changes and real Inkscape render/export
 for engine changes. Native acceptance is separate from automated tests. Only explicitly

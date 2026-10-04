@@ -89,8 +89,8 @@ jobs:
         run: cargo build --locked --release --manifest-path rust/Cargo.toml
       - name: Real STDIO discovery contract
         run: |
-          python3 scripts/migration_probe.py --output migration/results/ci-discovery --matrix --discovery-only -- rust/target/release/inkscape-mcp-rust
-          python3 scripts/migration_compare.py migration/contracts migration/results/ci-discovery --report migration/results/ci-discovery-comparison.json
+          .venv/bin/python scripts/migration_probe.py --output migration/results/ci-discovery --matrix --discovery-only -- rust/target/release/inkscape-mcp-rust
+          .venv/bin/python scripts/migration_compare.py migration/contracts migration/results/ci-discovery --report migration/results/ci-discovery-comparison.json
       - name: Record executable hash and dynamic dependencies
         shell: bash
         run: |

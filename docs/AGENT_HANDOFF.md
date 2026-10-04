@@ -35,6 +35,15 @@ not current validation claims. [RUST_NEXT_PLAN.md](RUST_NEXT_PLAN.md) is the act
 
 ## Validation
 
+CI on `499a81d` passed Rust format/clippy/tests and release compilation, then timed out
+in the final discovery configuration with empty server stderr. The old harness did not
+record the pending method. A local stress run passed 160 fresh core/short sessions.
+Discovery now uses the already pinned Python 3.12.14 environment, instead of the runner's
+Python 3.14.7, and retains completed/pending request traces even on failure. Reader errors
+and response timeouts report their cause; shutdown joins the harness-owned reader.
+Harness regression validation: Python: 16 passed; Ruff: 47 files; discovery: 16 exact matches.
+The original timeout's cause is not established; follow the new PR check for remote evidence.
+
 PR #8 review fixes validated locally on 2026-10-04: Rust: 224 passed, 1 ignored;
 fmt/clippy; Python: 11 passed (6 helper tests and 5 installation regressions); Ruff: 46 files;
 shell syntax; setup: 51 checks; bootstrap: 9 checks; discovery: 16 exact matches.
