@@ -1,6 +1,11 @@
-# Current Rust review record
+# Historical Rust review record — stage38 and URI export follow-up
 
-Current candidate is stage38. Earlier review cycles are retained in
+This page preserves the named checkpoint and its evidence. Its package paths, counts,
+validation and publication statements are historical, not the status of PR #8. For current
+work use [the handoff](AGENT_HANDOFF.md), [the plan](RUST_NEXT_PLAN.md) and
+[installation](install/install.md). Native results remain bound to the recorded binaries.
+
+The recorded candidate was stage38. Earlier review cycles are retained in
 [historical review log](history/RUST_REVIEW_LOG.md); their old current-package statements
 and retired Python comparison commands are historical.
 

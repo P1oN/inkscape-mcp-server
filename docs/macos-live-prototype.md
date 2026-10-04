@@ -1,13 +1,14 @@
 # Managed macOS live integration
 
 The current Rust server uses private D-Bus, a prebuilt Objective-C/GTK context bridge and
-fixed Python/inkex effects to preserve native Undo. Current candidate stage38 has packaged
-runtime/CLI/STDIO evidence plus122 fixed native checks,5 two-window guards and closed-session
-reconnect on this Mac. Current live measurements pass; see the report for finite scope.
+fixed Python/inkex effects to preserve native Undo. Historical stage38 evidence includes
+122 fixed native checks, 5 two-window guards, closed-session reconnect and live measurements
+on this Mac. These results remain tied to stage38; [current status](AGENT_HANDOFF.md)
+records PR #8 validation and its GUI limits.
 
 ## Install and connect
 
-Install Inkscape and use the [ready archive](RUST_MIGRATION_REPORT.md), or run `./setup.sh`
+Install Inkscape and use the [installation guide](install/install.md), or run `./setup.sh`
 from the checkout, then `./run-mcp.sh`. Source builds require development tools; ready
 archive users do not install Python, uv/pip, Homebrew, Rust or compiler. Doctor:
 

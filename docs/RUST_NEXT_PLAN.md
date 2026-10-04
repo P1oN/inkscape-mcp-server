@@ -1,13 +1,15 @@
 # Current Rust improvement plan
 
-Current work is unpublished; inspect Git status and [AGENT_HANDOFF.md](AGENT_HANDOFF.md).
+The improvements are committed on `codex/install-client-responsiveness` in
+[PR #8](https://github.com/P1oN/inkscape-mcp-server/pull/8), targeting `main`.
+Inspect Git status and [AGENT_HANDOFF.md](AGENT_HANDOFF.md) before continuing.
 Historical stage38 completion notes are in [history](history/rust-stage38-plan.md).
 
 The requested installation, client onboarding, skill update, build identity, responsiveness,
-archive acceptance, documentation separation and uninstall improvements are implemented locally.
+archive acceptance, documentation separation and uninstall improvements are implemented in that PR.
 Validation and its limitations are recorded in the handoff and local acceptance reports.
 
-Remaining follow-up scope:
+Remaining follow-up scope after review:
 
 1. Run the source bootstrap on a truly clean Apple Silicon machine, including Apple's SDK
    installation, downloads, quarantine and client installation. Existing-host archive
@@ -22,4 +24,5 @@ Remaining follow-up scope:
    group incident only on recurrence; capture first divergent tree/PNG, selection, document
    and window IDs, audit/wire/logs and Undo state before any restart or closure.
 
-No publication or personal runtime replacement is implied by this local implementation.
+Review and merge/release remain separate actions. PR publication has not replaced the
+published v0.1.1 archive or the user's configured runtime.

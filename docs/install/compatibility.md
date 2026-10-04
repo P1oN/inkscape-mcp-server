@@ -1,13 +1,23 @@
-# Current platform compatibility
+# Platform compatibility and validation scope
 
-Current installable candidate: stage38, macOS arm64 with official Inkscape 1.4.3 on this host.
-Cold/per-call and warm/shell archive installs, CLI render/export, STDIO, launcher and doctor pass.
-Current38 passes122 fixed native checks,5 two-window guards, closed-session reconnect and
-Rust-only headless/live measurements. Historical paired measurements remain tied to27.
-These are finite synthetic checks, not every SVG/live/error combination.
+The current improvements are in [PR #8](https://github.com/P1oN/inkscape-mcp-server/pull/8).
+Local validation on 2026-10-04 used macOS arm64, official Inkscape 1.4.3 and pinned
+Rust 1.99.0/private Python 3.12.14. Extracted-source setup, isolated real Codex registration,
+skill merge/conflicts, SVG edit/render/save, uninstall/reinstall and relocated ready archives
+passed. Both `per_call` and `shell` engines passed with empty PATH/private runtime/bus;
+owned process cancellation and responsive discovery/workspace reads were checked.
 
-Native macOS Intel/Linux CI jobs are prepared, not claimed as executed validation.
-Windows port and its filesystem/process/runtime protections are backlog.
-The private Python helper/runtime, Objective-C bridge and D-Bus are packaged components.
-Developer ID/notarization is not available; no macOS security setting is bypassed.
-See [packaging](../RUST_PACKAGING.md) and the [current report](../RUST_MIGRATION_REPORT.md).
+| Area | Evidence and remaining scope |
+|---|---|
+| Apple Silicon source provisioning | macOS 15+ recipe; existing-host archive acceptance, not a clean machine |
+| Codex | Real CLI registration in an isolated profile plus MCP handshake; no model session claim |
+| Claude Code | Synthetic CLI/config guards; real installed client acceptance remains pending |
+| Native GUI | Historical stage38: 122 fixed checks, 5 two-window guards and closed-session reconnect; not rerun for this PR |
+| macOS Intel/Linux | Native CI jobs are prepared; execution/compatibility requires their own successful runs |
+| Windows | Native filesystem/process/runtime port remains backlog |
+| Signing | Ad-hoc macOS signatures; no Developer ID/notarization or security-setting bypass |
+
+Stage38 archives and their GUI/performance evidence are historical and remain bound to
+those bytes. Later headless passes do not transfer native results to a new binary.
+See [current status](../AGENT_HANDOFF.md), [installation](install.md) and
+[historical migration report](../RUST_MIGRATION_REPORT.md).

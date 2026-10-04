@@ -1,5 +1,10 @@
 # Download a GitHub build for Apple Silicon
 
+As of 2026-10-04, published previews are v0.1.0 and v0.1.1. New installation/client/skill/
+build identity/removal features are in [PR #8](https://github.com/P1oN/inkscape-mcp-server/pull/8),
+not these Release assets. Follow the PR checks for its remote build status and download
+only a successful run. [Current installation](install.md) distinguishes each distribution.
+
 For local installation on Apple Silicon macOS 15+, open
 [Release v0.1.1](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.1)
 and download `inkscape-mcp-source-bootstrap.tar.gz` and its `.sha256` file from **Assets**.
@@ -25,7 +30,7 @@ tool installation were not revalidated.
 The command above is for published v0.1.1. Current sources instead use `./setup.sh`
 for automatic preparation/build on first use and reuse the saved package on subsequent
 runs. `--local-tools` selects a rebuild with existing tools/cached dependencies only;
-`--bootstrap` remains compatible. These later changes are not in the v0.1.1 asset.
+`--rebuild` explicitly repeats automatic preparation/build; `--bootstrap` remains compatible. These later changes are not in the v0.1.1 asset.
 
 The earlier [Release v0.1.0](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.0)
 keeps the prebuilt archive described below. Both releases are marked prerelease.
@@ -52,8 +57,8 @@ cd inkscape-mcp-macos-arm64
 ./run-mcp.sh --doctor
 ```
 
-For the updated launcher, default setup only writes private configuration; diagnostics
-are explicit with `./setup.sh --check` or `./run-mcp.sh --doctor`. Source rebuilding
+For ready packages using the updated launcher, setup without build/client options saves
+private configuration; diagnostics are explicit with `./setup.sh --check` or `./run-mcp.sh --doctor`. Source rebuilding
 with installed tools/cached dependencies is explicit with `./setup.sh --local-tools`.
 Fresh current source checkouts automatically prepare tools and build with `./setup.sh`.
 The historical v0.1.0 archive still runs doctor
@@ -61,8 +66,8 @@ during setup; these launcher changes are not in that published archive.
 
 Install Inkscape first. The package includes Rust server, private Python/inkex helpers,
 prebuilt bridge, D-Bus dependencies and matching debug symbols. Users do not install a
-compiler, Python, uv/pip or Homebrew. Configure the MCP client with the absolute path to
-`run-mcp.sh`. Setup can save an optional Sentry DSN/environment privately; CI receives
+compiler, Python, uv/pip or Homebrew. Packages built from PR #8 can register a client with `--connect-client codex|claude`;
+older assets require manual configuration of the absolute `run-mcp.sh` path. Setup can save an optional Sentry DSN/environment privately; CI receives
 no DSN or management token, and local settings are not packaged.
 
 Downloadable installable artifacts are uploaded only after all required checks succeed.

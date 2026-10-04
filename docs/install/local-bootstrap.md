@@ -1,6 +1,7 @@
 # Local source installation on Apple Silicon
 
-From a current source checkout on Apple Silicon macOS 15+, run:
+For the sources in [PR #8](https://github.com/P1oN/inkscape-mcp-server/pull/8),
+on Apple Silicon macOS 15+, run:
 
 ```sh
 ./setup.sh
@@ -11,7 +12,8 @@ Install Inkscape 1.4+ first. The installer asks for the SVG workspace and option
 Sentry settings, builds a local Rust server and saves private data-only configuration.
 MCP clients use the absolute path to the checkout's `run-mcp.sh`.
 Keep the checkout and its `.inkscape-mcp-local` folder in a permanent location.
-Normal subsequent `./setup.sh` runs reuse the saved package and only write configuration.
+Subsequent runs reuse a complete saved package when source revisions match; revision
+changes trigger rebuilding. Explicit build/check/skill/client options perform their requested work.
 Diagnostics are explicit; `--check` runs doctor before saving configuration.
 
 Reruns preserve the saved workspace, Inkscape path, live setting and engine unless an
@@ -26,8 +28,9 @@ edits produce a rebuild instruction; use `--rebuild` to include those changes ex
 dependencies only. It does not download Rust/Python/uv/native inputs or dependencies;
 missing prerequisites cause failure. A pinned `.venv` or `.packaging-venv` helper
 environment must already exist. `--build` remains a compatibility alias for this mode.
-`--bootstrap` explicitly repeats automatic preparation and build, even with an existing
-configuration. Neither build option can be combined with `--package`.
+`--rebuild` explicitly repeats automatic preparation and build, even with an existing
+configuration; `--bootstrap` is its compatibility alias. Build modes cannot be combined
+with each other or with `--package`.
 
 For a Git-free installation, download `inkscape-mcp-source-bootstrap.tar.gz` from the
 Release, verify its checksum and unpack it into a permanent location. The published
@@ -36,7 +39,7 @@ use with that version. The current source tree contains the updated default beha
 
 Automatic bootstrap currently supports **Apple Silicon, macOS 15 or newer**.
 The published v0.1.0 ready-binary archive does not contain this installer. Use the source
-bootstrap archive or the current `main` source checkout for this installation path.
+bootstrap archive for its original installer, or the PR sources for the updated workflow.
 The source archive includes SOURCE_REVISION metadata; ordinary GitHub source archives
 without this metadata still build, recording an unknown source commit rather than failing.
 

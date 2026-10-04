@@ -1,6 +1,7 @@
 # Client connection, updates and clean reinstall
 
-These options belong to current sources; published v0.1.1 assets remain unchanged.
+These options are committed in [PR #8](https://github.com/P1oN/inkscape-mcp-server/pull/8).
+Use that branch or a package built from it; published v0.1.1 assets lack these options.
 Install Inkscape first, then configure an existing SVG workspace with setup.
 
 ```sh

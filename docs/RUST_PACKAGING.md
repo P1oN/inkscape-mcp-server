@@ -1,6 +1,11 @@
-# Current packaging checkpoint
+# Historical packaging checkpoint — stage38
 
-Current candidate: **stage38, macOS arm64**, tested locally on this Mac. See
+This page preserves the named checkpoint and its evidence. Its package paths, counts,
+validation and publication statements are historical, not the status of PR #8. For current
+work use [the handoff](AGENT_HANDOFF.md), [the plan](RUST_NEXT_PLAN.md) and
+[installation](install/install.md). Native results remain bound to the recorded binaries.
+
+Recorded candidate: **stage38, macOS arm64**, tested locally on this Mac. See
 [Rust migration report](RUST_MIGRATION_REPORT.md) for exact install/config commands,
 archive SHA-256 and compatibility limits. The authoritative build/check index is
 [migration/package-stage38-build-comparison.json](../migration/package-stage38-build-comparison.json).

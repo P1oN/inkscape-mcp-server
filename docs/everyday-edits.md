@@ -1,6 +1,7 @@
-Current Rust candidate: stage38. Operation constraints below describe the fixed helper
-protocol; dated native results are historical. Current GUI acceptance passes122 fixed
-checks +5 two-window guards; see RUST_MIGRATION_REPORT.md for scope.
+The operation constraints below describe the fixed managed helper protocol. Stage38's
+122 native checks and 5 two-window guards are historical evidence, not a new GUI pass
+for PR #8. See [current status](AGENT_HANDOFF.md) and the
+[historical report](RUST_MIGRATION_REPORT.md) for scope.
 
 # Everyday edits in managed macOS Inkscape
 

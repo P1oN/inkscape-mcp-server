@@ -5,12 +5,13 @@ the server's discovery, working-copy/live, preview/refinement and artifact workf
 It uses current MCP schemas and the server's shared authoring guidance. The skill
 is optional; the MCP server works without it.
 
-From a current source checkout, include it when configuring/building the server:
+From [PR #8 sources](https://github.com/P1oN/inkscape-mcp-server/pull/8), include it
+when configuring/building the server:
 
 ```sh
 ./setup.sh --install-skill codex
-# Or, with an existing configured runtime:
-./setup.sh --install-skill codex
+# Also register the client:
+./setup.sh --install-skill codex --connect-client codex
 ```
 
 `codex` installs into `${CODEX_HOME:-$HOME/.codex}/skills/inkscape-mcp`.

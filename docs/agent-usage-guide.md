@@ -10,7 +10,8 @@ The generated [manifest](../llms.txt) is the authoritative full catalog.
 
 For clients supporting installable skills, the repository includes
 [inkscape-mcp](../skills/inkscape-mcp/SKILL.md). See
-[installation](install/agent-skill.md). It complements the MCP initialization
+[skill installation](install/agent-skill.md) and
+[client connection/update/removal](install/client-management.md). It complements the MCP initialization
 instructions without changing the tools or approval gates.
 
 For managed macOS, follow the [setup guide](macos-live-prototype.md). MCP startup and

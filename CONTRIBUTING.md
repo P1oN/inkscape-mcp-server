@@ -6,7 +6,8 @@ are retired; improve Rust against explicit contracts, invariants and regression 
 
 ## Development and checks
 
-Use pinned Rust tooling from rust/rust-toolchain.toml if present and Cargo.lock.
+Use Rust 1.99.0, pinned by the package builder/CI, and Cargo.lock.
+A rust-toolchain.toml is not currently supplied.
 Native libxml/clang development dependencies are required; on macOS point LIBXML2 at
 $(xcrun --show-sdk-path)/usr/lib/libxml2.tbd. Inkscape is required for CLI/native acceptance.
 
@@ -48,7 +49,7 @@ Use argument-list subprocesses, safe XML parsing and no arbitrary shell/code/ext
 Do not add bitmap tracing. Do not commit, publish or send messages without user authorization.
 Windows is backlog. Prepared CI jobs are not evidence of real target validation.
 
-## Installation and scheduling regressions
+## Installation and responsiveness regressions
 
 Run `scripts/rust_responsiveness_acceptance.py --binary PATH --output DIRECTORY`
 with `.venv/bin/python` for real STDIO discovery/workspace responsiveness and cancellation
@@ -59,3 +60,9 @@ skill merge/conflicts, Inkscape CLI rendering, uninstall and reinstall on the cu
 It reuses existing pinned host tools/caches; it does not claim clean-machine or GUI acceptance.
 Use `build_source_archive.py --working-tree` only for explicitly unpublished local snapshots;
 default source export continues to contain committed files only.
+
+Documentation-only changes need link/command consistency and `git diff --check`; do not
+rerun runtime or native GUI acceptance unless code, MCP schemas or initialization guidance
+also changes. Keep release instructions separate from PR sources, and label historical
+checkpoint reports. The handoff records the evidence source/revision and validation limits;
+the active plan records remaining work, without transferring old GUI results to new builds.

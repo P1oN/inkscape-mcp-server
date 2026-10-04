@@ -1,6 +1,11 @@
-# Rust migration report
+# Historical Rust migration report — stage38
 
-Current local candidate: **stage38, macOS arm64**, tested on this Mac with official
+This page preserves the named checkpoint and its evidence. Its package paths, counts,
+validation and publication statements are historical, not the status of PR #8. For current
+work use [the handoff](AGENT_HANDOFF.md), [the plan](RUST_NEXT_PLAN.md) and
+[installation](install/install.md). Native results remain bound to the recorded binaries.
+
+Recorded candidate: **stage38, macOS arm64**, tested on this Mac with official
 Inkscape 1.4.3 and Rust 1.99. The MCP server is native Rust using pinned rmcp 3.5.0.
 Full discovery has 110 tools, 7 prompts and 18 resources; 16 gate/profile/description
 configurations match the frozen JSON contracts exactly. The rewritten Python MCP server,
@@ -10,9 +15,10 @@ The migration is **complete within the user-confirmed current Mac scope**. Curre
 headless/package checks, 122 fixed native checks, five two-window guard checks and
 closed-session reconnect pass on the unchanged stage38 binary. Fresh headless and live
 measurements are recorded below. Historical failures/results remain preserved separately.
-No commits, PRs, release publication or user MCP configuration changes were made.
+At that checkpoint, no commits, PRs, release publication or user MCP configuration
+changes had been made.
 
-## Install and check the current local candidate
+## Install and check the historical stage38 candidate
 
 From the checkout, run `./setup.sh`, then `./run-mcp.sh`. Setup detects Inkscape, asks for
 an existing SVG workspace and saves local configuration without manual env editing.

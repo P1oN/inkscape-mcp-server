@@ -1,5 +1,9 @@
 # Sentry monitoring
 
+Automatic revision/build identity is in [PR #8](https://github.com/P1oN/inkscape-mcp-server/pull/8).
+Use a rebuilt package from those sources. Earlier package/event evidence below retains
+its original scope; it does not identify the runtime currently selected by setup.
+
 The Rust server supports optional panic/fatal capture, bounded subsystem failure events and sampled
 MCP tool transactions. Set `SENTRY_DSN` on the process to enable it. With no DSN (or
 an invalid DSN), no Sentry client is started. `--doctor` does not initialize telemetry.
@@ -128,7 +132,7 @@ Verification evidence: `migration/results/sentry-boundaries-review`. A real pack
 MCP render request used a synthetic headless executable that was signal-terminated twice,
 then exceeded its deadline. The server returned bounded failures and stayed responsive;
 Sentry delivery and category grouping are recorded alongside the raw STDIO trace.
-Current source checks:220 tests pass,1 ignored; format and all-target Clippy pass.
+Source checks at that checkpoint:220 tests passed,1 ignored; format and all-target Clippy pass.
 Native GUI acceptance was not repeated for telemetry-only changes.
 
 Confirmed events: [signal crash](https://boryslav.sentry.io/issues/INKSCAPE-MCP-SERVER-2)
@@ -140,19 +144,23 @@ from the ingestion connection, despite the SDK not attaching user data; transpor
 is visible to the hosted service. The privacy policy above concerns the client payload.
 
 Subsystem verification package: `/Users/bm/Documents/repos/inkscape-mcp-server/.inkscape-mcp-local/build.Jlhkjk/package`.
-The checkout launcher now selects it; existing client Sentry environment settings are
-preserved. Reconnect/reload the MCP client to replace an already-running server; this
+The checkout launcher selected it at that checkpoint; existing client Sentry settings
+were preserved. Reconnect/reload the MCP client to replace an already-running server; this
 must preserve the existing GUI. No client configuration was edited by this extension.
 
-## Ready package with the setup wizard
+## Historical setup-wizard package
 
-Use `migration/results/packages/inkscape-mcp-macos-arm64-sentry-setup.tar.gz` on a
-compatible Mac arm64 with Inkscape installed. Unpack it, run `./setup.sh`, enable
-reporting, paste the project DSN at the hidden prompt and enter `wife` as the environment.
-Then configure the MCP client to run that folder's absolute `run-mcp.sh` path. No DSN
-is needed in the client configuration. The archive contains no saved local configuration.
-Old stage38 archives do not contain the wizard or Sentry SDK; use this new package.
+The local checkpoint archive was
+`migration/results/packages/inkscape-mcp-macos-arm64-sentry-setup.tar.gz`. Its setup on
+Mac arm64 accepted opt-in reporting, a hidden DSN and an environment label, then saved
+them privately for the launcher. The archive contained no saved local configuration.
+Stage38 archives do not contain the wizard or Sentry SDK; this checkpoint predates
+the automatic build identity and client management in PR #8. Use the current source
+[installation guide](install/install.md) for those features.
 17 isolated TTY/privacy/refusal checks and real launcher/package acceptance are recorded
 under `migration/results/sentry-setup-review`. No GUI actions are needed for these checks.
 
-Current installed wizard package: `/Users/bm/Documents/repos/inkscape-mcp-server/.inkscape-mcp-local/build.KjfRBi/package`. The launcher now selects it.
+Installed wizard package at that checkpoint:
+`/Users/bm/Documents/repos/inkscape-mcp-server/.inkscape-mcp-local/build.KjfRBi/package`.
+This is historical installation state; inspect `setup.sh --version` and saved setup.conf
+for the selected runtime.

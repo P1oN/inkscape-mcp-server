@@ -1,7 +1,10 @@
 # Agent handoff — current status
 
-Read README.md, CONTRIBUTING.md and docs/agent-usage-guide.md. Check code and Git status;
-this tree includes unpublished local changes. Preserve them. Historical checkpoint counts
+Read README.md, CONTRIBUTING.md and docs/agent-usage-guide.md. Check code and Git status
+and preserve any uncommitted work. The improvements were committed as `a6f2180` and pushed
+to `codex/install-client-responsiveness` in [PR #8](https://github.com/P1oN/inkscape-mcp-server/pull/8),
+targeting `main`. Follow its checks/review for remote status; local results below are separate.
+The published v0.1.0/v0.1.1 assets and the user's installed runtime were not replaced. Historical checkpoint counts
 and package paths are in [the checkpoint archive](history/agent-checkpoints-through-2026-10-04.md),
 not current validation claims. [RUST_NEXT_PLAN.md](RUST_NEXT_PLAN.md) is the active plan.
 
@@ -32,13 +35,13 @@ not current validation claims. [RUST_NEXT_PLAN.md](RUST_NEXT_PLAN.md) is the act
 
 ## Validation
 
-Validated 2026-10-04: Rust223 passed/1ignored, fmt/clippy; helper6; Ruff45 files;
+Local pre-commit working-tree validation on 2026-10-04: Rust223 passed/1ignored, fmt/clippy; helper6; Ruff45 files;
 shell syntax and workflow YAML parsing; setup50 and bootstrap guards9; client ownership/
 config guards (real isolated Codex, synthetic Claude). Current source archive passed real
 build/setup/skill/handshake/create/edit/render/save/uninstall/reinstall on this Mac.
 Relocated ready archive passed both engines with empty PATH/private Python/bus, original
-preservation, transaction/rollback/no-op and render/export checks. Discovery16 exact matches, doctor10, launcher11 and notices17
-(184 crates) pass; per_call/shell cancellation reaps the owned process and leaves no PNG.
+preservation, transaction/rollback/no-op and render/export checks. Discovery16 exact matches,
+doctor10, launcher11 and notices17 (184 crates) pass; per_call/shell cancellation reaps the owned process and leaves no PNG.
 
 Evidence: migration/results/improvements-install-final/comparison.json,
 improvements-cancellation-final/comparison.json, improvements-client-guards-1/comparison.json,
