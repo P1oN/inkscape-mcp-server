@@ -1,35 +1,30 @@
-# Следующий этап Rust
+# Current Rust improvement plan
 
-Текущий пакет — stage38. Rust MCP развивается без старого Python-сервера и без повторных
-парных прогонов. История, frozen JSON и исходные результаты сохранены.
+The improvements are committed on `codex/install-client-responsiveness` in
+[PR #8](https://github.com/P1oN/inkscape-mcp-server/pull/8), targeting `main`.
+Inspect Git status and [AGENT_HANDOFF.md](AGENT_HANDOFF.md) before continuing.
+Historical stage38 completion notes are in [history](history/rust-stage38-plan.md).
 
-1. Свежие headless замеры завершены на38:10 запусков,250 замеров, оба движка,
-   SVG трёх размеров, edit/batch/save/readback/render/export. Обнаруженная коллизия имён
-   повторных экспортов исправлена;30 экспортов успешны, прежние файлы сохранены.
-2. Итоговый scoped аудит: migration/requirement-audit-stage38-final.json. На текущем Mac
-   обязательные условия миграции закрыты; пакет38 не изменён после сборки.
-3. Свежая native acceptance завершена:122 фиксированных проверки,5 проверок двух окон,
-   закрытая сессия не запускается через reconnect. Live:5 reconnects/15 одинаковых
-   наблюдений selection/tree/RGBA. Предыдущие отказы без monitor сохранены как история.
-4. Дальше — итерационное совершенствование Rust: воспроизводить найденные дефекты
-   минимальными регрессиями, улучшать диагностируемость и расширять реальные SVG fixtures.
-   Новые оптимизации оценивать абсолютными повторными замерами; не возвращать Python oracle.
+The requested installation, client onboarding, skill update, build identity, responsiveness,
+archive acceptance, documentation separation and uninstall improvements are implemented in that PR.
+PR review corrections cover cancellation cache integrity, linked-worktree build watches,
+uninstall rollback, working-tree archive identity, skill conflict proposals and documentation.
+Validation and its limitations are recorded in the handoff and local acceptance reports.
 
-Разделение server/IPC/files/Inkscape уточнять только там, где оно объясняет задержки.
-Roundtrip — смешанный интервал; точный profiler каждого kernel/IPC span не отдельный блокер.
-Provenance/notices текущего Mac и native source kit готовы в указанном scoped объёме;
-полная воспроизводимость бинарников и юридическая сертификация не заявляются.
+Remaining follow-up scope after review:
 
-Отложено пользователем: Windows, установка на чистой машине, расследование исторического
-live-сбоя до повторения. Foreign CI jobs подготовлены, но фактически не выполнены.
+1. Run the source bootstrap on a truly clean Apple Silicon machine, including Apple's SDK
+   installation, downloads, quarantine and client installation. Existing-host archive
+   acceptance does not establish this.
+2. Run Claude Code registration on a real installed client; synthetic CLI/config regression
+   checks establish argument routing only. Codex registration is exercised in an isolated home.
+3. Measure representative workload latency before finer concurrency changes. Headless
+   edits/rendering remain serialized intentionally; do not weaken snapshot/record ordering.
+4. Repeat native GUI acceptance only when changes affect live behavior. Preserve current
+   user windows; use owned synthetic documents and distinguish GUI results from headless tests.
+5. Windows and foreign-target executions remain deferred. Investigate the historical live
+   group incident only on recurrence; capture first divergent tree/PNG, selection, document
+   and window IDs, audit/wire/logs and Undo state before any restart or closure.
 
-Историческое исчезновение группы зафиксировано один раз в stage21; stage18 export/crash
-отдельный случай. При повторении сначала сохранить package/helper/vendor hashes, IDs
-окна/документа, последнее успешное и первое отличающееся дерево/PNG, selection, audit,
-wire trace/stderr, Undo/Redo и порядок UI-действий; при падении — crash/sample/autosave.
-Не перезапускать и не закрывать окно до сохранения материалов. Исходные доказательства:
-migration/native-stage21-comparison.json, native-structure-stage21-comparison.json,
-native-structure-stage21-evidence-binding.json, live-process-benchmark-stage21-evidence-binding.json.
-Последующие22/29 успешны в своих сценариях; причина не установлена.
-
-Никаких коммитов, PR, публикации, сообщений или изменений пользовательского MCP config.
+Review and merge/release remain separate actions. PR publication has not replaced the
+published v0.1.1 archive or the user's configured runtime.

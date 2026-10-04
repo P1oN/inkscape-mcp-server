@@ -1,23 +1,45 @@
 # Install the Rust Inkscape MCP server
 
-Install Inkscape 1.4 or newer and unpack a ready archive; see
-[Release downloads and checksum verification](github-builds.md).
-Run `./setup.sh` in the unpacked package. It detects Inkscape, asks for an existing
-SVG workspace and saves private, data-only configuration files. No manual environment
-editing is needed. It does not execute the server, private Python or Inkscape.
-`./run-mcp.sh` starts the Rust STDIO server using the saved configuration.
+Install Inkscape 1.4 or newer. Choose the instructions for your source/package version:
 
-Diagnostics are explicit: `./setup.sh --check` checks before saving settings, or
-`./run-mcp.sh --doctor` checks an existing configuration. Doctor executes Inkscape CLI
-and imports private Python/inkex/native modules, so macOS may assess those components.
-Successful config-only setup does not certify runtime readiness or macOS approval.
+| Distribution | First setup | Client and skill management |
+|---|---|---|
+| [PR #8 sources](https://github.com/P1oN/inkscape-mcp-server/pull/8) | `./setup.sh` builds automatically on Apple Silicon macOS 15+ | `--connect-client`, skill install/update and `uninstall.sh` are available |
+| Published v0.1.1 source archive | `./setup.sh --bootstrap` | Configure the launcher manually; new management options are absent |
+| Ready runtime built from PR sources | `./setup.sh` saves settings using its bundled runtime | New management options are available; no build tools required |
+| Published v0.1.0 ready runtime | Follow its included setup; doctor runs during setup | Manual client configuration; no new management options |
 
-From a source checkout on Apple Silicon macOS 15+ use `./setup.sh --bootstrap`
-for automatic private tool provisioning; see [local bootstrap](local-bootstrap.md).
-Use `./setup.sh --build` to build with existing developer prerequisites.
-Source packaging requires Rust, native build dependencies and a pinned helper environment
-or uv. Subsequent setup runs reuse the configured package instead of rebuilding it.
-Ready archive users need only Inkscape.
+See [Release downloads and checksums](github-builds.md) and
+[source prerequisites](local-bootstrap.md). Ready runtimes need no user-installed Python,
+Rust, uv or compiler. Source automatic provisioning currently supports Apple Silicon macOS 15+.
+
+For PR sources or a ready package built from them:
+
+```sh
+./setup.sh --install-skill codex --connect-client codex
+./run-mcp.sh --doctor
+```
+
+Use `claude` for Claude Code; the selected CLI must be installed and available on PATH.
+Setup detects Inkscape, asks for an existing SVG workspace and saves private data-only
+configuration. `run-mcp.sh` starts the Rust STDIO server using these saved settings.
+Connection is optional and includes a bounded server handshake before client registration.
+See [client management](client-management.md) for commands and scope.
+
+Without build, `--check`, or client connection, ready-package setup only saves configuration.
+`--check` runs doctor before saving; `--connect-client` executes packaged Python and starts
+a separate MCP process for the handshake. Source first setup compiles/packages the runtime.
+None of these paths launches Inkscape GUI. Doctor executes Inkscape CLI and imports private
+Python/inkex/native modules, so macOS may assess those components. Saving settings alone
+does not certify runtime readiness or macOS approval.
+
+Reruns preserve saved choices and reuse a complete runtime when recorded revisions match.
+A changed committed revision triggers rebuilding; unknown revisions or uncommitted source
+edits need `--rebuild`. This option repeats automatic preparation/build. `--local-tools`
+uses existing pinned prerequisites and cached dependencies offline; `--build` aliases it,
+and `--bootstrap` aliases automatic rebuilding. Build modes and `--package` are exclusive.
+Use `--version` for installed metadata, and the [update/removal guide](client-management.md)
+for skill merging, backups and clean reinstall.
 
 The v0.1.0 Release can show “Apple cannot check … for malicious software” for
 private runtime components. This is Gatekeeper, not missing administrator privileges;
@@ -34,3 +56,6 @@ or change macOS security/privacy settings. See
 Python package installation/uvx entry points are retired. Python remaining inside the
 ready package serves bounded live helpers and the supervisor, not an MCP server.
 Windows is backlog; native GUI acceptance is separate from CLI/package checks.
+
+Current sources also support client registration, installed build identity, managed skill
+updates and clean reinstall. See [client management](client-management.md).

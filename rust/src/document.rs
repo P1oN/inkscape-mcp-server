@@ -9,6 +9,12 @@ pub const INKSCAPE_NS: &str = "http://www.inkscape.org/namespaces/inkscape";
 const SODIPODI_NS: &str = "http://sodipodi.sourceforge.net/DTD/sodipodi-0.0.dtd";
 const PERSIST_HINT: &str = "Edits apply to a working copy — your original file on disk is NEVER changed. To persist the result, call save_document_as (writes a NEW .svg) or export_document (PNG/PDF/SVG). render_preview only displays it.";
 
+#[cfg(test)]
+thread_local! {
+    static BEFORE_REGISTRY_TEST: std::cell::RefCell<Option<Box<dyn FnOnce()>>> = const { std::cell::RefCell::new(None) };
+}
+
+#[derive(Clone)]
 pub struct Entry {
     pub id: String,
     pub root: usize,
@@ -26,6 +32,7 @@ impl Entry {
     }
 }
 
+#[derive(Clone)]
 pub struct Registry {
     pub workspace: Workspace,
     pub entries: indexmap::IndexMap<String, Entry>,
@@ -145,6 +152,14 @@ impl Registry {
             source,
             opened_at: chrono::Utc::now().to_rfc3339_opts(chrono::SecondsFormat::Micros, false),
         };
+        // Reject an unreadable/nonregular registry before creating document files.
+        let index = Path::new(".inkscape-mcp/registry.json");
+        let previous_index = match self.workspace.file_kind(root, Path::new(".inkscape-mcp"))? {
+            None => None,
+            Some(_) => self
+                .workspace
+                .read_optional(root, index, self.workspace.max_output)?,
+        };
         self.workspace
             .write_new(root, &entry.directory().join("original.svg"), &bytes)?;
         self.workspace.write_new(root, &entry.working(), &bytes)?;
@@ -157,15 +172,43 @@ impl Registry {
             self.workspace
                 .ensure_directory(root, &entry.directory().join(directory))?;
         }
-        self.entries.insert(id.clone(), entry);
-        let entries: Vec<_> = self.entries.values().filter(|e| e.root == root).map(|e| json!({
+        let mut entries: Vec<_> = self.entries.values().filter(|e| e.root == root).map(|e| json!({
             "doc_id":e.id,"source_path":e.source,"workspace_dir_name":e.id,"opened_at":e.opened_at
         })).collect();
-        self.workspace.atomic_write(
+        entries.push(json!({"doc_id":entry.id,"source_path":entry.source,"workspace_dir_name":entry.id,"opened_at":entry.opened_at}));
+        #[cfg(test)]
+        BEFORE_REGISTRY_TEST.with(|hook| {
+            if let Some(action) = hook.borrow_mut().take() {
+                action();
+            }
+        });
+        if let Err(error) = self.workspace.atomic_write(
             root,
-            Path::new(".inkscape-mcp/registry.json"),
+            index,
             &serde_json::to_vec_pretty(&json!({"documents":entries})).unwrap(),
-        )?;
+        ) {
+            // A post-rename fsync failure can still have published the candidate.
+            let rollback = match previous_index {
+                Some(bytes) => self.workspace.atomic_write(root, index, &bytes),
+                None => self
+                    .workspace
+                    .read_optional(root, index, self.workspace.max_output)
+                    .and_then(|current| {
+                        if current.is_some() {
+                            self.workspace.remove_file(root, index)
+                        } else {
+                            Ok(())
+                        }
+                    }),
+            };
+            if rollback.is_err() {
+                return Err("document registration failed; registry recovery required, candidate bytes retained".into());
+            }
+            // Candidate files remain available for diagnosis; never expose a failed
+            // registration as an active in-memory document.
+            return Err(error);
+        }
+        self.entries.insert(id.clone(), entry);
         Ok(id)
     }
 
@@ -319,6 +362,59 @@ fn summary(id: &str, document: &Document) -> Result<Value, String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn failed_registry_destination_does_not_publish_a_document_or_copy() {
+        let temporary = tempfile::tempdir().unwrap();
+        let root = temporary.path().canonicalize().unwrap();
+        let mut registry = Registry {
+            workspace: Workspace {
+                roots: vec![root.clone()],
+                max_input: 4096,
+                max_output: 4096,
+            },
+            entries: indexmap::IndexMap::new(),
+        };
+        std::fs::create_dir_all(root.join(".inkscape-mcp/registry.json")).unwrap();
+        std::fs::write(root.join("fixture.svg"), "<svg><rect id=\"r\"/></svg>").unwrap();
+        assert!(registry.open(&json!({"path":"fixture.svg"})).is_err());
+        assert!(registry.entries.is_empty());
+        assert!(!root.join(".inkscape-mcp/documents").exists());
+        assert!(root.join(".inkscape-mcp/registry.json").is_dir());
+        std::fs::remove_dir(root.join(".inkscape-mcp/registry.json")).unwrap();
+        assert!(registry.open(&json!({"path":"fixture.svg"})).is_ok());
+        assert_eq!(registry.entries.len(), 1);
+    }
+
+    #[test]
+    fn late_registry_write_failure_does_not_publish_candidate_in_memory() {
+        let temporary = tempfile::tempdir().unwrap();
+        let root = temporary.path().canonicalize().unwrap();
+        let mut registry = Registry {
+            workspace: Workspace {
+                roots: vec![root.clone()],
+                max_input: 4096,
+                max_output: 4096,
+            },
+            entries: indexmap::IndexMap::new(),
+        };
+        let original = b"<svg><rect id=\"r\"/></svg>";
+        std::fs::write(root.join("fixture.svg"), original).unwrap();
+        let destination = root.join(".inkscape-mcp/registry.json");
+        BEFORE_REGISTRY_TEST.with(|hook| {
+            *hook.borrow_mut() = Some(Box::new(move || std::fs::create_dir(destination).unwrap()))
+        });
+        assert!(registry.open(&json!({"path":"fixture.svg"})).is_err());
+        assert!(registry.entries.is_empty());
+        assert_eq!(std::fs::read(root.join("fixture.svg")).unwrap(), original);
+        // Ambiguous persistence retains candidate bytes for diagnosis, never
+        // presents them as a successfully opened document or deletes originals.
+        assert_eq!(
+            std::fs::read_dir(root.join(".inkscape-mcp/documents"))
+                .unwrap()
+                .count(),
+            1
+        );
+    }
 
     #[test]
     fn refused_open_validates_before_any_managed_write_and_valid_open_still_works() {

@@ -15,11 +15,11 @@ case "${1:-}" in
     *) fail 'Unexpected bootstrap option.';;
 esac
 [ "$#" -eq 0 ] || fail 'Unexpected bootstrap arguments.'
-[ "$(uname -s)" = Darwin ] && [ "$(uname -m)" = arm64 ] || fail 'Automatic bootstrap currently supports Apple Silicon macOS only.'
+[ "$(uname -s)" = Darwin ] && [ "$(uname -m)" = arm64 ] || fail 'Automatic setup supports Apple Silicon macOS only. Use setup.sh --local-tools with installed build prerequisites on other targets.'
 major=$(/usr/bin/sw_vers -productVersion); major=${major%%.*}
 [ "$major" -ge 15 ] || fail 'Pinned native build inputs require macOS 15 or newer.'
 if ! sdk=$(/usr/bin/xcrun --show-sdk-path 2>/dev/null); then
-    printf '%s\n' 'Apple Command Line Tools are required. Complete the Apple installation dialog, then rerun setup.sh --bootstrap.' >&2
+    printf '%s\n' 'Apple Command Line Tools are required. Complete the Apple installation dialog, then rerun ./setup.sh.' >&2
     /usr/bin/xcode-select --install >&2 || true
     exit 1
 fi

@@ -1,4 +1,9 @@
-# Current scoped security review
+# Historical scoped security review — stage38
+
+This page preserves the named checkpoint and its evidence. Its package paths, counts,
+validation and publication statements are historical, not the status of PR #8. For current
+work use [the handoff](AGENT_HANDOFF.md), [the plan](RUST_NEXT_PLAN.md) and
+[installation](install/install.md). Native results remain bound to the recorded binaries.
 
 Candidate **stage38**, source Rust 215 passed / 1 ignored, fmt and clippy pass.
 Actual package evidence is indexed by

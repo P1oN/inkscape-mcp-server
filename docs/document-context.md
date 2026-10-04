@@ -5,9 +5,10 @@ the Python MCP server is retired. Use README.md and CONTRIBUTING.md for current 
 # Managed macOS document context
 
 The managed GTK 3 session can identify and select a drawing window, then check that
-identity inside Inkscape immediately before dispatching an action. Current stage38 native
-acceptance passes on official Inkscape1.4.3, including continuous STDIO two-window mutation
-refusal and explicit rebinding. See RUST_MIGRATION_REPORT.md for scope and evidence.
+identity inside Inkscape immediately before dispatching an action. Historical stage38 native
+acceptance passed on official Inkscape1.4.3, including continuous STDIO two-window mutation
+refusal and explicit rebinding. See RUST_MIGRATION_REPORT.md for that evidence and
+[AGENT_HANDOFF.md](AGENT_HANDOFF.md) for current scope; this PR has no new GUI acceptance.
 The integration remains experimental.
 
 ## Workflow
@@ -80,7 +81,7 @@ has been observed in a native run; startup and full acceptance also passed after
 ## Historical stage 2 validation (2026-10-01)
 
 The counts and intermittent failure below record stage 2 before PR #5 and the explicit-launch
-change. For current `main` state see [AGENT_HANDOFF.md](AGENT_HANDOFF.md).
+change. For current development status see [AGENT_HANDOFF.md](AGENT_HANDOFF.md).
 
 Automated tests cover malformed and missing identities, identical titles with distinct IDs,
 window switches and document replacement, refusal before edits, native dispatch parameters,

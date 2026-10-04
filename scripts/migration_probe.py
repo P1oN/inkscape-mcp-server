@@ -29,7 +29,9 @@ def require(condition: bool, message: str) -> None:
 class Wire:
     """Sequential JSON-RPC harness with bounded waits and captured stderr."""
 
-    def __init__(self, command: list[str], env: dict[str, str], log: Path):
+    def __init__(
+        self, command: list[str], env: dict[str, str], log: Path, *, request_timeout: float = 90
+    ):
         self.log = log.open("w")
         self.process = subprocess.Popen(
             command,
@@ -43,17 +45,24 @@ class Wire:
         self.messages: queue.Queue = queue.Queue()
         self.sequence = 0
         self.trace: list[dict] = []
-        threading.Thread(target=self._read, daemon=True).start()
+        self.pending: dict | None = None
+        self.request_timeout = request_timeout
+        self.reader = threading.Thread(target=self._read, daemon=True)
+        self.reader.start()
 
     def _read(self) -> None:
         if self.process.stdout is None:
             raise RuntimeError("stdout pipe unavailable")
-        for line in self.process.stdout:
-            try:
-                self.messages.put(json.loads(line))
-            except json.JSONDecodeError:
-                self.messages.put({"invalid_stdout": line})
-        self.messages.put({"eof": self.process.poll()})
+        try:
+            for line in self.process.stdout:
+                try:
+                    self.messages.put(json.loads(line))
+                except json.JSONDecodeError:
+                    self.messages.put({"invalid_stdout": line})
+        except (OSError, UnicodeError) as error:
+            self.messages.put({"reader_error": str(error)})
+        finally:
+            self.messages.put({"eof": self.process.poll()})
 
     def request(self, method: str, params: dict | None = None) -> dict:
         self.sequence += 1
@@ -61,11 +70,18 @@ class Wire:
         if params is not None:
             message["params"] = params
         start = time.perf_counter_ns()
+        self.pending = message
         self.send(message)
-        deadline = time.monotonic() + 90
+        deadline = time.monotonic() + self.request_timeout
         while True:
-            reply = self.messages.get(timeout=max(0.01, deadline - time.monotonic()))
-            if "invalid_stdout" in reply or "eof" in reply:
+            try:
+                reply = self.messages.get(timeout=max(0.01, deadline - time.monotonic()))
+            except queue.Empty as error:
+                raise TimeoutError(
+                    f"MCP response timed out after {self.request_timeout}s: method={method}, "
+                    f"id={self.sequence}, pid={self.process.pid}, exit_code={self.process.poll()}"
+                ) from error
+            if "invalid_stdout" in reply or "eof" in reply or "reader_error" in reply:
                 raise RuntimeError(reply)
             if reply.get("id") == self.sequence:
                 self.trace.append(
@@ -75,7 +91,10 @@ class Wire:
                         "roundtrip_ns": time.perf_counter_ns() - start,
                     }
                 )
+                self.pending = None
                 return reply
+            if time.monotonic() >= deadline:
+                raise TimeoutError(f"MCP response timed out: method={method}, id={self.sequence}")
 
     def send(self, message: dict) -> None:
         if self.process.stdin is None:
@@ -107,6 +126,9 @@ class Wire:
         except subprocess.TimeoutExpired:
             self.process.terminate()  # Only the exact harness-owned server process.
             self.process.wait(timeout=10)
+        self.reader.join(timeout=1)
+        if not self.reader.is_alive():
+            self.process.stdout.close()
         self.log.close()
 
 
@@ -181,6 +203,14 @@ def main() -> None:
                 write(args.output / f"{key}.json", contract)
                 print(key, len(contract["tools/list"]["tools"]), flush=True)
             finally:
+                write(
+                    args.output / f"{key}.trace.json",
+                    {
+                        "completed": wire.trace,
+                        "pending": wire.pending,
+                        "exit_code": wire.process.poll(),
+                    },
+                )
                 wire.close()
     for run in range(0 if args.discovery_only else args.repeats):
         with TemporaryDirectory(prefix="imcp-benchmark-") as temporary:

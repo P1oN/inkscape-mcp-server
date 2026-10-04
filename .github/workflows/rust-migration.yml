@@ -18,6 +18,7 @@ name: Rust checks and native packages
       - "rust/**"
       - "migration/**"
       - "scripts/**"
+      - "skills/**"
       - "setup.sh"
       - "run-mcp.sh"
       - "runtime/**"
@@ -27,6 +28,7 @@ name: Rust checks and native packages
       - "rust/**"
       - "migration/**"
       - "scripts/**"
+      - "skills/**"
       - "setup.sh"
       - "run-mcp.sh"
       - "runtime/**"
@@ -87,8 +89,8 @@ jobs:
         run: cargo build --locked --release --manifest-path rust/Cargo.toml
       - name: Real STDIO discovery contract
         run: |
-          python3 scripts/migration_probe.py --output migration/results/ci-discovery --matrix --discovery-only -- rust/target/release/inkscape-mcp-rust
-          python3 scripts/migration_compare.py migration/contracts migration/results/ci-discovery --report migration/results/ci-discovery-comparison.json
+          .venv/bin/python scripts/migration_probe.py --output migration/results/ci-discovery --matrix --discovery-only -- rust/target/release/inkscape-mcp-rust
+          .venv/bin/python scripts/migration_compare.py migration/contracts migration/results/ci-discovery --report migration/results/ci-discovery-comparison.json
       - name: Record executable hash and dynamic dependencies
         shell: bash
         run: |
@@ -131,6 +133,9 @@ jobs:
           PACKAGE: ${{ matrix.package }}
         run: |
           .venv/bin/python scripts/rust_security_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-security
+          .venv/bin/python scripts/rust_stdio_startup_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-startup
+          .venv/bin/python scripts/rust_responsiveness_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-responsiveness
+          .venv/bin/python scripts/rust_defects_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-defects
           .venv/bin/python scripts/rust_diagnostic_limits_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-diagnostic-limits
           .venv/bin/python scripts/rust_stdio_frame_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-stdio-frame
           .venv/bin/python scripts/rust_compare_publication_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-compare-publication
@@ -142,9 +147,9 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/inkscape-mcp-source-workspace"
           if [ "$RUNNER_OS" = macOS ] && [ "$(uname -m)" = arm64 ]; then
-            ./setup.sh --bootstrap --workspace "$RUNNER_TEMP/inkscape-mcp-source-workspace"
+            ./setup.sh --workspace "$RUNNER_TEMP/inkscape-mcp-source-workspace"
           else
-            ./setup.sh --build --workspace "$RUNNER_TEMP/inkscape-mcp-source-workspace"
+            ./setup.sh --local-tools --workspace "$RUNNER_TEMP/inkscape-mcp-source-workspace"
           fi
       - name: Private Sentry setup and hidden input acceptance
         run: .venv/bin/python scripts/launcher_sentry_acceptance.py --output migration/results/ci-sentry-setup
@@ -202,5 +207,8 @@ jobs:
             migration/results/ci-launcher/
             migration/results/ci-sentry-setup/
             migration/results/ci-bootstrap-guards/
+            migration/results/ci-defects/
+            migration/results/ci-responsiveness/
+            migration/results/ci-startup/
           if-no-files-found: error
           retention-days: 14

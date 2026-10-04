@@ -104,6 +104,15 @@ def copy(source, target):
     shutil.copy2(source, target, follow_symlinks=True)
 
 
+def bundle_agent_skill(output):
+    """Keep optional skill installation available in ready runtime packages."""
+    for script in ("install-skill.sh", "mcp-client.sh", "mcp_client.py"):
+        copy(Path("scripts") / script, output / "scripts" / script)
+    copy(Path("uninstall.sh"), output / "uninstall.sh")
+    for skill_file in ("SKILL.md", "agents/openai.yaml"):
+        copy(Path("skills/inkscape-mcp") / skill_file, output / "skills/inkscape-mcp" / skill_file)
+
+
 def native_input_path(path):
     """Map pinned bottle paths into the installer-owned build input tree."""
     root = os.environ.get("INKSCAPE_MCP_BUILD_NATIVE_ROOT")
@@ -387,6 +396,11 @@ def build(output, binary=None):
         "release_signed": False,
         "notarized": False,
         "source_head": source_revision(),
+        "build_info": json.loads(
+            command(
+                str(binary or Path("rust/target/release/inkscape-mcp-rust").resolve()), "--version"
+            )
+        ),
     }
     for name in DEPS:
         dist = distribution(name)
@@ -419,6 +433,7 @@ def build(output, binary=None):
         manifest["server_debug_symbols"] = "bin/inkscape-mcp.dSYM"
     for launcher in ("setup.sh", "run-mcp.sh"):
         copy(Path(launcher), output / launcher)
+    bundle_agent_skill(output)
     headers = next(
         (
             p

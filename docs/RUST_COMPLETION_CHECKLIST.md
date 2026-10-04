@@ -1,6 +1,11 @@
-# Rust completion checklist
+# Historical Rust completion checklist — stage38
 
-Current candidate stage38, 2026-10-03. User decisions supersede the original executable
+This page preserves the named checkpoint and its evidence. Its package paths, counts,
+validation and publication statements are historical, not the status of PR #8. For current
+work use [the handoff](AGENT_HANDOFF.md), [the plan](RUST_NEXT_PLAN.md) and
+[installation](install/install.md). Native results remain bound to the recorded binaries.
+
+Recorded candidate: stage38, 2026-10-03. User decisions supersede the original executable
 Python oracle requirement: rewritten Python MCP retired; Windows backlog; clean-machine
 install user-owned; historical live investigation only on recurrence; timing refinement secondary.
 

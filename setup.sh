@@ -12,42 +12,99 @@ ask() {
 single_line() {
     case "$1" in *$'\n'*|*$'\r'*) fail "Paths cannot contain newline characters.";; esac
 }
-package= workspace= inkscape= engine=per_call live=true build=false check=false bootstrap=false
+package= workspace= inkscape= engine= live= build=false check=false bootstrap=false
 sentry= sentry_dsn_file= sentry_environment=
+skill_client=
+connect_client=
+skill_update=false
 while [ "$#" -gt 0 ]; do
     case "$1" in
-        --package|--workspace|--inkscape|--engine|--live|--sentry|--sentry-dsn-file|--sentry-environment)
+        --package|--workspace|--inkscape|--engine|--live|--sentry|--sentry-dsn-file|--sentry-environment|--install-skill|--connect-client)
             [ "$#" -ge 2 ] || fail "Missing value for $1."
+            [ -n "$2" ] || fail "Empty value for $1."
             case "$1" in
                 --package) package=$2;; --workspace) workspace=$2;;
                 --inkscape) inkscape=$2;; --engine) engine=$2;; --live) live=$2;;
                 --sentry) sentry=$2;; --sentry-dsn-file) sentry_dsn_file=$2;;
                 --sentry-environment) sentry_environment=$2;;
+                --install-skill) skill_client=$2;; --connect-client) connect_client=$2;;
             esac
             shift 2;;
-        --build) build=true; shift;;
+        --local-tools|--build|--bootstrap|--rebuild)
+            [ "$build" = false ] || fail 'Choose only one build mode.'
+            build=true
+            case "$1" in --bootstrap|--rebuild) bootstrap=true;; esac
+            shift;;
+        --update-skill) skill_update=true; shift;;
+        --version)
+            manifest=$repo/.inkscape-mcp-local/setup.conf
+            [ -f "$manifest" ] && [ ! -L "$manifest" ] || fail 'No configured installation.'
+            installed=$(sed -n '2p' "$manifest")
+            case "$installed" in /*/bin/inkscape-mcp) ;; *) fail 'Invalid saved package.';; esac
+            metadata=${installed%/bin/inkscape-mcp}/libexec/inkscape-mcp/package.json
+            [ -f "$metadata" ] || fail 'Installed package metadata missing.'
+            sed -n '/"build_info"/,/}/p; /"source_head"/p' "$metadata"
+            exit 0;;
         --check) check=true; shift;;
-        --bootstrap) bootstrap=true; build=true; shift;;
         --help)
             printf '%s\n' 'Usage: ./setup.sh [--package DIRECTORY] [--workspace DIRECTORY]' \
                 '                  [--inkscape BINARY_OR_APP] [--live true|false]' \
-                '                  [--engine per_call|shell] [--build|--bootstrap] [--check]' \
+                '                  [--engine per_call|shell] [--local-tools] [--check]' \
                 '                  [--sentry true|false] [--sentry-dsn-file FILE]' \
-                '                  [--sentry-environment LABEL]' \
+                '                  [--sentry-environment LABEL] [--install-skill codex|claude]' \
+                '--install-skill optionally installs bundled agent guidance without changing MCP client settings.' \
                 'Interactive setup asks about optional error reporting (default off).' \
                 'DSN input is hidden; use a file rather than putting it in shell history.' \
-                'Saves settings without launching the server, Python, libraries or Inkscape.' \
-                '--check runs doctor; --build builds with existing tools; --bootstrap downloads missing tools privately.' \
-                'Source builds need native developer prerequisites; archives need only Inkscape.' \
-                'Does not launch Inkscape or change MCP client settings.'
+                'Source setup automatically downloads missing build tools privately and builds on first use.' \
+                'Subsequent runs reuse the saved complete package; ready packages only save settings.' \
+                '--local-tools builds with existing developer tools, without automatic tool downloads.' \
+                '--package selects a ready package; --check runs doctor before saving.' \
+                'Compatibility: --build aliases --local-tools; --bootstrap explicitly repeats automatic provisioning/build.' \
+                'Automatic provisioning supports Apple Silicon macOS 15+; Apple developer tools are required.' \
+                '--rebuild explicitly rebuilds; --version displays installed revision/build metadata.' \
+                '--connect-client codex|claude verifies handshake and registers through the client CLI.' \
+                '--update-skill with --install-skill merges upstream changes, preserving customizations.' \
+                'Does not launch Inkscape. Client settings change only with --connect-client.'
             exit 0;;
         *) fail "Unknown option: $1";;
     esac
 done
+config_dir=$repo/.inkscape-mcp-local
+config=$config_dir/setup.conf
+[ ! -L "$config_dir" ] || fail "Configuration directory must not be a symlink."
+[ ! -L "$config" ] || fail "Configuration must not be a symlink."
+[ ! -e "$config" ] || [ -f "$config" ] || fail "Configuration must be a regular file."
+previous_binary=
+if [ -f "$config" ]; then
+    {
+        IFS= read -r previous_version && IFS= read -r previous_binary &&
+        IFS= read -r previous_inkscape_dir && IFS= read -r previous_workspace &&
+        IFS= read -r previous_live && IFS= read -r previous_engine || fail "Incomplete setup configuration."
+        if IFS= read -r extra || [ -n "$extra" ]; then fail "Unexpected setup configuration data."; fi
+    } < "$config"
+    [ "$previous_version" = inkscape-mcp-setup-v1 ] || fail "Unsupported setup configuration."
+    case "$previous_binary" in /*/bin/inkscape-mcp) ;; *) fail "Invalid saved package path.";; esac
+    case "$previous_inkscape_dir" in /*) ;; *) fail "Invalid saved Inkscape directory.";; esac
+    case "$previous_workspace" in /*) ;; *) fail "Invalid saved workspace.";; esac
+    case "$previous_live" in true|false) ;; *) fail "Invalid saved live setting.";; esac
+    case "$previous_engine" in per_call|shell) ;; *) fail "Invalid saved engine setting.";; esac
+    [ -n "$workspace" ] || workspace=$previous_workspace
+    [ -n "$inkscape" ] || inkscape=$previous_inkscape_dir/inkscape
+    [ -n "$live" ] || live=$previous_live
+    [ -n "$engine" ] || engine=$previous_engine
+fi
+live=${live:-true}
+engine=${engine:-per_call}
 case "$engine" in per_call|shell) ;; *) fail "Engine must be per_call or shell.";; esac
 case "$live" in true|false) ;; *) fail "Live must be true or false.";; esac
-[ "$build" = false ] || [ -z "$package" ] || fail '--build and --package cannot be combined.'
-[ "$build" = false ] || [ -f "$repo/rust/Cargo.toml" ] || fail '--build requires a source checkout.'
+case "$skill_client" in ''|codex|claude) ;; *) fail 'Skill client must be codex or claude.';; esac
+case "$connect_client" in ''|codex|claude) ;; *) fail 'Client must be codex or claude.';; esac
+[ "$skill_update" = false ] || [ -n "$skill_client" ] || fail '--update-skill requires --install-skill.'
+case "$sentry" in ''|true|false) ;; *) fail "Sentry must be true or false.";; esac
+[ "$sentry" != false ] || { [ -z "$sentry_dsn_file" ] && [ -z "$sentry_environment" ]; } ||
+    fail "Disabled Sentry cannot have DSN or environment options."
+[ "$build" = false ] || [ -z "$package" ] || fail 'Build options and --package cannot be combined.'
+[ "$build" = false ] || [ -f "$repo/rust/Cargo.toml" ] || fail 'Build options require a source checkout.'
 if [ -z "$package" ] && [ -f "$repo/libexec/inkscape-mcp/package.json" ]; then
     package=$repo
 fi
@@ -77,42 +134,37 @@ single_line "$inkscape"
 inkscape_dir=$(cd -- "$(dirname -- "$inkscape")" && pwd -P)
 single_line "$inkscape_dir"
 case "$inkscape_dir" in *:*) fail "The Inkscape directory cannot contain (:).";; esac
-# Reuse the configured package; rerunning setup must not create a new runtime path.
-previous_config=$repo/.inkscape-mcp-local/setup.conf
-if [ -z "$package" ] && [ "$build" = false ] && [ -f "$previous_config" ] &&
-    [ ! -L "$previous_config" ] && [ ! -L "$repo/.inkscape-mcp-local" ]; then
-    {
-        IFS= read -r previous_version && IFS= read -r previous_binary || true
-    } < "$previous_config"
-    if [ "${previous_version:-}" = inkscape-mcp-setup-v1 ]; then
-        case "${previous_binary:-}" in
-            /*/bin/inkscape-mcp)
-                if [ -x "$previous_binary" ]; then
-                    package=${previous_binary%/bin/inkscape-mcp}
-                fi;;
-        esac
+# Reuse only a complete configured runtime. Explicit --package always wins.
+if [ -z "$package" ] && [ "$build" = false ] && [ -n "$previous_binary" ] &&
+    [ -x "$previous_binary" ] && [ -f "${previous_binary%/bin/inkscape-mcp}/libexec/inkscape-mcp/package.json" ]; then
+    package=${previous_binary%/bin/inkscape-mcp}
+    if [ -f "$repo/rust/Cargo.toml" ]; then
+        source_revision=
+        if [ -e "$repo/.git" ]; then
+            source_revision=$(git -C "$repo" rev-parse --verify HEAD 2>/dev/null || true)
+            if [ -n "$source_revision" ] && ! git -C "$repo" diff --quiet HEAD -- rust runtime scripts skills setup.sh run-mcp.sh migration/contracts; then
+                printf '%s\n' 'Uncommitted source edits are present; use --rebuild to rebuild those changes explicitly.' >&2
+            fi
+        elif [ -f "$repo/SOURCE_REVISION" ] && [ ! -L "$repo/SOURCE_REVISION" ]; then
+            { IFS= read -r marker_version && IFS= read -r source_revision || true; } < "$repo/SOURCE_REVISION"
+            [ "${marker_version:-}" = inkscape-mcp-source-v1 ] || source_revision=
+        fi
+        # Manifest is generated locally with a fixed pretty-printed source_head field.
+        # This read uses system text tools, never imports the packaged Python runtime.
+        installed_revision=$(sed -n 's/^[ ]*"source_head":[ ]*"\([0-9a-f]\{40\}\)",\{0,1\}[ ]*$/\1/p' "$package/libexec/inkscape-mcp/package.json")
+        if [[ "$source_revision" =~ ^[0-9a-f]{40}$ ]] && [[ "$installed_revision" =~ ^[0-9a-f]{40}$ ]]; then
+            if [ "$source_revision" != "$installed_revision" ]; then
+                printf '%s\n' 'Sources changed since the installed build; rebuilding automatically.' >&2
+                package=
+            fi
+        else
+            printf '%s\n' 'Source revisions cannot be compared; use --rebuild to rebuild after source changes.' >&2
+        fi
     fi
 fi
-if [ "$build" = true ]; then
-    # The build recipe contains fixed commands; its stdout contains only one package path.
-    builder=$repo/scripts/build-local-package.sh
-    [ "$bootstrap" = false ] || builder=$repo/scripts/bootstrap-local-package.sh
-    package=$(PATH="$inkscape_dir:${PATH:-/usr/bin:/bin}" "$builder")
-fi
-if [ -z "$package" ]; then
-    ask 'Directory of the unpacked Rust package' --package
-    package=$answer
-fi
-single_line "$package"
-package=$(cd -- "$package" && pwd -P) || fail "Package directory does not exist."
-single_line "$package"
-binary=$package/bin/inkscape-mcp
-[ -x "$binary" ] && [ -f "$package/libexec/inkscape-mcp/package.json" ] || \
-    fail "Expected a complete package containing bin/inkscape-mcp and libexec/inkscape-mcp/package.json."
-if [ "$check" = true ]; then
-    printf '%s\n' 'Checking the package and Inkscape (no GUI launch)...' >&2
-    PATH="$inkscape_dir:${PATH:-/usr/bin:/bin}" INKSCAPE_MCP_WORKSPACE_ROOTS="$workspace" \
-        "$binary" --doctor >&2 || fail "Doctor failed; configuration was not saved."
+if [ -z "$package" ] && [ "$build" = false ] && [ -f "$repo/rust/Cargo.toml" ]; then
+    build=true
+    bootstrap=true
 fi
 config_dir=$repo/.inkscape-mcp-local
 [ ! -L "$config_dir" ] || fail "Configuration directory must not be a symlink."
@@ -181,6 +233,31 @@ if [ "$sentry" = true ]; then
 elif [ "$sentry" = false ]; then
     sentry_dsn= sentry_environment=production
 fi
+
+if [ "$build" = true ]; then
+    # The build recipe contains fixed commands; its stdout contains only one package path.
+    builder=$repo/scripts/build-local-package.sh
+    [ "$bootstrap" = false ] || builder=$repo/scripts/bootstrap-local-package.sh
+    local_tools_only=false
+    [ "$bootstrap" = true ] || local_tools_only=true
+    package=$(PATH="$inkscape_dir:${PATH:-/usr/bin:/bin}" \
+        INKSCAPE_MCP_BUILD_LOCAL_TOOLS_ONLY="$local_tools_only" "$builder")
+fi
+if [ -z "$package" ]; then
+    ask 'Directory of the unpacked Rust package' --package
+    package=$answer
+fi
+single_line "$package"
+package=$(cd -- "$package" && pwd -P) || fail "Package directory does not exist."
+single_line "$package"
+binary=$package/bin/inkscape-mcp
+[ -x "$binary" ] && [ -f "$package/libexec/inkscape-mcp/package.json" ] || \
+    fail "Expected a complete package containing bin/inkscape-mcp and libexec/inkscape-mcp/package.json."
+if [ "$check" = true ]; then
+    printf '%s\n' 'Checking the package and Inkscape (no GUI launch)...' >&2
+    PATH="$inkscape_dir:${PATH:-/usr/bin:/bin}" INKSCAPE_MCP_WORKSPACE_ROOTS="$workspace" \
+        "$binary" --doctor >&2 || fail "Doctor failed; configuration was not saved."
+fi
 temporary=$(mktemp "$config_dir/setup.XXXXXX")
 telemetry_temporary=
 trap 'rm -f -- "$temporary"; [ -z "$telemetry_temporary" ] || rm -f -- "$telemetry_temporary"' EXIT
@@ -193,3 +270,14 @@ fi
 printf '%s\n' 'inkscape-mcp-setup-v1' "$binary" "$inkscape_dir" "$workspace" "$live" "$engine" > "$temporary"
 mv -f -- "$temporary" "$config"
 printf 'Saved settings in %s\nMCP command: %s/run-mcp.sh\n' "$config" "$repo" >&2
+if [ -n "$skill_client" ]; then
+    skill_options=(--client "$skill_client")
+    [ "$skill_update" = false ] || skill_options+=(--update)
+    "$repo/scripts/install-skill.sh" "${skill_options[@]}" ||
+        fail 'MCP settings were saved, but skill installation failed. See the message above and retry scripts/install-skill.sh.'
+fi
+
+if [ -n "$connect_client" ]; then
+    "$repo/scripts/mcp-client.sh" --client "$connect_client" connect ||
+        fail 'MCP settings were saved, but client connection failed. Retry scripts/mcp-client.sh --client '"$connect_client"' connect.'
+fi

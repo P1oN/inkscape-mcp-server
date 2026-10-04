@@ -143,6 +143,9 @@ pub fn run_bounded_with_env(
     limit: usize,
     environment: &[(&str, &std::ffi::OsStr)],
 ) -> Result<Outcome, String> {
+    if cancelled() {
+        return Err("operation cancelled".into());
+    }
     let start = Instant::now();
     let mut command = Command::new(binary);
     command.envs(environment.iter().copied());
@@ -184,8 +187,8 @@ pub fn run_bounded_with_env(
                     .unwrap_or_else(|| -status.signal().unwrap_or(1));
                 break Ok(status.success());
             }
-            Ok(None) if start.elapsed() >= timeout => {
-                timed_out = true;
+            Ok(None) if cancelled() || start.elapsed() >= timeout => {
+                timed_out = !cancelled();
                 // SAFETY: negative pid refers ONLY to the new private process group above.
                 // No existing GUI/session process belongs to this group.
                 unsafe {
@@ -208,9 +211,13 @@ pub fn run_bounded_with_env(
             }
         }
     };
+    let was_cancelled = cancelled();
     done.store(true, Ordering::Release);
     let stdout = stdout.join();
     let stderr = stderr.join();
+    if was_cancelled {
+        return Err("operation cancelled".into());
+    }
     if timed_out {
         crate::telemetry::failure(crate::telemetry::Failure::ProcessTimeout);
     } else if exit_code < 0 && observed.is_ok() {
@@ -331,5 +338,44 @@ mod tests {
         assert!(!output.success);
         assert!(output.stdout.len() <= 65536);
         assert!(output.duration_s < 2.0);
+    }
+}
+
+// Scoped to a single blocking request, never propagated to unrelated GUI processes.
+thread_local! {
+    static CANCELLATION: std::cell::RefCell<Option<Box<dyn Fn() -> bool>>> = const { std::cell::RefCell::new(None) };
+}
+pub fn cancelled() -> bool {
+    CANCELLATION.with(|slot| slot.borrow().as_ref().is_some_and(|check| check()))
+}
+pub struct CancelOnDrop(pub Arc<AtomicBool>);
+impl Drop for CancelOnDrop {
+    fn drop(&mut self) {
+        self.0.store(true, Ordering::Release);
+    }
+}
+pub fn with_cancellation<T>(check: impl Fn() -> bool + 'static, work: impl FnOnce() -> T) -> T {
+    struct Reset;
+    impl Drop for Reset {
+        fn drop(&mut self) {
+            CANCELLATION.with(|slot| *slot.borrow_mut() = None);
+        }
+    }
+    CANCELLATION.with(|slot| *slot.borrow_mut() = Some(Box::new(check)));
+    let _reset = Reset;
+    work()
+}
+pub fn lock_cancelable<T>(
+    lock: &std::sync::Mutex<T>,
+) -> Result<std::sync::MutexGuard<'_, T>, String> {
+    loop {
+        if cancelled() {
+            return Err("operation cancelled".into());
+        }
+        match lock.try_lock() {
+            Ok(guard) => return Ok(guard),
+            Err(std::sync::TryLockError::Poisoned(_)) => return Err("operation lock failed".into()),
+            Err(std::sync::TryLockError::WouldBlock) => thread::sleep(Duration::from_millis(5)),
+        }
     }
 }
