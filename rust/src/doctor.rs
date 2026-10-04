@@ -219,6 +219,13 @@ pub fn report() -> Value {
                 .is_some_and(|package| compatible_binary(&package.join("bin/inkscape-mcp-inx"))),
         );
         checks.insert(
+            "fixed_socket_helper",
+            library
+                .parent()
+                .and_then(Path::parent)
+                .is_some_and(|package| compatible_binary(&package.join("bin/inkscape-mcp-live"))),
+        );
+        checks.insert(
             "private_bus_config",
             regular(&library.join("dbus/session.conf")),
         );
@@ -263,7 +270,6 @@ pub fn report() -> Value {
             [
                 "inkscape_mcp_insert.inx",
                 "inkscape_mcp_edit.inx",
-                "inkscape_mcp_live.py",
                 "inkscape_mcp_live.inx",
             ]
             .iter()

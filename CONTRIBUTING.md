@@ -20,7 +20,8 @@ cargo clippy --locked --all-targets --manifest-path rust/Cargo.toml -- -D warnin
 cargo test --locked --manifest-path rust/Cargo.toml
 ```
 
-Python is development/packaging tooling and a private live runtime, not the MCP server.
+Python is development/packaging tooling; the retained package interpreter is scheduled
+for removal in stage 6. Neither live helper invokes it.
 Before Rust tests, create `.venv` with the pinned helper interpreter and dependencies
 (the synthetic process/bus fixtures use it), for example `uv venv --managed-python
 --python 3.12.14 .venv` then `uv pip install --python .venv/bin/python
@@ -72,8 +73,8 @@ Working-tree archives omit SOURCE_REVISION and report an unknown revision. The i
 regressions in `runtime/tests/test_install_management.py` cover archive identity and Git
 worktree build watches; run them with the helper tests above. Client management regressions,
 including uninstall rollback and request deadlines, are Rust tests in
-`rust/src/bin/inkscape-mcp-client.rs`. Cargo builds the server, client manager, supervisor and INX helper;
-package construction requires all four binaries in the same target directory. Run
+`rust/src/bin/inkscape-mcp-client.rs`. Cargo builds the server, client manager, supervisor, INX helper and socket helper;
+package construction requires all five binaries in the same target directory. Run
 `scripts/client_management_acceptance.py --binary PATH --output DIRECTORY` and
 `scripts/client_package_acceptance.py --package DIRECTORY --output DIRECTORY` for client
 CLI guards and relocated ready-package management without Python on client PATH and with
@@ -88,15 +89,15 @@ the active plan records remaining work, without transferring old GUI results to 
 ## Managed supervisor regressions
 
 Cargo builds the separate `inkscape-mcp-supervisor` executable alongside the server/client
-manager and `inkscape-mcp-inx`; the package builder requires all four in the same target directory. The supervisor
+manager, `inkscape-mcp-inx` and `inkscape-mcp-live`; the package builder requires all five in the same target directory. The supervisor
 is invoked only by explicit `live_launch`, with the fixed session root and detected vendor
 binary. Startup, client checks, reconnect and doctor must never invoke it.
 
 `cargo test` includes supervisor filesystem/preparation and child lifecycle tests plus a
 macOS integration test running the real supervisor with synthetic native processes, empty
 PATH and no Python runtime. The fixture compiler is test tooling only, never runtime code.
-The socket helper still requires the bundled interpreter; do not confuse one-shot independence with
-removing that interpreter from ready packages.
+The socket helper is native too; CPython/wheels and their doctor prerequisites remain
+in packages until stage 6. Socket/native independence does not claim package cleanup.
 
 For explicitly authorized native acceptance, use
 `scripts/migration_native_gui_acceptance.py --package DIRECTORY --output DIRECTORY --close-owned`.
@@ -139,3 +140,28 @@ fixture construction for the frozen v1 wire format, not production execution or 
 paired Python MCP comparison. Run a separate copied package with its private Python
 executable disabled to establish one-shot independence; restore/retain the original
 package for socket/helper/doctor acceptance. Never damage an installed user runtime.
+
+## Socket helper regressions (stage 5)
+
+`rust/tests/socket_helper.rs` checks snapshot selection/ID/element bounds, read-only
+metadata, literal text, safe remapped insertion, refusals and exact unchanged bytes.
+The helper binary tests framing, coalesced requests and asset/dimension refusals.
+Run `.venv/bin/python scripts/rust_socket_helper_acceptance.py --binary
+/absolute/path/to/inkscape-mcp-live --output DIRECTORY` for the actual bounded socket
+process and real native CLI scene/render/export. It runs with empty PATH, verifies
+authentication, changed tokens, no-op output, input preservation and rendezvous cleanup.
+For a development binary it creates a minimal relocated fixture; package acceptance
+runs the actual copied package binary with its private Python executable disabled.
+
+Native acceptance uses `scripts/rust_socket_native_acceptance.py --package DIRECTORY
+--output DIRECTORY setup` against a copied package with disabled private Python.
+This explicitly launches one isolated GUI, verifies its private bus/context and actual
+INX helper PID, and creates a baseline. Select its rectangle in that exact private app, then run
+`style` (style plus socket insertion and a repeated style no-op); select the text,
+then run `text` (text change plus a repeated text no-op). Use native menu Undo only
+in the recorded private app, then run `verify-text-undo`, `verify-style-undo`, and
+(after undoing baseline insertion) `finish`. Each phase rechecks manifest/context;
+finish requires the original blank drawing and gracefully closes the owned session.
+Preserve a failed synthetic session for inspection; never close user windows.
+Socket geometry/render limits and snapshot timing are in
+[the shared helper documentation](docs/live-helper-kernels.md).

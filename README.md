@@ -104,8 +104,8 @@ Revision and build IDs are compiled automatically into telemetry and package met
 
 The legacy Python MCP server, its tests and paired Python/Rust comparison scripts are retired.
 Development now uses Rust regression/invariant tests, true STDIO and package/native acceptance.
-The managed GUI session now runs through a separate native Rust supervisor. Python remains
-for the socket live helper and development/package scripts. One-shot native insertion
+The managed GUI session now runs through a separate native Rust supervisor. The socket snapshot bridge now uses the Rust `inkscape-mcp-live` executable. Python remains
+for development/package scripts; CPython/wheels are retained in packages until stage 6. One-shot native insertion
 and the ten fixed selection edits run through the Rust `inkscape-mcp-inx` executable;
 shared SVG kernels prepare and apply bounded candidates. See
 [their semantics and limits](docs/live-helper-kernels.md). See [CONTRIBUTING.md](CONTRIBUTING.md), [runtime components](runtime/README.md),

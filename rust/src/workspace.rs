@@ -17,6 +17,20 @@ use std::{
 
 const ESCAPE: &str = "path rejected: outside workspace; call get_workspace_info and choose a relative path under a configured server root (relative paths default to the first root)";
 
+/// Inkscape may supply temporary SVGs through the known macOS system alias.
+/// Leave every other link for the descriptor walk to reject.
+#[allow(dead_code)] // Used by the native helpers, which also compile this IO module.
+pub fn normalize_macos_var_alias(path: &Path) -> PathBuf {
+    if cfg!(target_os = "macos")
+        && let Ok(tail) = path.strip_prefix("/var")
+        && std::fs::read_link("/var")
+            .is_ok_and(|link| link == Path::new("/private/var") || link == Path::new("private/var"))
+    {
+        return Path::new("/private/var").join(tail);
+    }
+    path.to_owned()
+}
+
 #[derive(Clone)]
 pub struct Workspace {
     pub roots: Vec<PathBuf>,
@@ -622,6 +636,24 @@ impl Workspace {
     }
 
     pub fn atomic_write(&self, index: usize, relative: &Path, bytes: &[u8]) -> Result<(), String> {
+        self.atomic_write_mode(index, relative, bytes, 0o600)
+    }
+    /// Fixed internal wrapper publication: set mode on the minted inode before rename.
+    pub fn atomic_write_executable(
+        &self,
+        index: usize,
+        relative: &Path,
+        bytes: &[u8],
+    ) -> Result<(), String> {
+        self.atomic_write_mode(index, relative, bytes, 0o700)
+    }
+    fn atomic_write_mode(
+        &self,
+        index: usize,
+        relative: &Path,
+        bytes: &[u8],
+        mode: libc::mode_t,
+    ) -> Result<(), String> {
         let (parent, name) = self.parent(index, relative, true)?;
         let temporary = CString::new(format!(".tmp-{}", uuid::Uuid::new_v4().simple())).unwrap();
         let mut handle = open_at(
@@ -630,7 +662,13 @@ impl Workspace {
             libc::O_WRONLY | libc::O_CREAT | libc::O_EXCL | libc::O_NOFOLLOW,
             0o600,
         )?;
-        let result = handle.write_all(bytes).and_then(|_| handle.sync_all());
+        let result = (|| {
+            // SAFETY: this is our exclusive new staging inode, never a reopened destination.
+            if mode == 0o700 && unsafe { libc::fchmod(handle.as_raw_fd(), mode) } != 0 {
+                return Err(std::io::Error::last_os_error());
+            }
+            handle.write_all(bytes).and_then(|_| handle.sync_all())
+        })();
         if result.is_err() {
             // SAFETY: valid live directory descriptor and NUL-terminated generated name.
             unsafe {

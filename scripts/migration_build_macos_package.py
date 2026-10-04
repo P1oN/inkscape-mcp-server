@@ -23,7 +23,6 @@ DEPS = ("lxml", "numpy", "cssselect", "tinycss2", "webencodings", "pillow")
 HELPERS = {
     "helper_extension/inkscape_mcp_insert.inx": "inkscape_mcp_insert.inx",
     "helper_extension/inkscape_mcp_edit.inx": "inkscape_mcp_edit.inx",
-    "helper_extension/inkscape_mcp_live.py": "inkscape_mcp_live.py",
     "helper_extension/inkscape_mcp_live.inx": "inkscape_mcp_live.inx",
 }
 
@@ -431,6 +430,11 @@ def build(output, binary=None):
         raise RuntimeError("Rust INX helper missing; build all Cargo binaries")
     copy(inx_binary, output / "bin/inkscape-mcp-inx")
     manifest["one_shot_helper"] = "bin/inkscape-mcp-inx"
+    live_binary = server_binary.parent / "inkscape-mcp-live"
+    if not live_binary.is_file():
+        raise RuntimeError("Rust socket helper missing; build all Cargo binaries")
+    copy(live_binary, output / "bin/inkscape-mcp-live")
+    manifest["socket_helper"] = "bin/inkscape-mcp-live"
     if sys.platform == "darwin":
         # Cargo consolidates DWARF before temporary LTO objects are removed.
         # Keep its UUID-matched bundle beside the relocated executable so the

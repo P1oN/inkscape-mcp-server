@@ -40,7 +40,8 @@ fn run() -> Result<(), String> {
     if selection.len() > 10_000 {
         return Err("invalid selection".into());
     }
-    let svg = ws().read(0, relative(&input.ok_or("SVG input required")?)?, CAP)?;
+    let input = workspace::normalize_macos_var_alias(&input.ok_or("SVG input required")?);
+    let svg = ws().read(0, relative(&input)?, CAP)?;
     let svg = std::str::from_utf8(&svg).map_err(|_| "invalid SVG encoding")?;
     let request: Value = serde_json::from_slice(&ws().read(
         0,

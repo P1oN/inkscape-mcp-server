@@ -5,8 +5,7 @@ no filesystem, subprocess, GUI, arbitrary execution or MCP entry point. The serv
 uses its fingerprint and insertion preflight, and shares its affine arithmetic
 with headless appearance-preserving reparenting. Both consumers use the same safe
 `xml` parser and iterative element traversal. Stage 4 adds owned plan application
-and the fixed `inkscape-mcp-inx` consumer. The Python socket helper remains until
-stage 5; it is no longer used for one-shot insertion/editing.
+and the fixed `inkscape-mcp-inx` consumer. Stage 5 adds the fixed Rust socket consumer; no Python helper participates in live execution.
 
 ## Fingerprint wire representation (v1)
 
@@ -149,3 +148,54 @@ must verify Undo/no-op/refusal separately on an owned synthetic drawing. Ready
 packages contain `bin/inkscape-mcp-inx`; the supervisor installs a fixed quoted
 wrapper pointing at that relocated binary. Python one-shot sources are retained
 only as development/historical fixtures and omitted from the package helper assets.
+
+
+## Socket snapshot bridge (stage 5)
+
+`inkscape-mcp-live` accepts only native SVG input, repeated `--id` and selected-node
+metadata. It retains protocol v5 and its 13 capabilities, binds only loopback,
+uses a fresh UUID token, and serves one client until disconnect or a 120-second
+accept/frame deadline. Frames (including newline) are capped at 64 MiB; coalesced
+frames remain buffered. SVG input/candidates are capped at 16 MiB and 10,000 elements,
+with unique IDs and a validated captured selection. The native blank-root fallback
+is interpreted as no object selection. No client can choose an executable, filename,
+extension, shell text or environment. Startup/reconnect do not invoke this helper.
+
+The rendezvous is atomically published with mode 0600 through the existing no-follow
+filesystem primitive. An exclusive adjacent lock serializes advertisers; lock losers
+leave the active rendezvous intact. Symlink/nonregular destinations and linked locks
+refuse. Cleanup removes only a matching advertisement, while holding that lock.
+Original SVG input is never written. Metadata/scene names and explicit `has_style`
+retain the socket model; `visible_objects` remains the historical object summary,
+including definition descendants, rather than a computed CSS visibility promise.
+Canvas retains the leading-number/viewBox-fallback socket representation. Viewport
+values are null and viewport requests explicitly report `applied:false`.
+
+This is still a **modal document snapshot**, captured at extension invocation. It
+cannot observe subsequent GUI edits or selection/viewport changes. A revision hashes
+the owned snapshot bytes. Render/selection export use fixed CLI arguments, bounded
+owned subprocesses and private temporary SVG/PNG files. Page size, scale, region,
+selection bounds, a 16,384 dimension limit, 64-million-pixel budget and 32 MiB PNG
+limit guard raster growth. An export retains the original socket region/scale flags;
+it does not introduce a new coordinate mapping contract. Self-contained local paint,
+inline styles, simple stylesheets and PNG/JPEG data references are supported. External
+assets, active content, DTDs/PIs, CSS escapes/comments/imports and stylesheet canvas
+sizing require preparation before CLI execution. Native vendor resources are retained.
+
+Selection geometric boxes use one bounded CLI query over isolated, unpainted shape
+roots: each object's own transform applies, ancestor transforms and stroke/filter/
+clip/mask/marker paint do not inflate its box. Rectangles, circles, ellipses, paths,
+lines, polygons, polylines and groups of these are supported. Text, use/reference,
+nested viewport, percentage and CSS geometry return null rather than an invented box.
+Duplicated query geometry has a cumulative 10,000-element / 16 MiB budget; roots that
+exceed it return null. These conservative limits replace inkex's best-effort boxes.
+
+Socket style/text/insertion use the same bounded candidate kernels as INX. Their
+conservative reference/style/transform/text restrictions above also apply here;
+insertions create a remapped ordinary group. The server still owns approvals,
+snapshots, Operation Records and confirmation. Socket acknowledgements describe the
+extension's candidate, which Inkscape adopts only when the modal extension exits;
+they do not establish native application or a separate Undo step per socket call.
+All accumulated changes return one full SVG on disconnect/timeout; unchanged sessions
+emit zero bytes. Publication preserves the full XML candidate. One-shot managed edits
+continue through `inkscape-mcp-inx`. CPython/wheels/notices cleanup is stage 6.

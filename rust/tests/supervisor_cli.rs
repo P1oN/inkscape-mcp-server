@@ -36,7 +36,12 @@ fn standalone_supervisor_without_python_owns_manifest_gui_and_bus_lifecycle() {
     fs::write(lib.join("dbus/session.conf"), "fixture").unwrap();
     fs::write(lib.join("context.so"), "fixture bridge").unwrap();
     fs::copy(&fixture, package.join("bin/inkscape-mcp-inx")).unwrap();
-    for name in ["inkscape_mcp_insert.inx", "inkscape_mcp_edit.inx"] {
+    fs::copy(&fixture, package.join("bin/inkscape-mcp-live")).unwrap();
+    for name in [
+        "inkscape_mcp_insert.inx",
+        "inkscape_mcp_edit.inx",
+        "inkscape_mcp_live.inx",
+    ] {
         fs::write(lib.join("helpers").join(name), "fixed helper").unwrap();
     }
     let contents = root.join("Vendor.app/Contents");

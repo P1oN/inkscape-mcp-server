@@ -18,7 +18,11 @@ use std::{
 };
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync>>;
 const LIMIT: usize = 128 * 1024 * 1024;
-const ASSETS: [&str; 2] = ["inkscape_mcp_insert.inx", "inkscape_mcp_edit.inx"];
+const ASSETS: [&str; 3] = [
+    "inkscape_mcp_insert.inx",
+    "inkscape_mcp_edit.inx",
+    "inkscape_mcp_live.inx",
+];
 fn workspace() -> workspace::Workspace {
     workspace::Workspace {
         roots: vec!["/".into()],
@@ -308,8 +312,7 @@ fn prepare_with(
         return Err("official GTK 3 Inkscape bundle required".into());
     }
     read(&resources.join("lib/libgtk-3.0.dylib"), LIMIT)?;
-    let vendor = resources.join("share/inkscape/extensions");
-    Dir::open(&vendor.join("inkex"), false)?;
+
     // Read all bounded assets before making any persistent changes.
     let payloads = ASSETS
         .iter()
@@ -327,6 +330,8 @@ fn prepare_with(
         .join("bin/inkscape-mcp-inx");
     // Validate the fixed native helper before modifying the isolated profile.
     read(&inx, LIMIT)?;
+    let live = inx.with_file_name("inkscape-mcp-live");
+    read(&live, LIMIT)?;
     let executable_bytes = read(binary, LIMIT)?;
     let bridge_bytes = read(&library.join("context.so"), 16 * 1024 * 1024)?;
     let mut info = plist::Value::from_reader(std::io::Cursor::new(read(
@@ -354,6 +359,7 @@ fn prepare_with(
         extensions.regular_destination(name)?;
     }
     extensions.regular_destination("inkscape_mcp_insert_run.sh")?;
+    extensions.regular_destination("inkscape_mcp_live_run.sh")?;
     let macos = root.join("context-bridge/Inkscape.app/Contents/MacOS");
     let private = Dir::open(&macos, true)?;
     let contents_dir = Dir::open(macos.parent().ok_or("invalid private bundle")?, false)?;
@@ -364,6 +370,8 @@ fn prepare_with(
     }
     let wrapper = format!("#!/bin/sh\nexec {} \"$@\"\n", quote(&inx)?);
     extensions.write("inkscape_mcp_insert_run.sh", wrapper.as_bytes(), 0o700)?;
+    let wrapper = format!("#!/bin/sh\nexec {} \"$@\"\n", quote(&live)?);
+    extensions.write("inkscape_mcp_live_run.sh", wrapper.as_bytes(), 0o700)?;
     private.write("inkscape", &executable_bytes, 0o700)?;
     contents_dir.write("Info.plist", &plist_bytes, 0o600)?;
     bridge_dir.write("context.so", &bridge_bytes, 0o600)?;
@@ -707,6 +715,11 @@ mod tests {
         fs::copy(
             fixture_binary(),
             root.path().join("package/bin/inkscape-mcp-inx"),
+        )
+        .unwrap();
+        fs::copy(
+            fixture_binary(),
+            root.path().join("package/bin/inkscape-mcp-live"),
         )
         .unwrap();
         fs::write(lib.join("context.so"), b"context").unwrap();

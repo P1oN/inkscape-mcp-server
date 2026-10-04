@@ -100,12 +100,6 @@ def exercise(source, output, archive=False, engine_mode="per_call"):
         require(Path(modules["prefix"]).is_relative_to(package), "Python prefix not relocated")
         for key in ("numpy", "lxml", "pillow"):
             require(Path(modules[key]).is_relative_to(package), "helper dependency escaped package")
-        for name in ("inkscape_mcp_live.py",):
-            help_text = run(
-                [str(python), str(library / "helpers" / name), "--help"],
-                {**env, "PYTHONPATH": vendor},
-            )
-            require("usage:" in help_text.lower(), "helper CLI not functional")
         # Fixed native one-shot CLI with empty PATH and the project interpreter disabled.
         native = root / "native-inx"
         native.mkdir(mode=0o700)
@@ -125,6 +119,9 @@ def exercise(source, output, archive=False, engine_mode="per_call"):
         disabled = python.with_name("python3.disabled")
         python.rename(disabled)
         try:
+            from rust_socket_helper_acceptance import main as socket_acceptance
+
+            socket_acceptance(package / "bin/inkscape-mcp-live", output / "native-socket")
             for changed in (True, False):
                 (native / "insert-request.json").write_text(json.dumps(request))
                 result = subprocess.run(
@@ -396,6 +393,7 @@ def exercise(source, output, archive=False, engine_mode="per_call"):
             "private_python_imports": True,
             "helper_CLIs": 2,
             "native_one_shot_without_python": True,
+            "native_socket_without_python": True,
             "private_bus_exchange": True,
             "stdio_surface": [110, 7, 18],
             "real_CLI_blue_pixels": True,

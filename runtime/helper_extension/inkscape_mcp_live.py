@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""inkscape-mcp live helper extension — runs INSIDE Inkscape.
+"""Historical Python socket helper — retained as development evidence only.
+
+Ready packages and live installation now use the fixed Rust `inkscape-mcp-live`
+binary. This source is neither shipped nor used as a fallback.
+
+Original implementation: inkscape-mcp live helper extension inside Inkscape.
 
 Fixed-purpose `inkex` extension that bridges a running Inkscape document to the inkscape-mcp
 server over a LOOPBACK-ONLY socket using a fixed, versioned semantic command schema. It exposes

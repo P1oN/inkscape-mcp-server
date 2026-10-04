@@ -133,6 +133,107 @@ fn invoke(root: &std::path::Path, args: &[&str]) -> std::process::Output {
         .unwrap()
 }
 #[test]
+#[cfg(target_os = "macos")]
+fn temporary_var_alias_is_accepted_but_other_links_are_refused() {
+    use std::{os::unix::fs::symlink, path::Path};
+    let link = fs::read_link("/var").unwrap();
+    assert!(link == Path::new("/private/var") || link == Path::new("private/var"));
+    let tmp = tempfile::tempdir_in("/private/var/tmp").unwrap();
+    let root = tmp.path();
+    let input = root.join("input.svg");
+    fs::write(&input, SVG).unwrap();
+    let d = xml::parse(SVG.as_bytes(), 100_000).unwrap();
+    let ids: Vec<_> = elements(d.get_root_element().unwrap())
+        .iter()
+        .filter_map(|n| n.get_property_no_ns("id"))
+        .collect();
+    let req = serde_json::json!({"nonce":NONCE,"expected_ids":ids,"expected_fingerprint":fingerprint::fingerprint(SVG,100_000).unwrap(),"operation":"style","selection":["a"],"style":{"opacity":"0.5"}});
+    fs::write(
+        root.join("insert-request.json"),
+        serde_json::to_vec(&req).unwrap(),
+    )
+    .unwrap();
+    let alias = Path::new("/var").join(input.strip_prefix("/private/var").unwrap());
+    let out = invoke(root, &["--id=a", alias.to_str().unwrap()]);
+    assert!(out.status.success());
+    assert!(!out.stdout.is_empty());
+    let reply: serde_json::Value =
+        serde_json::from_slice(&fs::read(root.join("insert-result.json")).unwrap()).unwrap();
+    assert_eq!(reply["ok"], true);
+    fs::remove_file(root.join("insert-result.json")).unwrap();
+    symlink(&input, root.join("linked.svg")).unwrap();
+    symlink(root, root.join("linked-dir")).unwrap();
+    for path in [
+        root.join("linked.svg"),
+        root.join("linked-dir/input.svg"),
+        Path::new("input.svg").to_owned(),
+        root.join("../input.svg"),
+    ] {
+        let out = invoke(root, &["--id=a", path.to_str().unwrap()]);
+        assert!(!out.status.success(), "{}", path.display());
+        assert!(out.stdout.is_empty());
+        assert!(!root.join("insert-result.json").exists());
+    }
+    assert_eq!(fs::read(input).unwrap(), SVG.as_bytes());
+}
+
+#[test]
+fn many_targets_keep_ids_and_structure_after_indexed_application() {
+    let count = 2000;
+    let mut svg = String::from("<svg xmlns='http://www.w3.org/2000/svg'>");
+    let ids: Vec<_> = (0..count).map(|i| format!("r{i}")).collect();
+    for id in &ids {
+        svg.push_str(&format!("<rect id='{id}' width='1' height='1'/>"));
+    }
+    svg.push_str("</svg>");
+    for operation in [
+        Operation::Style,
+        Operation::Group,
+        Operation::Duplicate,
+        Operation::Delete,
+    ] {
+        let mut r = request(operation, &[]);
+        r.selection = ids.clone();
+        r.style.insert("opacity".into(), "0.5".into());
+        let applied = apply::edit(&svg, &r, 2_000_000).unwrap();
+        let doc = xml::parse(&applied.bytes, 2_000_000).unwrap();
+        let root = doc.get_root_element().unwrap();
+        let all = elements(root.clone());
+        match operation {
+            Operation::Style => {
+                assert_eq!(root.get_child_elements().len(), count);
+                assert!(
+                    all.iter()
+                        .skip(1)
+                        .all(|n| n.get_property_no_ns("style").as_deref() == Some("opacity:0.5"))
+                );
+            }
+            Operation::Group => {
+                assert_eq!(root.get_child_elements().len(), 1);
+                assert_eq!(
+                    root.get_child_elements()[0].get_child_elements().len(),
+                    count
+                );
+            }
+            Operation::Duplicate => {
+                assert_eq!(root.get_child_elements().len(), count * 2);
+                assert_eq!(applied.ids.len(), count);
+            }
+            Operation::Delete => assert!(root.get_child_elements().is_empty()),
+            _ => unreachable!(),
+        }
+        if operation != Operation::Delete {
+            let remaining: std::collections::HashSet<_> = all
+                .iter()
+                .filter_map(|n| n.get_property_no_ns("id"))
+                .collect();
+            assert!(ids.iter().all(|id| remaining.contains(id)));
+            assert!(applied.ids.iter().all(|id| remaining.contains(id)));
+        }
+    }
+}
+
+#[test]
 fn fixed_cli_empty_path_guards_refusals_noop_and_atomic_results() {
     let tmp = tempfile::tempdir().unwrap();
     let root = tmp.path().canonicalize().unwrap();

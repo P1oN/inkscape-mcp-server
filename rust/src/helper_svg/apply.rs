@@ -5,11 +5,14 @@ use super::{
 };
 use libxml::tree::{Document, Node};
 use std::collections::HashMap;
-fn node(root: &Node, id: &str) -> Result<Node, &'static str> {
+fn index(root: &Node) -> HashMap<String, Node> {
     elements(root.clone())
         .into_iter()
-        .find(|n| n.get_property_no_ns("id").as_deref() == Some(id))
-        .ok_or("invalid selection")
+        .filter_map(|n| n.get_property_no_ns("id").map(|id| (id, n)))
+        .collect()
+}
+fn node(by_id: &HashMap<String, Node>, id: &str) -> Result<Node, &'static str> {
+    by_id.get(id).cloned().ok_or("invalid selection")
 }
 fn set(n: &mut Node, name: &str, value: &str) -> Result<(), &'static str> {
     n.set_property(name, value)
@@ -61,6 +64,7 @@ pub fn edit(svg: &str, request: &Request, cap: usize) -> Result<Applied, &'stati
     let root = document
         .get_root_element()
         .ok_or("invalid document or selection")?;
+    let by_id = index(&root);
     for step in plan.steps {
         match step {
             Step::Style {
@@ -68,7 +72,7 @@ pub fn edit(svg: &str, request: &Request, cap: usize) -> Result<Applied, &'stati
                 values,
                 transform,
             } => {
-                let mut n = node(&root, &id)?;
+                let mut n = node(&by_id, &id)?;
                 if !values.is_empty() {
                     let raw = n.get_property_no_ns("style").unwrap_or_default();
                     let mut declarations: Vec<String> = raw
@@ -89,7 +93,7 @@ pub fn edit(svg: &str, request: &Request, cap: usize) -> Result<Applied, &'stati
                 }
             }
             Step::Text { id, value } => {
-                let n = node(&root, &id)?;
+                let n = node(&by_id, &id)?;
                 let mut leaf = elements(n)
                     .into_iter()
                     .find(|n| n.get_child_elements().is_empty())
@@ -103,7 +107,7 @@ pub fn edit(svg: &str, request: &Request, cap: usize) -> Result<Applied, &'stati
             }
             Step::Delete { ids } => {
                 for id in ids {
-                    for mut n in bundle(&node(&root, &id)?) {
+                    for mut n in bundle(&node(&by_id, &id)?) {
                         n.unlink();
                     }
                 }
@@ -111,7 +115,7 @@ pub fn edit(svg: &str, request: &Request, cap: usize) -> Result<Applied, &'stati
             Step::Duplicate { ids, remap } => {
                 let remap: HashMap<_, _> = remap.into_iter().collect();
                 for id in ids {
-                    let source = node(&root, &id)?;
+                    let source = node(&by_id, &id)?;
                     let mut clone = clone_into(&mut document, &source)?;
                     for mut n in elements(clone.clone()) {
                         for ((key, ns), value) in n.get_properties_ns() {
@@ -145,19 +149,19 @@ pub fn edit(svg: &str, request: &Request, cap: usize) -> Result<Applied, &'stati
                 }
             }
             Step::Group { ids, id } => {
-                let mut first = node(&root, &ids[0])?;
+                let mut first = node(&by_id, &ids[0])?;
                 let mut group = Node::new("g", first.get_namespace(), &document)
                     .map_err(|_| "edit application failed")?;
                 set(&mut group, "id", &id)?;
                 before(&mut first, &mut group)?;
                 for id in ids {
-                    for mut n in bundle(&node(&root, &id)?) {
+                    for mut n in bundle(&node(&by_id, &id)?) {
                         append(&mut group, &mut n)?;
                     }
                 }
             }
             Step::Ungroup { id, children } => {
-                let mut group = node(&root, &id)?;
+                let mut group = node(&by_id, &id)?;
                 for (mut n, (_, transform)) in group.get_child_elements().into_iter().zip(children)
                 {
                     set(&mut n, "transform", &transform)?;

@@ -136,7 +136,7 @@ single_line "$inkscape_dir"
 case "$inkscape_dir" in *:*) fail "The Inkscape directory cannot contain (:).";; esac
 # Reuse only a complete configured runtime. Explicit --package always wins.
 if [ -z "$package" ] && [ "$build" = false ] && [ -n "$previous_binary" ] &&
-    [ -x "$previous_binary" ] && [ -x "${previous_binary%/bin/inkscape-mcp}/bin/inkscape-mcp-client" ] && [ -x "${previous_binary%/bin/inkscape-mcp}/bin/inkscape-mcp-supervisor" ] && [ -x "${previous_binary%/bin/inkscape-mcp}/bin/inkscape-mcp-inx" ] && [ -f "${previous_binary%/bin/inkscape-mcp}/libexec/inkscape-mcp/package.json" ]; then
+    [ -x "$previous_binary" ] && [ -x "${previous_binary%/bin/inkscape-mcp}/bin/inkscape-mcp-client" ] && [ -x "${previous_binary%/bin/inkscape-mcp}/bin/inkscape-mcp-supervisor" ] && [ -x "${previous_binary%/bin/inkscape-mcp}/bin/inkscape-mcp-inx" ] && [ -x "${previous_binary%/bin/inkscape-mcp}/bin/inkscape-mcp-live" ] && [ -f "${previous_binary%/bin/inkscape-mcp}/libexec/inkscape-mcp/package.json" ]; then
     package=${previous_binary%/bin/inkscape-mcp}
     if [ -f "$repo/rust/Cargo.toml" ]; then
         source_revision=
@@ -251,8 +251,8 @@ single_line "$package"
 package=$(cd -- "$package" && pwd -P) || fail "Package directory does not exist."
 single_line "$package"
 binary=$package/bin/inkscape-mcp
-[ -x "$binary" ] && [ -x "$package/bin/inkscape-mcp-client" ] && [ -x "$package/bin/inkscape-mcp-supervisor" ] && [ -x "$package/bin/inkscape-mcp-inx" ] && [ -f "$package/libexec/inkscape-mcp/package.json" ] || \
-    fail "Expected a complete package containing bin/inkscape-mcp, bin/inkscape-mcp-client, bin/inkscape-mcp-supervisor, bin/inkscape-mcp-inx and libexec/inkscape-mcp/package.json."
+[ -x "$binary" ] && [ -x "$package/bin/inkscape-mcp-client" ] && [ -x "$package/bin/inkscape-mcp-supervisor" ] && [ -x "$package/bin/inkscape-mcp-inx" ] && [ -x "$package/bin/inkscape-mcp-live" ] && [ -f "$package/libexec/inkscape-mcp/package.json" ] || \
+    fail "Expected a complete package containing bin/inkscape-mcp, bin/inkscape-mcp-client, bin/inkscape-mcp-supervisor, bin/inkscape-mcp-inx, bin/inkscape-mcp-live and libexec/inkscape-mcp/package.json."
 if [ "$check" = true ]; then
     printf '%s\n' 'Checking the package and Inkscape (no GUI launch)...' >&2
     PATH="$inkscape_dir:${PATH:-/usr/bin:/bin}" INKSCAPE_MCP_WORKSPACE_ROOTS="$workspace" \

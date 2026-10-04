@@ -4,7 +4,7 @@ Read README.md, CONTRIBUTING.md and docs/agent-usage-guide.md. Check code and Gi
 and preserve any uncommitted work. Installation/responsiveness improvements from
 [PR #8](https://github.com/P1oN/inkscape-mcp-server/pull/8) are merged locally into `main`
 as `a4dc71f`; MCP deadline/client ownership fixes are committed as `ccd1b0d`.
-Python removal stages 1–4 are implemented in this branch. Local validation is separate from remote CI.
+Python removal stages 1–5 are implemented in this branch. Local validation is separate from remote CI.
 The published v0.1.0/v0.1.1 assets and the user's installed runtime were not replaced. Historical checkpoint counts
 and package paths are in [the checkpoint archive](history/agent-checkpoints-through-2026-10-04.md),
 not current validation claims. [RUST_NEXT_PLAN.md](RUST_NEXT_PLAN.md) is the active plan.
@@ -12,8 +12,9 @@ not current validation claims. [RUST_NEXT_PLAN.md](RUST_NEXT_PLAN.md) is the act
 ## Current implementation
 
 - Rust STDIO server, client manager and separate managed GUI supervisor; legacy Python
-  MCP/parity workflow retired. One-shot native insert/edit effects are Rust; Python
-  remains for the socket live helper and development/packaging tooling. MCP startup/reconnect never launches GUI.
+  MCP/parity workflow retired. Both one-shot insert/edit effects and the socket snapshot
+  bridge are Rust. Python remains for development/packaging; CPython/wheels and doctor
+  import prerequisites are retained until stage 6. MCP startup/reconnect never launches GUI.
 - Current setup supports automatic first builds, `--rebuild`, offline `--local-tools`,
   ready packages, installed build metadata and preserved saved options/Sentry settings.
 - Optional `--connect-client codex|claude`: bounded handshake, required tool discovery,
@@ -34,6 +35,114 @@ not current validation claims. [RUST_NEXT_PLAN.md](RUST_NEXT_PLAN.md) is the act
 - Reference-safe deletion and durable registry publication fixes from the preceding local
   work are retained. Server approval tokens remain nonempty strings; the client must
   obtain confirmation for each operation. Do not claim server-authenticated authorization.
+
+## Local PR #9 review repairs (2026-10-05)
+
+Verified origin `P1oN/inkscape-mcp-server`, branch
+`codex/python-removal-stages-1-3`, and HEAD matching PR head `62a5288` before edits;
+existing stage 5 changes were preserved. Native SVG consumers now normalize only the
+verified macOS `/var` alias (absolute `/private/var` or relative `private/var` link),
+retaining no-follow refusal of other links. Edit application builds one ID index
+per owned document; handles remain alive across moves, duplicates and unlinking.
+The failed native CI job was reproduced: Sentry acceptance package fixtures omitted
+the required INX binary. Both fixtures now include all five current native binaries.
+
+Local validation: 288 Rust tests passed, two opt-in tests ignored; fmt/Clippy and
+14 runtime pytest tests/Ruff passed. Added `/var` input/link refusal regression and
+2,000-target style/group/duplicate/delete checks. Explicit native CLI rendering
+gate passed separately; socket helper acceptance with empty PATH passed, and
+Sentry setup acceptance passed all 51 checks (`migration/results/pr9-*`). These
+are local checks; no remote CI rerun or new native GUI acceptance was performed.
+MCP discovery/instructions are unchanged; generated llms files need no update.
+
+## Local Python removal stage 5 (2026-10-05)
+
+Stage 5 is locally implemented. `inkscape-mcp-live` replaces the last Python live
+helper with the bounded v5 loopback snapshot protocol. It validates captured SVG,
+unique IDs/selection and candidate growth; retains metadata/explicit style flags,
+canvas and unavailable viewport behavior; and hashes the owned snapshot for revision
+polling. Framing keeps coalesced requests, authenticates every request and enforces
+fixed accept/frame/write deadlines and the 64 MiB wire cap. The rendezvous uses an
+exclusive adjacent lock, no-follow IO and atomic 0600 publication; lock losers do not
+remove an active advertisement. Inputs remain unchanged. Neither native helper
+invokes Python or inkex; retained Python socket source is historical evidence only.
+
+Scene boxes use one bounded query over isolated unpainted shape roots, retaining
+own transforms while excluding ancestors and paint inflation. Unsupported reference,
+text/viewport, percentage/CSS geometry and exhausted cumulative query budgets return
+null. Fixed CLI renders/exports preserve self-contained paint and simple stylesheets;
+external/active assets, DTD/PIs, escaped/imported CSS and CSS canvas sizing require
+preparation. Raster dimensions/pixels, PNG bytes, owned process output/time and SVG
+limits remain bounded. See [helper limits](live-helper-kernels.md). This remains a
+modal invocation-time snapshot, not subsequent GUI selection/document tracking.
+Socket write acknowledgements describe the candidate; Inkscape adopts accumulated
+changes on extension exit as one Undo transaction. Unchanged sessions output zero
+SVG bytes. Shared style/text/insertion kernels preserve IDs/references/full XML and
+refuse unsafe edits before replacing the candidate. Server approvals, snapshots,
+Operation Records, rollback and confirmation were not moved into the helper.
+
+Packages contain the fifth Rust binary and omit the Python socket asset. Supervisor
+and `live_install_helper` install its fixed quoted wrapper; executable mode is set
+on an exclusive staging inode before rename, preserving hardlinked originals and
+permissions. Setup refuses incomplete saved packages and doctor checks the helper's
+native architecture without executing it. Native acceptance exposed Inkscape's
+underscore-to-dash normalization: arming and the context allowlist now use the actual
+`org.inkscape-mcp.live.noprefs` action. No arbitrary action/extension/executable/env
+route or MCP discovery/instruction change was introduced.
+
+Fresh automated validation: 286 Rust tests passed, 2 standard ignored tests remain
+unrun in this stage (server case and stage-4 structural render gate). Fmt, all-target
+clippy with warnings denied, 14 retained Python development tests, Ruff check/format
+(51 files), shell syntax and diff checks passed. Four new Rust snapshot regressions
+cover selection/ID/growth bounds, read-only metadata, unchanged byte/token behavior,
+refused style/transform edits, literal text and safe remapped insertion. Binary
+regressions check coalesced/oversized/invalid/incomplete frames, active/external assets,
+CSS paint/metadata and raster-size refusals. Shared process/filesystem/INX/supervisor
+invariants also passed. All 16 release discovery configurations match frozen
+contracts exactly: 110 tools, 7 prompts, 18 resources. Exposed schemas/instructions
+are unchanged, so llms manifests were not regenerated.
+
+The final relocated ready archive passed per-call and shell acceptance with empty
+PATH, real CLI PNG/export, approvals/batches/snapshots/rollback, preserved originals
+and headless no-op without audit/transient writes. Each acceptance temporarily
+disables its copied private Python executable and exercises the actual Rust socket
+and INX binaries. Socket tests verify auth/refusal, explicit style perception, local
+geometry despite ancestor transform/stroke, whole/region/selection rendering,
+stylesheet paint pixels, null CSS geometry, viewport refusal, candidate edits,
+changed tokens, repeated no-ops, coalesced requests, linked rendezvous refusal,
+unchanged input and advertisement cleanup. Launcher: 11; doctor: 13 profiles without
+GUI launch; bootstrap: 9; notices: 18 checks / 192 crates. Native helper Mach-O
+links only system libxml2/libiconv/libSystem. CPython/wheels and doctor imports are
+still in the package; these results establish helper independence, not stage-6 cleanup.
+
+Final native acceptance uses a copied final package with private Python disabled
+and an owned HOME/profile/workspace/session. It verifies actual INX socket helper
+PIDs and guarded context, scene/PNG reads and all three write commands. Accumulated
+style plus insertion reverse with one native menu Undo; text reverses with one more.
+Repeated style/text no-ops add no Undo step. Full before/after SVGs match after each
+Undo, excluding only namedview UI metadata. The final helper SHA-256 matches the
+relocated archive binary. The drawing was restored to its original blank state,
+then gracefully quit after exact manifest/context/PID ancestry verification; the
+supervisor/private bus exited and the manifest disappeared. Earlier prototype
+sessions were also restored to blank and closed safely. Selection and a blocking
+modal activation initially interrupted the harness; the corrected harness invokes
+activation concurrently with the socket client. Those failures are retained as
+history, not transferred to final acceptance. No existing user window/process was
+closed or signalled. Native Redo, Linux/Windows GUI and clean-machine acceptance
+were not repeated or established in this stage.
+
+Final evidence (Git-ignored): `migration/results/rust-socket-stage5-{tests,clippy}-final.log`,
+`rust-socket-stage5-build-delivery.log`, `rust-socket-stage5-delivery/`,
+`rust-socket-stage5-delivery.tar.gz`, `rust-socket-stage5-delivery-build.log`,
+`rust-socket-stage5-delivery-{discovery,per-call,shell,doctor,notices}.json`,
+`rust-socket-stage5-delivery-{per-call,shell,doctor,launcher}/`,
+`rust-socket-stage5-bootstrap/`, and `rust-socket-stage5-native-delivery/`
+(`acceptance.json`, per-call socket/trace/PNG records, Undo captures and
+`shutdown-acceptance.json`). `rust-socket-stage5-native-delivery-package/` is its
+owned Python-disabled copy. Preliminary package/native directories retain earlier
+binaries and partial evidence. The user's installed runtime/client settings, source
+and vendor files were not replaced. No commit/publication. Next pending stage: 6,
+ready-package CPython/wheels/notices/doctor cleanup; active tooling migration is 7.
 
 ## PR #9 review follow-up (2026-10-04, local)
 
@@ -130,7 +239,8 @@ The native record includes the exact helper SHA-256; its copied helper equals th
 final ready-package binary. Package/native claims refer to those immutable binaries;
 validation-only harness additions afterward do not install or replace them. The user's
 installed runtime/client settings, source drawings and vendor executable are unchanged.
-No commits/publication. Next pending stage: 5, the socket bridge/perception/geometry.
+No commits/publication at that checkpoint. Stage 5 above supersedes its pending
+socket bridge/perception/geometry status.
 Linux/Windows native GUI and clean-machine acceptance remain unverified.
 
 ## Local Python removal stage 3 (2026-10-04, historical checkpoint)

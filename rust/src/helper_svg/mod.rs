@@ -25,3 +25,5 @@ pub fn valid_nonce(value: &str) -> bool {
 pub mod apply;
 
 pub mod oneshot;
+
+pub mod socket;
