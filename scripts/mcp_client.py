@@ -19,7 +19,7 @@ def run(args):
     return subprocess.run(args, capture_output=True, text=True, timeout=30, check=False)
 
 
-def client_config(client, repo):
+def client_config(client, repo, *, require_match=True):
     home = Path.home()
     path = (
         Path(os.environ.get("CODEX_HOME", home / ".codex")) / "config.toml"
@@ -39,11 +39,15 @@ def client_config(client, repo):
     else:
         entries = json.loads(path.read_text()).get("mcpServers", {})
     entry = entries.get(NAME)
-    if entry is not None and (
-        entry.get("command") != str(repo / "run-mcp.sh")
-        or entry.get("args", [])
-        or entry.get("env", {})
-        or entry.get("url")
+    if (
+        require_match
+        and entry is not None
+        and (
+            entry.get("command") != str(repo / "run-mcp.sh")
+            or entry.get("args", [])
+            or entry.get("env", {})
+            or entry.get("url")
+        )
     ):
         raise RuntimeError("Existing inkscape entry differs; preserved. Remove or rename it first.")
     return entry
@@ -98,7 +102,15 @@ def probe(command, timeout=30):
                 return None
             deadline = time.monotonic() + timeout
             while True:
-                reply = messages.get(timeout=max(0.01, deadline - time.monotonic()))
+                remaining = deadline - time.monotonic()
+                if remaining <= 0:
+                    raise TimeoutError("MCP request timed out: " + method)
+                try:
+                    reply = messages.get(timeout=remaining)
+                except queue.Empty:
+                    raise TimeoutError("MCP request timed out: " + method) from None
+                if time.monotonic() >= deadline:
+                    raise TimeoutError("MCP request timed out: " + method)
                 if isinstance(reply, Exception):
                     raise reply
                 if reply.get("id") == sequence:
@@ -196,10 +208,13 @@ def main():
         raise RuntimeError("Client CLI missing; install it or use the config action")
     entry = client_config(args.client, repo)
     record, clients = client_record(repo)
-    if args.action == "uninstall" and any(
-        client != args.client and client_config(client, repo) is not None for client in clients
-    ):
-        raise RuntimeError("Another client uses this installation; disconnect it first")
+    if args.action == "uninstall":
+        for client in clients:
+            if client == args.client:
+                continue
+            other_entry = client_config(client, repo, require_match=False)
+            if other_entry is not None and other_entry.get("command") == launcher:
+                raise RuntimeError("Another client uses this installation; disconnect it first")
     if args.action == "connect":
         report = probe([launcher])  # complete handshake before changing client settings
         if entry is None:

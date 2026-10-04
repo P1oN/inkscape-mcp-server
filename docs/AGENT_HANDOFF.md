@@ -35,6 +35,21 @@ not current validation claims. [RUST_NEXT_PLAN.md](RUST_NEXT_PLAN.md) is the act
 
 ## Validation
 
+Local review follow-up on `a4dc71f` (uncommitted): client onboarding now enforces a fixed
+request deadline even during unrelated notifications. Uninstall ignores recorded clients
+that have switched to a different launcher, while still refusing removal when another client
+uses this installation. Skill ownership behavior is intentionally unchanged.
+Validation: Python runtime tests: 21 passed; Ruff check/format: 48 files; `git diff --check`;
+isolated real Codex and synthetic Claude client management acceptance:
+`migration/results/client-review-fixes-20261004-1/comparison.json`.
+Rust code and MCP contracts/instructions are unchanged; no new native GUI acceptance claimed.
+
+Local CI follow-up (uncommitted): SHA-pinned checkout/upload-artifact are updated to
+v7.0.1 and setup-uv to v10.2.0, all declaring `runs.using: node24`. The uv 0.12.22 pin,
+disabled cache and artifact upload settings remain intact. Workflow YAML, exact-SHA upstream
+action metadata and configured input compatibility were checked locally; remote CI has not
+been rerun for these changes.
+
 CI on `499a81d` timed out in final discovery; `3649425` passed discovery but hung on
 its first `create_document` in shell responsiveness acceptance. Concurrent local startup
 stress reproduced the hang: queued blocking work ran only after stdin closed. This matches

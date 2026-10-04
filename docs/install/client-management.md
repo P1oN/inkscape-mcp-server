@@ -33,8 +33,9 @@ Claude local/project configuration may shadow a user entry; check `/mcp` in the 
 ```
 
 `config` prints a ready TOML/JSON snippet for manual use. `check` launches only the configured
-MCP process, with bounded initialization/discovery/workspace requests and shutdown. `connect`
-runs the same check before registration and verifies saved user configuration afterward.
+MCP process, with bounded initialization/discovery/workspace requests and shutdown. Each
+request has a fixed deadline, including when unrelated notifications arrive. `connect` runs
+the same check before registration and verifies saved user configuration afterward.
 This verifies server availability; it does not run a model session or prove a client's
 permission choices. Restart/reconnect the client to load the changed server and skill.
 No path launches Inkscape GUI. The management helper uses packaged private Python.
@@ -53,8 +54,10 @@ conflicts preserve installed content and leave a proposed merge for review.
 
 Uninstall removes only a matching user-scoped client entry and moves `.inkscape-mcp-local`
 into `.inkscape-mcp-backup-TIMESTAMP` beside the source. It also archives an owned skill
-at that client's default location, including user changes. Other recorded clients must be
-disconnected first. Shared/custom-destination skills remain and can be moved aside manually.
+at that client's default location, including user changes. Other recorded clients still using
+this installation's launcher must be disconnected first. A recorded client that now points to
+another installation remains untouched and does not block removal. Shared/custom-destination
+skills remain and can be moved aside manually.
 Drawings and workspace `.inkscape-mcp` working copies/snapshots remain intact. Source files,
 external ready packages, system Inkscape, Rust and Apple developer tools are preserved.
 Existing client/server processes are not killed; close/restart the client before reinstall.

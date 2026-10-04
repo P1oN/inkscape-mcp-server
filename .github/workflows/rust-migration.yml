@@ -52,7 +52,7 @@ jobs:
       SENTRY_DSN: ""
       SENTRY_TRACES_SAMPLE_RATE: "0"
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install Linux XML build dependencies
         if: runner.os == 'Linux'
         run: |
@@ -74,7 +74,7 @@ jobs:
       - name: Clippy
         run: cargo clippy --locked --all-targets --manifest-path rust/Cargo.toml -- -D warnings
       - name: Install pinned packaging Python manager
-        uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6.8.0
+        uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
         with:
           version: "0.12.22"
           enable-cache: false
@@ -177,7 +177,7 @@ jobs:
           Path(str(archive) + ".sha256").write_text(checksum + "  " + archive.name + "\n")
           PY
       - name: Upload verified installable package
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: inkscape-mcp-${{ matrix.package }}
           path: |
@@ -188,7 +188,7 @@ jobs:
           compression-level: 0
       - name: Retain build and acceptance evidence
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: build-evidence-${{ matrix.target }}
           path: |
