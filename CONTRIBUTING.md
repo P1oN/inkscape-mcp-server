@@ -47,3 +47,15 @@ SVG IDs/references and appearance; reject unsafe structural edits before mutatio
 Use argument-list subprocesses, safe XML parsing and no arbitrary shell/code/extensions.
 Do not add bitmap tracing. Do not commit, publish or send messages without user authorization.
 Windows is backlog. Prepared CI jobs are not evidence of real target validation.
+
+## Installation and scheduling regressions
+
+Run `scripts/rust_responsiveness_acceptance.py --binary PATH --output DIRECTORY`
+with `.venv/bin/python` for real STDIO discovery/workspace responsiveness and cancellation
+against owned synthetic per-call/shell processes. Run launcher/package/doctor/notices
+acceptance for install changes. `scripts/install_path_acceptance.py --archive ARCHIVE
+--output DIRECTORY` exercises extracted-source setup, real isolated Codex registration,
+skill merge/conflicts, Inkscape CLI rendering, uninstall and reinstall on the current Mac.
+It reuses existing pinned host tools/caches; it does not claim clean-machine or GUI acceptance.
+Use `build_source_archive.py --working-tree` only for explicitly unpublished local snapshots;
+default source export continues to contain committed files only.

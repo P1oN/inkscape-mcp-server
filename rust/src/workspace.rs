@@ -17,6 +17,7 @@ use std::{
 
 const ESCAPE: &str = "path rejected: outside workspace; call get_workspace_info and choose a relative path under a configured server root (relative paths default to the first root)";
 
+#[derive(Clone)]
 pub struct Workspace {
     pub roots: Vec<PathBuf>,
     pub max_input: usize,

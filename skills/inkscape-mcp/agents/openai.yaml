@@ -1,0 +1,4 @@
+interface:
+  display_name: "Inkscape MCP"
+  short_description: "Create and refine editable SVG through Inkscape MCP"
+  default_prompt: "Use $inkscape-mcp to edit this drawing, inspect the preview and save the editable SVG."

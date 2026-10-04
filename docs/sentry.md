@@ -46,18 +46,19 @@ Configure the rebuilt server process with:
 ```
 
 These are process environment values, such as the `env` map in an MCP client
-configuration. Defaults are `development`, `inkscape-mcp-rust@0.1.0` and 10% sampling.
+configuration. Defaults are `development`, a compiled version/revision/build release and 10% sampling.
 Sampling accepts finite numbers from 0 through 1. Use a unique release per shipped
 build. The DSN is a client ingestion identifier, not a management auth token.
 
 Rebuild/package the modified source before using these values with `run-mcp.sh`:
 that launcher runs the package selected by setup, not `rust/target/debug`.
-The existing stage38 archives do not contain this SDK. Restart the MCP server after
-installing the rebuilt package, preserving existing Inkscape windows. The local installation now uses a rebuilt private package through `run-mcp.sh`.
-Codex configuration enables this DSN, `production`, release
-`inkscape-mcp-rust@0.1.0-sentry-20261003` and 10% tool sampling. The original client
-configuration is backed up under `.inkscape-mcp-local/config-before-sentry.toml`.
-Historical stage38 archives remain unchanged.
+Restart/reconnect the client after selecting a rebuilt package, preserving Inkscape windows.
+`--version` emits JSON with version, source revision and a deterministic content/build-options
+fingerprint (build ID, not a signing/provenance attestation). Git-free source archives use
+SOURCE_REVISION; unknown origins are explicitly labeled unknown. Working-tree edits affect
+the fingerprint. Error payloads and transactions carry fixed compiled `revision`/`build_id`
+tags even when `SENTRY_RELEASE` is overridden. The default release includes all three values.
+Package metadata captures the binary's actual identity, rather than inferring it from a tag.
 
 ## Privacy and diagnostics
 

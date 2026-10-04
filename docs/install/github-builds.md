@@ -22,6 +22,11 @@ license-notice checks and empty-PATH MCP/D-Bus/render/export/transaction accepta
 development Mac. This is local automated acceptance; native GUI and clean-machine Apple
 tool installation were not revalidated.
 
+The command above is for published v0.1.1. Current sources instead use `./setup.sh`
+for automatic preparation/build on first use and reuse the saved package on subsequent
+runs. `--local-tools` selects a rebuild with existing tools/cached dependencies only;
+`--bootstrap` remains compatible. These later changes are not in the v0.1.1 asset.
+
 The earlier [Release v0.1.0](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.0)
 keeps the prebuilt archive described below. Both releases are marked prerelease.
 
@@ -49,7 +54,9 @@ cd inkscape-mcp-macos-arm64
 
 For the updated launcher, default setup only writes private configuration; diagnostics
 are explicit with `./setup.sh --check` or `./run-mcp.sh --doctor`. Source rebuilding
-is explicit with `./setup.sh --build`. The historical v0.1.0 archive still runs doctor
+with installed tools/cached dependencies is explicit with `./setup.sh --local-tools`.
+Fresh current source checkouts automatically prepare tools and build with `./setup.sh`.
+The historical v0.1.0 archive still runs doctor
 during setup; these launcher changes are not in that published archive.
 
 Install Inkscape first. The package includes Rust server, private Python/inkex helpers,

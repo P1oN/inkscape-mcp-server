@@ -263,6 +263,19 @@ pub fn apply(registry: &Registry, args: &Value) -> Result<Value, String> {
         |document| mutation.mutate(document),
     )
 }
+
+pub fn build_info() -> serde_json::Value {
+    serde_json::json!({"version": env!("CARGO_PKG_VERSION"), "revision": env!("INKSCAPE_MCP_REVISION"), "build_id": env!("INKSCAPE_MCP_BUILD_ID")})
+}
+pub fn release() -> String {
+    format!(
+        "inkscape-mcp-rust@{}+{}.{}",
+        env!("CARGO_PKG_VERSION"),
+        env!("INKSCAPE_MCP_REVISION"),
+        env!("INKSCAPE_MCP_BUILD_ID")
+    )
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

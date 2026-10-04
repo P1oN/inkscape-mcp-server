@@ -63,6 +63,8 @@ pub fn record(id: &str, tool: &str, risk: &str, params: Value, approved: bool) -
 }
 
 pub fn policy(risk: &str, approval: Option<&str>) -> Result<(), String> {
+    // Client-confirmation marker only. Authenticating user approval and binding
+    // it to this operation is the client's responsibility, not this string check.
     match risk {
         "restricted" => Err("restricted operations are not permitted".into()),
         "high"

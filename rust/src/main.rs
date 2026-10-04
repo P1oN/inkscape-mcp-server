@@ -114,7 +114,7 @@ mod xml;
 use base64::{Engine, engine::general_purpose::STANDARD};
 use rmcp::{ErrorData, RoleServer, ServerHandler, ServiceExt, model::*, service::RequestContext};
 use serde_json::{Value, json};
-use std::sync::Mutex;
+use std::sync::{Arc, Mutex};
 
 /// Preserve the frozen wire shape without cloning a potentially large JSON tree
 /// through an intermediate Value and rmcp's compatibility deserializer.
@@ -145,131 +145,30 @@ fn tool_result(native: Result<Value, String>) -> CallToolResult {
     }
 }
 
+#[derive(Clone)]
 struct Server {
-    contract: Value,
-    registry: Mutex<document::Registry>,
-    capabilities: Mutex<Option<Value>>,
-    runtime_bus: Mutex<Option<live_probe::Inputs>>,
-    live: Mutex<live::Live>,
+    contract: Arc<Value>,
+    operations: Arc<tokio::sync::Mutex<()>>,
+    workers: Arc<tokio::sync::Semaphore>,
+    registry: Arc<Mutex<document::Registry>>,
+    capabilities: Arc<Mutex<Option<Value>>>,
+    runtime_bus: Arc<Mutex<Option<live_probe::Inputs>>>,
+    live: Arc<Mutex<live::Live>>,
 }
 
 impl Server {
-    fn capabilities(&self, registry: &document::Registry, refresh: bool) -> Result<Value, String> {
-        let host = self
-            .runtime_bus
-            .lock()
-            .map_err(|_| "runtime bus lock failed")?
-            .clone();
-        let mut cached = self
-            .capabilities
-            .lock()
-            .map_err(|_| "capability cache lock failed")?;
-        if refresh || cached.is_none() {
-            *cached = Some(runtime::detect(registry, host.as_ref()));
-        }
-        Ok(runtime::overlay(cached.as_ref().unwrap(), &self.contract))
-    }
-    fn unknown_resource(uri: &str) -> ErrorData {
-        ErrorData::resource_not_found(
-            format!(
-                "Resource not found: Unknown resource: {}",
-                style::python_repr(uri)
-            ),
-            None,
-        )
-    }
-    fn decode<T: serde::de::DeserializeOwned>(&self, key: &str) -> Result<T, ErrorData> {
-        serde_json::from_value(self.contract[key].clone())
-            .map_err(|_| telemetry::internal_error("invalid frozen contract", None))
-    }
-}
-
-impl ServerHandler for Server {
-    async fn get_prompt(
+    fn call_tool_blocking(
         &self,
-        request: GetPromptRequestParams,
-        _: RequestContext<RoleServer>,
-    ) -> Result<GetPromptResponse, ErrorData> {
-        prompts::render(&self.contract, request)
-    }
-    fn get_info(&self) -> ServerConfig {
-        self.decode("initialize").expect("reference initialization")
-    }
-
-    async fn list_tools(
-        &self,
-        _: Option<PaginatedRequestParams>,
-        _: RequestContext<RoleServer>,
-    ) -> Result<ListToolsResult, ErrorData> {
-        self.decode("tools/list")
-    }
-
-    async fn list_resources(
-        &self,
-        _: Option<PaginatedRequestParams>,
-        _: RequestContext<RoleServer>,
-    ) -> Result<ListResourcesResult, ErrorData> {
-        self.decode("resources/list")
-    }
-
-    async fn list_resource_templates(
-        &self,
-        _: Option<PaginatedRequestParams>,
-        _: RequestContext<RoleServer>,
-    ) -> Result<ListResourceTemplatesResult, ErrorData> {
-        self.decode("resources/templates/list")
-    }
-
-    async fn list_prompts(
-        &self,
-        _: Option<PaginatedRequestParams>,
-        _: RequestContext<RoleServer>,
-    ) -> Result<ListPromptsResult, ErrorData> {
-        self.decode("prompts/list")
-    }
-
-    async fn call_tool(
-        &self,
-        request: CallToolRequestParams,
-        context: RequestContext<RoleServer>,
+        name: &str,
+        arguments: &Value,
+        known: bool,
     ) -> Result<CallToolResponse, ErrorData> {
-        let tool = self.contract["tools/list"]["tools"]
-            .as_array()
-            .unwrap()
-            .iter()
-            .find(|tool| tool["name"].as_str() == Some(request.name.as_ref()));
-        let known = tool.is_some();
-        let _timing = telemetry::tool_timing(if known {
-            request.name.as_ref()
-        } else {
-            "unknown_tool"
-        });
-        let arguments = request
-            .arguments
-            .map(Value::Object)
-            .unwrap_or_else(|| json!({}));
-        if let Some(tool) = tool
-            && let Err(message) = argument_validation::validate(tool, &arguments)
-        {
-            return Ok(tool_result(Err(message)).into());
-        }
-        let arguments = tool
-            .map(|tool| argument_normalization::normalize(tool, &arguments))
-            .unwrap_or(arguments);
-        if known && request.name.as_ref() == "live_wait_for_change" {
-            let value = match live_events::wait(&self.live, &arguments, &context).await {
-                Ok(value) => {
-                    json!({"content":[{"type":"text","text":serde_json::to_string(&value).unwrap()}],"structuredContent":value,"isError":false})
-                }
-                Err(message) => json!({"content":[{"type":"text","text":message}],"isError":true}),
-            };
-            let result: CallToolResult = serde_json::from_value(value)
-                .map_err(|_| telemetry::internal_error("live wait serialization failed", None))?;
-            return Ok(result.into());
+        if process::cancelled() {
+            return Ok(tool_result(Err("operation cancelled".into())).into());
         }
         if known
             && matches!(
-                request.name.as_ref(),
+                name,
                 "render_preview"
                     | "export_document"
                     | "export_object"
@@ -280,8 +179,9 @@ impl ServerHandler for Server {
             let registry = self
                 .registry
                 .lock()
-                .map_err(|_| telemetry::internal_error("registry lock failed", None))?;
-            let value = match render::call(&registry, request.name.as_ref(), &arguments) {
+                .map_err(|_| telemetry::internal_error("registry lock failed", None))?
+                .clone();
+            let value = match render::call(&registry, name, arguments) {
                 Ok(value) => value,
                 Err(message) => json!({"content":[{"type":"text","text":message}],"isError":true}),
             };
@@ -290,11 +190,26 @@ impl ServerHandler for Server {
             return Ok(result.into());
         }
         let native = if known {
-            let mut registry = self
+            let mut guard = self
                 .registry
                 .lock()
                 .map_err(|_| telemetry::internal_error("registry lock failed", None))?;
-            match request.name.as_ref() {
+            let mut snapshot;
+            let registry = if matches!(
+                name,
+                "open_document"
+                    | "create_document"
+                    | "reload_document"
+                    | "compose_grid"
+                    | "live_sync_to_workspace"
+            ) {
+                &mut *guard
+            } else {
+                snapshot = guard.clone();
+                drop(guard);
+                &mut snapshot
+            };
+            match name {
                 "live_launch" => Some((|| {
                     let enabled = self
                         .live
@@ -329,27 +244,22 @@ impl ServerHandler for Server {
                         .settings
                         .enabled;
                     live_install::gate(enabled)?;
-                    let capabilities = self.capabilities(&registry, false)?;
-                    if request.name.as_ref() == "live_install_helper" {
+                    let capabilities = self.capabilities(registry, false)?;
+                    if name == "live_install_helper" {
                         live_install::install(&capabilities)
                     } else {
                         live_arm::arm(&capabilities, registry.workspace.max_input)
                     }
                 })()),
                 "check_live_support" | "live_status" | "live_disconnect" => Some((|| {
-                    let capabilities = self.capabilities(&registry, false)?;
+                    let capabilities = self.capabilities(registry, false)?;
                     self.live
                         .lock()
                         .map_err(|_| {
                             telemetry::failure(telemetry::Failure::Internal);
                             "live session lock failed"
                         })?
-                        .call(
-                            &registry.workspace,
-                            &capabilities,
-                            request.name.as_ref(),
-                            &arguments,
-                        )
+                        .call(&registry.workspace, &capabilities, name, arguments)
                 })(
                 )),
                 "live_get_active_document"
@@ -374,12 +284,7 @@ impl ServerHandler for Server {
                             telemetry::failure(telemetry::Failure::Internal);
                             "live session lock failed"
                         })?
-                        .call(
-                            &registry.workspace,
-                            &Value::Null,
-                            request.name.as_ref(),
-                            &arguments,
-                        )
+                        .call(&registry.workspace, &Value::Null, name, arguments)
                 })()),
                 "live_select_document" => Some((|| {
                     let mut live = self.live.lock().map_err(|_| {
@@ -389,12 +294,12 @@ impl ServerHandler for Server {
                     live.session
                         .require_transport()
                         .map_err(|e| e.public_message().to_string())?;
-                    let capabilities = self.capabilities(&registry, false)?;
+                    let capabilities = self.capabilities(registry, false)?;
                     live.call(
                         &registry.workspace,
                         &capabilities,
                         "live_select_document",
-                        &arguments,
+                        arguments,
                     )
                 })()),
                 "live_connect" => Some((|| {
@@ -402,64 +307,60 @@ impl ServerHandler for Server {
                         telemetry::failure(telemetry::Failure::Internal);
                         "live session lock failed"
                     })?;
-                    live.prepare_connect(&registry.workspace, &arguments)?;
+                    live.prepare_connect(&registry.workspace, arguments)?;
                     *self
                         .runtime_bus
                         .lock()
                         .map_err(|_| "runtime bus lock failed")? = live.runtime_inputs();
-                    let capabilities = self.capabilities(&registry, false)?;
+                    let capabilities = self.capabilities(registry, false)?;
                     live.call(
                         &registry.workspace,
                         &capabilities,
                         "live_connect",
-                        &arguments,
+                        arguments,
                     )
                 })()),
                 "get_workspace_info" => Some(Ok(registry.workspace.info())),
                 "list_capabilities" | "diagnose_runtime" => {
-                    Some(self.capabilities(&registry, request.name.as_ref() == "diagnose_runtime"))
+                    Some(self.capabilities(registry, name == "diagnose_runtime"))
                 }
-                "svg_web_optimize" | "optimize_set" => Some(optimize::apply(
-                    &registry,
-                    request.name.as_ref(),
-                    &arguments,
-                )),
+                "svg_web_optimize" | "optimize_set" => {
+                    Some(optimize::apply(registry, name, arguments))
+                }
                 "set_document_svg" | "insert_svg_fragment" => {
-                    Some(adopt::apply(&registry, request.name.as_ref(), &arguments))
+                    Some(adopt::apply(registry, name, arguments))
                 }
-                "replace_svg_fragment" => Some(fragment::apply(&registry, &arguments)),
-                "place_document" => Some(placement::apply(&registry, &arguments)),
-                "compose_grid" => Some(grid::apply(&mut registry, &arguments)),
-                "how_do_i" => Some(intents::apply(&registry, &arguments)),
+                "replace_svg_fragment" => Some(fragment::apply(registry, arguments)),
+                "place_document" => Some(placement::apply(registry, arguments)),
+                "compose_grid" => Some(grid::apply(registry, arguments)),
+                "how_do_i" => Some(intents::apply(registry, arguments)),
                 "quality_report" | "quality_report_set" => {
-                    Some(quality::apply(&registry, request.name.as_ref(), &arguments))
+                    Some(quality::apply(registry, name, arguments))
                 }
-                "stat_artifact" | "stat_artifacts" => Some(artifact_stat::apply(
-                    &registry,
-                    request.name.as_ref(),
-                    &arguments,
-                )),
+                "stat_artifact" | "stat_artifacts" => {
+                    Some(artifact_stat::apply(registry, name, arguments))
+                }
                 "live_sync_to_workspace" => Some((|| {
                     let mut live = self.live.lock().map_err(|_| {
                         telemetry::failure(telemetry::Failure::Internal);
                         "live session lock failed"
                     })?;
-                    live_sync::sync(&mut live, &mut registry, &arguments)
+                    live_sync::sync(&mut live, registry, arguments)
                 })()),
-                "open_document" => Some(registry.open(&arguments)),
-                "create_document" => Some(registry.create(&arguments)),
-                "reload_document" => Some(registry.reload(&arguments)),
-                "prune_snapshots" => Some(retention::apply(&registry, &arguments)),
-                "save_document_as" => Some(save::document(&registry, &arguments)),
-                "list_frames" => Some(frames::list(&registry, &arguments)),
-                "export_batch" => Some(export_batch::call(&registry, &arguments)),
-                "export_set" => Some(collection::export_set(&registry, &arguments)),
+                "open_document" => Some(registry.open(arguments)),
+                "create_document" => Some(registry.create(arguments)),
+                "reload_document" => Some(registry.reload(arguments)),
+                "prune_snapshots" => Some(retention::apply(registry, arguments)),
+                "save_document_as" => Some(save::document(registry, arguments)),
+                "list_frames" => Some(frames::list(registry, arguments)),
+                "export_batch" => Some(export_batch::call(registry, arguments)),
+                "export_set" => Some(collection::export_set(registry, arguments)),
                 "export_web_profile" | "create_icon_set" | "export_print_profile" => {
-                    Some(profiles::call(&registry, request.name.as_ref(), &arguments))
+                    Some(profiles::call(registry, name, arguments))
                 }
                 "validate_document" => Some((|| {
                     validate::document(
-                        &registry,
+                        registry,
                         arguments["doc_id"]
                             .as_str()
                             .ok_or("doc_id must be a string")?,
@@ -467,7 +368,7 @@ impl ServerHandler for Server {
                 })()),
                 "inspect_document" => Some((|| {
                     inspect::document(
-                        &registry,
+                        registry,
                         arguments["doc_id"]
                             .as_str()
                             .ok_or("doc_id must be a string")?,
@@ -475,56 +376,46 @@ impl ServerHandler for Server {
                 })()),
                 "create_rect" | "create_circle" | "create_ellipse" | "create_line"
                 | "create_polygon" | "create_polyline" | "create_path" | "create_text" => {
-                    Some(create::apply(&registry, request.name.as_ref(), &arguments))
+                    Some(create::apply(registry, name, arguments))
                 }
-                "add_linear_gradient" | "add_radial_gradient" => Some(gradient::apply(
-                    &registry,
-                    request.name.as_ref(),
-                    &arguments,
-                )),
-                "create_group" | "set_group_mode" => {
-                    Some(group::apply(&registry, request.name.as_ref(), &arguments))
+                "add_linear_gradient" | "add_radial_gradient" => {
+                    Some(gradient::apply(registry, name, arguments))
                 }
-                "create_use" => Some(use_object::apply(&registry, &arguments)),
-                "group_objects" => Some(structure::apply(&registry, &arguments)),
-                "reparent_object" => Some(reparent::apply(&registry, &arguments)),
-                "duplicate_object" => Some(duplicate::apply(&registry, &arguments)),
-                "tile" => Some(tile::apply(&registry, &arguments)),
-                "repeat_objects" => Some(repeat::apply(&registry, &arguments)),
-                "find_objects" => Some(find::apply(&registry, &arguments)),
-                "delete_object" => Some(delete::apply(&registry, &arguments)),
-                "rename_object" => Some(identity::apply(&registry, &arguments)),
-                "fit_to_content" => Some(fit::apply(&registry, &arguments)),
+                "create_group" | "set_group_mode" => Some(group::apply(registry, name, arguments)),
+                "create_use" => Some(use_object::apply(registry, arguments)),
+                "group_objects" => Some(structure::apply(registry, arguments)),
+                "reparent_object" => Some(reparent::apply(registry, arguments)),
+                "duplicate_object" => Some(duplicate::apply(registry, arguments)),
+                "tile" => Some(tile::apply(registry, arguments)),
+                "repeat_objects" => Some(repeat::apply(registry, arguments)),
+                "find_objects" => Some(find::apply(registry, arguments)),
+                "delete_object" => Some(delete::apply(registry, arguments)),
+                "rename_object" => Some(identity::apply(registry, arguments)),
+                "fit_to_content" => Some(fit::apply(registry, arguments)),
                 "resize_canvas" | "normalize_viewbox" => {
-                    Some(canvas::apply(&registry, request.name.as_ref(), &arguments))
+                    Some(canvas::apply(registry, name, arguments))
                 }
-                "move_object" | "scale_object" | "rotate_object" => Some(transform::apply(
-                    &registry,
-                    request.name.as_ref(),
-                    &arguments,
-                )),
-                "replace_text" | "set_font" => {
-                    Some(text::apply(&registry, request.name.as_ref(), &arguments))
+                "move_object" | "scale_object" | "rotate_object" => {
+                    Some(transform::apply(registry, name, arguments))
                 }
-                "list_actions" | "discover_extensions" => Some(runtime::discovery(
-                    &registry,
-                    request.name.as_ref(),
-                    &arguments,
-                )),
+                "replace_text" | "set_font" => Some(text::apply(registry, name, arguments)),
+                "list_actions" | "discover_extensions" => {
+                    Some(runtime::discovery(registry, name, arguments))
+                }
                 "validate_action_chain" | "run_action_chain" | "run_raw_action" => {
-                    Some(actions::apply(&registry, request.name.as_ref(), &arguments))
+                    Some(actions::apply(registry, name, arguments))
                 }
                 "simplify_path" | "boolean_union" | "boolean_difference" | "combine_paths"
                 | "break_apart" | "stroke_to_path" | "cleanup_paths" => {
-                    Some(paths::apply(&registry, request.name.as_ref(), &arguments))
+                    Some(paths::apply(registry, name, arguments))
                 }
-                "transform_objects" => Some(transform_objects::apply(&registry, &arguments)),
-                "apply_edits" => Some(batch::apply(&registry, &arguments)),
+                "transform_objects" => Some(transform_objects::apply(registry, arguments)),
+                "apply_edits" => Some(batch::apply(registry, arguments)),
                 "replace_color" | "apply_palette" => {
-                    Some(recolor::apply(&registry, request.name.as_ref(), &arguments))
+                    Some(recolor::apply(registry, name, arguments))
                 }
                 "set_fill" | "set_stroke" | "set_opacity" => {
-                    Some(style::apply(&registry, request.name.as_ref(), &arguments))
+                    Some(style::apply(registry, name, arguments))
                 }
                 "list_snapshots" => Some((|| {
                     let id = arguments["doc_id"]
@@ -532,7 +423,7 @@ impl ServerHandler for Server {
                         .ok_or("doc_id must be a string")?;
                     let entry = registry.entries.get(id).ok_or("document id not found")?;
                     Ok(
-                        json!({"doc_id":id,"snapshots":transaction::list_snapshots(&registry,entry)?}),
+                        json!({"doc_id":id,"snapshots":transaction::list_snapshots(registry,entry)?}),
                     )
                 })()),
                 "create_snapshot" => Some((|| {
@@ -541,15 +432,15 @@ impl ServerHandler for Server {
                         .ok_or("doc_id must be a string")?;
                     let entry = registry.entries.get(id).ok_or("document id not found")?;
                     transaction::snapshot(
-                        &registry,
+                        registry,
                         entry,
-                        arguments::string(&arguments, "label")?,
+                        arguments::string(arguments, "label")?,
                         None,
                     )
                 })()),
                 "restore_snapshot" => Some((|| {
                     transaction::restore(
-                        &registry,
+                        registry,
                         arguments["doc_id"]
                             .as_str()
                             .ok_or("doc_id must be a string")?,
@@ -568,12 +459,9 @@ impl ServerHandler for Server {
             return Ok(result.into());
         }
         let message = if known {
-            format!(
-                "Rust migration pending: {} has not been ported",
-                request.name
-            )
+            format!("Rust migration pending: {} has not been ported", name)
         } else {
-            format!("Unknown tool: '{}'", request.name)
+            format!("Unknown tool: '{}'", name)
         };
         let result: CallToolResult = serde_json::from_value(json!({
             "content": [{"type": "text", "text": message}], "isError": true
@@ -581,16 +469,15 @@ impl ServerHandler for Server {
         .expect("tool error wire shape");
         Ok(result.into())
     }
-
-    async fn read_resource(
+    fn read_resource_blocking(
         &self,
         request: ReadResourceRequestParams,
-        _: RequestContext<RoleServer>,
     ) -> Result<ReadResourceResponse, ErrorData> {
         let registry = self
             .registry
             .lock()
-            .map_err(|_| telemetry::internal_error("registry lock failed", None))?;
+            .map_err(|_| telemetry::internal_error("registry lock failed", None))?
+            .clone();
         if let Some((root_key, token)) = request
             .uri
             .strip_prefix("inkscape://artifact/")
@@ -717,9 +604,200 @@ impl ServerHandler for Server {
             .map_err(|_| telemetry::internal_error("resource serialization failed", None))?;
         Ok(result.into())
     }
+    fn capabilities(&self, registry: &document::Registry, refresh: bool) -> Result<Value, String> {
+        let host = self
+            .runtime_bus
+            .lock()
+            .map_err(|_| "runtime bus lock failed")?
+            .clone();
+        let mut cached = self
+            .capabilities
+            .lock()
+            .map_err(|_| "capability cache lock failed")?;
+        if refresh || cached.is_none() {
+            *cached = Some(runtime::detect(registry, host.as_ref()));
+        }
+        Ok(runtime::overlay(cached.as_ref().unwrap(), &self.contract))
+    }
+    fn unknown_resource(uri: &str) -> ErrorData {
+        ErrorData::resource_not_found(
+            format!(
+                "Resource not found: Unknown resource: {}",
+                style::python_repr(uri)
+            ),
+            None,
+        )
+    }
+    fn decode<T: serde::de::DeserializeOwned>(&self, key: &str) -> Result<T, ErrorData> {
+        serde_json::from_value(self.contract[key].clone())
+            .map_err(|_| telemetry::internal_error("invalid frozen contract", None))
+    }
+}
+
+impl ServerHandler for Server {
+    async fn get_prompt(
+        &self,
+        request: GetPromptRequestParams,
+        _: RequestContext<RoleServer>,
+    ) -> Result<GetPromptResponse, ErrorData> {
+        prompts::render(&self.contract, request)
+    }
+    fn get_info(&self) -> ServerConfig {
+        self.decode("initialize").expect("reference initialization")
+    }
+
+    async fn list_tools(
+        &self,
+        _: Option<PaginatedRequestParams>,
+        _: RequestContext<RoleServer>,
+    ) -> Result<ListToolsResult, ErrorData> {
+        self.decode("tools/list")
+    }
+
+    async fn list_resources(
+        &self,
+        _: Option<PaginatedRequestParams>,
+        _: RequestContext<RoleServer>,
+    ) -> Result<ListResourcesResult, ErrorData> {
+        self.decode("resources/list")
+    }
+
+    async fn list_resource_templates(
+        &self,
+        _: Option<PaginatedRequestParams>,
+        _: RequestContext<RoleServer>,
+    ) -> Result<ListResourceTemplatesResult, ErrorData> {
+        self.decode("resources/templates/list")
+    }
+
+    async fn list_prompts(
+        &self,
+        _: Option<PaginatedRequestParams>,
+        _: RequestContext<RoleServer>,
+    ) -> Result<ListPromptsResult, ErrorData> {
+        self.decode("prompts/list")
+    }
+
+    async fn call_tool(
+        &self,
+        request: CallToolRequestParams,
+        context: RequestContext<RoleServer>,
+    ) -> Result<CallToolResponse, ErrorData> {
+        let tool = self.contract["tools/list"]["tools"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|tool| tool["name"].as_str() == Some(request.name.as_ref()));
+        let known = tool.is_some();
+        let _timing = telemetry::tool_timing(if known {
+            request.name.as_ref()
+        } else {
+            "unknown_tool"
+        });
+        let arguments = request
+            .arguments
+            .map(Value::Object)
+            .unwrap_or_else(|| json!({}));
+        if let Some(tool) = tool
+            && let Err(message) = argument_validation::validate(tool, &arguments)
+        {
+            return Ok(tool_result(Err(message)).into());
+        }
+        let arguments = tool
+            .map(|tool| argument_normalization::normalize(tool, &arguments))
+            .unwrap_or(arguments);
+        if known && request.name.as_ref() == "live_wait_for_change" {
+            let value = match live_events::wait(&self.live, &self.workers, &arguments, &context)
+                .await
+            {
+                Ok(value) => {
+                    json!({"content":[{"type":"text","text":serde_json::to_string(&value).unwrap()}],"structuredContent":value,"isError":false})
+                }
+                Err(message) => json!({"content":[{"type":"text","text":message}],"isError":true}),
+            };
+            let result: CallToolResult = serde_json::from_value(value)
+                .map_err(|_| telemetry::internal_error("live wait serialization failed", None))?;
+            return Ok(result.into());
+        }
+        let operation = if (!request.name.starts_with("live_")
+            && request.name != "get_workspace_info")
+            || request.name == "live_sync_to_workspace"
+        {
+            Some(tokio::select! {
+                _ = context.ct.cancelled() => return Ok(tool_result(Err("operation cancelled".into())).into()),
+                guard = self.operations.clone().lock_owned() => guard,
+            })
+        } else {
+            None
+        };
+        let permit = tokio::select! {
+            _ = context.ct.cancelled() => return Ok(tool_result(Err("operation cancelled".into())).into()),
+            permit = self.workers.clone().acquire_owned() => permit.map_err(|_| telemetry::internal_error("worker queue closed", None))?,
+        };
+        let server = self.clone();
+        let dropped = Arc::new(std::sync::atomic::AtomicBool::new(false));
+        let _cancel_on_drop = process::CancelOnDrop(dropped.clone());
+        let ct = context.ct.clone();
+        tokio::task::spawn_blocking(move || {
+            let _permit = permit;
+            let _operation = operation;
+            process::with_cancellation(
+                move || ct.is_cancelled() || dropped.load(std::sync::atomic::Ordering::Acquire),
+                || server.call_tool_blocking(request.name.as_ref(), &arguments, known),
+            )
+        })
+        .await
+        .map_err(|_| telemetry::internal_error("tool worker failed", None))?
+    }
+
+    async fn read_resource(
+        &self,
+        request: ReadResourceRequestParams,
+        context: RequestContext<RoleServer>,
+    ) -> Result<ReadResourceResponse, ErrorData> {
+        let operation = if matches!(
+            request.uri.as_str(),
+            "inkscape://workspace"
+                | "inkscape://documents"
+                | "inkscape://prompts"
+                | "inkscape://runtime/intents"
+        ) {
+            None
+        } else {
+            Some(tokio::select! {
+                _ = context.ct.cancelled() => return Err(ErrorData::internal_error("resource read cancelled", None)),
+                guard = self.operations.clone().lock_owned() => guard,
+            })
+        };
+        let permit = tokio::select! {
+            _ = context.ct.cancelled() => return Err(ErrorData::internal_error("resource read cancelled", None)),
+            permit = self.workers.clone().acquire_owned() => permit.map_err(|_| telemetry::internal_error("worker queue closed", None))?,
+        };
+        let server = self.clone();
+        let dropped = Arc::new(std::sync::atomic::AtomicBool::new(false));
+        let _cancel_on_drop = process::CancelOnDrop(dropped.clone());
+        let ct = context.ct.clone();
+        tokio::task::spawn_blocking(move || {
+            let _permit = permit;
+            let _operation = operation;
+            process::with_cancellation(
+                move || ct.is_cancelled() || dropped.load(std::sync::atomic::Ordering::Acquire),
+                || server.read_resource_blocking(request),
+            )
+        })
+        .await
+        .map_err(|_| telemetry::internal_error("resource worker failed", None))?
+    }
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+    if std::env::args_os()
+        .nth(1)
+        .is_some_and(|arg| arg == "--version")
+    {
+        println!("{}", identity::build_info());
+        return Ok(());
+    }
     if std::env::args_os()
         .nth(1)
         .is_some_and(|arg| arg == "--doctor")
@@ -756,11 +834,13 @@ async fn run_server() -> Result<(), Box<dyn std::error::Error>> {
         );
     }
     let server = Server {
-        contract: contract::contract(),
-        registry: Mutex::new(registry),
-        capabilities: Mutex::new(None),
-        runtime_bus: Mutex::new(None),
-        live: Mutex::new(live::Live::new()),
+        contract: Arc::new(contract::contract()),
+        operations: Arc::new(tokio::sync::Mutex::new(())),
+        workers: Arc::new(tokio::sync::Semaphore::new(4)),
+        registry: Arc::new(Mutex::new(registry)),
+        capabilities: Arc::new(Mutex::new(None)),
+        runtime_bus: Arc::new(Mutex::new(None)),
+        live: Arc::new(Mutex::new(live::Live::new())),
     };
     let result = server
         .serve((

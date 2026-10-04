@@ -3,7 +3,10 @@
 use std::{
     collections::VecDeque,
     io::{Read, Write},
-    os::{fd::AsRawFd, unix::process::ExitStatusExt},
+    os::{
+        fd::AsRawFd,
+        unix::process::{CommandExt, ExitStatusExt},
+    },
     path::{Path, PathBuf},
     process::{Child, ChildStderr, ChildStdout, Command, Stdio},
     sync::{Mutex, OnceLock},
@@ -24,15 +27,15 @@ fn nonblocking(fd: i32) -> Result<(), ()> {
 }
 fn wait_ready(fds: &mut [libc::pollfd], deadline: Instant) -> Result<(), ()> {
     loop {
+        if crate::process::cancelled() {
+            return Err(());
+        }
         let remaining = deadline.saturating_duration_since(Instant::now());
         if remaining.is_zero() {
             crate::telemetry::failure(crate::telemetry::Failure::ProcessTimeout);
             return Err(());
         }
-        let milliseconds = remaining
-            .as_millis()
-            .saturating_add(1)
-            .min(i32::MAX as u128) as i32;
+        let milliseconds = remaining.as_millis().saturating_add(1).min(50) as i32;
         // SAFETY: poll receives this live slice of owned pipe descriptors and a
         // bounded deadline; no descriptor ownership is transferred.
         let result =
@@ -45,8 +48,7 @@ fn wait_ready(fds: &mut [libc::pollfd], deadline: Instant) -> Result<(), ()> {
             };
         }
         if result == 0 {
-            crate::telemetry::failure(crate::telemetry::Failure::ProcessTimeout);
-            return Err(());
+            continue;
         }
         if std::io::Error::last_os_error().kind() != std::io::ErrorKind::Interrupted {
             return Err(());
@@ -96,6 +98,7 @@ impl Worker {
     fn start(binary: &Path, timeout: Duration) -> Result<Self, ()> {
         let mut child = Command::new(binary)
             .arg("--shell")
+            .process_group(0)
             .stdin(Stdio::piped())
             .stdout(Stdio::piped())
             .stderr(Stdio::piped())
@@ -222,6 +225,15 @@ impl Worker {
 }
 impl Drop for Worker {
     fn drop(&mut self) {
+        if crate::process::cancelled() {
+            // This worker starts a new private group; no user GUI belongs to it.
+            unsafe {
+                libc::kill(-(self.child.id() as i32), libc::SIGKILL);
+            }
+            let _ = self.child.kill();
+            let _ = self.child.wait();
+            return;
+        }
         if let Some(mut stdin) = self.child.stdin.take() {
             let _ = stdin.write_all(b"quit\n");
         }

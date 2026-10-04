@@ -20,10 +20,7 @@ pub fn init() -> Option<sentry::ClientInitGuard> {
     Some(sentry::init(
         sentry::ClientOptions::new()
             .dsn(&dsn.to_string())
-            .release(
-                std::env::var("SENTRY_RELEASE")
-                    .unwrap_or_else(|_| format!("inkscape-mcp-rust@{}", env!("CARGO_PKG_VERSION"))),
-            )
+            .release(std::env::var("SENTRY_RELEASE").unwrap_or_else(|_| crate::identity::release()))
             .environment(
                 std::env::var("SENTRY_ENVIRONMENT").unwrap_or_else(|_| "development".into()),
             )
@@ -43,9 +40,10 @@ impl Drop for ToolTiming {
 }
 
 pub fn tool_timing(name: &str) -> ToolTiming {
-    ToolTiming(sentry::start_transaction(sentry::TransactionContext::new(
-        name, "mcp.tool",
-    )))
+    let transaction = sentry::start_transaction(sentry::TransactionContext::new(name, "mcp.tool"));
+    transaction.set_tag("revision", env!("INKSCAPE_MCP_REVISION"));
+    transaction.set_tag("build_id", env!("INKSCAPE_MCP_BUILD_ID"));
+    ToolTiming(transaction)
 }
 
 /// Fixed categories only: never classify by or send dynamic error text.
@@ -171,6 +169,12 @@ fn scrub_error(event: sentry::protocol::Event<'static>) -> sentry::protocol::Eve
     cleaned
         .tags
         .insert("arch".into(), std::env::consts::ARCH.into());
+    cleaned
+        .tags
+        .insert("revision".into(), env!("INKSCAPE_MCP_REVISION").into());
+    cleaned
+        .tags
+        .insert("build_id".into(), env!("INKSCAPE_MCP_BUILD_ID").into());
     cleaned.exception = event.exception;
     for exception in &mut cleaned.exception.values {
         exception.ty = "McpFailure".into();
@@ -256,6 +260,8 @@ mod tests {
         assert!(!wire.contains("private"), "{wire}");
         assert!(wire.contains("main.rs"));
         assert!(wire.contains("process_crash"));
+        assert_eq!(clean.tags["revision"], env!("INKSCAPE_MCP_REVISION"));
+        assert_eq!(clean.tags["build_id"], env!("INKSCAPE_MCP_BUILD_ID"));
         assert_eq!(clean.stacktrace.unwrap().frames[0].lineno, Some(99));
     }
 

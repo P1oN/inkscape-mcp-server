@@ -12,7 +12,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 
-def main(output):
+def main(output, working_tree=False):
     revision = subprocess.check_output(
         ["git", "rev-parse", "--verify", "HEAD"], text=True, timeout=30
     ).strip()
@@ -22,13 +22,50 @@ def main(output):
     prefix = "inkscape-mcp-source-bootstrap/"
     with TemporaryDirectory(prefix="imcp-source-export-") as temporary:
         archive = Path(temporary) / "source.tar"
-        with archive.open("wb") as stream:
-            subprocess.run(
-                ["git", "archive", "--format=tar", "--prefix=" + prefix, revision],
-                stdout=stream,
-                check=True,
-                timeout=120,
+        if working_tree:
+            tracked = (
+                subprocess.check_output(["git", "ls-files", "-z"], timeout=30).decode().split("\0")
             )
+            additions = (
+                subprocess.check_output(
+                    [
+                        "git",
+                        "ls-files",
+                        "--others",
+                        "--exclude-standard",
+                        "-z",
+                        "--",
+                        "scripts",
+                        "skills",
+                        "docs",
+                        "rust/src",
+                        "rust/build.rs",
+                        "uninstall.sh",
+                    ],
+                    timeout=30,
+                )
+                .decode()
+                .split("\0")
+            )
+            with tarfile.open(archive, "w") as stream:
+                for name in sorted(set(tracked + additions) - {""}):
+                    path = Path(name)
+                    if path.is_symlink():
+                        raise RuntimeError("working-tree source export refuses symlinks")
+                    if path.is_file():
+                        stream.add(path, arcname=prefix + name, recursive=False)
+                content = b"uncommitted-working-tree\n"
+                member = tarfile.TarInfo(prefix + "SOURCE_STATE")
+                member.size = len(content)
+                stream.addfile(member, io.BytesIO(content))
+        else:
+            with archive.open("wb") as stream:
+                subprocess.run(
+                    ["git", "archive", "--format=tar", "--prefix=" + prefix, revision],
+                    stdout=stream,
+                    check=True,
+                    timeout=120,
+                )
         with tarfile.open(archive, "a") as stream:
             name = prefix + "SOURCE_REVISION"
             if name in stream.getnames():
@@ -48,4 +85,10 @@ def main(output):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
-    main(parser.parse_args().output)
+    parser.add_argument(
+        "--working-tree",
+        action="store_true",
+        help="Explicit local acceptance snapshot including unpublished project changes",
+    )
+    args = parser.parse_args()
+    main(args.output, args.working_tree)

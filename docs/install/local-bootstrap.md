@@ -1,11 +1,9 @@
 # Local source installation on Apple Silicon
 
-Download `inkscape-mcp-source-bootstrap.tar.gz` from the Release, verify its checksum,
-and unpack it into a permanent location. No Git clone is required. From the extracted
-`inkscape-mcp-source-bootstrap` directory (or a source checkout), run:
+From a current source checkout on Apple Silicon macOS 15+, run:
 
 ```sh
-./setup.sh --bootstrap
+./setup.sh
 ./run-mcp.sh --doctor
 ```
 
@@ -15,6 +13,26 @@ MCP clients use the absolute path to the checkout's `run-mcp.sh`.
 Keep the checkout and its `.inkscape-mcp-local` folder in a permanent location.
 Normal subsequent `./setup.sh` runs reuse the saved package and only write configuration.
 Diagnostics are explicit; `--check` runs doctor before saving configuration.
+
+Reruns preserve the saved workspace, Inkscape path, live setting and engine unless an
+explicit option replaces them. Invalid settings/configuration paths are refused before
+building. In a source checkout, setup compares the current committed revision (or source
+archive marker) with the installed package's recorded revision. A mismatch triggers an
+automatic rebuild; a failed build preserves saved runtime settings. An explicit `--package`
+selects that package even if revisions differ. Unknown revisions or uncommitted source
+edits produce a rebuild instruction; use `--rebuild` to include those changes explicitly.
+
+`./setup.sh --local-tools` explicitly rebuilds using installed tools and cached Cargo
+dependencies only. It does not download Rust/Python/uv/native inputs or dependencies;
+missing prerequisites cause failure. A pinned `.venv` or `.packaging-venv` helper
+environment must already exist. `--build` remains a compatibility alias for this mode.
+`--bootstrap` explicitly repeats automatic preparation and build, even with an existing
+configuration. Neither build option can be combined with `--package`.
+
+For a Git-free installation, download `inkscape-mcp-source-bootstrap.tar.gz` from the
+Release, verify its checksum and unpack it into a permanent location. The published
+v0.1.1 archive predates automatic setup by default: use `./setup.sh --bootstrap` on first
+use with that version. The current source tree contains the updated default behavior.
 
 Automatic bootstrap currently supports **Apple Silicon, macOS 15 or newer**.
 The published v0.1.0 ready-binary archive does not contain this installer. Use the source
@@ -61,3 +79,6 @@ and clean-machine Apple tool installation are separate acceptance checks.
 Upstream mechanisms: [rustup isolated homes](https://rust-lang.github.io/rustup/installation/index.html),
 [uv storage](https://docs.astral.sh/uv/reference/storage/), and
 [Homebrew formula metadata](https://formulae.brew.sh/api/formula/glib.json).
+
+Current sources also support client registration, installed build identity, managed skill
+updates and clean reinstall. See [client management](client-management.md).

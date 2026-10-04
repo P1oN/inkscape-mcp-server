@@ -8,6 +8,11 @@ HIGH-risk tools, and how to pick the right tool. The full surface is **110 small
 Use the discovery tools below instead of grepping the list; gates may narrow the visible surface.
 The generated [manifest](../llms.txt) is the authoritative full catalog.
 
+For clients supporting installable skills, the repository includes
+[inkscape-mcp](../skills/inkscape-mcp/SKILL.md). See
+[installation](install/agent-skill.md). It complements the MCP initialization
+instructions without changing the tools or approval gates.
+
 For managed macOS, follow the [setup guide](macos-live-prototype.md). MCP startup and
 `live_connect` never open a window. Use `live_launch` only when the user asks to open Inkscape,
 then connect with `prefer="no_freeze"`, list and select the task drawing, and check
@@ -148,6 +153,11 @@ are never touched:
 Practical loop: snapshot (or rely on the automatic pre-mutation snapshot) → edit → `render_preview`
 to inspect → if wrong, `restore_snapshot` back and try again.
 
+Headless `delete_object` refuses to remove IDs referenced by remaining objects, including
+IDs inside a selected group. Remove references first or explicitly select the dependent
+objects in the same deletion. Stylesheets require preparation before deletion. The same
+guard applies to `apply_edits`; it does not extend the native live deletion protocol.
+
 ---
 
 ## 4. Risk classes and the approval-token gate
@@ -162,9 +172,12 @@ Every tool declares a risk class (in its docstring and in `llms.txt`):
 | **restricted** | code / network / fs-escape | never ships in the MVP |
 
 **The approval gate.** A HIGH-risk tool refuses (`high-risk operation requires explicit approval`)
-unless it is called with a non-empty `approval_token`. The token is **minted/confirmed out of band
-and bound to a single operation** — it is deliberately *not* an ambient env flag or a setting the
-model can flip on for itself. Many HIGH-risk path tools also default to `dry_run=True`: call them
+unless it is called with a non-empty `approval_token`. **Approval is enforced by the client:**
+the client must obtain explicit user confirmation for the particular operation before supplying
+the string. The server checks non-emptiness only; it does not issue, authenticate, bind,
+expire or consume tokens. This is a client-trust boundary, not an independent server-side
+authorization mechanism. An agent must not invent approval strings or carry confirmation
+over to another operation. Many HIGH-risk path tools also default to `dry_run=True`: call them
 once to validate + preview the change with no mutation, then call again with `dry_run=False` **and**
 the `approval_token` to apply it. Compose/adopt tools (`rust/src/adopt.rs`) are HIGH + approval-gated
 for the same reason (they ingest arbitrary SVG).

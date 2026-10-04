@@ -70,6 +70,8 @@ for candidate in "${INKSCAPE_MCP_BUILD_PYTHON:-/nonexistent}" "$repo/.packaging-
     fi
 done
 if [ -z "$python" ]; then
+    [ "${INKSCAPE_MCP_BUILD_LOCAL_TOOLS_ONLY:-false}" != true ] || \
+        fail '--local-tools needs an existing pinned Python 3.12.14 helper environment. Run ./setup.sh for automatic preparation.'
     # uv manages Python/wheels locally. Never install a system package manager or alter shell profiles.
     if command -v uv >/dev/null 2>&1; then
         uv=$(command -v uv)
@@ -86,7 +88,9 @@ if [ -z "$python" ]; then
 fi
 printf '%s\n' 'Building the locked Rust server and private helper/native package...' >&2
 target_dir=${INKSCAPE_MCP_BUILD_TARGET_DIR:-$repo/rust/target}
-"$cargo" build --locked --release --manifest-path rust/Cargo.toml \
+cargo_options=(--locked)
+if [ "${INKSCAPE_MCP_BUILD_LOCAL_TOOLS_ONLY:-false}" = true ]; then cargo_options+=(--offline); fi
+"$cargo" build "${cargo_options[@]}" --release --manifest-path rust/Cargo.toml \
     --target "$native_target" --target-dir "$target_dir" >&2
 "$python" scripts/migration_build_posix_package.py --output "$build_root/package" \
     --archive "$build_root/package.tar.gz" \
