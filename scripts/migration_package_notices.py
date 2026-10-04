@@ -115,51 +115,6 @@ def native_source_notices(output, copy_notice, vendor=Path("migration/vendor-not
     return rows, gaps
 
 
-def cpython_notices(output, target, copy_notice):
-    root = Path("migration/vendor-notices/cpython/3.12.14-20260929-macos-arm64")
-    if target != "macos-arm64":
-        return None, ["Exact private CPython release attribution unavailable for " + target]
-    provenance = json.loads((root / "provenance.json").read_text())
-    executable = output / "libexec/inkscape-mcp/python/bin/python3"
-    if sha(executable.read_bytes()) != provenance["executable_sha256"]:
-        return None, ["Private CPython binary does not match reviewed Astral release"]
-    notices = []
-    for notice in provenance["notices"]:
-        relative = PurePosixPath(notice["path"])
-        if relative.is_absolute() or ".." in relative.parts:
-            raise RuntimeError("unsafe CPython source notice path")
-        path = root / str(relative)
-        if path.is_symlink() or not path.is_file() or path.stat().st_size > 4 * 1024 * 1024:
-            raise RuntimeError("unsafe or missing CPython source notice")
-        content = path.read_bytes()
-        if len(content) != notice["bytes"] or sha(content) != notice["sha256"]:
-            raise RuntimeError("CPython source notice hash differs")
-        notices.append(copy_notice(content, Path("cpython-source") / relative))
-    notices.append(
-        copy_notice((root / "provenance.json").read_bytes(), Path("cpython-source/provenance.json"))
-    )
-    return {"source": provenance, "notices": notices}, []
-
-
-def wheel_provenance(output, target):
-    if target != "macos-arm64":
-        return None, ["Exact helper wheel attribution unavailable for " + target]
-    lock = json.loads(Path("rust/package/helper-wheel-provenance-macos-arm64.json").read_text())
-    site = output / "libexec/inkscape-mcp/python/lib/python3.12/site-packages"
-    for row in lock["wheels"]:
-        for member in row["members"]:
-            relative = PurePosixPath(member["path"])
-            if relative.is_absolute() or ".." in relative.parts:
-                raise RuntimeError("unsafe locked wheel member path")
-            path = site / str(relative)
-            if path.is_symlink() or not path.is_file() or path.stat().st_size > 64 * 1024 * 1024:
-                raise RuntimeError("missing or unsafe locked wheel member")
-            content = path.read_bytes()
-            if len(content) != member["bytes"] or sha(content) != member["sha256"]:
-                raise RuntimeError("helper wheel member differs from reviewed archive")
-    return lock, []
-
-
 def glib_build_notices(output, target, copy_notice):
     root = Path("migration/vendor-notices/native-build/glib/2.90.0")
     recipe = output / "libexec/inkscape-mcp/licenses/dbus/glib/build-metadata/.brew/glib.rb"
@@ -279,19 +234,8 @@ def collect_notices(output, target):
         if not path.is_file() or path.stat().st_size > 4 * 1024 * 1024:
             raise RuntimeError("Rust standard-library notice unavailable or excessive")
         std_rows.append(copy_notice(path.read_bytes(), Path("rust-standard-library") / path.name))
-    site = output / "libexec/inkscape-mcp/python/lib/python3.12/site-packages"
-    wheel_notices = [
-        str(p.relative_to(output))
-        for p in sorted(site.rglob("*"))
-        if p.is_file()
-        and any(part.lower().startswith(PREFIXES) for part in p.relative_to(site).parts)
-    ]
     native_sources, native_gaps = native_source_notices(output, copy_notice)
     gaps.extend(native_gaps)
-    python_source, python_gaps = cpython_notices(output, target, copy_notice)
-    gaps.extend(python_gaps)
-    wheels, wheel_gaps = wheel_provenance(output, target)
-    gaps.extend(wheel_gaps)
     glib_build, glib_gaps = glib_build_notices(output, target, copy_notice)
     gaps.extend(glib_gaps)
     native_notices = [
@@ -303,7 +247,6 @@ def collect_notices(output, target):
     # Inventory evidence must not be mistaken for complete binary-source/license clearance.
     gaps.extend(
         [
-            "Private CPython native dependency/source provenance needs audit.",
             "Native bus/GLib/gettext source obligations and referenced license texts need audit.",
             "Foreign target and exact linked-vs-build dependency attribution are not established.",
         ]
@@ -315,11 +258,8 @@ def collect_notices(output, target):
         "cargo_lock_sha256": sha(Path("rust/Cargo.lock").read_bytes()),
         "rust_crates": rows,
         "rust_standard_library_notices": std_rows,
-        "python_wheel_notice_paths": wheel_notices,
         "native_notice_paths": native_notices,
         "native_source_supplements": native_sources,
-        "cpython_source_supplement": python_source,
-        "helper_wheel_provenance": wheels,
         "glib_build_source_supplement": glib_build,
         "redistribution_audit_complete": False,
         "remaining_gaps": gaps,
@@ -332,8 +272,7 @@ def collect_notices(output, target):
         "Native-target Cargo normal/build dependency notices are included conservatively;",
         "this inventory does not claim every listed crate is linked into the binary.",
         "Rust standard-library notices are in libexec/inkscape-mcp/licenses/rust-standard-library.",
-        "Python's license is in libexec/inkscape-mcp/python/lib/python3.12/LICENSE.txt.",
-        "Wheel notices remain beside their dist-info metadata. Native bus notices and SBOMs",
+        "Native bus notices and SBOMs",
         "are under libexec/inkscape-mcp/licenses. LICENSE-INVENTORY.json records source hashes",
         "and remaining audit gaps. No license alternatives are silently reselected.",
         "",

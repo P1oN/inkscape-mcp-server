@@ -11,7 +11,7 @@ case "${1:-}" in
     --fresh-tools) fresh=true; shift;;
     --help) printf '%s\n' 'Usage: scripts/bootstrap-local-package.sh [--fresh-tools]' \
         'Build on macOS 15+ Apple Silicon. Download missing tools privately; delete build tools on exit.' \
-        'Existing installations remain untouched. Private Python needed by live helpers stays in the package.'; exit 0;;
+        'Existing installations remain untouched. Python is build tooling only; ready packages contain no Python runtime.'; exit 0;;
     *) fail 'Unexpected bootstrap option.';;
 esac
 [ "$#" -eq 0 ] || fail 'Unexpected bootstrap arguments.'

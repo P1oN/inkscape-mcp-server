@@ -194,11 +194,12 @@ def main(package, output, phase):
                 "Select the synthetic rectangle in the recorded private app, then phase style",
                 flush=True,
             )
-        elif phase == "style":
+        elif phase in ("style", "package-style"):
             ids = json.loads((output / "ids.json").read_text())
             require(
-                data(wire.call("live_get_selection", {}))["object_ids"] == [ids[1]],
-                "select the owned rectangle first",
+                data(wire.call("live_get_selection", {}))["object_ids"]
+                == [ids[0] if phase == "package-style" else ids[1]],
+                "select the owned target first",
             )
             baseline = capture("baseline-selected")
             after = bridge("style", "apply_to_selection", {"style": {"fill": "blue"}})
@@ -268,9 +269,7 @@ def main(package, output, phase):
                     "accumulated_style_insertion_one_step_Undo": True,
                     "style_text_one_step_Undo": True,
                     "no_op_Undo": True,
-                    "private_Python_disabled": not (
-                        package / "libexec/inkscape-mcp/python/bin/python3"
-                    ).exists(),
+                    "bundled_Python_absent": not (package / "libexec/inkscape-mcp/python").exists(),
                     "helper_sha256": hashlib.sha256(
                         (package / "bin/inkscape-mcp-live").read_bytes()
                     ).hexdigest(),
@@ -291,6 +290,7 @@ if __name__ == "__main__":
         choices=(
             "setup",
             "style",
+            "package-style",
             "text",
             "verify-text-undo",
             "verify-style-undo",

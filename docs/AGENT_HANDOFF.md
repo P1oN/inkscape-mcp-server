@@ -4,7 +4,7 @@ Read README.md, CONTRIBUTING.md and docs/agent-usage-guide.md. Check code and Gi
 and preserve any uncommitted work. Installation/responsiveness improvements from
 [PR #8](https://github.com/P1oN/inkscape-mcp-server/pull/8) are merged locally into `main`
 as `a4dc71f`; MCP deadline/client ownership fixes are committed as `ccd1b0d`.
-Python removal stages 1–5 are implemented in this branch. Local validation is separate from remote CI.
+Python removal stages 1–6 are implemented in this branch. Local validation is separate from remote CI.
 The published v0.1.0/v0.1.1 assets and the user's installed runtime were not replaced. Historical checkpoint counts
 and package paths are in [the checkpoint archive](history/agent-checkpoints-through-2026-10-04.md),
 not current validation claims. [RUST_NEXT_PLAN.md](RUST_NEXT_PLAN.md) is the active plan.
@@ -13,8 +13,8 @@ not current validation claims. [RUST_NEXT_PLAN.md](RUST_NEXT_PLAN.md) is the act
 
 - Rust STDIO server, client manager and separate managed GUI supervisor; legacy Python
   MCP/parity workflow retired. Both one-shot insert/edit effects and the socket snapshot
-  bridge are Rust. Python remains for development/packaging; CPython/wheels and doctor
-  import prerequisites are retained until stage 6. MCP startup/reconnect never launches GUI.
+  bridge are Rust. Python remains for development/packaging until stage 7; ready packages omit
+  CPython/wheels/Python helper assets and doctor import prerequisites. MCP startup/reconnect never launches GUI.
 - Current setup supports automatic first builds, `--rebuild`, offline `--local-tools`,
   ready packages, installed build metadata and preserved saved options/Sentry settings.
 - Optional `--connect-client codex|claude`: bounded handshake, required tool discovery,
@@ -35,6 +35,50 @@ not current validation claims. [RUST_NEXT_PLAN.md](RUST_NEXT_PLAN.md) is the act
 - Reference-safe deletion and durable registry publication fixes from the preceding local
   work are retained. Server approval tokens remain nonempty strings; the client must
   obtain confirmation for each operation. Do not claim server-authenticated authorization.
+
+## Local Python removal stage 6 (2026-10-05)
+
+Stage 5 and PR repairs were committed/pushed by user request as `616c1dd` to
+`codex/python-removal-stages-1-3`. Stage 6 was implemented and validated on that
+base, then prepared for commit/push by user request. Its acceptance artifacts were
+built from the working tree before the stage-6 commit; package metadata records
+base revision `616c1dd` plus compiled build identity. Stage 7 is next.
+
+The POSIX builder ships five native Rust binaries, fixed INX manifests/Bash interfaces,
+Objective-C macOS context bridge and relocated private D-Bus closure. It no longer
+copies CPython, six wheel distributions or Python helper sources. Package manifests,
+FILES and third-party notices omit their runtime entries and attribution; Rust/native
+notices and existing redistribution audit limitations remain. Doctor removes private
+interpreter architecture/import and vendor-inkex prerequisites, retaining native
+architecture, asset, bus, GTK and engine checks. Optional read-only runtime metadata
+still reports vendor inkex sources for compatibility, without import or readiness gates.
+Development/bootstrap Python and its pinned test dependencies remain until stage 7.
+
+Fresh package `migration/results/stage6-package.tar.gz`: 435 inventory files;
+193,092,453 uncompressed bytes; 48,442,243 archive bytes (previous stage-5 local
+archive 89,510,326 bytes). Both extracted per-call/shell archives pass empty-PATH
+headless CLI/render/export, approvals, batches, snapshots/records/rollback, unchanged
+originals and no-op audit/transient-write refusals; actual socket/INX processes run
+with no bundled interpreter/source/bytecode/wheels. Doctor: 12 ready/missing/link/
+architecture/version/read-only profiles. Launcher: 11; notices: 17 / 192 crates;
+bootstrap: 9; synthetic POSIX relocation guards and isolated client package lifecycle
+passed. Native client checks tolerate an inert legacy runtime residue and damaged
+supervisor without following it. All 16 discovery matrices match frozen contracts;
+110 tools, 7 prompts, 18 resources. No exposed instructions/schema change or llms update.
+Rust: 288 passed / two opt-in ignored; fmt/Clippy, 14 pytest regressions, Ruff and
+shell syntax passed. Standard ignored tests are not newly established by this stage.
+
+The fresh package explicitly launched one owned synthetic GUI. Native one-shot
+insertion, verified document/window context and actual socket helper scene/render,
+group style plus insertion and repeated no-op passed. One native menu Undo reversed
+the accumulated socket edits despite the no-op; a second restored the original
+blank drawing. Graceful closure verified exact PID/context/bus ownership, removed
+the manifest and ended only the owned session. Native text/Redo, foreign target and
+clean-machine acceptance were not repeated. Evidence is `stage6-native/` including
+`package-acceptance.json`, socket/PNG traces, captured SVGs and closed `session.json`.
+Other Git-ignored evidence: `stage6-{build,clippy,tests}.log`, `stage6-package*`,
+`stage6-{per-call,shell,doctor,launcher,notices,bootstrap,builder,client,discovery}*`.
+User runtime/configuration and existing drawings/windows were not replaced; no release.
 
 ## Local PR #9 review repairs (2026-10-05)
 

@@ -8,7 +8,7 @@ if [ "$#" -gt 0 ]; then
     if [ "$#" -eq 1 ] && [ "$1" = --help ]; then
         printf '%s\n' 'Usage: scripts/build-local-package.sh' \
             'Builds a new private native package and prints its absolute directory.' \
-            'Requires native Rust/SDK/GLib/D-Bus build prerequisites and pinned helper Python or uv.'
+            'Requires native Rust/SDK/GLib/D-Bus build prerequisites and pinned build Python or uv.'
         exit 0
     fi
     fail 'Unexpected build argument; use setup.sh for configuration options.'
@@ -86,7 +86,7 @@ if [ -z "$python" ]; then
     "$uv" pip install --python "$python" --only-binary :all: -r rust/package/helper-requirements.txt >&2
     "$python" -I -c "$check" "$architecture" || fail 'The prepared Python helper runtime differs from the pinned native recipe.'
 fi
-printf '%s\n' 'Building the locked Rust server and private helper/native package...' >&2
+printf '%s\n' 'Building the locked Rust server and native runtime package...' >&2
 target_dir=${INKSCAPE_MCP_BUILD_TARGET_DIR:-$repo/rust/target}
 cargo_options=(--locked)
 if [ "${INKSCAPE_MCP_BUILD_LOCAL_TOOLS_ONLY:-false}" = true ]; then cargo_options+=(--offline); fi

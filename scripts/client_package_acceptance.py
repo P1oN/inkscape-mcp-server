@@ -87,7 +87,7 @@ def main(package, output):
             "false",
         )
         runtime = repo / "libexec/inkscape-mcp"
-        shutil.rmtree(runtime / "python")
+        require(not (runtime / "python").exists(), "ready package still bundles Python")
         (runtime / "python").write_text("damaged helper runtime")
         (repo / "bin/inkscape-mcp-supervisor").write_text("damaged supervisor")
         checks.append("relocated ready package setup; Python runtime and supervisor damaged")

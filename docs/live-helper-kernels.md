@@ -198,4 +198,4 @@ extension's candidate, which Inkscape adopts only when the modal extension exits
 they do not establish native application or a separate Undo step per socket call.
 All accumulated changes return one full SVG on disconnect/timeout; unchanged sessions
 emit zero bytes. Publication preserves the full XML candidate. One-shot managed edits
-continue through `inkscape-mcp-inx`. CPython/wheels/notices cleanup is stage 6.
+continue through `inkscape-mcp-inx`. Ready packages omit CPython, helper wheels and their runtime notices; Python remains build/development tooling until stage 7.

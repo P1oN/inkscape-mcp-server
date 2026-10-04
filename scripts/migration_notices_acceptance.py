@@ -86,9 +86,7 @@ def main(package, report):
     checks["real_crate_notices_bound_to_FILES"] = bool(hashes)
     supplements = list(inventory.get("native_source_supplements", []))
     supplements.extend(
-        inventory[key]
-        for key in ("cpython_source_supplement", "glib_build_source_supplement")
-        if inventory.get(key)
+        inventory[key] for key in ("glib_build_source_supplement",) if inventory.get(key)
     )
     for supplement in supplements:
         for notice in supplement["notices"]:
@@ -99,26 +97,14 @@ def main(package, report):
                 "native notice hash differs",
             )
             require(files[notice["path"]]["sha256"] == digest, "native notice FILES differs")
-    if inventory.get("cpython_source_supplement"):
-        checks["cpython_distribution_notices_bound"] = (
-            len(inventory["cpython_source_supplement"]["notices"]) == 21
+    checks["no_Python_runtime_notices"] = not any(
+        key in inventory
+        for key in (
+            "cpython_source_supplement",
+            "helper_wheel_provenance",
+            "python_wheel_notice_paths",
         )
-    if inventory.get("helper_wheel_provenance"):
-        wheel_lock = inventory["helper_wheel_provenance"]
-        for wheel in wheel_lock["wheels"]:
-            for member in wheel["members"]:
-                relative = (
-                    "libexec/inkscape-mcp/python/lib/python3.12/site-packages/" + member["path"]
-                )
-                require(
-                    files[relative]["sha256"] == member["sha256"], "wheel FILES binding differs"
-                )
-                require(
-                    hashlib.sha256((package / relative).read_bytes()).hexdigest()
-                    == member["sha256"],
-                    "wheel member changed after collection",
-                )
-        checks["six_wheels_bound_to_FILES"] = len(wheel_lock["wheels"]) == 6
+    ) and not any("cpython-source" in path for path in files)
 
     if inventory.get("native_source_supplements"):
         native_paths = {

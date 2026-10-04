@@ -78,7 +78,7 @@ jobs:
         with:
           version: "0.12.22"
           enable-cache: false
-      - name: Install private helper build runtime and pinned dependencies
+      - name: Install development/build Python and pinned test dependencies
         run: |
           uv python install 3.12.14
           uv venv --managed-python --python 3.12.14 .venv

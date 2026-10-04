@@ -8,7 +8,6 @@ import json
 import os
 import shutil
 import subprocess
-import sys
 import tarfile
 import time
 from pathlib import Path
@@ -80,27 +79,18 @@ def exercise(source, output, archive=False, engine_mode="per_call"):
             "INKSCAPE_MCP_LIVE_RENDEZVOUS": str(root / "absent-rendezvous"),
             "GIO_MODULE_DIR": str(library / "dbus/lib/gio/modules"),
         }
-        python = library / "python/bin/python3"
-        if sys.platform == "darwin":
-            vendor = "/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions"
-        else:
-            engine = next(
-                (p for p in ("/usr/local/bin/inkscape", "/usr/bin/inkscape") if Path(p).is_file()),
-                None,
-            )
-            require(engine is not None, "Linux acceptance requires installed Inkscape")
-            vendor = str(Path(run([engine, "--system-data-directory"], env).strip()) / "extensions")
-        code = (
-            "import sys,json;sys.path.insert(0," + repr(vendor) + ");"
-            "import inkex,numpy,lxml.etree,PIL.Image;"
-            "print(json.dumps({'prefix':sys.prefix,'inkex':inkex.__file__,"
-            "'numpy':numpy.__file__,'lxml':lxml.etree.__file__,'pillow':PIL.Image.__file__}))"
+        require(not (library / "python").exists(), "Python runtime still bundled")
+        require(
+            not any(p.suffix in (".py", ".pyc", ".pyo", ".whl") for p in package.rglob("*")),
+            "Python source/bytecode/wheels still bundled",
         )
-        modules = json.loads(run([str(python), "-I", "-c", code], env))
-        require(Path(modules["prefix"]).is_relative_to(package), "Python prefix not relocated")
-        for key in ("numpy", "lxml", "pillow"):
-            require(Path(modules[key]).is_relative_to(package), "helper dependency escaped package")
-        # Fixed native one-shot CLI with empty PATH and the project interpreter disabled.
+        manifest = json.loads((library / "package.json").read_text())
+        require(
+            manifest.get("runtime") == "native-rust"
+            and not any(key in manifest for key in ("python", "runtime_source", "python_deps")),
+            "package manifest still declares a Python runtime",
+        )
+        # Fixed native helpers with empty PATH and no project interpreter.
         native = root / "native-inx"
         native.mkdir(mode=0o700)
         source = native / "input.svg"
@@ -116,31 +106,26 @@ def exercise(source, output, archive=False, engine_mode="per_call"):
             "expected_ids": ["g", "r"],
             "expected_fingerprint": fixture["expected"],
         }
-        disabled = python.with_name("python3.disabled")
-        python.rename(disabled)
-        try:
-            from rust_socket_helper_acceptance import main as socket_acceptance
+        from rust_socket_helper_acceptance import main as socket_acceptance
 
-            socket_acceptance(package / "bin/inkscape-mcp-live", output / "native-socket")
-            for changed in (True, False):
-                (native / "insert-request.json").write_text(json.dumps(request))
-                result = subprocess.run(
-                    [str(package / "bin/inkscape-mcp-inx"), "--id=r", str(source)],
-                    env={**env, "INKSCAPE_MCP_MANAGED_DIR": str(native)},
-                    capture_output=True,
-                    timeout=10,
-                    check=True,
-                )
-                reply = json.loads((native / "insert-result.json").read_text())
-                require(
-                    reply["ok"] and bool(result.stdout) == changed and not result.stderr,
-                    "native one-shot change/noop failed without Python",
-                )
-                if changed:
-                    source.write_bytes(result.stdout)
-                    request["expected_fingerprint"] = reply["fingerprint"]
-        finally:
-            disabled.rename(python)
+        socket_acceptance(package / "bin/inkscape-mcp-live", output / "native-socket")
+        for changed in (True, False):
+            (native / "insert-request.json").write_text(json.dumps(request))
+            result = subprocess.run(
+                [str(package / "bin/inkscape-mcp-inx"), "--id=r", str(source)],
+                env={**env, "INKSCAPE_MCP_MANAGED_DIR": str(native)},
+                capture_output=True,
+                timeout=10,
+                check=True,
+            )
+            reply = json.loads((native / "insert-result.json").read_text())
+            require(
+                reply["ok"] and bool(result.stdout) == changed and not result.stderr,
+                "native one-shot change/noop failed without Python",
+            )
+            if changed:
+                source.write_bytes(result.stdout)
+                request["expected_fingerprint"] = reply["fingerprint"]
         bus_dir = root / "bus"
         bus_dir.mkdir(mode=0o700)
         address = "unix:path=" + str(bus_dir / "bus.sock")
@@ -390,7 +375,7 @@ def exercise(source, output, archive=False, engine_mode="per_call"):
             "engine_mode": engine_mode,
             "relocated_files": count,
             "minimal_PATH": "empty",
-            "private_python_imports": True,
+            "bundled_Python_absent": True,
             "helper_CLIs": 2,
             "native_one_shot_without_python": True,
             "native_socket_without_python": True,

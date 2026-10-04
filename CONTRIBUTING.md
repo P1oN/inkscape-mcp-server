@@ -20,8 +20,7 @@ cargo clippy --locked --all-targets --manifest-path rust/Cargo.toml -- -D warnin
 cargo test --locked --manifest-path rust/Cargo.toml
 ```
 
-Python is development/packaging tooling; the retained package interpreter is scheduled
-for removal in stage 6. Neither live helper invokes it.
+Python remains development/packaging tooling until stage 7. Ready packages and both live helpers use only native executables; no Python runtime or wheels are shipped.
 Before Rust tests, create `.venv` with the pinned helper interpreter and dependencies
 (the synthetic process/bus fixtures use it), for example `uv venv --managed-python
 --python 3.12.14 .venv` then `uv pip install --python .venv/bin/python
@@ -96,8 +95,7 @@ binary. Startup, client checks, reconnect and doctor must never invoke it.
 `cargo test` includes supervisor filesystem/preparation and child lifecycle tests plus a
 macOS integration test running the real supervisor with synthetic native processes, empty
 PATH and no Python runtime. The fixture compiler is test tooling only, never runtime code.
-The socket helper is native too; CPython/wheels and their doctor prerequisites remain
-in packages until stage 6. Socket/native independence does not claim package cleanup.
+The socket helper is native too; ready packages omit CPython/wheels and doctor import probes. Run fresh package/doctor/notices acceptance when the shipped dependency set changes.
 
 For explicitly authorized native acceptance, use
 `scripts/migration_native_gui_acceptance.py --package DIRECTORY --output DIRECTORY --close-owned`.
@@ -137,9 +135,7 @@ that exact owned GUI and independently captured; successful CLI tests do not pro
 native Undo. Return the synthetic drawing to its blank original state before using
 `close_owned_session` to verify graceful exit. The harness's Python fingerprint is
 fixture construction for the frozen v1 wire format, not production execution or a
-paired Python MCP comparison. Run a separate copied package with its private Python
-executable disabled to establish one-shot independence; restore/retain the original
-package for socket/helper/doctor acceptance. Never damage an installed user runtime.
+paired Python MCP comparison. Use a fresh relocated package with no bundled Python for one-shot/socket/doctor acceptance. Never damage an installed user runtime.
 
 ## Socket helper regressions (stage 5)
 
@@ -151,10 +147,10 @@ Run `.venv/bin/python scripts/rust_socket_helper_acceptance.py --binary
 process and real native CLI scene/render/export. It runs with empty PATH, verifies
 authentication, changed tokens, no-op output, input preservation and rendezvous cleanup.
 For a development binary it creates a minimal relocated fixture; package acceptance
-runs the actual copied package binary with its private Python executable disabled.
+runs the actual copied package binary and asserts no Python runtime/source/wheels are shipped.
 
 Native acceptance uses `scripts/rust_socket_native_acceptance.py --package DIRECTORY
---output DIRECTORY setup` against a copied package with disabled private Python.
+--output DIRECTORY setup` against a fresh relocated package without bundled Python.
 This explicitly launches one isolated GUI, verifies its private bus/context and actual
 INX helper PID, and creates a baseline. Select its rectangle in that exact private app, then run
 `style` (style plus socket insertion and a repeated style no-op); select the text,
@@ -165,3 +161,9 @@ finish requires the original blank drawing and gracefully closes the owned sessi
 Preserve a failed synthetic session for inspection; never close user windows.
 Socket geometry/render limits and snapshot timing are in
 [the shared helper documentation](docs/live-helper-kernels.md).
+
+For stage-6 package acceptance, the native harness also supports `package-style`
+after `setup`, retaining the selected synthetic root group. This checks socket group
+style plus insertion and repeated no-op without additional UI selection. Use native
+menu Undo, run `verify-style-undo`, Undo the baseline insertion, then `close-owned`.
+Full native text/Redo checks remain separate; never infer them from package cleanup.

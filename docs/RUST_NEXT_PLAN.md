@@ -30,7 +30,7 @@ contracts and safety guarantees rather than expanding the MCP execution surface.
 | 3 | Shared helper logic: document fingerprint, fragment validation and edit planning | Reuse Rust XML/style/transform logic and reduce duplicated checks | Medium | Implemented locally in this branch: reusable Rust SVG library, fingerprint/insertion preflight integration and pure typed live edit plans; bounded refusals/no-op regressions, documented live differences and wire representation (see handoff) |
 | 4 | One-shot Inkscape insert/edit extensions through INX | Remove inkex from native insertion/editing | High | Implemented locally: fixed Rust executable, full SVG candidates, scoped context/selection guards; all ten native edits, one-step Undo, no-op/stale refusal, Redo and appearance acceptance on owned synthetic drawings without private Python (see handoff) |
 | 5 | Socket live bridge and its inkex-dependent perception/geometry | Remove the remaining Python live helper | High | Implemented locally: bounded Rust v5 snapshot bridge, fixed CLI scene/render/export, shared SVG edits and no-op output; relocated no-Python-helper and owned native socket/Undo acceptance recorded in the handoff |
-| 6 | Ready-package cleanup: CPython, wheels, wrappers, manifests/notices and doctor | Deliver a smaller dependency set and simpler release maintenance | Medium; depends on 1–5 | Pending: relocated ready archive passes install/headless/live acceptance with no bundled Python or Python helper invocation |
+| 6 | Ready-package cleanup: CPython, wheels, wrappers, manifests/notices and doctor | Deliver a smaller dependency set and simpler release maintenance | Medium; depends on 1–5 | Implemented locally: archive omits CPython/wheels/Python helper assets, native doctor/notices and relocated install/headless/socket/owned GUI acceptance passed (see handoff) |
 | 7 | Active bootstrap/package/development tooling and regression/acceptance harnesses | Build and validate without Python | Medium–high by volume | Pending: active CONTRIBUTING and CI commands use Rust/Bash; retain historical scripts/reports as evidence without keeping them on the active path |
 
 ### Completed stage 3: shared SVG helper logic
@@ -88,21 +88,28 @@ context bridge use the actual normalized Inkscape action name. Setup/package/doc
 include the fifth Rust binary and omit the Python socket asset. Fresh package and
 owned native acceptance, with private Python disabled, are recorded in the handoff.
 
-### Next stage: ready-package cleanup (stage 6)
+### Completed stage 6: ready-package cleanup
 
-Remove project-supplied CPython, helper wheels and their wrappers/manifest/notices
-entries. Remove the interpreter/vendor-inkex prerequisites and import probes from
-doctor and replace historical Python-helper package acceptance with native helper
-checks. Keep fixed Bash launch/bootstrap interfaces, the Objective-C context bridge,
-Inkscape vendor resources and private D-Bus dependencies. Development/package scripts
-still use Python until stage 7; do not confuse build tooling with shipped runtime.
+Ready packages now omit project-supplied CPython, helper wheels and Python helper
+sources, including their manifest/notices entries. Doctor uses native architecture,
+fixed asset/bridge/bus and engine prerequisites with no interpreter/vendor-inkex
+imports. Fixed Bash launch/bootstrap interfaces, the Objective-C context bridge,
+Inkscape vendor resources and private D-Bus dependencies remain. Development/package
+scripts still use Python until stage 7.
 
-Rebuild a relocated archive and run install/headless/live acceptance with no bundled
-Python and no project Python helper invocation. Preserve ownership/context checks,
-approvals, originals, snapshots, Operation Records, rollback and no-op behavior.
-Stage 6 changes the dependency set; earlier helper independence is not proof that
-its new archive is complete or accepted. Do not replace installed user configuration
-or publish a release as part of this stage.
+Fresh relocated archive acceptance covers install/headless/native helpers and an
+owned GUI socket/Undo session with no bundled Python. Approvals, originals, snapshots,
+Operation Records, rollback and no-op behavior passed; detailed counts, archive sizes
+and untested native/foreign-target scope are recorded in the handoff. Installed user
+configuration/runtime and published releases were not replaced.
+
+### Next stage: active tooling cleanup (stage 7)
+
+Replace active Python bootstrap/package/development and regression/acceptance tooling
+with Rust/Bash interfaces. Inventory the current CI and CONTRIBUTING entry points first;
+retain historical sources, vendor provenance and reports outside the active execution
+path. Keep the stage-6 native-only ready package, frozen MCP contracts and all safety
+and validation gates. Build-tool Python removal is a separate stage from runtime cleanup.
 
 ### Validation and delivery rules
 

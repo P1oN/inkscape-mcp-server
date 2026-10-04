@@ -1,6 +1,6 @@
 # Private live runtime components
 
-These files are required by the Rust server and are not the retired Python MCP server.
+Native components support the Rust server; retained Python sources are historical development fixtures.
 
 - helper_extension/: fixed Rust one-shot and socket INX manifests. The `.py` socket source is
   retained historical implementation, omitted from ready packages.
@@ -21,4 +21,4 @@ SVG edits on owned candidates; see [live-helper-kernels.md](../docs/live-helper-
 The supervisor installs the three fixed INX manifests and a safely quoted wrapper that
 executes the packaged Rust helper. No Python interpreter or inkex participates in
 one-shot insertion/editing. The socket live helper also executes a fixed Rust binary through its own quoted wrapper.
-Removing the retained bundled runtime/wheels and their doctor prerequisites is stage 6.
+Ready packages contain no CPython, wheels or Python helper assets. Doctor checks native binaries, bridge and private bus without importing Python or requiring vendor inkex.

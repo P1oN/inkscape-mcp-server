@@ -52,13 +52,17 @@ def main(package, output, report_path):
         before = tree(root)
         baseline = check(executable, env, "ready", output, True)
         require(all(baseline["checks"].values()), "failed ready prerequisites")
+        require(not (library / "python").exists(), "doctor fixture contains Python")
+        require(
+            not any("python" in key or "inkex" in key for key in baseline["checks"]),
+            "doctor still requires Python/inkex",
+        )
         require(tree(root) == before, f"doctor changed paths: {set(tree(root)) - set(before)}")
         verify_files(installed)
         observations = 1
         missing_cases = [
             ("missing-supervisor", "../../bin/inkscape-mcp-supervisor", "fixed_supervisor"),
             ("missing-bridge", "context.so", "prebuilt_context_architecture"),
-            ("missing-runtime", "python/bin/python3", "private_python_architecture"),
             ("missing-helper", "helpers/inkscape_mcp_insert.inx", "fixed_helper_assets"),
             ("missing-socket", "../../bin/inkscape-mcp-live", "fixed_socket_helper"),
             ("missing-inx", "../../bin/inkscape-mcp-inx", "fixed_inx_helper"),
@@ -80,12 +84,8 @@ def main(package, output, report_path):
             finally:
                 held.rename(path)
             observations += 1
-        relative = "context.so" if sys.platform == "darwin" else "python/bin/python3"
-        key = (
-            "prebuilt_context_architecture"
-            if sys.platform == "darwin"
-            else "private_python_architecture"
-        )
+        relative = "context.so" if sys.platform == "darwin" else "../../bin/inkscape-mcp-inx"
+        key = "prebuilt_context_architecture" if sys.platform == "darwin" else "fixed_inx_helper"
         path = library / relative
         held = root / "held-asset"
         path.rename(held)

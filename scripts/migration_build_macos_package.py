@@ -11,7 +11,6 @@ import shutil
 import subprocess
 import sys
 import tarfile
-from importlib.metadata import distribution
 from pathlib import Path
 
 if __package__:
@@ -19,7 +18,6 @@ if __package__:
 else:
     from migration_package_notices import collect_notices
 
-DEPS = ("lxml", "numpy", "cssselect", "tinycss2", "webencodings", "pillow")
 HELPERS = {
     "helper_extension/inkscape_mcp_insert.inx": "inkscape_mcp_insert.inx",
     "helper_extension/inkscape_mcp_edit.inx": "inkscape_mcp_edit.inx",
@@ -368,25 +366,10 @@ def build(output, binary=None):
     output.mkdir(parents=True, exist_ok=False)
     output = output.resolve()
     library = output / "libexec/inkscape-mcp"
-    runtime = library / "python"
-    runtime.mkdir(parents=True)
-    base = Path(sys.base_prefix)
-    if sys.version_info[:2] != (3, 12):
-        raise RuntimeError("pinned helper Python 3.12 required on development host")
-    copy(base / "bin/python3.12", runtime / "bin/python3")
-    shutil.copytree(
-        base / "lib",
-        runtime / "lib",
-        symlinks=True,
-        ignore=shutil.ignore_patterns("site-packages", "__pycache__", "*.pyc"),
-    )
-    site = runtime / "lib/python3.12/site-packages"
-    site.mkdir(parents=True)
+    library.mkdir(parents=True)
     manifest = {
         "target": target,
-        "python": sys.version,
-        "runtime_source": str(base),
-        "python_deps": [],
+        "runtime": "native-rust",
         "dbus_inputs": [],
         "release_signed": False,
         "notarized": False,
@@ -397,19 +380,6 @@ def build(output, binary=None):
             )
         ),
     }
-    for name in DEPS:
-        dist = distribution(name)
-        for relative in dist.files or []:
-            if (
-                ".." in relative.parts
-                or relative.suffix == ".pyc"
-                or "__pycache__" in relative.parts
-            ):
-                continue
-            source = Path(dist.locate_file(relative))
-            if source.is_file():
-                copy(source, site / str(relative))
-        manifest["python_deps"].append({"name": name, "version": dist.version})
     source = Path("runtime")
     for relative, name in HELPERS.items():
         copy(source / relative, library / "helpers" / name)
