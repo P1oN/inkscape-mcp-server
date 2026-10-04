@@ -105,10 +105,10 @@ Revision and build IDs are compiled automatically into telemetry and package met
 The legacy Python MCP server, its tests and paired Python/Rust comparison scripts are retired.
 Development now uses Rust regression/invariant tests, true STDIO and package/native acceptance.
 The managed GUI session now runs through a separate native Rust supervisor. Python remains
-only for Inkscape helper extensions and development/package scripts. Shared Rust SVG
-preparation kernels now cover fingerprints, fragments and typed live edit plans;
-see [their semantics and limits](docs/live-helper-kernels.md). The Python extensions
-still apply native edits pending the next INX stage. See [CONTRIBUTING.md](CONTRIBUTING.md), [runtime components](runtime/README.md),
+for the socket live helper and development/package scripts. One-shot native insertion
+and the ten fixed selection edits run through the Rust `inkscape-mcp-inx` executable;
+shared SVG kernels prepare and apply bounded candidates. See
+[their semantics and limits](docs/live-helper-kernels.md). See [CONTRIBUTING.md](CONTRIBUTING.md), [runtime components](runtime/README.md),
 [Python removal roadmap and current plan](docs/RUST_NEXT_PLAN.md) and [handoff](docs/AGENT_HANDOFF.md).
 Historical migration reports and raw evidence are retained as history, not an active Python oracle.
 

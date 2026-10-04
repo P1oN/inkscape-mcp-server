@@ -100,12 +100,50 @@ def exercise(source, output, archive=False, engine_mode="per_call"):
         require(Path(modules["prefix"]).is_relative_to(package), "Python prefix not relocated")
         for key in ("numpy", "lxml", "pillow"):
             require(Path(modules[key]).is_relative_to(package), "helper dependency escaped package")
-        for name in ("inkscape_mcp_insert.py", "inkscape_mcp_live.py"):
+        for name in ("inkscape_mcp_live.py",):
             help_text = run(
                 [str(python), str(library / "helpers" / name), "--help"],
                 {**env, "PYTHONPATH": vendor},
             )
             require("usage:" in help_text.lower(), "helper CLI not functional")
+        # Fixed native one-shot CLI with empty PATH and the project interpreter disabled.
+        native = root / "native-inx"
+        native.mkdir(mode=0o700)
+        source = native / "input.svg"
+        fixture = json.loads(Path("migration/contracts/effect-data-cases.json").read_text())[
+            "fingerprints"
+        ][0]
+        source.write_text(fixture["svg"])
+        request = {
+            "nonce": "mcp_" + "a" * 32,
+            "operation": "style",
+            "selection": ["r"],
+            "style": {"fill": "blue"},
+            "expected_ids": ["g", "r"],
+            "expected_fingerprint": fixture["expected"],
+        }
+        disabled = python.with_name("python3.disabled")
+        python.rename(disabled)
+        try:
+            for changed in (True, False):
+                (native / "insert-request.json").write_text(json.dumps(request))
+                result = subprocess.run(
+                    [str(package / "bin/inkscape-mcp-inx"), "--id=r", str(source)],
+                    env={**env, "INKSCAPE_MCP_MANAGED_DIR": str(native)},
+                    capture_output=True,
+                    timeout=10,
+                    check=True,
+                )
+                reply = json.loads((native / "insert-result.json").read_text())
+                require(
+                    reply["ok"] and bool(result.stdout) == changed and not result.stderr,
+                    "native one-shot change/noop failed without Python",
+                )
+                if changed:
+                    source.write_bytes(result.stdout)
+                    request["expected_fingerprint"] = reply["fingerprint"]
+        finally:
+            disabled.rename(python)
         bus_dir = root / "bus"
         bus_dir.mkdir(mode=0o700)
         address = "unix:path=" + str(bus_dir / "bus.sock")
@@ -357,6 +395,7 @@ def exercise(source, output, archive=False, engine_mode="per_call"):
             "minimal_PATH": "empty",
             "private_python_imports": True,
             "helper_CLIs": 2,
+            "native_one_shot_without_python": True,
             "private_bus_exchange": True,
             "stdio_surface": [110, 7, 18],
             "real_CLI_blue_pixels": True,

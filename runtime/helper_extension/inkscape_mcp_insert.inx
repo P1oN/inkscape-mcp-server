@@ -2,7 +2,7 @@
 <inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
   <name>inkscape-mcp Insert Once</name>
   <id>org.inkscape-mcp.insert</id>
-  <dependency type="executable" location="inx">inkscape_mcp_insert.py</dependency>
+  <dependency type="executable" location="inx">inkscape_mcp_insert_run.sh</dependency>
   <effect needs-live-preview="false"><object-type>all</object-type>
     <effects-menu><submenu name="inkscape-mcp"/></effects-menu>
   </effect>

@@ -4,7 +4,7 @@ Read README.md, CONTRIBUTING.md and docs/agent-usage-guide.md. Check code and Gi
 and preserve any uncommitted work. Installation/responsiveness improvements from
 [PR #8](https://github.com/P1oN/inkscape-mcp-server/pull/8) are merged locally into `main`
 as `a4dc71f`; MCP deadline/client ownership fixes are committed as `ccd1b0d`.
-Python removal stages 1–3 are implemented in this branch. Local validation is separate from remote CI.
+Python removal stages 1–4 are implemented in this branch. Local validation is separate from remote CI.
 The published v0.1.0/v0.1.1 assets and the user's installed runtime were not replaced. Historical checkpoint counts
 and package paths are in [the checkpoint archive](history/agent-checkpoints-through-2026-10-04.md),
 not current validation claims. [RUST_NEXT_PLAN.md](RUST_NEXT_PLAN.md) is the active plan.
@@ -12,8 +12,8 @@ not current validation claims. [RUST_NEXT_PLAN.md](RUST_NEXT_PLAN.md) is the act
 ## Current implementation
 
 - Rust STDIO server, client manager and separate managed GUI supervisor; legacy Python
-  MCP/parity workflow retired. Python remains private
-  helper runtime and development/packaging tooling. MCP startup/reconnect never launches GUI.
+  MCP/parity workflow retired. One-shot native insert/edit effects are Rust; Python
+  remains for the socket live helper and development/packaging tooling. MCP startup/reconnect never launches GUI.
 - Current setup supports automatic first builds, `--rebuild`, offline `--local-tools`,
   ready packages, installed build metadata and preserved saved options/Sentry settings.
 - Optional `--connect-client codex|claude`: bounded handshake, required tool discovery,
@@ -35,7 +35,105 @@ not current validation claims. [RUST_NEXT_PLAN.md](RUST_NEXT_PLAN.md) is the act
   work are retained. Server approval tokens remain nonempty strings; the client must
   obtain confirmation for each operation. Do not claim server-authenticated authorization.
 
-## Local Python removal stage 3 (2026-10-04, uncommitted at validation)
+## PR #9 review follow-up (2026-10-04, local)
+
+All three attached review findings were confirmed against PR head `5193631` and
+fixed locally while preserving the existing uncommitted stage-4 changes. Both
+supervisor fixture compilers honor `RUSTC` and otherwise resolve `rustc` through
+PATH. Transform plans compare parsed matrices, retaining the original transform
+for exact identity deltas without inverse/parent roundoff; context/invertibility
+refusals and real small edits remain intact. The native GUI acceptance runner saves
+`launch.trace.json` before replacing the first Wire; `mcp.trace.json` retains the
+reconnect trace. This does not reconstruct missing traces from past runs.
+
+Focused current-working-tree validation: 29 Rust tests passed, 1 explicitly ignored
+native CLI rendering test (12 helper, 9 supervisor, 1 standalone supervisor, 7 INX).
+Both supervisor suites passed with RUSTC unset, an isolated HOME without a Cargo
+compiler and a compiler provided through PATH. New regression covers identity
+deltas with absent/translate/matrix attributes, transformed parents, accompanying
+style changes, singular-parent refusal and real 1e-9 translations. Fmt, all-target
+clippy with warnings denied, Ruff on the changed acceptance runner, its trace
+save/close/replacement ordering and `git diff --check` passed. No native GUI
+acceptance, package rebuild, commit or push was performed for this follow-up.
+
+## Local Python removal stage 4 (2026-10-04, uncommitted at validation)
+
+Stage 4 is locally implemented. `rust/src/bin/inkscape-mcp-inx.rs` is the fixed
+one-shot consumer; `helper_svg::oneshot` validates the typed private request and
+captured SVG/IDs/native selection, and `helper_svg::apply` computes/applies a fresh
+plan to an owned DOM. It preserves the root, namespace metadata, prolog/epilog,
+comments/PIs/DTD, mixed text and element tails. Duplicate IDs/local references and
+ungroup affine compensation use the shared kernels. Descendant CSS transforms and
+nested viewports during ungroup refuse before publication. Text uses a real text
+node so ampersands/angle brackets remain literal. Unchanged plans and refusals emit
+zero SVG bytes, bypassing native document rebase and extra Undo steps. The input
+file is never written. Reads remain bounded/no-follow; result publication uses the
+existing descriptor-anchored atomic filesystem primitive and refuses linked results.
+
+The supervisor installs the two INX manifests and a safely quoted wrapper executing
+the relocated `bin/inkscape-mcp-inx`. Packages omit the four Python one-shot assets;
+setup rejects saved packages missing the native helper and doctor checks its native
+architecture without executing it. Socket/live Python and vendor inkex are still
+required until stage 5; CPython/wheels/notices cleanup is stage 6. The retained Python
+one-shot sources/tests are development/historical fixtures, not a fallback route.
+No arbitrary code/shell/extension/environment route or MCP schema/instruction change.
+Existing approvals, context UUIDs, snapshots, Operation Records and post-application
+SVG/fingerprint confirmation remain in the server pipeline.
+
+The mandatory small prototype passed before switching the route: native insertion,
+selection input, one style Undo after a repeated no-op and stale fingerprint refusal.
+Inkscape supplies `--id=svg1` on a blank drawing; insertion is selection-independent,
+while edit calls retain strict native-selection comparison.
+
+Fresh automated validation: 268 Rust tests passed, 2 ignored in the standard run
+(the existing ignored server case and the separate real-CLI render gate). The render
+gate was then explicitly run and passed: before/grouped/affine-ungrouped PNG pixels
+match. Fmt/clippy; 14 retained Python development tests; Ruff check/format (49 files).
+The seven new INX regressions cover all ten semantic operations, complete XML,
+references/namespaced metadata IDs/tails, literal text, no-op output, stale guards,
+strict fields/cross-mode requests, bounded growth and linked result refusal.
+Release discovery matches all 16 frozen configurations exactly: 110 tools, 7 prompts,
+18 resources. The exposed surface/instructions are unchanged; llms manifests were
+not regenerated. Documentation links, shell syntax and `git diff --check` passed.
+
+The rebuilt relocated ready archive passed both per-call and shell acceptance with
+empty PATH: real CLI render/export, approvals/batches/snapshots/rollback, preserved
+originals and headless no-ops without audit/transient writes. Acceptance also disables
+the copied private interpreter and runs the Rust INX change/no-op CLI against the
+frozen fingerprint fixture. Launcher: 11 checks; doctor: 12 profiles without GUI
+launch; bootstrap: 9; notices: 18 checks / 192 crates. Native helper Mach-O dependencies
+are system libxml2/libiconv/libSystem only. These are fresh stage-4 package results.
+
+Native acceptance uses a separate copied package with its private Python executable
+disabled and only an owned HOME/profile/workspace/session. All ten edits and insertion
+passed through the actual INX route. Each changed edit was reversed by exactly one
+native menu Undo and the SVG compared with its captured pre-edit state (excluding
+only namedview UI data). Repeated style/text no-ops and stale IDs/content/selection
+added no Undo step; all three stale calls left the SVG unchanged. Duplicate and text
+Redo restore their captured after states. Native group/ungroup SVGs render with
+identical PNG pixels. Both prototype and final synthetic sessions were restored to
+their original blank state and gracefully closed after verifying exact recorded
+manifest/context/PIDs; their supervisors/private buses exited and manifests vanished.
+A temporary computer-use timeout interrupted selection only; native mutation was
+resumed after UI access returned, and the final text/Undo/Redo/shutdown gate passed.
+No existing user window/process was closed or signalled.
+
+Evidence (Git-ignored): `migration/results/rust-inx-prototype-native/`,
+`rust-inx-{tests,clippy,release,render}-final.log`, `rust-inx-stage4-package-final/`,
+`rust-inx-stage4-package-final.tar.gz`, `rust-inx-package-final-build.log`,
+`rust-inx-stage4-discovery-final/` and `.json`,
+`rust-inx-stage4-{per-call,shell,doctor,notices}-final.json`,
+`rust-inx-stage4-{per-call,shell}-with-inx/`,
+`rust-inx-stage4-{launcher,bootstrap,doctor}-final/`, and
+`rust-inx-stage4-native-final/{acceptance,native-one-step-undo,native-text-undo,native-structural-render,shutdown-acceptance}.json`.
+The native record includes the exact helper SHA-256; its copied helper equals the
+final ready-package binary. Package/native claims refer to those immutable binaries;
+validation-only harness additions afterward do not install or replace them. The user's
+installed runtime/client settings, source drawings and vendor executable are unchanged.
+No commits/publication. Next pending stage: 5, the socket bridge/perception/geometry.
+Linux/Windows native GUI and clean-machine acceptance remain unverified.
+
+## Local Python removal stage 3 (2026-10-04, historical checkpoint)
 
 Stage 3 is locally implemented. `rust/src/lib.rs` exposes the hardened XML parser
 and `helper_svg` kernels for future native helpers, without executable, filesystem,
@@ -58,8 +156,8 @@ are documented in [live-helper-kernels.md](live-helper-kernels.md).
 
 The planner intentionally refuses complex inline CSS, stylesheet transforms,
 singular/ill-conditioned parents and minted descendant collisions. It is not wired
-to native publication; Python/inkex helpers and the bundled Python runtime remain
-active. Stage 4 must implement plan application and confirm full SVG preservation,
+to native publication; At that checkpoint, Python/inkex helpers and the bundled Python runtime remained
+active. Stage 4 above supersedes that status and implements plan application and confirm full SVG preservation,
 selection/context guards, native Undo, unchanged-result no-op and stale-state
 refusal on owned synthetic drawings. This stage does not claim native equivalence.
 
@@ -84,8 +182,8 @@ Evidence (Git-ignored): `migration/results/rust-helper-stage3-{tests,clippy,buil
 `rust-helper-stage3-{per-call,shell,doctor,notices}-final.json`, and
 `rust-helper-stage3-{per-call,shell,doctor,launcher}-final/`. The user's installed runtime,
 client settings, source drawings and existing Inkscape GUI were not replaced or
-restarted. No commits/publication. Next pending stage: 4, beginning with the small
-owned Rust INX prototype and native Undo/no-op/stale-state acceptance gate.
+restarted. No commits/publication at that checkpoint. Stage 4 was the next pending stage then;
+its completed prototype/native acceptance is recorded above.
 
 ## Local Python removal stage 2 (2026-10-04, uncommitted at validation)
 

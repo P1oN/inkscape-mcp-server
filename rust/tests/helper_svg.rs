@@ -373,3 +373,50 @@ fn multiplied_style_output_and_reference_scans_refuse_with_bounded_work() {
         "edit reference scan exceeds work cap"
     );
 }
+
+#[test]
+fn identity_transforms_are_noops_without_losing_real_small_edits() {
+    for parent in [
+        "",
+        "transform='rotate(23) scale(1.3,2.7)'",
+        "transform='translate(7,11)'",
+    ] {
+        for own in [
+            "",
+            "transform='translate(5,3)'",
+            "transform='matrix(1,0,0,1,5,3)'",
+        ] {
+            let svg = format!("<svg><g {parent}><rect id='r' {own}/></g></svg>");
+            let mut r = request("style", &["r"]);
+            for delta in ["translate(0,0)", "scale(1)", "matrix(1,0,0,1,0,0)"] {
+                r.transform = Some(delta.into());
+                let plan = edit::plan(&svg, &r, 4096).unwrap();
+                assert!(!plan.changed(), "{svg}, {delta}: {plan:?}");
+                assert!(plan.steps.is_empty());
+            }
+            r.transform = Some("translate(0.000000001,0)".into());
+            assert!(edit::plan(&svg, &r, 4096).unwrap().changed(), "{svg}");
+            // An identity transform must not suppress an accompanying real style edit.
+            r.transform = Some("scale(1)".into());
+            r.style.insert("fill".into(), "red".into());
+            let plan = edit::plan(&svg, &r, 4096).unwrap();
+            assert!(matches!(
+                &plan.steps[..],
+                [Step::Style {
+                    transform: None,
+                    ..
+                }]
+            ));
+        }
+    }
+    let mut r = request("style", &["r"]);
+    r.transform = Some("scale(1)".into());
+    assert!(
+        edit::plan(
+            "<svg><g transform='scale(0)'><rect id='r'/></g></svg>",
+            &r,
+            4096
+        )
+        .is_err()
+    );
+}

@@ -351,18 +351,22 @@ pub fn plan(svg: &str, request: &Request, cap: usize) -> Result<Plan, &'static s
                         .map_err(|_| "non-finite transform")?;
                     let delta = affine::parse(delta).map_err(|_| "non-finite transform")?;
                     let inv = affine::inverse(parent).map_err(|_| "non-finite transform")?;
-                    let value = affine::multiply(
+                    // Avoid inverse/parent roundoff for an exact identity delta.
+                    // Keep the context and invertibility checks above even for no-ops.
+                    let value = if delta == affine::IDENTITY {
+                        own
+                    } else {
                         affine::multiply(
-                            affine::multiply(inv, delta).map_err(|_| "non-finite transform")?,
-                            parent,
+                            affine::multiply(
+                                affine::multiply(inv, delta).map_err(|_| "non-finite transform")?,
+                                parent,
+                            )
+                            .map_err(|_| "non-finite transform")?,
+                            own,
                         )
-                        .map_err(|_| "non-finite transform")?,
-                        own,
-                    )
-                    .map_err(|_| "non-finite transform")?;
-                    let formatted = matrix(value);
-                    (n.get_property_no_ns("transform").as_deref() != Some(&formatted))
-                        .then_some(formatted)
+                        .map_err(|_| "non-finite transform")?
+                    };
+                    (value != own).then(|| matrix(value))
                 } else {
                     None
                 };
@@ -512,6 +516,16 @@ pub fn plan(svg: &str, request: &Request, cap: usize) -> Result<Plan, &'static s
                     .map_err(|_| "non-finite transform")?;
                 let mut children = Vec::new();
                 for c in n.get_child_elements() {
+                    // Attribute compensation cannot preserve CSS transforms or viewport mappings.
+                    if elements(c.clone()).iter().any(|e| {
+                        e.get_name() == "svg"
+                            || e.get_property_no_ns("style")
+                                .unwrap_or_default()
+                                .to_lowercase()
+                                .contains("transform")
+                    }) {
+                        return Err("CSS transforms and nested SVG viewports are unsupported");
+                    }
                     let own = affine::parse(&c.get_property_no_ns("transform").unwrap_or_default())
                         .map_err(|_| "non-finite transform")?;
                     // Plans use element positions at application time for anonymous children.

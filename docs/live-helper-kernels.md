@@ -4,8 +4,9 @@ Python removal stage 3 provides `inkscape_mcp_rust::helper_svg` as a library, wi
 no filesystem, subprocess, GUI, arbitrary execution or MCP entry point. The server
 uses its fingerprint and insertion preflight, and shares its affine arithmetic
 with headless appearance-preserving reparenting. Both consumers use the same safe
-`xml` parser and iterative element traversal. The installed Python extensions
-remain active until stages 4–5; this stage does not change their publication or Undo.
+`xml` parser and iterative element traversal. Stage 4 adds owned plan application
+and the fixed `inkscape-mcp-inx` consumer. The Python socket helper remains until
+stage 5; it is no longer used for one-shot insertion/editing.
 
 ## Fingerprint wire representation (v1)
 
@@ -48,7 +49,7 @@ attributes, foreign elements, comments/PIs and malformed CSS URLs refuse.
 
 The fragment limit remains 1 MiB, at most 10,000 elements including the synthetic
 wrapper, with safe XML depth limits and at most 8 MiB prepared output. Leading
-wrapper text is discarded as in the current Python insertion helper; element mixed
+wrapper text is discarded as in the established insertion contract; element mixed
 content and child tails survive. The serializer's namespace prefixes/formatting
 need not match lxml byte-for-byte. Use expanded names and preserved content for
 structural checks. This live allowlist is deliberately separate from headless
@@ -93,11 +94,10 @@ Live policy differs from the headless mutation pipeline:
 
 The Rust preparation kernel deliberately refuses complex inline CSS in style edits,
 stylesheets during transform planning, and minted descendant collisions rather than
-claiming inkex equivalence. The current native helper retains its established
-behavior. Plans are **not yet applied by the GUI**; stage 4 must implement application
-on a disposable candidate and independently verify full SVG preservation, native
-Undo, unchanged-result behavior and stale-state refusal before replacing inkex.
-In particular, a planner unit test is not evidence of native publication equivalence.
+claiming unrestricted inkex equivalence. Ungrouping also refuses descendant CSS
+transforms and nested SVG viewports whose coordinate mapping cannot be preserved.
+Stage 4 applies freshly computed plans on disposable DOM candidates. Native
+acceptance remains a separate gate; a planner unit test is not native Undo evidence.
 
 `edit::guard` compares captured IDs/fingerprint and an independently supplied native
 selection, refusing stale content, IDs and selection before planning.
@@ -108,3 +108,44 @@ before publication. It must retain root metadata, comments/PIs, namespaces, mixe
 content and paint order; application/serialization limits also apply. Approval,
 snapshots, Operation Records and rollback remain owned by the existing server
 pipeline. This library cannot authorize a mutation or create a native Undo step.
+
+## One-shot INX application (stage 4)
+
+`oneshot::Request` rejects unknown fields and cross-mode insertion/edit payloads.
+The fixed executable accepts an absolute native SVG temporary-file argument,
+repeated `--id=ID` and native `--selected-nodes=...` metadata only. It reads the
+fixed `insert-request.json` under the managed session, capped at 2 MiB. SVG input
+and output are capped at 16 MiB, preserving the existing 10,000-element/ID and
+fragment bounds. No script, process, environment or extension execution is exposed.
+The executable uses no-follow bounded regular-file reads and descriptor-anchored
+atomic result publication, refusing linked/nonregular result files. The input is
+never written. Publication failure emits no SVG; the server reconciles actual
+native content instead of treating a helper acknowledgement as proof of application.
+
+`oneshot::prepare` verifies the SVG root namespace, captured IDs/fingerprint and
+native selection before applying. Insertion intentionally ignores selection:
+Inkscape supplies the root ID when no drawable object is selected. Editing still
+compares native `--id` arguments with the captured GUI selection. Window/document
+UUID ownership is checked by the existing server/Objective-C scoped context action
+before extension invocation; the helper's fingerprint is not an identity substitute.
+
+`apply::edit` computes its own plan, retains the document root and top-level XML,
+and mutates only the owned candidate. Style application retains unrelated raw
+declarations; text is created as a text node so `&` and `<` remain literal content.
+Structural edits preserve element text tails and non-element nodes, copy namespaces
+and remap supported local references. Ungroup compensates child transforms;
+order plans retain nonpaintable nodes and comment/PI anchors. Serialization may
+normalize XML formatting; original files are never replaced. Output is reparsed
+and bounded before publication. `apply::insert` appends one prepared ordinary group
+in document coordinates, without inheriting the current layer transform.
+
+For a no-op or refusal the helper emits **zero SVG bytes**. Inkscape's script effect
+returns before document rebase when stdout is empty (see the upstream
+[script implementation](https://inkscape.gitlab.io/inkscape/doxygen/script_8cpp_source.html)).
+Successful changes return one complete SVG for the normal native extension Undo
+transaction. Approval, snapshots, Operation Records, rollback and post-application
+fingerprint/ID confirmation remain in the existing server pipeline. Native tests
+must verify Undo/no-op/refusal separately on an owned synthetic drawing. Ready
+packages contain `bin/inkscape-mcp-inx`; the supervisor installs a fixed quoted
+wrapper pointing at that relocated binary. Python one-shot sources are retained
+only as development/historical fixtures and omitted from the package helper assets.

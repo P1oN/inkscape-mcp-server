@@ -72,8 +72,8 @@ Working-tree archives omit SOURCE_REVISION and report an unknown revision. The i
 regressions in `runtime/tests/test_install_management.py` cover archive identity and Git
 worktree build watches; run them with the helper tests above. Client management regressions,
 including uninstall rollback and request deadlines, are Rust tests in
-`rust/src/bin/inkscape-mcp-client.rs`. Cargo builds the server, client manager and supervisor;
-package construction requires all three binaries in the same target directory. Run
+`rust/src/bin/inkscape-mcp-client.rs`. Cargo builds the server, client manager, supervisor and INX helper;
+package construction requires all four binaries in the same target directory. Run
 `scripts/client_management_acceptance.py --binary PATH --output DIRECTORY` and
 `scripts/client_package_acceptance.py --package DIRECTORY --output DIRECTORY` for client
 CLI guards and relocated ready-package management without Python on client PATH and with
@@ -88,14 +88,14 @@ the active plan records remaining work, without transferring old GUI results to 
 ## Managed supervisor regressions
 
 Cargo builds the separate `inkscape-mcp-supervisor` executable alongside the server/client
-manager; the package builder requires all three in the same target directory. The supervisor
+manager and `inkscape-mcp-inx`; the package builder requires all four in the same target directory. The supervisor
 is invoked only by explicit `live_launch`, with the fixed session root and detected vendor
 binary. Startup, client checks, reconnect and doctor must never invoke it.
 
 `cargo test` includes supervisor filesystem/preparation and child lifecycle tests plus a
 macOS integration test running the real supervisor with synthetic native processes, empty
 PATH and no Python runtime. The fixture compiler is test tooling only, never runtime code.
-Helpers still require the bundled interpreter; do not confuse supervisor independence with
+The socket helper still requires the bundled interpreter; do not confuse one-shot independence with
 removing that interpreter from ready packages.
 
 For explicitly authorized native acceptance, use
@@ -116,9 +116,26 @@ The server already reuses fingerprint/insertion preflight; headless reparenting
 shares affine arithmetic. See [live helper kernels](docs/live-helper-kernels.md)
 for live semantics, conservative refusals and consumer obligations.
 
-The planner returns semantic steps, not a replacement native extension. Python/inkex
-helpers still apply live edits. Stage 4 must separately validate application, root
-and mixed-content preservation, native Undo and stale-state refusal on owned
-synthetic drawings before changing that route. No GUI acceptance is implied by
-library tests. Exposed MCP contracts/instructions are unchanged by extraction;
-manifest regeneration is required only when those surfaces change.
+The one-shot `inkscape-mcp-inx` consumer now uses `oneshot` guards and `apply` on an
+owned candidate, publishes a nonce-bound result atomically, and emits SVG only on a
+change. It never writes its input file. `rust/tests/inx.rs` covers all ten operations,
+root/mixed-content preservation, local reference remapping, safe CLI files, strict
+request fields and no-ops. The separate native CLI render gate is:
+
+```sh
+INKSCAPE_MCP_ACCEPTANCE_INKSCAPE=/absolute/path/to/inkscape \
+  cargo test --locked --manifest-path rust/Cargo.toml --test inx real_inkscape_render -- --ignored
+```
+
+For native GUI acceptance, launch only an isolated synthetic session with
+`migration_native_gui_acceptance.py`, then use `scripts/rust_inx_native_acceptance.py
+--output DIRECTORY --label LABEL PHASE`. It checks the recorded manifest and both
+context UUIDs, captures before/after SVG, confirms applied Operation Records and
+exercises stale IDs/content/selection. Selection and Undo/Redo must be performed in
+that exact owned GUI and independently captured; successful CLI tests do not prove
+native Undo. Return the synthetic drawing to its blank original state before using
+`close_owned_session` to verify graceful exit. The harness's Python fingerprint is
+fixture construction for the frozen v1 wire format, not production execution or a
+paired Python MCP comparison. Run a separate copied package with its private Python
+executable disabled to establish one-shot independence; restore/retain the original
+package for socket/helper/doctor acceptance. Never damage an installed user runtime.

@@ -15,9 +15,7 @@ fn standalone_supervisor_without_python_owns_manifest_gui_and_bus_lifecycle() {
     let fixture = root.join("fixture");
     let rustc = std::env::var_os("RUSTC")
         .map(std::path::PathBuf::from)
-        .unwrap_or_else(|| {
-            std::path::PathBuf::from(std::env::var_os("HOME").unwrap()).join(".cargo/bin/rustc")
-        });
+        .unwrap_or_else(|| std::path::PathBuf::from("rustc"));
     assert!(
         Command::new(rustc)
             .arg(Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/supervisor-process.rs"))
@@ -37,14 +35,8 @@ fn standalone_supervisor_without_python_owns_manifest_gui_and_bus_lifecycle() {
     fs::copy(&fixture, lib.join("dbus/bin/dbus-daemon")).unwrap();
     fs::write(lib.join("dbus/session.conf"), "fixture").unwrap();
     fs::write(lib.join("context.so"), "fixture bridge").unwrap();
-    for name in [
-        "inkscape_mcp_insert.py",
-        "inkscape_mcp_insert.inx",
-        "inkscape_mcp_edit.py",
-        "inkscape_mcp_edit.inx",
-        "inkscape_mcp_insert_payload.py",
-        "inkscape_mcp_edit_errors.py",
-    ] {
+    fs::copy(&fixture, package.join("bin/inkscape-mcp-inx")).unwrap();
+    for name in ["inkscape_mcp_insert.inx", "inkscape_mcp_edit.inx"] {
         fs::write(lib.join("helpers").join(name), "fixed helper").unwrap();
     }
     let contents = root.join("Vendor.app/Contents");

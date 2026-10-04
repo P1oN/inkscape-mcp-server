@@ -28,7 +28,7 @@ contracts and safety guarantees rather than expanding the MCP execution surface.
 | 1 | Client management: config, check, connect, disconnect, uninstall | Installation management independent of helper Python, including damaged runtimes | Low | Implemented locally in this branch: separate Rust CLI and existing Bash interfaces; isolated real Codex and synthetic Claude acceptance recorded in the handoff |
 | 2 | Separate managed GUI supervisor | Native session/process ownership without Python supervision | Medium | Implemented locally in this branch: Rust supervisor; synthetic lifecycle and owned native macOS launch/connect/reconnect/shutdown acceptance recorded in the handoff |
 | 3 | Shared helper logic: document fingerprint, fragment validation and edit planning | Reuse Rust XML/style/transform logic and reduce duplicated checks | Medium | Implemented locally in this branch: reusable Rust SVG library, fingerprint/insertion preflight integration and pure typed live edit plans; bounded refusals/no-op regressions, documented live differences and wire representation (see handoff) |
-| 4 | One-shot Inkscape insert/edit extensions through INX | Remove inkex from native insertion/editing | High | Pending: Rust executable with confirmed selection/context guards, appearance preservation and one native Undo transaction on owned synthetic drawings |
+| 4 | One-shot Inkscape insert/edit extensions through INX | Remove inkex from native insertion/editing | High | Implemented locally: fixed Rust executable, full SVG candidates, scoped context/selection guards; all ten native edits, one-step Undo, no-op/stale refusal, Redo and appearance acceptance on owned synthetic drawings without private Python (see handoff) |
 | 5 | Socket live bridge and its inkex-dependent perception/geometry | Remove the remaining Python live helper | High | Pending: bounded Rust helper preserving protocol, rendering, styles/geometry and current behavior limits |
 | 6 | Ready-package cleanup: CPython, wheels, wrappers, manifests/notices and doctor | Deliver a smaller dependency set and simpler release maintenance | Medium; depends on 1–5 | Pending: relocated ready archive passes install/headless/live acceptance with no bundled Python or Python helper invocation |
 | 7 | Active bootstrap/package/development tooling and regression/acceptance harnesses | Build and validate without Python | Medium–high by volume | Pending: active CONTRIBUTING and CI commands use Rust/Bash; retain historical scripts/reports as evidence without keeping them on the active path |
@@ -41,15 +41,42 @@ uses the shared fingerprint/preflight; headless reparenting shares affine kernel
 The planner returns semantic steps without applying them to GUI documents. Deliberate
 conservative differences from inkex are documented in
 [live-helper-kernels.md](live-helper-kernels.md), including complex CSS and collision
-refusals. Python helpers and the packaged runtime remain active. Validation evidence
-and limits are recorded in the handoff; no native equivalence is claimed.
+refusals. The stage-4 consumer below now applies these plans. The Python socket helper and
+packaged runtime remain until stages 5–6. Validation evidence and conservative
+limits are recorded in the handoff.
 
-### Next stage: one-shot INX extensions (stage 4)
+### Completed stage 4: one-shot INX extensions
 
-Before implementing stage 4 fully, run a small Rust INX extension prototype against an owned
-synthetic drawing: receive SVG and selection, return one simple edit, verify native Undo,
-unchanged-result no-op and stale-state refusal. Native acceptance is a separate gate;
-passing headless tests does not prove inkex/live equivalence.
+The required small Rust prototype passed native insertion/style, selection input,
+one-step Undo after a no-op and stale fingerprint refusal before the full route
+was replaced. The separate `inkscape-mcp-inx` executable now reads the fixed bounded
+managed request, validates captured SVG/IDs/selection, applies a fresh owned plan
+and publishes a nonce-bound result. It returns a full SVG only for changes; no-ops
+and refusals emit no SVG. The root, namespaces, comments/PIs/DTD and mixed content
+are retained; structural edits preserve references and compensate safe transforms.
+
+The supervisor installs the two fixed INX manifests and a quoted wrapper pointing
+to the relocated Rust binary. Ready packages, setup completeness checks and doctor
+include it; one-shot Python helper assets are omitted. The socket helper still uses
+inkex and the private interpreter. MCP tools, instructions and discovery are unchanged.
+
+Fresh local acceptance covers all ten native operations and insertion, one Undo
+per changed operation, repeated style/text no-ops, stale IDs/content/selection,
+duplicate/text Redo and pixel-identical group/ungroup renders. It uses one owned
+synthetic GUI and a copy of the final package with its private Python executable
+disabled. Both synthetic sessions were restored to blank and gracefully closed
+with verified context/PIDs/bus ownership. Automated, relocated archive and native
+results are recorded separately in the handoff. Installed user runtime/configuration,
+source/vendor files and user drawings were not replaced; no commit/publication.
+
+### Next stage: socket live bridge (stage 5)
+
+Replace the remaining Python socket helper and its inkex-dependent perception and
+geometry with a bounded Rust helper. Preserve the current protocol, context guards,
+rendering/style/geometry behavior and documented conservative limits. One-shot
+native edits continue through stage 4; do not reintroduce an interpreter or an
+arbitrary execution route. Removing CPython/wheels from ready packages waits for
+stage 6 and fresh no-Python headless/live acceptance.
 
 ### Validation and delivery rules
 

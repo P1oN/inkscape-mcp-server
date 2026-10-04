@@ -18,14 +18,7 @@ use std::{
 };
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync>>;
 const LIMIT: usize = 128 * 1024 * 1024;
-const ASSETS: [&str; 6] = [
-    "inkscape_mcp_insert.py",
-    "inkscape_mcp_insert.inx",
-    "inkscape_mcp_edit.py",
-    "inkscape_mcp_edit.inx",
-    "inkscape_mcp_insert_payload.py",
-    "inkscape_mcp_edit_errors.py",
-];
+const ASSETS: [&str; 2] = ["inkscape_mcp_insert.inx", "inkscape_mcp_edit.inx"];
 fn workspace() -> workspace::Workspace {
     workspace::Workspace {
         roots: vec!["/".into()],
@@ -327,6 +320,13 @@ fn prepare_with(
             ))
         })
         .collect::<Result<Vec<_>>>()?;
+    let inx = library
+        .parent()
+        .and_then(Path::parent)
+        .ok_or("invalid package")?
+        .join("bin/inkscape-mcp-inx");
+    // Validate the fixed native helper before modifying the isolated profile.
+    read(&inx, LIMIT)?;
     let executable_bytes = read(binary, LIMIT)?;
     let bridge_bytes = read(&library.join("context.so"), 16 * 1024 * 1024)?;
     let mut info = plist::Value::from_reader(std::io::Cursor::new(read(
@@ -362,12 +362,7 @@ fn prepare_with(
     for (name, raw) in payloads {
         extensions.write(name, &raw, 0o600)?;
     }
-    let wrapper = format!(
-        "#!/bin/sh\nunset PYTHONHOME PYTHONPATH\nexport PYTHONPATH={}\nexec {} {} \"$@\"\n",
-        quote(&vendor)?,
-        quote(&library.join("python/bin/python3"))?,
-        quote(&target.join("inkscape_mcp_insert.py"))?
-    );
+    let wrapper = format!("#!/bin/sh\nexec {} \"$@\"\n", quote(&inx)?);
     extensions.write("inkscape_mcp_insert_run.sh", wrapper.as_bytes(), 0o700)?;
     private.write("inkscape", &executable_bytes, 0o700)?;
     contents_dir.write("Info.plist", &plist_bytes, 0o600)?;
@@ -534,9 +529,7 @@ mod tests {
             let binary = root.path().join("fixture");
             let rustc = std::env::var_os("RUSTC")
                 .map(PathBuf::from)
-                .unwrap_or_else(|| {
-                    PathBuf::from(std::env::var_os("HOME").unwrap()).join(".cargo/bin/rustc")
-                });
+                .unwrap_or_else(|| PathBuf::from("rustc"));
             assert!(
                 Command::new(rustc)
                     .arg(&source)
@@ -553,7 +546,7 @@ mod tests {
         })
     }
     fn library(root: &Path, mode: &str) -> PathBuf {
-        let library = root.join("library");
+        let library = root.join("package/libexec/inkscape-mcp");
         fs::create_dir_all(library.join("dbus/bin")).unwrap();
         fs::copy(fixture_binary(), library.join("dbus/bin/dbus-daemon")).unwrap();
         fs::write(library.join("dbus/bin/dbus-daemon.mode"), mode).unwrap();
@@ -710,6 +703,12 @@ mod tests {
         for name in ASSETS {
             fs::write(lib.join("helpers").join(name), name).unwrap();
         }
+        fs::create_dir_all(root.path().join("package/bin")).unwrap();
+        fs::copy(
+            fixture_binary(),
+            root.path().join("package/bin/inkscape-mcp-inx"),
+        )
+        .unwrap();
         fs::write(lib.join("context.so"), b"context").unwrap();
         let contents = root.path().join("Vendor.app/Contents");
         fs::create_dir_all(contents.join("MacOS")).unwrap();
@@ -754,7 +753,7 @@ mod tests {
         assert!(
             fs::read_to_string(extension.join("inkscape_mcp_insert_run.sh"))
                 .unwrap()
-                .contains("python/bin/python3")
+                .contains("bin/inkscape-mcp-inx")
         );
         assert!(
             prepare_with(&lib, &path, &binary, |_| Err("codesign failure".into()))

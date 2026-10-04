@@ -238,6 +238,7 @@ def main(package, output, close_owned=False):
         evidence.update(state="connected-owned-blank", document=document)
         write(output / "session.json", evidence)
         # The supervisor owns the GUI independently of the STDIO server lifecycle.
+        write(output / "launch.trace.json", wire.trace)
         wire.close()
         wire = Wire([str(package / "bin/inkscape-mcp")], env, output / "reconnect.stderr.log")
         wire.initialize()

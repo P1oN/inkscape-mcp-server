@@ -181,3 +181,20 @@ pub fn prepare(fragment: &str, prefix: &str) -> Result<(Vec<u8>, Vec<String>), &
     }
     Ok((bytes, ordered))
 }
+
+/// Rewrite only supported local references; external definition references survive.
+pub fn remap_reference(key: &str, value: &str, ids: &HashMap<String, String>) -> String {
+    let result = URL
+        .replace_all(value, |c: &regex::Captures<'_>| {
+            ids.get(&c[1][1..])
+                .map(|id| format!("url(#{id})"))
+                .unwrap_or_else(|| c[0].to_string())
+        })
+        .into_owned();
+    if matches!(key, "href" | "connector-start" | "connector-end")
+        && let Some(id) = result.strip_prefix('#').and_then(|id| ids.get(id))
+    {
+        return format!("#{id}");
+    }
+    result
+}

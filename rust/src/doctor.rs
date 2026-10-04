@@ -212,6 +212,13 @@ pub fn report() -> Value {
                 }),
         );
         checks.insert(
+            "fixed_inx_helper",
+            library
+                .parent()
+                .and_then(Path::parent)
+                .is_some_and(|package| compatible_binary(&package.join("bin/inkscape-mcp-inx"))),
+        );
+        checks.insert(
             "private_bus_config",
             regular(&library.join("dbus/session.conf")),
         );
@@ -254,14 +261,10 @@ pub fn report() -> Value {
         checks.insert(
             "fixed_helper_assets",
             [
-                "inkscape_mcp_insert.py",
                 "inkscape_mcp_insert.inx",
-                "inkscape_mcp_edit.py",
                 "inkscape_mcp_edit.inx",
                 "inkscape_mcp_live.py",
                 "inkscape_mcp_live.inx",
-                "inkscape_mcp_insert_payload.py",
-                "inkscape_mcp_edit_errors.py",
             ]
             .iter()
             .all(|name| regular(&library.join("helpers").join(name))),
