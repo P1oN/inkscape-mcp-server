@@ -49,13 +49,14 @@ Symlinked skill trees are refused.
 Updates use a three-way merge against the saved upstream version. Unmodified files receive
 the new version; nonconflicting user edits are retained. A prior version is archived beside
 the skill. On conflicts, the installed files and baseline remain untouched; the installer
-prints a directory containing proposed merge files for manual review. Customized legacy
-skills without a baseline are preserved and require a manual comparison. Identical legacy
+prints a temporary directory outside the skills folder containing proposed merge files for manual
+review. Customized legacy skills without a baseline are preserved and require a manual comparison. Identical legacy
 installs can be adopted by rerunning the installer before adding customizations.
 
 Restart your client to discover the skill. In Codex, invoke it with `$inkscape-mcp`
 or let the client select it for relevant SVG requests. Configure the MCP connection
-separately with the absolute path to `run-mcp.sh` as described in the README.
+with `./setup.sh --connect-client codex` (or `claude`). See
+[client management](client-management.md) for standalone connection checks and manual configuration.
 
 Ready packages built from this source include the same installer and skill; committed
 source archives include them as well. Previously published v0.1.0/v0.1.1 assets remain

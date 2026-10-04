@@ -26,15 +26,23 @@ fn fingerprint(path: &Path, hash: &mut std::collections::hash_map::DefaultHasher
 fn main() {
     let root = Path::new(env!("CARGO_MANIFEST_DIR")).parent().unwrap();
     let revision = if root.join(".git").exists() {
-        println!(
-            "cargo:rerun-if-changed={}",
-            root.join(".git/HEAD").display()
-        );
-        for item in ["refs", "packed-refs"] {
-            println!(
-                "cargo:rerun-if-changed={}",
-                root.join(".git").join(item).display()
-            );
+        println!("cargo:rerun-if-changed={}", root.join(".git").display());
+        for item in ["HEAD", "refs", "packed-refs"] {
+            if let Some(path) = std::process::Command::new("git")
+                .arg("-C")
+                .arg(root)
+                .args(["rev-parse", "--path-format=absolute", "--git-path", item])
+                .output()
+                .ok()
+                .filter(|o| o.status.success())
+                .and_then(|o| String::from_utf8(o.stdout).ok())
+            {
+                // Missing optional packed-refs would make Cargo rebuild every time.
+                let path = Path::new(path.trim());
+                if path.exists() {
+                    println!("cargo:rerun-if-changed={}", path.display());
+                }
+            }
         }
         std::process::Command::new("git")
             .args(["-C", root.to_str().unwrap(), "rev-parse", "HEAD"])

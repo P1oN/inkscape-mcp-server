@@ -35,21 +35,33 @@ not current validation claims. [RUST_NEXT_PLAN.md](RUST_NEXT_PLAN.md) is the act
 
 ## Validation
 
-Local pre-commit working-tree validation on 2026-10-04: Rust223 passed/1ignored, fmt/clippy; helper6; Ruff45 files;
-shell syntax and workflow YAML parsing; setup50 and bootstrap guards9; client ownership/
-config guards (real isolated Codex, synthetic Claude). Current source archive passed real
-build/setup/skill/handshake/create/edit/render/save/uninstall/reinstall on this Mac.
-Relocated ready archive passed both engines with empty PATH/private Python/bus, original
-preservation, transaction/rollback/no-op and render/export checks. Discovery16 exact matches,
-doctor10, launcher11 and notices17 (184 crates) pass; per_call/shell cancellation reaps the owned process and leaves no PNG.
+PR #8 review fixes validated locally on 2026-10-04: Rust: 224 passed, 1 ignored;
+fmt/clippy; Python: 11 passed (6 helper tests and 5 installation regressions); Ruff: 46 files;
+shell syntax; setup: 51 checks; bootstrap: 9 checks; discovery: 16 exact matches.
+The new tests cover normal/linked Git build watches, committed versus working-tree archive
+identity, skill-move failure and settings-archive rollback. Cancellation cannot publish partial
+runtime capabilities or replace a successful cached probe.
 
-Evidence: migration/results/improvements-install-final/comparison.json,
-improvements-cancellation-final/comparison.json, improvements-client-guards-1/comparison.json,
-improvements-package-{per_call,shell}.json, improvements-setup-final/comparison.json,
-improvements-notices-final.json and improvements-discovery-final/comparison.json.
-Final build/evidence binding: migration/results/improvements-final-evidence.json.
-These are ignored local artifacts; the source archive is an explicitly unpublished working-tree
-snapshot. The MCP surface remains unchanged; llms manifests were regenerated from this package.
+The new Git-free working-tree archive passed native build/setup/skill/client handshake,
+create/edit/Inkscape CLI render/save, uninstall and reinstall on this Mac. Its compiled
+revision is `unknown`, with matching binary/package build identity. Conflicting skill merge
+proposals remain outside client discovery; customized skill bytes and drawings survive removal.
+Codex registration uses a real isolated profile; Claude CLI routing remains synthetic.
+Owned per-call/shell cancellation and follow-up edits pass. Ready package checks:
+launcher: 11; doctor: 10; notices: 17 (184 crates).
+
+Review evidence (ignored local artifacts): migration/results/pr8-review-install-2/comparison.json,
+pr8-review-source-2.tar.gz, pr8-review-setup-1/comparison.json,
+pr8-review-bootstrap-1/comparison.json, pr8-review-clients-1/comparison.json,
+pr8-review-cancellation-1/comparison.json, pr8-review-discovery-1/comparison.json,
+pr8-review-launcher-1/comparison.json, pr8-review-doctor-1.json and pr8-review-notices-1.json.
+The archive is explicitly unpublished; existing pinned host tools/caches were reused.
+
+Before review fixes, relocated ready archives also passed both engines with empty PATH,
+private Python/bus, original preservation, transaction/rollback/no-op and render/export checks;
+see migration/results/improvements-package-{per_call,shell}.json and
+improvements-final-evidence.json. Those results describe the earlier build.
+Tool/schema counts remain unchanged; approval descriptions and llms manifests are corrected.
 No new native GUI acceptance, clean-machine installation or foreign-target result is claimed.
 Existing published Release assets and the user's installed runtime/config remain unchanged.
 

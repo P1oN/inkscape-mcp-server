@@ -84,6 +84,13 @@ def main(archive, output):
     require(
         '"build_id"' in version and '"revision"' in version, "installed version metadata missing"
     )
+    installed = Path((source / ".inkscape-mcp-local/setup.conf").read_text().splitlines()[1])
+    build_info = json.loads(command(str(installed), "--version").stdout)
+    metadata = json.loads((installed.parents[1] / "libexec/inkscape-mcp/package.json").read_text())
+    require(
+        build_info["revision"] == "unknown" and metadata["build_info"] == build_info,
+        "uncommitted Git-free archive claims a committed revision or mismatched identity",
+    )
     checks.append("idempotent registration and installed version")
     skill = home / ".codex/skills/inkscape-mcp"
     skill_file = skill / "SKILL.md"
@@ -105,10 +112,18 @@ def main(archive, output):
     )
     before = skill_file.read_bytes()
     require("# Updated Inkscape" in baseline.read_text(), "baseline not advanced")
-    command(
+    conflict = command(
         str(source / "scripts/install-skill.sh"), "--client", "codex", "--update", success=False
     )
     require(skill_file.read_bytes() == before, "conflicting merge changed installed skill")
+    proposal = Path(conflict.stderr.split("Review proposed files at ", 1)[1].strip().rstrip("."))
+    require(
+        not proposal.is_relative_to(skill.parent)
+        and "<<<<<<<" in (proposal / "SKILL.md").read_text()
+        and not list(skill.parent.glob(".inkscape-mcp-update.*")),
+        "conflict proposal leaked into client skill discovery",
+    )
+    shutil.rmtree(proposal)
     checks.append("skill customizations merge and conflicts preserve installed bytes")
     wire = Wire([str(source / "run-mcp.sh")], env, output / "wire.log")
     try:

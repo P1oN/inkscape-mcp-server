@@ -278,5 +278,6 @@ if [ -n "$skill_client" ]; then
 fi
 
 if [ -n "$connect_client" ]; then
-    "$repo/scripts/mcp-client.sh" --client "$connect_client" connect
+    "$repo/scripts/mcp-client.sh" --client "$connect_client" connect ||
+        fail 'MCP settings were saved, but client connection failed. Retry scripts/mcp-client.sh --client '"$connect_client"' connect.'
 fi

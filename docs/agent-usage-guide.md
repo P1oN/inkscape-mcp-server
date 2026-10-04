@@ -183,9 +183,9 @@ once to validate + preview the change with no mutation, then call again with `dr
 the `approval_token` to apply it. Compose/adopt tools (`rust/src/adopt.rs`) are HIGH + approval-gated
 for the same reason (they ingest arbitrary SVG).
 
-So a typical HIGH-risk flow is: `how_do_i` → dry-run the tool to preview → obtain an `approval_token`
-out of band → re-call with the token to apply → `render_preview` to confirm → `restore_snapshot` if
-unhappy.
+So a typical HIGH-risk flow is: `how_do_i` → dry-run the tool to preview → have the client obtain
+explicit user confirmation for this operation → re-call with the client-supplied `approval_token` →
+`render_preview` to confirm → `restore_snapshot` if unhappy.
 
 ---
 

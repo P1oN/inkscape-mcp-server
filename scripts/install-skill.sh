@@ -85,8 +85,8 @@ if [ -e "$target" ]; then
         fi
     done
     if [ "$conflicts" = true ]; then
-        proposal=$stage
-        stage=
+        proposal=$(mktemp -d "${TMPDIR:-/tmp}/inkscape-mcp-proposal.XXXXXX")
+        cp -R -- "$stage/." "$proposal/"
         fail "Skill merge conflicts; installed files preserved. Review proposed files at $proposal."
     fi
     printf '%s\n' "$repo" > "$stage/.inkscape-mcp-owner"

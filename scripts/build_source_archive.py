@@ -66,15 +66,16 @@ def main(output, working_tree=False):
                     check=True,
                     timeout=120,
                 )
-        with tarfile.open(archive, "a") as stream:
-            name = prefix + "SOURCE_REVISION"
-            if name in stream.getnames():
-                raise RuntimeError("source revision metadata already tracked")
-            content = ("inkscape-mcp-source-v1\n" + revision + "\n").encode()
-            member = tarfile.TarInfo(name)
-            member.size = len(content)
-            member.mode = 0o644
-            stream.addfile(member, io.BytesIO(content))
+        if not working_tree:
+            with tarfile.open(archive, "a") as stream:
+                name = prefix + "SOURCE_REVISION"
+                if name in stream.getnames():
+                    raise RuntimeError("source revision metadata already tracked")
+                content = ("inkscape-mcp-source-v1\n" + revision + "\n").encode()
+                member = tarfile.TarInfo(name)
+                member.size = len(content)
+                member.mode = 0o644
+                stream.addfile(member, io.BytesIO(content))
         with output.open("xb") as destination:
             with gzip.GzipFile(fileobj=destination, mode="wb", mtime=0, filename="") as compressed:
                 with archive.open("rb") as stream:

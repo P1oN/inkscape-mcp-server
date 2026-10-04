@@ -254,9 +254,19 @@ def main():
                 and owner.is_file()
                 and owner.read_text().strip() == str(repo)
             )
-            local.rename(backup)
+            staged_skill = local / "removed-skill"
             if owned:
-                skills.rename(backup / "removed-skill")
+                if staged_skill.exists() or staged_skill.is_symlink():
+                    raise RuntimeError(
+                        "Skill archive destination already exists; installation retained"
+                    )
+                skills.rename(staged_skill)
+            try:
+                local.rename(backup)
+            except OSError:
+                if owned:
+                    staged_skill.rename(skills)
+                raise
             print("Installation moved to " + str(backup))
         print("Client disconnected. Existing client processes must be restarted by the user.")
 

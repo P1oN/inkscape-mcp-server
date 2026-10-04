@@ -615,7 +615,11 @@ impl Server {
             .lock()
             .map_err(|_| "capability cache lock failed")?;
         if refresh || cached.is_none() {
-            *cached = Some(runtime::detect(registry, host.as_ref()));
+            let detected = runtime::detect(registry, host.as_ref());
+            if process::cancelled() {
+                return Err("operation cancelled".into());
+            }
+            *cached = Some(detected);
         }
         Ok(runtime::overlay(cached.as_ref().unwrap(), &self.contract))
     }
@@ -858,6 +862,33 @@ async fn run_server() -> Result<(), Box<dyn std::error::Error>> {
 #[cfg(test)]
 mod wire_result_tests {
     use super::*;
+
+    #[test]
+    fn cancelled_detection_does_not_publish_or_replace_capability_cache() {
+        let registry = document::Registry::new();
+        for previous in [None, Some(json!({"previous_success": true}))] {
+            let server = Server {
+                contract: Arc::new(contract::contract()),
+                operations: Arc::new(tokio::sync::Mutex::new(())),
+                workers: Arc::new(tokio::sync::Semaphore::new(4)),
+                registry: Arc::new(Mutex::new(registry.clone())),
+                capabilities: Arc::new(Mutex::new(previous.clone())),
+                runtime_bus: Arc::new(Mutex::new(None)),
+                live: Arc::new(Mutex::new(live::Live::new())),
+            };
+            let result = process::with_cancellation(Box::new(|| true), || {
+                server.capabilities(&registry, true)
+            });
+            assert_eq!(result.unwrap_err(), "operation cancelled");
+            assert_eq!(*server.capabilities.lock().unwrap(), previous);
+            if previous.is_some() {
+                assert_eq!(
+                    server.capabilities(&registry, false).unwrap()["previous_success"],
+                    true
+                );
+            }
+        }
+    }
 
     #[test]
     fn direct_result_preserves_all_frozen_scalar_and_error_shapes() {

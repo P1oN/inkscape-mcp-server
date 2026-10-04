@@ -40,8 +40,10 @@ use with that version. The current source tree contains the updated default beha
 Automatic bootstrap currently supports **Apple Silicon, macOS 15 or newer**.
 The published v0.1.0 ready-binary archive does not contain this installer. Use the source
 bootstrap archive for its original installer, or the PR sources for the updated workflow.
-The source archive includes SOURCE_REVISION metadata; ordinary GitHub source archives
-without this metadata still build, recording an unknown source commit rather than failing.
+Committed source exports include SOURCE_REVISION metadata. Explicit `--working-tree`
+acceptance snapshots omit it and record an unknown revision; their build ID still identifies
+the source content. Ordinary GitHub source archives without this metadata also build,
+recording an unknown source commit rather than failing.
 
 The build uses Apple Xcode or Command Line Tools. If these are missing, the installer
 opens Apple's installation dialog and stops with a rerun instruction; it does not accept

@@ -7,6 +7,8 @@ Historical stage38 completion notes are in [history](history/rust-stage38-plan.m
 
 The requested installation, client onboarding, skill update, build identity, responsiveness,
 archive acceptance, documentation separation and uninstall improvements are implemented in that PR.
+PR review corrections cover cancellation cache integrity, linked-worktree build watches,
+uninstall rollback, working-tree archive identity, skill conflict proposals and documentation.
 Validation and its limitations are recorded in the handoff and local acceptance reports.
 
 Remaining follow-up scope after review:

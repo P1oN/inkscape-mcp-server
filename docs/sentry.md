@@ -58,9 +58,9 @@ Rebuild/package the modified source before using these values with `run-mcp.sh`:
 that launcher runs the package selected by setup, not `rust/target/debug`.
 Restart/reconnect the client after selecting a rebuilt package, preserving Inkscape windows.
 `--version` emits JSON with version, source revision and a deterministic content/build-options
-fingerprint (build ID, not a signing/provenance attestation). Git-free source archives use
-SOURCE_REVISION; unknown origins are explicitly labeled unknown. Working-tree edits affect
-the fingerprint. Error payloads and transactions carry fixed compiled `revision`/`build_id`
+fingerprint (build ID, not a signing/provenance attestation). Git-free committed source archives use
+SOURCE_REVISION; working-tree archives and unknown origins are explicitly labeled unknown.
+Working-tree edits affect the fingerprint. Error payloads and transactions carry fixed compiled `revision`/`build_id`
 tags even when `SENTRY_RELEASE` is overridden. The default release includes all three values.
 Package metadata captures the binary's actual identity, rather than inferring it from a tag.
 
@@ -72,8 +72,8 @@ sending; full details remain on local stderr. Only known tool names are used as 
 names; unknown names are reduced to `unknown_tool`. Errors retain source basenames,
 functions and line numbers. Error payloads use an allowlist: SDK contexts, tags, logentry,
 threads, stack locals, source context and binary package paths are removed. Only fixed
-failure category, OS and architecture tags are retained. Hostnames are not reported. SDK default PII collection is
-disabled. Tool timing includes validation and error returns and does not currently
+failure category, OS, architecture, compiled `revision` and `build_id` tags are retained.
+Hostnames are not reported. SDK default PII collection is disabled. Tool timing includes validation and error returns and does not currently
 record success/error status or link a panic to its tool transaction.
 
 ## Stack traces and builds

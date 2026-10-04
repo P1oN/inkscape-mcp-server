@@ -60,6 +60,9 @@ skill merge/conflicts, Inkscape CLI rendering, uninstall and reinstall on the cu
 It reuses existing pinned host tools/caches; it does not claim clean-machine or GUI acceptance.
 Use `build_source_archive.py --working-tree` only for explicitly unpublished local snapshots;
 default source export continues to contain committed files only.
+Working-tree archives omit SOURCE_REVISION and report an unknown revision. The install
+regressions in `runtime/tests/test_install_management.py` cover archive identity, Git worktree
+build watches and uninstall rollback; run them with the helper tests above.
 
 Documentation-only changes need link/command consistency and `git diff --check`; do not
 rerun runtime or native GUI acceptance unless code, MCP schemas or initialization guidance

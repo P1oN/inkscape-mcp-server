@@ -82,6 +82,18 @@ def main(output):
         require(run("setup.sh", *base).returncode == 0, "legacy noninteractive setup")
         marker = root / "server-started"
         require(not marker.exists(), "default setup does not execute package code")
+        client_script = checkout / "scripts/mcp-client.sh"
+        saved_client_script = client_script.read_bytes()
+        client_script.write_text("#!/bin/bash\necho 'injected connection failure' >&2\nexit 1\n")
+        result = run("setup.sh", *base, "--connect-client", "codex")
+        require(
+            result.returncode != 0
+            and (checkout / ".inkscape-mcp-local/setup.conf").is_file()
+            and "MCP settings were saved, but client connection failed" in result.stderr
+            and "scripts/mcp-client.sh --client codex connect" in result.stderr,
+            "failed client connection retains settings and explains standalone retry",
+        )
+        client_script.write_bytes(saved_client_script)
         codex_skill = Path(env["CODEX_HOME"]) / "skills/inkscape-mcp"
         require(not codex_skill.exists(), "skill installation is opt-in")
         result = run("setup.sh", *base, "--install-skill", "codex")
