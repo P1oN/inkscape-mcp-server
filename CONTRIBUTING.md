@@ -8,6 +8,9 @@ are retired; improve Rust against explicit contracts, invariants and regression 
 
 Use Rust 1.99.0, pinned by the package builder/CI, and Cargo.lock.
 A rust-toolchain.toml is not currently supplied.
+Keep Tokio at the pinned 1.52.1 patch or a verified newer version: 1.52.0 has a
+[blocking-pool hang regression](https://github.com/tokio-rs/tokio/issues/8056) affecting
+STDIO and `spawn_blocking` workers.
 Native libxml/clang development dependencies are required; on macOS point LIBXML2 at
 $(xcrun --show-sdk-path)/usr/lib/libxml2.tbd. Inkscape is required for CLI/native acceptance.
 
@@ -56,8 +59,10 @@ Windows is backlog. Prepared CI jobs are not evidence of real target validation.
 
 Run `scripts/rust_responsiveness_acceptance.py --binary PATH --output DIRECTORY`
 with `.venv/bin/python` for real STDIO discovery/workspace responsiveness and cancellation
-against owned synthetic per-call/shell processes. Run launcher/package/doctor/notices
-acceptance for install changes. `scripts/install_path_acceptance.py --archive ARCHIVE
+against owned synthetic per-call/shell processes. `scripts/rust_stdio_startup_acceptance.py --binary PATH
+--output DIRECTORY` exercises 128 fresh sessions with four concurrent owned servers,
+including an immediate first mutation and discovery requests, without retries or a GUI.
+Run launcher/package/doctor/notices acceptance for install changes. `scripts/install_path_acceptance.py --archive ARCHIVE
 --output DIRECTORY` exercises extracted-source setup, real isolated Codex registration,
 skill merge/conflicts, Inkscape CLI rendering, uninstall and reinstall on the current Mac.
 It reuses existing pinned host tools/caches; it does not claim clean-machine or GUI acceptance.

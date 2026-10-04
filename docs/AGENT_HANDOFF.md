@@ -35,16 +35,22 @@ not current validation claims. [RUST_NEXT_PLAN.md](RUST_NEXT_PLAN.md) is the act
 
 ## Validation
 
-CI on `499a81d` passed Rust format/clippy/tests and release compilation, then timed out
-in the final discovery configuration with empty server stderr. The old harness did not
-record the pending method. A local stress run passed 160 fresh core/short sessions.
-Discovery now uses the already pinned Python 3.12.14 environment, instead of the runner's
-Python 3.14.7, and retains completed/pending request traces even on failure. Reader errors
-and response timeouts report their cause; shutdown joins the harness-owned reader.
-Harness regression validation: Python: 16 passed; Ruff: 47 files; discovery: 16 exact matches.
-The original timeout's cause is not established; follow the new PR check for remote evidence.
+CI on `499a81d` timed out in final discovery; `3649425` passed discovery but hung on
+its first `create_document` in shell responsiveness acceptance. Concurrent local startup
+stress reproduced the hang: queued blocking work ran only after stdin closed. This matches
+[Tokio's confirmed 1.52.0 blocking-pool regression](https://github.com/tokio-rs/tokio/issues/8056).
+Tokio is now pinned to the upstream fix in 1.52.1, with Cargo.lock updated.
 
-PR #8 review fixes validated locally on 2026-10-04: Rust: 224 passed, 1 ignored;
+Patched local validation: Rust: 224 passed, 1 ignored; fmt/clippy; Python: 16 passed;
+Ruff: 48 files; release discovery: 16 exact matches; 512 fresh sessions with 8 concurrent
+servers; per-call/shell responsiveness and cancellation. Evidence:
+migration/results/pr8-ci-startup-patched-1/comparison.json,
+pr8-ci-responsiveness-patched-1/comparison.json and pr8-ci-discovery-patched-1/comparison.json.
+The native CI now includes bounded startup stress (128 sessions, 4 concurrent servers).
+Discovery uses pinned Python 3.12.14 and retains completed/pending traces on failure;
+reader errors and timeouts report their cause. Follow the latest PR check for remote evidence.
+
+Before the Tokio patch, PR #8 review fixes were validated locally on 2026-10-04: Rust: 224 passed, 1 ignored;
 fmt/clippy; Python: 11 passed (6 helper tests and 5 installation regressions); Ruff: 46 files;
 shell syntax; setup: 51 checks; bootstrap: 9 checks; discovery: 16 exact matches.
 The new tests cover normal/linked Git build watches, committed versus working-tree archive

@@ -133,6 +133,7 @@ jobs:
           PACKAGE: ${{ matrix.package }}
         run: |
           .venv/bin/python scripts/rust_security_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-security
+          .venv/bin/python scripts/rust_stdio_startup_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-startup
           .venv/bin/python scripts/rust_responsiveness_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-responsiveness
           .venv/bin/python scripts/rust_defects_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-defects
           .venv/bin/python scripts/rust_diagnostic_limits_acceptance.py --binary "dist/inkscape-mcp-$PACKAGE/bin/inkscape-mcp" --output migration/results/ci-diagnostic-limits
@@ -208,5 +209,6 @@ jobs:
             migration/results/ci-bootstrap-guards/
             migration/results/ci-defects/
             migration/results/ci-responsiveness/
+            migration/results/ci-startup/
           if-no-files-found: error
           retention-days: 14
