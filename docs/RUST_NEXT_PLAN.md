@@ -1,6 +1,6 @@
 # Active backlog
 
-Updated **2026-10-05** after PR #9 merged into `main` (`df3272b`). This file contains only
+Updated **2026-10-05** after PR #9 merged and the CI repair passed on `c66583b`. This file contains only
 unfinished work. Implemented Python removal and authoring plans are in
 [history](history/plans/python-removal-and-authoring.md); completed product milestones are
 in [the milestone index](history/README.md). Current behavior/validation is in
@@ -10,7 +10,6 @@ in [the milestone index](history/README.md). Current behavior/validation is in
 
 | Task | Next action | Completion evidence |
 | --- | --- | --- |
-| Confirm the local CI regression repair remotely | The invalid 300 ms shared test budget is repaired and regression/full local checks pass; [diagnosis](history/reports/ci-effect-timeout-fix.md). After authorized commit/push, run the repaired revision on CI without masking failures through retries. | Successful native CI for the repaired revision; retain the original failed run and its scope. |
 | Clean-machine Apple Silicon installation | Exercise source bootstrap on a separate clean macOS 15+ host: Apple SDK installation, pinned downloads, quarantine, first setup, client registration, render and reinstall. | Host/tool versions, commands, actual prompts/failures and preserved settings/drawings. Existing-host acceptance is insufficient. |
 | Real Claude Code acceptance | Use an installed Claude client in an isolated profile where supported; check registration scope, handshake, first workspace request, reconnect and disconnect. | Actual client version/config scope and results. Synthetic CLI routing remains separate. |
 | Complete review and prepare a release | Resolve the uncompleted CodeRabbit review through a suitable bounded review process; choose a release candidate after the validation above. | Reviewed scope and unresolved findings are explicit; candidate source/build identity, required package checks and distribution notes recorded. Publishing assets or replacing an installed runtime requires a separate request. |

@@ -1,11 +1,9 @@
 # Platform compatibility and validation scope
 
 Current `main` includes PR #8 installation/responsiveness and PR #9 Python removal/authoring.
-The [PR #9 candidate CI](https://github.com/P1oN/inkscape-mcp-server/actions/runs/37296446838)
-passed on macOS arm64. Its separate post-merge
-[main CI](https://github.com/P1oN/inkscape-mcp-server/actions/runs/37298327949) failed in a
-managed effect-loss regression; the test budget is [repaired locally](../history/reports/ci-effect-timeout-fix.md),
-with fresh remote confirmation pending. Local acceptance uses official
+The [main CI for `c66583b`](https://github.com/P1oN/inkscape-mcp-server/actions/runs/37310025578)
+passed on macOS arm64 after the [test-budget repair](../history/reports/ci-effect-timeout-fix.md).
+The earlier failed post-merge run remains historical evidence. Local acceptance uses official
 Inkscape 1.4.3 and pinned Rust 1.99.0. See [current status](../AGENT_HANDOFF.md).
 
 | Area | Evidence and remaining scope |

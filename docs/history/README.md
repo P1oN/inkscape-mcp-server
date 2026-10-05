@@ -16,7 +16,7 @@ builds. Use [current status](../AGENT_HANDOFF.md), [active backlog](../RUST_NEXT
 | Python removal stages 1–7, PR #9 | Five native executables and Rust/Bash tooling; historical Python archived | [Completed plan](plans/python-removal-and-authoring.md), [stage-7 ledger](reports/stage7-tooling.md), [implementation checkpoints](agent-checkpoints-through-pr9.md) |
 | Editable vector authoring, PR #9 | Shared guidance and bounded advisory analysis; real CLI synthetic acceptance | [Authoring ledger](reports/editable-vector-authoring.md), [completed design](plans/python-removal-and-authoring.md#editable-vector-authoring-quality-requested-2026-10-04) |
 | PR #9 delivery, 2026-10-05 | Candidate `b7caa67` CI passed; merged as `df3272b`. Separate main run failed in managed effect-loss test; no release/installed runtime replacement | [Delivery record](pr9-delivery.md) |
-| Managed effect CI regression, 2026-10-05 | Delayed preflight reproduces invalid short test budget; repaired locally with full tests/fmt/Clippy, remote confirmation pending | [Diagnosis and evidence](reports/ci-effect-timeout-fix.md) |
+| Managed effect CI regression, 2026-10-05 | Delayed preflight reproduces invalid short test budget; repair pushed as `c66583b`, full fresh native CI passed | [Diagnosis and evidence](reports/ci-effect-timeout-fix.md) |
 
 ## Reports and logs
 

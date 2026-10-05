@@ -4,9 +4,9 @@ As of 2026-10-05, published previews remain v0.1.0 and v0.1.1. Current `main` in
 installation/client/skill/build identity improvements and complete Python removal/authoring
 from PRs #8/#9; these changes are not in existing Release assets.
 
-The [PR #9 candidate run](https://github.com/P1oN/inkscape-mcp-server/actions/runs/37296446838)
-passed. The separate [post-merge main run](https://github.com/P1oN/inkscape-mcp-server/actions/runs/37298327949)
-failed in native tests. Download installable artifacts only from successful runs and inspect
+The [main run for `c66583b`](https://github.com/P1oN/inkscape-mcp-server/actions/runs/37310025578)
+passed after the effect-regression test repair. The earlier failed post-merge run remains
+historical. Download installable artifacts only from successful runs and inspect
 source/build identity; the newest run is not automatically an accepted package.
 [Current installation](install.md) distinguishes each distribution.
 

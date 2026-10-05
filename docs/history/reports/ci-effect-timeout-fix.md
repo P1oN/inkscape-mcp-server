@@ -1,7 +1,8 @@
 # Managed effect regression timeout — 2026-10-05
 
-Status: fixed and validated locally on `df3272b` plus the uncommitted documentation cleanup.
-No commit/push or remote run of the repair has been performed. The failed
+Status: fixed, committed and pushed to `main` as `c66583b`; the fresh
+[CI run 37310025578](https://github.com/P1oN/inkscape-mcp-server/actions/runs/37310025578)
+passed on that exact revision. Local validation preceded the commit. The failed
 [main run 37298327949](https://github.com/P1oN/inkscape-mcp-server/actions/runs/37298327949)
 remains a failed historical run; the earlier PR candidate passed separately.
 
@@ -53,4 +54,7 @@ cargo test --locked --manifest-path rust/Cargo.toml --bin inkscape-mcp-rust \
 ```
 
 Use the Cargo/macOS SDK environment from [CONTRIBUTING](../../../CONTRIBUTING.md).
-Fresh remote CI confirmation remains a delivery task in the [active backlog](../../RUST_NEXT_PLAN.md).
+Fresh remote CI confirmation is complete: both Cargo graphs, the delayed effect regression,
+release/discovery, package/notices/STDIO, source setup, Sentry/launcher and relocated
+per-call/shell CLI/socket/doctor checks passed. The subsequent documentation-only update
+records that evidence; it changes no runtime, fixture, contract or workflow inputs.
