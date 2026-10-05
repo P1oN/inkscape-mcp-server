@@ -23,7 +23,7 @@ To print the correct manual snippet after setup:
 ./scripts/mcp-client.sh --client claude config
 ```
 
-Published v0.1.1 lacks these options; configure its launcher manually.
+v0.1.2 includes these options. Historical v0.1.1 lacks them; configure its launcher manually.
 For Codex, add this to its TOML configuration:
 
 ```toml

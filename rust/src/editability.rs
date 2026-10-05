@@ -23,6 +23,11 @@ pub fn analyze(root: Node, opts: &Value) -> Result<Value, String> {
     }
     let roles = crate::authoring_analysis::roles(opts)?;
     let enabled = arguments::boolean(opts, "enabled", true)?;
+    let vector_only = arguments::boolean(opts, "vector_only", false)?;
+    let tolerance = arguments::optional_number(opts, "node_tolerance")?.unwrap_or(0.);
+    if !tolerance.is_finite() || !(0.0..=1.0).contains(&tolerance) {
+        return Err("node_tolerance must be finite and between 0 and 1 local user units".into());
+    }
     let labels = arguments::boolean(opts, "check_labels", true)?;
     let layers_limit = threshold(opts, "layer_advisory_threshold", 12, 10000)?;
     let depth_limit = threshold(opts, "max_group_depth", 6, 100)?;
@@ -160,13 +165,54 @@ pub fn analyze(root: Node, opts: &Value) -> Result<Value, String> {
         );
     }
     Ok(
-        json!({"authoring": if enabled {crate::authoring_analysis::analyze(&nodes, &roles)} else {json!({"findings":[],"truncated":false,"scope":"Disabled."})},"group_count":groups.len(),"layer_count":layers,"max_group_depth":groups.iter().map(|(_,d)|*d).max().unwrap_or(0),"single_child_groups":fragments,"advice":advice,"truncated":total>200,"note":"Advice is optional; names/counts cannot establish semantics or tracing."}),
+        json!({"geometry":if enabled {crate::geometry_quality::analyze(&nodes,&roles,tolerance)}else{json!({"findings":[],"truncated":false})},"vector_content":if vector_only {crate::vector_content::analyze(&nodes)}else{json!({"status":"not_requested"})},"authoring": if enabled {crate::authoring_analysis::analyze(&nodes, &roles)} else {json!({"findings":[],"truncated":false,"scope":"Disabled."})},"group_count":groups.len(),"layer_count":layers,"max_group_depth":groups.iter().map(|(_,d)|*d).max().unwrap_or(0),"single_child_groups":fragments,"advice":advice,"truncated":total>200,"note":"Advice is optional; names/counts cannot establish semantics or tracing."}),
     )
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn explicit_closure_geometry_and_independent_vector_certification_are_readonly() {
+        let doc=crate::xml::parse(b"<svg xmlns='http://www.w3.org/2000/svg'><path id='open' d='M0 0 L1 0 L0 0'/><path id='dot' d='M0 0 l0 0'/><image id='reference' href='ref.png'/></svg>",4096).unwrap();
+        let before = crate::xml::serialize(&doc);
+        let opts = json!({"vector_only":true,"node_tolerance":0.01,"object_roles":[{"object_id":"open","role":"closed_shape"},{"object_id":"missing","role":"closed_shape"}]});
+        let report = analyze(doc.get_root_element().unwrap(), &opts).unwrap();
+        let findings = report["geometry"]["findings"].as_array().unwrap();
+        assert!(
+            findings
+                .iter()
+                .any(|f| f["object_id"] == "open" && f["code"] == "open_shape")
+        );
+        assert!(
+            findings
+                .iter()
+                .any(|f| f["object_id"] == "dot" && f["code"] == "zero_length_segment")
+        );
+        assert!(
+            report["authoring"]["findings"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .any(|f| f["object_id"] == "missing" && f["certainty"] == "unknown")
+        );
+        assert_eq!(report["vector_content"]["status"], "unknown");
+        let disabled = analyze(
+            doc.get_root_element().unwrap(),
+            &json!({"enabled":false,"vector_only":true}),
+        )
+        .unwrap();
+        assert_eq!(disabled["geometry"]["findings"], json!([]));
+        assert_eq!(disabled["vector_content"]["status"], "unknown");
+        assert_eq!(crate::xml::serialize(&doc), before);
+        for invalid in [
+            json!({"node_tolerance":-1}),
+            json!({"node_tolerance":2}),
+            json!({"vector_only":[]}),
+        ] {
+            assert!(analyze(doc.get_root_element().unwrap(), &invalid).is_err());
+        }
+    }
     #[test]
     fn bounds_advice_preserves_counts_comments_and_disabled_readonly_tree() {
         let source = format!(

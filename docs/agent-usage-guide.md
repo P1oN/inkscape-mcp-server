@@ -2,7 +2,7 @@
 
 How to drive this server from an LLM agent: the core create→render→export loop, the
 working-copy + snapshot reversibility model, the risk classes and the approval-token gate for
-HIGH-risk tools, and how to pick the right tool. The full surface is **110 small typed tools / 7 prompts /
+HIGH-risk tools, and how to pick the right tool. The full surface is **112 small typed tools / 7 prompts /
 18 resources** — deliberately *not* a portmanteau `run_action(string)` / `do_task(prompt)` design
 ([architecture decisions](adr/README.md)). The trade-off: more tools to navigate, but each is explicit, typed, and risk-classed.
 Use the discovery tools below instead of grepping the list; gates may narrow the visible surface.
@@ -353,7 +353,8 @@ Review is bounded to 20,000 elements, 256 KiB stylesheet text, 2,048 rules, 128 
 levels, two million CSS work units and 200 findings. Path parsing allows 256 KiB/10,000
 segments per path and 4 MiB/200,000 segments across a report. Group-role traversal has
 a 200,000-element visit budget. Limit exhaustion produces uncertainty/truncation, not
-evidence of safe geometry. Setting `enabled=false` disables all editability findings.
+evidence of safe geometry. Setting `enabled=false` disables advisory editability findings; explicitly requested
+`vector_only` inventory remains independent.
 
 Hidden/transparent scene findings account for ancestry, resource containers and local
 references. Required `defs`, masks, clipping shapes and `use` source subtrees are preserved.
@@ -373,3 +374,54 @@ page previews; apply identical style/transform/text edits with all returned docu
 content and package-digest guards plus explicit per-package approval. Only the guarded managed
 native helper applies. Native package GUI Undo/Redo passed for a synthetic style/text pair (see the acceptance ledger); do not promise general live atomicity
 or retry an uncertain result before inspection. See [supported scope, recovery and pilot protocol](live/reviewed-workflow.md).
+
+## Closure, duplicate path nodes and vector-only delivery
+
+`create_path` now parses all SVG path commands with finite coordinates (including
+relative-coordinate arithmetic), at most 256 KiB/10,000 segments per path. Its existing
+200,000-character creation limit also applies. Invalid path data refuses before mutation.
+Use `require_closed=true` for silhouettes: each subpath must end with `Z`, even when
+its endpoint equals its start. Use `reject_zero_length=true` to refuse exact zero-length
+drawing segments. Both options default false, also in `apply_edits`, preserving intentional
+open strokes and dots. A curve with coincident endpoints and distinct controls is a possible
+loop, not a zero-length segment. A zero-length `Z` edge is allowed because closure changes
+stroke joins. Creation guards never normalize or simplify geometry.
+
+```json
+{"doc_id":"YOUR_DOCUMENT_ID","d":"M0 0 L20 0 L10 15 Z","fill":"#fc0","require_closed":true,"reject_zero_length":true}
+```
+
+`quality_report` accepts `editability.object_roles` with role `closed_shape` for a specific
+path or closed primitive. Missing/ambiguous IDs and unsupported targets remain unknown.
+`editability.geometry.findings` reports `open_shape`, `zero_length_segment`,
+`coincident_curve_endpoints`, and `near_coincident_nodes`. The last uses optional
+`editability.node_tolerance` (0–1 path-local user units, default 0). It does not account
+for document transforms or establish overlap between separate objects. These observations
+never authorize deletion or merging. Geometry review is bounded to 20,000 elements,
+4 MiB of path text, 200,000 segments, and 200 retained findings; exhaustion is unknown.
+
+Set `editability.vector_only=true` to request `editability.vector_content`, independently
+of the advice `enabled` flag. Status is `passed`, `failed` (recognized embedded raster), or
+`unknown` (linked/opaque images, embedded SVG images, `feImage` local targets, external or
+ambiguous references, stylesheets, processing instructions, DTDs or dynamic content).
+The conservative inventory includes all hidden objects and resource containers, including
+images instantiated by local `use` references. It never fetches resources or infers tracing
+provenance. Findings retain IDs and are capped at 200; the document scan is capped at 20,000
+elements and non-element inspection at 40,000 visits. Unknown is not passing. Known embedded
+raster count here is a resource count; existing legacy raster-byte metrics remain unchanged.
+
+For final SVG delivery use `save_document_as(..., vector_only=true)`. The same whole-document
+check runs before destination preparation or Operation Record writes; failed/unknown status
+refuses without modifying the document or an existing destination. Default false preserves
+existing document editing/saving. There are no image exclusions in this gate: keep reference
+bitmaps outside the delivered SVG. PNG previews/exports are still supported.
+
+For an existing defective outline, prepare an explicit replacement preserving its ID,
+paint, transforms and references. `replace_svg_fragment(..., dry_run=true)` validates through
+the same replacement kernel and returns `candidate_svg` and `would_change`, with `changed=false`.
+It writes neither the working copy nor snapshots/history, requires no approval, and refuses
+an oversized candidate/result. This is structural review, not a rendered preview or a bound
+approval package: inspect/render the candidate separately and recheck the current document
+before applying. Omitted/false `dry_run` retains the existing HIGH-risk approval gate. Batch
+replacement remains application-only. Use snapshots and before/after comparison for approved
+repairs; `cleanup_paths` is simplification, not a targeted duplicate-node repair.

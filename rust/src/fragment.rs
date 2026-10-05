@@ -202,6 +202,21 @@ pub fn apply(registry: &Registry, args: &Value) -> Result<Value, String> {
     let _raw = args["svg"].as_str().ok_or("svg must be a string")?;
     let policy = arguments::string(args, "reference_policy")?.unwrap_or("reject_changes");
     let approval = arguments::string(args, "approval_token")?;
+    if arguments::boolean(args, "dry_run", false)? {
+        let mut candidate = crate::placement::load(registry, id)?;
+        let before = xml::serialize(&candidate);
+        let mutation = Mutation::build(args, registry.workspace.max_input)?;
+        let summary = mutation.mutate(&mut candidate)?;
+        let after = xml::serialize(&candidate);
+        if after.len() > registry.workspace.max_input {
+            return Err("candidate SVG exceeds input limit".into());
+        }
+        let result = json!({"doc_id":id,"dry_run":true,"changed":false,"would_change":before!=after,"summary":summary,"candidate_svg":String::from_utf8(after).map_err(|_|"candidate encoding failed")?,"note":"Structural candidate only; render separately before approved application. No working-copy or history writes."});
+        if result.to_string().len() > registry.workspace.max_output {
+            return Err("fragment dry-run exceeds output limit".into());
+        }
+        return Ok(result);
+    }
     if approval.is_none_or(str::is_empty) {
         return Err("high-risk compose operation requires an explicit approval_token".into());
     }
@@ -222,6 +237,60 @@ pub fn apply(registry: &Registry, args: &Value) -> Result<Value, String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn dry_run_candidate_noop_refusal_and_caps_preserve_document_and_history() {
+        let temp = tempfile::tempdir().unwrap();
+        let source = b"<svg xmlns='http://www.w3.org/2000/svg'><path id='p' d='M0 0 L1 0'/></svg>";
+        std::fs::write(temp.path().join("source.svg"), source).unwrap();
+        let mut registry = Registry {
+            workspace: crate::workspace::Workspace {
+                roots: vec![temp.path().canonicalize().unwrap()],
+                max_input: 100000,
+                max_output: 100000,
+            },
+            entries: indexmap::IndexMap::new(),
+        };
+        let id = registry.open(&json!({"path":"source.svg"})).unwrap()["doc_id"]
+            .as_str()
+            .unwrap()
+            .to_owned();
+        let mut args = json!({"doc_id":id,"object_id":"p","svg":"<path xmlns='http://www.w3.org/2000/svg' d='M0 0 L1 0 Z'/>","dry_run":true});
+        let report = apply(&registry, &args).unwrap();
+        assert_eq!(report["changed"], false);
+        assert_eq!(report["would_change"], true);
+        assert!(report["candidate_svg"].as_str().unwrap().contains("L1 0 Z"));
+        args["svg"] = json!("<path xmlns='http://www.w3.org/2000/svg' d='M0 0 L1 0'/>");
+        assert_eq!(apply(&registry, &args).unwrap()["would_change"], false);
+        args["svg"] = json!("<path xmlns='http://www.w3.org/2000/svg' id='wrong'/>");
+        assert!(apply(&registry, &args).is_err());
+        args["svg"] = json!("<path xmlns='http://www.w3.org/2000/svg' d='M0 0 Z'/>");
+        registry.workspace.max_output = 32;
+        assert!(
+            apply(&registry, &args)
+                .unwrap_err()
+                .contains("output limit")
+        );
+        registry.workspace.max_output = 100000;
+        args["dry_run"] = json!(false);
+        assert!(
+            apply(&registry, &args)
+                .unwrap_err()
+                .contains("approval_token")
+        );
+        let entry = &registry.entries[&id];
+        assert_eq!(
+            std::fs::read(temp.path().join(entry.working())).unwrap(),
+            source
+        );
+        for dir in ["operations", "snapshots"] {
+            assert_eq!(
+                std::fs::read_dir(temp.path().join(entry.directory()).join(dir))
+                    .unwrap()
+                    .count(),
+                0
+            );
+        }
+    }
     #[test]
     fn input_limit_and_approval_precede_fragment_parse() {
         let registry = Registry {

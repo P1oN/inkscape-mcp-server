@@ -4,16 +4,16 @@ Install Inkscape 1.4 or newer. Choose the instructions for your source/package v
 
 | Distribution | First setup | Client and skill management |
 |---|---|---|
-| Current `main` sources | `./setup.sh` builds automatically on Apple Silicon macOS 15+ | `--connect-client`, skill install/update and `uninstall.sh` are available |
+| v0.1.2 source archive / current `main` | `./setup.sh` builds automatically on Apple Silicon macOS 15+ | `--connect-client`, skill install/update and `uninstall.sh` are available |
 | Published v0.1.1 source archive | `./setup.sh --bootstrap` | Configure the launcher manually; new management options are absent |
-| Ready runtime built from current sources | `./setup.sh` saves settings using its bundled runtime | New management options are available; no build tools required |
+| v0.1.2 ready runtime / current-source package | `./setup.sh` saves settings using its bundled runtime | New management options are available; no build tools required |
 | Published v0.1.0 ready runtime | Follow its included setup; doctor runs during setup | Manual client configuration; no new management options |
 
 See [Release downloads and checksums](github-builds.md) and
 [source prerequisites](local-bootstrap.md). Ready runtimes need no user-installed Python,
 Rust, uv or compiler. Source automatic provisioning currently supports Apple Silicon macOS 15+.
 
-For current sources or a ready package built from them:
+For v0.1.2 sources/ready runtime or current sources/packages:
 
 ```sh
 ./setup.sh --install-skill codex --connect-client codex

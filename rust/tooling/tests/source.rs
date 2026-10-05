@@ -63,6 +63,11 @@ fn source_exports_distinguish_commits_from_unpublished_files() {
         let mut files = std::collections::BTreeMap::new();
         for entry in stream.entries().unwrap() {
             let mut entry = entry.unwrap();
+            let kind = entry.header().entry_type();
+            assert!(
+                kind.is_file() || kind.is_dir() || kind.is_symlink() || kind.is_hard_link(),
+                "exported source member rejected by safe extraction: {kind:?}"
+            );
             let name = entry.path().unwrap().to_string_lossy().into_owned();
             let mut bytes = vec![];
             std::io::Read::read_to_end(&mut entry, &mut bytes).unwrap();

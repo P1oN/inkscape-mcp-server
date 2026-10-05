@@ -130,7 +130,7 @@ pub fn run(args: &Args) -> Result<()> {
             "fixture contains raster artwork",
         )?;
         let before = inventory(&workspace)?;
-        let report=data(wire.call("quality_report",json!({"doc_id":doc,"editability":{"object_roles":[{"object_id":"folds","role":"independent_strokes"}]}}))?)?;
+        let report=data(wire.call("quality_report",json!({"doc_id":doc,"editability":{"vector_only":true,"object_roles":[{"object_id":"folds","role":"independent_strokes"},{"object_id":"petals","role":"closed_shape"}]}}))?)?;
         ensure(
             inventory(&workspace)? == before,
             "quality report changed bytes/history",
@@ -173,6 +173,61 @@ pub fn run(args: &Args) -> Result<()> {
             invalid["result"]["isError"] == true && inventory(&workspace)? == before,
             "typed role rejection mutated workspace",
         )?;
+        ensure(
+            report["editability"]["vector_content"]["status"] == "passed",
+            "vector fixture did not pass certification",
+        )?;
+        ensure(
+            !report["editability"]["geometry"]["findings"]
+                .as_array()
+                .ok_or("geometry missing")?
+                .iter()
+                .any(|f| f["code"] == "open_shape"),
+            "closed silhouette failed",
+        )?;
+        for spec in [
+            json!({"doc_id":doc,"d":"M0 0 L1 0","require_closed":true}),
+            json!({"doc_id":doc,"d":"M0 0 L0 0 Z","reject_zero_length":true}),
+            json!({"doc_id":doc,"d":"M0 0 L"}),
+        ] {
+            let rejected = wire.call("create_path", spec)?;
+            ensure(
+                rejected["result"]["isError"] == true && inventory(&workspace)? == before,
+                "path guard mutated workspace",
+            )?;
+        }
+        let candidate=data(wire.call("replace_svg_fragment",json!({"doc_id":doc,"object_id":"fold-a","svg":"<path xmlns='http://www.w3.org/2000/svg' d='M130 35 Q150 60 140 100 Z'/>","dry_run":true}))?)?;
+        ensure(
+            candidate["changed"] == false
+                && candidate["would_change"] == true
+                && inventory(&workspace)? == before,
+            "fragment dry-run mutated workspace",
+        )?;
+        evidence["repair_candidate"] = candidate;
+        let raster_source = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'><defs><image id='bitmap' href='data:image/png;base64,YQ=='/></defs><use href='#bitmap'/></svg>";
+        fs::write(workspace.join("raster.svg"), raster_source)?;
+        let raster_doc =
+            data(wire.call("open_document", json!({"path":"raster.svg"}))?)?["doc_id"].clone();
+        let raster_before = inventory(&workspace)?;
+        let raster_report = data(wire.call(
+            "quality_report",
+            json!({"doc_id":raster_doc,"editability":{"vector_only":true}}),
+        )?)?;
+        ensure(
+            raster_report["editability"]["vector_content"]["status"] == "failed",
+            "hidden raster not detected",
+        )?;
+        let rejected = wire.call(
+            "save_document_as",
+            json!({"doc_id":raster_doc,"dest_path":"must-not-exist/final.svg","vector_only":true}),
+        )?;
+        ensure(
+            rejected["result"]["isError"] == true
+                && inventory(&workspace)? == raster_before
+                && !workspace.join("must-not-exist").exists(),
+            "vector-only save changed workspace",
+        )?;
+        evidence["raster_report"] = raster_report;
         evidence["report"] = report;
         let rendered = preview(&mut wire, &workspace, &out, &doc, "before")?;
         let refusal_before = inventory(&workspace)?;

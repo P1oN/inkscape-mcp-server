@@ -28,6 +28,7 @@ mod fonts;
 mod fragment;
 mod frames;
 mod geometry;
+mod geometry_quality;
 mod gradient;
 mod grid;
 mod grid_plan;
@@ -37,6 +38,7 @@ mod inspect;
 mod intents;
 #[cfg(test)]
 mod native_test_fixture;
+mod vector_content;
 // Native public live integration and private fixed IPC kernels.
 mod decimal;
 mod live;

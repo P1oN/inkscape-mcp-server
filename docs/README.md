@@ -1,7 +1,8 @@
 # Documentation
 
 This index separates current usage, remaining work, architecture decisions and dated evidence.
-Current source status is recorded as of 2026-10-05, after PR #9 merged into `main`.
+Current usage covers v0.1.2 and the PR #8–11 source surface. The handoff records
+release-specific evidence and outstanding acceptance as of 2026-10-06.
 
 ## Start here
 

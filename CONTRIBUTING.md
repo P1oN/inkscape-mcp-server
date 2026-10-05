@@ -108,7 +108,8 @@ scripts/dev-tools.sh install-acceptance --archive migration/results/source.tar.g
 Source archive export defaults to committed files and SOURCE_REVISION. Explicit
 `--working-tree` snapshots omit that marker and report unknown revision. Source install
 acceptance requires real Codex and existing pinned native tools/caches. It builds from
-Git-free unpublished sources, registers an isolated client, merges/conflicts a customized
+Git-free committed or unpublished sources, verifies the corresponding build identity,
+registers an isolated client, merges/conflicts a customized
 skill, renders through real CLI, uninstalls and reinstalls while preserving drawings.
 It does not establish clean-machine installation or native GUI acceptance.
 
@@ -177,3 +178,8 @@ It retains SVG, resource/bounds reports, object/package PNGs and wire traces, ch
 preservation and stale/digest/approval/unsupported-backend refusals. This does not establish
 native GUI package publication, Undo/Redo or artist pilot acceptance; follow the
 [reviewed workflow](docs/live/reviewed-workflow.md) for those separate checks.
+
+The authoring acceptance probe also checks explicit path closure/zero-length guards,
+read-only fragment dry-run candidates, closed-shape advice and vector-only save refusal
+(including hidden resource images) through real STDIO. Keep default-value fixtures and
+all discovery profiles in sync when adding optional authoring parameters.

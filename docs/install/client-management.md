@@ -1,7 +1,7 @@
 # Client connection, updates and clean reinstall
 
-These options are implemented in current `main` (PR #8, retained through PR #9).
-Use current sources or a package built from them; published v0.1.1 assets lack these options.
+These options are included in v0.1.2 sources and ready runtime, and current `main`.
+Historical v0.1.1 assets lack these options.
 Install Inkscape first, then configure an existing SVG workspace with setup.
 
 ```sh

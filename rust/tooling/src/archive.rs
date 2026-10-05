@@ -167,6 +167,12 @@ pub fn source(args: &Args) -> Result<()> {
         let mut stream = tar::Archive::new(fs::File::open(bytes.path())?);
         for entry in stream.entries()? {
             let mut entry = entry?;
+            // git archive emits a global PAX commit comment. It is not a source file;
+            // retain identity through our explicit SOURCE_REVISION instead, so exports
+            // remain compatible with the strict native archive extractor.
+            if entry.header().entry_type().is_pax_global_extensions() {
+                continue;
+            }
             let path = entry.path()?.into_owned();
             ensure(
                 path != Path::new("SOURCE_REVISION"),
