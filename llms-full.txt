@@ -20993,7 +20993,7 @@ Native Rust runtime and build tools; ready packages contain no Python runtime.
       {
         "name": "live_change_package",
         "title": "Live: review a change package",
-        "description": "Plan and preview 1..16 typed style/transform/text edits on a fixed current selection. dry_run=true is read-only and needs no approval; it returns before/after PNG paths and document/selection/fingerprint guards. Review them and resubmit the same edits with dry_run=false, all guards and client-confirmed approval_token. Only the guarded managed native helper applies, through one candidate publication and a Live Operation Record. Failed plans and net no-ops do not mutate or add records. No structural edits/insertion/actions. Native GUI Undo/Redo acceptance is pending: do not promise live atomicity. Inspect after uncertainty before retry; recover confirmed changes through native Undo. Risk class: high when applying, low when planning.",
+        "description": "Plan and preview 1..16 typed style/transform/text edits on a fixed current selection. dry_run=true is read-only and needs no approval; it returns before/after PNG paths and document/selection/fingerprint guards. Review them and resubmit the same edits with dry_run=false, all guards and client-confirmed approval_token. Only the guarded managed native helper applies, through one candidate publication and a Live Operation Record. Failed plans and net no-ops do not mutate or add records. No structural edits/insertion/actions. Native GUI Undo/Redo passed only for a scoped synthetic style/text package; do not promise live atomicity. Inspect after uncertainty before retry; recover confirmed changes through native Undo. Risk class: high when applying, low when planning.",
         "inputSchema": {
           "type": "object",
           "additionalProperties": false,
@@ -21198,7 +21198,44 @@ Native Rust runtime and build tools; ready packages contain no Python runtime.
           },
           "required": [
             "edits"
-          ]
+          ],
+          "if": {
+            "properties": {
+              "dry_run": {
+                "const": false
+              }
+            },
+            "required": [
+              "dry_run"
+            ]
+          },
+          "then": {
+            "required": [
+              "expected_document",
+              "expected_selection",
+              "expected_package_digest",
+              "expected_fingerprint",
+              "approval_token"
+            ],
+            "properties": {
+              "expected_document": {
+                "type": "object"
+              },
+              "expected_selection": {
+                "type": "array"
+              },
+              "expected_package_digest": {
+                "type": "string"
+              },
+              "expected_fingerprint": {
+                "type": "string"
+              },
+              "approval_token": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
         },
         "outputSchema": {
           "type": "object",

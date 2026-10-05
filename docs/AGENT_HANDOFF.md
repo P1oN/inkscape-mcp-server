@@ -27,6 +27,21 @@ acceptance remains unverified; artist/real-work/separate-Mac acceptance is user-
 Runtime Undo fields remain conservative. Acceptance used an uncommitted candidate; the user
 subsequently authorized committing, pushing and opening a PR. No installed-runtime change occurred.
 
+PR #10 review follow-up: the published package schema now conditionally requires non-null
+review guards and a nonempty approval token only when `dry_run=false`. Omitted/true dry-run
+requests retain their preview contract. Tool descriptions and runtime dry-run notes now
+state the scoped synthetic Undo/Redo evidence consistently; per-call verification remains
+conservative. The manifests are regenerated from fresh STDIO discovery. This follow-up
+changes schema/documentation only, not native publication behavior or installed helpers.
+Validation: 64 JSON Schema cases across all four full/live contracts, 16 exact discovery
+configurations, regenerated catalogs, release server build, fmt and Clippy passed. The
+default-parallel Rust run failed the existing immediate post-release lock assertion in
+`live_launch::tests::private_session_and_locks_refuse_link_escape_and_parallel_launch`;
+that test passed in isolation. The suspected concurrent fork/lock lifetime race is outside
+this schema repair and remains recorded rather than hidden by a retry. A diagnostic full
+sequential run passed: 301 tests, zero failures, two opt-in ignored; its retained log is
+`migration/results/pr10-review-checks/runtime-serial.log`.
+
 ## Implemented
 
 - Rust STDIO server, native client manager, separate GUI supervisor, one-shot INX helper

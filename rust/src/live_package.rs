@@ -161,7 +161,7 @@ pub fn call(live: &mut Live, workspace: &Workspace, args: &Value) -> Result<Valu
             preview(candidate, workspace)?
         };
         return Ok(
-            json!({"dry_run":true,"changed":!applied.bytes.is_empty(),"expected_document":crate::live_records::sanitize(&active,workspace),"expected_selection":ids,"expected_fingerprint":fp,"expected_package_digest":digest,"affected_ids":applied.ids,"preview_before":before,"preview_after":after,"preview_artifacts":{"before":workspace.artifact_link(0,Path::new(&before)),"after":workspace.artifact_link(0,Path::new(&after))},"native_undo_verified":false,"notes":["Review these previews, then resubmit the same edits with returned guards, dry_run=false and client-confirmed approval.","Only guarded managed native helpers can apply. Native GUI Undo/Redo acceptance is pending; never retry an uncertain edit before inspection."]}),
+            json!({"dry_run":true,"changed":!applied.bytes.is_empty(),"expected_document":crate::live_records::sanitize(&active,workspace),"expected_selection":ids,"expected_fingerprint":fp,"expected_package_digest":digest,"affected_ids":applied.ids,"preview_before":before,"preview_after":after,"preview_artifacts":{"before":workspace.artifact_link(0,Path::new(&before)),"after":workspace.artifact_link(0,Path::new(&after))},"native_undo_verified":false,"notes":["Review these previews, then resubmit the same edits with returned guards, dry_run=false and client-confirmed approval.","Only guarded managed native helpers can apply. Native GUI Undo/Redo passed only for a scoped synthetic style/text package; do not promise live atomicity. Never retry an uncertain edit before inspection."]}),
         );
     }
     let approval = arguments::string(args, "approval_token")?;
