@@ -1,3 +1,6 @@
+> Historical checkpoint. Counts, commands, package paths and “current” labels
+> apply only to the recorded build. See the [history index](../README.md).
+
 # Stage 7: native development and acceptance tooling
 
 The active entry point is `scripts/dev-tools.sh`, backed by the standalone locked

@@ -1,46 +1,29 @@
 # Changelog
 
-All notable changes to `inkscape-mcp` are documented here. The format is based on
-[Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
-[Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+Source changes below are merged but have not been published as new release assets.
+Detailed checkpoint evidence is indexed in [history](docs/history/README.md).
 
-## [0.1.0] - Unreleased
+## Unreleased — current `main`
 
-First public release. A Model Context Protocol (MCP) server that makes Inkscape / SVG documents
-agent-ready over STDIO.
+- Replace project-supplied Python runtime/helper routes with five Rust executables;
+  ready packages omit CPython/wheels/inkex helpers and active tooling uses Rust/Bash (PR #9).
+- Add shared editable-vector authoring guidance and bounded, read-only explicit stroke-role,
+  CSS/subpath and hidden-geometry advice; no automatic cleanup (PR #9).
+- Improve source installation, client registration, managed skill updates, build identity,
+  uninstall/reinstall, responsiveness and owned cancellation (PR #8 and deadline follow-up).
+- Preserve existing working-copy edit guarantees and bounded managed live operations.
 
-### Added
-- Managed macOS everyday edits: multi-property fill/stroke/opacity, document-space transforms,
-  single-run text and `live_edit_selection` for duplication/deletion/grouping/stacking, each
-  with one native Undo transaction and explicit refusal for locked or unsupported structures.
-- Native acceptance covers every managed edit family, Undo/Redo and unchanged-call behavior.
+## v0.1.1 — 2026-10-03, prerelease
 
-### Fixed
-- Shell responses now collect stderr before publishing the stdout prompt, preventing
-  unknown-action errors from being silently missed or attributed to the following command.
+Published source-bootstrap preview for automatic local installation on Apple Silicon.
+It predates the current default setup/client management and complete Python removal.
+[Release](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.1).
 
-### Original release surface
-- **Headless document lifecycle** — `open_document` / `create_document` into tracked working copies
-  keyed by an opaque `doc_id`; originals are never mutated.
-- **Read & inspect** — `inspect_document`, `find_objects`, `validate_document`, `quality_report`
-  (+ set variants), plus MCP resources exposing document structure and the runtime capability matrix.
-- **Safe edits (medium risk, reversible)** — style (`set_fill` / `set_stroke` / `set_opacity` /
-  `replace_color` / `apply_palette`), text/object, transforms, element creation, defs/gradients,
-  grouping. Every mutation auto-snapshots and emits an Operation Record; `restore_snapshot` rolls back.
-- **Typed batch & bulk** — `apply_edits` (ordered typed edits, validate-all-first, atomic, one
-  snapshot) and `transform_objects` (selector → one typed op, `dry_run` default, `max_matches` cap).
-- **Render & export** — `render_preview`, `export_document` / `export_object`, web / icon / print
-  profiles, bounded dry-run-default batch export, with in-process content-truth verification.
-- **High-risk surfaces (approval-gated)** — path geometry, Action chains, overwrite-on-save, delete,
-  `set_document_svg` / `insert_svg_fragment`; each requires a per-operation approval token.
-- **Live mode** — read / write / view-loop control of a running Inkscape via a cross-platform
-  transport abstraction (extension-socket bridge on any OS; DBus fast-path on Linux), gated by
-  `INKSCAPE_MCP_LIVE_ENABLED`.
-- **Discoverability** — `how_do_i`, `list_capabilities`, generated `llms.txt` / `llms-full.txt`,
-  MCP tool annotations + tags, and an opt-in `core` tool profile / `short` description mode to trim
-  per-turn context cost.
-- **Security model** — workspace sandbox with path + symlink guard, size / export / timeout limits,
-  arg-list subprocess (never shell strings), safe XML parsing (no entity expansion), no network,
-  no arbitrary extension execution, and risk-classed tools.
+## v0.1.0 — 2026-10-03, prerelease
 
-[0.1.0]: https://github.com/jjjsood/inkscape-mcp/releases/tag/v0.1.0
+Published Rust MCP preview with a ready Apple Silicon package.
+Its runtime includes historical Python helper dependencies.
+[Release](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.0).
+
+The inherited changelog and original feature list are
+[archived](docs/history/original-changelog.md); they do not describe these release assets.

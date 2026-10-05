@@ -1,3 +1,6 @@
+> Historical checkpoint. Counts, commands, package paths and “current” labels
+> apply only to the recorded build. See the [history index](README.md).
+
 # Agent handoff — current Rust candidate
 
 Current local defect fixes (2026-10-04, not committed/published): delete_object and

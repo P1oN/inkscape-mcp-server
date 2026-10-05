@@ -1,3 +1,6 @@
+> Historical checkpoint. Counts, commands, package paths and “current” labels
+> apply only to the recorded build. See the [history index](../README.md).
+
 # Rust helper migration investigation
 
 Historical investigation checkpoint: 2026-10-02, stage13. The current stage38 package

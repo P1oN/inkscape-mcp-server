@@ -155,7 +155,7 @@ selected baseline root group without another selection; after native Undo run
 `verify-style-undo`, Undo baseline and `close-owned`. Finish requires the blank original
 and independent Undo/change/no-op evidence before graceful close. Full text/Redo remains
 separate; CLI success or session cleanup never proves native Undo/Redo. See
-[helper semantics](docs/live-helper-kernels.md) for timing and supported limits.
+[helper semantics](docs/live/live-helper-kernels.md) for timing and supported limits.
 
 Documentation-only changes need command/link consistency and `git diff --check`;
 rerun native GUI acceptance only when live behavior changes. Record fresh evidence and

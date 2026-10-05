@@ -1,215 +1,14 @@
-> Historical checkpoint. Counts, commands, package paths and “current” labels
-> apply only to the recorded build. See the [history index](README.md).
+> Historical snapshot archived on 2026-10-05 after PR #9 merged. Statements such as
+> “current”, “next”, “local” and “uncommitted” describe their original checkpoint.
+> Use [current status](../AGENT_HANDOFF.md) and [active backlog](../RUST_NEXT_PLAN.md).
 
-Development STDIO frame checkpoint (2026-10-03): pinned rmcp AsyncRwTransport uses
-unbounded read_until before argument validation. Current Rust wraps stdin with a per-line
-byte cap before SDK buffering/deserialization; default6*MAX_INPUT_BYTES+1MiB accommodates
-JSON escaping, override positive INKSCAPE_MCP_MAX_REQUEST_BYTES. Newline/CR count toward
-cap. Oversized input closes only the MCP connection; startup/reconnect do not launch GUI.
-Actual stage36 unfinished5KB line waits without EOF under configured4096 cap; current debug
-refuses immediately, ordinary3ping frames pass, workspace bytes/mtime unchanged. Rust215/
-1ignored, fmt/clippy and tooling lint/format pass. Not a whole-process RSS/output cap proof.
-Fix not yet packaged; current36 unchanged. CI frame gate prepared, not remotely executed.
-
-Native36 launch attempted on owned synthetic root/private profile and failed before drawing:
-bridge reports no primary monitor. Native safety guard remains intact. Logs preserved in
-native-stage36/saved-launch-diagnostics; native-stage36-launch-comparison.json is a failure,
-not acceptance. No surviving owned GUI/supervisor found. A CUA display-name lookup also
-launched ordinary Inkscape PID8571; acknowledged to user and left untouched. No UI edits or
-window closures. User input requested for an unlocked Mac/active screen; meanwhile continue
-independent work. This is one verified native environmental refusal, not recurrence of
-historical disappearing-group incident. Do not retry native launch until screen is available.
-
-Next: package current frame fix with prepared Homebrew BSD text/source kit, final scoped
-output/requirement/documentation audit, then native acceptance when monitor is available.
-Goal active; Windows/clean-machine/old incident remain user-deferred.
-
-Current package checkpoint: stage36 (2026-10-03). Actual cold/warm archive install,
-doctor10/launcher11/notices17 pass.2532FILES entries verified. Exact comparison to35:
-2506 existing files unchanged, including every executable/runtime/helper/native asset;
-only inventory/package metadata changes and24 added CPython/source notices. Thus35
-binary-specific security/discovery/CLI/diagnostic evidence applies to identical bytes,
-without inferring new GUI/performance acceptance. Build index: package-stage36-build-comparison.json.
-
-Provenance review: six exact PyPI wheels,1259 matching members. Every upstream RECORD
-row retained; only hashed uv INSTALLER/empty REQUESTED metadata and two omitted NumPy
-CLI records added. Installed GLib recipe matches exact SHA-verified SBOM bottle; current
-API-cache recipe differs and was not substituted. Sole GLib patch history commit predates
-the bottle; patch applies to exact upstream2.90.0. Native source kit includes four exact
-upstream archives/recipes/receipts/SBOMs, patch and recipe's gobject-introspection resource.
-Raw: wheel-source-audit-stage35-final and homebrew-source-audit. Initial wheel-report
-serialization failure was a local audit variable-shadowing bug, fixed; earlier raw retained.
-
-19CPython license texts/PYTHON.json/provenance and GLib recipe/patch now packaged in36;
-wheel hashes enforced by builder. Homebrew recipe BSD2 license additionally retrieved
-and prepared in collector, but not yet in36; include it and the source-kit license in the
-next consolidated package. Do not claim complete redistribution clearance. Source kit
-is a source-input artifact, not a reproduced binary. Current GUI/performance evidence
-remains historical. Goal active: finish remaining publication/output scope and current
-synthetic native assessment, then final requirement/documentation audit. Windows,
-clean-machine installation and historical incident cause remain user-deferred.
-
-CPython provenance checkpoint (development, 2026-10-03): actual stage35 runtime matches
-Astral CPython3.12.14+20260929 macOS arm64 stripped release. Both downloaded release
-archives match GitHub asset SHA-256.946 regular runtime members outside site-packages
-match byte-for-byte; libpython matches exact install_name_tool reproduction with the
-original basename; all sysconfig values match published uv transformations; the added
-EXTERNALLY-MANAGED marker matches explicitly. Additional executable sysconfig statements
-are refused. Earlier codesign simulation used a different basename and yielded a different
-signature; that was an audit-fixture issue, not a runtime defect. Raw failures are retained.
-Pinned build recipe b498734a5791d0e6786695a226fd398a41c6f7f6 records source URL/hash/version;
-actual packaged OpenSSL3.5.9/SQLite3.53.1/Expat2.8.5/mpdecimal4.0.0 agree with the recipe.
-Report: migration/cpython-stage35-provenance-comparison.json.
-
-19 full-distribution license texts plus PYTHON.json/provenance are now checked in under
-migration/vendor-notices/cpython. Collector selects them only for the exact reviewed
-executable hash; unknown targets/binaries remain explicit gaps. Collection tests and
-Python lint/format pass. Current archive remains35 and DOES NOT yet include these texts.
-This is regular-file runtime attribution, not wheel provenance, complete source rebuild
-or legal clearance; conservative licenses do not imply every named library is linked.
-Next: exact Homebrew GLib patch/source metadata, wheel attribution and fresh packaged
-notices, scoped remaining audit/current native assessment. Goal remains incomplete.
-
-Current package checkpoint: stage35 (2026-10-03). Includes bounded validation diagnostics,
-compare_region private rendering before pair publication, and exact upstream notice
-supplements for GLib2.90.0/D-Bus1.16.2/gettext1.0/PCRE2 10.48, matched to installed SBOM
-URL/hash/version. Full GLib LGPL, referenced D-Bus alternatives and runtime libintl LGPL
-are packaged; receipt/formula metadata is bound by FILES. Rust213/1ignored, fmt/clippy,
-15notice checks/102crates, doctor10/launcher11/security35/files12/discovery16,
-asset17/routes8 both engines, debug/package diagnostics3 and compare refusal/pixel readback
-pass. Actual cold/warm archive installs with empty PATH pass. Archive/current index:
-migration/package-stage35-build-comparison.json. No current GUI/performance acceptance.
-
-Stage34 was an intermediate archive missing gettext-runtime/intl/COPYING.LIB; the
-strengthened completeness check failed. It was never current. Stage35 includes the
-runtime-specific LGPL text and passes. Exact archives/hash-verified notice extraction
-are preserved in migration/results/native-source-audit. This closes missing native
-license-text evidence, not full corresponding-source/relink clearance: Homebrew GLib
-patches and private CPython native/source provenance remain to audit. Foreign target
-attribution and actual execution remain unverified. No publication or user configuration
-changes. CI notice/diagnostic/compare gates are prepared, not remotely executed.
-
-Next: audit private CPython and exact modified native source/build metadata, finish scoped
-output/publication review and assess current-package synthetic native smoke, then audit
-the full objective. Earlier checkpoint notes below retain their original package scope.
-
-Development comparison-publication checkpoint (2026-10-03): stage33 reproduction
-confirmed compare_region left a before PNG when the after source was unsafe. Both PNGs
-are now rendered privately before publication. Per-file exclusive atomic creation avoids
-partial PNG exposure; second-write failure rolls back a preceding unchanged artifact,
-preserves existing destinations and reports recovery when inspection/cleanup is uncertain.
-Actual debug STDIO refusal leaves complete workspace bytes/mtime unchanged; a successful
-blue/red pair is read back through resources/read. Collision/unusable-parent regressions
-pass. Rust213/1ignored, fmt/clippy and Python tooling lint/format pass. This is not pair-level
-crash atomicity or exhaustive concurrent-race proof; directory mtimes may change on a
-publication failure. Current archive remains stage33 and does not include these development
-fixes or bounded diagnostics yet. Raw evidence: migration/results/compare-stage33-before-fix,
-compare-publication-final and compare-publication-review. CI gate prepared, not remotely run.
-Next: remaining output/publication scope, dependency provenance, fresh package and scoped
-native assessment; user-deferred Windows/clean-machine/live-incident work stays deferred.
-
-Development diagnostic checkpoint: streaming bounded repr preserves ordinary frozen
-validation errors, long keys (>256chars)/tags (>50chars) abbreviated. Stage33 reproduces
-250527-byte unknown-field response; current debug3large-input refusals stay below4096wire
-bytes with unchanged workspace. Rust211/1ignored and clippy pass. Current package remains33;
-fix not packaged yet. Not a global transport/output/RSS proof. Next: remaining kernel/resource
-errors and publication audit, provenance, fresh package/native assessment. See security audit.
-
-# Current candidate: stage33 (2026-10-03)
-
-Private bounded staging protects linked SVG/raster/CSS URL/import resources. Relative
-origins, nested dependencies and restored links/absref metadata have scoped evidence.
-Confirmed stage32 capture/custom-export directory planning preceded unsafe-asset refusal;
-fixed before all output planning. Earlier route harness mistakes (missing raw gate and
-expecting accurate find_objects to error instead of safe DOM fallback) are retained.
-Initial unit expected the already-created artifacts root absent; corrected to newly-created
-frames subtree. Actual complete-tree/mtime refusal checks remain strict and pass.
-
-Current Rust209/1ignored, fmt/clippy; actual33 archive cold/warm install, resources17 and
-routes8 in both engine modes, security35/special-files12, doctor10/launcher11/notices9
-(102crates), discovery16 and manifest drift check pass. GUI/native/performance evidence
-remains historical, not transferred. Current-package.json and stage33-build index artifact.
-
-Next: remaining error/output/publication audit, dependency source/provenance and scoped
-current-native smoke assessment, then requirement-by-requirement completion/delivery.
-PI/xml:base and non-UTF-8 stylesheet syntax are explicit supported-surface limits. No
-new GUI launch, window closure, user document/config mutation or remote CI/publish occurred.
-Legacy Python MCP is retired; runtime helpers/supervisor remain. Windows, clean machine
-and historical incident investigation remain user-deferred; timing is secondary.
-
-## Historical checkpoint notes
-
-Stylesheet checkpoint: development safely stages local UTF-8 @import with nested bases,
-order/media suffixes and shared depth/count/byte limits. Actual CLI17cases:9outside
-refusals,8positive pixels/8SVG exports. Direct native CLI8fixtures prove @import works;
-selected PI/xml:base behavior differs, so explicit unsupported refusals remain documented.
-Rust208/1ignored, clippy pass. Next: broader engine route checks and fresh package/notices,
-remaining error/output/publication audit and provenance. Stage31 archive is unchanged.
-See RUST_SECURITY_AUDIT.md; native GUI and other versions are not inferred from CLI.
-
-CSS URL checkpoint: development uses pinned cssparser0.38.0 (10 added dependencies),
-stages ordinary CSS URL assets and restores CSS links. Real CLI13cases:7outside refusals,
-6positive pixels/6SVG linked exports, Rust207/1ignored and clippy pass. Initial probe prefix
-collision was a harness false positive, retained/corrected with strict assertion unchanged.
-Next: imports/stylesheets+xml:base compatibility, broader route checks, fresh package with
-updated dependency notices, remaining audit/provenance. Stage31 archive is unchanged.
-See RUST_SECURITY_AUDIT.md and renderer-assets-css-debug-v4; no native/GUI claim.
-
-Use/feImage checkpoint: development stages SVG fragments and raster feImage resources,
-restores absref metadata for CLI edits (including namespace recreation). Actual CLI11cases:
-6outside refusals/no publication,5positive pixel checks and5SVG linked exports. Rust205/1
-ignored; staged assets remain bounded. Next: complete CSS/xml:base handling and broader
-engine route acceptance, fresh package, remaining security/provenance audit. Stage31
-archive is unchanged. See RUST_SECURITY_AUDIT.md and use-feimage-debug-v2 evidence.
-
-Nested asset checkpoint: development uses original SVG asset base, recursively stages
-SVG image dependencies with depth8/count128/aggregate limits. Real CLI7cases:4outside
-refusals (including nested),3positive PNG pixels and3SVG exports preserving links. Rust205/1
-ignored and clippy pass. Current stage31 archive is unchanged. Next: external CSS/use/feImage,
-metadata restoration, wider route checks and fresh package; then remaining audit/provenance.
-See RUST_SECURITY_AUDIT.md and renderer-assets-nested-debug-v2 for scoped evidence.
-
-In-progress asset staging (2026-10-03): engine_input owns bounded workspace-read raster
-copies for all headless engine input routes, restores links on outputs; development real
-CLI checks refuse outside absolute/fileURI/symlink refs and preserve inside PNG/SVG links.
-Stage31 archive is unchanged/unsafe for external asset isolation. Nested SVG/CSS dependency
-compatibility, relative base semantics/metadata restoration, broader routes and fresh package
-remain pending. See RUST_SECURITY_AUDIT.md; do not transfer this to native or stage31 proof.
-
-# Current Rust development status (2026-10-03)
-
-Current package stage31 includes namespace fix and XML open preflight fix. Malformed
-open used to write managed copies/registry before failing; now refused before all writes.
-Rust202passed/1ignored + fmt/clippy, helper6, packaged35security/12special-file checks,
-cold/warm CLI/STDIO archive install, doctor10, launcher11, notices9 and discovery16 pass.
-See RUST_SECURITY_AUDIT.md for exact proof/limits; current-package.json indexes artifact.
-
-Legacy Python MCP server and paired comparison scripts are retired. Required Python
-components are only runtime/helpers and rust/package/supervise.py; frozen JSON contracts
-remain schema/instruction/regression data. Use Rust-only iterations. README/CONTRIBUTING
-and generated llms describe actual Rust operation.
-
-Confirmed next fix: stage31 renderer reads owned outside-workspace PNG via absolute/file URI/
-symlink references. Failing owned regression and pixels saved; see RUST_SECURITY_AUDIT.md.
-Next: close renderer dependency reads, then focused security/behavior review (caps, errors,
-publication boundaries), dependency source/provenance, final delivery. Do not redo whole
-suites without changed code/failure/concern. Native/performance stage29 results describe
-stage27 only. Historical incident research is deferred until recurrence; Windows backlog;
-clean-machine install user-owned; timing secondary. No user GUI launch/close in this audit.
-
-## Historical checkpoint log (newest first)
-
-Entries below describe their individual checkpoint; “pending” there is historical.
-Use the current status and report above to determine the next work.
-
-Namespace review fix (2026-10-03): ordinary SVG attribute reads/removals use explicit
-no-namespace methods across37 Rust DOM modules; foreign q:fill/q:style/q:id no longer
-cause false no-ops, metadata removal or wrong targets. Two regressions failed before,
-pass after; fullRust201/1ignored, fmt/clippy, Python1211/90skipped + Ruff/mypy pass.
-Fresh release15namespace, debug71read/122realCLIedit and release16discovery comparisons
-pass without differences. See RUST_REVIEW and namespace-review-comparison.json.
-Existing stage27 packages/native/perf evidence are PRE-FIX; no install/config/restart
-or GUI mutation occurred. Rebuild/revalidate packages before transferring evidence.
+User-approved Rust-only development update (2026-10-03): the legacy Python MCP
+implementation and paired comparison harnesses are retired. Frozen JSON contracts and
+historical evidence remain, but no executable Python oracle or repeated parity runs are
+part of the current plan. Use Rust regression/invariant tests, STDIO, package and native
+acceptance. Required Python helpers/supervisor remain in runtime/ and rust/package/.
+Historical preservation/parity requirements below are superseded by this user decision.
+Recovery location is recorded in migration/python-retirement.json. See CONTRIBUTING.md.
 
 Stage29 current live benchmark complete:5alternating Python/Rust pairs/80read-only
 requests/40scene-selection-PNG comparisons pass; sampler errors0, scene7objects throughout.
@@ -237,8 +36,6 @@ benchmark pending; no cause/fix claim for historical stage21 disappearance. Revi
 missing binary hash in native launch harness; initial selection/sync refusals retained.
 See native-stage29-comparison.json and native-stage29-captured-comparison.json.
 
-# Продолжение работы
-
 Stage28 isolated transport diagnostic:50 frame/handler+50file/process partitions pass,
 5pairs160requests/20full inspection envelopes equal/sampler errors0. Normal stage27 unchanged.
 Initial flush envelope subtraction refused: flush may overlap client roundtrip; v2 read-to-first
@@ -246,11 +43,9 @@ write + residual additive, write/flush separate. Clock epochs differ, duration c
 No pureIPC/native/production claim. See RUST_PHASE_MEASUREMENTS/transport-profile-stage28 binding;
 continue Python/warm/live boundaries, native-positive/package live, Windows/foreign/licensing.
 
-Stage27 filesystem review adds test-only FIFO regression for4read/hash/lock paths; injected
-O_NONBLOCK removal fails in1s without hang, exactsource restored. FullRust199/ignored1,
-clippy/fmt pass. Actual unchanged package12special-file/escape STDIO refusals preserve external
-original and create zero managed files. No production defect/fix claimed; Windows/foreign
-port still pending. See filesystem-review-stage27 and special-files-stage27 evidence.
+Stage27 filesystem review: test-only FIFO regression detects injected lostNONBLOCK withouthang;
+fullRust199/1ignored+clippy/fmt pass. Actual package12special-file/escape refusals preserve
+original/zero managedwrites. Reviewed paths not exhaustive concurrent-race/foreign proof.
 
 Stage27 current argument audit:12negative matrices/4351observations/24STDIOstarts pass actual
 package; nine positive coercion suites547observations/316converted requests pass exact unbundled
@@ -268,150 +63,68 @@ native still pending. Fixed prompt live flag with actual tool-gate assertions;10
 pass actual package. Reports process-benchmark-stage27-followup and prompt-stage27-comparison.
 Next argument/current resource audit, precise IPC, native history and foreign/platform gates.
 
-Stage27 synthetic live: 15 families/651 observations pass on byte-identical unbundled release.
-Owned fixed peers/fake boundaries, real CLI discovery; no current native/package live proof.
-Current gzip+trace coverage union4619calls, all110called/109success; live_edit_selection only
-8structural socket refusals. Initial reference discovery PATH failure retained/repeated alone.
-Explicit loop10/diff18encoded deltas, managed7/mutation2safety deltas retained; zero unexpected.
-See current-live-stage27-coverage.json and migration report. Next current production benchmark,
-argument/prompt/resource audit and native-positive/package live gate; preserve old bindings.
+Stage27 synthetic live follow-up:15families/651 observations pass on exact release bytes.
+No native/package-live inference. Named current union4619calls/110called/109success;
+live_edit_selection only structural refusals. current-live-stage27-coverage.json and
+results/current-live-synthetic-stage27-verified/comparison.json reference actual attempts.
 
-Stage27 remaining headless review passes 16 release families/1715 observations and 11 actual
-package families/1462 (overlapping). Runner fixes terminal-state/report format; coverage fixes
-gzip omission. Corrected current trace union4145calls/84of110 names, remaining26live; not full
-argument/native proof. Failed PATH/auto-discovery/fontconfig attempts retained, selected passing
-reports reference exact original raw dirs. No server source changed. See migration report and
-current-headless-stage27-coverage-with-package-v2.json; continue live/current perf/platform gates.
+Stage27 affected-family follow-up: 15 headless cohorts pass 1035 scenarios/profiles on
+current package; raw results/current-family-stage27-v2 preserves path-only harness copies.
+Coverage-with-package maps 1155 actual tool calls, 53/110 successful names; remaining57
+explicit. No full/native/argument coverage claim; old results/bindings untouched.
 
-Stage27 affected-family cohort completed: 15 families, 1035 scenarios/profiles pass on
-packaged binary. Isolated copies change only paths and preserve old reports. Initial prep
-rejected argument-only recovery before launch; v2 passes. Coverage union with current
-byte-identical release/archive traces: 1155 tool calls, 53/110 names with successful replies.
-Remaining57 in current-family-stage27-coverage-with-package.json; presence is not exhaustive
-behavior/args/native proof. Next current read/export/actions/path/quality/live audit, plus
-native monitor, pure IPC, foreign-platform and licensing/source-offer gates still pending.
+Current candidate stage27 packages the DOM no-op fix. Cold/warm archive plus complete-tree
+mtime no-op checks, 16 discovery, 10 doctor, 9 notice and 11 launcher cases pass. Build report
+package-stage27-build-comparison.json; current-package.json indexes it. Current native and
+performance acceptance still pending; no historical evidence transfer.
 
+Stage26 sync diagnostic found transient proposed-record creation on DOM no-op. Current
+source fixes memory-only DOM staging; CLI pre-dispatch audit gates and sync remain. Raw
+phase-profile-stage26 contains pre-fix timings, failed regression and fixed Rust/STDIO logs.
+Stage23 archive is pre-fix; replacement package is pending. Existing-debug edit attempt is
+explicitly excluded; fresh-release edit evidence is recorded separately.
 
-Current package stage27: stage26 no-op fix, exact tested fresh-release bytes, cold/warm
-archive installation plus full-tree mtime no-op checks pass; discovery16/doctor10/notices9/
-launcher11 pass. Helper/native components unchanged from stage23. Current pointer indexes
-package-stage27-build-comparison.json. Native/performance stage27 pending, not transferred.
-Earlier stage23 native launch refused without primary monitor. Preserve all old bindings.
+Stage25 paired Python/Rust phase diagnostics: 50+50 bounded handler partitions validated,
+small/100-object full inspection envelopes match, sampler errors0. See phase-profile-{python,rust}-
+stage25-comparison.json, phase-profile-stage25-envelope-comparison.json and
+../docs/RUST_PHASE_MEASUREMENTS.md. Next investigate individual sync latency; pure IPC,
+unguarded file APIs and warm/live still pending. Production source/archive unchanged.
 
+Stage24 isolated diagnostic phase follow-up: see ../docs/RUST_PHASE_MEASUREMENTS.md,
+phase-profile-stage24-v2-comparison.json and raw results/phase-profile-stage24-v2/.
+Initial nested-log contamination retained in results/phase-profile-stage24/. No normal
+server source/package changed; pure IPC/Python/warm/live phase attribution remains pending.
 
-Stage26 sync spans found transient audit creation on DOM no-op. Source fixed: 22 memory-only
-families use transaction::apply_dom; actions/paths/fit keep pre-dispatch audit apply. No sync
-or safety gate removed. Directory-mtime regression failed before fix; full Rust198/ignored1
-and clippy pass. Fresh release STDIO preserves full tree bytes/sizes/mtime on no-op. Existing
-stage23 archive is pre-fix; build a replacement package after affected comparisons complete.
-Pre-fix sync timing is separate from fixed release validation. See RUST_PHASE_MEASUREMENTS.
+Stage23 live follow-up (2026-10-03): 134 synthetic connect/loop/mutation observations pass.
+Isolated native launch refused without a primary monitor; terminal logs retained under
+results/native-gui-stage23. No relaunch or native success claim. See
+live-stage23-followup-comparison.json and native-stage23-launch-comparison.json.
 
+# Rust migration evidence
 
-Stage25 paired diagnostic: 50 Python ContextVar middleware requests + 50 Rust handlers
-partition correctly; full small/100-object inspection envelopes match, sampler errors0.
-No normal server/package change. See docs/RUST_PHASE_MEASUREMENTS.md and
-migration/phase-profile-{python,rust}-stage25-comparison.json. Rust logical-file edit
-region is larger; next measure file/directory sync_all separately before changing anything.
-Pure IPC, unguarded IO, warm/live and native-primary-monitor gate remain open.
+Reference: clean `main` at `c50a9248b3bca9177103373ce66d6dd1307bedd3`.
+Work branch: `codex/rust-migration`. Python remains the production/reference server.
 
+Current package index: `current-package.json`. The legacy `package-build-comparison.json`
+is frozen at its hash-bound stage22 native checkpoint; use per-stage reports for acceptance.
 
-Stage24 diagnostic phase work: scripts/history/python/migration_prepare_phase_profile.py creates an
-isolated source copy; diagnostic spans are never compiled into the normal server.
-Corrected 5-pair run binds/partitions 50 Rust handlers via interval union. Initial nested
-stderr logging polluted file spans and is retained separately; v2 buffers outside handler.
-Read docs/RUST_PHASE_MEASUREMENTS.md. Pure IPC/Python/warm/live and unguarded file
-coverage remain pending; stage23 is still the installable candidate. No GUI retry occurred.
+## Stage23 source-first onboarding (2026-10-03)
 
+setup.sh now invokes the fixed native source recipe and saves launcher settings; ready
+archives still need only Inkscape. source-onboarding-stage23-comparison.json and its binding
+record clean-target source-copy acceptance with existing host dependencies, intentional Cargo
+settings overrides, the empty-PATH launcher fix and cold/warm/doctor/notices/discovery/edit
+checks. Stage23 headless direct/diagnostic five-pair follow-up is saved; no stage23 GUI, uv-download or foreign execution is claimed. Historical
+stage22/review evidence remains immutable; full migration is incomplete.
 
-Stage23 live follow-up: 134 synthetic observations pass (connect26/loop46/mutation62),
-intentional uncertainty/encoding differences retained. Ninth isolated managed launch attempt
-at /private/tmp/imcp-native-60hza24y terminated: no primary monitor guard. No surviving
-owned process, no retry/unlock/security change. Native stage23 still unverified, earlier
-stage21 disappearance unexplained. See live-stage23-followup-comparison.json and
-native-stage23-launch-comparison.json; continue independent phase/platform/coverage work.
+## Review cycles and stage22 (2026-10-03)
 
-
-Stage23 measurement follow-up: five alternating direct pairs plus five diagnostic CLI pairs,
-360 requests, 60 complete inspection envelopes equal. Startup median Python/Rust
-824.42/20.18 ms; inspect 100k 15322.69/1966.01 ms. No general edit/render speedup.
-One retained Python direct sampler ESRCH; memory observations incomplete, large response
-RSS still high in both. Raw process-benchmark-stage23 and process-benchmark-cli-stage23;
-comparison/followup JSONs bind the exact stage23 binary. Native stage23/current live and
-exclusive server/IPC/logical-file timing remain pending. Historical bindings unchanged.
-
-
-Обновлено 2026-10-03. Это индекс состояния, не дополнительные разрешения.
-Перед действиями проверяй Git/PR/процессы; не закрывай GUI с несохранённой работой.
-
-## Текущее состояние main
-
-
-### Stage23 source build/setup and PATH regression fix (2026-10-03)
-
-setup.sh now invokes scripts/build-local-package.sh from a checkout; a ready archive
-still auto-detects itself and needs only Inkscape. Native build prerequisites are detected,
-SDK/PATH configured, helper Python 3.12.14/native architecture/six pins checked. Existing
-pinned runtime is reused or installed uv manages the helper environment. No system package
-manager/profile/MCP-client config is changed; no GUI launch/restart occurs.
-
-Isolated fresh source copy/empty target build passes with intentionally wrong Cargo
-external target/output settings: explicit native artifact is packaged, stale implicit release
-is absent. Empty-PATH launcher initially failed dirname; all three scripts now bootstrap
-system paths and the fixed build/setup/doctor/STDIO succeeds. Stage23 actual cold/warm archive,
-ten doctor profiles, nine notices checks, eleven launcher checks, 16 discovery profiles and
-122 edit scenarios pass. UV download/foreign/fresh-OS paths are unverified.
-
-Stage23 binary SHA dfadfbc0a11cc14a1454c40d35956348070b353115ed726b8b450035b73afd1f
-has no native GUI/performance evidence yet. Do not transfer stage22 results to it.
-Raw: migration/results/source-onboarding-stage23/. Summary/binding:
-migration/source-onboarding-stage23-comparison.json and -evidence-binding.json.
-Current commands/archive are in RUST_MIGRATION_REPORT.md. Next: final native/history,
-phase measurement, target ports/validation and coverage audit. Preserve all retained GUI.
-
-### Stage22 fresh native and read-only benchmark follow-up (2026-10-03)
-
-Fresh stage22 explicitly owned session: supervisor 30626, native PID 30645,
-/private/tmp/imcp-native-l3sosx3s; see results/native-gui-stage22/session.json.
-46 fixed effects/history + 38 structure + 22 transform + 16 lower/order checks pass,
-with exact-tree/ID/RGBA and captured-only rechecks. Five paired Python/Rust live reads:
-80 requests and 40 comparisons pass; every scene has seven objects. After benchmark,
-Select All still has seven; group-apply proceeds to eight. Stage21 disappearance did not
-reproduce in this attempt, but no cause/fix is proven. Stage21 state is preserved.
-Final stage22 fixture is restored to seven objects and retained; do not relaunch/repair it
-without examining the evidence/current PID/path/parent. Eight synthetic sessions have now
-been opened total; six known remaining sessions are preserved. No user windows were changed.
-
-Current data and UI/harness incidents are documented in RUST_MIGRATION_REPORT.md;
-binding: migration/native-stage22-evidence-binding.json. Native UI capture error after Redo
-was handled by inspecting completion, not repeating the action. Empty-selection and existing
-sync-destination guards refused before dispatch; lower/order uses a separate owned workspace.
-Automatic source build after clone, Windows/other-host validation, phase attribution and
-history investigation remain pending. Review's earlier no-GUI checkpoint is historical.
-
-### Review cycles and stage22 shell onboarding (2026-10-03)
-
-Read [RUST_REVIEW.md](reports/RUST_REVIEW.md) and the finite
-[RUST_COMPLETION_CHECKLIST.md](reports/RUST_COMPLETION_CHECKLIST.md) first for migration follow-up.
-The high-risk process/audit review fixed three conditions: continuously readable pipes
-could defeat completed-child drain bounds; ignored fcntl failures could enter blocking reads;
-failed post-dispatch live audit writes could hide completion uncertainty. Focused regressions
-and rereview pass. Full gates: 197 Rust / 1 ignored, 1289 Python / 12 skipped, fmt/clippy,
-Ruff (325 files) and mypy (122 sources). Fresh release: 16 exact discovery profiles,
-122 edit scenarios and 62 synthetic live observations with no unexpected differences.
-
-Stage22 includes those fixes plus setup.sh/run-mcp.sh. Cold/warm installation from its
-actual archive with empty PATH, ten doctor profiles, nine notice checks and eleven launcher
-checks pass. Settings are literal data, not shell source; no user MCP config was changed.
-The source-first automatic package build after Git clone remains pending. Stage22 has
-**no native GUI acceptance** or fresh benchmark evidence. Stage21's disappearance is not
-fixed or causally explained by the review changes. Preserve its drawing and earlier evidence.
-No new GUI was opened/closed/restarted. Other-platform execution, Windows port and exclusive
-phase attribution remain pending; no credentials are needed for local source/archive setup.
-
-Raw review evidence: migration/results/review-cycle1/; summaries:
-migration/review-cycle1-comparison.json and migration/review-cycle1-evidence-binding.json.
-Current install commands/archive hashes are in RUST_MIGRATION_REPORT.md. Full goal remains
-incomplete; do not mark historical scoped evidence as final-candidate acceptance.
+See ../docs/RUST_REVIEW.md for the process/audit findings, their fixes and scope.
+review-cycle1-comparison.json and review-cycle1-evidence-binding.json bind the fresh
+release, source snapshots, raw logs and actual stage22 archive acceptance. Native history
+remains unresolved; no new GUI acceptance is transferred from stage21. setup.sh/run-mcp.sh
+now configure a ready package without manual env edits; automatic source package building
+is pending. Full migration remains incomplete.
 
 ### Stage21 live benchmark and extended-native refusal (2026-10-03)
 
@@ -512,13 +225,13 @@ Reproduce separately, never concurrently:
 
 ```sh
 PATH=/Applications/Inkscape.app/Contents/MacOS:$PATH .venv/bin/python \
-  scripts/history/python/migration_process_benchmark.py \
+  scripts/migration_process_benchmark.py \
   --package migration/results/packages/inkscape-mcp-macos-arm64-stage21 \
   --output migration/results/process-benchmark-stage21-new \
   --repeats 5 --counts 100 10000 100000
 # Run the diagnostic after the direct run has ended, into a different new directory.
 PATH=/Applications/Inkscape.app/Contents/MacOS:$PATH .venv/bin/python \
-  scripts/history/python/migration_process_benchmark.py \
+  scripts/migration_process_benchmark.py \
   --package migration/results/packages/inkscape-mcp-macos-arm64-stage21 \
   --output migration/results/process-benchmark-cli-stage21-new \
   --repeats 5 --counts 100 --diagnostic-cli
@@ -1507,7 +1220,7 @@ Raw replies/traces and **24 captured SVG/PNG artifacts with hashes** are retaine
 `migration/results/native-gui-stage12/`; read-only verification is reproducible without GUI:
 
 ```bash
-.venv/bin/python scripts/history/python/migration_verify_native.py --output migration/results/native-gui-stage12 --report migration/native-stage12-captured-comparison.json --captured-only
+.venv/bin/python scripts/migration_verify_native.py --output migration/results/native-gui-stage12 --report migration/native-stage12-captured-comparison.json --captured-only
 migration/results/packages/inkscape-mcp-macos-arm64-stage12/bin/inkscape-mcp --doctor
 ```
 
@@ -1637,7 +1350,7 @@ gaps and SHA-256 of **complete inspection result envelopes** for the 1/100/10,00
 fixtures. Every repeated Python/Rust result matches, including duplicated JSON text; object and
 flat tree counts prove the large result was not truncated. Only actual `doc_id` fields bound by
 requests are normalized and JSON text is decoded; no result fields are discarded. Reproduce
-with `scripts/history/python/migration_verify_large_response.py --output migration/results/process-benchmark-stage9
+with `scripts/migration_verify_large_response.py --output migration/results/process-benchmark-stage9
 --prior-summary migration/results/process-benchmark-stage8/summary.json
 --report migration/process-benchmark-stage9-comparison.json`. The benchmark harness retains all
 raw wire replies and samples. This check is fixture evidence, not full schema/error acceptance.
@@ -1658,7 +1371,7 @@ the full migration goal remains active.
 
 ### Stage8 real STDIO process and CLI measurements (2026-10-02)
 
-`scripts/history/python/migration_process_benchmark.py` now benchmarks the packaged optimized stage8 binary
+`scripts/migration_process_benchmark.py` now benchmarks the packaged optimized stage8 binary
 against the preserved Python console entry point, sequentially with alternating order across
 **five repetitions**. Each run uses a fresh owned temporary HOME/profile/workspace, live disabled,
 full descriptions/profile, raw Actions enabled and explicit `per_call` mode. No GUI is launched.
@@ -1724,12 +1437,12 @@ Reproduce direct measurements (use a new output directory):
 
 ```bash
 PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" .venv/bin/python \
-  scripts/history/python/migration_process_benchmark.py \
+  scripts/migration_process_benchmark.py \
   --package migration/results/packages/inkscape-mcp-macos-arm64-stage8 \
   --output migration/results/process-benchmark-stage8-new --repeats 5
 # Separate diagnostic trial; never mix this with direct timing comparisons:
 PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" .venv/bin/python \
-  scripts/history/python/migration_process_benchmark.py \
+  scripts/migration_process_benchmark.py \
   --package migration/results/packages/inkscape-mcp-macos-arm64-stage8 \
   --output migration/results/process-benchmark-cli-stage8-new \
   --repeats 1 --counts 100 --diagnostic-cli
@@ -1813,258 +1526,799 @@ and use its exact application path (the old/new apps share a bundle ID). The use
 to unlock manually; independent work may continue. The native harness now accepts `--output`
 to preserve each session's evidence and still refuses reuse of an existing ownership record.
 
-### Packaged native insertion, Undo/Redo and reconnect (2026-10-02)
+`contracts/` contains complete initialization and discovery wire results captured through
+the installed `.venv/bin/inkscape-mcp` STDIO entry point for all 16 combinations of live,
+advanced Actions, profile and description settings. These include instructions, defaults,
+input/output schemas, annotations, prompt arguments and resource/template descriptors.
+They contain metadata only; the Rust implementation does not invoke the Python server.
 
-One explicitly authorized isolated managed session was launched from candidate stage5,
-using private HOME/profile/workspace, packaged Python supervisor, prebuilt bridge and private
-D-Bus. Real context discovery found exactly one synthetic blank drawing. The packaged insertion
-helper authored an editable named vector group containing a blue rectangle. Native Edit → Undo
-removed every inserted ID in one step; native Edit → Redo restored each inserted SVG subtree
-byte-for-byte and the rendered PNG RGBA pixels exactly. Reconnecting over fresh MCP STDIO
-cleared the task binding, and an approved style request before document selection was refused.
-The official vendor executable SHA-256 remained unchanged. The owned test window is retained
-for further acceptance; no user drawing/window was changed or closed.
+`discovery-comparison.json` compares every field and list position without normalization.
+`read-comparison.json` compares native workspace/open/summary/read errors; its only
+normalizations are actual discovery/open ID bindings and decoding JSON text payloads.
+The index also binds its validated malformed-open document ID and concrete resource URIs.
+No semantic result field, MIME type or error message is ignored. There are now 71 scenarios,
+including all seven document resources, aggregate inspection and validation.
 
-Evidence: `migration/native-gui-comparison.json`, raw wire/SVG/PNG captures in
-`migration/results/native-gui-acceptance/` and its recorded isolated workspace. Launch harness
-`scripts/history/python/migration_native_gui_acceptance.py` refuses a second launch while that ownership record
-exists. `scripts/history/python/migration_native_capture.py` attaches only to the existing private bus and checks
-exact window/document IDs and allowed blank/dirty window titles before capture. An initial
-Redo capture assertion incorrectly required an unchanged title; its failed trace is retained,
-and the capture was corrected to allow Inkscape's observed leading dirty `*`, preserving exact
-identity checks. This is actual GUI/package/helper acceptance for insertion, single-step Undo,
-Redo and reconnect refusal, not full native coverage. Selected style/text/structural edits,
-document-switch guards, uncertain/crash cases and socket-helper runtime remain unverified.
+`find-comparison.json` covers 45 filtered-search observations through actual MCP STDIO:
+authored ObjectRefs, AND filters, CSS/inherited paint matching, Unicode text, inclusive region
+intersections and real CLI accurate bounds. Isolated absent/failing/timed-out/synthetic CSV
+engines prove DOM fallback, exactly one query per accurate call, malformed/duplicate/negative/
+zero/nonfinite CSV behavior, and unchanged source/working SVGs with no history writes.
+`results/find-acceptance/native-output-cap.json` separately proves bounded stdout falls back
+to identical DOM results; this is a Rust safety check, not Python parity. Raw responses/logs
+are retained. One earlier repeat timed out at Rust initialization without stderr; its cause
+is undetermined. Subsequent complete repeats passed. Read's 71 scenarios were rerun after
+sharing ObjectRef extraction. More argument/error/security edges remain pending.
 
-The subsequent repeated-style GUI test exposed an empty native Undo entry in stage5:
-after two identical fill calls the first Undo left the SVG byte-identical and only the second
-removed the style. `migration/native-style-comparison.json` deliberately retains that failed
-result. Investigation with the actual vendor inkex/private Python found that replacing an
-identical root discarded the document-level comment/PI; inkex detected a serialization change.
-The shared helper now compares exact root serialization after full planning/validation and keeps
-the original document tree for an exact no-op. Two regression cases cover no-op prolog/root
-preservation and a changed edit. The actual private inkex probe changed from 1149 output bytes
-to zero for the same validated no-op. An overlay of this fixed helper in the owned test profile
-passed the native test: one Undo removed the changed fill after a repeated identical call.
-`migration/native-style-fixed-comparison.json` records this scoped overlay evidence. Stage5's
-archive remains unchanged and still contains the faulty helper; stage6 rebuild/archive-install and ten-profile doctor acceptance have passed.
-The stage6 archive contains the fixed helper; its full fresh native session has not yet been tested. Live Operation Records still exist for every approved call, matching the Python
-reference; an initial no-record assertion was corrected and its failed trace retained.
+`contracts/bus-variant-cases.json` captures 25 exact guarded GVariant string/bool/double/empty
+values/errors (`.venv/bin/python scripts/migration_live_bus_reference.py`). Private native Bus
+uses fixed action/method/context/target types, bounded gdbus argv and stdout, UUID identity and
+shared unique-owner parsing. Broker lookup precedes Actions.List; every application/context/
+introspection call targets that pinned unique owner, never a well-known application name. Four
+Rust tests inspect fake CLI traces: missing/bad owners stop after broker; all fixed methods and
+window/context identity params stay bounded; timeout/nonzero/oversized mutation replies are
+uncertain, quarantine the owner and never retry. ContextChanged keeps the owner and exposes only
+fixed recovery text. Bounded stderr is retained internally to classify that fixed bridge error.
+These stronger semantics are documented, not normalized into reference equivalence. Initial
+200 ms fixture connect timed out (cause unproven); production-floor 1 s with 2 s mutation stall
+passes. All 98 Action-discovery comparisons reran after shared stderr retention with no differences.
+Fake CLI is not real D-Bus/native GUI acceptance. Public/transport/managed
+helper/packaging/native Undo remain pending; public count stays 84/26.
 
-### Native read-only doctor and refreshed candidate (2026-10-02)
+`contracts/context-reply-cases.json` captures 54 exact document-context/list parsing replies and
+errors (`.venv/bin/python scripts/migration_live_context_reference.py`). Private live_context
+implements a data-only string/tuple/list parser with a 1 MiB byte cap, depth/node bounds and
+10,000-row cap; it never evaluates expressions. Escapes, adjacent strings, title annotation
+normalization, empty names, UUID/error precedence and raw NUL refusal match these fixtures.
+Unpaired surrogate/out-of-range escapes fail as invalid Unicode. Two parser tests and one fake
+CLI integration test verify active/list replies through the unique owner (113 Rust tests total).
+This does not claim exhaustive Python literal grammar or actual native bridge acceptance.
 
-The native binary now accepts `--doctor` before creating an MCP server. It emits structured
-JSON and exits 0 only when current package prerequisites pass (1 otherwise). Checks cover
-current macOS/arm64 package target, bounded no-follow package metadata and fixed assets,
-Mach-O architecture of private Python/bridge/bus executables, official vendor GTK3/inkex,
-actual Inkscape CLI minimum version, actual private Python/inkex/numpy/lxml/Pillow imports,
-private bus/gdbus CLI startup and system codesign presence. It does not require a compiler,
-Homebrew headers or a user Python installation. Missing/incompatible checks include concrete
-next steps. `ready_to_launch` means prerequisites, with `native_gui_verified=false`; it does
-not certify native GUI, Undo/Redo, signatures or notarization.
+`contracts/dbus-backend-cases.json` captures 22 real Python DBus backend calls against a synthetic
+process boundary (`.venv/bin/python scripts/migration_live_dbus_reference.py`), without bus/GUI.
+Native Dbus implements the common Transport with plain-SVG and PNG exports, parsed active-document
+metadata/count, window viewport and selection style/transform actions. Results/errors and action
+traces are checked; only minted export filenames bind to `<EXPORT>`. Three fixtures explicitly
+retain reference traces that Rust refuses earlier: pan avoids introspection, and two malformed
+transform tails no longer apply earlier mutations. Native whole-plan validation also bounds argv
+before the first mutation. Export reads use no-follow regular-file descriptors and input caps;
+missing/symlink/oversize/bad XML/UTF-8 and owned-directory cleanup regressions pass. Synthetic PNG
+bytes check transport only, not pixels or native Undo. Three new tests bring the total to 116.
+Managed guards/helper/probes/public integration, actual D-Bus and packaging remain pending.
 
-The real macOS launcher was observed creating preferences even for `--version`. Doctor now
-runs that fixed probe with an owned ephemeral HOME/profile/config/cache and an unavailable
-private bus address; bounded child completion precedes temporary cleanup. Private Python uses
-`-I -B`, so it ignores external Python configuration and writes no bytecode. An internal typed
-process environment wrapper is used only by fixed server callers; no tool accepts executable,
-code or environment overrides. No GUI, bus service, extension install or automatic repair is
-performed. Inkscape supports profile isolation through its documented [environment variables](https://wiki.inkscape.org/wiki/Environment_variables).
+`contracts/task-guard-cases.json` contains 50 exact Python selected-task guard outcomes (regenerate
+with `.venv/bin/python scripts/migration_live_guard_reference.py`), without GUI or bus. Private
+Managed now owns scoped regular stdout and advisory lock descriptors opened through no-follow
+workspace descent. Deadline-bounded flock coordinates another process; same-thread/same-stream
+nesting shares context/handles, different sessions refuse nesting, and nesting caps at 16. Scoped
+error/panic cleanup releases handles. Select/list and plain-SVG/PNG reads route all guarded actions
+through UUID Context.Activate on the pinned owner. Tests simulate a context switch and verify no
+fallback or retry, selected-task mismatch and disconnect reset. Legacy unguarded reads remain
+available; entering a guarded nested scope without a captured context refuses before actions.
+Five new tests bring the total to 121. Selection stdout fencing, scene, effect transactions, fresh
+liveness/probes/public wiring and actual native Undo/package acceptance are still pending. This
+partial private Managed advertises only its implemented read commands; public count remains 84/26.
+After the shared regular-file handle change, all 71 headless read acceptance scenarios passed again
+with zero differences through real MCP STDIO.
 
-`migration/doctor-comparison.json`: ten owned relocated-package profiles pass exact ready/exit
-and relevant failed-check assertions: ready, missing bridge/runtime/helper/bus/gdbus/manifest,
-linked bridge, malformed architecture and actual mocked Inkscape 1.2.2 version output. Full
-package file hashes and owned directory entries remain unchanged after diagnosis (including
-no bytecode, managed directories or user profile creation). Raw JSON reports are in
-`migration/results/doctor-acceptance/`. No native GUI was opened.
+`contracts/selection-reply-cases.json` captures 58 exact Python managed-selection parser replies
+and errors (`.venv/bin/python scripts/migration_live_selection_reference.py`). Native parsing
+preserves numeric/Unicode fences, ordered dedup, partial-line and Python splitlines/strip behavior,
+including ignoring trailing data after a complete fence. Native byte and 10,000 unique-ID caps are
+separate safety guards. Managed selection seeks conceptually to the current end using positional
+reads of the pinned regular stdout handle; it sends exactly select-list/query-x under one scope,
+filters the last exported root ID and times out without retry. Fake CLI tests cover Unicode/empty,
+duplicate/filter, malformed/incomplete/invalid UTF-8/oversize replies and scope cleanup. Managed
+exports now reset sticky id/id-only/text-to-path/plain-SVG options before each export, retaining
+metadata; region render uses shared root user-unit mapping. One mapped SVG/PNG action-trace test
+checks the reset order, transformed area and a single captured context. Five new tests bring the
+total to 126; these are internal/fake CLI checks, not native GUI/pixel/Undo or public-tool parity.
+Full managed geometry/error fixtures, scene/inspection, effect transactions and public wiring remain.
 
-The refreshed local candidate is
-`migration/results/packages/inkscape-mcp-macos-arm64-stage6/`, with archive
-`migration/results/packages/inkscape-mcp-macos-arm64-stage6.tar.gz` (46,232,949 bytes; SHA-256
-`77e92c31d0ab43120daa0a344043c8ccca760cdcfe002614a32b21011afc1757`). It contains 2258 regular
-file hash entries, 129,945,135 regular bytes. `migration/package-build-comparison.json` now
-points to this candidate; older candidates remain available as historical evidence. Installation
-from the actual new archive again passes clean empty-PATH runtime/helper/private-bus/STDIO
-full discovery, no-op, batch/rollback, approval refusal, original preservation, SVG save/resource
-and real PNG preview/export pixel checks. Raw acceptance remains in `migration/results/`.
+`contracts/managed-scene-cases.json` has 140 exact Python scene/inspection models, regenerated with
+`.venv/bin/python scripts/migration_live_scene_reference.py`. Private live_scene reuses shared
+headless ObjectInfo/tree helpers and preserves attribute-derived geometry, ancestor-transform
+bbox refusal, inline/presentation visibility, descendant visibility overrides, duplicate-ID lookup,
+selected-ID order/duplicates/stale IDs, metadata, canvas/viewBox and unavailable viewport notes.
+All fields compare without normalization. Native XML/input and 10,000 scene-element/selection caps
+are tested separately. The same script regenerates `unicode-decimal-starts.json` (Unicode 15.0.0)
+and 705 `numeric-text-cases.json` Python float cases: every frozen Unicode decimal block, signed
+zero, exponents/underscores, invalid syntax, infinity/NaN and whitespace classification. Native
+decimal text decoding is shared with attribute-prefix bbox parsing; it executes no Python at runtime.
+Managed scene/inspection now obtain selection and SVG under one context, and only managed scene's
+active document receives the captured window/document UUID. A fake CLI test checks selection→export
+order, one context per call, fields and cleanup. Four new tests bring the total to 130. Actual
+managed geometry/error, GUI/pixels/Undo, helper transactions, liveness/probes and public integration
+remain pending; public count stays 84/26.
+After sharing inspection/tree/decimal helpers, 71 read and 45 find scenarios reran through real
+MCP STDIO with zero differences.
 
-Reproduce/test:
+`contracts/effect-data-cases.json` captures 11 exact Python helper document fingerprints, 18 edit
+reply validation cases and the fixed public refusal whitelist (regenerate with
+`.venv/bin/python scripts/migration_live_effect_reference.py`). Native fingerprints preserve Clark
+namespaces, sorted attributes, root UI exclusions, metadata/namedview filtering and mixed text/tail,
+including comments/PIs/entities; JSON separators match the helper's hash input. Hashing streams
+records and bounds expanded bytes at min(8×operator input cap, 64 MiB), with per-record guards;
+namespace amplification refusal is an explicit native protection. Reply parsing verifies nonce,
+strict boolean discriminator, fingerprint/ID types and refusal types, with malformed/stale/capped
+data remaining uncertain. Known public refusals pass; unknown private detail falls back to the
+fixed invalid-document/selection reason. Private Exchange atomically writes mode-0600 fixed request
+files, bounds bytes and validates regular entries before mutation; replies use no-follow reads.
+Cleanup is once-only, including Drop fallback, so an already-cleaned exchange cannot delete a later
+request. Tests cover mode/data, stale cleanup, symlink originals, request/reply caps and uncertainty.
+Five new tests bring the total to 135. This is an internal data/file kernel; Managed activation,
+post-effect fingerprint confirmation, insertion planning, actual helper/Undo/GUI/package and public
+dispatch remain pending. Public tool count stays 84/26.
+
+`contracts/edit-transaction-cases.json` captures 13 actual Python managed edit request/result/
+refusal transactions against a synthetic effect boundary (regenerate with
+`.venv/bin/python scripts/migration_live_transaction_reference.py`). Native Managed now uses
+the fixed edit effect, not document replacement: selected-task scope spans selection, pre-export,
+nonce/expected IDs+fingerprint request, activation, reply and post-export fingerprint confirmation.
+Style/text plus eight typed structural/order operations are internal; fill fallback remains for
+legacy helper-absent sessions. Requests/results/refusals compare exactly after validating/binding
+the minted nonce only. Another fake effect changes SVG and computes its SHA with Python helper
+code; Rust confirms the changed fingerprint. Lost/stale/missing/mismatched replies and guarded
+context switch stay uncertain, with one activation and cleanup. A valid refusal after lost
+activation is recovered; an applied reply remains uncertain after unique-owner quarantine, an
+intentional conservative difference from the reference's generic action reconciliation. Unknown
+refusal details use the captured whitelist fallback. Four new tests bring total to 139. Initial
+trace assertions included Describe in mutation counts; the switch fixture also used unguarded
+legacy mode. Corrected method filters and guarded document selection pass the complete repeat.
+These are fake effect tests, not native Undo/GUI/effect-runtime evidence.
+
+`contracts/insertion-plan-cases.json` and `contracts/insertion-transaction-cases.json` regenerate
+with `.venv/bin/python scripts/migration_live_insert_reference.py`.
+Private Managed insertion now validates the original fragment natively, then activates only the
+fixed insertion effect under a selected task and one operation scope. 64 frozen Python preflight
+cases match allowlist, namespace/attribute/reference/CSS restrictions and planned IDs; 3 complete
+Python transactions match requests/results with only validated minted nonce binding. Synthetic
+insertion uses Python prepare_fragment to append a group; a fresh scoped SVG must contain exactly
+one direct SVG root group with all planned IDs in order. This deliberately strengthens the legacy
+substring confirmation. Native guards bound 1 MiB/10,000 elements and 2 MiB helper requests, refuse
+empty IDs before dispatch (legacy uncaught KeyError), require exact nonce/boolean reply and classify
+stale/malformed/oversize as uncertain. Lost/missing/mismatched/context-switch replies have one
+activation and cleaned files/scopes; trustworthy refusal after lost activation is recovered, while
+applied transport loss remains uncertain. Six new tests bring total to 145. This is fake CLI/effect
+evidence, not actual helper/native Undo/GUI/package acceptance. Public counts remain 84/26. Next
+complete fresh liveness/probes, public approvals/records/live dispatch/resources and package/native
+acceptance.
+
+
+`contracts/transport-probe-cases.json` regenerates with
+`.venv/bin/python scripts/migration_live_probe_reference.py`.
+Private live_probe now derives readonly D-Bus/managed/socket readiness and constructs fixed
+attach-only backends for Session::connect. 256 frozen Python host/process profiles plus 4 socket
+advertisement profiles match every readiness field/command list, with no action activation.
+D-Bus handshake resolves the broker once, then targets the unique owner; managed helper support
+uses fresh Describe. Managed is_connected now performs a fresh List with timeout capped at 2 s,
+against that same owner, without reconnect or replacement. Vanished-owner/changed-helper and
+post-disconnect fixtures pass. Managed stdout readiness refuses file/ancestor symlinks; this is
+an explicit stronger native guard. No-session gates perform no subprocess calls. Factory tests
+verify no process before attach, fixed D-Bus/managed document capture and Session teardown/history
+callback. Socket readiness intentionally means a rendezvous advertisement, as in Python; connect
+still requires the authenticated handshake. Four new tests bring total to 149. These are fake
+CLI/process-boundary tests, not actual D-Bus/helper/GUI acceptance. Public counts remain 84/26.
+Next wire config/probes/factory/Session and public live policy/approvals/records/tools/resources,
+then complete private runtime/bridge/bus packaging, native Undo and end-user package acceptance.
+
+`live-status-comparison.json` regenerates with
+`.venv/bin/python scripts/migration_live_status_acceptance.py`; raw actual STDIO traces are under
+`results/live-status-acceptance/`.
+Public native check_live_support/live_status/live_disconnect and the live/session resource now
+use Session, fresh native probes and cached runtime helper/data-directory facts. These readonly
+paths never launch or attach a GUI. Disconnect resets transport/token/cache/task state and invokes
+bounded best-effort first-root history cleanup. One no-follow cleanup test preserves original/link
+and non-record files, and verifies idempotence; links are retained, an intentional stronger guard
+than the reference glob unlink. Actual STDIO acceptance compares 8 isolated profiles (master gate,
+rendezvous advertisement and helper installed marker), 48 complete tool/resource/file observations
+with zero differences. Responses include every probe/command list, sorted ranking, exact status/
+recovery notes, helper reconciliation, JSON MIME/text/structured content and repeated disconnect.
+Fresh marker transitions after cache initialization also match: support/socket readiness uses fresh
+installation presence while session reconciliation retains the cached runtime helper flag.
+Public count is now 87 native / 23 pending tools; live/session is ported and four live resources
+remain pending. 150 Rust tests pass. Public live_connect, managed manifest/environment refresh,
+records/mutation/render/sync/events/resources, packaging and actual native acceptance remain.
+One repeated full run alongside STDIO acceptance hit the synthetic gdbus 1 s connect timeout;
+the cause is unproven. The isolated fault test and subsequent full 150-test repeat passed, without
+changing deadlines. These STDIO profiles stay disconnected; connected public transport/guard
+acceptance follows live_connect integration.
+
+
+`live-connect-comparison.json` and `live-managed-comparison.json` regenerate with
+`.venv/bin/python scripts/migration_live_connect_acceptance.py` and
+`.venv/bin/python scripts/migration_live_managed_acceptance.py`. Raw STDIO traces are retained in
+`results/live-connect-acceptance/` and `results/live-managed-acceptance/`.
+Public live_connect, live_get_active_document/live_get_selection/live_inspect_selection and
+managed live_list_documents/live_select_document now use the native Session/fixed factory. Managed
+connect refreshes an existing owned 0700 session manifest through no-follow bounded reads, validates
+the fixed private Unix bus address/optional GUID, probes the unique owner/context bridge, then
+attaches without starting a daemon or GUI. Native address overrides are per-transport, with no
+process environment mutation. Strict address tails refuse network/fallback addresses, an intentional
+stronger native guard. Managed root paths must use ASCII alphanumerics or /._-; this prevents
+D-Bus metacharacter/percent decoding from changing the endpoint. All fixed action-plan argv caps
+include the address. Reconnect clears task,
+token/cache and history; failed preference/attach leaves the documented state. live/selection and
+live/view resources now use their transport with exact disconnected fallbacks.
+Actual STDIO comparisons add 26 owned-loopback connected/read/reconnect/failure/resource observations
+and initially 10 synthetic managed manifest/task/ready-to-edit/reconnect observations, matching Python.
+The expanded managed comparison is described below.
+Only validated UTC connected_at timestamps are bound, preserving reuse/new-connect relationships.
+The managed test verifies explicit task choice and binding reset, but is fake gdbus, not native GUI.
+Two attach/security tests bring total to 152; format/clippy/Ruff/mypy pass. Public count is now 93
+native / 17 pending tools, with live/events and live/operations the two remaining resources. Next
+complete events/render/cache/sync and approved live edit records/pipeline/remaining tools, then
+package private runtime/bridge/bus and perform native Undo/Redo and package/benchmark acceptance.
+Connected runtime capabilities now use the adopted transport address without process environment
+mutation. Managed preflight runs before the first capability probe; an existing cache stays unchanged
+until diagnose_runtime, matching Python. Disconnected read tools and selection/view resources do
+not probe or fill that cache. Managed STDIO acceptance initially covered 41 observations across both
+cache initialization orders, full runtime/resource fields, refresh after disconnect and no process
+calls for disconnected reads. Seven explicit Python-version identity differences remain; all other
+fields match after validated UTC timestamp bindings and semantic JSON decoding. These are owned
+synthetic process-boundary checks, not native GUI or packaged-runtime acceptance.
+
+
+`live-events-comparison.json` regenerates with
+`.venv/bin/python scripts/migration_live_events_acceptance.py`; raw traces are in
+`results/live-events-acceptance/`.
+
+Public live_wait_for_change and inkscape://live/events now share Session's last-token/change
+baseline via fixed state_token calls. First observations report no change; selection/document/
+viewport deltas remain independent. A timeout carries the latest token with empty convenience
+selection IDs without overwriting the persisted observation. Reconnect/disconnect reset the baseline.
+The wait validates a 0..60 s budget, floors positive polling intervals at 10 ms, uses Tokio timers,
+and releases the session mutex before sleeping. An actual MCP cancellation notification stops
+subsequent polls; another resource read proceeds during a pending wait. This proves cancellation
+between polls, not interruption of an in-flight synchronous transport exchange (its own bounded
+process/socket deadline still applies).
+23 actual STDIO observations match Python through an owned authenticated loopback peer, covering
+shared tool/resource state, simultaneous deltas, defensive token coercion, zero timeout, bounded
+interval-floor timeout, changes on subsequent polls, reconnect and helper refusal. Full negative
+read replies preserve the synchronized socket channel without retry, matching Python; mutation,
+malformed and lost-reply quarantine remains. Helper rejection has Python's exact tool/resource
+error rather than being silently turned into an empty resource. Managed acceptance expands to
+45 observations (seven retained runtime-identity deltas only), including inherited unsupported-token
+refusal and clean events fallback. Nothing launches Inkscape or captures document/scene/PNG per poll.
+Two new tests bring the total to 154. Public native count is 94 / 16 pending tools, with 17 native
+resources and only live/operations pending. All seven prompts remain native. More schema-error
+precedence/coercion cases, live render/cache/sync/edit approvals/records and packaging/native GUI
+acceptance remain; neither synthetic peer nor fake managed bus proves native manual-edit detection.
+
+`live-viewport-comparison.json` and `live-render-comparison.json` regenerate with
+`.venv/bin/python scripts/migration_live_viewport_acceptance.py` and
+`.venv/bin/python scripts/migration_live_render_acceptance.py`. Their raw traces are in
+`results/live-viewport-acceptance/` and `results/live-render-acceptance/`.
+
+Public live_set_viewport, live_render_view and live_get_scene now use the fixed native
+Transport methods. Shared preflight bounds fixed zoom/pan/fit modes, paired center/deltas,
+complete region parts, finite coordinates/extents and positive bounded scale; fast defaults to
+0.5 while explicit scale wins. View control creates no document mutation, artifacts or records.
+46 actual STDIO viewport observations compare results/refusals and fixed command parameters,
+including before-connect validation and a valid helper refusal followed by another successful read.
+Managed viewport support remains refused by its frozen command set, as in Python.
+Live frame persistence uses the first workspace root, no-follow directory descent and atomic
+publication of a minted timestamp/nonce PNG path. Caps refuse before file publication; a native
+security test preserves an external symlink target and leaves no partial artifacts. Artifacts and
+metadata are cached using the existing Session LRU/coalescing model with revision plus rounded
+region/scale keys. Cache-token reads do not alter the events baseline; unavailable tokens skip
+caching. live_get_scene scopes the frame and scene together through the transport operation scope.
+60 actual STDIO render observations match Python, including full PNG byte and RGBA pixel hashes,
+returned metadata/path reuse, rounded-key hits, LRU eviction, revision-change invalidation,
+fast/explicit scale, region/scales bounds, invalid inputs before rendering and reconnect reset.
+Only validated artifact timestamp/nonce paths are bound; all other result and request fields stay
+compared. Synthetic managed acceptance expands to 51 observations, seven explicit Python runtime
+identity differences only, including PNG persistence and guarded region/scene reads. Fake gdbus
+writes a fixed valid PNG for PNG exports and the existing SVG fixture for document exports.
+155 Rust tests, all-target clippy/format, Ruff (285 files) and mypy (122 sources) pass. Current
+native tool count is 97 / 13 pending, with 17 native resources / live operations still pending.
+These are synthetic public transport checks; actual GUI rendering, native Undo/Redo, packaged
+helper/bus/bridge, remaining live mutation/record/sync/export/loop/diff tools, broader schema-error
+parity and full package/performance acceptance remain. Python production files are unchanged.
+
+`contracts/session-state-cases.json` captures 872 exact Python status/recovery models and twelve
+cache transitions (regenerate with `.venv/bin/python scripts/migration_live_session_reference.py`).
+No probe/socket/GUI is needed to capture these state models. Native common Transport/Session/Cache
+kernels and Socket adapter compare every fixture without normalization: all five connection states,
+guarded/legacy identity and recovery, helper reconciliation, LRU/count/byte/replacement/touch behavior,
+coalescing boundary and reference single-oversize-entry exception. Other tests verify capability/
+no-freeze ranking, teardown/reconnect/failure state cleanup, history-clear hook, scoped context end
+on error/panic and actual loopback Session→Socket reads/reconnect. Six new Rust tests pass (106 total).
+Public probes/config/records/cache-key/frame pipeline/event wait/managed guards/DBus/GUI/package
+integration remain pending; 84/26 public tool count is unchanged. History clearing is currently an
+injected hook, not proof of persisted live-record cleanup. RAII mock scope is not native context
+acceptance. Internal connection factories attach only; launch remains a separate explicit action.
+
+`contracts/socket-binary-cases.json` retains 29 exact strict base64 result/error cases from Python
+(regenerate with `.venv/bin/python scripts/migration_live_binary_reference.py`). Missing/wrong/
+malformed types, alphabet, control/Unicode, padding and nonzero padding bits are compared without
+normalization. Native transport binary decoding does not prove PNG validity. Private socket
+render/view/edit methods now cover the fixed semantic surface: four typed viewport variants,
+optional render region/scale, string style map/composed transform, SVG/text and selection export.
+A real TCP peer verifies each fixed payload and modeled result; another verifies nonfinite
+parameters send no request and a lost insert reply stays uncertain without retry. Three additional
+Rust tests pass. Public policy/approval/validation/records/task guards and native effect/Undo are
+still pending, as are all 26 public live dispatches; do not treat internal methods as public tools.
+
+`contracts/socket-model-cases.json` captures 658 defensive live-result/model fixtures, regenerated
+with `.venv/bin/python scripts/migration_live_models_reference.py`. Native model tests compare every
+field without normalization: document/selection/inspection/mutation/viewport, scene, Python scalar/
+container strings and server-hashed revision/ordered-selection/coarse-viewport token. 256 seeded
+float cases span exponents -300..300; signed zero/rounding/malformed/default/bool/Unicode and large
+integer counts are included. Separate 10,001-item tests verify the reference caps before filtering.
+Socket semantic reads now model fixed commands internally; scene identity is fetched separately
+from get_active_document, ignoring the scene's spoofed path. A real TCP peer verifies command
+order and authoritative identity. Three new Rust tests pass; public live tools/resources and
+session/backends/pipeline/cache/event-wait/packaging/GUI acceptance remain pending (84/26 tools).
+
+`contracts/socket-protocol-cases.json` captures 96 exact reference cases (42 encoded requests,
+15 parsed response/error frames, 39 rendezvous scalar/version cases). Regenerate with
+`.venv/bin/python scripts/migration_live_protocol_reference.py`; Rust kernel tests consume this
+fixture directly, not a hand-written expected model. Private protocol v5/socket modules carry
+all 14 fixed enum commands; there is no raw command string API. Seven Rust tests cover all commands
+on real loopback TCP, token-bearing hello/every request, capabilities and disconnect; malformed/
+rejected/wrong-version hello, truncated/malformed/oversize replies, no retry after transmitted
+uncertain mutation, explicit rejection, and bounded slow trickle with view/mutation distinction.
+No GUI or Python helper is launched. Bounded outbound serialization counts UTF-8/escaping/newline before writing and refuses before
+allocating an oversized frame; exact-boundary/one-byte-under tests pass. Native TCP is not live MCP/native Undo acceptance: public
+live tools/resources still return migration-pending, and counts remain 84/26. Temporary dead-code
+allowances cover only these private kernels awaiting integration. Stronger native guards are
+separate: filesystem-root no-follow rendezvous descent (file/ancestor link tests), min(input,
+1 MiB) rendezvous and 4096-byte token bounds, reject trailing unsolicited frames, whole-request
+deadline, quarantine the failed stream and never retry uncertain edits. Complete typed result
+coercion, all backend/session/tool wiring and packaged helper/GUI/Undo acceptance remain pending.
+
+`capability-comparison.json` retains 46 observations over every sixteen-profile gated registry,
+real Inkscape and absent backend. Shared list_capabilities/diagnose_runtime/resource cache has
+no probes on repeated reads; refresh replaces tool/resource fields after a fixture version change.
+Exact sorted registry names/count/purpose/risk and all 49 intents match. Six fixed CLI/font probes
+run per controlled cache fill. Core's hidden tools stay hidden; its resource initializes the cache.
+Tool text/structured fields and application/json resource readback must agree; full raw wire traces
+are saved. Only separately validated UTC timestamps are bound. All 28 matrix differences are
+retained: Python's interpreter version versus truthful Rust `not applicable (native Rust MCP)`.
+`exact_parity` is false, with zero unexpected differences; helper-runtime packaging remains pending.
+A unit covers refreshed registry overlays without mutating the probe, sorting and purpose/risk.
+
+`action-discovery-comparison.json` covers 98 observations over fourteen real/controlled runtimes.
+list_actions/discover_extensions match complete reply fields/ordered notes, action and allowlist
+order/intersection, compact/count semantics, boolean coercion and persisted map names/content.
+JSON text is decoded without deleting fields; only separately validated UTC probe times are bound.
+Real/absent/failed/empty/timed-out/bad-version/non-executable/signaled CLI cases, data/inkex version,
+fonts, owned/unowned bus and operator allowlists are checked. Every case retains an opened original
+and working SVG with no snapshots/records. Expected successes are mandatory.
+`results/action-discovery-acceptance/native-probe-guards.json` separately proves no truncated
+Action map under an 8192-byte output cap and bounded no-follow refusal for both inkex file and
+ancestor-directory symlinks, retaining protected helper sources and document bytes. Sources are
+read only, never imported. Native bus probes first query the broker for a unique owner and use
+that unique destination for Actions.List, preventing well-known-name activation even after an
+owner race. Controlled traces assert no named destination and no Actions.List when unowned;
+this is mocked IPC, not GUI/native-session acceptance. One unit covers versions/export lists and
+unique-owner grammar. Shared process binary lookup now requires X_OK and preserves real exit/
+signal codes; Action's 110 common/32 fault observations passed again.
+Packaged helper Python reporting, further parser/filesystem/failure/coercion cases and warm-shell/live/package work remain.
+
+`action-comparison.json` covers 110 observations of validate_action_chain, run_action_chain
+and run_raw_action. Operator allowlist, version capability map and fixed grammar all gate the
+bounded 32×16 plan. Complete response/error fields, normalized plans/argv, source/working hashes,
+records/snapshots, actual preview PNG RGBA and exact restore match. The advanced gate is explicit
+and expected successful calls are mandatory. Persisted map filename/version/tuple/actions/count/
+source are compared; the only additional normalization is a separately validated UTC probed_at.
+Cache bytes must remain unchanged between calls. Two native file/directory map-link guards retain
+outside bytes and prove persistence cannot escape the root while an in-memory plan still works.
+`action-fault-comparison.json` retains 32 fault/no-op observations and all six semantic audit
+status differences (Python proposed vs native discarded), requiring zero unexpected differences.
+Absent Inkscape rejects at the map availability gate with no audit. Other fixtures use genuine
+1-second timeout, failed/missing/empty/unsafe/oversized output and no-op; dry-run cannot launch an
+Action execution, each real engine run has exactly one fixed argv invocation and private staging
+is removed. Three separately recorded native output structure/reference guards refuse unchanged.
+Two units cover independent gates, malformed/absent/argument error order, 32×16 bounds, comma hints,
+fixed argv, action-list deduplication/order and traversal-safe version keys.
+Validation map probing is native version/action-list only. Full schema/coercion/error parity, map corruption/staleness/races and warm-shell/GUI/package work
+remain pending. Shared CLI refactor reran all 170 path and 32 path-fault observations successfully.
+
+`path-comparison.json` contains 170 real observations across all seven advanced path tools.
+The harness explicitly enables `INKSCAPE_MCP_RAW_ACTION_ENABLED=true` and requires successful
+expected calls before comparison; an initial run which only matched hidden-tool errors was invalid.
+Fixed actions/argv-safe IDs, default dry-run, deduplication and bottom merge identity, explicit
+approval, complete replies/SVG hashes/history, actual PNG previews and exact restore match.
+Stroke outlining restores fill from the original stroke and removes only newly added empty stubs.
+Private engine input/output use pinned bounded no-follow IO; originals are retained.
+`path-fault-comparison.json` retains 32 additional observations and all seven intentional audit
+status differences: engine faults stay `proposed` in Python but transition to `discarded` in Rust.
+All public errors, other record fields, snapshots and no-op behavior match. No status normalization
+or broad exclusions are applied; zero unexpected differences is required separately from exact
+parity. Fixtures cover absent/failed/timed-out/missing/empty/unsafe/oversized engines and no-op,
+assert one fixed invocation and no dry-run invocation, and prove original/working bytes unchanged.
+`results/path-fault-acceptance/native-output-guards.json` records three separate native refusals
+for non-SVG root, duplicate IDs and refs to removed original IDs, without snapshots or applied audit.
+The Rust target list has an explicit 4096-item bound. Four units cover grammar/bottom order,
+outline fill/marker scope, original comments/PIs plus incoming-document DTD serialization and unsafe engine structure.
+Shared timeout now matches the Python 1-second floor with a dedicated config unit; the existing
+find fixture was corrected from invalid 0.1s to genuine 1s, then all 45 observations passed again.
+Broader CSS/reference/asset/schema/geometry/engine/failure and warm-shell/GUI/package work remains.
+
+`transform-comparison.json` covers 116 selector-driven transform observations over 21 cases:
+all eight allowed targeted operations, ordered list/single-target projected edits, default dry-run,
+CSS paint and accurate CLI bbox selection, empty matches, no-op, match bounds, high-risk approval,
+invalid color/pivot and document-root refusal. The native implementation composes the existing
+find and batch kernels; the shared batch now accepts a transaction name/match-count parameter.
+Whole responses, raw working SVG hashes, history/snapshots, real CLI preview RGBA and exact
+restore match. Only existing validated document/audit/time bindings are normalized.
+One native unit proves a 65-match dry-run plan and later 64-edit batch-cap refusal, excluded
+creation operation, unchanged source/working bytes and empty history. Shared batch regression
+passed all 122 edit scenarios again and discovery matched all 16 configurations. Full schema validation/error
+formatting, broader limits/coercions/failure injection and GUI/package acceptance remain pending.
+
+`grid-comparison.json` covers 102 full observations over 18 compose_grid cases: document/object
+modes, repeated assets, existing/new target, row-major group plans, padding/gap, optional downscale,
+mode/size/finite/empty/unknown errors and invalid-new-target refusal. Clone topology/suffix and
+wrapper/plan identities validate every ID binding. Whole replies/SVG hashes/raw lengths/history
+and real CLI preview pixels match; existing-target restore is exact and original/source working
+bytes stay unchanged. Registry deltas prove only a successful new-target call creates a document.
+`contracts/grid-plan-cases.json` has 28 exact DOM heuristic cases, used directly by a Rust unit.
+Capture is explicit through migration_grid_plan_reference.py; normal Rust tests never refresh it.
+Two further units cover plan limits/origins/canvas and pre-creation source-list/aggregate-source/
+invalid-plan guards. The heuristic ignores transforms and never upscales, matching the reference.
+Whole-document input totals obey an additional configured byte budget; object mode loads once.
+Maximum CLI grid, further schema/numeric/import-context/asset/copy/race and native GUI/package
+acceptance remain pending. New document creation and edit are separate stages like the reference.
+
+`place-comparison.json` covers 69 native place_document observations over thirteen whole/rootless SVG
+and self-contained group cases: translation/down/upscale, missing source/target/object and bad
+scale. Original subtree positions/tags/IDs and six-hex suffixes validate each minted ID binding;
+wrapper IDs are verified against the clone's minted top ID. Complete replies, raw byte lengths,
+normalized full SVG SHA-256, history and real CLI preview pixels match; target restore is exact.
+Both sources and working copies stay unchanged. Six native-only context guards separately
+refuse outside defs, inherited source paint, viewport-relative geometry, external assets,
+scripts and target root paint before mutation/history. Additional context preparation, asset
+relocation, scalar/schema errors and additional composition edges remain pending. Two units cover these source
+requirements and rootless copy/contained reference remapping. Duplicate/placement now share
+one bounded remint kernel. An observed 1024-tile random root-token collision prompted bounded
+128-attempt automatic root allocation; explicit IDs still refuse conflicts. A deterministic
+unit covers retry/explicit refusal/exhaustion, an intentional robustness difference from Python.
+
+`fragment-comparison.json` covers 131 complete observations over 25 replace_svg_fragment cases:
+stable ID/qualified tag, duplicate/invalid/conflicting IDs, internal/external/unresolved/removed
+refs, default and allow_retained policy, exclusive C14N no-op with reordered attributes,
+retained externally referenced no-op, namespaces, tails, stylesheet preparation and refusal
+paths. Whole replies/SVG hashes/history/CLI preview pixels/exact restore match; only validated
+minted IDs/timestamps and their artifact paths plus JSON tool text are normalized. Native-only
+removed-target timing/accessibility guards separately prove unchanged source/working bytes,
+no snapshot and one discarded record. Three units cover early approval/input limits, canonical
+no-op bytes and replacement slot/tail/reference policy. Full schema/Pydantic errors, further
+canonicalization namespaces/encoding/entities and copy/filesystem failure injection are pending.
+
+`adopt-comparison.json` covers 152 complete STDIO observations over 29 cases for native
+set_document_svg/insert_svg_fragment: approval, strict allowlist/namespace/href/url checks,
+whole-document/no-op replacement, DTD/top-level comments/PIs, nested/unwrapped/intact fragments,
+parent selection, mixed text/tails, plain/xlink references and malformed/active/external content.
+Every response field, working SVG hash, snapshot and Operation Record plus real CLI preview
+pixels matches; restores recover source bytes exactly. Only validated minted IDs/timestamps,
+corresponding artifact paths and JSON tool text are normalized. Two native-only ID guards
+refuse insertion collisions with unchanged bytes/no snapshot/one discarded audit record.
+Three units verify early approval/input limits, allowlist/entity refusal and independent mixed
+namespace copies; a shared XML unit verifies top-level sibling/DTD serialization spacing.
+Further scalar/schema/CSS escape/URI/namespace/encoding/failure cases remain pending.
+expanded composition edge coverage remains pending. Read parity was rerun.
+
+`optimize-comparison.json` covers 161 complete STDIO observations for svg_web_optimize/optimize_set.
+Seven fixtures exercise editor metadata/comments/PIs, used/dead defs and IDs, kept IDs, nested
+empty groups, precision 0/2/8, unused namespace declarations and mixed text. Responses/deltas,
+serialized SVG SHA-256, history and real CLI PNG RGBA hashes match. Restore recovers original
+source bytes before sequential set tests. No-op, ordered/reversed/empty/duplicate/unknown sets
+and invalid precision match. Only validated minted IDs/timestamps and corresponding artifact
+paths plus JSON text decoding are normalized. Native-only reference guards separately prove
+five stronger refusals (CSS/script/SMIL/accessibility/referenced metadata), unchanged working/
+source bytes, no snapshot and one discarded audit record. The set is sequential, not atomic
+across documents. Full schema errors, Unicode numbers/rounding extremes and further injection
+remain pending. Two units prove retained namespaces/references and cleanup idempotence.
+
+`quality-comparison.json` covers 126 full report/set observations over actual MCP STDIO.
+Thirteen fixtures run with present and absent fontconfig: metadata/comments, references/defs,
+coordinates, rasters/fonts, duplicate/missing IDs, viewBox variants and truncated structure advice.
+Four advice configurations plus ordered/reversed/single/empty/duplicate/unknown/malformed sets
+match, normalizing only minted document IDs and decoding JSON tool text. No report field is
+excluded. Both original and working SVGs stay unchanged; no snapshots or records are created.
+Three native units verify advice bounds/counts, read-only analysis and single/set output limits.
+Output limits are an extra Rust guard, separate from common parity. Invalid option schema errors,
+unusual numeric rounding, races and additional optimizer edge cases remain pending.
+
+`intent-comparison.json` covers 820 exact wire observations without normalization for native
+how_do_i/runtime-intents: all 49 map entries and their keywords, four out-of-scope rules,
+uppercase/mixed/tied/empty/unknown/Unicode/NUL goals, full/core and live on/off gates, stable
+top-three ordering and exact resource text/MIME. No workspace state is created. The native
+compiled `contracts/intent-data.json` is shared by both interfaces; provenance records the
+preserved source hash and reference HEAD. Normal acceptance checks provenance and never
+recaptures; use `migration_intent_acceptance.py --capture-data` explicitly after reviewing
+reference guidance changes, then rebuild Rust. Suggested tools are checked against maximum
+frozen discovery, including tools still pending native implementation. Input/output bounds
+are unit-tested; further argument/schema/environment cases remain pending.
+
+`stat-comparison.json` covers 19 exact wire comparisons with no normalization for streaming
+artifact size/SHA-256: relative/absolute/Unicode paths, multiple roots, canonical internal links,
+missing/broken/escaping/NUL paths, empty/2.56 MB/over-limit files and ordered/repeated/failed sets.
+Fixtures remain byte-identical and no document/history is created. Native
+`results/stat-acceptance/native-guards.json` separately proves directory refusal without host
+path disclosure and a 1024-path set cap (the reference list has no cap). A unit test proves
+known digest, direct final-link refusal and before-read size caps. Hashing uses a fixed 1 MiB
+buffer and bounds growing files during reads; length/mtime changes are refused. A separate
+`native-output-cap.json` verifies an 80-byte metadata limit without file changes. Further
+concurrent-write/race/platform/argument cases remain pending acceptance.
+
+`retention-comparison.json` covers 12 real STDIO observations for explicit snapshot/orphan
+record/live-frame pruning: keep-window/count/byte caps, disabled/zero policies, empty state,
+idempotence, unknown IDs, exact snapshot hashes, record survival and protected live preview/
+diff frame survival. Working/baseline/source bytes stay unchanged. Minted ID lists bind only
+previously validated fixture IDs. `results/retention-acceptance/native-path-guard.json` separately
+checks tampered manifest basenames and symlink refusal without outside-byte changes. Directory
+enumeration is capped at 10,000 entries and record reads at 4 MiB/workspace output cap.
+This is explicit cleanup; boot-time sweep and crash-consistent index/file cleanup are pending.
+File deletion precedes index rewrite as in the reference; no transactional rollback is claimed.
+
+`repeat-comparison.json` covers 19 real STDIO scenarios for native root-space linked/copy
+repetition: default/copy dry-run, transformed parents/source, internal references and gradients,
+mixed text/tails, tangent orientation, local anchor, rectangle placement, wide integer seed
+jitter, Unicode group labels and target/style/reference/conflict refusals. Complete wire
+responses, snapshot bytes/metadata, discarded/applied audit records and real PNG RGBA pixels
+are compared. Entire SVG hashes bind only strictly validated unique minted copy-ID suffixes;
+the synthetic sibling tree in the harness validates those bindings and is never used for
+hashing. Source files stay unchanged. Raw responses, SVGs and observed results are retained.
+`repeat-plan-cases.json` additionally freezes 30 direct Python planner outputs/errors, compared
+field-for-field without normalization. Seed parsing is bounded at 4096 decimal digits. The
+1024 linked-instance maximum, projected byte budget and locked/accessibility guards are DOM
+unit tests, not CLI pixel or GUI claims. Copies retain duplicate's stronger reference refusals.
+Full schema/error precedence and more alias/namespace/limit cases remain pending. Reproduce
+planner capture with `.venv/bin/python scripts/migration_repeat_plan_reference.py`.
+The pinned serde_json enables float roundtrip and arbitrary integer precision; the 71 read
+and 122 edit comparisons passed again after that parser configuration.
+
+`reload-comparison.json` covers 11 observations: source updates, unconditional pre-reload
+checkpoints, missing/directory fallback, internal/escaping symlinks, input-size refusal,
+created/opened `document.svg` seed behavior, unknown IDs and actual pre-reload restoration.
+Full wire results, snapshot metadata and complete SVG byte hashes are compared. Native
+`results/reload-acceptance/native-malformed-guard.json` documents the intentional refusal
+before malformed XML replaces either managed copy; Python copies first and fails inspection.
+`native-write-failure.json` injects a read-only working directory and proves baseline rollback
+when the second replacement fails, unchanged working/source bytes and retained checkpoints.
+Each replacement is atomic; two-file crash journaling and further race/fsync injection remain
+pending. These native safety fixtures are separate from parity comparisons.
+
+`edit-comparison.json` covers 122 real STDIO edit/history/error scenarios. It compares
+snapshot sizes/hashes, no-op behavior, audit records, original-file preservation, atomic
+style/color/text/font/transform/canvas-batch failure and byte-exact restoration. UUIDs and timestamps are validated before
+binding; artifact URI paths are decoded for explicit ID bindings. Actual Inkscape preview
+PNGs are decoded and compared by RGBA pixel hashes. Recolor cases cover overlapping scopes,
+style/presentation precedence, gradient stops, palette cascades, no-op and strict keyword refusal.
+Text/font cases include tspan tails, literal markup, empty runs, no-op, input limits, own-family
+glyph coverage, unavailable fonts and mixed batches. Transform cases verify parent-space
+prepend order, numeric formatting/coercion, centred/origin rotation, invalid factors/nonfinite
+values, error precedence and rollback after an earlier staged transform. Canvas cases compare
+viewBox preservation, retarget/repair/synthesis, percentage/rem fallback, no-op, bleed validation,
+unique background IDs and real pixels without changing original SVGs. Engine fit compares exact
+working bytes, real pixels and repeat calls for transformed groups, stroke curves, mm/slice,
+percentage fallback and empty-document refusal. Numeric repeats are no-op; the percentage
+fallback changes repeatedly in both servers. Rename covers ID/label/no-op, href/xlink/paint and
+connector reference rewriting, exact working bytes/pixels, conflicts and bounded labels. Native
+regressions verify refusal before stylesheet ID mutation and explicit namespace on label attrs.
+Stylesheet/timing/accessibility rename references are conservatively refused in Rust; this
+intentional safety difference is documented separately from passing common contract scenarios.
+Native regression also rejects hex-color/ID ambiguity without mutation. Delete cases compare
+HIGH approval gates for direct calls and atomic batches, no-match no-op, duplicate/pre-edit
+affected IDs, sequential parent/child removal, root refusal, tail removal and rollback;
+working hashes, operation records and real pixels remain part of the same comparison. Unavailable/timeout fit cases remain pending. Raw evidence is in ignored `results/`.
+
+`create-comparison.json` covers 93 vector-authoring observations for all eight primitive tools,
+first-layer/explicit transformed-parent selection, explicit IDs, styles, literal/empty text,
+analytic bbox, scalar coercion, input refusal and atomic creation/style batches. Exact working
+and snapshot hashes, full operation records and real PNG RGBA are compared. The new harness is
+`scripts/migration_create_acceptance.py`; raw evidence is in `results/create-acceptance/`.
+Linear/radial gradients compare defs creation, offsets/colors/opacity, coordinates/focal points,
+actual gradient fills, 1000-stop cap/refusals and gradient-to-fill atomic batches/rollback.
+Native regression checks defs/comment/leading-text order and stops inheriting the SVG namespace.
+Named-group defaults, explicit layers, child insertion, conversion/no-op, invalid labels/targets,
+stylesheet refusals and group/shape/mode atomic batches/rollback are also compared. The working
+bytes, snapshots, audit records and actual PNG pixels remain in the same exact comparison.
+Instances compare position/transform, source updates, both href forms, new/existing alternate
+xlink prefixes, same-document/transform validation and create-source-to-instance batches/rollback;
+exact SVG hashes and PNG RGBA remain required. Auto-ID, cycles and additional namespace/cap/
+parent/transform edges remain pending; no broad normalization is used.
+
+Adjacent same-parent grouping compares exact order/bytes, unchanged preview pixels, errors
+and mixed group/creation batches with rollback. Native-only evidence in
+`results/create-acceptance/native-grouping-guards.json` records five intentional safety refusals
+for cross-parent moves, paint-order changes, stylesheets and meaningful tails. Every refused
+case keeps original/working bytes unchanged and creates no snapshot. The Python grouping
+remapper permits such moves; this documented safety difference follows the repository
+appearance-preservation requirement and is not a normalization exception.
+
+`reparent-comparison.json` covers 42 observations: affine compensation (translate/scale,
+rotation centre, skews, matrices/exponents), unchanged real PNGs, mixed tails, exact working
+and snapshot bytes, audit records, no-op and style/reparent batches with rollback. Target/cycle,
+ancestor style/effects/locks, references, paint order, singular/CSS/nested/invalid transforms
+and undefined XML prefixes are checked through actual STDIO. Inherited namespace bindings
+and conflicting destination prefixes compare exact serialized bytes and instance pixels.
+`results/reparent-acceptance/native-legacy-guards.json` records five additional safety refusals
+for legacy moves that could alter appearance/content; source/working bytes stay unchanged and
+no snapshot is created. These refusals are intentional differences from unrestricted Python
+preserve_appearance=False behavior, not normalization exclusions. More edge cases remain pending.
+
+`duplicate-comparison.json` covers 19 real STDIO observations: explicit/automatic IDs,
+internal/external href/xlink/connector/paint references, masks/clip paths/markers, namespace
+adoption, mixed text/tails/comments, cloning an existing clone, batch movement and rollback.
+Full results, audit records, snapshot manifests/sizes, SVG bytes and real PNG RGBA are compared.
+Only newly minted IDs validated against corresponding original subtree positions (uniqueness,
+prefix, six-hex format and shared suffix) are bound before hashing complete SVG bytes. No XML
+reserialization or output field omission is used. Raw wire/SVG files remain in
+`results/duplicate-acceptance/`. `native-reference-guards.json` records five intentional stronger
+refusals for stylesheet/SMIL/accessibility/quoted-paint/hex-ID ambiguity with unchanged source/
+working bytes and no snapshots. Those forms and rarer limits/collisions remain follow-up work.
+The shared rename reference helper passed all 122 edit observations again.
+
+`tile-comparison.json` covers 27 row-major grid observations, including real 128- and 1024-cell rendering,
+groups/references, existing transforms, mixed text/tails/comments, negative/fractional/zero offsets,
+coerced counts, 1x1 no-op, batches/rollback and cap/nonfinite/root/missing errors. Full results,
+SVGs/snapshots (only validated minted-ID occurrences bound), audit records and actual PNG RGBA
+are compared. The 1024-cell upper-bound fixture completed with the original plus 1023 copies,
+unique IDs and matching full SVG/history/pixel results. Cap/target-error precedence is checked
+separately. Native `results/tile-acceptance/native-size-guard.json` proves
+incremental size refusal under a 512-byte configured limit without changing source/working SVGs
+or creating snapshots. The shared insertion helper preserves tail order and namespace adoption;
+all 19 duplicate comparisons were rerun successfully. More scalar/namespace/entity/collision and failure edges remain pending.
+
+`save-comparison.json` covers 50 validation/save/create scenarios, with exact saved byte hashes,
+root-qualified resource readback, approvals, managed files and symlinks, escape without side effects,
+blank-document seeds, scalar coercions, ID/viewBox errors, external entity observations and actual
+fontconfig glyph coverage. Embedded raster cases include the 5 MiB boundary with excess padding.
+Only validated IDs/timestamps and their URI bindings are normalized.
+
+`prompt-comparison.json` covers 96 exact prompt-get responses and four prompt-index resource reads.
+For the index, only JSON text is decoded; MIME, fields, values and list order are retained.
+`contracts/prompt-messages.json` contains actual reference message templates with one explicit
+goal placeholder; native Rust applies the same whitespace/500-character cleaning to that slot.
+
+`render-comparison.json` covers 74 public render/export observations through real STDIO and
+Inkscape CLI. PNGs compare actual decoded RGBA hashes, plain SVGs compare exact byte hashes;
+PDFs compare magic and exposed content-truth flags only (no PDF pixel/byte-equivalence claim).
+Fixtures include relative raster references, whole-page and object previews/exports, inline
+thresholds, path naming/readback, future working-copy mtime, size/dimension caps and failed-output
+cleanup without working/source mutation. Validated filename timestamps and unique tokens are
+normalized narrowly. Region fixtures cover transparent/white backgrounds, out-of-page bounds, physical units,
+letterboxing, slice, nonuniform scaling and no viewBox, plus reference refusals for unsupported
+root transforms/CSS/percent sizes/alignment. Frame captures/listings check sanitized series/labels, empty series, sequential and seeded
+numbering, symlink exclusion and invalid widths; frame filenames/indices are compared exactly.
+Historical region comparisons verify inline and artifact-readback PNGs before/after a style edit,
+missing snapshots, mapping mismatch refusal without artifacts and immutable source/snapshot
+bytes. Warm shell remains pending.
+
+`export-batch-comparison.json` covers 21 observations: dry-run/default plans, output-directory
+creation semantics, 32-item bounds, widths/IDs/formats, budget clamp/refusal, and real mixed
+PNG/SVG exports. Exact total output bytes, artifact readback, PNG RGBA and SVG byte hashes are
+compared. Sources and working SVGs remain byte-identical; preflight errors create no artifacts.
+Only validated IDs/filename timestamps and decoded JSON text are normalized.
+
+`profile-comparison.json` covers 28 observations: web widths/scales precedence and sorting,
+icon order/empty lists, size errors and escapes; exact PNG pixels/SVG bytes and source immutability.
+Print coverage checks real PDF 1.4, font outlining and applied options, without claiming complete
+PDF byte or pixel equivalence. Native profile lists are capped at 32; duplicate icon sizes and
+same-second naming collisions remain dedicated follow-up fixtures.
+
+`set-comparison.json` covers 17 observations across seven SVG fixtures. It compares complete
+consistency verdicts (viewBox/fallback, dominant stroke widths and ID naming, unknowns and ties),
+dry-run totals, empty/duplicate/unknown/malformed failures, actual two-document PNG/SVG output
+and exact total bytes. All source/working bytes are retained. Bound document IDs appearing in
+verdict lists are explicitly normalized; no property value or error is omitted. Native set inputs
+are capped at 32. Later export failures may retain earlier artifacts, matching reference semantics.
+
+`python-baseline-summary.json` summarizes five repeated real STDIO scenario runs.
+Raw requests, responses, timings, initialization RSS snapshots and stderr are retained locally
+under `migration/results/python-baseline/` (gzip preserves complete raw traces). That directory
+is ignored by Git to keep large observations separate from reviewable source and summaries.
+The initialization RSS snapshot does not establish peak or Inkscape child-process memory.
+The timings include client JSON parsing, IPC, file IO and engine processing; they do not yet
+attribute time to those components. The separate release checkpoint comparison below now records limited local evidence.
+
+`checkpoint-benchmark-comparison.json` preserves every sample from five fresh Python and
+five optimized Rust runs. Startup medians are 519.40/35.75 ms; initialization server RSS is
+92,336/12,688 KiB. Inspect roundtrips are lower for Rust, but edits/render/export are slower in
+these fixtures. This is an incomplete developer build and a sequential warm-cache comparison,
+not an overall speedup, package or peak-memory result. The live_status migration-pending error
+is the sole response-status mismatch and its timing is explicitly not comparable. Build hash,
+flags and linked system libraries are recorded in `release-checkpoint-build.json`.
+
+Reproduce the new measurements after the documented release build:
+
 ```sh
-migration/results/packages/inkscape-mcp-macos-arm64-stage6/bin/inkscape-mcp --doctor
-.venv/bin/python scripts/history/python/migration_doctor_acceptance.py --package migration/results/packages/inkscape-mcp-macos-arm64-stage6
-.venv/bin/python scripts/history/python/migration_package_acceptance.py --archive migration/results/packages/inkscape-mcp-macos-arm64-stage6.tar.gz
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_probe.py \
+  --output migration/results/rust-release-checkpoint --repeats 5 \
+  -- rust/target/release/inkscape-mcp-rust
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_probe.py \
+  --output migration/results/python-checkpoint --repeats 5 \
+  -- .venv/bin/inkscape-mcp
+.venv/bin/python scripts/migration_summarize.py \
+  migration/results/rust-release-checkpoint migration/rust-release-checkpoint-summary.json
+.venv/bin/python scripts/migration_summarize.py \
+  migration/results/python-checkpoint migration/python-checkpoint-summary.json
+.venv/bin/python scripts/migration_benchmark_compare.py \
+  migration/results/python-checkpoint migration/results/rust-release-checkpoint \
+  migration/checkpoint-benchmark-comparison.json
 ```
-Configure normal MCP execution with that candidate's `bin/inkscape-mcp` and a synthetic writable
-`INKSCAPE_MCP_WORKSPACE_ROOTS`, without `--doctor`. The user's current MCP configuration is
-unchanged. Native packaged GUI/supervisor/effects/Undo, signing/ABI/license audit, other platform
-builds, complete behavioral coverage and new phase/peak-memory measurements remain required.
-All 165 Rust tests, all-target clippy/format, Ruff (302 files), mypy (122 sources) pass; LLM indexes
-regenerated with frozen text unchanged. The full migration goal remains active and incomplete.
-
-### Local macOS arm64 candidate and archive installation (2026-10-02)
-
-A real local candidate is available at
-`migration/results/packages/inkscape-mcp-macos-arm64-stage3/`, with archive
-`migration/results/packages/inkscape-mcp-macos-arm64-stage3.tar.gz` (46,230,230 bytes;
-SHA-256 `0c2d4086893f04facb0b87dfb24b2bb29d8e9e34e3f9631b597486e9e1009721`).
-This is a current-Mac CLI/STDIO candidate, not the finished replacement or a published release.
-The archive contains the optimized native Rust executable, an actual prebuilt arm64 context
-module, a private CPython 3.12.14 runtime and six helper dependencies, fixed helper/supervisor
-assets, relocated dbus-daemon/gdbus and their library closure, package provenance/licenses and
-2258 file size/hash entries. Uncompressed regular bytes: 129,927,894. Native MCP execution does
-not load or wrap Python; Python remains only for the fixed supervisor and inkex helpers. Vendor
-inkex is read from the installed Inkscape bundle. Development used the existing uv-managed
-[python-build-standalone runtime](https://github.com/astral-sh/python-build-standalone/blob/main/docs/running.rst)
-([uv provenance](https://docs.astral.sh/uv/reference/environment/)); the user needs neither uv/pip,
-Homebrew nor a compiler to run this candidate.
-
-`scripts/history/python/migration_build_macos_package.py` refuses an existing output directory, copies only
-helper dependencies (no Python MCP package), builds the bridge on the development machine,
-relocates each non-system D-Bus dependency to loader-relative paths and ad-hoc signs modified
-copies. Fixed package manifest enables native discovery of private gdbus and the vendor
-Inkscape executable with an empty PATH; the development/reference PATH behavior is unchanged.
-Private gdbus disables external GIO module directories. A dedicated packaged Unix bus config
-uses EXTERNAL authentication and no host includes or service activation directories. Its
-mandatory listener is overridden by the fixed owned socket argv, per the [D-Bus documentation](https://dbus.freedesktop.org/doc/dbus-daemon.1.html).
-No system bus, GUI or security settings were modified. Developer ID/notarization, a complete
-redistribution-license/source audit and other-platform packaging remain unfinished.
-
-`migration/package-build-comparison.json` retains build/dependency provenance and archive hash.
-`migration/package-comparison.json` proves installation from this actual archive into a fresh
-owned temporary directory, file/hash and contained-link checks, and execution with an empty
-PATH and isolated HOME. Private Python imports all helper libraries from the relocated bundle
-(vendor inkex excepted); both insertion and socket helper CLIs run. The actual relocated bus
-and gdbus complete an authenticated private Unix exchange, then only that exact owned bus is
-terminated. Actual packaged STDIO discovery compares every field of tools/prompts/resources/
-templates against the frozen full contract (110 tools, seven prompts, ten static resources and
-eight templates). Native open/edit, no-op without audit, one-record atomic batch, failing-batch
-rollback, approval refusal, save/resource bytes and untouched original pass. Real Inkscape CLI
-preview and PNG export/resource readback have the expected blue RGBA pixel. Startup/headless
-calls do not create the configured managed session. No native GUI was opened.
 
 Reproduce:
+
 ```sh
-.venv/bin/python scripts/history/python/migration_build_macos_package.py --output migration/results/packages/<new-name>
-.venv/bin/python scripts/history/python/migration_package_acceptance.py --archive migration/results/packages/inkscape-mcp-macos-arm64-stage3.tar.gz
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_probe.py \
+  --output migration/results/python-baseline --matrix --repeats 5 \
+  -- .venv/bin/inkscape-mcp
+.venv/bin/python scripts/migration_summarize.py \
+  migration/results/python-baseline migration/python-baseline-summary.json
+.venv/bin/python scripts/migration_probe.py \
+  --output migration/results/rust-discovery --matrix --discovery-only \
+  -- rust/target/debug/inkscape-mcp-rust
+.venv/bin/python scripts/migration_compare.py migration/contracts \
+  migration/results/rust-discovery --report migration/discovery-comparison.json
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_capability_acceptance.py
+.venv/bin/python scripts/migration_read_acceptance.py
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_edit_acceptance.py
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_save_acceptance.py
+.venv/bin/python scripts/migration_prompt_acceptance.py
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_render_acceptance.py
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_batch_acceptance.py
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_profile_acceptance.py
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_set_acceptance.py
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_create_acceptance.py
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_reparent_acceptance.py
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_duplicate_acceptance.py
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_tile_acceptance.py
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_find_acceptance.py
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_reload_acceptance.py
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_repeat_acceptance.py
+.venv/bin/python scripts/migration_retention_acceptance.py
+.venv/bin/python scripts/migration_stat_acceptance.py
+.venv/bin/python scripts/migration_intent_acceptance.py
+.venv/bin/python scripts/migration_quality_acceptance.py
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_optimize_acceptance.py
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_adopt_acceptance.py
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_fragment_acceptance.py
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_place_acceptance.py
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_grid_acceptance.py
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_transform_acceptance.py
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_path_acceptance.py
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_action_acceptance.py
+PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" \
+  .venv/bin/python scripts/migration_action_discovery_acceptance.py
+.venv/bin/python scripts/migration_action_fault_acceptance.py
+.venv/bin/python scripts/migration_path_fault_acceptance.py
 ```
-For a manual candidate test, extract the archive into an empty folder and set the MCP executable
-to its `bin/inkscape-mcp`, with `INKSCAPE_MCP_WORKSPACE_ROOTS` pointing to a synthetic writable
-workspace. No build/install command is needed. This exact local process configuration is tested:
-```json
-{
-  "command": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage3/bin/inkscape-mcp",
-  "env": {
-    "INKSCAPE_MCP_WORKSPACE_ROOTS": "/absolute/path/to/synthetic-workspace",
-    "INKSCAPE_MCP_LIVE_ENABLED": "1"
-  }
-}
-```
-The user's configured server is unchanged. Packaged managed GUI/supervisor/effect execution,
-native Undo/Redo, doctor, signing/ABI/platform acceptance, complete behavioral coverage and new
-phase/peak-memory measurements remain required; the full goal is active and incomplete.
-All 165 Rust tests, all-target clippy/format, Ruff (299 files), mypy (122 sources) pass. Frozen LLM
-indexes are regenerated; original source Python server is preserved.
 
-### Explicit managed launch and packaged supervisor foundation (2026-10-02)
-
-Native `live_launch` now gates live/macOS, creates or validates an owned 0700 session through
-no-follow descriptor descent, bounds Unix socket path length, serializes launch with a bounded
-fixed lock, and adopts an existing reachable private managed bus. A surviving supervisor lock
-with an unavailable bus refuses a second launch. Only the verified system `/tmp` and `/var`
-aliases normalize on macOS; arbitrary parent/final links are rejected. The ready attached host
-is retained internally for a later `live_connect`, without changing the process environment.
-The bool response preserves the exact FastMCP result wrapper and wrap_result metadata.
-
-New launch resolves fixed package-relative `libexec/inkscape-mcp` assets and starts only its
-private Python with `-I` and fixed `supervise.py`, session root and trusted Inkscape binary.
-It uses null stdin, owned bounded-path log files and detached session. The 15-second readiness
-wait never kills a potentially running GUI/supervisor. The standalone stdlib supervisor in
-`rust/package/supervise.py` imports no Python MCP server: it installs six fixed one-shot helper
-assets and a private-runtime wrapper, copies the vendor executable/resources association,
-uses a prebuilt context module, ad-hoc signs only the private executable copy, and owns a
-private fixed-path bus until its GUI exits. It never compiles on the user's machine or changes
-macOS settings. Bounded no-follow asset reads and atomic directory-relative writes preserve
-external/hardlinked originals. Full directory-race/crash and native supervisor acceptance
-remain unproved; the ready bundle supplying these paths does not exist yet.
-
-`migration/live-launch-comparison.json`: three synthetic STDIO profiles, nine observations,
-zero differences without normalization (existing ready session, wrong permissions, surviving
-supervisor with lost bus). Separate native evidence covers a linked manifest, linked parents,
-external/hardlinked byte preservation, asset caps and no staging leaks. An owned temporary
-fake package with a copied Rust executable proves the new-launch fixed argv, isolated Python,
-detached session, no startup launch, repeat reuse and child survival past MCP exit. Its runtime,
-supervisor/bridge/bus are test substitutes: this does not validate the real packaged supervisor
-or native GUI. Raw evidence is in `migration/results/live-launch-acceptance/`; reproduce with
-`.venv/bin/python scripts/history/python/migration_live_launch_acceptance.py`.
-
-`migration/context-build-comparison.json` records the real development clang command, source
-and bridge hashes, arm64 Mach-O type and dependencies (only Apple system frameworks/libraries,
-no Homebrew dylib). Build headers were available on the development host. No GUI loaded it.
-A direct Inkscape bundled Python/inkex probe exited 137 without output; the cause is unproven
-and this candidate is not accepted as a working runtime. The package still needs a verified
-private runtime, relocated D-Bus and complete packaged/helper/GTK ABI/signing checks.
-
-All 165 Rust tests, all-target clippy/format, Ruff (297 files), mypy (122 sources) pass.
-Managed regression: 55 observations, seven retained Python runtime identity deltas, no unexpected
-differences. Connect regression: 26 observations, zero differences. LLM indexes regenerated,
-frozen discovery guidance unchanged. All 110 tool names now have native dispatches, all 18
-resources and seven prompts are native; partially implemented batch/schema/error cases and
-unverified packaged launch are still material limitations. Ready Mac installation, doctor,
-platform builds, native GUI Undo/Redo and current phase/peak-memory benchmarks remain required.
-The full migration goal is active and incomplete; dispatch coverage is not completion.
-
-### Explicit socket helper arming (2026-10-02)
-
-Native `live_arm_socket` requires the live gate and cached user-data capability, installs only
-fixed shipped assets when neither system nor user directory has a regular helper marker,
-then reuses an advertising rendezvous before binary/display checks. New launch uses only
-`--with-gui`, the fixed helper action and a server-minted private blank SVG, with null stdio
-and a detached process session. The document remains available for the GUI/OS temp policy.
-Polling is bounded by max(5 seconds, configured process timeout); timeout or MCP exit never
-kills the GUI. An owned-child waiter reaps normal exits. No arbitrary extension/action input
-is accepted. Marker reads add no-follow parent/file protections; Windows remains unported.
-
-`migration/live-arm-comparison.json`: six isolated profiles and 27 real STDIO observations,
-zero differences. Covers first launch then reuse, pre-existing rendezvous, system helper marker,
-missing user directory, blocked extension target, timeout without retry, and child survival
-past timeout and MCP exit. Compares complete wire fields, installed asset hashes, cached probe
-requests, fixed launch argv, exact blank SVG bytes, 0600 mode, detached session and retained
-file. Only the validated minted document path is bound. The fake engine is compiled as Python
-before execution. No real GUI was opened; helper execution/Undo remain unproved. Raw traces:
-`migration/results/live-arm-acceptance/`. Reproduce with
-`.venv/bin/python scripts/history/python/migration_live_arm_acceptance.py`.
-
-All 164 Rust tests, all-target clippy/format, Ruff (295 files), mypy (122 sources) pass.
-LLM indexes regenerated, frozen text unchanged. Current count: 109 native tools / one pending
-(`live_launch`), all 18 resources and 7 prompts native. Ready packaged runtime/supervisor/bridge/bus,
-doctor, current-Mac installation, other platforms, native GUI Undo/Redo, full argument/failure
-coverage and fresh phase/peak-memory benchmarks remain required. Full goal stays active.
-
-### Fixed live helper installation (2026-10-02)
-
-Native `live_install_helper` installs only the two compile-time shipped socket-helper assets,
-after the live gate and cached read-only Inkscape capability probe. It preserves source result
-fields, ordered filenames and home-relative/basename path redaction. Startup and reconnect do
-not install extensions or launch GUI. The shared POSIX descriptor/no-follow write pipeline
-refuses linked parents and nonregular destinations before either asset is replaced. Atomic
-replacement preserves an externally hardlinked original; the reference uses truncating copies.
-The two-file upgrade is sequential, not a crash-atomic pair. Windows guards remain unported.
-
-`migration/live-install-comparison.json`: five isolated profiles, 18 real STDIO observations,
-zero differences and no normalization. Checks both fixed asset hashes, first install/upgrade,
-read-only probe argv/cache, missing engine/user-data directory and blocked target errors,
-path redaction, unchanged blocked bytes and no staging leaks. Only synthetic child HOME/data
-paths were written. A native security unit separately checks symlink refusal, hardlink
-preservation and preflight ordering. On macOS its temporary root is canonicalized to remove
-the system `/var` alias; production no-follow checks remain intact.
-
-All 164 Rust tests, all-target clippy/format, Ruff (294 files) and mypy (122 sources) pass.
-LLM indexes regenerated with frozen discovery text unchanged. This proves installation of
-reference helper bytes, not execution by packaged Python/inkex or native GUI acceptance.
-Current count: 108 native tools / 2 pending (`live_arm_socket`, `live_launch`), all 18 resources
-and 7 prompts native. Full schema/failure, packaged helper/supervisor/bridge/bus, ready Mac
-installation, doctor, platform builds, native Undo/Redo and phase/peak-memory benchmarks
-remain required. The full migration goal stays active and incomplete.
+Run the console entry point for the Python reference. `python -m inkscape_mcp.server`
+currently registers a different module's app instance and exposes zero tools; the harness
+now rejects an empty surface rather than accepting a useless timing measurement.
+That pre-existing issue has not been changed as part of the migration.
 
 ### Public live mutations and operation records (2026-10-02)
 
@@ -2102,7 +2356,6 @@ Pending tools: `live_arm_socket`, `live_diff_view`, `live_export_selection`,
 packaged helper/bridge/bus, doctor, current-Mac installation, platform builds and new phase/peak
 memory measurements remain required. The full migration goal is active and incomplete.
 
-
 ### Public selection export (2026-10-02)
 
 Native `live_export_selection` uses the fixed transport command set, best-effort selection,
@@ -2125,7 +2378,6 @@ Current count: 102 native tools / 8 pending, all 18 resources / 7 prompts native
 `live_arm_socket`, `live_diff_view`, `live_find_objects`, `live_install_helper`, `live_launch`,
 `live_preview_object`, `live_session_step`, `live_sync_to_workspace`. Native GUI/Undo and package,
 doctor, platform and complete phase/peak-memory acceptance remain unfinished; the goal is active.
-
 
 ### Public live discovery and isolated preview (2026-10-02)
 
@@ -2164,7 +2416,6 @@ Current count: 104 native tools / 6 pending, all 18 resources / 7 prompts native
 ready current-Mac install, other-platform builds, native GUI Undo/Redo and fresh phase/peak-memory
 benchmarks remain required. The full migration goal remains active and incomplete.
 
-
 ### Public live workspace sync (2026-10-02)
 
 Native `live_sync_to_workspace` validates and creates in-sandbox parents before requiring a
@@ -2198,7 +2449,6 @@ LLM indexes regenerated, frozen guidance unchanged. Current count: 105 native to
 all 18 resources / 7 prompts native. Pending tools: `live_arm_socket`, `live_diff_view`,
 `live_install_helper`, `live_launch`, `live_session_step`. Full schema/failure coverage and ready
 package/doctor/platform/native GUI/Undo/phase-memory acceptance remain required. Goal stays active.
-
 
 ### Public focused live diff (2026-10-02)
 
@@ -2236,7 +2486,6 @@ LLM indexes regenerated; frozen instructions unchanged. Current count: 106 nativ
 pending, all 18 resources / 7 prompts native. Pending: `live_arm_socket`, `live_install_helper`,
 `live_launch`, `live_session_step`. Package/doctor/platform/native Undo/Redo/full-schema and new
 phase/peak-memory acceptance remain required; the full goal stays active and incomplete.
-
 
 ### Public one-step live orchestration (2026-10-02)
 
@@ -2276,558 +2525,223 @@ helper/bridge/bus packaging, doctor, current-Mac clean installation, platform bu
 Undo/Redo, full schema/security/failure coverage and new phase/peak-memory measurements remain
 required. The full migration goal remains active and incomplete.
 
-### Active Rust migration (2026-10-02)
+### Fixed live helper installation (2026-10-02)
 
-Local branch `codex/rust-migration` starts from clean `c50a924`. The full objective is in
-`/Users/bm/.codex/attachments/10e0e4a1-1fc1-48af-9f93-2b78ff295044/goal-objective.md`.
-No commits/PRs/releases/messages are authorized. The goal is active, not complete.
-See [Rust migration checkpoint](reports/RUST_MIGRATION_REPORT.md) and
-[contract/measurement evidence](../../migration/README.md).
+Native `live_install_helper` installs only the two compile-time shipped socket-helper assets,
+after the live gate and cached read-only Inkscape capability probe. It preserves source result
+fields, ordered filenames and home-relative/basename path redaction. Startup and reconnect do
+not install extensions or launch GUI. The shared POSIX descriptor/no-follow write pipeline
+refuses linked parents and nonregular destinations before either asset is replaced. Atomic
+replacement preserves an externally hardlinked original; the reference uses truncating copies.
+The two-file upgrade is sequential, not a crash-atomic pair. Windows guards remain unported.
 
-Python remains the usable reference server. Rust currently implements STDIO discovery,
-workspace/open/create/reload, aggregate inspect/validate/find_objects and document resources, safe save and bounded artifact reading,
-the shared transaction kernel, five style/color tools plus replace_text/set_font and move/scale/rotate plus resize_canvas/normalize_viewbox and fit_to_content plus rename_object/delete_object and eight vector primitive creators and two gradient creators plus create_group/set_group_mode/create_use/group_objects/reparent_object/duplicate_object/tile/repeat_objects, style/color/text/font/transform/canvas atomic batches and snapshots;
-all seven prompt renderers plus prompt index and headless public PNG/PDF/SVG render/export and frame series plus historical region comparison and bounded export_batch plus web/icon/print profiles and export_set; the full frozen
-discovery surface includes pending tools which return explicit migration errors.
-Do not confuse 16/16 discovery parity with complete behavioral migration.
-Checks: 71 native read, 122 edit, 50 save/create, 100 prompt, 74 render, 21 export-batch and 28 profile and 17 export-set plus 93 vector-authoring and 42 reparent/XML plus 19 duplicate and 27 tile plus 45 filtered-search and 11 reload and 19 repeat and 12 retention and 19 artifact-stat and 820 intent-guidance and 126 quality and 161 optimizer and 152 SVG adoption and 131 fragment and 69 placement and 102 grid and 116 selector-transform and 170 path comparisons match;
-163 Rust tests, format/clippy pass. There are 107 native dispatches and 3 pending tools; all 18 resources are native.
-Real operation-preview PNG pixels, audit records and snapshot hashes match Python.
-Native grouping also has five explicit appearance-safety refusals with unchanged source/working
-bytes and no snapshots; see the report for intentional differences from the legacy remapper.
-Native reparent compensation preserves transforms, paint order, mixed tails and inherited/conflicting
-namespace bindings; five stronger legacy-mode refusals are documented. Undefined XML prefixes now
-refuse even when libxml2 returns a document pointer. Read/save comparisons were rerun successfully.
-Native duplicate and batch reuse rename reference rewriting, preserve tail/namespace order, and
-validate unique intra-clone IDs. Complete SVGs are compared with only validated random ID suffixes
-bound; pixels/history match. Five intentional reference-safety refusals are documented separately.
-The 122 edit scenarios were rerun after sharing the helper.
-Native tile shares the copy kernel, occupied IDs and incremental size accounting. Real 128- and 1024-cell
-grids and no-op/rollback/error scenarios match; a 512-byte native guard preserves originals/working
-bytes and snapshots. The 1024-cell upper-bound render (original plus 1023 copies) also matched
-full SVGs/history and unique-ID checks; cap/target-error precedence is tested separately.
-Native filtered search matches authored ObjectRefs, reference CSS paint filtering and Unicode text,
-with one private bounded CLI query for accurate bounds and DOM fallback on engine faults.
-Malformed/duplicate/nonfinite CSV rows and a separate native stdout-cap fallback are checked;
-working/original bytes and history stay unchanged. Read comparisons passed after sharing ObjectRef.
-One initialization timeout remains unexplained; subsequent complete repeats passed.
-Native reload snapshots before source resolution and keeps identity; source/seed/fallback/error
-behavior and pre-reload restoration match Python. Malformed replacements refuse before copying
-(an intentional stronger guard); read-only working-directory injection verifies baseline rollback,
-unchanged working/source bytes and retained snapshots. Two-file crash journaling remains pending.
-Native repeat now creates bounded root-space linked/copy instances in ordinary named groups,
-with affine compensation, local anchors, tangent orientation and compatible seeded jitter.
-19 STDIO comparisons include raw SVGs with strictly validated copy-ID bindings, real preview
-pixels/history, dry-run and late refusal with discarded records. 30 planner cases also match.
-1024-instance/size/locked/reference guards are unit-tested; this is not GUI acceptance.
-Full schema-error precedence and broader namespace/scalar/limit cases remain pending.
-JSON precision features are enabled; 71 read and 122 edit comparisons passed again.
-Native explicit pruning now matches snapshot keep-union/count/byte policies, orphan records
-and root live-frame age/byte budgets with protected preview/diff frames. 12 STDIO observations
-include idempotence and unchanged original/current SVGs; a separate native tampered-basename
-and symlink guard passes. Boot-time sweep and crash-consistent pruning remain pending.
-Native artifact stats now stream SHA-256 through pinned no-follow descriptors with a 1 MiB
-buffer. 19 exact wire comparisons cover binary/empty files, roots/links/path and size failures,
-ordered/repeated sets and unchanged bytes/no document state. Native directory/path-count guards
-are separate intentional safety differences. An 80-byte metadata output-cap fixture passed; concurrent-write injection remains
-pending acceptance; the code bounds growing-file reads and rejects changed length/mtime.
-Private live_bus now implements bounded typed gdbus IPC (fixed actions/parameters/target/context),
-broker GetNameOwner → validated unique owner → Actions.List and owner-pinned later calls. Four
-new tests compare 25 exact Python GVariant fixtures and fake CLI argv traces for context/window
-params, missing/bad owner, 1 s timeout/nonzero/capped mutation → uncertain with no retry/owner
-quarantine. ContextChanged remains a fixed actionable refusal. Shared process retains bounded
-stderr internally for its classifier. Initial 200 ms connect timeout cause is unproven; production
-1 s floor + 2 s stalled action passed. All 98 Action-discovery comparisons passed after shared
-stderr retention. No actual bus/GUI acceptance or public count change.
-Private live_context now parses bounded string/tuple/list replies without evaluation. 54 exact
-Python fixtures cover identities, titles, escapes, invalid shapes and errors; native tests bound
-depth/nodes/bytes/row count and reject raw NUL and invalid Unicode scalar escapes. One additional
-fake CLI test reads active/list contexts through the pinned owner. No public surface change.
-Private live_dbus now implements the common Transport: plain-SVG/PNG export, parsed active doc,
-viewport through a fixed integer window path and selection style/transform actions. 22 captured
-Python backend cases compare internal results and fixed action traces. Three explicit preflight
-differences retain legacy traces: pan refuses before introspection; malformed transform tails
-refuse before any mutation. Entire plans include byte-cap preflight. Export reads use no-follow
-regular-file descriptors and size bounds; missing/symlink/oversize/invalid XML/UTF-8 and owned
-temp cleanup tests pass. This is fake CLI evidence, not actual D-Bus/GUI/Undo; public count unchanged.
-Private live_managed now provides no-follow stdout/lock handles, deadline-bounded flock, selected
-task guards, list/select and scoped managed SVG/PNG reads. Shared same-thread/same-stream scopes
-reuse the captured context and lock; different sessions refuse nesting. Error/unwind cleanup and
-separate-process lock contention are verified. All guarded export actions use UUID Context.Activate,
-not app-global Actions.Activate. 50 Python task-guard fixtures match; five new tests pass. Actual
-managed selection/scene/helper effect transactions and liveness probes remain pending; only finished
-read commands are advertised internally, and no public live tools are counted as ported.
-All 71 headless read comparisons passed again after sharing regular-file handle validation.
-Private Managed selection now uses pinned positional stdout reads, select-list/query-x fencing,
-1 MiB/10,000-ID bounds, Unicode/dedup/root-ID filtering and timeout without retry. 58 exact Python
-parser fixtures cover numeric fences, incomplete lines, splitlines/strip behavior and invalid replies.
-Managed export now resets sticky id/id-only/text/plain options and retains Inkscape metadata;
-region rendering maps root user units to pixels. Five new tests pass (126 total), including fake
-CLI scoped selection and mapped export traces. Actual managed geometry/error parity, scene/inspection,
-helper transactions and GUI acceptance remain pending; no public live tools are counted as ported.
-Private live_scene now reuses headless ObjectInfo/tree helpers for scene and selection inspection.
-140 exact Python fixtures match canvas/viewBox, metadata, visibility/inheritance, ancestor-transform
-bbox refusal, duplicate/stale/reordered selection and hierarchy. Unicode/underscore numeric text
-decoding uses frozen Unicode 15 decimal starts; 705 Python float fixtures match, and shared bbox
-numeric parsing now accepts Unicode decimal prefixes. Scene guards cap elements/selection at 10,000.
-Managed scene/inspection run selection and SVG export under one context; fake CLI trace tests pass.
-Four new tests bring total to 130. No public dispatch count change or actual GUI/Undo acceptance.
-After the shared inspection/decimal refactor, all 71 read and 45 find scenarios passed again.
-Private live_effect now provides exact helper document fingerprints and typed nonce-bound edit
-reply parsing, with captured refusal whitelist/fallback. 11 Python fingerprint and 18 reply fixtures
-match. Hashing streams records with a bounded expanded-record budget (min(8×input cap,64 MiB));
-namespace amplification refuses before any effect. Exchange prepares fixed files atomically/mode
-0600, reads no-follow bounded regular replies, classifies stale/malformed as uncertain and cleans
-once only. Three additional filesystem/cap tests preserve originals and avoid late Drop deleting
-a later request. Five new tests bring total to 135. No actual effect activation/Undo/public change.
-Private Managed now connects edit Exchange to fixed edit-effect activation and fingerprint
-confirmation, with selected task guards and cross-client scope across selection/pre-export/request/
-effect/post-export. Style/text and eight typed order/structure commands are supported internally;
-legacy helper-absent fill fallback remains guarded. 13 exact Python request/result/refusal fixtures
-match with validated nonce binding. A fake effect changes synthetic SVG; Python helper-code SHA
-is confirmed by Rust. Lost/stale/missing/mismatched and guarded context-switch outcomes stay
-uncertain with one activation; a trustworthy refusal after lost activation is recovered safely.
-Applied replies after transport loss remain uncertain because unique-owner binding is quarantined.
-Four new tests bring total to 139. Initial trace tests counted Describe as activation and a switch
-test used unguarded legacy mode; corrected method filters/guarded setup pass. No actual native
-effect/Undo/GUI acceptance or public count change.
-Private Managed insertion now validates the original fragment natively, then activates only the
-fixed insertion effect under a selected task and one operation scope. 64 frozen Python preflight
-cases match allowlist, namespace/attribute/reference/CSS restrictions and planned IDs; 3 complete
-Python transactions match requests/results with only validated minted nonce binding. Synthetic
-insertion uses Python prepare_fragment to append a group; a fresh scoped SVG must contain exactly
-one direct SVG root group with all planned IDs in order. This deliberately strengthens the legacy
-substring confirmation. Native guards bound 1 MiB/10,000 elements and 2 MiB helper requests, refuse
-empty IDs before dispatch (legacy uncaught KeyError), require exact nonce/boolean reply and classify
-stale/malformed/oversize as uncertain. Lost/missing/mismatched/context-switch replies have one
-activation and cleaned files/scopes; trustworthy refusal after lost activation is recovered, while
-applied transport loss remains uncertain. Six new tests bring total to 145. This is fake CLI/effect
-evidence, not actual helper/native Undo/GUI/package acceptance. Public counts remain 84/26. Next
-complete fresh liveness/probes, public approvals/records/live dispatch/resources and package/native
-acceptance.
+`migration/live-install-comparison.json`: five isolated profiles, 18 real STDIO observations,
+zero differences and no normalization. Checks both fixed asset hashes, first install/upgrade,
+read-only probe argv/cache, missing engine/user-data directory and blocked target errors,
+path redaction, unchanged blocked bytes and no staging leaks. Only synthetic child HOME/data
+paths were written. A native security unit separately checks symlink refusal, hardlink
+preservation and preflight ordering. On macOS its temporary root is canonicalized to remove
+the system `/var` alias; production no-follow checks remain intact.
 
-Private live_probe now derives readonly D-Bus/managed/socket readiness and constructs fixed
-attach-only backends for Session::connect. 256 frozen Python host/process profiles plus 4 socket
-advertisement profiles match every readiness field/command list, with no action activation.
-D-Bus handshake resolves the broker once, then targets the unique owner; managed helper support
-uses fresh Describe. Managed is_connected now performs a fresh List with timeout capped at 2 s,
-against that same owner, without reconnect or replacement. Vanished-owner/changed-helper and
-post-disconnect fixtures pass. Managed stdout readiness refuses file/ancestor symlinks; this is
-an explicit stronger native guard. No-session gates perform no subprocess calls. Factory tests
-verify no process before attach, fixed D-Bus/managed document capture and Session teardown/history
-callback. Socket readiness intentionally means a rendezvous advertisement, as in Python; connect
-still requires the authenticated handshake. Four new tests bring total to 149. These are fake
-CLI/process-boundary tests, not actual D-Bus/helper/GUI acceptance. Public counts remain 84/26.
-Next wire config/probes/factory/Session and public live policy/approvals/records/tools/resources,
-then complete private runtime/bridge/bus packaging, native Undo and end-user package acceptance.
-Public native check_live_support/live_status/live_disconnect and the live/session resource now
-use Session, fresh native probes and cached runtime helper/data-directory facts. These readonly
-paths never launch or attach a GUI. Disconnect resets transport/token/cache/task state and invokes
-bounded best-effort first-root history cleanup. One no-follow cleanup test preserves original/link
-and non-record files, and verifies idempotence; links are retained, an intentional stronger guard
-than the reference glob unlink. Actual STDIO acceptance compares 8 isolated profiles (master gate,
-rendezvous advertisement and helper installed marker), 48 complete tool/resource/file observations
-with zero differences. Responses include every probe/command list, sorted ranking, exact status/
-recovery notes, helper reconciliation, JSON MIME/text/structured content and repeated disconnect.
-Fresh marker transitions after cache initialization also match: support/socket readiness uses fresh
-installation presence while session reconciliation retains the cached runtime helper flag.
-Public count is now 87 native / 23 pending tools; live/session is ported and four live resources
-remain pending. 150 Rust tests pass. Public live_connect, managed manifest/environment refresh,
-records/mutation/render/sync/events/resources, packaging and actual native acceptance remain.
-One repeated full run alongside STDIO acceptance hit the synthetic gdbus 1 s connect timeout;
-the cause is unproven. The isolated fault test and subsequent full 150-test repeat passed, without
-changing deadlines. These STDIO profiles stay disconnected; connected public transport/guard
-acceptance follows live_connect integration.
+All 164 Rust tests, all-target clippy/format, Ruff (294 files) and mypy (122 sources) pass.
+LLM indexes regenerated with frozen discovery text unchanged. This proves installation of
+reference helper bytes, not execution by packaged Python/inkex or native GUI acceptance.
+Current count: 108 native tools / 2 pending (`live_arm_socket`, `live_launch`), all 18 resources
+and 7 prompts native. Full schema/failure, packaged helper/supervisor/bridge/bus, ready Mac
+installation, doctor, platform builds, native Undo/Redo and phase/peak-memory benchmarks
+remain required. The full migration goal stays active and incomplete.
 
-Public live_connect, live_get_active_document/live_get_selection/live_inspect_selection and
-managed live_list_documents/live_select_document now use the native Session/fixed factory. Managed
-connect refreshes an existing owned 0700 session manifest through no-follow bounded reads, validates
-the fixed private Unix bus address/optional GUID, probes the unique owner/context bridge, then
-attaches without starting a daemon or GUI. Native address overrides are per-transport, with no
-process environment mutation. Strict address tails refuse network/fallback addresses, an intentional
-stronger native guard. Managed root paths must use ASCII alphanumerics or /._-; this prevents
-D-Bus metacharacter/percent decoding from changing the endpoint. All fixed action-plan argv caps
-include the address. Reconnect clears task,
-token/cache and history; failed preference/attach leaves the documented state. live/selection and
-live/view resources now use their transport with exact disconnected fallbacks.
-Actual STDIO comparisons add 26 owned-loopback connected/read/reconnect/failure/resource observations
-and initially 10 synthetic managed manifest/task/ready-to-edit/reconnect observations, matching Python.
-The expanded managed comparison is described below.
-Only validated UTC connected_at timestamps are bound, preserving reuse/new-connect relationships.
-The managed test verifies explicit task choice and binding reset, but is fake gdbus, not native GUI.
-Two attach/security tests bring total to 152; format/clippy/Ruff/mypy pass. Public count is now 93
-native / 17 pending tools, with live/events and live/operations the two remaining resources. Next
-complete events/render/cache/sync and approved live edit records/pipeline/remaining tools, then
-package private runtime/bridge/bus and perform native Undo/Redo and package/benchmark acceptance.
-Connected runtime capabilities now use the adopted transport address without process environment
-mutation. Managed preflight runs before the first capability probe; an existing cache stays unchanged
-until diagnose_runtime, matching Python. Disconnected read tools and selection/view resources do
-not probe or fill that cache. Managed STDIO acceptance initially covered 41 observations across both
-cache initialization orders, full runtime/resource fields, refresh after disconnect and no process
-calls for disconnected reads. Seven explicit Python-version identity differences remain; all other
-fields match after validated UTC timestamp bindings and semantic JSON decoding. These are owned
-synthetic process-boundary checks, not native GUI or packaged-runtime acceptance.
+Reproduce with `.venv/bin/python scripts/migration_live_install_acceptance.py`.
+Raw traces are in ignored `results/live-install-acceptance/`.
 
-Public live_wait_for_change and inkscape://live/events now share Session's last-token/change
-baseline via fixed state_token calls. First observations report no change; selection/document/
-viewport deltas remain independent. A timeout carries the latest token with empty convenience
-selection IDs without overwriting the persisted observation. Reconnect/disconnect reset the baseline.
-The wait validates a 0..60 s budget, floors positive polling intervals at 10 ms, uses Tokio timers,
-and releases the session mutex before sleeping. An actual MCP cancellation notification stops
-subsequent polls; another resource read proceeds during a pending wait. This proves cancellation
-between polls, not interruption of an in-flight synchronous transport exchange (its own bounded
-process/socket deadline still applies).
-23 actual STDIO observations match Python through an owned authenticated loopback peer, covering
-shared tool/resource state, simultaneous deltas, defensive token coercion, zero timeout, bounded
-interval-floor timeout, changes on subsequent polls, reconnect and helper refusal. Full negative
-read replies preserve the synchronized socket channel without retry, matching Python; mutation,
-malformed and lost-reply quarantine remains. Helper rejection has Python's exact tool/resource
-error rather than being silently turned into an empty resource. Managed acceptance expands to
-45 observations (seven retained runtime-identity deltas only), including inherited unsupported-token
-refusal and clean events fallback. Nothing launches Inkscape or captures document/scene/PNG per poll.
-Two new tests bring the total to 154. Public native count is 94 / 16 pending tools, with 17 native
-resources and only live/operations pending. All seven prompts remain native. More schema-error
-precedence/coercion cases, live render/cache/sync/edit approvals/records and packaging/native GUI
-acceptance remain; neither synthetic peer nor fake managed bus proves native manual-edit detection.
+### Explicit socket helper arming (2026-10-02)
 
-Public live_set_viewport, live_render_view and live_get_scene now use the fixed native
-Transport methods. Shared preflight bounds fixed zoom/pan/fit modes, paired center/deltas,
-complete region parts, finite coordinates/extents and positive bounded scale; fast defaults to
-0.5 while explicit scale wins. View control creates no document mutation, artifacts or records.
-46 actual STDIO viewport observations compare results/refusals and fixed command parameters,
-including before-connect validation and a valid helper refusal followed by another successful read.
-Managed viewport support remains refused by its frozen command set, as in Python.
-Live frame persistence uses the first workspace root, no-follow directory descent and atomic
-publication of a minted timestamp/nonce PNG path. Caps refuse before file publication; a native
-security test preserves an external symlink target and leaves no partial artifacts. Artifacts and
-metadata are cached using the existing Session LRU/coalescing model with revision plus rounded
-region/scale keys. Cache-token reads do not alter the events baseline; unavailable tokens skip
-caching. live_get_scene scopes the frame and scene together through the transport operation scope.
-60 actual STDIO render observations match Python, including full PNG byte and RGBA pixel hashes,
-returned metadata/path reuse, rounded-key hits, LRU eviction, revision-change invalidation,
-fast/explicit scale, region/scales bounds, invalid inputs before rendering and reconnect reset.
-Only validated artifact timestamp/nonce paths are bound; all other result and request fields stay
-compared. Synthetic managed acceptance expands to 51 observations, seven explicit Python runtime
-identity differences only, including PNG persistence and guarded region/scene reads. Fake gdbus
-writes a fixed valid PNG for PNG exports and the existing SVG fixture for document exports.
-155 Rust tests, all-target clippy/format, Ruff (285 files) and mypy (122 sources) pass. Current
-native tool count is 97 / 13 pending, with 17 native resources / live operations still pending.
-These are synthetic public transport checks; actual GUI rendering, native Undo/Redo, packaged
-helper/bus/bridge, remaining live mutation/record/sync/export/loop/diff tools, broader schema-error
-parity and full package/performance acceptance remain. Python production files are unchanged.
+Native `live_arm_socket` requires the live gate and cached user-data capability, installs only
+fixed shipped assets when neither system nor user directory has a regular helper marker,
+then reuses an advertising rendezvous before binary/display checks. New launch uses only
+`--with-gui`, the fixed helper action and a server-minted private blank SVG, with null stdio
+and a detached process session. The document remains available for the GUI/OS temp policy.
+Polling is bounded by max(5 seconds, configured process timeout); timeout or MCP exit never
+kills the GUI. An owned-child waiter reaps normal exits. No arbitrary extension/action input
+is accepted. Marker reads add no-follow parent/file protections; Windows remains unported.
 
-All actual native Undo/packaged runtime/build/doctor/benchmark requirements remain active.
-Private live_transport/live_session/live_cache now provide common semantic interface + Socket
-adapter, read/no_freeze capability ranking, teardown/attach/document-capture and session cache.
-872 exact Python status/recovery + 12 cache fixtures match without probes/GUI. Tests cover all
-five connection states, guarded/legacy identities, helper reconciliation, LRU floors/replacement/
-coalescing/oversize exception, failed attach cleanup and operation RAII end on error/panic.
-Actual loopback Session→Socket reads and reconnect reset tokens/change/cache; six new units,
-total 110 Rust tests. Public 84/26 count unchanged. Actual history-file clearing is a pending hook;
-public probes/config/MCP wiring, cache keys/frames/event wait and DBus/managed guards are required.
-Next implement native DBus and managed transport probes/IPC, preserving unique-owner activation
-protection and task binding; connect through this Session with explicit-only launch semantics.
-Private socket now covers all semantic methods, including render/export binary decode, four typed
-viewport enum modes and string-map transform/SVG/text writes. 29 captured Python strict base64
-cases match exact decoded bytes/error categories (including padding-bit semantics); this is not
-PNG visual validation. TCP tests verify fixed request params and Unicode/mutation model, refuse
-nonfinite view args before IO, and preserve uncertain after lost insert reply without retry.
-Three new tests, total 100. Public live policy/approvals/bounds/fragment/text/style validation,
-records/previews/task guards, session/reconnect/backend/native Undo/package acceptance remain.
-Next implement the common live transport interface and session state/cache/teardown, then wire
-socket and DBus/managed backends into public MCP without relaxing startup/launch/GUI guarantees.
-Private live_models now has 658 exact captured Python-reference fixtures for document/selection/
-inspection/mutation/viewport/scene and token hashes, including 256 seeded float cases (-300..300),
-malformed/default/Unicode/bool, large integer count, signed-zero and rounding behavior. Native
-socket reads internally model fixed active-doc/selection/inspection/SVG/scene/token commands;
-scene performs a separate authoritative document read, ignoring payload identity. TCP test proves
-command order/readback; units verify first-10,000 caps before filtering and unchanged token digest
-for a dropped 10,001st ID. Three new tests; total 97. Public live tools/resources remain pending.
-Next session/backend wiring must include typed render/view/edit wrappers, event wait/cache/audit,
-managed document guards, supervisor/helper packaging and real native Undo/Redo acceptance.
-Private native live_protocol/live_socket kernels now implement fixed v5/all 14 enum commands,
-loopback/token-bearing handshake, bounded framed IO and disconnect. Seven new Rust tests use
-96 exact compiled Python-reference cases and real loopback peers for all commands/faults.
-Lost/untrusted mutation reply is uncertain with no retry; failed stream is dropped. View-only
-faults remain communication failures, explicit rejection remains rejection. Slow trickle has a
-whole-request deadline. No-follow rendezvous file/ancestor/size/token guards retain protected
-bytes. These modules have limited temporary dead-code allowances pending session/tool wiring:
-public live dispatch is still pending, so do not count them as completed tools or GUI acceptance.
-Next build typed live result coercion and transport/session abstraction, then native managed/DBus
-IPC and public live pipeline; all 26 live tools/five resources and packaging/Undo remain required.
-Native list_capabilities/diagnose_runtime/runtime capabilities resource now share one per-server
-cache with fresh registry overlays. 46 observations cover all sixteen gated profiles, real/absent
-engines, cached reads without re-probes and version-changing refresh shared by tool/resource.
-28 explicit python_version differences are retained (native says not applicable, Python reports
-its interpreter); exact_parity=false, zero unexpected differences. Full wire traces and matching
-text/structured/resource fields are checked; only validated UTC timestamps are bound. Registry
-count/purpose/risk/49 intents match. One unit tests overlay refresh/sort without changing probe.
-Five live resources and 26 live tools, helper packaging, warm-shell/native acceptance remain.
-Native list_actions/discover_extensions now have 98 comparisons over fourteen runtime cases:
-real/absent/failed/empty/timeout/unparsed/nonexec/signal engines, inkex/data, fonts, bus and operator
-allowlists; complete wire/notes/map content/counts and unchanged original/working SVG/no history match.
-Three native guards reject truncated Action stdout and inkex file/ancestor symlinks, preserving
-protected sources. Broker GetNameOwner + validated unique destination prevents D-Bus activation;
-mock traces prove no well-known destination/no Actions.List without owner. One parser/owner unit.
-Shared binary discovery now uses X_OK and captures real exit/signal codes. All 110 Action/32 fault
-observations passed again. Packaged Python/helper runtime reporting and further failure/race/coercion/warm-shell/GUI/package acceptance remain pending.
-Native validate_action_chain/run_action_chain/run_raw_action now use operator allowlist, version
-map and fixed grammar with 32×16 bounds, approval and shared private CLI/pipeline. 110 observations
-match full wire/plans/argv, persisted map fields (validated UTC timestamp only normalized), SVG
-hashes/history, actual previews and exact restore. Cache bytes stay fixed between calls. Two map
-link guards preserve outside files/directories; two units cover gate precedence, grammar/hints/bounds,
-ordered parser and safe version keys. 32 raw engine-fault/no-op observations retain six audit safety
-differences (proposed vs discarded); absent runtime refuses before audit. Three additional output
-guards refuse unchanged SVGs without snapshots. All 170 path/32 path-fault observations reran after
-sharing the runner. Native maps probe version/action-list only; full schema/map corruption/staleness/race/warm-shell/GUI/package work remain pending.
-Seven native path tools now use fixed high-risk approved CLI Actions and the shared pipeline.
-170 actual observations match complete wire, SVG hashes/history, PNG previews and exact restore.
-Harness explicitly enables the advanced gate and asserts expected successes; its first hidden-tool
-error-only run was invalid. 32 engine-fault/no-op observations have seven explicit audit differences
-(Python proposed vs Rust discarded), retained without normalization; all other fields match.
-Three separate native output guards refuse wrong root/duplicate IDs/removed-ID refs without mutation.
-Four units cover target grammar/order, outline fill/marker scope, original comment/PI siblings and incoming DTD serialization
-and structural refusals. Target list capped at 4096. Shared timeout now matches the 1-second floor;
-a config unit covers finite bounds; find's genuine 1-second timeout fixture passes all 45 checks.
-Full schema/CSS/ref/asset/geometry/warm-shell/failure and GUI/package acceptance remain pending.
-Native transform_objects composes find_objects and the shared typed batch for all eight targeted
-ops, default dry-run and effective delete approval. 116 observations match complete wire, full
-SVG hashes/history, actual PNG previews and exact restore across 21 cases. One unit proves
-65-match dry-run planning, 64-edit real-run cap and rejected creation without byte/history changes.
-Full schema/error/coercion, failure-injection and GUI/package acceptance remain pending.
-Native compose_grid now supports both source modes, repeated assets, existing/new sheets,
-row-major ordinary groups, padding/gap and optional downscale. 102 observations match wire,
-verified minted IDs, full SVG hashes/lengths/history, real previews and restore. Registry deltas
-prove invalid new plans create no document. Three units cover limits/origins/canvas, 28 exact
-reference DOM heuristic fixtures and early source-list/aggregate-byte/invalid-plan refusal.
-Object mode loads its source once; document mode adds a configured aggregate input budget.
-Accurate geometry is not claimed: naive primitive bounds intentionally ignore transforms.
-Further schema/numeric/import-context/asset/copy/race/maximum-CLI-grid and GUI/package acceptance
-remain pending; create-then-edit stages are not crash-atomic across the whole call.
-Native place_document copies rootless/whole SVG or self-contained objects through a common
-append/remint kernel, creates one ordinary translated/scaled wrapper, and preserves both sources.
-69 comparisons match verified minted ID topology, full SVG normalized hashes/lengths/history,
-real CLI previews and exact target restore. Six separate preflight context guards leave both
-sources/working copies/history unchanged. Inheritance/defs/relative-asset context preparation,
-full argument errors, further composition edges and native GUI/package acceptance remain pending.
-Automatic root ID allocation now retries at most 128 times after an observed six-hex collision
-in a 1024-tile fixture; explicit IDs still refuse immediately. One deterministic unit proves
-retry/exhaustion/explicit refusal, separately from common parity. Two units cover rootless
-remap and self-contained references/neutral ancestry.
-Native replace_svg_fragment now validates stable/qualified container identity, ID conflicts,
-unresolved/removed refs, exclusive C14N no-op and explicit allow_retained appearance changes.
-131 observations over 25 cases match whole responses, working bytes/history, real preview
-pixels and exact restore. Three units cover early input/approval, canonical no-op and slot/tail/
-reference policy. Two separately recorded stronger guards reject removed timing/accessibility
-targets with unchanged SVGs/no snapshot/one discarded record. Full schema/canonicalization/
-encoding/copy/filesystem injection and native GUI/package acceptance remain pending.
-Native approved set_document_svg/insert_svg_fragment share strict allowlist/input/href checks,
-staged audit/snapshot edits and post-adopt validation. 152 comparisons match complete wire,
-SVG hashes/history, CLI preview pixels and exact restore; 29 cases include qualified/unqualified
-roots, DTD/top-level comments/PIs, no-op, wrapped/nested/intact insertion and refusal paths.
-Two separate ID-collision guards leave SVGs unchanged, create no snapshot and audit refusal.
-The shared XML serializer now matches lxml's top-level comment/PI/DTD spacing; 71 read checks
-were rerun successfully. Four new units cover XML spacing, early caps/approval, allowlist/entities
-and independent namespace/mixed text copying. Full schema/CSS escape/URI/encoding/failure
-edges and further composition edges remain pending.
-Native svg_web_optimize/optimize_set now share the existing staged edit pipeline and quality
-analysis. 161 observations match: sizes/deltas/summaries, whole SVG hashes, snapshot/operation
-history, real CLI PNG pixels, precision 0/2/8, kept references and exact snapshot restore.
-Five separately recorded stronger refusals preserve CSS/script/SMIL/accessibility/referenced
-metadata targets; they create one discarded audit record and leave SVGs/history snapshots
-unchanged. Namespace cleanup keeps every referenced namespace pointer. Sets preserve sequential
-partial-success behavior; they are not atomic across documents. Further schemas/numeric/race
-and native GUI/package validation remain pending.
-Native quality_report/quality_report_set now share validation/font/collection inspection plus
-read-only optimization signals and bounded optional editability advice. 126 observations match
-with fontconfig present/absent, including viewBox variants, metadata/definitions/coordinates,
-rasters/fonts, 200-advice truncation and malformed/unknown/ordered set reports. Source/working
-SVGs and history remain unchanged. Three native units cover read-only analysis and output bounds.
-Full argument/schema errors and further optimizer edge cases remain pending; no GUI acceptance claim.
-Native how_do_i and runtime/intents now share one compiled 49-entry/four-rule table.
-820 exact STDIO observations cover all keywords, stable scoring/scope precedence, gates and
-exact resource text/MIME. No Python or workspace state is involved. Six live/runtime resources
-remain pending; size guards are unit-tested, full argument errors remain pending. Capture
-provenance and reproduction commands are in the migration evidence.
-The reversible edit/save vertical slice and selected CLI exports are verified. Next:
-warm shell,
-remaining tool families and full argument errors, live session/IPC, packaging and measured comparisons.
-No GUI launch/close or native acceptance has occurred during this checkpoint.
+`migration/live-arm-comparison.json`: six isolated profiles and 27 real STDIO observations,
+zero differences. Covers first launch then reuse, pre-existing rendezvous, system helper marker,
+missing user directory, blocked extension target, timeout without retry, and child survival
+past timeout and MCP exit. Compares complete wire fields, installed asset hashes, cached probe
+requests, fixed launch argv, exact blank SVG bytes, 0600 mode, detached session and retained
+file. Only the validated minted document path is bound. The fake engine is compiled as Python
+before execution. No real GUI was opened; helper execution/Undo remain unproved. Raw traces:
+`migration/results/live-arm-acceptance/`. Reproduce with
+`.venv/bin/python scripts/migration_live_arm_acceptance.py`.
 
-Current checks: Python 1286 passed/12 skipped with Inkscape 1.4.3, Ruff lint/format and
-strict mypy passed. The initial Rust checkpoint had 5 XML/POSIX tests and 13 read comparisons;
-current Rust counts are recorded above.
-Five fresh Python/release Rust runs now record startup/read/edit/export and initialization RSS;
-see the report. Startup/read are lower, edits/exports slower; phase/peak/live/package evidence
-remains pending. Raw five-run baseline traces remain in ignored `migration/results/python-baseline/`.
-Preserve all local migration files and measurement data when continuing.
+All 164 Rust tests, all-target clippy/format, Ruff (295 files), mypy (122 sources) pass.
+LLM indexes regenerated, frozen text unchanged. Current count: 109 native tools / one pending
+(`live_launch`), all 18 resources and 7 prompts native. Ready packaged runtime/supervisor/bridge/bus,
+doctor, current-Mac installation, other platforms, native GUI Undo/Redo, full argument/failure
+coverage and fresh phase/peak-memory benchmarks remain required. Full goal stays active.
 
-PR #4 (document context, `bfe9e4f`) и PR #5 (everyday edits, `e6e4e80`) объединены в `main`.
-Коммит `d948a25` добавил явный запуск Inkscape и переносимое определение session directory;
-текущий HEAD при начале этой задачи — `852c73e` (Add agent guidance and vector authoring rules).
-PR #6 (`0f1a766`) добавил live discovery и fingerprinted previews.
-Это ориентир, а не требование откатывать более новые изменения.
-Origin: https://github.com/P1oN/inkscape-mcp-server.
 
-- MCP startup и `live_connect` не открывают окно. `live_launch()` запускает или использует
-  managed GUI только по явному запросу пользователя. Терминальный вариант:
-  `.venv/bin/inkscape-mcp-macos --launch`; начальный SVG требует `--launch --document ...`.
-- Уже открытый managed GUI и несохранённая работа сохраняются между MCP-подключениями.
-  Закрытое окно не открывается заново при reconnect. Для обновления helper/native bridge:
-  сохранить и закрыть старое окно, явно запустить новое, затем подключиться.
-- Рабочий порядок: `live_connect(prefer="no_freeze")`, `live_list_documents`,
-  `live_select_document`, проверка `live_status.ready_to_edit`, чтение сцены/выделения и правки.
-  Каждый reconnect сбрасывает привязку task drawing. Окно из Finder не является managed session.
-- Managed macOS поддерживает заливку/обводку/прозрачность, document-space transforms,
-  простой однострочный текст и duplicate/delete/group/ungroup/raise/lower/front/back.
-  Один изменяющий вызов — один Undo; неизменяющий шаг не добавляет Undo.
-- Правки готовятся на копии SVG в one-shot inkex effect; проверяются контекст/выделение,
-  блокировки и ссылки. Таймаут/неподтверждённый результат сообщает неопределённость:
-  проверить рисунок перед повтором. Native integration остаётся экспериментальной.
-- Инструкции: [macOS setup](../live/macos-live-prototype.md), [document context](../live/document-context.md),
-  [everyday edits](../live/everyday-edits.md). Актуальный полный manifest: [llms.txt](../../llms.txt)
-  (110 инструментов, 7 prompts, 18 resources; видимость зависит от gates).
+### Explicit managed launch and packaged supervisor foundation (2026-10-02)
 
-## Проверки и доказательства
+Native `live_launch` now gates live/macOS, creates or validates an owned 0700 session through
+no-follow descriptor descent, bounds Unix socket path length, serializes launch with a bounded
+fixed lock, and adopts an existing reachable private managed bus. A surviving supervisor lock
+with an unavailable bus refuses a second launch. Only the verified system `/tmp` and `/var`
+aliases normalize on macOS; arbitrary parent/final links are rejected. The ready attached host
+is retained internally for a later `live_connect`, without changing the process environment.
+The bool response preserves the exact FastMCP result wrapper and wrap_result metadata.
 
-Проверка документации 2026-10-01: полный pytest — **1142 passed, 74 skipped**
-(Inkscape CLI отсутствовал в тестовом PATH). Ruff, format check и strict mypy
-(111 source files) прошли. Исторические результаты этапов 2/3
-в тематических документах не являются текущим статусом тестов.
+New launch resolves fixed package-relative `libexec/inkscape-mcp` assets and starts only its
+private Python with `-I` and fixed `supervise.py`, session root and trusted Inkscape binary.
+It uses null stdin, owned bounded-path log files and detached session. The 15-second readiness
+wait never kills a potentially running GUI/supervisor. The standalone stdlib supervisor in
+`rust/package/supervise.py` imports no Python MCP server: it installs six fixed one-shot helper
+assets and a private-runtime wrapper, copies the vendor executable/resources association,
+uses a prebuilt context module, ad-hoc signs only the private executable copy, and owns a
+private fixed-path bus until its GUI exits. It never compiles on the user's machine or changes
+macOS settings. Bounded no-follow asset reads and atomic directory-relative writes preserve
+external/hardlinked originals. Full directory-race/crash and native supervisor acceptance
+remain unproved; the ready bundle supplying these paths does not exist yet.
 
-Native acceptance этапа 3 после исправлений ревью прошёл на official Inkscape 1.4.3
-через настоящий MCP STDIO на разблокированном Mac. Проверены семейства правок, точные
-отпечатки Undo/Redo, неизменяющие вызовы, блокировки/неверный выбор текста,
-guard/race/stale-binding и STDIO reuse.
-Доказательство: `/private/tmp/imcp-context-r79j3lvj/acceptance.json` (`passed: true`),
-`stage3-*.svg` и preview PNG в том же каталоге. Эти временные файлы могут быть уже удалены.
+`migration/live-launch-comparison.json`: three synthetic STDIO profiles, nine observations,
+zero differences without normalization (existing ready session, wrong permissions, surviving
+supervisor with lost bus). Separate native evidence covers a linked manifest, linked parents,
+external/hardlinked byte preservation, asset caps and no staging leaks. An owned temporary
+fake package with a copied Rust executable proves the new-launch fixed argv, isolated Python,
+detached session, no startup launch, repeat reuse and child survival past MCP exit. Its runtime,
+supervisor/bridge/bus are test substitutes: this does not validate the real packaged supervisor
+or native GUI. Raw evidence is in `migration/results/live-launch-acceptance/`; reproduce with
+`.venv/bin/python scripts/migration_live_launch_acceptance.py`.
 
-Команда воспроизведения: `.venv/bin/python scripts/history/python/accept_document_context.py`.
-Она явно запускает отдельный тестовый GUI с `--launch`, затем проверяет MCP reconnect
-без launch. Успех закрывает только два проверенных синтетических окна; ошибка сохраняет GUI.
-Native GUI acceptance не запускался в ходе проверки документации.
+`migration/context-build-comparison.json` records the real development clang command, source
+and bridge hashes, arm64 Mach-O type and dependencies (only Apple system frameworks/libraries,
+no Homebrew dylib). Build headers were available on the development host. No GUI loaded it.
+A direct Inkscape bundled Python/inkex probe exited 137 without output; the cause is unproven
+and this candidate is not accepted as a working runtime. The package still needs a verified
+private runtime, relocated D-Bus and complete packaged/helper/GTK ABI/signing checks.
 
-Проверка инструкций 2026-10-02: **41 passed** в тестах authoring/prompts/tool descriptions
-и `test_llms_txt.py` (включая сверку каталога с реестром). Ruff check/format для двух
-измененных Python-файлов и `git diff --check` прошли. Полный pytest, mypy и native GUI
-acceptance в этой проверке не перезапускались; результаты выше относятся к 2026-10-01.
+All 165 Rust tests, all-target clippy/format, Ruff (297 files), mypy (122 sources) pass.
+Managed regression: 55 observations, seven retained Python runtime identity deltas, no unexpected
+differences. Connect regression: 26 observations, zero differences. LLM indexes regenerated,
+frozen discovery guidance unchanged. All 110 tool names now have native dispatches, all 18
+resources and seven prompts are native; partially implemented batch/schema/error cases and
+unverified packaged launch are still material limitations. Ready Mac installation, doctor,
+platform builds, native GUI Undo/Redo and current phase/peak-memory benchmarks remain required.
+The full migration goal is active and incomplete; dispatch coverage is not completion.
 
-## Сессии и следующий объем
 
-Историческая пользовательская сессия `/tmp/imcp-stage2-501` не закрывалась в предыдущих задачах;
-это не утверждение, что она сейчас работает. Не использовать сохранённые PID:
-перепроверять manifest и command line. Не завершать процессы по имени Inkscape.
+### Local macOS arm64 candidate and archive installation (2026-10-02)
 
-Этап 3 уже объединён. Пользователь выбрал следующий объем: шесть улучшений ниже,
-последовательно в указанном порядке; реализация завершена для рабочих копий. Общий этап 4 и остальные
-долгосрочные цели остаются в [ROADMAP.md](../ROADMAP.md).
+A real local candidate is available at
+`migration/results/packages/inkscape-mcp-macos-arm64-stage3/`, with archive
+`migration/results/packages/inkscape-mcp-macos-arm64-stage3.tar.gz` (46,230,230 bytes;
+SHA-256 `0c2d4086893f04facb0b87dfb24b2bb29d8e9e34e3f9631b597486e9e1009721`).
+This is a current-Mac CLI/STDIO candidate, not the finished replacement or a published release.
+The archive contains the optimized native Rust executable, an actual prebuilt arm64 context
+module, a private CPython 3.12.14 runtime and six helper dependencies, fixed helper/supervisor
+assets, relocated dbus-daemon/gdbus and their library closure, package provenance/licenses and
+2258 file size/hash entries. Uncompressed regular bytes: 129,927,894. Native MCP execution does
+not load or wrap Python; Python remains only for the fixed supervisor and inkex helpers. Vendor
+inkex is read from the installed Inkscape bundle. Development used the existing uv-managed
+[python-build-standalone runtime](https://github.com/astral-sh/python-build-standalone/blob/main/docs/running.rst)
+([uv provenance](https://docs.astral.sh/uv/reference/environment/)); the user needs neither uv/pip,
+Homebrew nor a compiler to run this candidate.
 
-## Перед началом новой задачи
+`scripts/migration_build_macos_package.py` refuses an existing output directory, copies only
+helper dependencies (no Python MCP package), builds the bridge on the development machine,
+relocates each non-system D-Bus dependency to loader-relative paths and ad-hoc signs modified
+copies. Fixed package manifest enables native discovery of private gdbus and the vendor
+Inkscape executable with an empty PATH; the development/reference PATH behavior is unchanged.
+Private gdbus disables external GIO module directories. A dedicated packaged Unix bus config
+uses EXTERNAL authentication and no host includes or service activation directories. Its
+mandatory listener is overridden by the fixed owned socket argv, per the [D-Bus documentation](https://dbus.freedesktop.org/doc/dbus-daemon.1.html).
+No system bus, GUI or security settings were modified. Developer ID/notarization, a complete
+redistribution-license/source audit and other-platform packaging remain unfinished.
 
-Прочитай [AGENTS.md](../../AGENTS.md), README, CONTRIBUTING и
-[agent usage guide](../agent-usage-guide.md), затем проверь `git status` и текущие сигнатуры.
-В рабочем дереве уже есть незакоммиченные изменения инструкций и документации. Сохрани их:
-не делай reset/checkout/clean и не заменяй файлы целиком из HEAD.
+`migration/package-build-comparison.json` retains build/dependency provenance and archive hash.
+`migration/package-comparison.json` proves installation from this actual archive into a fresh
+owned temporary directory, file/hash and contained-link checks, and execution with an empty
+PATH and isolated HOME. Private Python imports all helper libraries from the relocated bundle
+(vendor inkex excepted); both insertion and socket helper CLIs run. The actual relocated bus
+and gdbus complete an authenticated private Unix exchange, then only that exact owned bus is
+terminated. Actual packaged STDIO discovery compares every field of tools/prompts/resources/
+templates against the frozen full contract (110 tools, seven prompts, ten static resources and
+eight templates). Native open/edit, no-op without audit, one-record atomic batch, failing-batch
+rollback, approval refusal, save/resource bytes and untouched original pass. Real Inkscape CLI
+preview and PNG export/resource readback have the expected blue RGBA pixel. Startup/headless
+calls do not create the configured managed session. No native GUI was opened.
 
-В `overview.py` и `prompts/authoring.py` уже добавлены общие инструкции:
+Reproduce:
+```sh
+.venv/bin/python scripts/migration_build_macos_package.py --output migration/results/packages/<new-name>
+.venv/bin/python scripts/migration_package_acceptance.py --archive migration/results/packages/inkscape-mcp-macos-arm64-stage3.tar.gz
+```
+For a manual candidate test, extract the archive into an empty folder and set the MCP executable
+to its `bin/inkscape-mcp`, with `INKSCAPE_MCP_WORKSPACE_ROOTS` pointing to a synthetic writable
+workspace. No build/install command is needed. This exact local process configuration is tested:
+```json
+{
+  "command": "/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage3/bin/inkscape-mcp",
+  "env": {
+    "INKSCAPE_MCP_WORKSPACE_ROOTS": "/absolute/path/to/synthetic-workspace",
+    "INKSCAPE_MCP_LIVE_ENABLED": "1"
+  }
+}
+```
+The user's configured server is unchanged. Packaged managed GUI/supervisor/effect execution,
+native Undo/Redo, doctor, signing/ABI/platform acceptance, complete behavioral coverage and new
+phase/peak-memory measurements remain required; the full goal is active and incomplete.
+All 165 Rust tests, all-target clippy/format, Ruff (299 files), mypy (122 sources) pass. Frozen LLM
+indexes are regenerated; original source Python server is preserved.
 
-- семантические объекты — обычные именованные группы; для новой иллюстрации по умолчанию
-  один общий слой, дополнительные слои по назначению или просьбе пользователя;
-- не предлагать и не выполнять трассировку PNG, в том числе внешними трассировщиками,
-  скриптами или до импорта через MCP; не подменять вектор встроенным растром;
-- сохранять порядок, трансформации, стили и ссылки; проверять результат визуально.
 
-Это уже добавленное руководство для агента, а не реализованные новые инструменты или
-детектор трассировки. Работающий MCP читает overview при старте: после изменения инструкции
-нужен перезапуск сервера, без закрытия пользовательского GUI.
+### Native read-only doctor and refreshed candidate (2026-10-02)
 
-## Шесть улучшений: реализованы для рабочих копий
+The native binary now accepts `--doctor` before creating an MCP server. It emits structured
+JSON and exits 0 only when current package prerequisites pass (1 otherwise). Checks cover
+current macOS/arm64 package target, bounded no-follow package metadata and fixed assets,
+Mach-O architecture of private Python/bridge/bus executables, official vendor GTK3/inkex,
+actual Inkscape CLI minimum version, actual private Python/inkex/numpy/lxml/Pillow imports,
+private bus/gdbus CLI startup and system codesign presence. It does not require a compiler,
+Homebrew headers or a user Python installation. Missing/incompatible checks include concrete
+next steps. `ready_to_launch` means prerequisites, with `native_gui_verified=false`; it does
+not certify native GUI, Undo/Redo, signatures or notarization.
 
-Реализованы 2026-10-02; текущее состояние публикации проверяй в Git/PR.
-Существующие инструкции о семантических группах и запрете трассировки сохранены.
+The real macOS launcher was observed creating preferences even for `--version`. Doctor now
+runs that fixed probe with an owned ephemeral HOME/profile/config/cache and an unavailable
+private bus address; bounded child completion precedes temporary cleanup. Private Python uses
+`-I -B`, so it ignores external Python configuration and writes no bytecode. An internal typed
+process environment wrapper is used only by fixed server callers; no tool accepts executable,
+code or environment overrides. No GUI, bus service, extension install or automatic repair is
+performed. Inkscape supports profile isolation through its documented [environment variables](https://wiki.inkscape.org/wiki/Environment_variables).
 
-1. **Workspace и артефакты.** `get_workspace_info`, `inkscape://workspace`, root-qualified
-   artifact URIs и read-only ресурс чтения с sandbox/size проверками. `open_document` и
-   `save_document_as` принимают optional `root_id`; относительные пути по умолчанию по-прежнему
-   используют первый root. Абсолютные server paths не выдаются за client paths. Ошибки вне
-   workspace указывают на discovery; сохранение во второй root и чтение через MCP Client проверены.
-2. **Группы/слои.** `create_group(label, mode)`, существующий label-only `rename_object`,
-   `set_group_mode` на том же g и `reparent_object(preserve_appearance=True)`. Последний
-   компенсирует affine transforms и требует неизменного глобального paint order. Отказывает
-   при stylesheets, CSS transforms, singular transforms, nested viewports, внешних ссылках
-   и непустом оформлении/effects/locks на изменяемой цепочке родителей. Legacy default False
-   сохранён и не обещает сохранение вида. Batch-параметры и операции синхронизированы.
-3. **Редактируемость.** `quality_report(editability=...)` возвращает отдельные optional
-   рекомендации и factual observations; не меняет SVG validity/score. Семантические ID задаются
-   явно; thresholds настраиваются, советы отключаются и ограничены 200. Это не детектор трассировки.
-4. **Детали.** `render_preview(object_id/region)` переиспользует object export или рендерит
-   прямоугольник в document user units. `compare_region(snapshot_id, region)` рендерит фиксированные
-   bounds/scale/background без restore; разные canvas mappings отклоняются. Resource URIs и
-   inline PNG доступны; artistic score не вычисляется.
-5. **Фрагменты.** HIGH-risk `replace_svg_fragment` через существующий parser/allowlist и
-   approval gate. Корневые ID/tag сохраняются; внутренние ID только при явном включении.
-   Конфликты/duplicate IDs, unresolved refs и удаление внешне используемых ID отклоняются.
-   `allow_retained` явно разрешает изменение вида surviving references; default отвергает такие
-   изменения. Один snapshot/record, no-op без записи; есть соответствующий batch member.
-6. **Повторение.** `repeat_objects` по explicit polyline (два пункта — линия) или rectangle grid.
-   Count/spacing, fixed/tangent orientation, ограниченные jitter/scale/rotation и seed.
-   Linked use и независимые copies различаются; copies переиспользуют remap duplicate engine.
-   Dry-run по умолчанию проверяет полную disposable expansion без записи. Max 1024 и предварительный
-   size budget; ID group задаётся явно. Anchor — local source point в document user units;
-   copies могут совместно использовать внешние defs. SVG curves/path strings не поддерживаются.
+`migration/doctor-comparison.json`: ten owned relocated-package profiles pass exact ready/exit
+and relevant failed-check assertions: ready, missing bridge/runtime/helper/bus/gdbus/manifest,
+linked bridge, malformed architecture and actual mocked Inkscape 1.2.2 version output. Full
+package file hashes and owned directory entries remain unchanged after diagnosis (including
+no bytecode, managed directories or user profile creation). Raw JSON reports are in
+`migration/results/doctor-acceptance/`. No native GUI was opened.
 
-Новые изменения относятся к tracked working copies, не к native live mutation protocol.
-Автоматические проверки не подтверждают новый GUI Undo; GUI acceptance в этой задаче не запускался.
-Для headless edits Undo обеспечен существующим snapshot/restore pipeline.
+The refreshed local candidate is
+`migration/results/packages/inkscape-mcp-macos-arm64-stage5/`, with archive
+`migration/results/packages/inkscape-mcp-macos-arm64-stage5.tar.gz` (46,232,964 bytes; SHA-256
+`cbc7887b0593bef43d964c8351d94012980d3acf852fe31aae4536cb19338953`). It contains 2258 regular
+file hash entries, 129,944,806 regular bytes. `migration/package-build-comparison.json` now
+points to this candidate; older candidates remain available as historical evidence. Installation
+from the actual new archive again passes clean empty-PATH runtime/helper/private-bus/STDIO
+full discovery, no-op, batch/rollback, approval refusal, original preservation, SVG save/resource
+and real PNG preview/export pixel checks. Raw acceptance remains in `migration/results/`.
 
-### Проверки реализации
-
-- Итоговый полный pytest с Inkscape **1.4.3 (0d15f75)** в PATH: **1275 passed, 6 skipped**.
-  Команда: `PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" .venv/bin/pytest -q`.
-- Ruff check, format check (226 files), strict mypy (121 source files), manifest regeneration
-  и `git diff --check` прошли. CI surface smoke обновлён до 110/7/18 и прошёл. Discovery eval: **41/41**, 100% accuracy.
-- Реальные PNG проверяют cropped red→blue snapshot, совпадение всех RGBA каналов после
-  safe reparent/group-layer conversion и между linked/copies. Это настоящие CLI рендеры,
-  не GUI acceptance. Контейнеры/ссылки/отказы/seed/snapshot restore проверены автоматически.
-- MCP Client проверил roots, сохранение во второй root, бинарное чтение resource URI и отказ
-  после удаления артефакта. Отдельный свежий процесс через `.venv/bin/inkscape-mcp` проверил
-  настоящий STDIO: **110 tools**, create/save/resource readback на synthetic workspace.
-- Новую native GUI acceptance и native GUI Undo/Redo не запускали. Пользовательские окна
-  не запускали/не закрывали; существующий live bridge не изменяли.
-- Контракты и границы: [agent usage guide](../agent-usage-guide.md).
-
-MCP нужно перезапустить/переподключить для загрузки новых tools/resources/instructions.
-Не закрывать пользовательский GUI: startup/reconnect по-прежнему не запускают окно.
-
-## CI follow-up for PR #7
-
-The initial Linux CI installed unsupported Inkscape 1.2.2 from Ubuntu's default archive.
-The full-suite job now uses Ubuntu 24.04 and the official stable PPA, with an explicit
-runtime-minimum check. Windows mypy exposed unguarded POSIX APIs: managed macOS helpers
-now reject Windows explicitly. Missing-directory creation and save use native Windows
-no-follow handles with ancestors held against renames; POSIX safeguards remain in place.
-Windows-specific tests cover nested creation, overwrite, exclusive writes, symlink refusal
-before truncation/descent, and parent rename prevention. Native GUI acceptance is unchanged.
-
-The next CI run passed the Linux full suite. Windows then exposed existing CRLF shell
-framing and path separator issues; shell frames normalize CRLF, registry source paths
-use portable forward slashes, and DBus export filenames use forward slashes before
-GVariant validation. macOS tests requiring actual POSIX ownership/locking are explicitly
-platform-gated; the launch-policy fake uses the same socket path construction as production.
-
-## PR #7 review corrections
-
-Roadmap repetition scope explicitly names polylines and rectangles. Linked repeats set
-both SVG2 href and legacy XLink href. Render artifacts use the caller's settings, and
-object previews reuse unique preview tokens to preserve before/after files. Engine-routing
-test settings retain their configured workspace roots instead of constructing rootless settings.
-Artifact resources apply max_output_bytes independently of SVG imports. POSIX reads traverse
-with no-follow directory descriptors; Windows reads reuse native no-reparse handles with
-ancestor rename protection. Size/type validation and bounded reading use the opened file.
-Regression coverage includes file/parent/root symlink swaps, post-open replacement, size growth,
-non-regular files, explicit roots and repeated object preview preservation. GUI acceptance
-is unchanged; these fixes require the usual MCP reconnect to load new code.
-
-Local validation after these review corrections: 1286 passed, 12 skipped with Inkscape
-1.4.3; ruff lint/format, strict mypy for macOS and Windows, diff check, MCP surface smoke
-and fresh STDIO boot smoke passed. Native Windows read-handle tests run in CI.
+Reproduce/test:
+```sh
+migration/results/packages/inkscape-mcp-macos-arm64-stage5/bin/inkscape-mcp --doctor
+.venv/bin/python scripts/migration_doctor_acceptance.py --package migration/results/packages/inkscape-mcp-macos-arm64-stage5
+.venv/bin/python scripts/migration_package_acceptance.py --archive migration/results/packages/inkscape-mcp-macos-arm64-stage5.tar.gz
+```
+Configure normal MCP execution with that candidate's `bin/inkscape-mcp` and a synthetic writable
+`INKSCAPE_MCP_WORKSPACE_ROOTS`, without `--doctor`. The user's current MCP configuration is
+unchanged. Native packaged GUI/supervisor/effects/Undo, signing/ABI/license audit, other platform
+builds, complete behavioral coverage and new phase/peak-memory measurements remain required.
+All 165 Rust tests, all-target clippy/format, Ruff (300 files), mypy (122 sources) pass; LLM indexes
+regenerated with frozen text unchanged. The full migration goal remains active and incomplete.

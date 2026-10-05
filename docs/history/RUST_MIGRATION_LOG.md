@@ -1,3 +1,6 @@
+> Historical checkpoint. Counts, commands, package paths and “current” labels
+> apply only to the recorded build. See the [history index](README.md).
+
 Current package checkpoint: stage36 (2026-10-03). Actual cold/warm archive install,
 doctor10/launcher11/notices17 pass.2532FILES entries verified. Exact comparison to35:
 2506 existing files unchanged, including every executable/runtime/helper/native asset;
@@ -61,7 +64,7 @@ Recovery location is recorded in migration/python-retirement.json. See CONTRIBUT
 
 # Rust migration report
 
-User-approved scope update (2026-10-03): [current next plan](RUST_NEXT_PLAN.md).
+User-approved scope update (2026-10-03): [current next plan](../RUST_NEXT_PLAN.md).
 Historical live-incident investigation is deferred unless it recurs; clean-machine
 installation will be checked later by the user; Windows port is backlog. Compatibility
 and security are the main next gate; phase attribution is secondary and bounded.
@@ -220,7 +223,7 @@ sampler errors0. First flush-envelope subtraction was rejected because flush can
 client roundtrip; corrected read-to-first-write + residual is additive, write/flush retained
 separately. CLOCK_MONOTONIC and Python perf_counter epochs differ; only durations are compared.
 Not pure IPC/production/native evidence. Stage27 package remains unchanged. Details and
-raw bindings: [phase measurements](RUST_PHASE_MEASUREMENTS.md#stage28-transport-boundary-diagnostic).
+raw bindings: [phase measurements](reports/RUST_PHASE_MEASUREMENTS.md#stage28-transport-boundary-diagnostic).
 
 ### Stage27 filesystem boundary review (2026-10-03)
 
@@ -415,7 +418,7 @@ on no-op, which older final-state checks missed. A deterministic directory-mtime
 failed before the fix; 22 pure DOM families now stage through `apply_dom` and decide no-op
 before audit creation. CLI-staging actions/paths/fit preserve the pre-dispatch audit gate.
 Snapshots, previews and working publication remain after durable intent; sync protections
-are retained. [Details](RUST_PHASE_MEASUREMENTS.md) separate pre-fix timing from post-fix
+are retained. [Details](reports/RUST_PHASE_MEASUREMENTS.md) separate pre-fix timing from post-fix
 validation. Fresh release no-op STDIO preserves the complete tree/bytes/sizes/mtime_ns.
 Rust 198 passed/1 ignored and clippy pass; new packaged/final-candidate validation remains.
 The existing stage23 archive is historical and still contains the transient-write behavior.
@@ -425,7 +428,7 @@ The existing stage23 archive is historical and still contains the transient-writ
 The explicit Python diagnostic entry point now wraps fixed filesystem/process APIs and
 binds worker events through ContextVars. Five alternating pairs make 160 actual requests;
 50 Python middleware and 50 Rust handler partitions validate, complete small/100-object
-inspection envelopes match, and sampler errors are zero. [Phase details](RUST_PHASE_MEASUREMENTS.md)
+inspection envelopes match, and sampler errors are zero. [Phase details](reports/RUST_PHASE_MEASUREMENTS.md)
 retain differing framework/file API boundaries. Rust single-edit logical-file median is
 64.510 ms versus Python 1.041 ms; individual file/directory synchronization latency remains
 unmeasured. Do not infer identical IO scopes or remove sync/path protections from this data.
@@ -434,7 +437,7 @@ normal Python server, Rust sources and stage23 archive are unchanged by this dia
 
 ### Stage24 diagnostic phase follow-up (2026-10-03)
 
-[Phase measurements](RUST_PHASE_MEASUREMENTS.md) use isolated instrumented Rust copies,
+[Phase measurements](reports/RUST_PHASE_MEASUREMENTS.md) use isolated instrumented Rust copies,
 not a new distributable candidate. Two five-pair experiments are preserved: initial immediate
 nested logging was found to contaminate outer file spans; corrected buffering emits records
 after the handler timestamp. The corrected 50 Rust handlers have exact bounded interval-union
@@ -547,7 +550,7 @@ and other-host/source-offer gates remain explicit in the checklist.
 
 ### Stage22 review fixes and fresh native follow-up (2026-10-03)
 
-[The review](RUST_REVIEW.md) fixes bounded pipe drains, failed nonblocking setup and
+[The review](reports/RUST_REVIEW.md) fixes bounded pipe drains, failed nonblocking setup and
 post-dispatch audit-loss handling. Its release binary SHA-256 is
 `ea78a3430065316c47fcb0362d21feba62e29b93a65c1dd3d854fd418af97ccb`.
 Review/archive/launcher evidence is scoped in `migration/review-cycle1-comparison.json`;
@@ -1479,7 +1482,7 @@ live read measurements without completing native effect or full migration compat
 
 ### Separate helper-to-Rust investigation (2026-10-02)
 
-[The helper investigation](RUST_HELPER_INVESTIGATION.md) documents a feasible compiled
+[The helper investigation](reports/RUST_HELPER_INVESTIGATION.md) documents a feasible compiled
 one-shot SVG filter boundary and its unimplemented requirements. The actual stage13
 Python/helper/vendor inkex passes **20/20 offline file/stdin protocol checks**
 (`migration/helper-protocol-stage13-comparison.json`), including zero stdout for exact
@@ -2467,7 +2470,7 @@ a prebuilt Objective-C context module and relocated private D-Bus/GLib dependenc
 Rust MCP server never starts the reference Python MCP server. End users need Inkscape and
 the archive, without a compiler, Python/pip/uv or Homebrew. Python remains the reference.
 
-See [native packaging inputs/jobs and exact limits](RUST_PACKAGING.md). Four native Linux/
+See [native packaging inputs/jobs and exact limits](reports/RUST_PACKAGING.md). Four native Linux/
 macOS jobs are prepared; no remote or local Linux/Intel package result is claimed. Native
 Windows filesystem/runtime support and jobs remain pending. Ad-hoc assets are available;
 Developer ID/notarization, full ABI/source/license audit and reproducibility remain incomplete.
@@ -2487,8 +2490,8 @@ export LIBXML2="$(xcrun --show-sdk-path)/usr/lib/libxml2.tbd"
 
 Five Python processes were measured to completed MCP initialization over real STDIO.
 Median startup: **664.6 ms** (individual runs 517.3, 664.6, 680.8, 686.3, 662.5 ms).
-See [raw-derived summary](../migration/python-baseline-summary.json) and
-[reproduction commands](../migration/README.md). These measurements are end-to-end; they
+See [raw-derived summary](../../migration/python-baseline-summary.json) and
+[reproduction commands](../../migration/README.md). These measurements are end-to-end; they
 do not isolate server CPU, IPC, IO or Inkscape. The new checkpoint comparison below is separate from this earlier baseline.
 The baseline also records inspect/open on 100/10,000/100,000-object SVGs, one edit,
 an atomic batch, no-op, approval refusal, failed-batch rollback, snapshot restore,

@@ -1,3 +1,6 @@
+> Historical checkpoint. Counts, commands, package paths and “current” labels
+> apply only to the recorded build. See the [history index](README.md).
+
 Current package checkpoint: stage36 (2026-10-03). Actual cold/warm archive install,
 doctor10/launcher11/notices17 pass.2532FILES entries verified. Exact comparison to35:
 2506 existing files unchanged, including every executable/runtime/helper/native asset;
@@ -53,7 +56,7 @@ not src/inkscape_mcp. Earlier package checkpoints below are historical.
 This is a developer workflow. End users install Inkscape plus the archive and run its
 `bin/inkscape-mcp`; they do not install Python, uv, Homebrew, Rust or a compiler.
 The current verified local archive and installation commands are in
-[RUST_MIGRATION_REPORT.md](RUST_MIGRATION_REPORT.md#install-and-check-the-current-local-candidate).
+[RUST_MIGRATION_REPORT.md](RUST_MIGRATION_LOG.md#install-and-check-the-current-local-candidate).
 
 ## Targets and evidence
 

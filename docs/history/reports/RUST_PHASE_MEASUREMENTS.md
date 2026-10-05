@@ -1,5 +1,8 @@
+> Historical checkpoint. Counts, commands, package paths and “current” labels
+> apply only to the recorded build. See the [history index](../README.md).
+
 Historical phase measurements. Current status and build evidence are recorded in
-[AGENT_HANDOFF.md](AGENT_HANDOFF.md). Python/parity profiler scripts were retired by user decision;
+[AGENT_HANDOFF.md](../../AGENT_HANDOFF.md). Python/parity profiler scripts were retired by user decision;
 old reproduction commands below describe retained experiments, not current workflows.
 No historical diagnostic timings are automatically transferred to the current binary.
 

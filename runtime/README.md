@@ -13,4 +13,4 @@ Shared bounded SVG kernels and their regressions are in `rust/src/helper_svg` an
 `rust/tests`. Historical Python fixtures/tests moved to
 [scripts/history/python](../scripts/history/python/README.md). Use current Rust/Bash
 checks in [CONTRIBUTING](../CONTRIBUTING.md) and read
-[helper semantics](../docs/live-helper-kernels.md).
+[helper semantics](../docs/live/live-helper-kernels.md).

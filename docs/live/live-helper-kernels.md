@@ -1,11 +1,11 @@
 # Shared Rust SVG helper kernels
 
-Python removal stage 3 provides `inkscape_mcp_rust::helper_svg` as a library, with
+The shared SVG library provides `inkscape_mcp_rust::helper_svg` as a library, with
 no filesystem, subprocess, GUI, arbitrary execution or MCP entry point. The server
 uses its fingerprint and insertion preflight, and shares its affine arithmetic
 with headless appearance-preserving reparenting. Both consumers use the same safe
-`xml` parser and iterative element traversal. Stage 4 adds owned plan application
-and the fixed `inkscape-mcp-inx` consumer. Stage 5 adds the fixed Rust socket consumer; no Python helper participates in live execution.
+`xml` parser and iterative element traversal. Owned plan application uses
+the fixed `inkscape-mcp-inx` consumer and the fixed Rust socket consumer; no Python helper participates in live execution.
 
 ## Fingerprint wire representation (v1)
 
@@ -198,4 +198,4 @@ extension's candidate, which Inkscape adopts only when the modal extension exits
 they do not establish native application or a separate Undo step per socket call.
 All accumulated changes return one full SVG on disconnect/timeout; unchanged sessions
 emit zero bytes. Publication preserves the full XML candidate. One-shot managed edits
-continue through `inkscape-mcp-inx`. Ready packages omit CPython, helper wheels and their runtime notices; Python remains build/development tooling until stage 7.
+continue through `inkscape-mcp-inx`. Ready packages omit CPython, helper wheels and their runtime notices; active build/development/acceptance tooling also uses Rust/Bash.

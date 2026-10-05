@@ -5,6 +5,9 @@ with Inkscape, and controlling bounded live operations. The full surface has 110
 7 prompts and 18 resources. Original files, workspace boundaries, snapshots, approvals,
 Operation Records, atomic rollback and genuine no-op behavior remain part of the design.
 
+[Documentation index](docs/README.md) · [Current status](docs/AGENT_HANDOFF.md) ·
+[Backlog](docs/RUST_NEXT_PLAN.md) · [History](docs/history/README.md) · [ADRs](docs/adr/README.md)
+
 ## Install and run
 
 The latest published source preview is [v0.1.1](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.1).
@@ -95,7 +98,7 @@ published v0.1.1 archive does not include them.
 Sentry error capture and sampled tool tracing are available in rebuilt Rust binaries.
 `setup.sh` asks whether to enable reporting, reads the DSN without echo and saves a private
 Git-ignored local file. Choose an environment label such as `wife` to distinguish computers.
-See [configuration and release guidance](docs/sentry.md).
+See [configuration and release guidance](docs/operations/sentry.md).
 Revision and build IDs are compiled automatically into telemetry and package metadata;
 `--version` displays the installed values. Existing published archives remain unchanged.
 
@@ -106,8 +109,8 @@ Development now uses Rust regression/invariant tests, true STDIO and package/nat
 The managed GUI session now runs through a separate native Rust supervisor. The socket snapshot bridge now uses the Rust `inkscape-mcp-live` executable. Development and package tools now use Rust/Bash; ready packages contain no CPython or helper wheels. One-shot native insertion
 and the ten fixed selection edits run through the Rust `inkscape-mcp-inx` executable;
 shared SVG kernels prepare and apply bounded candidates. See
-[their semantics and limits](docs/live-helper-kernels.md). See [CONTRIBUTING.md](CONTRIBUTING.md), [runtime components](runtime/README.md),
-[Python removal roadmap and current plan](docs/RUST_NEXT_PLAN.md) and [handoff](docs/AGENT_HANDOFF.md).
+[their semantics and limits](docs/live/live-helper-kernels.md). See [CONTRIBUTING.md](CONTRIBUTING.md), [runtime components](runtime/README.md),
+[remaining work](docs/RUST_NEXT_PLAN.md) and [handoff](docs/AGENT_HANDOFF.md).
 Historical migration reports and raw evidence are retained as history, not an active Python oracle.
 
 Use editable vector geometry and ordinary named groups for semantic objects; layers organize
@@ -125,5 +128,5 @@ Editable vector authoring guidance is shared by initialization and `compose_artw
 `quality_report` accepts explicit stroke/group roles and reports bounded read-only
 structural and hidden-geometry advice with uncertainty, independently of validity/score.
 See [the authoring guide](docs/agent-usage-guide.md#editable-vector-authoring-quality) and
-[the acceptance evidence](docs/editable-vector-authoring.md); silhouettes and occlusion
+[the acceptance evidence](docs/history/reports/editable-vector-authoring.md); silhouettes and occlusion
 remain rendered/manual reviews, with existing approval gates for repairs.

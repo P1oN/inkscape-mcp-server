@@ -5,7 +5,7 @@ the server's discovery, working-copy/live, preview/refinement and artifact workf
 It uses current MCP schemas and the server's shared authoring guidance. The skill
 is optional; the MCP server works without it.
 
-From [PR #8 sources](https://github.com/P1oN/inkscape-mcp-server/pull/8), include it
+From current `main` sources, include it
 when configuring/building the server:
 
 ```sh

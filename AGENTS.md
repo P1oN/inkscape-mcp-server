@@ -2,7 +2,8 @@
 
 Start with [docs/AGENT_HANDOFF.md](docs/AGENT_HANDOFF.md), [README.md](README.md),
 [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/agent-usage-guide.md](docs/agent-usage-guide.md).
-The handoff records the next six improvements and distinguishes pending work from shipped features.
+The handoff records current implementation and validation; `docs/RUST_NEXT_PLAN.md` is the
+single unfinished-work backlog and `docs/history/README.md` indexes completed plans/evidence.
 Check current code and Git status before relying on recorded counts or validation results.
 
 - Preserve existing uncommitted work. Do not reset, clean or restore files from HEAD to discard it.

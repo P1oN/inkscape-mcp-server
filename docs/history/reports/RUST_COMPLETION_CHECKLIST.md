@@ -1,9 +1,12 @@
+> Historical checkpoint. Counts, commands, package paths and “current” labels
+> apply only to the recorded build. See the [history index](../README.md).
+
 # Historical Rust completion checklist — stage38
 
 This page preserves the named checkpoint and its evidence. Its package paths, counts,
 validation and publication statements are historical, not the status of PR #8. For current
-work use [the handoff](AGENT_HANDOFF.md), [the plan](RUST_NEXT_PLAN.md) and
-[installation](install/install.md). Native results remain bound to the recorded binaries.
+work use [the handoff](../../AGENT_HANDOFF.md), [the plan](../../RUST_NEXT_PLAN.md) and
+[installation](../../install/install.md). Native results remain bound to the recorded binaries.
 
 Recorded candidate: stage38, 2026-10-03. User decisions supersede the original executable
 Python oracle requirement: rewritten Python MCP retired; Windows backlog; clean-machine
@@ -25,7 +28,7 @@ install user-owned; historical live investigation only on recurrence; timing ref
 | Other targets/signing | Only current Mac proved; foreign jobs prepared; Windows deferred; ad-hoc signing, no Developer ID/notarization |
 | Final delivery / goal | COMPLETE within user-confirmed current Mac scope; no commits/PR/publication |
 
-Final evidence index: [package38](../migration/package-stage38-final-comparison.json).
-Final scoped audit: [requirements](../migration/requirement-audit-stage38-final.json).
+Final evidence index: [package38](../../../migration/package-stage38-final-comparison.json).
+Final scoped audit: [requirements](../../../migration/requirement-audit-stage38-final.json).
 A current headless pass does not transfer old native/performance results. No finite suite
-proves all compatibility or security combinations. See [next plan](RUST_NEXT_PLAN.md).
+proves all compatibility or security combinations. See [next plan](../../RUST_NEXT_PLAN.md).

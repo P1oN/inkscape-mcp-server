@@ -1,13 +1,16 @@
+> Historical checkpoint. Counts, commands, package paths and “current” labels
+> apply only to the recorded build. See the [history index](../README.md).
+
 # Historical scoped security review — stage38
 
 This page preserves the named checkpoint and its evidence. Its package paths, counts,
 validation and publication statements are historical, not the status of PR #8. For current
-work use [the handoff](AGENT_HANDOFF.md), [the plan](RUST_NEXT_PLAN.md) and
-[installation](install/install.md). Native results remain bound to the recorded binaries.
+work use [the handoff](../../AGENT_HANDOFF.md), [the plan](../../RUST_NEXT_PLAN.md) and
+[installation](../../install/install.md). Native results remain bound to the recorded binaries.
 
 Candidate **stage38**, source Rust 215 passed / 1 ignored, fmt and clippy pass.
 Actual package evidence is indexed by
-[package-stage38-build-comparison.json](../migration/package-stage38-build-comparison.json).
+[package-stage38-build-comparison.json](../../../migration/package-stage38-build-comparison.json).
 This is a finite regression review, not exhaustive adversarial or whole-process memory proof.
 
 | Boundary | Current evidence | Limit |
@@ -61,4 +64,4 @@ recurrence. See [final checklist](RUST_COMPLETION_CHECKLIST.md).
 Crate/runtime/wheel/native attribution checks and source kit are recorded in
 [packaging](RUST_PACKAGING.md). Their limits are explicit; no credentials approval is needed.
 Earlier review, failures and raw evidence remain in
-[historical security log](history/RUST_SECURITY_AUDIT_LOG.md), with old checkpoints frozen.
+[historical security log](../RUST_SECURITY_AUDIT_LOG.md), with old checkpoints frozen.

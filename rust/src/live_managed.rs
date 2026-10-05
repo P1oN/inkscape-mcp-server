@@ -1042,6 +1042,15 @@ mod tests {
                 mode == "effect-switch",
             );
             backend.effect_directory(root.path().canonicalize().unwrap());
+            if mode == "effect-stale" {
+                // A read-only preflight may exceed the former 300 ms shortcut under
+                // CI scheduling pressure, before any effect has been dispatched.
+                std::fs::write(
+                    root.path().join("probe-control.json"),
+                    serde_json::to_vec(&json!({"delay_action":"query-x","delay_ms":600})).unwrap(),
+                )
+                .unwrap();
+            }
             if mode == "effect-switch" {
                 let docs = backend.list_documents().unwrap();
                 backend
@@ -1051,7 +1060,11 @@ mod tests {
                     )
                     .unwrap();
             }
-            backend.dbus.bus.timeout = Duration::from_millis(300);
+            // This matrix tests replies after dispatch, not subprocess startup speed.
+            // Keep preflight bounded but allow CI scheduling; shortening this shared
+            // timeout can fail a read-only call before the effect exists. Missing and
+            // mismatched replies still exercise the real bounded completion deadline.
+            backend.dbus.bus.timeout = Duration::from_secs(5);
             let result = backend.set_text("literal");
             if mode == "effect-lost-refused" {
                 assert_eq!(
@@ -1064,6 +1077,14 @@ mod tests {
                 assert_eq!(result, Err(Error::Uncertain), "{mode}");
             }
             let calls = trace(&log);
+            assert_eq!(
+                calls
+                    .iter()
+                    .filter(|a| a.iter().any(|s| s == "query-x"))
+                    .count(),
+                1,
+                "{mode}: selection preflight completed without retry"
+            );
             assert_eq!(
                 calls
                     .iter()

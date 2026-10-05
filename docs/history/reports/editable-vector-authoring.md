@@ -1,3 +1,6 @@
+> Historical checkpoint. Counts, commands, package paths and “current” labels
+> apply only to the recorded build. See the [history index](../README.md).
+
 # Editable vector authoring quality — implementation and acceptance
 
 Implemented locally on `4aacfae` in `codex/python-removal-stages-1-3` on 2026-10-05.

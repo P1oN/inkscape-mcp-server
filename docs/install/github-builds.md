@@ -1,9 +1,14 @@
 # Download a GitHub build for Apple Silicon
 
-As of 2026-10-04, published previews are v0.1.0 and v0.1.1. New installation/client/skill/
-build identity/removal features are in [PR #8](https://github.com/P1oN/inkscape-mcp-server/pull/8),
-not these Release assets. Follow the PR checks for its remote build status and download
-only a successful run. [Current installation](install.md) distinguishes each distribution.
+As of 2026-10-05, published previews remain v0.1.0 and v0.1.1. Current `main` includes
+installation/client/skill/build identity improvements and complete Python removal/authoring
+from PRs #8/#9; these changes are not in existing Release assets.
+
+The [PR #9 candidate run](https://github.com/P1oN/inkscape-mcp-server/actions/runs/37296446838)
+passed. The separate [post-merge main run](https://github.com/P1oN/inkscape-mcp-server/actions/runs/37298327949)
+failed in native tests. Download installable artifacts only from successful runs and inspect
+source/build identity; the newest run is not automatically an accepted package.
+[Current installation](install.md) distinguishes each distribution.
 
 For local installation on Apple Silicon macOS 15+, open
 [Release v0.1.1](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.1)
@@ -21,10 +26,9 @@ cd inkscape-mcp-source-bootstrap
 Install Inkscape first. Setup builds locally, downloads missing build tools into a private
 temporary directory and removes those tools afterward. The historical v0.1.1 package retained private Python for runtime use. If Apple Command Line Tools are missing, complete their installation
 dialog and rerun setup. See [local bootstrap](local-bootstrap.md) for prerequisites and limits.
-The exact Git-free release archive passed a fresh-tools build, temporary-tool cleanup,
-license-notice checks and empty-PATH MCP/D-Bus/render/export/transaction acceptance on the
-development Mac. This is local automated acceptance; native GUI and clean-machine Apple
-tool installation were not revalidated.
+The v0.1.1 bootstrap verification belongs to its original archive; its detailed evidence
+is [historical](../history/reports/RUST_MIGRATION_REPORT.md). It does not establish acceptance
+of current source or clean-machine Apple tool installation.
 
 The command above is for published v0.1.1. Current sources instead use `./setup.sh`
 for automatic preparation/build on first use and reuse the saved package on subsequent
@@ -39,10 +43,6 @@ automatically builds **macOS arm64 (M chips)** after relevant pushes to `main` a
 pull requests. It can also be started manually with **Run workflow → macos-arm64**.
 Manual `all-posix` additionally selects the prepared Intel Mac and Linux jobs; their
 existence does not prove compatibility before they have passed on their own runners.
-
-First verified Apple Silicon build: [successful run 37154851232](https://github.com/P1oN/inkscape-mcp-server/actions/runs/37154851232),
-source `5345f619add78004d3ecc9ca83abd5a6205788db`. Its downloaded archive also
-passed installation and real CLI acceptance on the development Mac.
 
 Open a successful run and download **Artifacts → inkscape-mcp-macos-arm64**. Unzip the
 artifact: it contains `inkscape-mcp-macos-arm64.tar.gz` and its `.sha256` file. With both
@@ -65,7 +65,7 @@ during setup; these launcher changes are not in that published archive.
 
 Install Inkscape first. Current packages include five Rust executables,
 prebuilt bridge, D-Bus dependencies and matching debug symbols. Users do not install a
-compiler, Python, uv/pip or Homebrew. Packages built from PR #8 can register a client with `--connect-client codex|claude`;
+compiler, Python, uv/pip or Homebrew. Current packages can register a client with `--connect-client codex|claude`;
 older assets require manual configuration of the absolute `run-mcp.sh` path. Setup can save an optional Sentry DSN/environment privately; CI receives
 no DSN or management token, and local settings are not packaged.
 

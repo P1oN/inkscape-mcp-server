@@ -1,15 +1,9 @@
-Current Rust implementation: rust/src/live_context.rs, live_session.rs and live_managed.rs.
-Legacy Python source paths and commands below describe historical implementation only;
-the Python MCP server is retired. Use README.md and CONTRIBUTING.md for current operation.
-
 # Managed macOS document context
 
-The managed GTK 3 session can identify and select a drawing window, then check that
-identity inside Inkscape immediately before dispatching an action. Historical stage38 native
-acceptance passed on official Inkscape1.4.3, including continuous STDIO two-window mutation
-refusal and explicit rebinding. See RUST_MIGRATION_REPORT.md for that evidence and
-[AGENT_HANDOFF.md](AGENT_HANDOFF.md) for current scope; this PR has no new GUI acceptance.
-The integration remains experimental.
+The managed GTK 3 session identifies and selects a drawing window, then verifies that
+identity inside Inkscape immediately before native dispatch. The current implementation
+is in `rust/src/live_context.rs`, `live_session.rs` and `live_managed.rs`. The integration
+remains experimental; [current status](../AGENT_HANDOFF.md) records validation limits.
 
 ## Workflow
 
@@ -73,35 +67,8 @@ legacy-session note: `document_guard_available` / `ready_to_edit` are false and 
 selection tools are unsupported. Save and close that managed GUI, explicitly launch it again, then reconnect to load
 the module. Restarting MCP alone never upgrades a running GUI's native module.
 
-Inkscape 1.4.3 was observed crashing during primary-monitor initialization while the Mac was
-locked. The module now refuses startup before loading any drawing when no primary monitor
-is available, with an unlock-and-retry message in `inkscape.stderr.log`. The locked-Mac refusal
-has been observed in a native run; startup and full acceptance also passed after unlocking the Mac.
-
-## Historical stage 2 validation (2026-10-01)
-
-The counts and intermittent failure below record stage 2 before PR #5 and the explicit-launch
-change. For current development status see [AGENT_HANDOFF.md](AGENT_HANDOFF.md).
-
-Automated tests cover malformed and missing identities, identical titles with distinct IDs,
-window switches and document replacement, refusal before edits, native dispatch parameters,
-lock cleanup, explicit binding, connection-loss guidance, bridge diagnosis without repair,
-and private-copy build/cache behavior. Strict mypy (110 source files), focused Ruff, MCP surface smoke (101 tools) and wheel
-build passed at that stage. Full pytest at that stage: 1078 passed, 74 skipped, 1 failed — the previously documented
-intermittent fake-shell `test_unknown_action_surfaces_engine_action_error`; an isolated repeat
-passed. Native acceptance passed through actual MCP STDIO on 2026-10-01: two identical
-SVGs received distinct live identities, edits required explicit choice, fill and insertion
-returned to exact before/after content fingerprints with native Undo/Redo, a switch between
-context read and dispatch was refused without changing drawing B, and a new STDIO client
-reused the GUI and IDs while clearing the task binding. The fresh test GUI was closed only
-after verifying both synthetic drawing identities. The report recorded `passed: true`.
-
-Those results belong to the retired Python implementation. Current automated
-context/dispatch refusals use native Rust fixtures in `cargo test`; current explicitly
-authorized owned GUI phases are documented in [CONTRIBUTING](../CONTRIBUTING.md).
-No historical count or GUI result establishes acceptance of a new Rust build.
-
-Rust migration is deferred for this PR: native identity and macOS integration required additional
-work and exposed actual startup/activation problems. The Python server and inkex insertion helper
-retain their functionality. A full migration needs a separate feature-parity and packaging plan;
-this implementation does not claim Rust performance improvements.
+The context module refuses startup when no primary monitor is available, rather than
+bypassing the guard. Historical locked-Mac/startup and document-selection results are
+[archived](../history/reports/document-context-through-pr9.md). Current regression and
+explicit owned-GUI acceptance commands are in [CONTRIBUTING](../../CONTRIBUTING.md);
+old Python test counts do not establish Rust acceptance.

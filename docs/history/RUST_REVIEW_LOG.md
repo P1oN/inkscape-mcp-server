@@ -1,3 +1,6 @@
+> Historical checkpoint. Counts, commands, package paths and “current” labels
+> apply only to the recorded build. See the [history index](README.md).
+
 # Local Rust migration review
 
 Reviewed 2026-10-03 on `codex/rust-migration`, reference HEAD `c50a924`.
@@ -114,7 +117,7 @@ Raw commands/results are under `migration/results/review-cycle1/`;
 `migration/review-cycle1-comparison.json` and its evidence binding identify source, executable,
 archive, reports and logs. Source/report changes after a run must be distinguished from
 the exact versions captured in that binding. Full migration remains incomplete; remaining
-work is enumerated in [the completion checklist](RUST_COMPLETION_CHECKLIST.md).
+work is enumerated in [the completion checklist](reports/RUST_COMPLETION_CHECKLIST.md).
 
 ## Subsequent goal work
 

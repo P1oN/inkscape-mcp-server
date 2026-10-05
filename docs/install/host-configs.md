@@ -3,7 +3,7 @@
 After setup, the client runs the absolute `run-mcp.sh` path. The launcher loads saved local
 settings noninteractively; retain the source/package directory in a permanent location.
 
-For sources/packages containing [PR #8](https://github.com/P1oN/inkscape-mcp-server/pull/8):
+For current sources/packages:
 
 ```sh
 ./setup.sh --connect-client codex

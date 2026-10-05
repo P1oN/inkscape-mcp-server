@@ -1,3 +1,6 @@
+> Historical checkpoint. Counts, commands, package paths and “current” labels
+> apply only to the recorded build. See the [history index](README.md).
+
 Development STDIO frame checkpoint (2026-10-03): pinned rmcp AsyncRwTransport uses
 unbounded read_until before argument validation. Current Rust wraps stdin with a per-line
 byte cap before SDK buffering/deserialization; default6*MAX_INPUT_BYTES+1MiB accommodates

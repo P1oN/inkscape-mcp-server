@@ -1,3 +1,6 @@
+> Historical checkpoint. Counts, commands, package paths and “current” labels
+> apply only to the recorded build. See the [history index](README.md).
+
 # Следующий этап Rust
 
 Текущий пакет — stage38. Rust MCP развивается без старого Python-сервера и без повторных

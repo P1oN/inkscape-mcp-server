@@ -1,11 +1,7 @@
-The operation constraints below describe the fixed managed helper protocol. Stage38's
-122 native checks and 5 two-window guards are historical evidence, not a new GUI pass
-for PR #8. See [current status](AGENT_HANDOFF.md) and the
-[historical report](RUST_MIGRATION_REPORT.md) for scope.
-
 # Everyday edits in managed macOS Inkscape
 
-Implemented 2026-10-01 for official Inkscape 1.4.3. This extends the experimental
+The Rust one-shot helper supports the bounded managed edit workflow with official
+GTK3 Inkscape; local native evidence uses 1.4.3. This extends the experimental
 [managed document context](document-context.md); the installation/launcher requirements stay
 as described in the [macOS setup guide](macos-live-prototype.md). Save and close an old managed
 GUI, explicitly launch it again with `live_launch`, then reconnect to load the new
@@ -40,14 +36,14 @@ These restrictions preserve the drawing; the server does not flatten its structu
 
 ## Undo and failure behavior
 
-All everyday edits run through a fixed one-shot inkex effect. It checks document content and
+All everyday edits run through the fixed Rust `inkscape-mcp-inx` one-shot effect. It checks document content and
 captured selection, validates and prepares the complete change on a copy, then publishes it
 through Inkscape's normal extension transaction. A changed call adds **one native Undo step**,
 even when it edits several objects/properties. One Redo restores the entire result. A call that
 leaves drawing content unchanged adds no Undo entry; Undo then affects the previous change.
 
-The native dispatch guard rejects window/document switches. Validation refusal returns the
-unchanged document and an allowlisted, path-free reason; it does not open an error dialog.
+The native dispatch guard rejects window/document switches. Validation refusal emits no replacement SVG and returns an allowlisted, path-free reason;
+it does not open an error dialog.
 Request preparation failures refuse before dispatch and attempt removal of temporary files.
 A cleanup failure after dispatch reports uncertain completion instead of success.
 Timeouts, malformed replies and unconfirmed result fingerprints report **uncertain completion**:
@@ -60,6 +56,8 @@ The retired Python/vendor-inkex edit tests and 2026-10-01 GUI results are histor
 Current bounded edit/fingerprint/affine/reference/refusal/no-op checks run through
 `cargo test --locked --manifest-path rust/Cargo.toml`, including `rust/tests/helper_svg.rs`
 and `rust/tests/inx.rs`. The native CLI render gate and explicitly authorized owned
-GUI capture/edit/Undo/Redo phases are in [CONTRIBUTING](../CONTRIBUTING.md).
+GUI capture/edit/Undo/Redo phases are in [CONTRIBUTING](../../CONTRIBUTING.md).
 Native Undo/Redo requires independent evidence from the exact owned GUI; automated
 fixtures and historical results do not establish it for a new build.
+
+Dated earlier GUI results are [archived](../history/reports/everyday-edits-through-pr9.md).

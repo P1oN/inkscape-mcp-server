@@ -1,12 +1,15 @@
+> Historical checkpoint. Counts, commands, package paths and “current” labels
+> apply only to the recorded build. See the [history index](../README.md).
+
 # Historical Rust review record — stage38 and URI export follow-up
 
 This page preserves the named checkpoint and its evidence. Its package paths, counts,
 validation and publication statements are historical, not the status of PR #8. For current
-work use [the handoff](AGENT_HANDOFF.md), [the plan](RUST_NEXT_PLAN.md) and
-[installation](install/install.md). Native results remain bound to the recorded binaries.
+work use [the handoff](../../AGENT_HANDOFF.md), [the plan](../../RUST_NEXT_PLAN.md) and
+[installation](../../install/install.md). Native results remain bound to the recorded binaries.
 
 The recorded candidate was stage38. Earlier review cycles are retained in
-[historical review log](history/RUST_REVIEW_LOG.md); their old current-package statements
+[historical review log](../RUST_REVIEW_LOG.md); their old current-package statements
 and retired Python comparison commands are historical.
 
 The subsequent local source review found an SVG export regression: decoded asset filenames
@@ -25,7 +28,7 @@ engine dependency reads, capture preflight side effects, oversized validation di
 partial compare pair publication and unbounded unfinished STDIO input. The stage38 source baseline has
 215 passing Rust tests and one ignored test, with format/clippy passing. Each defect has
 preserved before/after evidence; actual38 package checks are indexed in
-[build/check index](../migration/package-stage38-build-comparison.json).
+[build/check index](../../../migration/package-stage38-build-comparison.json).
 
 Both cold and warm temporary archive installs pass, alongside exact discovery, helper/runtime,
 launcher/doctor/notices, security/special-file and selected renderer/resource checks. These
@@ -38,5 +41,5 @@ passes122 fixed checks +5 two-window guards, closed-session reconnect, and live 
 as history. UI keyboard-shortcut failures were corrected by explicit Edit-menu Undo/Redo;
 this required no server fix. CUA reopened the private welcome window after closure during a
 state read; left untouched and documented. Final source/artifact hashes are bound in the
-[final index](../migration/package-stage38-final-comparison.json).
+[final index](../../../migration/package-stage38-final-comparison.json).
 No user document edits are part of acceptance. No commits/PR/publication are authorized.

@@ -1,6 +1,6 @@
 # Local source installation on Apple Silicon
 
-For the sources in [PR #8](https://github.com/P1oN/inkscape-mcp-server/pull/8),
+For current `main` sources,
 on Apple Silicon macOS 15+, run:
 
 ```sh
@@ -38,7 +38,7 @@ use with that version. The current source tree contains the updated default beha
 
 Automatic bootstrap currently supports **Apple Silicon, macOS 15 or newer**.
 The published v0.1.0 ready-binary archive does not contain this installer. Use the source
-bootstrap archive for its original installer, or the PR sources for the updated workflow.
+bootstrap archive for its original installer, or current `main` sources for the updated workflow.
 Committed source exports include SOURCE_REVISION metadata. Explicit `--working-tree`
 acceptance snapshots omit it and record an unknown revision; their build ID still identifies
 the source content. Ordinary GitHub source archives without this metadata also build,

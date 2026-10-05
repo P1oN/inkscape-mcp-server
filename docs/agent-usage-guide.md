@@ -4,7 +4,7 @@ How to drive this server from an LLM agent: the core create→render→export lo
 working-copy + snapshot reversibility model, the risk classes and the approval-token gate for
 HIGH-risk tools, and how to pick the right tool. The full surface is **110 small typed tools / 7 prompts /
 18 resources** — deliberately *not* a portmanteau `run_action(string)` / `do_task(prompt)` design
-(ADR-002/003). The trade-off: more tools to navigate, but each is explicit, typed, and risk-classed.
+([architecture decisions](adr/README.md)). The trade-off: more tools to navigate, but each is explicit, typed, and risk-classed.
 Use the discovery tools below instead of grepping the list; gates may narrow the visible surface.
 The generated [manifest](../llms.txt) is the authoritative full catalog.
 
@@ -14,7 +14,7 @@ For clients supporting installable skills, the repository includes
 [client connection/update/removal](install/client-management.md). It complements the MCP initialization
 instructions without changing the tools or approval gates.
 
-For managed macOS, follow the [setup guide](macos-live-prototype.md). MCP startup and
+For managed macOS, follow the [setup guide](live/macos-live-prototype.md). MCP startup and
 `live_connect` never open a window. Use `live_launch` only when the user asks to open Inkscape,
 then connect with `prefer="no_freeze"`, list and select the task drawing, and check
 `live_status.ready_to_edit`. Reconnect preserves an existing GUI and resets the drawing binding.
@@ -53,7 +53,7 @@ Use `how_do_i` and `list_capabilities` for representative asks and current tool 
 Their intent catalog is embedded in the Rust server.
 
 Rule of thumb: simple structural edits (create/style/text/transform) go through the Rust DOM
-edit pipeline; render, export, and complex path geometry go through the Inkscape engine (ADR-005).
+edit pipeline; render, export, and complex path geometry go through the Inkscape engine ([helper semantics](live/live-helper-kernels.md)).
 
 ---
 

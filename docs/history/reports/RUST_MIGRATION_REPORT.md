@@ -1,9 +1,12 @@
+> Historical checkpoint. Counts, commands, package paths and “current” labels
+> apply only to the recorded build. See the [history index](../README.md).
+
 # Historical Rust migration report — stage38
 
 This page preserves the named checkpoint and its evidence. Its package paths, counts,
 validation and publication statements are historical, not the status of PR #8. For current
-work use [the handoff](AGENT_HANDOFF.md), [the plan](RUST_NEXT_PLAN.md) and
-[installation](install/install.md). Native results remain bound to the recorded binaries.
+work use [the handoff](../../AGENT_HANDOFF.md), [the plan](../../RUST_NEXT_PLAN.md) and
+[installation](../../install/install.md). Native results remain bound to the recorded binaries.
 
 Recorded candidate: **stage38, macOS arm64**, tested on this Mac with official
 Inkscape 1.4.3 and Rust 1.99. The MCP server is native Rust using pinned rmcp 3.5.0.
@@ -44,8 +47,8 @@ MCP client configuration (the launcher reads setup's saved configuration):
 Archive: `/Users/bm/Documents/repos/inkscape-mcp-server/migration/results/packages/inkscape-mcp-macos-arm64-stage38.tar.gz`. Size: 46,748,658 bytes.
 SHA-256: `94aab2652babf39c440a8a88ebd52efd70f036ea35f254a65dbe26307405bd6e`.
 Binary SHA-256: `d6614579efa32d8912e8bc73c552cf0597dcd74e4e6b1ae1448c167415a4f311`.
-Initial build index: [package-stage38-build-comparison.json](../migration/package-stage38-build-comparison.json).
-Final acceptance overlay: [package-stage38-final-comparison.json](../migration/package-stage38-final-comparison.json).
+Initial build index: [package-stage38-build-comparison.json](../../../migration/package-stage38-build-comparison.json).
+Final acceptance overlay: [package-stage38-final-comparison.json](../../../migration/package-stage38-final-comparison.json).
 The build-time index and archive remain unchanged; this external report records later acceptance.
 
 Characteristic checks: open a synthetic SVG; inspect/find its objects; dry-run an edit;
@@ -117,7 +120,7 @@ Native GLib/D-Bus/gettext/PCRE2 source archives match installed SBOM URL/version
 GLib's installed recipe matches its exact cached bottle; its sole historical patch applies
 to the exact source. Recipe/patch and Homebrew BSD2 notice are included. Source kit:
 `migration/results/homebrew-source-audit/native-source-kit-stage37.tar.gz`;
-hash/file index:[source-kit-stage37.json](../migration/results/homebrew-source-audit/source-kit-stage37.json).
+hash/file index:[source-kit-stage37.json](../../../migration/results/homebrew-source-audit/source-kit-stage37.json).
 It includes four upstream archives, recipes/receipts/SBOMs, patch and the recipe's
 introspection resource. Libraries remain separate replaceable dylibs. Source/build inputs
 are supplied; a reproduced whole binary and full redistribution clearance are not claimed.
@@ -150,7 +153,7 @@ coverage). Command:
 
 The output path must be new. Use a development environment with Pillow. Actual raw commands,
 isolated HOME/PATH/settings, timing samples, RSS samples and wire traces are preserved in
-[migration/results/rust-measurements-stage38](../migration/results/rust-measurements-stage38).
+[migration/results/rust-measurements-stage38](../../../migration/results/rust-measurements-stage38).
 Roundtrip medians in milliseconds:
 
 | Operation | per_call | shell | Samples per engine |
@@ -241,8 +244,8 @@ Historical disappearing-group cause is deferred unless it recurs (one recorded i
 not the separate stage18 export/crash). Clean-machine installation will be checked by the
 user later; Windows is deferred. No credentials or signing approval is required to continue
 local independent work. [Current requirement checklist](RUST_COMPLETION_CHECKLIST.md) and
-[handoff](AGENT_HANDOFF.md) record the completed scope and backlog.
+[handoff](../../AGENT_HANDOFF.md) record the completed scope and backlog.
 
 All prior checkpoints, failures, raw results and comparison details are preserved in
-[historical migration log](history/RUST_MIGRATION_LOG.md) and hash-bound result snapshots.
+[historical migration log](../RUST_MIGRATION_LOG.md) and hash-bound result snapshots.
 Old Python/parity reproduction commands there are retired and should not be rerun.

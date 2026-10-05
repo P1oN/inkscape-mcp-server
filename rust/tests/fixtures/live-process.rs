@@ -48,6 +48,13 @@ fn main() {
         println!("{}",if mode == "bad-owner" {"('org.inkscape.Inkscape',)"} else {"(':1.23',)"}); return;
     }
     let control = if root.join("probe-control.json").exists() {read(&root.join("probe-control.json"))} else {json!({})};
+    // Test-controlled scheduling delay for exactly one read-only action. The call trace
+    // is already recorded, so timeout tests can distinguish preflight from effect dispatch.
+    if control["delay_action"].as_str().is_some_and(has) {
+        let delay = control["delay_ms"].as_u64().unwrap();
+        assert!(delay <= 2000);
+        std::thread::sleep(Duration::from_millis(delay));
+    }
     if has("org.gtk.Actions.List") {
         if control["reachable"] == false {fail()}
         println!("(list,)"); return;

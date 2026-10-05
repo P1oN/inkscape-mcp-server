@@ -1,7 +1,10 @@
+> Historical checkpoint. Counts, commands, package paths and “current” labels
+> apply only to the recorded build. See the [history index](README.md).
+
 # Interactive macOS prototype
 
 The managed macOS integration supports scene inspection, bounded SVG insertion,
-[document identity](document-context.md) and [everyday edits](everyday-edits.md). Insertion uses a short native effect, then returns control to the canvas. Tested on macOS with official Inkscape 1.4.3
+[document identity](../live/document-context.md) and [everyday edits](../live/everyday-edits.md). Insertion uses a short native effect, then returns control to the canvas. Tested on macOS with official Inkscape 1.4.3
 (0d15f75), Python 3.12 and FastMCP 3.4.2 (locked install) / 3.4.7 on 2026-09-30.
 Other builds are unverified.
 
@@ -58,10 +61,10 @@ tool_timeout_sec = 60
 INKSCAPE_MCP_WORKSPACE_ROOTS = "/Users/yourname/Documents/Drawings"
 ```
 
-New managed sessions also build the [native context bridge](document-context.md) and a private
+New managed sessions also build the [native context bridge](../live/document-context.md) and a private
 ad-hoc signed executable copy. The original vendor application stays unchanged; the copy does not
 retain its vendor signature or hardened runtime. Native acceptance passed on 2026-10-01;
-see the [recorded results](document-context.md#validation). The integration remains experimental.
+see the [recorded results](reports/document-context-through-pr9.md#historical-stage-2-validation-2026-10-01). The integration remains experimental.
 Existing legacy sessions are reused with a guard-unavailable note.
 
 The configured command starts MCP without opening a window. It attaches to an existing managed
@@ -116,7 +119,7 @@ A filename is not a unique window/document identity, and paths remain null when 
 cannot report them. New managed sessions provide runtime window/document UUIDs through
 `live_list_documents`; `live_select_document` activates and binds the drawing for the task.
 The native module rejects actions after a window/document change. Reconnect clears that binding.
-See [implementation and acceptance results](document-context.md) before using this experimental
+See [implementation and acceptance results](../live/document-context.md) before using this experimental
 version. `live_status` exposes `document_guard_available`, `ready_to_edit`, `connection_state`
 and `recovery_actions`. Legacy sessions have no document guard.
 
@@ -154,7 +157,7 @@ Save through Inkscape normally when you want to keep the changes.
 
 Everyday edits now support fill, stroke, stroke width, opacity, document-space transforms,
 single-run text, duplication, deletion, grouping and stacking. Each changed call is one native
-Undo transaction. See [supported cases and constraints](everyday-edits.md).
+Undo transaction. See [supported cases and constraints](../live/everyday-edits.md).
 Insertion accepts vector shapes,
 groups, text, gradients, clipping, masks and patterns up to 1 MiB / 10,000 elements. It rejects
 scripts, images, foreignObject, stylesheet elements, event handlers and external references.
@@ -209,7 +212,7 @@ and text. One Undo removed the entire inserted group (including its gradient def
 the exported SVG drawing-content fingerprint matched the pre-insertion state. One Redo restored
 the group, definition and references; the fingerprint matched the post-insertion state. The user
 also observed the gradient reappear. Previously existing objects were preserved. This branch
-remains experimental; see the completed acceptance checklist in [ROADMAP.md](ROADMAP.md).
+remains experimental; see the completed acceptance checklist in [ROADMAP.md](../ROADMAP.md).
 
 Native Save As (Inkscape SVG) and File → Revert also passed: both the saved file and the
 reloaded live SVG drawing-content fingerprint matched the post-insertion state, preserving

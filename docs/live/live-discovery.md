@@ -1,6 +1,6 @@
-# Live discovery and previews (roadmap stage 4, first slice)
+# Live discovery and previews
 
-Implemented 2026-10-01. Use this to locate candidates in an existing drawing before an edit.
+Use this to locate candidates in an existing drawing before an edit.
 The existing `live_get_scene` retains its inexpensive, attribute-derived geometry contract;
 `live_find_objects` explicitly asks the Inkscape engine for accurate bounds.
 
@@ -57,36 +57,11 @@ passed user coordinates directly, producing an incorrect crop when the viewBox w
   unreferenced frames within budget and protecting frames referenced by operation records.
   Returned paths can expire after maintenance; render again if a preview is removed.
 
-## Real illustration pilot
+## Validation scope
 
-On 2026-10-01, a separate private Inkscape 1.4.3 GUI was launched with a copy of the supplied
-`background.svg`. The 3.8 MiB drawing contains 430 elements, 178 paths, 16 groups, gradients,
-filters, one clipping path and an embedded image. Its 4774×3600 pixel page has a
-1263.1208×952.50001 viewBox and a transformed layer.
-
-- All 178 paths received engine bounds in document coordinates. Labeled groups made searching
-  for the three trees and flower groups practical; individual paths often lack useful labels.
-- Three requested pilot operations passed through actual MCP STDIO: move `tree_one` by 20 user
-  units horizontally, set `bush_flower` group opacity to 0.75, duplicate `mini_flowers_3_yellow`.
-- Each edit changed the copy, one Undo restored its exact drawing-content fingerprint, one Redo
-  restored the edited fingerprint, and a final Undo restored the baseline.
-- Isolated preview/search preserved selection and content. Stale preview requests refused.
-  Region preview dimensions matched the engine bbox after pixel/viewBox conversion.
-- The source SHA-256 stayed unchanged. Only the checked private test window was closed after
-  success; pre-existing sessions were not adopted or terminated.
-
-Reproduce with a source and a JSON cases file on macOS:
-
-```sh
-python scripts/history/python/accept_live_discovery.py --source /path/to/drawing.svg --cases /path/to/cases.json
-```
-
-Cases are a list of objects such as
-`{"label":"tree_one","tool":"live_apply_to_selection","params":{"dx":20,"dy":0}}`.
-Labels must resolve to one candidate. Allowed case tools are `live_apply_to_selection` and
-`live_edit_selection`. The script creates a copy and prints its evidence directory, retaining
-`acceptance.json`, discovery output, SVGs after each edit and PNG previews. Failure preserves GUI.
-Use `--keep-gui` to leave the disposable baseline open after successful acceptance.
-
-This pilot validates these operations on one illustration. Mask/pattern/clone coverage and
-computed styles/reference analysis remain subsequent stage-4 work; stage 4 is not complete.
+The earlier real-illustration pilot, original fixture and Python-era acceptance commands
+are [archived](../history/reports/live-discovery-through-pr9.md). The current Rust route uses
+bounded regression/CLI checks from [CONTRIBUTING](../../CONTRIBUTING.md); each new live
+implementation requires its own explicitly authorized owned-GUI evidence.
+Computed live styles and representative mask/pattern/clone acceptance remain in the
+[active backlog](../RUST_NEXT_PLAN.md).
