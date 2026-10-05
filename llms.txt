@@ -53,6 +53,7 @@ Native Rust runtime and build tools; ready packages contain no Python runtime.
 - list_snapshots: List a document's snapshots in order, with metadata.
 - live_apply_to_selection: Apply a validated style and/or simple transform to the current live selection.
 - live_arm_socket: Auto-arm the extension-socket helper so a programmatic launch gets the FULL live surface.
+- live_change_package: Plan and preview 1..16 typed style/transform/text edits on a fixed current selection. dry_run=true is read-only and needs no approval; it returns before/after PNG paths and document/selection/fingerprint guards. Review them and resubmit the same edits with dry_run=false, all guards and client-confirmed approval_token. Only the guarded managed native helper applies, through one candidate publication and a Live Operation Record. Failed plans and net no-ops do not mutate or add records. No structural edits/insertion/actions. Native GUI Undo/Redo acceptance is pending: do not promise live atomicity. Inspect after uncertainty before retry; recover confirmed changes through native Undo. Risk class: high when applying, low when planning.
 - live_connect: Connect to a running Inkscape over the best-ranked available transport (enables live).
 - live_diff_view: Produce a FOCUSED, annotated before/after visual diff of a live operation.
 - live_disconnect: Disconnect the current live session (the X1 disable switch). Idempotent.
@@ -63,6 +64,7 @@ Native Rust runtime and build tools; ready packages contain no Python runtime.
 - live_get_scene: Capture one live frame as a PNG PLUS a structured, machine-readable `LiveScene`.
 - live_get_selection: Read the current selection in the live instance as object ids (read-only).
 - live_insert_svg: Insert an SVG fragment into the running document.
+- live_inspect_objects: Inspect bounded static computed paint and local gradient/mask/clip/pattern/clone relationships from one live snapshot. Supply 1..100 IDs. Simple type/ID/class/universal CSS, importance, defaults and inheritance are supported; unsupported CSS/dynamic/context paint yields explicit unknowns. Clone shadow-tree paint and resource coverage require rendered review. No renderer, external fetch, selection change or Undo. Risk class: low.
 - live_inspect_selection: Inspect the selected objects in the live instance (semantic, by id; read-only).
 - live_install_helper: Install the shipped extension-socket helper into the Inkscape user extensions dir.
 - live_launch: Explicitly launch or reuse the managed Inkscape window on macOS.

@@ -11,6 +11,22 @@ Read [README](../README.md), [CONTRIBUTING](../CONTRIBUTING.md) and
 [agent usage](agent-usage-guide.md). [Documentation index](README.md) maps the guides;
 [active backlog](RUST_NEXT_PLAN.md) is the single list of unfinished work.
 
+## Live workflow branch checkpoint
+
+`codex/live-drawing-workflow` starts from `main` `44e0e30` on 2026-10-05. The
+candidate adds `live_inspect_objects` and `live_change_package` to the full profile (112 tools).
+Computed paint uses bounded static CSS with explicit unknowns and local resource links;
+packages review page previews, bind document/selection/content/canonical edits, then publish
+one native candidate through the existing guarded helper and Live Operation Records.
+No-op/refusal/recovery boundaries remain explicit. See the [workflow guide](live/reviewed-workflow.md)
+and [fresh acceptance ledger](history/reports/live-drawing-workflow.md).
+Owned native GUI acceptance passed for the final package: a two-member style/text package,
+no-op history, one native Undo/Redo with equal SVG/PNG pairs, and stale native request guards.
+The isolated session was restored to blank and gracefully closed. General human-review race
+acceptance remains unverified; artist/real-work/separate-Mac acceptance is user-deferred.
+Runtime Undo fields remain conservative. Acceptance used an uncommitted candidate; the user
+subsequently authorized committing, pushing and opening a PR. No installed-runtime change occurred.
+
 ## Implemented
 
 - Rust STDIO server, native client manager, separate GUI supervisor, one-shot INX helper

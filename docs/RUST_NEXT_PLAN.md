@@ -16,15 +16,17 @@ in [the milestone index](history/README.md). Current behavior/validation is in
 
 ## Priority 2 — live drawing workflow
 
-These remaining items come from the original product roadmap. First check current code
-against the requested behavior; do not reimplement the existing headless batch/edit pipeline.
+The implementation from these items now provides bounded computed live paint/resource
+inspection and reviewed style/transform/text packages in the full profile. Synthetic
+resource identity/bounds/CLI previews and automated guards/publication checks are in the
+[acceptance ledger](history/reports/live-drawing-workflow.md); supported scope is in the
+[workflow guide](live/reviewed-workflow.md). Remaining acceptance is listed below.
 
-| Task | Scope to design or validate | Completion evidence |
+| Task | Next action | Completion evidence |
 | --- | --- | --- |
-| Computed live styles and relationships | Bounded effective paint and links to gradients, masks, clipping, patterns and clones; retain explicit unknowns for unsupported CSS. Headless quality-report CSS advice does not complete live computed-style support. | Representative synthetic and realistic drawing cases, preserved references and documented live limits. |
-| Realistic mask/pattern/clone acceptance | Inspect and preview drawings using these resources; identify unsupported live paths before extending them. | Correct object identity/bounds/render results with unchanged originals; headless and GUI evidence distinguished. |
-| Reviewed live change packages | Plan/preview before application, stale-document guard, explicit results/recovery; research one native Undo transaction for a bounded multi-operation package. Existing working-copy `apply_edits` is already atomic. | Defined supported operations/failure semantics, appropriate regression/CLI checks and owned GUI Undo/Redo evidence before promising live atomicity. |
-| Artist pilot and installation usability | Test copies of real artwork on a separate Mac; observe selection, preview/refinement and recovery. Evaluate a setup/update flow without terminal use from those observations. Existing CLI setup and agent guidance are implemented. | Recorded usability problems and scoped follow-up fixes; originals and user sessions preserved. |
+| Real-artwork computed styles and mask/pattern/clone acceptance | The user deferred real artwork on 2026-10-05 until copies are supplied. Use the pilot protocol; include unsupported CSS, clone instance paint, linked resources and renderer refusals. Existing synthetic CLI results do not establish realistic-drawing acceptance. | Correct identity/bounds/render and explicit uncertainty on copies of actual drawings, with original hashes preserved; headless and GUI evidence distinguished. |
+| Human-review race acceptance for live packages | Owned two-member style/text GUI apply/no-op/Undo/Redo and deliberately stale native request guards passed on 2026-10-05. Still observe actual intervening human edits, selection and window/document changes after a retained review; include transform and broader-selection cases. | Build-bound retained reviews and before/after captures proving refusal without mutation; scoped Undo/Redo for the added cases. Runtime verification fields remain conservative. |
+| Artist pilot and installation usability | User-deferred until copies of real work and a separate Mac are available. Observe installation, selection, preview/refinement and recovery; derive a terminal-free setup/update proposal from those observations. | Separate host/tool/build identity, observed problems and scoped fixes, preserved originals and user sessions. The documented protocol and current CLI setup are preparation, not completed usability evidence. |
 
 ## Research and deferred work
 

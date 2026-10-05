@@ -84,7 +84,7 @@ impl Managed {
     fn edit_available(&mut self) -> Result<bool, Error> {
         Ok(self.effect_directory.is_some() && self.dbus.bus.effect_available(Action::Edit))
     }
-    fn edit_selection(&mut self, operation: &str, params: Value) -> Result<Value, Error> {
+    fn edit_selection(&mut self, operation: &str, mut params: Value) -> Result<Value, Error> {
         if !self.edit_available()? {
             return Err(Error::Unsupported(
                 "save and restart managed Inkscape to load everyday edits",
@@ -104,6 +104,17 @@ impl Managed {
             let root=document.get_root_element().ok_or(Error::Protocol("active document export is invalid"))?;
             let ids:Vec<_>=crate::document::elements(root).iter().filter_map(|node|node.get_property_no_ns("id").filter(|id|!id.is_empty())).collect();
             let fingerprint=crate::live_effect::fingerprint(&svg,this.dbus.max_input)?;
+            if operation == "package" {
+                if !this.guarded { return Err(Error::Unsupported("reviewed packages require document context protection")); }
+                let expected_document = params.as_object_mut().unwrap().remove("expected_document").ok_or(Error::Protocol("reviewed document required"))?;
+                let expected_selection = params.as_object_mut().unwrap().remove("expected_selection").ok_or(Error::Protocol("reviewed selection required"))?;
+                if this.current.as_ref().and_then(|v| identity(v).ok()) != identity(&expected_document).ok() || identity(&expected_document).is_err() {
+                    return Err(Error::Context("reviewed document changed; prepare a new package"));
+                }
+                if params["expected_fingerprint"] != fingerprint || expected_selection != selected["object_ids"] {
+                    return Err(Error::EditRefused("drawing or selection changed since review; prepare a new package".into()));
+                }
+            }
             let mut payload=json!({"nonce":nonce,"operation":operation,"selection":selected["object_ids"],"expected_ids":ids,"expected_fingerprint":fingerprint});
             for (key,value) in params.as_object().unwrap() { payload[key]=value.clone(); }
             let exchange=crate::live_effect::Exchange::prepare(&directory,&payload,this.dbus.max_input)?;
@@ -132,7 +143,7 @@ impl Managed {
                             let confirmed=crate::live_effect::fingerprint(&current,this.dbus.max_input).map_err(|_|Error::Uncertain)?;
                             if confirmed==fingerprint {
                                 exchange.cleanup()?;
-                                return Ok(json!({"affected_ids":ids,"count":ids.len(),"detail":format!("{operation}: one Undo step; unchanged calls add no step"),"undo_friendly":true}));
+                                return Ok(json!({"affected_ids":ids,"count":ids.len(),"detail":if operation=="package" {"package: one native candidate publication; GUI Undo/Redo unverified".to_string()}else{format!("{operation}: one Undo step; unchanged calls add no step")},"undo_friendly":operation!="package"}));
                             }
                         },
                     }
@@ -161,6 +172,17 @@ impl Managed {
     }
 }
 impl Transport for Managed {
+    fn package_available(&mut self) -> Result<bool, Error> {
+        Ok(self.guarded && self.edit_available()?)
+    }
+    fn change_package(&mut self, params: &Value) -> Result<Value, Error> {
+        if !self.guarded {
+            return Err(Error::Unsupported(
+                "reviewed packages require document context protection",
+            ));
+        }
+        self.edit_selection("package", params.clone())
+    }
     fn order_selection(&mut self, operation: SelectionEdit) -> Result<Value, Error> {
         Managed::order_selection(self, operation)
     }
@@ -982,6 +1004,66 @@ mod tests {
         let (root, dbus, log) = fixture(mode, 1024 * 1024);
         std::fs::write(root.path().join("stdout.log"), b"").unwrap();
         (root, dbus, log)
+    }
+    #[test]
+    fn reviewed_package_guard_and_single_native_dispatch() {
+        for bad in [
+            None,
+            Some("expected_fingerprint"),
+            Some("expected_selection"),
+            Some("expected_document"),
+        ] {
+            let (root, dbus, log) = fixture_for_effect("effect-mutated");
+            let mut backend = Managed::new(
+                dbus,
+                root.path().canonicalize().unwrap().join("stdout.log"),
+                true,
+            );
+            backend.effect_directory(root.path().canonicalize().unwrap());
+            let docs = backend.list_documents().unwrap();
+            backend
+                .select_document(
+                    docs[0]["window_id"].as_str().unwrap(),
+                    docs[0]["document_id"].as_str().unwrap(),
+                )
+                .unwrap();
+            let active = backend.active_document().unwrap();
+            let svg = backend.document_svg().unwrap();
+            let mut params = json!({"operation":null,"edits":[{"op":"style","style":{"fill":"blue"}},{"op":"style","style":{"opacity":"0.6"}}],"expected_fingerprint":crate::live_effect::fingerprint(&svg,1024*1024).unwrap(),"expected_selection":["r"],"expected_document":active});
+            if let Some(key) = bad {
+                params[key] = match key {
+                    "expected_selection" => json!(["other"]),
+                    "expected_document" => json!({}),
+                    _ => json!("stale"),
+                };
+            }
+            assert!(backend.package_available().unwrap());
+            let result = backend.change_package(&params);
+            let calls = trace(&log);
+            let dispatched = calls
+                .iter()
+                .filter(|a| {
+                    a.get(10)
+                        .is_some_and(|s| s == "org.inkscape-mcp.edit.noprefs")
+                })
+                .count();
+            if bad.is_some() {
+                assert!(result.is_err());
+                assert_eq!(dispatched, 0);
+                assert!(!root.path().join("insert-request.json").exists());
+            } else {
+                let result = result.unwrap();
+                assert_eq!(dispatched, 1);
+                assert_eq!(result["affected_ids"], json!(["r"]));
+                assert_eq!(result["undo_friendly"], false);
+                let current = backend.document_svg().unwrap();
+                assert!(current.contains("fill:blue") && current.contains("opacity:0.6"));
+            }
+            assert_eq!(
+                std::fs::read_to_string(root.path().join("fixture.svg")).unwrap(),
+                svg
+            );
+        }
     }
     #[test]
     fn changed_effect_result_is_confirmed_against_independent_helper_fingerprint() {

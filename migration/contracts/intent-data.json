@@ -794,9 +794,11 @@
         "live_list_documents",
         "live_select_document",
         "live_get_scene",
-        "live_apply_to_selection"
+        "live_apply_to_selection",
+        "live_inspect_objects",
+        "live_change_package"
       ],
-      "how_to": "Connect to an already running window; connecting never launches Inkscape. On managed macOS use live_launch only on an explicit request to open Inkscape, then connect, list and select the task drawing; read its scene, then edit. Reconnect resets the task binding.",
+      "how_to": "Connect to an already running window; connecting never launches Inkscape. On managed macOS use live_launch only on an explicit request to open Inkscape, then connect, list and select the task drawing; read its scene, then edit. Reconnect resets the task binding. Inspect IDs with live_inspect_objects for bounded computed styles/resource links. Review live_change_package with dry_run=true; resubmit identical edits and returned guards with explicit per-operation approval to apply through the guarded native helper. GUI Undo/Redo acceptance for packages is pending.",
       "group": "live",
       "keywords": [
         "live",
@@ -804,7 +806,10 @@
         "open canvas",
         "live mode",
         "connect to inkscape",
-        "current selection in inkscape"
+        "current selection in inkscape",
+        "computed live styles",
+        "live change package",
+        "review live changes"
       ]
     }
   ],

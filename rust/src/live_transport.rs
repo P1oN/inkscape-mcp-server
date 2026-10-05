@@ -110,6 +110,14 @@ pub trait Transport: Send {
             "structural edits require managed macOS Inkscape",
         ))
     }
+    fn package_available(&mut self) -> Result<bool, Error> {
+        Ok(false)
+    }
+    fn change_package(&mut self, _params: &Value) -> Result<Value, Error> {
+        Err(Error::Unsupported(
+            "reviewed packages require the guarded managed native helper",
+        ))
+    }
     fn export_selection(&mut self) -> Result<Vec<u8>, Error> {
         Err(Error::Unsupported("selection export unavailable"))
     }

@@ -13,7 +13,7 @@ static ALIGN: LazyLock<Regex> =
 fn trim(s: &str) -> &str {
     s.trim_matches(|c: char| c.is_whitespace() || matches!(c, '\u{1c}'..='\u{1f}'))
 }
-fn length(raw: &str) -> Result<f64, String> {
+pub(crate) fn length(raw: &str) -> Result<f64, String> {
     let c = LENGTH
         .captures(trim(raw))
         .ok_or("accurate geometry requires absolute root width and height")?;

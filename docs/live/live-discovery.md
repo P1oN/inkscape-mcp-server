@@ -63,5 +63,6 @@ The earlier real-illustration pilot, original fixture and Python-era acceptance 
 are [archived](../history/reports/live-discovery-through-pr9.md). The current Rust route uses
 bounded regression/CLI checks from [CONTRIBUTING](../../CONTRIBUTING.md); each new live
 implementation requires its own explicitly authorized owned-GUI evidence.
-Computed live styles and representative mask/pattern/clone acceptance remain in the
-[active backlog](../RUST_NEXT_PLAN.md).
+Use [computed style inspection and reviewed changes](reviewed-workflow.md) alongside
+discovery. Synthetic mask/pattern/clone CLI evidence is recorded separately from pending
+real-artwork and owned-GUI acceptance in the [active backlog](../RUST_NEXT_PLAN.md).

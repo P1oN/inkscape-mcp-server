@@ -137,6 +137,11 @@ retain the synthetic session. Every subsequent phase checks that exact manifest 
 single window/document context. Evidence labels must be fresh ASCII alphanumeric/hyphen
 names. No phase guesses a selection or operates on a pre-existing user window.
 
+`native-inx` also supports `package` and `package-noop` for an owned synthetic single-run
+text selection; these plan/review/apply style plus text through the public package tool.
+Capture independent native Undo/Redo and compare the package before/after captures before
+claiming one Undo transaction.
+
 `native-inx` supports `insert`, `insert-text`, `style`, `noop`, `text`, `duplicate`,
 `delete`, `group`, `ungroup`, `raise`, `lower`, `front`, `back`, `capture`, `stale-content`,
 `stale-ids` and `stale-selection`. Perform selection and native menu Undo/Redo in the
@@ -160,3 +165,15 @@ separate; CLI success or session cleanup never proves native Undo/Redo. See
 Documentation-only changes need command/link consistency and `git diff --check`;
 rerun native GUI acceptance only when live behavior changes. Record fresh evidence and
 limitations in the handoff. Never transfer historical GUI results to a new build.
+
+For computed live styles and reviewed packages, run the owned snapshot/real-STDIO/CLI probe
+(no GUI launch), with Inkscape CLI on PATH:
+
+```sh
+scripts/dev-tools.sh live-workflow-acceptance --binary rust/target/release/inkscape-mcp-rust --helper rust/target/release/inkscape-mcp-live --output migration/results/live-workflow
+```
+
+It retains SVG, resource/bounds reports, object/package PNGs and wire traces, checks original
+preservation and stale/digest/approval/unsupported-backend refusals. This does not establish
+native GUI package publication, Undo/Redo or artist pilot acceptance; follow the
+[reviewed workflow](docs/live/reviewed-workflow.md) for those separate checks.

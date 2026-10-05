@@ -14,3 +14,5 @@ are in [CONTRIBUTING](../../CONTRIBUTING.md).
 
 Startup/reconnect never launch or close Inkscape. A new GUI requires a user request.
 Select the task drawing after reconnect and preserve unrelated windows and unsaved work.
+
+See [computed styles and reviewed live packages](reviewed-workflow.md) for the new full-profile tools and the deferred artist pilot protocol.

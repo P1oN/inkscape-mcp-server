@@ -1,7 +1,7 @@
 # Inkscape MCP server — Rust
 
 A native Rust STDIO MCP server for inspecting, authoring and editing SVG, rendering/exporting
-with Inkscape, and controlling bounded live operations. The full surface has 110 tools,
+with Inkscape, and controlling bounded live operations. The full surface has 112 tools,
 7 prompts and 18 resources. Original files, workspace boundaries, snapshots, approvals,
 Operation Records, atomic rollback and genuine no-op behavior remain part of the design.
 
@@ -130,3 +130,7 @@ structural and hidden-geometry advice with uncertainty, independently of validit
 See [the authoring guide](docs/agent-usage-guide.md#editable-vector-authoring-quality) and
 [the acceptance evidence](docs/history/reports/editable-vector-authoring.md); silhouettes and occlusion
 remain rendered/manual reviews, with existing approval gates for repairs.
+
+The full live profile adds bounded static computed paint/resource inspection and reviewed
+style/transform/text packages. See [reviewed live workflow](docs/live/reviewed-workflow.md)
+for guards, preview/refusal behavior and scoped native GUI Undo/Redo evidence and deferred artist acceptance.

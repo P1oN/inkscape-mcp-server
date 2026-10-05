@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="300" height="180" viewBox="0 0 300 180">
+  <defs>
+    <linearGradient id="petal-gradient"><stop offset="0" stop-color="#fbcf78"/><stop offset="1" stop-color="#d95d72"/></linearGradient>
+    <linearGradient id="linked-gradient" href="#petal-gradient"/>
+    <clipPath id="round-clip"><circle id="clip-circle" cx="60" cy="60" r="40"/></clipPath>
+    <mask id="half-mask" maskUnits="userSpaceOnUse" x="20" y="20" width="80" height="80"><rect id="mask-white" x="20" y="20" width="40" height="80" fill="white"/></mask>
+    <pattern id="dots" patternUnits="userSpaceOnUse" width="10" height="10"><rect id="tile" width="10" height="10" fill="#eef3df"/><circle id="dot" cx="5" cy="5" r="2" fill="#567d46"/></pattern>
+    <pattern id="linked-dots" href="#dots"/>
+    <g id="leaf-source" fill="url(#linked-gradient)"><path id="leaf-outline" d="M0 20 Q25 -20 50 20 Q25 60 0 20Z"/></g>
+  </defs>
+  <g id="artwork" inkscape:groupmode="layer" inkscape:label="Resource study">
+    <g id="masked-object" inkscape:label="Masked circle" mask="url(#half-mask)"><rect id="masked-paint" x="20" y="20" width="80" height="80" fill="#d95d72" clip-path="url(#round-clip)"/></g>
+    <g id="pattern-object" inkscape:label="Pattern panel"><rect id="panel" x="120" y="20" width="140" height="60" fill="url(#linked-dots)"/></g>
+    <g id="flower" inkscape:label="Gradient flower"><path id="petals" fill="url(#linked-gradient)" d="M65 110 C80 90 90 110 85 120 C105 120 105 145 85 145 C90 165 65 170 60 150 C40 165 25 145 45 135 C25 115 45 100 55 120Z"/><circle id="center" cx="65" cy="135" r="9" fill="#567d46"/></g>
+    <g id="cloned-object" inkscape:label="Linked leaf"><use id="leaf-clone" href="#leaf-source" x="190" y="110"/></g>
+    <text id="caption" x="115" y="170" font-size="12" fill="#34512f">Editable resources</text>
+  </g>
+</svg>

@@ -103,6 +103,9 @@ fn main() {
                 let bytes = if action == "org.inkscape-mcp.insert.noprefs" {
                     let applied = helper_svg::apply::insert(&svg,request["fragment"].as_str().unwrap(),request["nonce"].as_str().unwrap(),1024*1024).unwrap();
                     response = json!({"nonce":request["nonce"],"ok":true,"ids":applied.ids}); applied.bytes
+                } else if request.get("edits").is_some() {
+                    let (applied,fp)=helper_svg::oneshot::prepare(&svg,serde_json::from_value(request.clone()).unwrap(),&["r".into()],1024*1024).unwrap();
+                    response["fingerprint"]=json!(fp);response["ids"]=json!(applied.ids);applied.bytes
                 } else {
                     let document = xml::parse(svg.as_bytes(),1024*1024).unwrap();
                     let mut stack = vec![document.get_root_element().unwrap()];
