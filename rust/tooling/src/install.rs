@@ -6,6 +6,31 @@ use crate::{
 };
 use serde_json::{Value, json};
 use std::{fs, path::Path, process::Command};
+fn source_revision(source: &Path) -> Result<String> {
+    let marker = source.join("SOURCE_REVISION");
+    if marker.exists() {
+        ensure(
+            !source.join("SOURCE_STATE").exists(),
+            "ambiguous source identity",
+        )?;
+        let contents = fs::read_to_string(marker)?;
+        let lines: Vec<_> = contents.lines().collect();
+        ensure(
+            lines.len() == 2
+                && lines[0] == "inkscape-mcp-source-v1"
+                && lines[1].len() == 40
+                && lines[1].bytes().all(|b| b.is_ascii_hexdigit()),
+            "invalid committed source identity",
+        )?;
+        Ok(lines[1].to_owned())
+    } else {
+        ensure(
+            fs::read_to_string(source.join("SOURCE_STATE"))? == "uncommitted-working-tree\n",
+            "invalid unpublished source identity",
+        )?;
+        Ok("unknown".into())
+    }
+}
 pub fn run(args: &Args) -> Result<()> {
     args.check(&["--archive", "--output"])?;
     let archive = args.required("--archive")?.canonicalize()?;
@@ -20,6 +45,7 @@ pub fn run(args: &Args) -> Result<()> {
         Path::new("inkscape-mcp-source-bootstrap"),
     )?;
     let source = extracted.join("inkscape-mcp-source-bootstrap");
+    let expected_revision = source_revision(&source)?;
     ensure(
         !source.join(".git").exists() && !source.join(".inkscape-mcp-local").exists(),
         "source archive contains private state",
@@ -119,10 +145,10 @@ pub fn run(args: &Args) -> Result<()> {
         .and_then(Path::parent)
         .ok_or("package path")?;
     ensure(
-        build["revision"] == "unknown"
+        build["revision"] == expected_revision
             && crate::common::json(&package.join("libexec/inkscape-mcp/package.json"))?["build_info"]
                 == build,
-        "unpublished source claims committed identity",
+        "installed build identity differs from source archive or package manifest",
     )?;
     let skill = home.join(".codex/skills/inkscape-mcp");
     let skill_file = skill.join("SKILL.md");
@@ -249,8 +275,40 @@ pub fn run(args: &Args) -> Result<()> {
     )?;
     write_json(
         &out.join("acceptance.json"),
-        &json!({"passed":true,"checks":8,"source":source,"package":package,"native_GUI":false,"clean_machine":false,"source_state":"unpublished working tree"}),
+        &json!({"passed":true,"checks":8,"source":source,"package":package,"native_GUI":false,"clean_machine":false,"source_revision":expected_revision,"source_state":if expected_revision == "unknown" { "unpublished working tree" } else { "committed" }}),
     )?;
     println!("Source install: 8 checks passed");
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn source_identity_requires_unambiguous_valid_export_markers() {
+        let source = tempfile::tempdir().unwrap();
+        let root = source.path();
+        assert!(source_revision(root).is_err());
+        fs::write(root.join("SOURCE_STATE"), "uncommitted-working-tree\n").unwrap();
+        assert_eq!(source_revision(root).unwrap(), "unknown");
+        let revision = "a".repeat(40);
+        fs::write(
+            root.join("SOURCE_REVISION"),
+            format!("inkscape-mcp-source-v1\n{revision}\n"),
+        )
+        .unwrap();
+        assert!(source_revision(root).is_err());
+        fs::remove_file(root.join("SOURCE_STATE")).unwrap();
+        assert_eq!(source_revision(root).unwrap(), revision);
+        for invalid in [
+            "wrong-format\n",
+            "inkscape-mcp-source-v1\nunknown\n",
+            "inkscape-mcp-source-v1\nxyz\n",
+            "inkscape-mcp-source-v1\nextra\nlines\n",
+        ] {
+            fs::write(root.join("SOURCE_REVISION"), invalid).unwrap();
+            assert!(source_revision(root).is_err());
+        }
+    }
 }
