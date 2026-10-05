@@ -353,7 +353,8 @@ Review is bounded to 20,000 elements, 256 KiB stylesheet text, 2,048 rules, 128 
 levels, two million CSS work units and 200 findings. Path parsing allows 256 KiB/10,000
 segments per path and 4 MiB/200,000 segments across a report. Group-role traversal has
 a 200,000-element visit budget. Limit exhaustion produces uncertainty/truncation, not
-evidence of safe geometry. Setting `enabled=false` disables all editability findings.
+evidence of safe geometry. Setting `enabled=false` disables advisory editability findings; explicitly requested
+`vector_only` inventory remains independent.
 
 Hidden/transparent scene findings account for ancestry, resource containers and local
 references. Required `defs`, masks, clipping shapes and `use` source subtrees are preserved.

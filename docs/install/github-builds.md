@@ -1,42 +1,50 @@
 # Download a GitHub build for Apple Silicon
 
-As of 2026-10-05, published previews remain v0.1.0 and v0.1.1. Current `main` includes
-installation/client/skill/build identity improvements and complete Python removal/authoring
-from PRs #8/#9; these changes are not in existing Release assets.
+[Release v0.1.2](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.2)
+contains `inkscape-mcp-macos-arm64.tar.gz` (ready runtime) and
+`inkscape-mcp-source-bootstrap.tar.gz` (source installer), each with a `.sha256` file.
+Both include the current installation/client/skill management, five Rust executables,
+reviewed live tools and vector-quality guards. This remains a prerelease for Apple Silicon
+macOS 15+ with Inkscape 1.4+; Intel/Linux/Windows and clean-machine/native artist acceptance
+retain their separate scope.
 
-The [main run for `c66583b`](https://github.com/P1oN/inkscape-mcp-server/actions/runs/37310025578)
-passed after the effect-regression test repair. The earlier failed post-merge run remains
-historical. Download installable artifacts only from successful runs and inspect
-source/build identity; the newest run is not automatically an accepted package.
-[Current installation](install.md) distinguishes each distribution.
+For the ready runtime, download its archive and checksum into one directory:
 
-For local installation on Apple Silicon macOS 15+, open
-[Release v0.1.1](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.1)
-and download `inkscape-mcp-source-bootstrap.tar.gz` and its `.sha256` file from **Assets**.
-With both files in the same directory:
+```sh
+shasum -a 256 -c inkscape-mcp-macos-arm64.tar.gz.sha256
+tar -xzf inkscape-mcp-macos-arm64.tar.gz
+cd inkscape-mcp-macos-arm64
+./setup.sh --install-skill codex --connect-client codex
+./run-mcp.sh --doctor
+```
+
+Use `claude` for an installed Claude Code CLI. Keep the extracted directory in a permanent
+location; the client registers its absolute launcher. No compiler, Python or Homebrew is
+needed for the ready runtime. For the source archive:
 
 ```sh
 shasum -a 256 -c inkscape-mcp-source-bootstrap.tar.gz.sha256
 tar -xzf inkscape-mcp-source-bootstrap.tar.gz
 cd inkscape-mcp-source-bootstrap
-./setup.sh --bootstrap
+./setup.sh --install-skill codex --connect-client codex
 ./run-mcp.sh --doctor
 ```
 
-Install Inkscape first. Setup builds locally, downloads missing build tools into a private
-temporary directory and removes those tools afterward. The historical v0.1.1 package retained private Python for runtime use. If Apple Command Line Tools are missing, complete their installation
-dialog and rerun setup. See [local bootstrap](local-bootstrap.md) for prerequisites and limits.
-The v0.1.1 bootstrap verification belongs to its original archive; its detailed evidence
-is [historical](../history/reports/RUST_MIGRATION_REPORT.md). It does not establish acceptance
-of current source or clean-machine Apple tool installation.
+Source setup builds automatically and prepares missing pinned build inputs privately.
+Apple Command Line Tools are required; complete Apple's installation dialog if absent.
+`--rebuild` explicitly repeats preparation/build, while `--local-tools` uses existing tools
+and cached inputs offline. See [source prerequisites](local-bootstrap.md).
 
-The command above is for published v0.1.1. Current sources instead use `./setup.sh`
-for automatic preparation/build on first use and reuse the saved package on subsequent
-runs. `--local-tools` selects a rebuild with existing tools/cached dependencies only;
-`--rebuild` explicitly repeats automatic preparation/build; `--bootstrap` remains compatible. These later changes are not in the v0.1.1 asset.
+Inspect `./setup.sh --version` for actual compiled revision/build identity; a distribution
+tag does not replace those fields. Ready-package setup defaults to saving configuration;
+`--connect-client` checks/registers the client and `--check` runs diagnostics. Startup and
+reconnect never launch Inkscape GUI. The release does not change your configured runtime
+until you install/select it and reconnect.
 
-The earlier [Release v0.1.0](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.0)
-keeps the prebuilt archive described below. Both releases are marked prerelease.
+Historical [v0.1.1](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.1)
+is a source preview requiring `./setup.sh --bootstrap`; it retained private Python and lacks
+current client/skill management. Historical [v0.1.0](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.0)
+contains its original ready package. These archives and their acceptance evidence remain unchanged.
 
 The [Rust checks and native packages workflow](https://github.com/P1oN/inkscape-mcp-server/actions/workflows/rust-migration.yml)
 automatically builds **macOS arm64 (M chips)** after relevant pushes to `main` and for
@@ -60,8 +68,7 @@ For ready packages using the updated launcher, setup without build/client option
 private configuration; diagnostics are explicit with `./setup.sh --check` or `./run-mcp.sh --doctor`. Source rebuilding
 with installed tools/cached dependencies is explicit with `./setup.sh --local-tools`.
 Fresh current source checkouts automatically prepare tools and build with `./setup.sh`.
-The historical v0.1.0 archive still runs doctor
-during setup; these launcher changes are not in that published archive.
+The historical v0.1.0 archive still runs doctor during setup; use its included instructions.
 
 Install Inkscape first. Current packages include five Rust executables,
 prebuilt bridge, D-Bus dependencies and matching debug symbols. Users do not install a

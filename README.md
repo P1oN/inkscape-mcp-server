@@ -10,12 +10,12 @@ Operation Records, atomic rollback and genuine no-op behavior remain part of the
 
 ## Install and run
 
-The latest published source preview is [v0.1.1](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.1).
-The installation, client connection, skill update, build identity and uninstall improvements
-were merged into `main` in [PR #8](https://github.com/P1oN/inkscape-mcp-server/pull/8).
-They are not included in the v0.1.1 archive.
+[v0.1.2](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.2) provides current
+source installation and a ready Apple Silicon package. It includes installation/client
+management, complete Python removal, reviewed live packages and vector-quality guards
+from PRs #8–11. Older v0.1.0/v0.1.1 previews retain their original behavior.
 
-For the current sources on Apple Silicon macOS 15+, install Inkscape 1.4+ and the client CLI,
+For v0.1.2 sources or current sources on Apple Silicon macOS 15+, install Inkscape 1.4+ and the client CLI,
 then run from the checkout:
 
 ```sh
@@ -90,8 +90,8 @@ different existing skills. Add `--update-skill` to merge an existing managed ski
 conflicts leave installed content unchanged. Skill installation alone does not register MCP.
 For an already configured server, run `./scripts/install-skill.sh --client codex`
 without rebuilding. See [skill installation](docs/install/agent-skill.md) for paths
-and other clients. These additions are in the current source tree; the already
-published v0.1.1 archive does not include them.
+and other clients. These additions are included in v0.1.2 source and ready packages; the historical
+v0.1.1 archive does not include them.
 
 ## Optional monitoring
 
@@ -134,3 +134,9 @@ remain rendered/manual reviews, with existing approval gates for repairs.
 The full live profile adds bounded static computed paint/resource inspection and reviewed
 style/transform/text packages. See [reviewed live workflow](docs/live/reviewed-workflow.md)
 for guards, preview/refusal behavior and scoped native GUI Undo/Redo evidence and deferred artist acceptance.
+
+Explicit path-quality guards support closed silhouettes and exact zero-length segment
+refusal. `quality_report` adds closure/node diagnostics and conservative whole-document
+vector status; `save_document_as(vector_only=true)` refuses raster or unknown resource
+content. `replace_svg_fragment(dry_run=true)` returns a structural candidate without
+changing the drawing. See [usage and limits](docs/agent-usage-guide.md#closure-duplicate-path-nodes-and-vector-only-delivery).

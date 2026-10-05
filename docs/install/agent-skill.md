@@ -58,6 +58,6 @@ or let the client select it for relevant SVG requests. Configure the MCP connect
 with `./setup.sh --connect-client codex` (or `claude`). See
 [client management](client-management.md) for standalone connection checks and manual configuration.
 
-Ready packages built from this source include the same installer and skill; committed
-source archives include them as well. Previously published v0.1.0/v0.1.1 assets remain
+v0.1.2 ready and source packages include the same installer and skill; packages built
+from current sources include them as well. Previously published v0.1.0/v0.1.1 assets remain
 unchanged and do not contain the skill.

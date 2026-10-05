@@ -1,9 +1,19 @@
 # Changelog
 
-Source changes below are merged but have not been published as new release assets.
+Distribution tags describe published previews; source/build identity remains recorded in each package.
 Detailed checkpoint evidence is indexed in [history](docs/history/README.md).
 
-## Unreleased — current `main`
+## v0.1.2 — 2026-10-06, prerelease
+
+Source archive and ready macOS Apple Silicon package, with checksums.
+[Release](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.2).
+
+- Add bounded path parsing, explicit closure/zero-length guards, read-only node/closure
+  findings, whole-document vector inventory and vector-only save refusal (PR #11).
+- Add structural fragment dry-run candidates; application retains existing approval/reference gates (PR #11).
+- Add computed live inspection and reviewed style/transform/text packages with content/selection guards (PR #10).
+- Preserve scoped synthetic GUI evidence, explicit unknowns and conservative per-call Undo verification.
+
 
 - Replace project-supplied Python runtime/helper routes with five Rust executables;
   ready packages omit CPython/wheels/inkex helpers and active tooling uses Rust/Bash (PR #9).

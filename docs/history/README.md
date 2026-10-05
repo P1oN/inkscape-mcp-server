@@ -20,6 +20,8 @@ builds. Use [current status](../AGENT_HANDOFF.md), [active backlog](../RUST_NEXT
 
 ## Reports and logs
 
+- [Handoff through PR #11 validation](agent-checkpoints-through-pr11.md), archived before the v0.1.2 release follow-up.
+
 - Local vector-quality guards, 2026-10-05: [closure, duplicate path nodes, vector-only save and fragment dry-run](reports/vector-quality-guards.md); uncommitted candidate and concurrency limitation.
 
 - Live drawing workflow candidate: [computed styles, resources and reviewed packages](reports/live-drawing-workflow.md); automated/CLI evidence and scoped native GUI Undo/Redo are separate from the user-deferred pilot.
