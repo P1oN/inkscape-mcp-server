@@ -27,7 +27,7 @@ none of these checks is native GUI acceptance. The namespace suite checks foreig
 attributes, target shadowing/refusal, batch rollback, original preservation, XLink
 rewrites, no-op retained files and Rust's stricter directory-mtime invariant.
 
-`scripts/migration_namespace_acceptance.py` retains full replies and SVG bytes;
+`scripts/history/python/migration_namespace_acceptance.py` retains full replies and SVG bytes;
 it normalizes only the existing validated ID/timestamp bindings. The final fresh
 release result, executable/source hashes and raw traces are indexed by
 `migration/namespace-review-comparison.json` and stored under

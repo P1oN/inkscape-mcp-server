@@ -143,7 +143,7 @@ requests/startups. SVG fixtures contain 100/3000/15000 rectangles (not realistic
 coverage). Command:
 
 ```sh
-.venv/bin/python scripts/rust_current_measurements.py \
+.venv/bin/python scripts/history/python/rust_current_measurements.py \
   --binary migration/results/packages/inkscape-mcp-macos-arm64-stage38/bin/inkscape-mcp \
   --output migration/results/rust-measurements-stage38-repeat --repeats 5
 ```
@@ -219,7 +219,7 @@ headless roots. Native mutation traces retain individual timings, not a repeated
 benchmark. These are absolute current measurements, with no new Python comparison or
 pure IPC/general speedup claim. Commands/environment/raw/wire/PNGs are retained in
 `migration/results/live-measurements-stage38-retry1`; development harness:
-`scripts/rust_current_live_measurements.py` (requires an explicitly owned live session).
+`scripts/history/python/rust_current_live_measurements.py` (requires an explicitly owned live session).
 
 The original stage36/38 no-primary-monitor/CVDisplayLink failures remain historical;
 no bridge guard was bypassed and no server change was needed for this retry. The first

@@ -84,15 +84,12 @@ If the helper runtime or supervisor is damaged, `config`, `disconnect` and `unin
 still work through Rust without Python. `check` and `connect` also need a working MCP
 server and launcher; they report a bounded error if that server cannot initialize.
 Older packages without `bin/inkscape-mcp-client` must be rebuilt or replaced first;
-there is no fallback to the removed Python manager. Source builds and package creation
-still use Python tooling. Inkscape helpers remain private Python for later stages;
-supervision is now Rust.
+there is no fallback to the removed Python manager. Source builds, package creation, helpers and supervision now use Rust/Bash.
 
 Automated Rust regressions cover fixed deadlines (including continuous notifications),
 protocol errors/response limits, TOML/JSON ownership, symlink refusal, recorded clients,
 archive errors/skill restoration and drawing/skill preservation. Run
-`scripts/client_package_acceptance.py --package DIRECTORY --output DIRECTORY` with the
-development Python to exercise all five commands in a relocated ready package, isolated
+`scripts/dev-tools.sh client-acceptance --package DIRECTORY --output DIRECTORY` to exercise all five commands in a relocated ready package, isolated
 CODEX_HOME/HOME and a client PATH without Python, after damaging the helper runtime and
 supervisor. This uses real Codex and synthetic shell Claude; it does not claim real Claude
 or native GUI acceptance. The runner itself is development tooling, not an installation dependency.

@@ -56,15 +56,10 @@ of rollback. MCP client locks do not prevent a person from editing during an ope
 
 ## Verification
 
-`tests/test_managed_everyday_edits.py` uses installed vendor inkex for actual edit planning;
-it skips when vendor inkex is unavailable. Tests cover transformed parents, parent/child
-selection, locks, reference remapping/deletion, sibling order across rendered SVG containers,
-stylesheet transform refusal, group geometry and text formatting.
-`tests/test_managed_edit_failures.py` covers reply/activation failures, cleanup and subsequent
-successful calls. Existing policy/record tests cover the approval boundary.
-
-Run `.venv/bin/python scripts/accept_document_context.py` on an unlocked Mac. It creates a
-new private GUI with two synthetic drawings and checks all edit families through real MCP STDIO,
-exact before/after content with Undo/Redo, unchanged calls, lock/text refusal, document races,
-stale bindings and reconnect. Its directory retains `acceptance.json`, operation previews and
-`stage3-*.svg`. Success closes only its verified synthetic windows; failures preserve the GUI.
+The retired Python/vendor-inkex edit tests and 2026-10-01 GUI results are historical.
+Current bounded edit/fingerprint/affine/reference/refusal/no-op checks run through
+`cargo test --locked --manifest-path rust/Cargo.toml`, including `rust/tests/helper_svg.rs`
+and `rust/tests/inx.rs`. The native CLI render gate and explicitly authorized owned
+GUI capture/edit/Undo/Redo phases are in [CONTRIBUTING](../CONTRIBUTING.md).
+Native Undo/Redo requires independent evidence from the exact owned GUI; automated
+fixtures and historical results do not establish it for a new build.

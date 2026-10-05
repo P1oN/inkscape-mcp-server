@@ -1,24 +1,16 @@
-# Private live runtime components
+# Private native live runtime assets
 
-Native components support the Rust server; retained Python sources are historical development fixtures.
+- `helper_extension/`: fixed INX descriptors for the Rust one-shot/socket consumers.
+- `native/context.m`: Objective-C window/document context bridge.
+- `../rust/src/bin/`: native supervisor, INX and socket helper implementations.
 
-- helper_extension/: fixed Rust one-shot and socket INX manifests. The `.py` socket source is
-  retained historical implementation, omitted from ready packages.
-- insert_payload.py / edit_errors.py and the one-shot `.py` sources: retained development
-  fixtures/historical implementation; no longer shipped or invoked for native edits.
-- native/context.m: Objective-C document/window context bridge.
-- ../rust/src/bin/inkscape-mcp-supervisor.rs: separate native managed-session supervisor.
-- ../rust/src/bin/inkscape-mcp-inx.rs: fixed one-shot extension consumer.
-- ../rust/src/bin/inkscape-mcp-live.rs: bounded v5 loopback snapshot bridge.
-- tests/: retained helper refusal and serialization regressions.
+The Rust package builder copies these assets into a private runtime. Ready packages
+contain no Python/wheels/inkex. The supervisor installs fixed quoted wrappers that
+execute packaged Rust binaries; no second MCP server or arbitrary extension is exposed.
+Doctor checks native binaries, context bridge and private bus.
 
-The package builder copies these into a private runtime. The source installer prepares
-pinned dependencies from rust/package/helper-requirements.txt; end users of a ready archive
-do not install Python. Helpers never expose a second MCP server.
-
-The shared Rust kernels in `../rust/src/helper_svg/` validate, plan and apply one-shot
-SVG edits on owned candidates; see [live-helper-kernels.md](../docs/live-helper-kernels.md).
-The supervisor installs the three fixed INX manifests and a safely quoted wrapper that
-executes the packaged Rust helper. No Python interpreter or inkex participates in
-one-shot insertion/editing. The socket live helper also executes a fixed Rust binary through its own quoted wrapper.
-Ready packages contain no CPython, wheels or Python helper assets. Doctor checks native binaries, bridge and private bus without importing Python or requiring vendor inkex.
+Shared bounded SVG kernels and their regressions are in `rust/src/helper_svg` and
+`rust/tests`. Historical Python fixtures/tests moved to
+[scripts/history/python](../scripts/history/python/README.md). Use current Rust/Bash
+checks in [CONTRIBUTING](../CONTRIBUTING.md) and read
+[helper semantics](../docs/live-helper-kernels.md).

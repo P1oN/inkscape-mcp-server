@@ -86,7 +86,7 @@
 - [x] Status различает потерю связи/отсутствие рисунка и сообщает восстановление;
   reconnect сохраняет GUI и сбрасывает выбор для задачи.
 - [x] Финальная native acceptance нового launcher/guard на разблокированном Mac:
-  `scripts/accept_document_context.py` прошел 2026-10-01 на Inkscape 1.4.3. Проверены
+  `scripts/history/python/accept_document_context.py` прошел 2026-10-01 на Inkscape 1.4.3. Проверены
   одинаковые SVG с разными ID, явный выбор, Undo/Redo, race/stale-binding refusal
   и STDIO reuse. [Состояние и ограничения](document-context.md).
 

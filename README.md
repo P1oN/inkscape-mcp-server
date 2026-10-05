@@ -24,7 +24,7 @@ Use `claude` for both client options to connect Claude Code. Setup asks for an e
 SVG workspace and optional monitoring, prepares missing build tools privately and builds
 on first use. Keep the checkout in its permanent location: the client stores its absolute
 `run-mcp.sh` path. Apple Command Line Tools are required; if missing, complete Apple's
-installation dialog and rerun setup. Existing developer tools are preserved; Python is used only by source build/development tooling; ready packages contain no Python runtime.
+installation dialog and rerun setup. Existing developer tools are preserved; source build/development tools use Rust and Bash; ready packages contain no Python runtime.
 
 Connection checks MCP initialization, required tools and a first workspace request before
 registering through the client CLI. A differing existing `inkscape` entry is preserved
@@ -103,8 +103,7 @@ Revision and build IDs are compiled automatically into telemetry and package met
 
 The legacy Python MCP server, its tests and paired Python/Rust comparison scripts are retired.
 Development now uses Rust regression/invariant tests, true STDIO and package/native acceptance.
-The managed GUI session now runs through a separate native Rust supervisor. The socket snapshot bridge now uses the Rust `inkscape-mcp-live` executable. Python remains
-for development/package scripts; ready packages contain no CPython or helper wheels. One-shot native insertion
+The managed GUI session now runs through a separate native Rust supervisor. The socket snapshot bridge now uses the Rust `inkscape-mcp-live` executable. Development and package tools now use Rust/Bash; ready packages contain no CPython or helper wheels. One-shot native insertion
 and the ten fixed selection edits run through the Rust `inkscape-mcp-inx` executable;
 shared SVG kernels prepare and apply bounded candidates. See
 [their semantics and limits](docs/live-helper-kernels.md). See [CONTRIBUTING.md](CONTRIBUTING.md), [runtime components](runtime/README.md),

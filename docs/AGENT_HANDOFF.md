@@ -4,7 +4,7 @@ Read README.md, CONTRIBUTING.md and docs/agent-usage-guide.md. Check code and Gi
 and preserve any uncommitted work. Installation/responsiveness improvements from
 [PR #8](https://github.com/P1oN/inkscape-mcp-server/pull/8) are merged locally into `main`
 as `a4dc71f`; MCP deadline/client ownership fixes are committed as `ccd1b0d`.
-Python removal stages 1–6 are implemented in this branch. Local validation is separate from remote CI.
+Python removal stages 1–7 are implemented in this branch. Local validation is separate from remote CI.
 The published v0.1.0/v0.1.1 assets and the user's installed runtime were not replaced. Historical checkpoint counts
 and package paths are in [the checkpoint archive](history/agent-checkpoints-through-2026-10-04.md),
 not current validation claims. [RUST_NEXT_PLAN.md](RUST_NEXT_PLAN.md) is the active plan.
@@ -13,7 +13,7 @@ not current validation claims. [RUST_NEXT_PLAN.md](RUST_NEXT_PLAN.md) is the act
 
 - Rust STDIO server, client manager and separate managed GUI supervisor; legacy Python
   MCP/parity workflow retired. Both one-shot insert/edit effects and the socket snapshot
-  bridge are Rust. Python remains for development/packaging until stage 7; ready packages omit
+  bridge are Rust. Active bootstrap/development/acceptance tooling now uses Rust/Bash; ready packages omit
   CPython/wheels/Python helper assets and doctor import prerequisites. MCP startup/reconnect never launches GUI.
 - Current setup supports automatic first builds, `--rebuild`, offline `--local-tools`,
   ready packages, installed build metadata and preserved saved options/Sentry settings.
@@ -36,13 +36,39 @@ not current validation claims. [RUST_NEXT_PLAN.md](RUST_NEXT_PLAN.md) is the act
   work are retained. Server approval tokens remain nonempty strings; the client must
   obtain confirmation for each operation. Do not claim server-authenticated authorization.
 
+## Local Python removal stage 7 (2026-10-05)
+
+Implemented on initially clean HEAD `85c67cd` in `codex/python-removal-stages-1-3`;
+changes remain uncommitted. Source bootstrap/build, packaging, source archives, MCP
+discovery/manifests, CI and CONTRIBUTING use the standalone locked Rust tooling CLI
+through `scripts/dev-tools.sh`. Cargo subprocess fixtures are native Rust; 55 historical
+Python source/config files moved byte-for-byte to `scripts/history/python`. Native
+GUI acceptance phases are also Rust, remain explicit and verify recorded ownership.
+No MCP schema/initialization policy or GUI behavior changed.
+
+Fresh checks: runtime 288 passed/two standard opt-in ignored; tooling 15 passed; both
+fmt/Clippy checks, Bash syntax/YAML structure and all 16 frozen discovery configurations
+passed. Final native archive has 435 inventory files / 193,143,208 inventory bytes and
+passes relocated per-call/shell CLI, native INX/private-bus/socket, doctor (12), notices
+(11/192 crates), launcher (11), Sentry/setup (51), isolated client and STDIO/resource/
+renderer gates. Git-free source setup/uninstall/reinstall passes eight checks with real
+isolated Codex and CLI rendering. Six pinned native bottles were freshly verified.
+Manifests were regenerated; only the obsolete Python header differs.
+
+See [the gate/evidence ledger](stage7-tooling.md) for commands, raw evidence paths,
+refusal regressions and superseded failed experiments. No native GUI was launched or
+Undo/Redo result transferred; the replacement native GUI harness is not yet exercised
+on a real new GUI. Foreign platforms, remote CI, clean-machine provisioning and real
+Claude remain separate. Installed runtime/configuration, published assets and user
+windows are unchanged. No commit/push/PR was requested or performed.
+
 ## Local Python removal stage 6 (2026-10-05)
 
 Stage 5 and PR repairs were committed/pushed by user request as `616c1dd` to
 `codex/python-removal-stages-1-3`. Stage 6 was implemented and validated on that
 base, then prepared for commit/push by user request. Its acceptance artifacts were
 built from the working tree before the stage-6 commit; package metadata records
-base revision `616c1dd` plus compiled build identity. Stage 7 is next.
+base revision `616c1dd` plus compiled build identity. The current stage-7 entry supersedes the tooling status at that checkpoint.
 
 The POSIX builder ships five native Rust binaries, fixed INX manifests/Bash interfaces,
 Objective-C macOS context bridge and relocated private D-Bus closure. It no longer
@@ -52,7 +78,8 @@ notices and existing redistribution audit limitations remain. Doctor removes pri
 interpreter architecture/import and vendor-inkex prerequisites, retaining native
 architecture, asset, bus, GTK and engine checks. Optional read-only runtime metadata
 still reports vendor inkex sources for compatibility, without import or readiness gates.
-Development/bootstrap Python and its pinned test dependencies remain until stage 7.
+At that checkpoint development/bootstrap Python and its pinned dependencies still remained;
+stage 7 has now replaced their active consumers.
 
 Fresh package `migration/results/stage6-package.tar.gz`: 435 inventory files;
 193,092,453 uncompressed bytes; 48,442,243 archive bytes (previous stage-5 local
@@ -407,7 +434,7 @@ configuration/runtime were not replaced; nothing was committed or published.
 
 ## Local Python removal stage 1 (2026-10-04, uncommitted at validation)
 
-Client management has moved from `scripts/mcp_client.py` (removed) to the separate
+Client management has moved from `scripts/history/python/mcp_client.py` (removed) to the separate
 `rust/src/bin/inkscape-mcp-client.rs` binary. All five actions (`config`, `check`,
 `connect`, `disconnect`, `uninstall`) use Rust through the existing Bash interfaces.
 Ready packages bundle `bin/inkscape-mcp-client`; setup requires it and rebuilds an

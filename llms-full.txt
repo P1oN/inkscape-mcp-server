@@ -1,7 +1,7 @@
 # inkscape-mcp: Rust STDIO server
 
 Run ./setup.sh then ./run-mcp.sh. See README.md and docs/agent-usage-guide.md.
-Python is used only for private live helpers and development/packaging tools.
+Native Rust runtime and build tools; ready packages contain no Python runtime.
 
 ## Actual MCP initialization and surface
 

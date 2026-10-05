@@ -31,7 +31,7 @@ contracts and safety guarantees rather than expanding the MCP execution surface.
 | 4 | One-shot Inkscape insert/edit extensions through INX | Remove inkex from native insertion/editing | High | Implemented locally: fixed Rust executable, full SVG candidates, scoped context/selection guards; all ten native edits, one-step Undo, no-op/stale refusal, Redo and appearance acceptance on owned synthetic drawings without private Python (see handoff) |
 | 5 | Socket live bridge and its inkex-dependent perception/geometry | Remove the remaining Python live helper | High | Implemented locally: bounded Rust v5 snapshot bridge, fixed CLI scene/render/export, shared SVG edits and no-op output; relocated no-Python-helper and owned native socket/Undo acceptance recorded in the handoff |
 | 6 | Ready-package cleanup: CPython, wheels, wrappers, manifests/notices and doctor | Deliver a smaller dependency set and simpler release maintenance | Medium; depends on 1–5 | Implemented locally: archive omits CPython/wheels/Python helper assets, native doctor/notices and relocated install/headless/socket/owned GUI acceptance passed (see handoff) |
-| 7 | Active bootstrap/package/development tooling and regression/acceptance harnesses | Build and validate without Python | Medium–high by volume | Pending: active CONTRIBUTING and CI commands use Rust/Bash; retain historical scripts/reports as evidence without keeping them on the active path |
+| 7 | Active bootstrap/package/development tooling and regression/acceptance harnesses | Build and validate without Python | Medium–high by volume | Implemented locally: locked Rust/Bash tooling, native subprocess fixtures, migrated CI/CONTRIBUTING and acceptance; historical Python archived outside active paths (see [stage-7 evidence](stage7-tooling.md)) |
 
 ### Completed stage 3: shared SVG helper logic
 
@@ -95,7 +95,7 @@ sources, including their manifest/notices entries. Doctor uses native architectu
 fixed asset/bridge/bus and engine prerequisites with no interpreter/vendor-inkex
 imports. Fixed Bash launch/bootstrap interfaces, the Objective-C context bridge,
 Inkscape vendor resources and private D-Bus dependencies remain. Development/package
-scripts still use Python until stage 7.
+tooling now uses Rust/Bash following stage 7.
 
 Fresh relocated archive acceptance covers install/headless/native helpers and an
 owned GUI socket/Undo session with no bundled Python. Approvals, originals, snapshots,
@@ -103,13 +103,15 @@ Operation Records, rollback and no-op behavior passed; detailed counts, archive 
 and untested native/foreign-target scope are recorded in the handoff. Installed user
 configuration/runtime and published releases were not replaced.
 
-### Next stage: active tooling cleanup (stage 7)
+### Completed locally: active tooling cleanup (stage 7)
 
-Replace active Python bootstrap/package/development and regression/acceptance tooling
-with Rust/Bash interfaces. Inventory the current CI and CONTRIBUTING entry points first;
-retain historical sources, vendor provenance and reports outside the active execution
-path. Keep the stage-6 native-only ready package, frozen MCP contracts and all safety
-and validation gates. Build-tool Python removal is a separate stage from runtime cleanup.
+Active bootstrap/package/development and regression/acceptance entry points now use
+the standalone locked Rust tooling crate and fixed Bash wrappers. Historical Python
+sources/configs are archived under `scripts/history/python`; vendor provenance and
+reports remain historical evidence. Frozen MCP contracts and the five-binary runtime
+are unchanged. Fresh local validation and remaining native/foreign-target limits are
+in [the stage-7 evidence ledger](stage7-tooling.md) and the handoff. The next workstream
+is the authoring-quality plan below; release/installation remain separate actions.
 
 ### Validation and delivery rules
 
@@ -129,7 +131,7 @@ and validation gates. Build-tool Python removal is a separate stage from runtime
 ## Editable vector authoring quality (requested 2026-10-04)
 
 Status: planned; no runtime, prompt or schema changes implemented or validated yet.
-This is an additional workstream; the Python removal roadmap above remains pending as recorded.
+This is an additional workstream; the Python removal roadmap above is implemented locally as recorded.
 Implement in the order below. The goal is both appropriate silhouettes and independently
 editable geometry, rather than merely a visually plausible render.
 

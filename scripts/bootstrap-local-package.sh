@@ -11,7 +11,7 @@ case "${1:-}" in
     --fresh-tools) fresh=true; shift;;
     --help) printf '%s\n' 'Usage: scripts/bootstrap-local-package.sh [--fresh-tools]' \
         'Build on macOS 15+ Apple Silicon. Download missing tools privately; delete build tools on exit.' \
-        'Existing installations remain untouched. Python is build tooling only; ready packages contain no Python runtime.'; exit 0;;
+        'Existing installations remain untouched. Build and runtime use native tools.'; exit 0;;
     *) fail 'Unexpected bootstrap option.';;
 esac
 [ "$#" -eq 0 ] || fail 'Unexpected bootstrap arguments.'
@@ -68,35 +68,14 @@ else
     export PATH="$CARGO_HOME/bin:$PATH"
 fi
 export RUSTUP_TOOLCHAIN=1.99.0
-# Use an existing exact helper environment if available. Otherwise prepare a private one.
-python=
-if [ "$fresh" = false ]; then
-    for candidate in "$repo/.packaging-venv/bin/python" "$repo/.venv/bin/python"; do
-        if [ -x "$candidate" ] && "$candidate" -I -c \
-            'import sys,platform,importlib.metadata as m;assert sys.version_info[:3]==(3,12,14);assert platform.machine()=="arm64";assert all(m.version(n)==v for n,v in [line.strip().split("==") for line in open(sys.argv[1]) if line.strip() and not line.startswith("#")])' \
-            "$repo/rust/package/helper-requirements.txt" >/dev/null 2>&1; then
-            python=$candidate; break
-        fi
-    done
-fi
-if [ -z "$python" ]; then
-    download https://github.com/astral-sh/uv/releases/download/0.12.22/uv-aarch64-apple-darwin.tar.gz \
-        "$bootstrap_root/uv.tar.gz" 5d714de09501a59393ceca78f4bc232a50478729640d251907160299b2a93ddd
-    tar -xzf "$bootstrap_root/uv.tar.gz" -C "$bootstrap_root"
-    uv=$bootstrap_root/uv-aarch64-apple-darwin/uv
-    export UV_PYTHON_INSTALL_DIR="$bootstrap_root/python" UV_CACHE_DIR="$bootstrap_root/uv-cache"
-    "$uv" python install --no-bin 3.12.14 >&2
-    "$uv" venv --managed-python --python 3.12.14 "$bootstrap_root/helper-build" >&2
-    python=$bootstrap_root/helper-build/bin/python
-    "$uv" pip install --python "$python" --only-binary :all: -r rust/package/helper-requirements.txt >&2
-fi
-"$python" scripts/bootstrap_native.py --lock rust/package/bootstrap-native-macos-arm64.json \
+# Compile only the standalone build CLI before downloading native inputs.
+export INKSCAPE_MCP_BUILD_TOOLING_TARGET_DIR="$bootstrap_root/tooling-target"
+"$repo/scripts/dev-tools.sh" bootstrap-native --lock rust/package/bootstrap-native-macos-arm64.json \
     --output "$bootstrap_root/native" >&2
 export INKSCAPE_MCP_BUILD_NATIVE_ROOT="$bootstrap_root/native"
 export INKSCAPE_MCP_BUILD_GLIB_PREFIX="$bootstrap_root/native/glib/2.90.0"
-export INKSCAPE_MCP_BUILD_PYTHON="$python"
 export INKSCAPE_MCP_BUILD_TARGET_DIR="$bootstrap_root/target"
 export PATH="$bootstrap_root/native/glib/2.90.0/bin:$bootstrap_root/native/dbus/1.16.2_1/bin:$PATH"
 package=$("$repo/scripts/build-local-package.sh")
-printf '%s\n' 'Local package built. Removing temporary build tools; packaged live Python stays.' >&2
+printf '%s\n' 'Local package built. Removing temporary build tools.' >&2
 printf '%s\n' "$package"

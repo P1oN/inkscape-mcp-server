@@ -30,7 +30,7 @@ process keeps its previous copy.
 This is the agent-facing companion to the two machine-readable manifests
 [`llms.txt`](../llms.txt) (concise index) and
 [`llms-full.txt`](../llms-full.txt) (full per-tool manifest),
-both **generated from the live registry** by `scripts/gen_llms_txt.py`.
+both **generated from the live registry** by `scripts/dev-tools.sh manifests`.
 
 ---
 

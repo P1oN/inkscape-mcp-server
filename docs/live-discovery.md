@@ -78,7 +78,7 @@ filters, one clipping path and an embedded image. Its 4774×3600 pixel page has 
 Reproduce with a source and a JSON cases file on macOS:
 
 ```sh
-python scripts/accept_live_discovery.py --source /path/to/drawing.svg --cases /path/to/cases.json
+python scripts/history/python/accept_live_discovery.py --source /path/to/drawing.svg --cases /path/to/cases.json
 ```
 
 Cases are a list of objects such as

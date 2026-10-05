@@ -27,6 +27,7 @@ uv.lock.bak
 
 # Rust build products and raw migration measurements (summaries are tracked).
 /rust/target/
+/rust/tooling/target/
 /migration/results/
 /.inkscape-mcp-local/
 /.inkscape-mcp-backup-*/

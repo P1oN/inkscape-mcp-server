@@ -33,6 +33,8 @@ mod group;
 mod identity;
 mod inspect;
 mod intents;
+#[cfg(test)]
+mod native_test_fixture;
 // Native public live integration and private fixed IPC kernels.
 mod decimal;
 mod live;

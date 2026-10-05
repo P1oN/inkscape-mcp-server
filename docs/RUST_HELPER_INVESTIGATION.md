@@ -67,7 +67,7 @@ No package assets, INX descriptors or installed GUI profile were changed by this
 Reproduce in a new output directory:
 
 ```sh
-.venv/bin/python scripts/migration_helper_protocol_probe.py \
+.venv/bin/python scripts/history/python/migration_helper_protocol_probe.py \
   --package migration/results/packages/inkscape-mcp-macos-arm64-stage13 \
   --output migration/results/helper-protocol-stage13-repeat \
   --report migration/helper-protocol-stage13-repeat-comparison.json

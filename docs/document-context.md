@@ -96,20 +96,10 @@ context read and dispatch was refused without changing drawing B, and a new STDI
 reused the GUI and IDs while clearing the task binding. The fresh test GUI was closed only
 after verifying both synthetic drawing identities. The report recorded `passed: true`.
 
-```sh
-.venv/bin/pytest -q
-.venv/bin/mypy src
-INKSCAPE_MCP_RAW_ACTION_ENABLED=1 .venv/bin/python scripts/ci_surface_smoke.py
-.venv/bin/python scripts/accept_document_context.py
-```
-
-The final command requires an unlocked Mac and creates a new disposable private GUI, profile,
-and two identical synthetic SVGs. It verifies window identities, explicit choice, fill and
-insertion Undo/Redo fingerprints, switching between the context read and native action dispatch,
-stale-binding refusal and STDIO reuse with binding reset. Successful acceptance closes only
-its two verified synthetic windows; `--keep-gui` preserves them. Failure preserves the GUI
-for inspection. Its printed directory retains SVGs, logs and a successful `acceptance.json`.
-It never adopts an existing session or opens user drawings.
+Those results belong to the retired Python implementation. Current automated
+context/dispatch refusals use native Rust fixtures in `cargo test`; current explicitly
+authorized owned GUI phases are documented in [CONTRIBUTING](../CONTRIBUTING.md).
+No historical count or GUI result establishes acceptance of a new Rust build.
 
 Rust migration is deferred for this PR: native identity and macOS integration required additional
 work and exposed actual startup/activation problems. The Python server and inkex insertion helper
