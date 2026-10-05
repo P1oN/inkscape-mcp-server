@@ -20,6 +20,8 @@ builds. Use [current status](../AGENT_HANDOFF.md), [active backlog](../RUST_NEXT
 
 ## Reports and logs
 
+- Live drawing workflow candidate: [computed styles, resources and reviewed packages](reports/live-drawing-workflow.md); automated/CLI evidence and scoped native GUI Undo/Redo are separate from the user-deferred pilot.
+
 - Rust migration: [report](reports/RUST_MIGRATION_REPORT.md), [long log](RUST_MIGRATION_LOG.md),
   [former migration README](migration-evidence-log.md), [helper investigation](reports/RUST_HELPER_INVESTIGATION.md).
 - Packaging/provenance: [checkpoint report](reports/RUST_PACKAGING.md), [packaging log](RUST_PACKAGING_LOG.md).

@@ -363,3 +363,13 @@ Partial overlap is allowed. Review the SVG and render, then use existing gated d
 or path operations for explicitly approved repairs within the requested scope. Compare
 before/after renders and retain snapshots and Operation Records; this report never edits
 or deletes anything.
+
+## Computed live paint and reviewed packages
+
+In the full profile, use `live_inspect_objects(object_ids=[...])` for bounded static computed
+paint, ancestor effects and local resource links with explicit unknowns. Discover engine bounds
+and preview separately. `live_change_package(edits=[...])` defaults to read-only planning and
+page previews; apply identical style/transform/text edits with all returned document, selection,
+content and package-digest guards plus explicit per-package approval. Only the guarded managed
+native helper applies. Native package GUI Undo/Redo passed for a synthetic style/text pair (see the acceptance ledger); do not promise general live atomicity
+or retry an uncertain result before inspection. See [supported scope, recovery and pilot protocol](live/reviewed-workflow.md).

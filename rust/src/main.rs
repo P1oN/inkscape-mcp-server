@@ -65,6 +65,7 @@ mod live_managed;
 #[allow(dead_code)]
 mod live_models;
 mod live_mutation;
+mod live_package;
 #[allow(dead_code)]
 mod live_probe;
 #[allow(dead_code)]
@@ -79,6 +80,7 @@ mod live_selection;
 mod live_session;
 #[allow(dead_code)]
 mod live_socket;
+mod live_styles;
 mod live_sync;
 #[allow(dead_code)]
 mod live_transport;
@@ -274,6 +276,8 @@ impl Server {
                 | "live_render_view"
                 | "live_get_scene"
                 | "live_export_selection"
+                | "live_inspect_objects"
+                | "live_change_package"
                 | "live_find_objects"
                 | "live_preview_object"
                 | "live_diff_view"

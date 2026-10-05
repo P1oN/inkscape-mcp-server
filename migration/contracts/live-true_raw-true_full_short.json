@@ -20908,6 +20908,410 @@
             ]
           }
         }
+      },
+      {
+        "name": "live_inspect_objects",
+        "title": "Live: computed styles and links",
+        "description": "Inspect bounded static computed paint and local gradient/mask/clip/pattern/clone relationships from one live snapshot. Supply 1..100 IDs. Simple type/ID/class/universal CSS, importance, defaults and inheritance are supported; unsupported CSS/dynamic/context paint yields explicit unknowns. Clone shadow-tree paint and resource coverage require rendered review. No renderer, external fetch, selection change or Undo. Risk class: low.",
+        "inputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "object_ids": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 100,
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+              }
+            }
+          },
+          "required": [
+            "object_ids"
+          ]
+        },
+        "outputSchema": {
+          "type": "object",
+          "properties": {
+            "fingerprint": {
+              "type": "string"
+            },
+            "count": {
+              "type": "integer"
+            },
+            "objects": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "active_document": {
+              "type": "object"
+            },
+            "notes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "fingerprint",
+            "count",
+            "objects"
+          ]
+        },
+        "annotations": {
+          "title": "Live: computed styles and links",
+          "readOnlyHint": true,
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": [
+              "live",
+              "low"
+            ]
+          }
+        }
+      },
+      {
+        "name": "live_change_package",
+        "title": "Live: review a change package",
+        "description": "Plan and preview 1..16 typed style/transform/text edits on a fixed current selection. dry_run=true is read-only and needs no approval; it returns before/after PNG paths and document/selection/fingerprint guards. Review them and resubmit the same edits with dry_run=false, all guards and client-confirmed approval_token. Only the guarded managed native helper applies, through one candidate publication and a Live Operation Record. Failed plans and net no-ops do not mutate or add records. No structural edits/insertion/actions. Native GUI Undo/Redo passed only for a scoped synthetic style/text package; do not promise live atomicity. Inspect after uncertainty before retry; recover confirmed changes through native Undo. Risk class: high when applying, low when planning.",
+        "inputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "edits": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 16,
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "op": {
+                        "type": "string",
+                        "enum": [
+                          "style"
+                        ]
+                      },
+                      "fill": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "default": null
+                      },
+                      "stroke": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "default": null
+                      },
+                      "stroke_width": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "default": null
+                      },
+                      "opacity": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "default": null
+                      },
+                      "dx": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "default": null
+                      },
+                      "dy": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "default": null
+                      },
+                      "scale": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "default": null
+                      },
+                      "rotate": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "default": null
+                      }
+                    },
+                    "required": [
+                      "op"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "op": {
+                        "type": "string",
+                        "enum": [
+                          "text"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "maxLength": 100000
+                      }
+                    },
+                    "required": [
+                      "op",
+                      "text"
+                    ]
+                  }
+                ]
+              }
+            },
+            "dry_run": {
+              "type": "boolean",
+              "default": true
+            },
+            "expected_document": {
+              "anyOf": [
+                {
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "expected_selection": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "maxItems": 1000,
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "expected_package_digest": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 64
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "expected_fingerprint": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 256
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "approval_token": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "required": [
+            "edits"
+          ],
+          "if": {
+            "properties": {
+              "dry_run": {
+                "const": false
+              }
+            },
+            "required": [
+              "dry_run"
+            ]
+          },
+          "then": {
+            "required": [
+              "expected_document",
+              "expected_selection",
+              "expected_package_digest",
+              "expected_fingerprint",
+              "approval_token"
+            ],
+            "properties": {
+              "expected_document": {
+                "type": "object"
+              },
+              "expected_selection": {
+                "type": "array"
+              },
+              "expected_package_digest": {
+                "type": "string"
+              },
+              "expected_fingerprint": {
+                "type": "string"
+              },
+              "approval_token": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "outputSchema": {
+          "type": "object",
+          "properties": {
+            "dry_run": {
+              "type": "boolean"
+            },
+            "changed": {
+              "type": "boolean"
+            },
+            "native_undo_verified": {
+              "type": "boolean"
+            },
+            "expected_document": {
+              "type": "object"
+            },
+            "expected_selection": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "expected_fingerprint": {
+              "type": "string"
+            },
+            "expected_package_digest": {
+              "type": "string"
+            },
+            "preview_before": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "preview_after": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "preview_artifacts": {
+              "type": "object"
+            },
+            "affected_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "operation_id": {
+              "type": "string"
+            },
+            "recovery": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "dry_run",
+            "changed",
+            "native_undo_verified"
+          ]
+        },
+        "annotations": {
+          "title": "Live: review a change package",
+          "readOnlyHint": false,
+          "destructiveHint": true,
+          "idempotentHint": false,
+          "openWorldHint": false
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": [
+              "live",
+              "high"
+            ]
+          }
+        }
       }
     ]
   },

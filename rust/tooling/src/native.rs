@@ -419,6 +419,66 @@ fn inx(s: &Session, wire: &mut Wire, phase: &str, label: &str) -> Result<()> {
             &json!({"captured":before,"selection":selected}),
         );
     }
+    if phase == "package" || phase == "package-noop" {
+        ensure(
+            selected.as_array().is_some_and(|s| s.len() == 1),
+            "select the owned synthetic single-run text first",
+        )?;
+        let edits = json!([{"op":"style","fill":"#d95d72","opacity":0.75},{"op":"text","text":"Reviewed & editable"}]);
+        let plan = data(wire.call("live_change_package", json!({"edits":edits}))?)?;
+        write_json(&s.out.join(format!("{label}.plan.json")), &plan)?;
+        ensure(
+            plan["changed"] == json!(phase == "package"),
+            "unexpected package change/noop",
+        )?;
+        let history_before = wire.request(
+            "resources/read",
+            Some(json!({"uri":"inkscape://live/operations"})),
+        )?;
+        let reply=wire.call("live_change_package",json!({"edits":edits,"dry_run":false,"expected_document":plan["expected_document"],"expected_selection":plan["expected_selection"],"expected_fingerprint":plan["expected_fingerprint"],"expected_package_digest":plan["expected_package_digest"],"approval_token":"owned-native-package-acceptance"}))?;
+        write_json(&s.out.join(format!("{label}.json")), &reply)?;
+        let result = data(reply)?;
+        let history_after = wire.request(
+            "resources/read",
+            Some(json!({"uri":"inkscape://live/operations"})),
+        )?;
+        write_json(
+            &s.out.join(format!("{label}.operations.json")),
+            &history_after,
+        )?;
+        let after = s.capture(wire, &format!("{label}-after"))?;
+        if phase == "package-noop" {
+            ensure(
+                result["changed"] == false
+                    && history_before["result"] == history_after["result"]
+                    && same(&before, &after)?,
+                "package no-op added history or changed content",
+            )?;
+        } else {
+            ensure(
+                result["changed"] == true && !same(&before, &after)?,
+                "package not applied",
+            )?;
+            let records: Value = serde_json::from_str(
+                history_after["result"]["contents"][0]["text"]
+                    .as_str()
+                    .ok_or("audit missing")?,
+            )?;
+            ensure(
+                records["operations"].as_array().is_some_and(|rs| {
+                    rs.iter()
+                        .filter(|r| {
+                            r["operation_id"] == result["operation_id"] && r["status"] == "applied"
+                        })
+                        .count()
+                        == 1
+                }),
+                "package applied audit missing",
+            )?;
+        }
+        println!("Capture native Undo/Redo independently before claiming one Undo transaction.");
+        return Ok(());
+    }
     if phase.starts_with("stale-") {
         ensure(
             selected.as_array().is_some_and(|s| !s.is_empty()),
@@ -778,6 +838,8 @@ pub fn run(args: &Args) -> Result<()> {
             "close-owned",
         ],
         "native-inx" => &[
+            "package",
+            "package-noop",
             "capture",
             "insert",
             "insert-text",

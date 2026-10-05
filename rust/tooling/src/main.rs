@@ -7,6 +7,7 @@ mod common;
 mod install;
 mod invariants;
 mod launcher;
+mod live_workflow;
 mod native;
 mod notices;
 mod package;
@@ -21,6 +22,7 @@ use common::{Args, Result};
 fn run() -> Result<()> {
     let args = Args::parse()?;
     match args.command.as_str() {
+        "live-workflow-acceptance" => live_workflow::run(&args),
         "install-acceptance" => install::run(&args),
         "native-gui" | "native-inx" | "native-socket" => native::run(&args),
         "responsiveness-acceptance" => responsiveness::run(&args),
@@ -49,7 +51,7 @@ fn run() -> Result<()> {
         "manifests" => wire::manifests(&args),
         "help" => {
             println!(
-                "inkscape-mcp-tools: bootstrap-native | build-package | source-archive | discovery | manifests | sync-authoring-guidance\nAcceptance: package, doctor, notices, launcher, sentry-setup, client, install, socket, security, frame, startup, responsiveness, defects, diagnostic, compare, special-file, renderer, authoring, engine-routes (append -acceptance).\nExplicit native GUI phases: native-gui | native-inx | native-socket.\nSee CONTRIBUTING.md for arguments and ownership requirements."
+                "inkscape-mcp-tools: bootstrap-native | build-package | source-archive | discovery | manifests | sync-authoring-guidance\nAcceptance: package, doctor, notices, launcher, sentry-setup, client, install, socket, security, frame, startup, responsiveness, defects, diagnostic, compare, special-file, renderer, authoring, live-workflow, engine-routes (append -acceptance).\nExplicit native GUI phases: native-gui | native-inx | native-socket.\nSee CONTRIBUTING.md for arguments and ownership requirements."
             );
             Ok(())
         }

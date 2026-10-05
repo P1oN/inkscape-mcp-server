@@ -244,6 +244,12 @@ impl Live {
         if name == "live_preview_object" {
             return crate::live_discovery::preview(self, workspace, args);
         }
+        if name == "live_inspect_objects" {
+            return crate::live_styles::inspect(self, workspace, args);
+        }
+        if name == "live_change_package" {
+            return crate::live_package::call(self, workspace, args);
+        }
         if name == "live_find_objects" {
             return crate::live_discovery::find(self, workspace, args);
         }

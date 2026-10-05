@@ -23,6 +23,8 @@ pub struct Request {
     pub text: Option<String>,
     #[serde(default)]
     pub fragment: Option<String>,
+    #[serde(default)]
+    pub edits: Option<Vec<super::package::Change>>,
 }
 pub fn prepare(
     svg: &str,
@@ -46,14 +48,24 @@ pub fn prepare(
         &request.expected_ids,
         &request.selection,
         // Insertion is independent of selection, including INX's root fallback --id.
-        if request.operation.is_some() {
+        if request.operation.is_some() || request.edits.is_some() {
             native_selection
         } else {
             &request.selection
         },
         cap,
     )?;
-    let applied = if let Some(operation) = request.operation {
+    let applied = if let Some(edits) = request.edits {
+        if request.operation.is_some()
+            || request.fragment.is_some()
+            || !request.style.is_empty()
+            || request.transform.is_some()
+            || request.text.is_some()
+        {
+            return Err("invalid document or selection");
+        }
+        super::package::prepare(svg, &request.selection, &edits, &request.nonce, cap)?
+    } else if let Some(operation) = request.operation {
         if request.fragment.is_some() {
             return Err("invalid document or selection");
         }

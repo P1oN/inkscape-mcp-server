@@ -40,3 +40,5 @@ hashes and labels. Moving a Markdown guide does not rewrite those immutable reco
 Python source history remains beside the archived code in `scripts/history/python/`.
 Generated MCP manifests describe the registry and are regenerated only when its exposed
 surface or instructions change; documentation rearrangement does not change that surface.
+
+See [computed styles and reviewed live packages](live/reviewed-workflow.md) for the new full-profile tools and the deferred artist pilot protocol.

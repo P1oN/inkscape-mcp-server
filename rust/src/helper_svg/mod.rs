@@ -27,3 +27,5 @@ pub mod apply;
 pub mod oneshot;
 
 pub mod socket;
+
+pub mod package;

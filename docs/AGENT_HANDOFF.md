@@ -11,6 +11,37 @@ Read [README](../README.md), [CONTRIBUTING](../CONTRIBUTING.md) and
 [agent usage](agent-usage-guide.md). [Documentation index](README.md) maps the guides;
 [active backlog](RUST_NEXT_PLAN.md) is the single list of unfinished work.
 
+## Live workflow branch checkpoint
+
+`codex/live-drawing-workflow` starts from `main` `44e0e30` on 2026-10-05. The
+candidate adds `live_inspect_objects` and `live_change_package` to the full profile (112 tools).
+Computed paint uses bounded static CSS with explicit unknowns and local resource links;
+packages review page previews, bind document/selection/content/canonical edits, then publish
+one native candidate through the existing guarded helper and Live Operation Records.
+No-op/refusal/recovery boundaries remain explicit. See the [workflow guide](live/reviewed-workflow.md)
+and [fresh acceptance ledger](history/reports/live-drawing-workflow.md).
+Owned native GUI acceptance passed for the final package: a two-member style/text package,
+no-op history, one native Undo/Redo with equal SVG/PNG pairs, and stale native request guards.
+The isolated session was restored to blank and gracefully closed. General human-review race
+acceptance remains unverified; artist/real-work/separate-Mac acceptance is user-deferred.
+Runtime Undo fields remain conservative. Acceptance used an uncommitted candidate; the user
+subsequently authorized committing, pushing and opening a PR. No installed-runtime change occurred.
+
+PR #10 review follow-up: the published package schema now conditionally requires non-null
+review guards and a nonempty approval token only when `dry_run=false`. Omitted/true dry-run
+requests retain their preview contract. Tool descriptions and runtime dry-run notes now
+state the scoped synthetic Undo/Redo evidence consistently; per-call verification remains
+conservative. The manifests are regenerated from fresh STDIO discovery. This follow-up
+changes schema/documentation only, not native publication behavior or installed helpers.
+Validation: 64 JSON Schema cases across all four full/live contracts, 16 exact discovery
+configurations, regenerated catalogs, release server build, fmt and Clippy passed. The
+default-parallel Rust run failed the existing immediate post-release lock assertion in
+`live_launch::tests::private_session_and_locks_refuse_link_escape_and_parallel_launch`;
+that test passed in isolation. The suspected concurrent fork/lock lifetime race is outside
+this schema repair and remains recorded rather than hidden by a retry. A diagnostic full
+sequential run passed: 301 tests, zero failures, two opt-in ignored; its retained log is
+`migration/results/pr10-review-checks/runtime-serial.log`.
+
 ## Implemented
 
 - Rust STDIO server, native client manager, separate GUI supervisor, one-shot INX helper

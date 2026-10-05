@@ -55,7 +55,7 @@ fn drawable(node: &Node) -> bool {
             | "svg"
     )
 }
-fn snapshot(svg: &str, workspace: &Workspace) -> Result<Document, String> {
+pub(crate) fn snapshot(svg: &str, workspace: &Workspace) -> Result<Document, String> {
     if svg.len() > workspace.max_input {
         return Err(format!(
             "input exceeds max size: {} > {} bytes",

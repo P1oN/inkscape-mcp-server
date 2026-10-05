@@ -291,7 +291,8 @@ impl Analysis {
     }
     pub fn computed(&self, node: &Node, prop: &str) -> Result<String, String> {
         let (default, inherited) = match prop {
-            "fill" => ("black", true),
+            "fill" | "color" => ("black", true),
+            "stroke-width" => ("1", true),
             "stroke" => ("none", true),
             "visibility" => ("visible", true),
             "fill-opacity" | "stroke-opacity" => ("1", true),
