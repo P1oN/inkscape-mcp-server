@@ -286,14 +286,7 @@ impl Registry {
 }
 
 pub fn elements(root: Node) -> Vec<Node> {
-    // Iterative traversal avoids a Rust stack overflow on attacker-controlled nesting.
-    let mut stack = vec![root];
-    let mut result = Vec::new();
-    while let Some(node) = stack.pop() {
-        stack.extend(node.get_child_elements().into_iter().rev());
-        result.push(node);
-    }
-    result
+    inkscape_mcp_rust::helper_svg::elements(root)
 }
 
 fn summary(id: &str, document: &Document) -> Result<Value, String> {

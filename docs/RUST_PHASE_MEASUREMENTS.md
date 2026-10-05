@@ -9,7 +9,7 @@ Checkpoint 2026-10-03. These measurements advance phase attribution but do not c
 the migration or prove pure IPC/kernel IO timings. The distributable candidate remains
 stage23. Its source, executable and archive were not modified by this experiment.
 
-`scripts/migration_prepare_phase_profile.py` copies the current Rust sources into a new
+`scripts/history/python/migration_prepare_phase_profile.py` copies the current Rust sources into a new
 private directory and inserts a diagnostic module from `scripts/migration_phase_profile.rs`.
 No profiler is linked into the normal server. The copy instruments synchronous headless
 `call_tool`, 19 named logical-file API functions and bounded child-process execution.
@@ -56,7 +56,7 @@ It must not be labeled pure IPC. The diagnostic is not a production speed compar
 Reproduction (use a fresh output directory; never overwrite prior evidence):
 
 ```sh
-.venv/bin/python scripts/migration_prepare_phase_profile.py --output .inkscape-mcp-local/new-phase-copy
+.venv/bin/python scripts/history/python/migration_prepare_phase_profile.py --output .inkscape-mcp-local/new-phase-copy
 LIBXML2="$(xcrun --show-sdk-path)/usr/lib/libxml2.tbd" cargo build --locked --release \
   --manifest-path .inkscape-mcp-local/new-phase-copy/rust/Cargo.toml \
   --target-dir .inkscape-mcp-local/new-phase-copy/target
@@ -72,7 +72,7 @@ stage24 result directories and evidence binding.
 
 ## Stage25 Python/Rust paired phase follow-up
 
-The diagnostic Python entry point is `scripts/migration_python_phase_profile.py`.
+The diagnostic Python entry point is `scripts/history/python/migration_python_phase_profile.py`.
 It runs the unchanged reference server, wraps 13 fixed Path APIs and three workspace path
 resolvers, and wraps the existing `subprocess.run` in that process only. The original
 implementations, arguments and protections remain in use. ContextVars carry request identity

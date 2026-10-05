@@ -19,8 +19,7 @@ cd inkscape-mcp-source-bootstrap
 ```
 
 Install Inkscape first. Setup builds locally, downloads missing build tools into a private
-temporary directory and removes those tools afterward. The packaged helper Python stays
-available for runtime use. If Apple Command Line Tools are missing, complete their installation
+temporary directory and removes those tools afterward. The historical v0.1.1 package retained private Python for runtime use. If Apple Command Line Tools are missing, complete their installation
 dialog and rerun setup. See [local bootstrap](local-bootstrap.md) for prerequisites and limits.
 The exact Git-free release archive passed a fresh-tools build, temporary-tool cleanup,
 license-notice checks and empty-PATH MCP/D-Bus/render/export/transaction acceptance on the
@@ -64,7 +63,7 @@ Fresh current source checkouts automatically prepare tools and build with `./set
 The historical v0.1.0 archive still runs doctor
 during setup; these launcher changes are not in that published archive.
 
-Install Inkscape first. The package includes Rust server, private Python/inkex helpers,
+Install Inkscape first. Current packages include five Rust executables,
 prebuilt bridge, D-Bus dependencies and matching debug symbols. Users do not install a
 compiler, Python, uv/pip or Homebrew. Packages built from PR #8 can register a client with `--connect-client codex|claude`;
 older assets require manual configuration of the absolute `run-mcp.sh` path. Setup can save an optional Sentry DSN/environment privately; CI receives

@@ -383,38 +383,10 @@ pub(crate) fn shutdown() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::os::unix::fs::PermissionsExt;
 
     fn fake() -> (tempfile::TempDir, PathBuf) {
         let dir = tempfile::tempdir().unwrap();
-        let binary = dir.path().join("inkscape");
-        let python = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-            .parent()
-            .unwrap()
-            .join(".venv/bin/python");
-        let python = if python.is_file() {
-            python
-        } else {
-            PathBuf::from("/usr/bin/python3")
-        };
-        std::fs::write(&binary, format!(r#"#!{}
-import os,sys,time
-sys.stdout.write('synthetic banner\n> ');sys.stdout.flush()
-for line in sys.stdin:
-    command=line.rstrip('\n')
-    if command=='quit':break
-    if command=='hang':time.sleep(10)
-    if command=='crash':sys.exit(1)
-    if command=='close-stderr':os.close(2)
-    if command=='split':
-        sys.stdout.write(command+'\n>');sys.stdout.flush();time.sleep(.01)
-        sys.stdout.write(' ');sys.stdout.flush();continue
-    if command=='unknown':
-        sys.stderr.write('InkscapeApplication::parse_actions: could not find action for: unknown\n');sys.stderr.flush()
-    if command=='flood':sys.stdout.write('x'*70000)
-    sys.stdout.write(command+'\n> ');sys.stdout.flush()
-"#, python.display())).unwrap();
-        std::fs::set_permissions(&binary, std::fs::Permissions::from_mode(0o700)).unwrap();
+        let binary = crate::native_test_fixture::install(dir.path(), "normal", "engine");
         (dir, binary)
     }
     fn limits() -> Limits {

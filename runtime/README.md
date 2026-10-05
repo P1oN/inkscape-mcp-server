@@ -1,13 +1,16 @@
-# Private live runtime components
+# Private native live runtime assets
 
-These files are required by the Rust server and are not the retired Python MCP server.
+- `helper_extension/`: fixed INX descriptors for the Rust one-shot/socket consumers.
+- `native/context.m`: Objective-C window/document context bridge.
+- `../rust/src/bin/`: native supervisor, INX and socket helper implementations.
 
-- helper_extension/: fixed inkex effects/socket helper and INX manifests.
-- insert_payload.py / edit_errors.py: bounded one-shot helper validation.
-- native/context.m: Objective-C document/window context bridge.
-- ../rust/package/supervise.py: private managed-session supervisor.
-- tests/: retained helper refusal and serialization regressions.
+The Rust package builder copies these assets into a private runtime. Ready packages
+contain no Python/wheels/inkex. The supervisor installs fixed quoted wrappers that
+execute packaged Rust binaries; no second MCP server or arbitrary extension is exposed.
+Doctor checks native binaries, context bridge and private bus.
 
-The package builder copies these into a private runtime. The source installer prepares
-pinned dependencies from rust/package/helper-requirements.txt; end users of a ready archive
-do not install Python. Helpers never expose a second MCP server.
+Shared bounded SVG kernels and their regressions are in `rust/src/helper_svg` and
+`rust/tests`. Historical Python fixtures/tests moved to
+[scripts/history/python](../scripts/history/python/README.md). Use current Rust/Bash
+checks in [CONTRIBUTING](../CONTRIBUTING.md) and read
+[helper semantics](../docs/live-helper-kernels.md).

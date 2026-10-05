@@ -38,7 +38,11 @@ request has a fixed deadline, including when unrelated notifications arrive. `co
 the same check before registration and verifies saved user configuration afterward.
 This verifies server availability; it does not run a model session or prove a client's
 permission choices. Restart/reconnect the client to load the changed server and skill.
-No path launches Inkscape GUI. The management helper uses packaged private Python.
+No path launches Inkscape GUI. All five actions run through the separate native Rust
+`bin/inkscape-mcp-client` executable. The Bash interfaces above are unchanged. The manager
+reads configuration as data and invokes client CLIs with argument lists; it never loads
+private Python, the supervisor or Inkscape helpers. MCP requests have 30-second fixed
+deadlines, bounded response sizes and owned-process shutdown.
 
 For [skill updates](agent-skill.md), use `--update-skill` with `--install-skill`, or the
 standalone installer with `--update`. Customizations merge against the saved baseline;
@@ -76,8 +80,16 @@ handshake/discovery, a first workspace request, real SVG edit/render/save, unins
 reinstall. It does not establish clean-machine installation, native GUI behavior or real
 Claude Code client acceptance. Synthetic Claude command/config checks are separate.
 
-If the private runtime is damaged and the management helper cannot run, remove the client
-entry manually with `codex mcp remove inkscape` or `claude mcp remove inkscape --scope user`
-after checking it belongs to this installation. Move `.inkscape-mcp-local` to a private
-backup directory, and move an old skill aside before rerunning setup. This recovery path
-requires no execution of the broken MCP binary.
+If the helper runtime or supervisor is damaged, `config`, `disconnect` and `uninstall`
+still work through Rust without Python. `check` and `connect` also need a working MCP
+server and launcher; they report a bounded error if that server cannot initialize.
+Older packages without `bin/inkscape-mcp-client` must be rebuilt or replaced first;
+there is no fallback to the removed Python manager. Source builds, package creation, helpers and supervision now use Rust/Bash.
+
+Automated Rust regressions cover fixed deadlines (including continuous notifications),
+protocol errors/response limits, TOML/JSON ownership, symlink refusal, recorded clients,
+archive errors/skill restoration and drawing/skill preservation. Run
+`scripts/dev-tools.sh client-acceptance --package DIRECTORY --output DIRECTORY` to exercise all five commands in a relocated ready package, isolated
+CODEX_HOME/HOME and a client PATH without Python, after damaging the helper runtime and
+supervisor. This uses real Codex and synthetic shell Claude; it does not claim real Claude
+or native GUI acceptance. The runner itself is development tooling, not an installation dependency.

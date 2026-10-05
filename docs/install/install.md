@@ -27,10 +27,10 @@ Connection is optional and includes a bounded server handshake before client reg
 See [client management](client-management.md) for commands and scope.
 
 Without build, `--check`, or client connection, ready-package setup only saves configuration.
-`--check` runs doctor before saving; `--connect-client` executes packaged Python and starts
+`--check` runs doctor before saving; `--connect-client` executes the native Rust client CLI and starts
 a separate MCP process for the handshake. Source first setup compiles/packages the runtime.
-None of these paths launches Inkscape GUI. Doctor executes Inkscape CLI and imports private
-Python/inkex/native modules, so macOS may assess those components. Saving settings alone
+None of these paths launches Inkscape GUI. Doctor executes Inkscape CLI and checks packaged native binaries/bridge/private bus,
+so macOS may assess those components. Saving settings alone
 does not certify runtime readiness or macOS approval.
 
 Reruns preserve saved choices and reuse a complete runtime when recorded revisions match.
@@ -53,8 +53,7 @@ prompt for the current ad-hoc signed package. Setup does not remove quarantine a
 or change macOS security/privacy settings. See
 [Apple's app security explanation](https://support.apple.com/en-ie/102445).
 
-Python package installation/uvx entry points are retired. Python remaining inside the
-ready package serves bounded live helpers and the supervisor, not an MCP server.
+Python package installation/uvx entry points are retired. Ready packages, source bootstrap and active development tooling use Rust/Bash.
 Windows is backlog; native GUI acceptance is separate from CLI/package checks.
 
 Current sources also support client registration, installed build identity, managed skill

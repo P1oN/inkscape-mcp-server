@@ -411,45 +411,10 @@ impl Bus {
 mod tests {
     use super::*;
     use serde_json::{Value, json};
-    use std::os::unix::fs::PermissionsExt;
     fn fixture(mode: &str) -> (tempfile::TempDir, Bus, PathBuf) {
         let root = tempfile::tempdir().unwrap();
-        let binary = root.path().join("gdbus");
+        let binary = crate::native_test_fixture::install(root.path(), mode, "bus");
         let log = root.path().join("calls.jsonl");
-        let python = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-            .parent()
-            .unwrap()
-            .join(".venv/bin/python");
-        let body = format!(
-            r#"#!{}
-import sys,json,time
-from pathlib import Path
-with Path({:?}).open('a') as f: f.write(json.dumps(sys.argv[1:])+'\n')
-mode={:?}
-if 'org.freedesktop.DBus.GetNameOwner' in sys.argv:
-    if mode=='unowned': raise SystemExit(1)
-    if mode=='bad-owner': print("('org.inkscape.Inkscape',)")
-    else: print("(':1.23',)")
-elif 'org.gtk.Actions.List' in sys.argv: print('(list,)')
-elif mode=='context-data':
-    row="('12345678-1234-1234-1234-123456789abc','abcdefab-1234-1234-1234-123456789abc','Drawing.svg')"
-    if 'org.inkscape.MCP.Context1.GetContext' in sys.argv: print(row)
-    elif 'org.inkscape.MCP.Context1.ListDocuments' in sys.argv: print('(['+row+'],)')
-    else: raise SystemExit(1)
-elif mode=='context-changed':
-    sys.stderr.write('org.inkscape.MCP.ContextChanged: private detail')
-    raise SystemExit(1)
-elif mode=='timeout': time.sleep(2)
-elif mode=='failed': raise SystemExit(1)
-elif mode=='capped': print('x'*9000)
-else: print('()')
-"#,
-            python.display(),
-            log.to_string_lossy(),
-            mode
-        );
-        std::fs::write(&binary, body).unwrap();
-        std::fs::set_permissions(&binary, std::fs::Permissions::from_mode(0o700)).unwrap();
         let bus = Bus::new(binary, Duration::from_secs(1), 8192);
         (root, bus, log)
     }

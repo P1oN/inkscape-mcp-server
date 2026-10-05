@@ -7,7 +7,6 @@ use std::{
     path::{Path, PathBuf},
     time::Duration,
 };
-const PYTHON_CHECK: &str = "import sys,json;sys.path.insert(0,sys.argv[1]);import inkex,numpy,lxml.etree,PIL.Image;print(json.dumps({'python':list(sys.version_info[:3]),'prefix':sys.prefix,'inkex':inkex.__file__}))";
 fn workspace() -> Workspace {
     Workspace {
         roots: vec!["/".into()],
@@ -180,29 +179,42 @@ pub fn report() -> Value {
         .as_ref()
         .and_then(|path| path.parent().and_then(Path::parent).and_then(Path::parent))
         .map(|resources| resources.join("lib/libgtk-3.0.dylib"));
-    checks.insert(
-        "official_vendor_inkex",
-        vendor
-            .as_ref()
-            .is_some_and(|vendor| regular(&vendor.join("inkex/__init__.py"))),
-    );
     if cfg!(target_os = "macos") {
         checks.insert(
             "official_vendor_gtk3",
             gtk.as_ref().is_some_and(|path| compatible_binary(path)),
         );
     }
-    let mut private_python = None;
     if let Some(library) = &library {
-        let python = library.join("python/bin/python3");
-        checks.insert("private_python_architecture", compatible_binary(&python));
         if cfg!(target_os = "macos") {
             checks.insert(
                 "prebuilt_context_architecture",
                 compatible_binary(&library.join("context.so")),
             );
         }
-        checks.insert("fixed_supervisor", regular(&library.join("supervise.py")));
+        checks.insert(
+            "fixed_supervisor",
+            library
+                .parent()
+                .and_then(Path::parent)
+                .is_some_and(|package| {
+                    compatible_binary(&package.join("bin/inkscape-mcp-supervisor"))
+                }),
+        );
+        checks.insert(
+            "fixed_inx_helper",
+            library
+                .parent()
+                .and_then(Path::parent)
+                .is_some_and(|package| compatible_binary(&package.join("bin/inkscape-mcp-inx"))),
+        );
+        checks.insert(
+            "fixed_socket_helper",
+            library
+                .parent()
+                .and_then(Path::parent)
+                .is_some_and(|package| compatible_binary(&package.join("bin/inkscape-mcp-live"))),
+        );
         checks.insert(
             "private_bus_config",
             regular(&library.join("dbus/session.conf")),
@@ -215,45 +227,12 @@ pub fn report() -> Value {
             "gdbus_architecture",
             compatible_binary(&library.join("dbus/bin/gdbus")),
         );
-        let runtime_ok = if checks["private_python_architecture"] {
-            vendor
-                .as_ref()
-                .and_then(|vendor| {
-                    probe(
-                        &python,
-                        &[
-                            "-I".into(),
-                            "-B".into(),
-                            "-c".into(),
-                            PYTHON_CHECK.into(),
-                            vendor.to_string_lossy().into_owned(),
-                        ],
-                    )
-                })
-                .and_then(|text| serde_json::from_str::<Value>(&text).ok())
-                .filter(|value| {
-                    value["python"].as_array().is_some_and(|v| {
-                        v.len() == 3 && v[0] == 3 && v[1].as_u64().is_some_and(|minor| minor >= 12)
-                    }) && value["prefix"]
-                        .as_str()
-                        .is_some_and(|prefix| Path::new(prefix).starts_with(library.join("python")))
-                })
-        } else {
-            None
-        };
-        checks.insert("private_python_helper_imports", runtime_ok.is_some());
-        private_python = runtime_ok;
         checks.insert(
             "fixed_helper_assets",
             [
-                "inkscape_mcp_insert.py",
                 "inkscape_mcp_insert.inx",
-                "inkscape_mcp_edit.py",
                 "inkscape_mcp_edit.inx",
-                "inkscape_mcp_live.py",
                 "inkscape_mcp_live.inx",
-                "inkscape_mcp_insert_payload.py",
-                "inkscape_mcp_edit_errors.py",
             ]
             .iter()
             .all(|name| regular(&library.join("helpers").join(name))),
@@ -301,7 +280,7 @@ pub fn report() -> Value {
             "Package prerequisites pass. Start MCP normally; managed GUI launch is macOS-only. Linux D-Bus/socket connections require an explicitly opened Inkscape session."
         });
     }
-    json!({"state":if ready {if cfg!(target_os = "macos") {"ready_to_launch"} else {"ready_for_mcp"}} else {"setup_incomplete"},"ready":ready,"platform":std::env::consts::OS,"architecture":std::env::consts::ARCH,"checks":checks,"inkscape_version":version,"private_python":private_python,"next_steps":steps,"managed_gui_supported":cfg!(target_os = "macos"),"native_gui_verified":false,"notes":["Read-only prerequisite checks do not prove native GUI, Undo/Redo or signing/notarization acceptance.","No GUI, private bus or extension was launched; no setup was installed or repaired."]})
+    json!({"state":if ready {if cfg!(target_os = "macos") {"ready_to_launch"} else {"ready_for_mcp"}} else {"setup_incomplete"},"ready":ready,"platform":std::env::consts::OS,"architecture":std::env::consts::ARCH,"checks":checks,"inkscape_version":version,"next_steps":steps,"managed_gui_supported":cfg!(target_os = "macos"),"native_gui_verified":false,"notes":["Read-only prerequisite checks do not prove native GUI, Undo/Redo or signing/notarization acceptance.","No GUI, private bus or extension was launched; no setup was installed or repaired."]})
 }
 
 #[cfg(test)]

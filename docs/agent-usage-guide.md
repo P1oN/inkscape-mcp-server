@@ -30,7 +30,7 @@ process keeps its previous copy.
 This is the agent-facing companion to the two machine-readable manifests
 [`llms.txt`](../llms.txt) (concise index) and
 [`llms-full.txt`](../llms-full.txt) (full per-tool manifest),
-both **generated from the live registry** by `scripts/gen_llms_txt.py`.
+both **generated from the live registry** by `scripts/dev-tools.sh manifests`.
 
 ---
 
@@ -306,3 +306,60 @@ The explicit-root path must be relative without `..`; the sandbox still checks t
 Outside-workspace tool errors retain their stable prefix and now point to workspace discovery.
 Fixed-scale comparison refuses snapshots whose canvas coordinate mapping differs from the current
 canvas; choose a snapshot from before a local edit with the same canvas setup.
+
+## Editable vector authoring quality
+
+Initialization and `compose_artwork` share the policy from
+`migration/contracts/authoring-guidance.txt`; discovery and prompt files are generated
+snapshots, checked against that source. Follow the geometry and rendered-review guidance
+as well as the vector-only, semantic-group and approval rules above.
+
+For a flower, author a smooth continuous petal silhouette as one outline and keep the
+center separate if it has different paint. A geometric union can remove internal overlaps
+of construction primitives; merely combining paths does not. Keep genuinely independent
+parts separate. For fabric folds, create separate `fill="none"` path objects for each fold
+and put them in an ordinary named group. A snowball should have a rounded silhouette;
+semantic shape choice requires inspecting the render and is not inferred by a tool.
+
+Use explicit roles when asking for structural advice:
+
+```json
+{
+  "doc_id": "YOUR_DOCUMENT_ID",
+  "editability": {
+    "object_roles": [
+      {"object_id": "folds", "role": "independent_strokes"},
+      {"object_id": "whisker-left", "role": "stroke_only"}
+    ]
+  }
+}
+```
+
+Pass this to `quality_report`. Roles are optional, limited to 200 unique IDs of 1–256
+UTF-8 bytes each. Missing or duplicate SVG IDs yield an unknown target finding; repeated
+role IDs and malformed inputs are rejected. `independent_strokes` designates a `<g>` and
+its scene geometry; definitions are excluded. The report never guesses roles from names,
+open paths or primitive counts. A compound filled path without a stroke role is valid.
+
+`editability.authoring.findings` identifies the object ID, code, certainty (`known` or
+`unknown`) and reason. Advice does not affect validity or the existing quality score.
+A stroke's effective fill must be `none`, even if its fill is transparent or covered.
+The static cascade supports simple type, ID, class and universal selectors, presentation
+attributes, inline declarations, importance, source order and inheritance. Complex or
+external stylesheets, dynamic values, animation and unsupported syntax yield unknown
+findings; they are never a passing check. The legacy inspector remains unchanged.
+
+Review is bounded to 20,000 elements, 256 KiB stylesheet text, 2,048 rules, 128 ancestor
+levels, two million CSS work units and 200 findings. Path parsing allows 256 KiB/10,000
+segments per path and 4 MiB/200,000 segments across a report. Group-role traversal has
+a 200,000-element visit budget. Limit exhaustion produces uncertainty/truncation, not
+evidence of safe geometry. Setting `enabled=false` disables all editability findings.
+
+Hidden/transparent scene findings account for ancestry, resource containers and local
+references. Required `defs`, masks, clipping shapes and `use` source subtrees are preserved.
+Unresolved external/encoded references make cleanup advice uncertain. General occlusion
+is deferred: overlapping bounding boxes or a plausible render do not establish coverage.
+Partial overlap is allowed. Review the SVG and render, then use existing gated deletion
+or path operations for explicitly approved repairs within the requested scope. Compare
+before/after renders and retain snapshots and Operation Records; this report never edits
+or deletes anything.

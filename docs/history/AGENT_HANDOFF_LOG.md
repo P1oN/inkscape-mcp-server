@@ -312,7 +312,7 @@ region is larger; next measure file/directory sync_all separately before changin
 Pure IPC, unguarded IO, warm/live and native-primary-monitor gate remain open.
 
 
-Stage24 diagnostic phase work: scripts/migration_prepare_phase_profile.py creates an
+Stage24 diagnostic phase work: scripts/history/python/migration_prepare_phase_profile.py creates an
 isolated source copy; diagnostic spans are never compiled into the normal server.
 Corrected 5-pair run binds/partitions 50 Rust handlers via interval union. Initial nested
 stderr logging polluted file spans and is retained separately; v2 buffers outside handler.
@@ -509,13 +509,13 @@ Reproduce separately, never concurrently:
 
 ```sh
 PATH=/Applications/Inkscape.app/Contents/MacOS:$PATH .venv/bin/python \
-  scripts/migration_process_benchmark.py \
+  scripts/history/python/migration_process_benchmark.py \
   --package migration/results/packages/inkscape-mcp-macos-arm64-stage21 \
   --output migration/results/process-benchmark-stage21-new \
   --repeats 5 --counts 100 10000 100000
 # Run the diagnostic after the direct run has ended, into a different new directory.
 PATH=/Applications/Inkscape.app/Contents/MacOS:$PATH .venv/bin/python \
-  scripts/migration_process_benchmark.py \
+  scripts/history/python/migration_process_benchmark.py \
   --package migration/results/packages/inkscape-mcp-macos-arm64-stage21 \
   --output migration/results/process-benchmark-cli-stage21-new \
   --repeats 5 --counts 100 --diagnostic-cli
@@ -1504,7 +1504,7 @@ Raw replies/traces and **24 captured SVG/PNG artifacts with hashes** are retaine
 `migration/results/native-gui-stage12/`; read-only verification is reproducible without GUI:
 
 ```bash
-.venv/bin/python scripts/migration_verify_native.py --output migration/results/native-gui-stage12 --report migration/native-stage12-captured-comparison.json --captured-only
+.venv/bin/python scripts/history/python/migration_verify_native.py --output migration/results/native-gui-stage12 --report migration/native-stage12-captured-comparison.json --captured-only
 migration/results/packages/inkscape-mcp-macos-arm64-stage12/bin/inkscape-mcp --doctor
 ```
 
@@ -1634,7 +1634,7 @@ gaps and SHA-256 of **complete inspection result envelopes** for the 1/100/10,00
 fixtures. Every repeated Python/Rust result matches, including duplicated JSON text; object and
 flat tree counts prove the large result was not truncated. Only actual `doc_id` fields bound by
 requests are normalized and JSON text is decoded; no result fields are discarded. Reproduce
-with `scripts/migration_verify_large_response.py --output migration/results/process-benchmark-stage9
+with `scripts/history/python/migration_verify_large_response.py --output migration/results/process-benchmark-stage9
 --prior-summary migration/results/process-benchmark-stage8/summary.json
 --report migration/process-benchmark-stage9-comparison.json`. The benchmark harness retains all
 raw wire replies and samples. This check is fixture evidence, not full schema/error acceptance.
@@ -1655,7 +1655,7 @@ the full migration goal remains active.
 
 ### Stage8 real STDIO process and CLI measurements (2026-10-02)
 
-`scripts/migration_process_benchmark.py` now benchmarks the packaged optimized stage8 binary
+`scripts/history/python/migration_process_benchmark.py` now benchmarks the packaged optimized stage8 binary
 against the preserved Python console entry point, sequentially with alternating order across
 **five repetitions**. Each run uses a fresh owned temporary HOME/profile/workspace, live disabled,
 full descriptions/profile, raw Actions enabled and explicit `per_call` mode. No GUI is launched.
@@ -1721,12 +1721,12 @@ Reproduce direct measurements (use a new output directory):
 
 ```bash
 PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" .venv/bin/python \
-  scripts/migration_process_benchmark.py \
+  scripts/history/python/migration_process_benchmark.py \
   --package migration/results/packages/inkscape-mcp-macos-arm64-stage8 \
   --output migration/results/process-benchmark-stage8-new --repeats 5
 # Separate diagnostic trial; never mix this with direct timing comparisons:
 PATH="/Applications/Inkscape.app/Contents/MacOS:$PATH" .venv/bin/python \
-  scripts/migration_process_benchmark.py \
+  scripts/history/python/migration_process_benchmark.py \
   --package migration/results/packages/inkscape-mcp-macos-arm64-stage8 \
   --output migration/results/process-benchmark-cli-stage8-new \
   --repeats 1 --counts 100 --diagnostic-cli
@@ -1824,8 +1824,8 @@ for further acceptance; no user drawing/window was changed or closed.
 
 Evidence: `migration/native-gui-comparison.json`, raw wire/SVG/PNG captures in
 `migration/results/native-gui-acceptance/` and its recorded isolated workspace. Launch harness
-`scripts/migration_native_gui_acceptance.py` refuses a second launch while that ownership record
-exists. `scripts/migration_native_capture.py` attaches only to the existing private bus and checks
+`scripts/history/python/migration_native_gui_acceptance.py` refuses a second launch while that ownership record
+exists. `scripts/history/python/migration_native_capture.py` attaches only to the existing private bus and checks
 exact window/document IDs and allowed blank/dirty window titles before capture. An initial
 Redo capture assertion incorrectly required an unchanged title; its failed trace is retained,
 and the capture was corrected to allow Inkscape's observed leading dirty `*`, preserving exact
@@ -1888,8 +1888,8 @@ and real PNG preview/export pixel checks. Raw acceptance remains in `migration/r
 Reproduce/test:
 ```sh
 migration/results/packages/inkscape-mcp-macos-arm64-stage6/bin/inkscape-mcp --doctor
-.venv/bin/python scripts/migration_doctor_acceptance.py --package migration/results/packages/inkscape-mcp-macos-arm64-stage6
-.venv/bin/python scripts/migration_package_acceptance.py --archive migration/results/packages/inkscape-mcp-macos-arm64-stage6.tar.gz
+.venv/bin/python scripts/history/python/migration_doctor_acceptance.py --package migration/results/packages/inkscape-mcp-macos-arm64-stage6
+.venv/bin/python scripts/history/python/migration_package_acceptance.py --archive migration/results/packages/inkscape-mcp-macos-arm64-stage6.tar.gz
 ```
 Configure normal MCP execution with that candidate's `bin/inkscape-mcp` and a synthetic writable
 `INKSCAPE_MCP_WORKSPACE_ROOTS`, without `--doctor`. The user's current MCP configuration is
@@ -1915,7 +1915,7 @@ inkex is read from the installed Inkscape bundle. Development used the existing 
 ([uv provenance](https://docs.astral.sh/uv/reference/environment/)); the user needs neither uv/pip,
 Homebrew nor a compiler to run this candidate.
 
-`scripts/migration_build_macos_package.py` refuses an existing output directory, copies only
+`scripts/history/python/migration_build_macos_package.py` refuses an existing output directory, copies only
 helper dependencies (no Python MCP package), builds the bridge on the development machine,
 relocates each non-system D-Bus dependency to loader-relative paths and ad-hoc signs modified
 copies. Fixed package manifest enables native discovery of private gdbus and the vendor
@@ -1941,8 +1941,8 @@ calls do not create the configured managed session. No native GUI was opened.
 
 Reproduce:
 ```sh
-.venv/bin/python scripts/migration_build_macos_package.py --output migration/results/packages/<new-name>
-.venv/bin/python scripts/migration_package_acceptance.py --archive migration/results/packages/inkscape-mcp-macos-arm64-stage3.tar.gz
+.venv/bin/python scripts/history/python/migration_build_macos_package.py --output migration/results/packages/<new-name>
+.venv/bin/python scripts/history/python/migration_package_acceptance.py --archive migration/results/packages/inkscape-mcp-macos-arm64-stage3.tar.gz
 ```
 For a manual candidate test, extract the archive into an empty folder and set the MCP executable
 to its `bin/inkscape-mcp`, with `INKSCAPE_MCP_WORKSPACE_ROOTS` pointing to a synthetic writable
@@ -1992,7 +1992,7 @@ fake package with a copied Rust executable proves the new-launch fixed argv, iso
 detached session, no startup launch, repeat reuse and child survival past MCP exit. Its runtime,
 supervisor/bridge/bus are test substitutes: this does not validate the real packaged supervisor
 or native GUI. Raw evidence is in `migration/results/live-launch-acceptance/`; reproduce with
-`.venv/bin/python scripts/migration_live_launch_acceptance.py`.
+`.venv/bin/python scripts/history/python/migration_live_launch_acceptance.py`.
 
 `migration/context-build-comparison.json` records the real development clang command, source
 and bridge hashes, arm64 Mach-O type and dependencies (only Apple system frameworks/libraries,
@@ -2029,7 +2029,7 @@ requests, fixed launch argv, exact blank SVG bytes, 0600 mode, detached session 
 file. Only the validated minted document path is bound. The fake engine is compiled as Python
 before execution. No real GUI was opened; helper execution/Undo remain unproved. Raw traces:
 `migration/results/live-arm-acceptance/`. Reproduce with
-`.venv/bin/python scripts/migration_live_arm_acceptance.py`.
+`.venv/bin/python scripts/history/python/migration_live_arm_acceptance.py`.
 
 All 164 Rust tests, all-target clippy/format, Ruff (295 files), mypy (122 sources) pass.
 LLM indexes regenerated, frozen text unchanged. Current count: 109 native tools / one pending
@@ -2699,7 +2699,7 @@ guard/race/stale-binding и STDIO reuse.
 Доказательство: `/private/tmp/imcp-context-r79j3lvj/acceptance.json` (`passed: true`),
 `stage3-*.svg` и preview PNG в том же каталоге. Эти временные файлы могут быть уже удалены.
 
-Команда воспроизведения: `.venv/bin/python scripts/accept_document_context.py`.
+Команда воспроизведения: `.venv/bin/python scripts/history/python/accept_document_context.py`.
 Она явно запускает отдельный тестовый GUI с `--launch`, затем проверяет MCP reconnect
 без launch. Успех закрывает только два проверенных синтетических окна; ошибка сохраняет GUI.
 Native GUI acceptance не запускался в ходе проверки документации.

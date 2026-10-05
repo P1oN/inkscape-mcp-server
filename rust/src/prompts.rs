@@ -47,6 +47,13 @@ pub fn render(
         .unwrap());
     }
     let mut rendered = TEMPLATES[&request.name].clone();
+    if request.name == "compose_artwork" {
+        for message in rendered["messages"].as_array_mut().unwrap() {
+            message["content"]["text"] = json!(crate::authoring::expand(
+                message["content"]["text"].as_str().unwrap()
+            ));
+        }
+    }
     if matches!(
         request.name.as_str(),
         "compose_artwork" | "restyle_artwork" | "live_canvas_assist"

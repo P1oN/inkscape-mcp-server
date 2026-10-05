@@ -1,137 +1,13 @@
 //! Native preflight for the fixed managed insertion effect. The helper receives
 //! the original fragment and repeats this validation while applying one Undo step.
 use crate::live_socket::Error;
-use libxml::tree::NodeType;
-use std::collections::HashMap;
-use std::sync::LazyLock;
 const SVG: &str = "http://www.w3.org/2000/svg";
 const CAP: usize = 1024 * 1024;
-static URL: LazyLock<regex::Regex> = LazyLock::new(|| {
-    // Python \w means Unicode alphanumeric plus underscore; Rust's \w also
-    // includes combining marks, so use explicit letter/number classes.
-    regex::Regex::new(r##"(?i:url)\([\s\x1c-\x1f]*['"]?(#[\p{L}\p{N}_.:-]+)['"]?[\s\x1c-\x1f]*\)"##)
-        .unwrap()
-});
 fn fail(message: &'static str) -> Error {
     Error::Protocol(message)
 }
 pub fn plan(fragment: &str, prefix: &str) -> Result<Vec<String>, Error> {
-    let token = prefix.strip_prefix("mcp_").unwrap_or("");
-    if token.len() != 32
-        || !token
-            .bytes()
-            .all(|c| c.is_ascii_hexdigit() && !c.is_ascii_uppercase())
-    {
-        return Err(fail("invalid insertion id"));
-    }
-    if fragment
-        .trim_matches(|c: char| c.is_whitespace() || matches!(c, '\u{1c}'..='\u{1f}'))
-        .is_empty()
-        || fragment.len() > CAP
-    {
-        return Err(fail("insertion fragment is empty or too large"));
-    }
-    let source = format!("<svg xmlns=\"{SVG}\">{fragment}</svg>");
-    let document = crate::xml::parse(source.as_bytes(), CAP + 100)
-        .map_err(|_| fail("malformed insertion XML"))?;
-    let root = document
-        .get_root_element()
-        .ok_or(fail("malformed insertion XML"))?;
-    let mut nodes = Vec::new();
-    let mut stack = vec![root.clone()];
-    while let Some(node) = stack.pop() {
-        if matches!(
-            node.get_type(),
-            Some(NodeType::TextNode | NodeType::CDataSectionNode)
-        ) {
-            continue;
-        }
-        nodes.push(node.clone());
-        if nodes.len() > 10_000 {
-            return Err(fail("too many insertion elements"));
-        }
-        stack.extend(node.get_child_nodes().into_iter().rev());
-    }
-    let mut ids = HashMap::new();
-    let mut ordered = vec![prefix.to_string()];
-    for node in &nodes {
-        if !node.is_element_node() {
-            return Err(fail("insertion contains non-element content"));
-        }
-        if node.get_namespace().map(|ns| ns.get_href()).as_deref() != Some(SVG)
-            || !matches!(
-                node.get_name().as_str(),
-                "svg"
-                    | "g"
-                    | "defs"
-                    | "rect"
-                    | "circle"
-                    | "ellipse"
-                    | "path"
-                    | "line"
-                    | "polygon"
-                    | "polyline"
-                    | "text"
-                    | "tspan"
-                    | "use"
-                    | "linearGradient"
-                    | "radialGradient"
-                    | "stop"
-                    | "clipPath"
-                    | "mask"
-                    | "pattern"
-                    | "title"
-                    | "desc"
-            )
-        {
-            return Err(fail("unsupported SVG insertion element"));
-        }
-        if let Some(id) = node.get_property_no_ns("id").filter(|id| !id.is_empty()) {
-            if ids.contains_key(&id) {
-                return Err(fail("duplicate insertion id"));
-            }
-            let new = format!("{prefix}_{}", ids.len());
-            ordered.push(new.clone());
-            ids.insert(id, new);
-        }
-    }
-    for node in &nodes {
-        for ((name, _), value) in node.get_properties_ns() {
-            if name.to_lowercase().starts_with("on") || name == "base" {
-                return Err(fail("event attributes are unsupported"));
-            }
-            if name == "id" {
-                // Python raises an uncaught KeyError for an empty ID. Refuse it
-                // deterministically before any request, preserving the document.
-                if !ids.contains_key(&value) {
-                    return Err(fail("''"));
-                }
-            } else if name == "href" {
-                if !value
-                    .strip_prefix('#')
-                    .is_some_and(|id| ids.contains_key(id))
-                {
-                    return Err(fail("href must reference an id in the fragment"));
-                }
-            } else if value.to_lowercase().contains("url") || name == "style" {
-                if value.contains(['\\', '@']) {
-                    return Err(fail("unsupported CSS insertion value"));
-                }
-                for found in URL.captures_iter(&value) {
-                    if !ids.contains_key(&found[1][1..]) {
-                        return Err(fail("paint reference must be internal to the fragment"));
-                    }
-                }
-                if URL.replace_all(&value, "").to_lowercase().contains("url") {
-                    return Err(fail("external or malformed CSS URL"));
-                }
-            }
-        }
-    }
-    if root.get_child_elements().is_empty() {
-        return Err(fail("insertion has no objects"));
-    }
-    Ok(ordered)
+    inkscape_mcp_rust::helper_svg::fragment::plan(fragment, prefix).map_err(fail)
 }
 /// Confirm a direct root group, rather than a substring in unrelated text.
 #[cfg(test)]

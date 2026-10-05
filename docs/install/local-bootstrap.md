@@ -25,9 +25,8 @@ selects that package even if revisions differ. Unknown revisions or uncommitted 
 edits produce a rebuild instruction; use `--rebuild` to include those changes explicitly.
 
 `./setup.sh --local-tools` explicitly rebuilds using installed tools and cached Cargo
-dependencies only. It does not download Rust/Python/uv/native inputs or dependencies;
-missing prerequisites cause failure. A pinned `.venv` or `.packaging-venv` helper
-environment must already exist. `--build` remains a compatibility alias for this mode.
+dependencies only. It does not download Rust/native inputs or dependencies;
+missing prerequisites cause failure. `--build` remains a compatibility alias for this mode.
 `--rebuild` explicitly repeats automatic preparation and build, even with an existing
 configuration; `--bootstrap` is its compatibility alias. Build modes cannot be combined
 with each other or with `--package`.
@@ -50,12 +49,12 @@ opens Apple's installation dialog and stops with a rerun instruction; it does no
 Apple's license or administrator authorization on the user's behalf. These shared system
 tools remain installed. Inkscape also remains installed.
 
-An exact existing Rust 1.99.0 toolchain or pinned helper environment can be reused without
-upgrading or uninstalling it. Otherwise, rustup 1.28.2 and uv 0.12.22 are downloaded with
-pinned SHA-256 checksums. Rustup installs a minimal Rust 1.99.0 toolchain with private
-CARGO_HOME/RUSTUP_HOME and `--no-modify-path`. uv prepares Python 3.12.14 and the six
-pinned helper wheels under private install/cache directories, without global Python links.
-No shell profile or system package manager is installed or changed.
+An exact existing Rust 1.99.0 toolchain can be reused without upgrading or
+uninstalling it. Otherwise, rustup 1.28.2 is downloaded with a pinned SHA-256 checksum
+and installs Rust 1.99.0 with private CARGO_HOME/RUSTUP_HOME and `--no-modify-path`.
+The development-only Rust CLI downloads, validates and extracts native inputs and
+builds the package. No Python/uv/wheels, shell profile or system package manager is
+installed or changed.
 
 Six native Homebrew bottles are pinned by URL/hash in
 `rust/package/bootstrap-native-macos-arm64.json`. They are extracted into the temporary
@@ -65,15 +64,14 @@ closure into the final package and records native input hashes/SBOMs/license tex
 Temporary roots cannot remain as linked runtime dependencies.
 
 Only the installer's own `bootstrap.*` mktemp directory is removed on success, failure
-or handled interruption. This removes downloaded development Rust/uv/Python, native inputs,
-Cargo/uv caches and compilation intermediates. Existing tools and prior installed packages
+or handled interruption. This removes downloaded development Rust, native inputs,
+Cargo caches and compilation intermediates. Existing tools and prior installed packages
 are preserved. Failed builds may leave a partial `build.*` package for diagnosis; saved
 configuration is changed only after a successful build. A hard kill or power loss can leave
 a bootstrap directory; never delete unrelated tool installations to clean it up.
 
-**Private Python inside the installed package remains necessary** for bounded live
-helpers and supervision. It is copied before cleanup and works without the development
-runtime. Neither Python nor Rust needs to be registered in the user's shell PATH.
+The installed package contains five native Rust executables, the context bridge and
+private D-Bus libraries. Neither Python nor a Rust toolchain is needed at runtime.
 
 This is local source installation, not Developer ID signing/notarization. Bootstrap does
 not remove quarantine attributes or disable Gatekeeper/TCC. It downloads pinned build
@@ -82,7 +80,6 @@ host's security/privacy settings; at most one prompt is not guaranteed. Native G
 and clean-machine Apple tool installation are separate acceptance checks.
 
 Upstream mechanisms: [rustup isolated homes](https://rust-lang.github.io/rustup/installation/index.html),
-[uv storage](https://docs.astral.sh/uv/reference/storage/), and
 [Homebrew formula metadata](https://formulae.brew.sh/api/formula/glib.json).
 
 Current sources also support client registration, installed build identity, managed skill

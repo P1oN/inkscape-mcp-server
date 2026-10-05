@@ -1,6 +1,6 @@
 {
   "passed": true,
-  "profiles": 10,
+  "profiles": 11,
   "ready_and_exit_codes": true,
   "read_only_no_bytecode": true,
   "missing_assets_named": true,

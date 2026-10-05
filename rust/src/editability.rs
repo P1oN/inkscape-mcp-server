@@ -21,6 +21,7 @@ pub fn analyze(root: Node, opts: &Value) -> Result<Value, String> {
     if !opts.is_object() {
         return Err("invalid editability options".into());
     }
+    let roles = crate::authoring_analysis::roles(opts)?;
     let enabled = arguments::boolean(opts, "enabled", true)?;
     let labels = arguments::boolean(opts, "check_labels", true)?;
     let layers_limit = threshold(opts, "layer_advisory_threshold", 12, 10000)?;
@@ -159,7 +160,7 @@ pub fn analyze(root: Node, opts: &Value) -> Result<Value, String> {
         );
     }
     Ok(
-        json!({"group_count":groups.len(),"layer_count":layers,"max_group_depth":groups.iter().map(|(_,d)|*d).max().unwrap_or(0),"single_child_groups":fragments,"advice":advice,"truncated":total>200,"note":"Advice is optional; names/counts cannot establish semantics or tracing."}),
+        json!({"authoring": if enabled {crate::authoring_analysis::analyze(&nodes, &roles)} else {json!({"findings":[],"truncated":false,"scope":"Disabled."})},"group_count":groups.len(),"layer_count":layers,"max_group_depth":groups.iter().map(|(_,d)|*d).max().unwrap_or(0),"single_child_groups":fragments,"advice":advice,"truncated":total>200,"note":"Advice is optional; names/counts cannot establish semantics or tracing."}),
     )
 }
 

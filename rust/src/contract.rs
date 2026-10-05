@@ -31,7 +31,12 @@ pub fn contract() -> Value {
         (false, false, true, false) => select!("live-false_raw-false_core_full"),
         (false, false, true, true) => select!("live-false_raw-false_core_short"),
     };
-    serde_json::from_str(source).expect("checked-in reference contract must be valid JSON")
+    let mut value: Value =
+        serde_json::from_str(source).expect("checked-in reference contract must be valid JSON");
+    value["initialize"]["instructions"] = Value::String(crate::authoring::expand(
+        value["initialize"]["instructions"].as_str().unwrap(),
+    ));
+    value
 }
 
 pub(crate) fn flag(name: &str, default: bool) -> bool {

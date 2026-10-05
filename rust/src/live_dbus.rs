@@ -334,118 +334,22 @@ impl Drop for Dbus {
 pub(crate) mod tests {
     use super::*;
     use base64::{Engine, engine::general_purpose::STANDARD};
-    use std::{os::unix::fs::PermissionsExt, path::PathBuf, time::Duration};
+    use std::{path::PathBuf, time::Duration};
     pub(crate) fn fixture(mode: &str, cap: usize) -> (tempfile::TempDir, Dbus, PathBuf) {
         let root = tempfile::tempdir().unwrap();
         let log = root.path().join("calls.jsonl");
-        let binary = root.path().join("gdbus");
-        let fixture = Path::new(env!("CARGO_MANIFEST_DIR"))
-            .parent()
-            .unwrap()
-            .join("migration/contracts/dbus-backend-cases.json");
-        let python = Path::new(env!("CARGO_MANIFEST_DIR"))
-            .parent()
-            .unwrap()
-            .join(".venv/bin/python");
-        let body = format!(
-            r#"#!{}
-import sys,json,base64
-from pathlib import Path
-root=Path({:?})
-mode={:?}
-argv=sys.argv[1:]
-control=json.loads((root/'probe-control.json').read_text()) if (root/'probe-control.json').exists() else {{}}
-with (root/'calls.jsonl').open('a') as f: f.write(json.dumps(argv)+'\n')
-if 'org.freedesktop.DBus.GetNameOwner' in argv: print("(':1.23',)")
-elif 'org.gtk.Actions.List' in argv:
-    if not control.get('reachable',True): raise SystemExit(1)
-    print('(list,)')
-elif 'org.gtk.Actions.Describe' in argv:
-    if not control.get('reachable',True): raise SystemExit(1)
-    available=control.get('insert' if argv[-1]=='org.inkscape-mcp.insert.noprefs' else 'edit',mode!='effect-absent')
-    print('((true,),)' if available else '((false,),)')
-elif 'introspect' in argv: print('node /org/inkscape/Inkscape/window/17 {{ }}')
-elif 'org.inkscape.MCP.Context1.GetContext' in argv:
-    row=json.loads((root/'context.json').read_text()) if (root/'context.json').exists() else ['12345678-1234-1234-1234-123456789abc','abcdefab-1234-1234-1234-123456789abc','Drawing.svg']
-    print(repr(tuple(row)))
-elif 'org.inkscape.MCP.Context1.ListDocuments' in argv:
-    print("([('12345678-1234-1234-1234-123456789abc','abcdefab-1234-1234-1234-123456789abc','Drawing.svg')],)")
-elif 'org.inkscape.MCP.Context1.SelectDocument' in argv:
-    (root/'context.json').write_text(json.dumps(argv[-2:]+['Chosen.svg']))
-    print('()')
-else:
-    if 'org.inkscape.MCP.Context1.Activate' in argv:
-        row=json.loads((root/'context.json').read_text()) if (root/'context.json').exists() else ['12345678-1234-1234-1234-123456789abc','abcdefab-1234-1234-1234-123456789abc','Drawing.svg']
-        if argv[-4:-2]!=row[:2]:
-            sys.stderr.write('org.inkscape.MCP.ContextChanged: private detail')
-            raise SystemExit(1)
-        action,parameter=argv[-2:]
-    else: action,parameter=argv[-3:-1]
-    if action in ['org.inkscape-mcp.edit.noprefs','org.inkscape-mcp.insert.noprefs']:
-        request=json.loads((root/'insert-request.json').read_text())
-        (root/'captured-request.json').write_text(json.dumps(request))
-        response=dict(nonce=request['nonce'],ok=True,ids=request.get('selection',[]),fingerprint=request['expected_fingerprint'])
-        if mode=='effect-mutated' or action=='org.inkscape-mcp.insert.noprefs':
-            from lxml import etree
-            fixture_path=Path({:?})
-            sys.path.insert(0,str(fixture_path.parents[2]/"runtime"))
-            from insert_payload import document_fingerprint,prepare_fragment
-            data=json.loads(fixture_path.read_text())
-            drawing=etree.fromstring(base64.b64decode(data['svg']))
-            if document_fingerprint(drawing)!=request['expected_fingerprint']: raise SystemExit(1)
-            if action=='org.inkscape-mcp.insert.noprefs':
-                payload,ids=prepare_fragment(request['fragment'],request['nonce'])
-                drawing.append(etree.fromstring(payload))
-                response=dict(nonce=request['nonce'],ok=True,ids=ids)
-            else:
-                drawing.xpath('//*[@id="r"]')[0].set('fill',request['style']['fill'])
-                response['fingerprint']=document_fingerprint(drawing)
-            if mode not in ['effect-mismatch','effect-refused','effect-lost-refused']:
-                (root/'drawing.svg').write_bytes(etree.tostring(drawing))
-        if mode=='effect-refused' or mode=='effect-lost-refused': response=dict(nonce=request['nonce'],ok=False,error='invalid selection')
-        elif mode=='effect-unknown-refusal': response=dict(nonce=request['nonce'],ok=False,error='private /host/path')
-        elif mode=='effect-stale': response['nonce']='stale'
-        elif mode=='effect-mismatch': response['fingerprint']='wrong'
-        if mode!='effect-missing': (root/'insert-result.json').write_text(json.dumps(response))
-        if mode=='effect-lost' or mode=='effect-lost-refused': raise SystemExit(1)
-        if mode=='effect-switch': (root/'context.json').write_text(json.dumps(['abcdefab-1234-1234-1234-123456789abc','12345678-1234-1234-1234-123456789abc','Changed']))
-    elif action=='select-list':
-        with (root/'stdout.log').open('ab') as stream:
-            if mode=='selection-empty': pass
-            elif mode=='selection-overflow': stream.write(b'x'*(1024*1024+1))
-            elif mode=='selection-invalid': stream.write(b'changed format\n')
-            elif mode=='selection-utf8': stream.write(b'\xff')
-            elif mode.startswith('effect-'): stream.write(b'r cloned: true ref: 1 href: 0 total href: 0\n')
-            else: stream.write('r cloned: true ref: 1 href: 0 total href: 0\nПривіт cloned: false ref: 0 href: 0 total href: 0\nr cloned: true ref: 1 href: 0 total href: 0\n'.encode())
-    elif action=='query-x':
-        if mode!='selection-incomplete':
-            with (root/'stdout.log').open('ab') as stream: stream.write(b'0\n')
-    elif action=='export-filename': (root/'filename').write_text(parameter[3:-3])
-    elif action=='export-do':
-        out=Path((root/'filename').read_text())
-        data=json.loads(Path({:?}).read_text())
-        if mode=='missing': pass
-        elif mode=='symlink':
-            (root/'original').write_bytes(b'keep original')
-            out.symlink_to(root/'original')
-        elif mode=='oversize': out.write_bytes(b'x'*1024)
-        elif mode=='bad-xml': out.write_bytes(b'<invalid')
-        elif mode=='bad-utf8': out.write_bytes(b'\xff')
-        else:
-            payload=base64.b64decode(data['png' if out.suffix=='.png' else 'svg'])
-            if (root/'drawing.svg').exists() and out.suffix=='.svg': payload=(root/'drawing.svg').read_bytes()
-            if mode=='mapped' and out.suffix=='.svg': payload=payload.replace(b'<svg ',b'<svg id="svgroot" width="200" height="100" viewBox="10 20 50 25" preserveAspectRatio="none" ')
-            out.write_bytes(payload)
-    print('()')
-"#,
-            python.display(),
-            root.path().to_string_lossy(),
-            mode,
-            fixture.to_string_lossy(),
-            fixture.to_string_lossy()
-        );
-        std::fs::write(&binary, body).unwrap();
-        std::fs::set_permissions(&binary, std::fs::Permissions::from_mode(0o700)).unwrap();
+        let binary = crate::native_test_fixture::install(root.path(), mode, "dbus");
+        let fixture: Value = serde_json::from_str(include_str!(
+            "../../migration/contracts/dbus-backend-cases.json"
+        ))
+        .unwrap();
+        for (key, name) in [("svg", "fixture.svg"), ("png", "fixture.png")] {
+            std::fs::write(
+                root.path().join(name),
+                STANDARD.decode(fixture[key].as_str().unwrap()).unwrap(),
+            )
+            .unwrap();
+        }
         let mut backend = Dbus::new(Bus::new(binary, Duration::from_secs(1), 8192), cap);
         backend.connect().unwrap();
         (root, backend, log)

@@ -89,7 +89,7 @@ recorded in the package manifest; an older baseline is not inferred from the tar
 After the locked native release build, create a new output tree and archive:
 
 ```sh
-.packaging-venv/bin/python scripts/migration_build_posix_package.py \
+.packaging-venv/bin/python scripts/history/python/migration_build_posix_package.py \
   --output dist/inkscape-mcp-<native-target> \
   --archive dist/inkscape-mcp-<native-target>.tar.gz
 ```

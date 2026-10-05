@@ -5,6 +5,8 @@ mod argument_numbers;
 mod argument_validation;
 mod arguments;
 mod artifact_stat;
+mod authoring;
+mod authoring_analysis;
 mod batch;
 mod canvas;
 mod collection;
@@ -33,6 +35,8 @@ mod group;
 mod identity;
 mod inspect;
 mod intents;
+#[cfg(test)]
+mod native_test_fixture;
 // Native public live integration and private fixed IPC kernels.
 mod decimal;
 mod live;
@@ -109,7 +113,7 @@ mod transform_objects;
 mod use_object;
 mod validate;
 mod workspace;
-mod xml;
+use inkscape_mcp_rust::xml;
 
 use base64::{Engine, engine::general_purpose::STANDARD};
 use rmcp::{ErrorData, RoleServer, ServerHandler, ServiceExt, model::*, service::RequestContext};

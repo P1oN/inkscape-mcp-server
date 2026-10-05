@@ -9,10 +9,10 @@ Operation Records, atomic rollback and genuine no-op behavior remain part of the
 
 The latest published source preview is [v0.1.1](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.1).
 The installation, client connection, skill update, build identity and uninstall improvements
-are committed on `codex/install-client-responsiveness` in [PR #8](https://github.com/P1oN/inkscape-mcp-server/pull/8),
-which targets `main`. They are not included in the v0.1.1 archive.
+were merged into `main` in [PR #8](https://github.com/P1oN/inkscape-mcp-server/pull/8).
+They are not included in the v0.1.1 archive.
 
-For the PR sources on Apple Silicon macOS 15+, install Inkscape 1.4+ and the client CLI,
+For the current sources on Apple Silicon macOS 15+, install Inkscape 1.4+ and the client CLI,
 then run from the checkout:
 
 ```sh
@@ -24,8 +24,7 @@ Use `claude` for both client options to connect Claude Code. Setup asks for an e
 SVG workspace and optional monitoring, prepares missing build tools privately and builds
 on first use. Keep the checkout in its permanent location: the client stores its absolute
 `run-mcp.sh` path. Apple Command Line Tools are required; if missing, complete Apple's
-installation dialog and rerun setup. Existing developer tools are preserved; the private
-helper Python remains in the installed package.
+installation dialog and rerun setup. Existing developer tools are preserved; source build/development tools use Rust and Bash; ready packages contain no Python runtime.
 
 Connection checks MCP initialization, required tools and a first workspace request before
 registering through the client CLI. A differing existing `inkscape` entry is preserved
@@ -62,12 +61,15 @@ Build options cannot be combined with `--package DIRECTORY`.
 Skill updates merge against a saved upstream baseline and preserve installed content on
 conflicts. Uninstall disconnects the matching client entry and archives local settings,
 builds and an owned default-location skill; drawings remain in the workspace.
+Client `config`, `check`, `connect`, `disconnect` and `uninstall` use the packaged native
+Rust CLI through `scripts/mcp-client.sh`. Management does not depend on Python;
+disconnect/uninstall remain available with a damaged helper runtime.
 See [client management and clean reinstall](docs/install/client-management.md) for
 manual configuration, standalone checks, legacy skill handling and recovery.
 
 Startup/reconnect/doctor never launch Inkscape. Explicit GUI launch requires a user request.
 Live operations use the selected open drawing; headless operations use working copies.
-Clean-machine installation, real Claude Code client acceptance and new native GUI checks
+Clean-machine installation, real Claude Code client acceptance and broader native GUI checks
 remain follow-up work; [current status](docs/AGENT_HANDOFF.md) records validation scope.
 
 ## Optional agent skill
@@ -101,9 +103,11 @@ Revision and build IDs are compiled automatically into telemetry and package met
 
 The legacy Python MCP server, its tests and paired Python/Rust comparison scripts are retired.
 Development now uses Rust regression/invariant tests, true STDIO and package/native acceptance.
-Python remains only for live helper extensions, the managed supervisor and development/package
-scripts. See [CONTRIBUTING.md](CONTRIBUTING.md), [runtime components](runtime/README.md),
-[current plan](docs/RUST_NEXT_PLAN.md) and [handoff](docs/AGENT_HANDOFF.md).
+The managed GUI session now runs through a separate native Rust supervisor. The socket snapshot bridge now uses the Rust `inkscape-mcp-live` executable. Development and package tools now use Rust/Bash; ready packages contain no CPython or helper wheels. One-shot native insertion
+and the ten fixed selection edits run through the Rust `inkscape-mcp-inx` executable;
+shared SVG kernels prepare and apply bounded candidates. See
+[their semantics and limits](docs/live-helper-kernels.md). See [CONTRIBUTING.md](CONTRIBUTING.md), [runtime components](runtime/README.md),
+[Python removal roadmap and current plan](docs/RUST_NEXT_PLAN.md) and [handoff](docs/AGENT_HANDOFF.md).
 Historical migration reports and raw evidence are retained as history, not an active Python oracle.
 
 Use editable vector geometry and ordinary named groups for semantic objects; layers organize
@@ -116,3 +120,10 @@ the scene. No bitmap tracing or embedded raster substitute. See
 Current status and validation limits are maintained in [the handoff](docs/AGENT_HANDOFF.md);
 next work is in [the plan](docs/RUST_NEXT_PLAN.md). Checkpoint reports remain historical evidence.
 The project is MIT licensed; bundled dependency licenses are recorded separately.
+
+Editable vector authoring guidance is shared by initialization and `compose_artwork`.
+`quality_report` accepts explicit stroke/group roles and reports bounded read-only
+structural and hidden-geometry advice with uncertainty, independently of validity/score.
+See [the authoring guide](docs/agent-usage-guide.md#editable-vector-authoring-quality) and
+[the acceptance evidence](docs/editable-vector-authoring.md); silhouettes and occlusion
+remain rendered/manual reviews, with existing approval gates for repairs.

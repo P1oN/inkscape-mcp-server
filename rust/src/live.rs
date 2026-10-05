@@ -48,7 +48,7 @@ fn facts(
     let installed = ["system_data_dir", "user_data_dir"].iter().any(|key| {
         capabilities[*key].as_str().is_some_and(|directory| {
             Path::new(directory)
-                .join("extensions/inkscape_mcp_live.py")
+                .join("extensions/inkscape_mcp_live_run.sh")
                 .is_file()
         })
     });

@@ -67,7 +67,7 @@ tracing and arbitrary shell/code/extension/network execution are not exposed.
 
 `runtime/helper_extension` retains fixed Python/inkex effect helpers;
 `runtime/insert_payload.py` and `runtime/edit_errors.py` support their private protocol.
-`rust/package/supervise.py` supervises an explicitly launched owned GUI/bus. These are not
+`rust/src/bin/inkscape-mcp-supervisor.rs` supervises an explicitly launched owned GUI/bus. These are not
 another MCP server. The archive carries private CPython 3.12.14 and six pinned wheels.
 `runtime/native/context.m` supplies the Objective-C/GTK context bridge; prebuilt bridge,
 D-Bus/gdbus and their library closure are included. The private effect transaction
@@ -143,7 +143,7 @@ requests/startups. SVG fixtures contain 100/3000/15000 rectangles (not realistic
 coverage). Command:
 
 ```sh
-.venv/bin/python scripts/rust_current_measurements.py \
+.venv/bin/python scripts/history/python/rust_current_measurements.py \
   --binary migration/results/packages/inkscape-mcp-macos-arm64-stage38/bin/inkscape-mcp \
   --output migration/results/rust-measurements-stage38-repeat --repeats 5
 ```
@@ -219,7 +219,7 @@ headless roots. Native mutation traces retain individual timings, not a repeated
 benchmark. These are absolute current measurements, with no new Python comparison or
 pure IPC/general speedup claim. Commands/environment/raw/wire/PNGs are retained in
 `migration/results/live-measurements-stage38-retry1`; development harness:
-`scripts/rust_current_live_measurements.py` (requires an explicitly owned live session).
+`scripts/history/python/rust_current_live_measurements.py` (requires an explicitly owned live session).
 
 The original stage36/38 no-primary-monitor/CVDisplayLink failures remain historical;
 no bridge guard was bypassed and no server change was needed for this retry. The first

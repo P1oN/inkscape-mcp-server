@@ -20,7 +20,7 @@ fn installed(capabilities: &Value) -> bool {
         .filter_map(|key| capabilities[key].as_str())
         .filter(|s| !s.is_empty())
         .any(|directory| {
-            let path = Path::new(directory).join("extensions/inkscape_mcp_live.py");
+            let path = Path::new(directory).join("extensions/inkscape_mcp_live_run.sh");
             let absolute = if path.is_absolute() {
                 Some(path)
             } else {
@@ -68,7 +68,7 @@ fn launch(user: &str, cap: usize) -> Result<(), String> {
         .map_err(|_| "could not prepare the live helper launch document")?;
     let mut command = Command::new(binary);
     command
-        .args(["--with-gui", "--actions=org.inkscape_mcp.live.noprefs"])
+        .args(["--with-gui", "--actions=org.inkscape-mcp.live.noprefs"])
         .arg(path)
         .stdin(Stdio::null())
         .stdout(Stdio::null())

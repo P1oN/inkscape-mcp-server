@@ -2,7 +2,7 @@
 
 Run `./setup.sh` again to review Inkscape/workspace paths, then start `./run-mcp.sh`.
 Source builds require the pinned Rust toolchain and native libxml/clang/GLib dependencies;
-a ready archive avoids user compilation and private Python installation.
+a ready archive avoids user compilation and development-tool installation.
 The launcher's errors go to stderr; MCP STDIO stdout is reserved for protocol messages.
 Use the configured Rust executable's `--doctor` for read-only dependency diagnostics.
 Doctor does not launch GUI or repair the user's system.

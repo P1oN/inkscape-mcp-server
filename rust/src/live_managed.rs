@@ -1300,11 +1300,12 @@ mod tests {
     fn external_client_lock_times_out_before_context_io_and_links_are_refused() {
         let (root, mut backend, log) = managed(true);
         let lock = backend.stream.with_extension("lock");
-        let python = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-            .parent()
-            .unwrap()
-            .join(".venv/bin/python");
-        let mut child=Process::new(python).args(["-c","import fcntl,sys,time; f=open(sys.argv[1],'a'); fcntl.flock(f,fcntl.LOCK_EX); print('locked',flush=True); time.sleep(60)"]).arg(&lock).stdout(Stdio::piped()).spawn().unwrap();
+        let mut child = Process::new(crate::native_test_fixture::binary())
+            .arg("hold-lock")
+            .arg(&lock)
+            .stdout(Stdio::piped())
+            .spawn()
+            .unwrap();
         let mut ready = String::new();
         BufReader::new(child.stdout.take().unwrap())
             .read_line(&mut ready)

@@ -160,7 +160,7 @@ workspace read protections to their targets. Three synthetic outside PNGs are vi
 rendered pixels; in-workspace PNG positive control also passes. No user assets, network
 or GUI were used and source PNGs remain unchanged. This is a real workspace read escape,
 not XML entity expansion. Current package must not be described as isolating renderer
-assets. Script `scripts/rust_renderer_asset_probe.py --require-isolation` fails on this
+assets. Script `scripts/history/python/rust_renderer_asset_probe.py --require-isolation` fails on this
 candidate by design; raw trace/pixels are in migration/results/renderer-assets-stage31-regression.
 
 Next fix must preserve legitimate in-workspace linked artwork while obtaining asset bytes
@@ -179,7 +179,7 @@ current native package smoke where required by changed live components. No globa
 certification is claimed. Historical live incident cause investigation is deferred until recurrence.
 Full crash/race/property fuzzing is not represented by the finite passing fixtures.
 
-Scripts: scripts/rust_security_acceptance.py and scripts/migration_special_file_acceptance.py.
+Scripts: scripts/history/python/rust_security_acceptance.py and scripts/history/python/migration_special_file_acceptance.py.
 Build/check index: migration/package-stage31-build-comparison.json. CI now runs the Rust
 security suites on candidate packages; prepared jobs are not remote results.
 

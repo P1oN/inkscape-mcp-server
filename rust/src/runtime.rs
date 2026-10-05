@@ -268,7 +268,7 @@ pub(crate) fn detect(registry: &Registry, host: Option<&crate::live_probe::Input
     }
     let live = data_dirs.iter().any(|dir| {
         Path::new(dir)
-            .join("extensions/inkscape_mcp_live.py")
+            .join("extensions/inkscape_mcp_live_run.sh")
             .is_file()
     });
     let fonts = if let Some(fc) = process::binary("fc-list") {

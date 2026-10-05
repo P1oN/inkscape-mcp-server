@@ -2,7 +2,7 @@
 
 The current improvements are in [PR #8](https://github.com/P1oN/inkscape-mcp-server/pull/8).
 Local validation on 2026-10-04 used macOS arm64, official Inkscape 1.4.3 and pinned
-Rust 1.99.0/private Python 3.12.14. Extracted-source setup, isolated real Codex registration,
+Rust 1.99.0 with native Rust/Bash build and runtime tooling. Extracted-source setup, isolated real Codex registration,
 skill merge/conflicts, SVG edit/render/save, uninstall/reinstall and relocated ready archives
 passed. Both `per_call` and `shell` engines passed with empty PATH/private runtime/bus;
 owned process cancellation and responsive discovery/workspace reads were checked.
