@@ -108,7 +108,8 @@ scripts/dev-tools.sh install-acceptance --archive migration/results/source.tar.g
 Source archive export defaults to committed files and SOURCE_REVISION. Explicit
 `--working-tree` snapshots omit that marker and report unknown revision. Source install
 acceptance requires real Codex and existing pinned native tools/caches. It builds from
-Git-free unpublished sources, registers an isolated client, merges/conflicts a customized
+Git-free committed or unpublished sources, verifies the corresponding build identity,
+registers an isolated client, merges/conflicts a customized
 skill, renders through real CLI, uninstalls and reinstalls while preserving drawings.
 It does not establish clean-machine installation or native GUI acceptance.
 
