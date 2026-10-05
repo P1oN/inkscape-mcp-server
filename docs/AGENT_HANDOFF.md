@@ -55,7 +55,8 @@ are synchronized, not independent policy copies.
 | Release vs installed runtime | Distribution publication does not replace the user's configured runtime. Rebuild/select the new package and reconnect MCP to activate it, preserving Inkscape GUI |
 
 Release/source archive checksums and actual package identity belong to their published
-assets and release notes. Historical local build hashes remain in their original ledgers.
+assets and release notes. The [release follow-up](history/reports/v0.1.2-release.md) records
+documentation reconciliation and the committed-source PAX metadata repair. Historical local build hashes remain in their original ledgers.
 Clean-machine Apple Silicon, real Claude, real artwork/artist and broader human-review
 race acceptance remain pending or user-deferred; Intel/Linux execution and Windows port
 remain separately scoped. Ad-hoc macOS signing is not Developer ID/notarization.

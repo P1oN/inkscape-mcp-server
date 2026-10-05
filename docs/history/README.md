@@ -20,6 +20,8 @@ builds. Use [current status](../AGENT_HANDOFF.md), [active backlog](../RUST_NEXT
 
 ## Reports and logs
 
+- [v0.1.2 release follow-up](reports/v0.1.2-release.md): documentation reconciliation, source archive regression and distribution identity/evidence.
+
 - [Handoff through PR #11 validation](agent-checkpoints-through-pr11.md), archived before the v0.1.2 release follow-up.
 
 - Local vector-quality guards, 2026-10-05: [closure, duplicate path nodes, vector-only save and fragment dry-run](reports/vector-quality-guards.md); uncommitted candidate and concurrency limitation.

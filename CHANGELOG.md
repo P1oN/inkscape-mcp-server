@@ -8,6 +8,8 @@ Detailed checkpoint evidence is indexed in [history](docs/history/README.md).
 Source archive and ready macOS Apple Silicon package, with checksums.
 [Release](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.2).
 
+- Omit Git global PAX metadata from committed source exports, retaining explicit source
+  identity and compatibility with strict archive extraction.
 - Add bounded path parsing, explicit closure/zero-length guards, read-only node/closure
   findings, whole-document vector inventory and vector-only save refusal (PR #11).
 - Add structural fragment dry-run candidates; application retains existing approval/reference gates (PR #11).
