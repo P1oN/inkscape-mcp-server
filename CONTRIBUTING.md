@@ -27,6 +27,10 @@ scripts/dev-tools.sh discovery --binary rust/target/release/inkscape-mcp-rust --
 scripts/dev-tools.sh manifests --binary rust/target/release/inkscape-mcp-rust --output .
 ```
 
+After editing `migration/contracts/authoring-guidance.txt`, run
+`scripts/dev-tools.sh sync-authoring-guidance` to refresh the generated initialization and
+compose snapshots. The policy has one source; regression checks enforce snapshot consistency.
+
 Regenerate llms.txt and llms-full.txt whenever the exposed surface or instructions change.
 The generator queries the actual Rust STDIO server without launching a GUI. Frozen
 migration/contracts remain the schema/instruction source. Failed discovery retains
@@ -81,7 +85,18 @@ For server changes run the following bounded real-STDIO suites with
 `security-acceptance`, `frame-acceptance`, `startup-acceptance`,
 `responsiveness-acceptance`, `defects-acceptance`, `diagnostic-acceptance`,
 `compare-acceptance`, `special-file-acceptance`, `renderer-acceptance` and
-`engine-routes-acceptance`. Startup defaults to 128 fresh sessions/four concurrent
+`engine-routes-acceptance`. For authoring changes also run:
+
+```sh
+scripts/dev-tools.sh authoring-acceptance --binary rust/target/release/inkscape-mcp-rust --output migration/results/authoring
+scripts/dev-tools.sh authoring-acceptance --binary rust/target/release/inkscape-mcp-rust --engine-mode shell --output migration/results/authoring-shell
+```
+
+These probes use deliberate editable flower/fold/snowball and overlapping-shape fixtures,
+real CLI pixels, read-only report checks, approved deletion/no-op/restore and reference
+refusal. Inspect the retained SVG and PNGs separately for silhouette quality.
+
+Startup defaults to 128 fresh sessions/four concurrent
 servers with immediate mutation/discovery and no retries. Responsiveness checks both
 engine modes and owned process cancellation. Renderer checks require isolation.
 

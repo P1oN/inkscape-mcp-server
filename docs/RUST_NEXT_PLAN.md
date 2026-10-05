@@ -131,7 +131,11 @@ is the authoring-quality plan below; release/installation remain separate action
 ## Editable vector authoring quality (requested 2026-10-04)
 
 Status: planned; no runtime, prompt or schema changes implemented or validated yet.
-This is an additional workstream; the Python removal roadmap above is implemented locally as recorded.
+All three stages below are implemented locally (2026-10-05). See
+[implementation and fresh acceptance evidence](editable-vector-authoring.md). The shared
+authoritative policy is `migration/contracts/authoring-guidance.txt`; the draft below
+records the design. General occlusion and semantic silhouette inference remain deferred.
+The Python removal roadmap above is implemented as recorded.
 Implement in the order below. The goal is both appropriate silhouettes and independently
 editable geometry, rather than merely a visually plausible render.
 

@@ -1,5 +1,6 @@
 mod acceptance;
 mod archive;
+mod authoring;
 mod bootstrap;
 mod clients;
 mod common;
@@ -28,6 +29,8 @@ fn run() -> Result<()> {
         | "special-file-acceptance"
         | "compare-acceptance"
         | "engine-routes-acceptance" => invariants::run(&args),
+        "sync-authoring-guidance" => authoring::sync_guidance(&args),
+        "authoring-acceptance" => authoring::run(&args),
         "renderer-acceptance" => renderer::run(&args),
         "client-acceptance" => clients::run(&args),
         "sentry-setup-acceptance" => sentry_setup::run(&args),
@@ -46,7 +49,7 @@ fn run() -> Result<()> {
         "manifests" => wire::manifests(&args),
         "help" => {
             println!(
-                "inkscape-mcp-tools: bootstrap-native | build-package | source-archive | discovery | manifests\nAcceptance: package, doctor, notices, launcher, sentry-setup, client, install, socket, security, frame, startup, responsiveness, defects, diagnostic, compare, special-file, renderer, engine-routes (append -acceptance).\nExplicit native GUI phases: native-gui | native-inx | native-socket.\nSee CONTRIBUTING.md for arguments and ownership requirements."
+                "inkscape-mcp-tools: bootstrap-native | build-package | source-archive | discovery | manifests | sync-authoring-guidance\nAcceptance: package, doctor, notices, launcher, sentry-setup, client, install, socket, security, frame, startup, responsiveness, defects, diagnostic, compare, special-file, renderer, authoring, engine-routes (append -acceptance).\nExplicit native GUI phases: native-gui | native-inx | native-socket.\nSee CONTRIBUTING.md for arguments and ownership requirements."
             );
             Ok(())
         }

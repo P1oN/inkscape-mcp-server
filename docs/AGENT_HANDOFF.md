@@ -36,10 +36,34 @@ not current validation claims. [RUST_NEXT_PLAN.md](RUST_NEXT_PLAN.md) is the act
   work are retained. Server approval tokens remain nonempty strings; the client must
   obtain confirmation for each operation. Do not claim server-authenticated authorization.
 
+## Local editable vector authoring quality (2026-10-05)
+
+All three stages of the additional workstream in RUST_NEXT_PLAN are implemented locally:
+shared initialization/compose guidance; explicit bounded stroke roles with effective CSS
+fill and parsed-subpath findings; conservative hidden/transparent geometry review with
+resource/reference protection and deferred general occlusion. Advice is read-only and
+independent of validity/score. Repairs reuse existing approval, snapshots, records,
+reference refusal and no-op behavior; no automatic cleanup or silhouette conversion.
+
+Fresh runtime tests: 295 passed/two standard opt-in ignored; tooling: 15 passed; both
+fmt/Clippy graphs passed. All 16 frozen discovery configurations, ten STDIO suites,
+relocated per-call/shell package and notices (11/196 crates) passed on the accepted
+443-file package. Manifests and real per-call/shell CLI synthetic
+flower/folds/snowball/overlap acceptance are recorded in
+[the authoring ledger](editable-vector-authoring.md). Rounded silhouettes remain a
+semantic/render review. No live behavior changed or real GUI acceptance claimed.
+Installed runtime/configuration and existing windows remain unchanged.
+
+The preceding changes were pushed as `4aacfae` to PR #9 and its title/description were
+updated. Native candidate CI passed for that commit. CodeRabbit skipped both requested
+reviews because 161/full and 118/incremental files exceed its 100-file limit; review is
+not complete. The user authorized committing/pushing the authoring implementation in
+the same PR and merging into `main` after checking the new candidate's CI.
+
 ## Local Python removal stage 7 (2026-10-05)
 
 Implemented on initially clean HEAD `85c67cd` in `codex/python-removal-stages-1-3`;
-changes remain uncommitted. Source bootstrap/build, packaging, source archives, MCP
+committed/pushed by user request as `4aacfae` to [PR #9](https://github.com/P1oN/inkscape-mcp-server/pull/9). Source bootstrap/build, packaging, source archives, MCP
 discovery/manifests, CI and CONTRIBUTING use the standalone locked Rust tooling CLI
 through `scripts/dev-tools.sh`. Cargo subprocess fixtures are native Rust; 55 historical
 Python source/config files moved byte-for-byte to `scripts/history/python`. Native
@@ -60,7 +84,7 @@ refusal regressions and superseded failed experiments. No native GUI was launche
 Undo/Redo result transferred; the replacement native GUI harness is not yet exercised
 on a real new GUI. Foreign platforms, remote CI, clean-machine provisioning and real
 Claude remain separate. Installed runtime/configuration, published assets and user
-windows are unchanged. No commit/push/PR was requested or performed.
+windows are unchanged. The later user request authorized the stage-7 commit/push and PR update.
 
 ## Local Python removal stage 6 (2026-10-05)
 

@@ -9,10 +9,10 @@ Operation Records, atomic rollback and genuine no-op behavior remain part of the
 
 The latest published source preview is [v0.1.1](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.1).
 The installation, client connection, skill update, build identity and uninstall improvements
-are committed on `codex/install-client-responsiveness` in [PR #8](https://github.com/P1oN/inkscape-mcp-server/pull/8),
-which targets `main`. They are not included in the v0.1.1 archive.
+were merged into `main` in [PR #8](https://github.com/P1oN/inkscape-mcp-server/pull/8).
+They are not included in the v0.1.1 archive.
 
-For the PR sources on Apple Silicon macOS 15+, install Inkscape 1.4+ and the client CLI,
+For the current sources on Apple Silicon macOS 15+, install Inkscape 1.4+ and the client CLI,
 then run from the checkout:
 
 ```sh
@@ -120,3 +120,10 @@ the scene. No bitmap tracing or embedded raster substitute. See
 Current status and validation limits are maintained in [the handoff](docs/AGENT_HANDOFF.md);
 next work is in [the plan](docs/RUST_NEXT_PLAN.md). Checkpoint reports remain historical evidence.
 The project is MIT licensed; bundled dependency licenses are recorded separately.
+
+Editable vector authoring guidance is shared by initialization and `compose_artwork`.
+`quality_report` accepts explicit stroke/group roles and reports bounded read-only
+structural and hidden-geometry advice with uncertainty, independently of validity/score.
+See [the authoring guide](docs/agent-usage-guide.md#editable-vector-authoring-quality) and
+[the acceptance evidence](docs/editable-vector-authoring.md); silhouettes and occlusion
+remain rendered/manual reviews, with existing approval gates for repairs.

@@ -5,6 +5,8 @@ mod argument_numbers;
 mod argument_validation;
 mod arguments;
 mod artifact_stat;
+mod authoring;
+mod authoring_analysis;
 mod batch;
 mod canvas;
 mod collection;
