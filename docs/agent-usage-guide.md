@@ -2,7 +2,7 @@
 
 How to drive this server from an LLM agent: the core create→render→export loop, the
 working-copy + snapshot reversibility model, the risk classes and the approval-token gate for
-HIGH-risk tools, and how to pick the right tool. The full surface is **110 small typed tools / 7 prompts /
+HIGH-risk tools, and how to pick the right tool. The full surface is **112 small typed tools / 7 prompts /
 18 resources** — deliberately *not* a portmanteau `run_action(string)` / `do_task(prompt)` design
 ([architecture decisions](adr/README.md)). The trade-off: more tools to navigate, but each is explicit, typed, and risk-classed.
 Use the discovery tools below instead of grepping the list; gates may narrow the visible surface.
