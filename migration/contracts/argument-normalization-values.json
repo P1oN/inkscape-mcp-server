@@ -3918,7 +3918,8 @@
     "arguments": {},
     "expected": {
       "reference_policy": "reject_changes",
-      "approval_token": null
+      "approval_token": null,
+      "dry_run": false
     },
     "scope": "root defaults only; required fields deliberately absent"
   },
@@ -4003,7 +4004,9 @@
       "object_id": null,
       "fill": null,
       "stroke": null,
-      "stroke_width": null
+      "stroke_width": null,
+      "require_closed": false,
+      "reject_zero_length": false
     },
     "scope": "root defaults only; required fields deliberately absent"
   },
@@ -5566,7 +5569,8 @@
     "expected": {
       "overwrite": false,
       "approval_token": null,
-      "root_id": null
+      "root_id": null,
+      "vector_only": false
     },
     "scope": "root defaults only; required fields deliberately absent"
   },
@@ -6998,12 +7002,12 @@
         ],
         "count": "3.0"
       },
-      "label": "Named \u0394 objects",
+      "label": "Named Δ objects",
       "dry_run": "off"
     },
     "expected": {
       "mode": "linked",
-      "label": "Named \u0394 objects",
+      "label": "Named Δ objects",
       "orientation": "fixed",
       "variation": null,
       "anchor": null,
@@ -7900,12 +7904,12 @@
         ],
         "count": "3.0"
       },
-      "label": "Named \u0394 objects",
+      "label": "Named Δ objects",
       "dry_run": "off"
     },
     "expected": {
       "mode": "linked",
-      "label": "Named \u0394 objects",
+      "label": "Named Δ objects",
       "orientation": "fixed",
       "variation": null,
       "anchor": null,

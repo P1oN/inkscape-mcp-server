@@ -42,6 +42,23 @@ this schema repair and remains recorded rather than hidden by a retry. A diagnos
 sequential run passed: 301 tests, zero failures, two opt-in ignored; its retained log is
 `migration/results/pr10-review-checks/runtime-serial.log`.
 
+## Local vector-quality guards
+
+The vector-quality follow-up on `codex/vector-quality-guards` starts from merged PR #10
+(`f6dc569`). Its validation used the uncommitted `codex/live-drawing-workflow` candidate
+from `d16083a`, with the same source tree before these delivery notes. It adds explicit creation closure/zero-segment guards, read-only `closed_shape` path diagnostics,
+whole-document vector inventory and an opt-in vector-only save gate, plus structural dry-run
+review for existing fragment replacement. Intentional dots, loops and open strokes retain
+their defaults; repairs remain explicit and approval-gated. Shared guidance, all schemas and
+catalogs are regenerated. [Behavior and evidence](history/reports/vector-quality-guards.md)
+record the bounds, binary hash and unchanged tool counts.
+Final validation: 308 sequential runtime tests passed/two ignored, tooling 15, both fmt/Clippy
+graphs, release build, 16 exact discovery profiles, both real CLI authoring modes and ten
+STDIO suites. The default-parallel run repeated the pre-existing managed launch/lock test
+failure; it remains unresolved and retained. No GUI acceptance or installed-runtime update
+was performed. Fresh isolated STDIO processes loaded the new guidance; activating it in the
+user's existing connection still requires selected-runtime rebuild/reconnect, preserving GUI.
+
 ## Implemented
 
 - Rust STDIO server, native client manager, separate GUI supervisor, one-shot INX helper

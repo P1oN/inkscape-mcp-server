@@ -20,6 +20,8 @@ builds. Use [current status](../AGENT_HANDOFF.md), [active backlog](../RUST_NEXT
 
 ## Reports and logs
 
+- Local vector-quality guards, 2026-10-05: [closure, duplicate path nodes, vector-only save and fragment dry-run](reports/vector-quality-guards.md); uncommitted candidate and concurrency limitation.
+
 - Live drawing workflow candidate: [computed styles, resources and reviewed packages](reports/live-drawing-workflow.md); automated/CLI evidence and scoped native GUI Undo/Redo are separate from the user-deferred pilot.
 
 - Rust migration: [report](reports/RUST_MIGRATION_REPORT.md), [long log](RUST_MIGRATION_LOG.md),

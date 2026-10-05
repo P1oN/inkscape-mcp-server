@@ -177,3 +177,8 @@ It retains SVG, resource/bounds reports, object/package PNGs and wire traces, ch
 preservation and stale/digest/approval/unsupported-backend refusals. This does not establish
 native GUI package publication, Undo/Redo or artist pilot acceptance; follow the
 [reviewed workflow](docs/live/reviewed-workflow.md) for those separate checks.
+
+The authoring acceptance probe also checks explicit path closure/zero-length guards,
+read-only fragment dry-run candidates, closed-shape advice and vector-only save refusal
+(including hidden resource images) through real STDIO. Keep default-value fixtures and
+all discovery profiles in sync when adding optional authoring parameters.

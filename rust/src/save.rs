@@ -8,6 +8,14 @@ pub fn document(registry: &Registry, args: &Value) -> Result<Value, String> {
     let approval = crate::arguments::string(args, "approval_token")?;
     let pre = validate::document(registry, id)?;
     let entry = &registry.entries[id];
+    let bytes =
+        registry
+            .workspace
+            .read(entry.root, &entry.working(), registry.workspace.max_input)?;
+    let vector_only = crate::arguments::boolean(args, "vector_only", false)?;
+    if vector_only {
+        crate::vector_content::require(&bytes, registry.workspace.max_input)?;
+    }
     let raw = args["dest_path"]
         .as_str()
         .ok_or("dest_path must be a string")?;
@@ -47,14 +55,10 @@ pub fn document(registry: &Registry, args: &Value) -> Result<Value, String> {
         id,
         "save_document_as",
         risk,
-        json!({"dest_path":raw,"overwrite":overwrite}),
+        json!({"dest_path":raw,"overwrite":overwrite,"vector_only":vector_only}),
         true,
     );
     transaction::persist(registry, entry, &record)?;
-    let bytes =
-        registry
-            .workspace
-            .read(entry.root, &entry.working(), registry.workspace.max_input)?;
     let old = if overwritten {
         Some(
             registry
@@ -127,6 +131,55 @@ mod tests {
     use crate::{style, workspace::Workspace};
     use std::path::Path;
 
+    #[test]
+    fn vector_guard_refuses_before_destination_and_record_writes() {
+        for body in [
+            "<image href='data:image/png;base64,YQ=='/>",
+            "<image href='linked.png'/>",
+            "<defs><image id='r' href='data:image/png;base64,YQ=='/></defs><use href='#r'/>",
+        ] {
+            let temp = tempfile::tempdir().unwrap();
+            let source =
+                format!("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'>{body}</svg>");
+            std::fs::write(temp.path().join("source.svg"), &source).unwrap();
+            let mut registry = Registry {
+                workspace: Workspace {
+                    roots: vec![temp.path().canonicalize().unwrap()],
+                    max_input: 100000,
+                    max_output: 100000,
+                },
+                entries: indexmap::IndexMap::new(),
+            };
+            let id = registry.open(&json!({"path":"source.svg"})).unwrap()["doc_id"]
+                .as_str()
+                .unwrap()
+                .to_owned();
+            std::fs::write(temp.path().join("existing.svg"), b"preserve").unwrap();
+            for args in [
+                json!({"doc_id":id,"dest_path":"new/final.svg","vector_only":true}),
+                json!({"doc_id":id,"dest_path":"existing.svg","vector_only":true,"overwrite":true,"approval_token":"approved"}),
+            ] {
+                assert!(document(&registry, &args).is_err());
+            }
+            assert!(!temp.path().join("new").exists());
+            assert_eq!(
+                std::fs::read(temp.path().join("existing.svg")).unwrap(),
+                b"preserve"
+            );
+            let entry = &registry.entries[&id];
+            assert_eq!(
+                std::fs::read(temp.path().join(entry.working())).unwrap(),
+                source.as_bytes()
+            );
+            assert_eq!(
+                std::fs::read_dir(temp.path().join(entry.directory()).join("operations"))
+                    .unwrap()
+                    .count(),
+                0
+            );
+            document(&registry, &json!({"doc_id":id,"dest_path":"allowed.svg"})).unwrap();
+        }
+    }
     #[test]
     fn save_preserves_original_and_refuses_links_and_escapes() {
         let temporary = tempfile::tempdir().unwrap();

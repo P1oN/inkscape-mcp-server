@@ -36,7 +36,7 @@ pub fn roles(opts: &Value) -> Result<Vec<(String, String)>, String> {
                 .ok_or("object role ID must contain 1–256 bytes")?;
             let role = entry["role"]
                 .as_str()
-                .filter(|s| matches!(*s, "stroke_only" | "independent_strokes"))
+                .filter(|s| matches!(*s, "stroke_only" | "independent_strokes" | "closed_shape"))
                 .ok_or("invalid object role")?;
             if !seen.insert(id) {
                 return Err("duplicate object role ID".into());
@@ -302,7 +302,9 @@ pub fn analyze(nodes: &[Node], roles: &[(String, String)]) -> Value {
                 continue;
             };
             let node = matches[0];
-            if role == "stroke_only" {
+            if role == "closed_shape" {
+                continue; // Checked by the shared geometry analyzer.
+            } else if role == "stroke_only" {
                 if checked.insert(node.node_ptr() as usize) {
                     stroke(node, &cascade, &mut paths, &mut findings);
                 }

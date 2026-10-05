@@ -22,7 +22,7 @@
       "name": "inkscape-mcp",
       "version": "3.4.2"
     },
-    "instructions": "inkscape-mcp makes Inkscape/SVG documents agent-ready through SMALL TYPED TOOLS (not a free-text\nrun_action / execute_code portmanteau). Orientation:\n\nDocument model & lifecycle. Work is keyed by a `doc_id`: `create_document` (new blank) or\n`open_document` (existing workspace SVG) returns one; every other tool takes it. Typical flow:\nopen/create -> inspect (`inspect_document` / `find_objects` for object ids) -> edit (typed DOM\ntools) -> `render_preview` to look -> `export_document` / `save_document_as`. All writes land on a\nWORKING COPY; the original source file is never modified.\n\nWorkspace and artifacts. Call `get_workspace_info` or read `inkscape://workspace` before choosing\npaths. Existing relative paths use the first server root, never client CWD; open/save accept\nan explicit root_id. Read returned artifact resource URIs through MCP; server paths are not\nclient-local paths. Use render_preview(object_id/region) for details and compare_region with a\npre-edit snapshot for fixed-area comparison.\n\nReversibility. Every real mutation auto-snapshots first and emits an Operation Record (ADR-004). A\ngenuine no-op writes nothing and reports `changed: false`. Undo with\n`restore_snapshot(doc_id, snapshot_id)`; `create_snapshot` checkpoints on demand; `list_snapshots`\nbrowses; `reload_document` re-reads the working copy from disk.\n\nRisk classes & approval. Each tool declares a risk class: low (read/inspect/render/export),\nmedium (create/style/text/transform — reversible, snapshot-backed), high (overwrite/delete/path\ngeometry/Action chains — requires client-confirmed approval), restricted (never ships).\nThe client must obtain explicit user approval for the particular operation before supplying\n`approval_token`. The server checks only that this string is non-empty; it does not issue,\nauthenticate, bind or expire tokens. This is a client-trust boundary, not server-side\nauthorization. Do not invent approval strings or reuse approval for a different operation.\n\nBatching. `apply_edits` applies an ordered list of typed edits as ONE atomic, reversible operation\n(validate-all first, all-or-nothing, one snapshot) — use it to make several edits in a single call\ninstead of N round-trips. Its effective risk is the max over its members.\n\nEditable artwork structure. Unless the user requests otherwise, make each semantic object\n(cat, sofa, tree, flower, cloud, etc.) an ordinary named SVG group, selectable as a whole.\nUse stable unique ids and readable inkscape:label names. For new illustrations, prefer one\ngeneral artwork layer containing these groups; reserve additional layers for genuine scene\norganization, not one layer per object. Inkscape layers expose their children to selection;\nSelect All may be scoped to the current layer. Do not silently convert existing layers or\nflatten groups, merge paths, or introduce masks merely to organize objects. Preserve paint\norder, transforms, clipping, masks and styles when regrouping; render and compare afterwards.\nA group/layer conversion changes inkscape:groupmode on the same <g>, not its geometry;\npreserve its id, children, styles, visibility, locks and position in the parent.\nLayer highlight colours are editor UI metadata, not artwork fill colours.\n\n\nVector authoring. Do not propose or perform bitmap tracing or automatic raster-to-vector\nconversion when working through this MCP. This applies to Inkscape Trace Bitmap, external\ntracers (such as VTracer or Potrace), shell commands, scripts and preprocessing before SVG\nadoption; importing their traced output through MCP does not satisfy this rule. Treat a PNG\nor other bitmap as a visual reference only. Reconstruct the artwork with deliberately\nauthored, editable shapes, Bezier curves, fills and gradients, organized into semantic groups.\nDo not substitute an embedded bitmap for vector artwork. Render, compare with the reference\nand refine; be honest about remaining differences rather than promise pixel-identical results.\n\n\nRender and look before you trust an edit. After a mutating call (especially a batch), render and\nINSPECT the result — `render_preview` (headless) or `live_render_view` (live mode) — before relying\non it; `restore_snapshot` reverts if it is wrong.\n\nManaged macOS live documents. MCP startup and live_connect never open a window. Use live_launch\nonly when the user asks to open Inkscape; otherwise attach to a running session.\nAfter `live_connect`, use `live_list_documents` and\n`live_select_document(window_id, document_id)` to bind the task drawing. Check\n`live_status.ready_to_edit`: writes refuse after a window switch or document replacement.\nReconnect preserves the GUI and resets the binding. Inspect a drawing after an edit timeout\nbefore retrying: the edit may have applied.\n\nFinding the right tool. Don't grep the surface: call `how_do_i(goal)` (natural-language goal ->\ntool names + how-to, and it flags out-of-scope goals), or `list_capabilities` for the runtime matrix\nplus the full intent map. The generated `llms.txt` / `llms-full.txt` manifest and\n`docs/agent-usage-guide.md` carry the full per-tool detail.\n\n\nEditable vector authoring quality:\nWhen creating artwork, consider both its appearance and its editable structure:\n\n- Choose geometry that matches the subject: use circles, ellipses or smooth closed\n  paths for round objects, and avoid unintended sharp corners in soft forms.\n  A snowball should have a rounded silhouette. Preserve angular forms when requested\n  by the user or shown in the reference.\n- Create each continuous filled form as one final outline. For example, a flower\n  should have one petal outline and a separate center. Keep parts with different\n  paint or independent editing purposes separate. If overlapping primitives are\n  used during construction, use a geometric union when appropriate; combining paths\n  alone does not remove internal overlaps. Existing approval gates still apply.\n- Explicitly set fill=\"none\" on stroke-only lines; do not hide their fill through\n  transparency or by covering it with another shape.\n- Create each independent stroke as a separate object, and place related strokes\n  in a named group. Do not put independent folds, whiskers or veins into one path\n  with multiple subpaths.\n- Do not leave unnecessary hidden or fully covered construction shapes in the final\n  artwork. Preserve elements required by references, masks and clipping paths.\n  Partial overlap is allowed. Do not remove existing artwork outside the requested scope.\n\nBefore delivery, inspect the SVG structure and rendered image. Check that silhouettes\nmatch their subjects, and look for unintended corners, redundant shapes, fills on\nstroke-only lines and independent strokes combined into one object. Correct any issues\nfound, preserving appearance and references and following the existing approval rules."
+    "instructions": "inkscape-mcp makes Inkscape/SVG documents agent-ready through SMALL TYPED TOOLS (not a free-text\nrun_action / execute_code portmanteau). Orientation:\n\nDocument model & lifecycle. Work is keyed by a `doc_id`: `create_document` (new blank) or\n`open_document` (existing workspace SVG) returns one; every other tool takes it. Typical flow:\nopen/create -> inspect (`inspect_document` / `find_objects` for object ids) -> edit (typed DOM\ntools) -> `render_preview` to look -> `export_document` / `save_document_as`. All writes land on a\nWORKING COPY; the original source file is never modified.\n\nWorkspace and artifacts. Call `get_workspace_info` or read `inkscape://workspace` before choosing\npaths. Existing relative paths use the first server root, never client CWD; open/save accept\nan explicit root_id. Read returned artifact resource URIs through MCP; server paths are not\nclient-local paths. Use render_preview(object_id/region) for details and compare_region with a\npre-edit snapshot for fixed-area comparison.\n\nReversibility. Every real mutation auto-snapshots first and emits an Operation Record (ADR-004). A\ngenuine no-op writes nothing and reports `changed: false`. Undo with\n`restore_snapshot(doc_id, snapshot_id)`; `create_snapshot` checkpoints on demand; `list_snapshots`\nbrowses; `reload_document` re-reads the working copy from disk.\n\nRisk classes & approval. Each tool declares a risk class: low (read/inspect/render/export),\nmedium (create/style/text/transform — reversible, snapshot-backed), high (overwrite/delete/path\ngeometry/Action chains — requires client-confirmed approval), restricted (never ships).\nThe client must obtain explicit user approval for the particular operation before supplying\n`approval_token`. The server checks only that this string is non-empty; it does not issue,\nauthenticate, bind or expire tokens. This is a client-trust boundary, not server-side\nauthorization. Do not invent approval strings or reuse approval for a different operation.\n\nBatching. `apply_edits` applies an ordered list of typed edits as ONE atomic, reversible operation\n(validate-all first, all-or-nothing, one snapshot) — use it to make several edits in a single call\ninstead of N round-trips. Its effective risk is the max over its members.\n\nEditable artwork structure. Unless the user requests otherwise, make each semantic object\n(cat, sofa, tree, flower, cloud, etc.) an ordinary named SVG group, selectable as a whole.\nUse stable unique ids and readable inkscape:label names. For new illustrations, prefer one\ngeneral artwork layer containing these groups; reserve additional layers for genuine scene\norganization, not one layer per object. Inkscape layers expose their children to selection;\nSelect All may be scoped to the current layer. Do not silently convert existing layers or\nflatten groups, merge paths, or introduce masks merely to organize objects. Preserve paint\norder, transforms, clipping, masks and styles when regrouping; render and compare afterwards.\nA group/layer conversion changes inkscape:groupmode on the same <g>, not its geometry;\npreserve its id, children, styles, visibility, locks and position in the parent.\nLayer highlight colours are editor UI metadata, not artwork fill colours.\n\n\nVector authoring. Do not propose or perform bitmap tracing or automatic raster-to-vector\nconversion when working through this MCP. This applies to Inkscape Trace Bitmap, external\ntracers (such as VTracer or Potrace), shell commands, scripts and preprocessing before SVG\nadoption; importing their traced output through MCP does not satisfy this rule. Treat a PNG\nor other bitmap as a visual reference only. Reconstruct the artwork with deliberately\nauthored, editable shapes, Bezier curves, fills and gradients, organized into semantic groups.\nDo not substitute an embedded bitmap for vector artwork. Render, compare with the reference\nand refine; be honest about remaining differences rather than promise pixel-identical results.\n\n\nRender and look before you trust an edit. After a mutating call (especially a batch), render and\nINSPECT the result — `render_preview` (headless) or `live_render_view` (live mode) — before relying\non it; `restore_snapshot` reverts if it is wrong.\n\nManaged macOS live documents. MCP startup and live_connect never open a window. Use live_launch\nonly when the user asks to open Inkscape; otherwise attach to a running session.\nAfter `live_connect`, use `live_list_documents` and\n`live_select_document(window_id, document_id)` to bind the task drawing. Check\n`live_status.ready_to_edit`: writes refuse after a window switch or document replacement.\nReconnect preserves the GUI and resets the binding. Inspect a drawing after an edit timeout\nbefore retrying: the edit may have applied.\n\nFinding the right tool. Don't grep the surface: call `how_do_i(goal)` (natural-language goal ->\ntool names + how-to, and it flags out-of-scope goals), or `list_capabilities` for the runtime matrix\nplus the full intent map. The generated `llms.txt` / `llms-full.txt` manifest and\n`docs/agent-usage-guide.md` carry the full per-tool detail.\n\n\nEditable vector authoring quality:\nWhen creating artwork, consider both its appearance and its editable structure:\n\n- Choose geometry that matches the subject: use circles, ellipses or smooth closed\n  paths for round objects, and avoid unintended sharp corners in soft forms.\n  A snowball should have a rounded silhouette. Preserve angular forms when requested\n  by the user or shown in the reference.\n- Create each continuous filled form as one final outline. For example, a flower\n  should have one petal outline and a separate center. Keep parts with different\n  paint or independent editing purposes separate. If overlapping primitives are\n  used during construction, use a geometric union when appropriate; combining paths\n  alone does not remove internal overlaps. Existing approval gates still apply.\n- Explicitly set fill=\"none\" on stroke-only lines; do not hide their fill through\n  transparency or by covering it with another shape.\n- Create each independent stroke as a separate object, and place related strokes\n  in a named group. Do not put independent folds, whiskers or veins into one path\n  with multiple subpaths.\n- Do not leave unnecessary hidden or fully covered construction shapes in the final\n  artwork. Preserve elements required by references, masks and clipping paths.\n  Partial overlap is allowed. Do not remove existing artwork outside the requested scope.\n\nBefore delivery, inspect the SVG structure and rendered image. Check that silhouettes\nmatch their subjects, and look for unintended corners, redundant shapes, fills on\nstroke-only lines and independent strokes combined into one object. Correct any issues\nfound, preserving appearance and references and following the existing approval rules.\n\nFor filled path silhouettes, use create_path(require_closed=true, reject_zero_length=true).\nEvery subpath must explicitly close with Z; repeating the first coordinate does not\nclose the stroke join. Open strokes remain allowed. Avoid accidental consecutive duplicate\nnodes; coincident curve endpoints may form intentional loops, and zero-length stroked\nsegments may be intentional dots. Do not simplify or delete them blindly.\nBefore delivery, request quality_report with editability.vector_only=true and explicit\nclosed_shape object_roles for silhouettes. Review editability.geometry findings and\nvector_content.status; unknown is not passing. node_tolerance is optional, measured in\npath-local user units, and never authorizes merging nodes. Save a vector-only final SVG\nwith save_document_as(vector_only=true). Its whole-document check includes hidden objects\nand defs and has no reference-image exclusions. Keep bitmap references outside the final\nSVG; previews and requested PNG exports are raster renderings, not embedded artwork.\nReview selected repairs using replace_svg_fragment(dry_run=true), then render the candidate\nseparately before an approved apply. Its default remains approval-gated application.\nRepair only selected geometry using existing approved replace_svg_fragment operations,\nretain IDs/references and snapshots, and compare rendered before/after results."
   },
   "tools/list": {
     "tools": [
@@ -1866,6 +1866,14 @@
                           }
                         ],
                         "default": null
+                      },
+                      "require_closed": {
+                        "type": "boolean",
+                        "default": false
+                      },
+                      "reject_zero_length": {
+                        "type": "boolean",
+                        "default": false
                       }
                     },
                     "required": [
@@ -3331,7 +3339,7 @@
       {
         "name": "replace_svg_fragment",
         "title": "Replace svg fragment",
-        "description": "Replace one selected SVG subtree atomically, retaining its container ID and qualified tag.\n\nPass a complete allowlisted element with matching root ID or no root ID. Internal IDs\nsurvive only when explicitly included. Conflicting/duplicate IDs, unresolved references\nand external references to removed IDs always refuse before write. Stylesheets require\npreparation. Default reject_changes refuses updates to externally referenced subtrees;\nallow_retained explicitly accepts changed appearance of references to surviving IDs.\nRest of the scene is preserved structurally; XML serialization may normalize formatting.\nOne snapshot and Operation Record; high-risk approval gate matches existing SVG adoption.\nRisk class: high (allowlisted fragment adoption, approval-gated and reversible).",
+        "description": "Replace one selected SVG subtree atomically, retaining its container ID and qualified tag.\n\nPass a complete allowlisted element with matching root ID or no root ID. Internal IDs\nsurvive only when explicitly included. Conflicting/duplicate IDs, unresolved references\nand external references to removed IDs always refuse before write. Stylesheets require\npreparation. Default reject_changes refuses updates to externally referenced subtrees;\nallow_retained explicitly accepts changed appearance of references to surviving IDs.\nRest of the scene is preserved structurally; XML serialization may normalize formatting.\nOne snapshot and Operation Record; high-risk approval gate matches existing SVG adoption.\nRisk class: high (allowlisted fragment adoption, approval-gated and reversible).\nOptional dry_run=true validates a disposable candidate through the same replacement/reference kernel and returns candidate_svg plus would_change, without approval, working-copy mutation, snapshots or Operation Records. This is structural review; render the candidate separately before approved application. Default false preserves existing approval-gated behavior. Not supported as a batch dry-run.",
         "inputSchema": {
           "additionalProperties": false,
           "properties": {
@@ -3362,6 +3370,10 @@
                 }
               ],
               "default": null
+            },
+            "dry_run": {
+              "type": "boolean",
+              "default": false
             }
           },
           "required": [
@@ -3477,16 +3489,46 @@
                 "warning_count"
               ],
               "type": "object"
+            },
+            "dry_run": {
+              "type": "boolean"
+            },
+            "would_change": {
+              "type": "boolean"
+            },
+            "candidate_svg": {
+              "type": "string"
             }
           },
           "required": [
             "doc_id",
-            "operation_id",
-            "snapshot_id",
-            "changed",
-            "validation"
+            "changed"
           ],
-          "type": "object"
+          "type": "object",
+          "anyOf": [
+            {
+              "required": [
+                "operation_id",
+                "snapshot_id",
+                "validation"
+              ]
+            },
+            {
+              "properties": {
+                "dry_run": {
+                  "const": true
+                },
+                "changed": {
+                  "const": false
+                }
+              },
+              "required": [
+                "dry_run",
+                "would_change",
+                "candidate_svg"
+              ]
+            }
+          ]
         },
         "annotations": {
           "title": "Replace svg fragment",
@@ -4692,7 +4734,7 @@
       {
         "name": "create_path",
         "title": "Create path",
-        "description": "Create a `<path>` with the validated `d` data string.\n\nWhen to use: freeform / bezier / curve geometry from a `d` string. For simple primitives prefer\n`create_rect` / `create_circle` / `create_polygon`; to edit an existing path's geometry use the\n`paths` tools (`simplify_path`, `combine_paths`, ...).\n\nKey params: `d` validated against a strict charset (digits, whitespace, `,`, `.`, sign,\nexponent, SVG path command letters only) and length-bounded; geometry is NOT fully parsed; into\n`parent_id` (must exist) or the document default parent. Optional `fill` / `stroke` /\n`stroke_width` paint it in this call (validated like `set_fill` / `set_stroke`;\ndefault None = unpainted).\n\nReturn shape: `CreateResult` — `object_id` (new id), `bbox=None` (paths are not analytically\nmeasured), plus the pipeline fields (`operation_id`, `snapshot_id`, `changed`, preview).\n\nExample: `create_path(doc_id, \"M0 0 L100 0 L50 80 Z\", fill=\"#222\")`\n\nRender and look before you trust this edit: render with `render_preview` (or `live_render_view`)\nand inspect the result before relying on it; `restore_snapshot` reverts it if it is wrong.\n\nRisk class: medium (reversible write-new on the working copy; original untouched).",
+        "description": "Create a `<path>` with the validated `d` data string.\n\nWhen to use: freeform / bezier / curve geometry from a `d` string. For simple primitives prefer\n`create_rect` / `create_circle` / `create_polygon`; to edit an existing path's geometry use the\n`paths` tools (`simplify_path`, `combine_paths`, ...).\n\nKey params: `d` validated against a strict charset (digits, whitespace, `,`, `.`, sign,\nexponent, SVG path command letters only) and length-bounded; geometry is parsed with finite coordinates and bounded segment counts; into\n`parent_id` (must exist) or the document default parent. Optional `fill` / `stroke` /\n`stroke_width` paint it in this call (validated like `set_fill` / `set_stroke`;\ndefault None = unpainted).\n\nReturn shape: `CreateResult` — `object_id` (new id), `bbox=None` (paths are not analytically\nmeasured), plus the pipeline fields (`operation_id`, `snapshot_id`, `changed`, preview).\n\nExample: `create_path(doc_id, \"M0 0 L100 0 L50 80 Z\", fill=\"#222\")`\n\nRender and look before you trust this edit: render with `render_preview` (or `live_render_view`)\nand inspect the result before relying on it; `restore_snapshot` reverts it if it is wrong.\n\nRisk class: medium (reversible write-new on the working copy; original untouched).\nOptional require_closed enforces explicit Z on every subpath; reject_zero_length refuses exact zero-length drawing segments. Both default false; loops with distinct controls remain allowed. Maximum 10,000 segments.",
         "inputSchema": {
           "additionalProperties": false,
           "properties": {
@@ -4756,6 +4798,14 @@
                 }
               ],
               "default": null
+            },
+            "require_closed": {
+              "type": "boolean",
+              "default": false
+            },
+            "reject_zero_length": {
+              "type": "boolean",
+              "default": false
             }
           },
           "required": [
@@ -15046,7 +15096,7 @@
       {
         "name": "quality_report",
         "title": "Quality report",
-        "description": "Build a machine-readable quality report for a document: validation findings plus metrics.\n\nWhen to use: assessing a document's health and what optimizing would save. For pass/fail\ncorrectness only use `validate_document`; to actually strip the opportunities use\n`svg_web_optimize`.\n\nKey params: optional `editability` configures labels, explicitly designated semantic group IDs,\nlayer/depth/fragmentation advisory thresholds, or disables advice. Optional object_roles\ndesignates stroke_only objects or independent_strokes groups (at most 200 unique IDs).\neditability.authoring reports effective stroke fill, parsed subpaths and hidden/transparent\nscene geometry with known/unknown reasons. Missing or ambiguous targets and unsupported\nCSS/limits are unknown. Required resources/references are preserved; general occlusion\nand semantic silhouette quality require rendered/manual review. No automatic cleanup.\nRecommendations never affect SVG validity or score and cannot identify tracing provenance.\n\nReturn shape: `QualityReport` — `ok`, the `validate_document` findings (missing fonts, external\nassets, large rasters, id problems, viewBox sanity), quantitative metrics (object/node/layer\ncounts, embedded-raster weight in bytes, font coverage, viewBox health), and `opportunities`\n(keyed identically to `svg_web_optimize.removed`: editor metadata, unused defs, unreferenced\nids, empty groups, reducible coordinate precision). Every field is structured (not prose).\n\nExample: `quality_report(doc_id)`\n\nRisk class: low (read-only; document unchanged).",
+        "description": "Build a machine-readable quality report for a document: validation findings plus metrics.\n\nWhen to use: assessing a document's health and what optimizing would save. For pass/fail\ncorrectness only use `validate_document`; to actually strip the opportunities use\n`svg_web_optimize`.\n\nKey params: optional `editability` configures labels, explicitly designated semantic group IDs,\nlayer/depth/fragmentation advisory thresholds, or disables advice. Optional object_roles\ndesignates stroke_only objects or independent_strokes groups (at most 200 unique IDs).\neditability.authoring reports effective stroke fill, parsed subpaths and hidden/transparent\nscene geometry with known/unknown reasons. Missing or ambiguous targets and unsupported\nCSS/limits are unknown. Required resources/references are preserved; general occlusion\nand semantic silhouette quality require rendered/manual review. No automatic cleanup.\nRecommendations never affect SVG validity or score and cannot identify tracing provenance.\n\nReturn shape: `QualityReport` — `ok`, the `validate_document` findings (missing fonts, external\nassets, large rasters, id problems, viewBox sanity), quantitative metrics (object/node/layer\ncounts, embedded-raster weight in bytes, font coverage, viewBox health), and `opportunities`\n(keyed identically to `svg_web_optimize.removed`: editor metadata, unused defs, unreferenced\nids, empty groups, reducible coordinate precision). Every field is structured (not prose).\n\nExample: `quality_report(doc_id)`\n\nRisk class: low (read-only; document unchanged).\neditability.object_roles also supports closed_shape. editability.geometry reports missing Z for that role, exact zero-length segments, coincident curve endpoints and optional node_tolerance findings. editability.vector_only requests vector_content status passed/failed/unknown for all content including defs and hidden images; unknown is not passing. Read-only; advice does not alter validity or score.",
         "inputSchema": {
           "additionalProperties": false,
           "properties": {
@@ -15107,7 +15157,8 @@
                             "type": "string",
                             "enum": [
                               "stroke_only",
-                              "independent_strokes"
+                              "independent_strokes",
+                              "closed_shape"
                             ]
                           }
                         },
@@ -15116,6 +15167,18 @@
                           "role"
                         ]
                       }
+                    },
+                    "vector_only": {
+                      "type": "boolean",
+                      "default": false,
+                      "description": "Request whole-document vector certification, independent of enabled advice; unknown never passes."
+                    },
+                    "node_tolerance": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1,
+                      "default": 0,
+                      "description": "Near-endpoint threshold in path-local user units; advisory only."
                     }
                   },
                   "type": "object"
@@ -15903,7 +15966,7 @@
       {
         "name": "save_document_as",
         "title": "Save document as",
-        "description": "Save a document's current working-copy state to a NEW file in the workspace.\n\nWhen to use: persisting the working copy to disk. To export a raster/PDF instead use\n`export_document`; to snapshot in-server state (not a file) use `create_snapshot`. The original\nand source files are never touched.\n\nKey params: `dest_path` may be RELATIVE or absolute — relative anchors to the FIRST configured\nworkspace root (NOT the server CWD); absolute must resolve inside a configured root. Optional\n`root_id` from get_workspace_info selects a root explicitly with a relative dest. A dest into\na not-yet-existing SUBFOLDER (e.g. `\"output/final.svg\"`) is supported: missing parents are\ncreated only after proving they resolve INSIDE the workspace (a `..`-escaping / out-of-sandbox\ndest creates nothing and is rejected with `path rejected: outside workspace`). The dest is\nsandbox- and symlink-checked (incl. a pre-existing symlink at the final name) and the copy never\nfollows a symlinked dest (sec.12). Overwriting an existing file requires `overwrite=True` PLUS a\nnon-empty `approval_token`.\n\nReturn shape: `SaveResult` — `saved_path` (workspace-relative POSIX), `operation_id`,\n`overwritten`, and `pre_validation` / `post_validation` (the `validate_document` reports from\nbefore and after the write).\n\nExample: `save_document_as(doc_id, \"output/final.svg\")`\n\nRisk class: medium for a new-file save; high (approval-gated) when overwriting an existing file.",
+        "description": "Save a document's current working-copy state to a NEW file in the workspace.\n\nWhen to use: persisting the working copy to disk. To export a raster/PDF instead use\n`export_document`; to snapshot in-server state (not a file) use `create_snapshot`. The original\nand source files are never touched.\n\nKey params: `dest_path` may be RELATIVE or absolute — relative anchors to the FIRST configured\nworkspace root (NOT the server CWD); absolute must resolve inside a configured root. Optional\n`root_id` from get_workspace_info selects a root explicitly with a relative dest. A dest into\na not-yet-existing SUBFOLDER (e.g. `\"output/final.svg\"`) is supported: missing parents are\ncreated only after proving they resolve INSIDE the workspace (a `..`-escaping / out-of-sandbox\ndest creates nothing and is rejected with `path rejected: outside workspace`). The dest is\nsandbox- and symlink-checked (incl. a pre-existing symlink at the final name) and the copy never\nfollows a symlinked dest (sec.12). Overwriting an existing file requires `overwrite=True` PLUS a\nnon-empty `approval_token`.\n\nReturn shape: `SaveResult` — `saved_path` (workspace-relative POSIX), `operation_id`,\n`overwritten`, and `pre_validation` / `post_validation` (the `validate_document` reports from\nbefore and after the write).\n\nExample: `save_document_as(doc_id, \"output/final.svg\")`\n\nRisk class: medium for a new-file save; high (approval-gated) when overwriting an existing file.\nOptional vector_only requires passing whole-document vector certification before destination preparation or history writes; raster and unknown image/resource content refuse. No reference-image exclusions.",
         "inputSchema": {
           "additionalProperties": false,
           "properties": {
@@ -15938,6 +16001,10 @@
                 }
               ],
               "default": null
+            },
+            "vector_only": {
+              "type": "boolean",
+              "default": false
             }
           },
           "required": [

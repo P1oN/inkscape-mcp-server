@@ -227,8 +227,19 @@ impl Mutation {
                 if !PATH.is_match(value) {
                     return Err("path d contains invalid characters".into());
                 }
+                let review = crate::geometry_quality::path(value, 0.)?;
+                let require_closed = arguments::boolean(args, "require_closed", false)?;
+                let reject_zero_length = arguments::boolean(args, "reject_zero_length", false)?;
+                if require_closed && review.open_subpaths > 0 {
+                    return Err("require_closed: every subpath must end with Z".into());
+                }
+                if reject_zero_length && review.zero_segments > 0 {
+                    return Err(
+                        "reject_zero_length: path contains exact zero-length segments".into(),
+                    );
+                }
                 attrs.insert("d".into(), value.into());
-                params = json!({"d_length":raw.chars().count(),"parent_id":parent});
+                params = json!({"d_length":raw.chars().count(),"parent_id":parent,"require_closed":require_closed,"reject_zero_length":reject_zero_length});
             }
             "text" => {
                 let value = args["text"].as_str().ok_or("text must be a string")?;
@@ -338,6 +349,58 @@ pub fn apply(registry: &Registry, tool: &str, args: &Value) -> Result<Value, Str
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn path_guards_refuse_before_mutation_and_batch_history() {
+        let temp = tempfile::tempdir().unwrap();
+        let source = b"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'/>";
+        std::fs::write(temp.path().join("source.svg"), source).unwrap();
+        let mut registry = Registry {
+            workspace: crate::workspace::Workspace {
+                roots: vec![temp.path().canonicalize().unwrap()],
+                max_input: 100000,
+                max_output: 100000,
+            },
+            entries: indexmap::IndexMap::new(),
+        };
+        let id = registry.open(&json!({"path":"source.svg"})).unwrap()["doc_id"]
+            .as_str()
+            .unwrap()
+            .to_owned();
+        for spec in [
+            json!({"d":"M0 0 L1 1","require_closed":true}),
+            json!({"d":"M0 0 L0 0 Z","reject_zero_length":true}),
+            json!({"d":"M0 0 L"}),
+            json!({"d":"M1e999 0"}),
+        ] {
+            let mut args = spec.clone();
+            args["doc_id"] = json!(id);
+            assert!(apply(&registry, "create_path", &args).is_err());
+            let mut edit = spec;
+            edit["op"] = json!("create_path");
+            assert!(crate::batch::apply(&registry,&json!({"doc_id":id,"edits":[{"op":"create_rect","x":0,"y":0,"width":1,"height":1},edit]})).is_err());
+        }
+        let entry = &registry.entries[&id];
+        assert_eq!(
+            std::fs::read(temp.path().join(entry.working())).unwrap(),
+            source
+        );
+        for dir in ["operations", "snapshots"] {
+            assert_eq!(
+                std::fs::read_dir(temp.path().join(entry.directory()).join(dir))
+                    .unwrap()
+                    .count(),
+                0
+            );
+        }
+        assert!(
+            Mutation::build(
+                "create_path",
+                &json!({"d":"M0 0 C1 0 1 1 0 0 Z","require_closed":true,"reject_zero_length":true})
+            )
+            .is_ok()
+        );
+        assert!(Mutation::build("create_path", &json!({"d":"M0 0 L0 0"})).is_ok());
+    }
     #[test]
     fn default_layer_and_literal_empty_text() {
         let mut document=crate::xml::parse(br#"<svg xmlns="http://www.w3.org/2000/svg" xmlns:i="http://www.inkscape.org/namespaces/inkscape"><g id="group"/><g id="layer" i:groupmode="layer"/></svg>"#,4096).unwrap();

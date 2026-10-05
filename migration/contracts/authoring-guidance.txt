@@ -22,3 +22,20 @@ Before delivery, inspect the SVG structure and rendered image. Check that silhou
 match their subjects, and look for unintended corners, redundant shapes, fills on
 stroke-only lines and independent strokes combined into one object. Correct any issues
 found, preserving appearance and references and following the existing approval rules.
+
+For filled path silhouettes, use create_path(require_closed=true, reject_zero_length=true).
+Every subpath must explicitly close with Z; repeating the first coordinate does not
+close the stroke join. Open strokes remain allowed. Avoid accidental consecutive duplicate
+nodes; coincident curve endpoints may form intentional loops, and zero-length stroked
+segments may be intentional dots. Do not simplify or delete them blindly.
+Before delivery, request quality_report with editability.vector_only=true and explicit
+closed_shape object_roles for silhouettes. Review editability.geometry findings and
+vector_content.status; unknown is not passing. node_tolerance is optional, measured in
+path-local user units, and never authorizes merging nodes. Save a vector-only final SVG
+with save_document_as(vector_only=true). Its whole-document check includes hidden objects
+and defs and has no reference-image exclusions. Keep bitmap references outside the final
+SVG; previews and requested PNG exports are raster renderings, not embedded artwork.
+Review selected repairs using replace_svg_fragment(dry_run=true), then render the candidate
+separately before an approved apply. Its default remains approval-gated application.
+Repair only selected geometry using existing approved replace_svg_fragment operations,
+retain IDs/references and snapshots, and compare rendered before/after results.
