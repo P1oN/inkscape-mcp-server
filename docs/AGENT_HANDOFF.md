@@ -66,6 +66,12 @@ Clean-machine Apple Silicon, real Claude, real artwork/artist and broader human-
 race acceptance remain pending or user-deferred; Intel/Linux execution and Windows port
 remain separately scoped. Ad-hoc macOS signing is not Developer ID/notarization.
 
+## Dependency review
+
+Coordinated dependency updates are being reviewed in PR #15: both Cargo graphs must keep
+shared direct pins and lockfiles consistent. Historical Python and manifest-only sha2 0.11
+updates were declined; see the [review ledger](history/reports/dependency-pr-review.md).
+
 ## Repository maintenance
 
 The repository was detached from its fork network on 2026-10-06; GitHub reports `fork=false`.
