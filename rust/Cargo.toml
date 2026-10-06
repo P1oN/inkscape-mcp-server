@@ -10,10 +10,10 @@ description = "Native Rust migration of the Inkscape STDIO MCP server"
 [dependencies]
 rmcp = { version = "=3.5.0", default-features = false, features = ["server", "transport-io"] }
 tokio = { version = "=1.52.1", features = ["macros", "rt-multi-thread", "io-std", "time"] }
-serde_json = { version = "=1.0.149", features = ["preserve_order", "float_roundtrip", "arbitrary_precision"] }
-serde = "=1.0.228"
+serde_json = { version = "=1.0.151", features = ["preserve_order", "float_roundtrip", "arbitrary_precision"] }
+serde = "=1.0.229"
 libxml = "=0.3.21"
-libc = "=0.2.183"
+libc = "=0.2.190"
 sha2 = "=0.10.9"
 base64 = "=0.22.1"
 uuid = { version = "=1.26.1", features = ["v4"] }
