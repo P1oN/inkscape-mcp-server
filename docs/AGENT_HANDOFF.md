@@ -14,6 +14,11 @@ Check current code and Git status before relying on recorded results.
 
 ## Implemented
 
+Current unpublished follow-up: setup replaces existing MCP registrations and skill trees
+while preserving configuration/preferences and supplementing missing optional settings.
+Source edits/unknown revisions rebuild automatically. The published v0.1.2 archives retain
+the previous preserve/refuse installation policy. See the [upgrade ledger](history/reports/setup-upgrade.md).
+
 - Rust STDIO server, native client manager, separate GUI supervisor, one-shot INX helper
   and socket bridge. Active build/development/packaging use Rust/Bash. Ready runtime
   packages omit Python, wheels and inkex, retaining fixed Bash interfaces, the Objective-C

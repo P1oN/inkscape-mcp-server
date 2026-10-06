@@ -12,6 +12,8 @@ fn invoke(root: &Path, source: &Path, script: &str, args: &[&str]) -> Result<Val
             .args(args)
             .current_dir(root)
             .env("PATH", "")
+            .env("HOME", root.join("home"))
+            .env("CODEX_HOME", root.join("home/.codex"))
             .env("INKSCAPE_MCP_RAW_ACTION_ENABLED", "false")
             .env("INKSCAPE_MCP_TOOL_PROFILE", "full")
             .env("INKSCAPE_MCP_TOOL_DESC", "full")
@@ -128,6 +130,17 @@ pub fn run(args: &Args) -> Result<()> {
         )?;
     }
     fs::write(&config, &stored)?;
+    fs::write(&config, format!("{}\n", lines[..4].join("\n")))?;
+    let upgraded = invoke(
+        &root,
+        &source,
+        "setup.sh",
+        &["--package", package.to_str().unwrap()],
+    )?;
+    ensure(
+        upgraded["exit"] == 0 && fs::read(&config)? == stored,
+        "setup failed to supplement missing live/engine defaults",
+    )?;
     let colon = root.join("bad:workspace");
     fs::create_dir(&colon)?;
     let newline = format!("{}\n/", root.display());

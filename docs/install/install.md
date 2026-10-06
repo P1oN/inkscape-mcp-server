@@ -20,13 +20,18 @@ For v0.1.2 sources/ready runtime or current sources/packages:
 ./run-mcp.sh --doctor
 ```
 
-Use `claude` for Claude Code; the selected CLI must be installed and available on PATH.
+Use `claude` for Claude Code. Current setup writes the user profile directly after a
+bounded handshake; standalone `connect` and published v0.1.2 require the selected CLI on PATH.
 Setup detects Inkscape, asks for an existing SVG workspace and saves private data-only
 configuration. `run-mcp.sh` starts the Rust STDIO server using these saved settings.
 Connection is optional and includes a bounded server handshake before client registration.
 See [client management](client-management.md) for commands and scope.
 
-Without build, `--check`, or client connection, ready-package setup only saves configuration.
+A fresh ready-package setup without build, `--check`, or client connection only saves
+configuration. Current setup also refreshes existing client registrations and skills
+automatically, preserving preferences and archiving replaced files; published v0.1.2
+retains the previous preserve/refuse behavior. Missing live/engine and Sentry optional
+fields are supplemented with defaults when setup runs.
 `--check` runs doctor before saving; `--connect-client` executes the native Rust client CLI and starts
 a separate MCP process for the handshake. Source first setup compiles/packages the runtime.
 None of these paths launches Inkscape GUI. Doctor executes Inkscape CLI and checks packaged native binaries/bridge/private bus,
@@ -35,7 +40,7 @@ does not certify runtime readiness or macOS approval.
 
 Reruns preserve saved choices and reuse a complete runtime when recorded revisions match.
 A changed committed revision triggers rebuilding; unknown revisions or uncommitted source
-edits need `--rebuild`. This option repeats automatic preparation/build. `--local-tools`
+edits trigger rebuilding in current sources; v0.1.2 needs explicit `--rebuild`. This option repeats automatic preparation/build. `--local-tools`
 uses existing pinned prerequisites and cached dependencies offline; `--build` aliases it,
 and `--bootstrap` aliases automatic rebuilding. Build modes and `--package` are exclusive.
 Use `--version` for installed metadata, and the [update/removal guide](client-management.md)

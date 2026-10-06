@@ -15,7 +15,8 @@ source installation and a ready Apple Silicon package. It includes installation/
 management, complete Python removal, reviewed live packages and vector-quality guards
 from PRs #8–11. Older v0.1.0/v0.1.1 previews retain their original behavior.
 
-For v0.1.2 sources or current sources on Apple Silicon macOS 15+, install Inkscape 1.4+ and the client CLI,
+For v0.1.2 sources or current sources on Apple Silicon macOS 15+, install Inkscape 1.4+
+and the client (v0.1.2 also needs its CLI),
 then run from the checkout:
 
 ```sh
@@ -30,9 +31,9 @@ on first use. Keep the checkout in its permanent location: the client stores its
 installation dialog and rerun setup. Existing developer tools are preserved; source build/development tools use Rust and Bash; ready packages contain no Python runtime.
 
 Connection checks MCP initialization, required tools and a first workspace request before
-registering through the client CLI. A differing existing `inkscape` entry is preserved
-and refused. Restart/reconnect the client after installation. Default setup without
-`--connect-client` saves server configuration without registering a client.
+registering through the client CLI. In current sources, setup replaces the existing `inkscape` transport binding while
+preserving other client settings. v0.1.2 archives still refuse a differing entry. Restart/reconnect the client after installation. Default setup refreshes existing registrations and skills;
+`--connect-client` is required to register a new client.
 
 For the published v0.1.1 source archive, use its original commands instead:
 
@@ -47,6 +48,11 @@ Ready runtime packages need Inkscape and no user-installed compiler or Python.
 
 ## Update and remove
 
+Current-source setup refreshes an existing installation automatically: runtime selection,
+MCP registration and installed skill. Saved workspace/Inkscape/live/engine/Sentry choices
+and unrelated Codex/Claude configuration survive; missing optional settings receive defaults.
+This upgrade policy is not included in the already published v0.1.2 archives.
+
 ```sh
 ./setup.sh --version
 ./setup.sh --rebuild
@@ -56,13 +62,13 @@ Ready runtime packages need Inkscape and no user-installed compiler or Python.
 
 Setup reruns preserve workspace/Inkscape/live/engine and monitoring settings, and reuse a
 complete saved runtime when source revisions match. A changed committed revision triggers
-rebuilding; unknown revisions or local edits need an explicit `--rebuild`.
+rebuilding; unknown revisions or local edits also trigger a rebuild in current sources.
 `--local-tools` builds offline using existing pinned prerequisites; `--build` is its alias.
 `--bootstrap` is the compatibility alias for automatic preparation/rebuild.
 Build options cannot be combined with `--package DIRECTORY`.
 
-Skill updates merge against a saved upstream baseline and preserve installed content on
-conflicts. Uninstall disconnects the matching client entry and archives local settings,
+Current setup replaces installed skill contents and archives the old tree outside skill discovery.
+The standalone `install-skill.sh --update` still merges customizations against the upstream baseline. Uninstall disconnects the matching client entry and archives local settings,
 builds and an owned default-location skill; drawings remain in the workspace.
 Client `config`, `check`, `connect`, `disconnect` and `uninstall` use the packaged native
 Rust CLI through `scripts/mcp-client.sh`. Management does not depend on Python;
@@ -85,9 +91,9 @@ Install it alongside server configuration:
 ./setup.sh --install-skill codex
 ```
 
-Use `--install-skill claude` for Claude Code. Installation is optional and preserves
-different existing skills. Add `--update-skill` to merge an existing managed skill;
-conflicts leave installed content unchanged. Skill installation alone does not register MCP.
+Use `--install-skill claude` for Claude Code. New skill installation is optional. Current setup replaces an existing installed skill,
+archiving its complete previous tree; `--update-skill` remains a compatibility alias.
+Use standalone `install-skill.sh --update` to merge customizations instead. Skill installation alone does not register MCP.
 For an already configured server, run `./scripts/install-skill.sh --client codex`
 without rebuilding. See [skill installation](docs/install/agent-skill.md) for paths
 and other clients. These additions are included in v0.1.2 source and ready packages; the historical

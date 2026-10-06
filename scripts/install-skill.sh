@@ -4,7 +4,7 @@ set -euo pipefail
 export PATH="/usr/bin:/bin${PATH:+:$PATH}"
 repo=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)
 fail() { printf '%s\n' "$*" >&2; exit 1; }
-client=codex destination= update=false
+client=codex destination= update=false replace=false
 while [ "$#" -gt 0 ]; do
     case "$1" in
         --client|--destination)
@@ -12,15 +12,17 @@ while [ "$#" -gt 0 ]; do
             case "$1" in --client) client=$2;; --destination) destination=$2;; esac
             shift 2;;
         --update) update=true; shift;;
+        --replace) replace=true; shift;;
         --help)
             printf '%s\n' 'Usage: scripts/install-skill.sh [--client codex|claude] [--destination SKILLS_DIRECTORY]' \
                 'Default: ${CODEX_HOME:-$HOME/.codex}/skills or $HOME/.claude/skills.' \
-                'Installs inkscape-mcp. --update merges against the recorded upstream; conflicts preserve existing files.'
+                'Installs inkscape-mcp. --replace archives/replaces all skill files; --update merges customizations.'
             exit 0;;
         *) fail "Unknown option: $1";;
     esac
 done
 case "$client" in codex|claude) ;; *) fail 'Client must be codex or claude.';; esac
+[ "$replace" = false ] || [ "$update" = false ] || fail 'Choose --replace or --update.'
 if [ -z "$destination" ]; then
     case "$client" in
         codex) destination=${CODEX_HOME:-${HOME:?HOME is required}/.codex}/skills;;
@@ -49,6 +51,28 @@ trap cleanup_update EXIT
 if [ -e "$target" ]; then
     [ -d "$target" ] && [ ! -L "$target/agents" ] || fail 'Existing skill has a different layout; preserved.'
     [ -z "$(find "$target" -type l -print)" ] || fail 'Existing skill contains symlinks; preserved.'
+    if [ "$replace" = true ]; then
+        stage=$(mktemp -d "$destination/.inkscape-mcp-update.XXXXXX")
+        (umask 077; mkdir -p -- "$stage/agents" "$stage/.inkscape-mcp-upstream/agents";
+            cp -- "$source_dir/SKILL.md" "$stage/SKILL.md";
+            cp -- "$source_dir/agents/openai.yaml" "$stage/agents/openai.yaml";
+            cp -- "$source_dir/SKILL.md" "$stage/.inkscape-mcp-upstream/SKILL.md";
+            cp -- "$source_dir/agents/openai.yaml" "$stage/.inkscape-mcp-upstream/agents/openai.yaml";
+            printf '%s\n' "$repo" > "$stage/.inkscape-mcp-owner")
+        backup_root=$(dirname -- "$destination")/inkscape-mcp-backups
+        [ ! -L "$backup_root" ] || fail 'Skill backup directory must not be symlinked.'
+        (umask 077; mkdir -p -- "$backup_root")
+        backup=$(mktemp -d "$backup_root/skill.XXXXXX")
+        rmdir -- "$backup"
+        mv -- "$target" "$backup"
+        if ! mv -- "$stage" "$target"; then
+            mv -- "$backup" "$target"
+            fail 'Skill replacement failed; previous version restored.'
+        fi
+        stage=
+        printf 'Replaced skill: %s\nPrevious version archived at %s\n' "$target" "$backup" >&2
+        exit 0
+    fi
     identical=true
     for file in SKILL.md agents/openai.yaml; do
         [ -f "$target/$file" ] || fail 'Existing skill has a different layout; preserved.'

@@ -21,8 +21,8 @@ explicit option replaces them. Invalid settings/configuration paths are refused 
 building. In a source checkout, setup compares the current committed revision (or source
 archive marker) with the installed package's recorded revision. A mismatch triggers an
 automatic rebuild; a failed build preserves saved runtime settings. An explicit `--package`
-selects that package even if revisions differ. Unknown revisions or uncommitted source
-edits produce a rebuild instruction; use `--rebuild` to include those changes explicitly.
+selects that package even if revisions differ. Current sources rebuild automatically for unknown revisions or uncommitted source edits.
+Published v0.1.2 instead prints a rebuild instruction; use `--rebuild` with that version.
 
 `./setup.sh --local-tools` explicitly rebuilds using installed tools and cached Cargo
 dependencies only. It does not download Rust/native inputs or dependencies;

@@ -124,7 +124,7 @@ pub fn run(args: &Args) -> Result<()> {
                 .contains("MCP settings were saved, but client connection failed")
             && result
                 .2
-                .contains("scripts/mcp-client.sh --client codex connect"),
+                .contains("scripts/mcp-client.sh --client codex upgrade"),
         "failed client connection retains settings and explains standalone retry",
     )?;
     fs::write(client_script, saved_client)?;
@@ -148,9 +148,13 @@ pub fn run(args: &Args) -> Result<()> {
     fs::write(skill.join("SKILL.md"), saved_skill)?;
     check(
         &mut checks,
-        setup(&base, &["--install-skill", "codex"])?.0 != 0
-            && fs::read(skill.join("SKILL.md"))? == saved_skill,
-        "different existing skill preserved",
+        setup(&base, &["--install-skill", "codex"])?.0 == 0
+            && fs::read(skill.join("SKILL.md"))?
+                == fs::read(checkout.join("skills/inkscape-mcp/SKILL.md"))?
+            && fs::read_dir(codex_home.join("inkscape-mcp-backups"))?
+                .filter_map(std::result::Result::ok)
+                .any(|p| fs::read(p.path().join("SKILL.md")).is_ok_and(|v| v == saved_skill)),
+        "different existing skill replaced and archived outside discovery",
     )?;
     fs::remove_file(skill.join("SKILL.md"))?;
     let sentinel = root.join("skill-sentinel");
@@ -161,6 +165,17 @@ pub fn run(args: &Args) -> Result<()> {
         invoke("scripts/install-skill.sh", &["--client", "codex"])?.0 != 0
             && fs::read(sentinel)? == saved_skill,
         "existing skill file symlink refused without touching target",
+    )?;
+    fs::remove_file(skill.join("SKILL.md"))?;
+    fs::write(skill.join("SKILL.md"), saved_skill)?;
+    fs::write(skill.join("obsolete.txt"), "stale extra")?;
+    check(
+        &mut checks,
+        setup(&base, &[])?.0 == 0
+            && fs::read(skill.join("SKILL.md"))?
+                == fs::read(checkout.join("skills/inkscape-mcp/SKILL.md"))?
+            && !skill.join("obsolete.txt").exists(),
+        "ordinary setup replaces installed skill and removes stale files",
     )?;
     check(
         &mut checks,
@@ -204,8 +219,8 @@ pub fn run(args: &Args) -> Result<()> {
     )?;
     check(
         &mut checks,
-        setup(&base[2..], &[])?.0 == 0 && !marker.exists(),
-        "rerun reuses configured package without execution or rebuild",
+        setup(&base[2..], &[])?.0 != 0 && !marker.exists(),
+        "unidentified sources require a builder instead of reusing stale runtime",
     )?;
     let build_marker = root.join("builder-called");
     for (name, mode, expected) in [
@@ -232,8 +247,17 @@ pub fn run(args: &Args) -> Result<()> {
     fs::remove_file(&build_marker)?;
     check(
         &mut checks,
-        setup(&base[2..], &[])?.0 == 0 && !build_marker.exists(),
-        "repeat source setup skips both builders",
+        setup(&base[2..], &[])?.0 == 0 && fs::read_to_string(&build_marker)? == "auto",
+        "unidentified source rerun rebuilds automatically",
+    )?;
+    fs::remove_file(&build_marker)?;
+    write_json(
+        &package.join("libexec/inkscape-mcp/package.json"),
+        &json!({"source_head":"1".repeat(40)}),
+    )?;
+    fs::write(
+        checkout.join("SOURCE_REVISION"),
+        format!("inkscape-mcp-source-v1\n{}\n", "1".repeat(40)),
     )?;
     check(
         &mut checks,
@@ -402,6 +426,14 @@ pub fn run(args: &Args) -> Result<()> {
         "legacy environment retained without local setting",
     )?;
     let config = checkout.join(".inkscape-mcp-local/sentry.conf");
+    fs::write(&config, "inkscape-mcp-sentry-v1\nfalse\n")?;
+    check(
+        &mut checks,
+        setup(&base, &[])?.0 == 0
+            && fs::read_to_string(&config)? == "inkscape-mcp-sentry-v1\nfalse\n\nproduction\n",
+        "setup supplements missing optional Sentry fields without enabling reporting",
+    )?;
+    fs::remove_file(&config)?;
     let input = root.join("dsn-input");
     fs::write(&input, format!("{DSN}\n"))?;
     let result = setup(

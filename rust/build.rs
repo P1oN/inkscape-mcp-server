@@ -24,7 +24,10 @@ fn fingerprint(path: &Path, hash: &mut std::collections::hash_map::DefaultHasher
     }
 }
 fn main() {
-    let root = Path::new(env!("CARGO_MANIFEST_DIR")).parent().unwrap();
+    // Cargo may reuse this executable across checkouts sharing a target directory.
+    // Resolve the invoking source root at execution time, not when compiling the script.
+    let manifest_dir = std::env::var("CARGO_MANIFEST_DIR").unwrap();
+    let root = Path::new(&manifest_dir).parent().unwrap();
     let revision = if root.join(".git").exists() {
         println!("cargo:rerun-if-changed={}", root.join(".git").display());
         for item in ["HEAD", "refs", "packed-refs"] {

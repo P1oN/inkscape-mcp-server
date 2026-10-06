@@ -3,6 +3,13 @@
 Distribution tags describe published previews; source/build identity remains recorded in each package.
 Detailed checkpoint evidence is indexed in [history](docs/history/README.md).
 
+## Unreleased
+
+- Refresh existing MCP registrations and installed skill trees during setup, archiving
+  prior config/skill versions and preserving unrelated preferences and saved settings.
+- Resolve build-script source identity at execution time when Cargo caches are shared across checkouts.
+- Supplement missing optional setup fields; rebuild changed/unidentified sources automatically.
+
 ## v0.1.2 — 2026-10-06, prerelease
 
 Source archive and ready macOS Apple Silicon package, with checksums.
