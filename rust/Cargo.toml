@@ -9,7 +9,7 @@ description = "Native Rust migration of the Inkscape STDIO MCP server"
 
 [dependencies]
 rmcp = { version = "=3.5.0", default-features = false, features = ["server", "transport-io"] }
-tokio = { version = "=1.52.1", features = ["macros", "rt-multi-thread", "io-std", "time"] }
+tokio = { version = "=1.53.1", features = ["macros", "rt-multi-thread", "io-std", "time"] }
 serde_json = { version = "=1.0.149", features = ["preserve_order", "float_roundtrip", "arbitrary_precision"] }
 serde = "=1.0.228"
 libxml = "=0.3.21"
