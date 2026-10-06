@@ -42,16 +42,22 @@ Symlinked skill trees are refused.
 
 ```sh
 ./scripts/install-skill.sh --client codex --update
-# Or together with setup:
-./setup.sh --install-skill codex --update-skill
+# Replace through current setup (old contents are archived):
+./setup.sh --install-skill codex
 ```
 
-Updates use a three-way merge against the saved upstream version. Unmodified files receive
+Standalone `--update` uses a three-way merge against the saved upstream version. Unmodified files receive
 the new version; nonconflicting user edits are retained. A prior version is archived beside
 the skill. On conflicts, the installed files and baseline remain untouched; the installer
 prints a temporary directory outside the skills folder containing proposed merge files for manual
 review. Customized legacy skills without a baseline are preserved and require a manual comparison. Identical legacy
 installs can be adopted by rerunning the installer before adding customizations.
+
+Current setup uses `--replace`: it installs the complete bundled skill and removes stale
+extra files from the active tree, archiving the previous tree under the profile
+`inkscape-mcp-backups` directory outside skills discovery. It also refreshes already
+installed skills without flags. `--update-skill` is a compatibility alias for replacement
+in setup; published v0.1.2 retains the earlier merge/opt-in behavior.
 
 Restart your client to discover the skill. In Codex, invoke it with `$inkscape-mcp`
 or let the client select it for relevant SVG requests. Configure the MCP connection

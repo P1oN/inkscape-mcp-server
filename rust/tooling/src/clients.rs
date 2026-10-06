@@ -152,6 +152,21 @@ pub fn run(args: &Args) -> Result<()> {
             client(name, action, false)?;
         }
         ensure(fs::read(path)? == foreign, "foreign entry modified")?;
+        execute(&repo.join("setup.sh"), &[], true)?;
+        let updated = fs::read_to_string(path)?;
+        ensure(
+            updated.contains(repo.join("run-mcp.sh").to_str().unwrap())
+                && !updated.contains("/foreign/run-mcp.sh"),
+            "setup did not replace old registration",
+        )?;
+        ensure(
+            if *name == "codex" {
+                updated.contains("user-model")
+            } else {
+                crate::common::json(path)?["unrelated"]["keep"] == true
+            },
+            "setup replaced unrelated client settings",
+        )?;
         fs::write(path, installed)?;
         client(name, "disconnect", true)?;
         client(name, "disconnect", true)?;

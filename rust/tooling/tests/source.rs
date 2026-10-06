@@ -33,6 +33,45 @@ fn repository(root: &Path) {
     git(root, &["commit", "--quiet", "-m", "fixture"]);
 }
 #[test]
+fn cached_build_script_uses_current_git_free_source_identity() {
+    let root = tempfile::tempdir().unwrap();
+    let compiled_from = root.path().join("compiled-from");
+    repository(&compiled_from);
+    let archive = root.path().join("archive");
+    fs::create_dir_all(archive.join("rust")).unwrap();
+    let executable = root.path().join("cached-build-script");
+    assert!(
+        Command::new(std::env::var_os("RUSTC").unwrap_or_else(|| "rustc".into()))
+            .arg(Path::new(env!("CARGO_MANIFEST_DIR")).join("../build.rs"))
+            .env("CARGO_MANIFEST_DIR", compiled_from.join("rust"))
+            .args(["--edition=2024", "-o"])
+            .arg(&executable)
+            .status()
+            .unwrap()
+            .success()
+    );
+    let invoke = || {
+        String::from_utf8(
+            Command::new(&executable)
+                .env("CARGO_MANIFEST_DIR", archive.join("rust"))
+                .output()
+                .unwrap()
+                .stdout,
+        )
+        .unwrap()
+    };
+    assert!(invoke().contains("cargo:rustc-env=INKSCAPE_MCP_REVISION=unknown\n"));
+    let revision = "a".repeat(40);
+    fs::write(
+        archive.join("SOURCE_REVISION"),
+        format!("inkscape-mcp-source-v1\n{revision}\n"),
+    )
+    .unwrap();
+    assert!(invoke().contains(&format!(
+        "cargo:rustc-env=INKSCAPE_MCP_REVISION={revision}\n"
+    )));
+}
+#[test]
 fn source_exports_distinguish_commits_from_unpublished_files() {
     let root = tempfile::tempdir().unwrap();
     let repo = root.path().join("repo");

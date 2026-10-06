@@ -17,11 +17,19 @@ Both retain saved workspace/Inkscape/live/engine and monitoring choices. Ready p
 `--package DIRECTORY`. Version output reads installed package metadata without starting MCP
 or Inkscape. Older metadata may have only source_head; rebuild for full build identity.
 
-The client must be installed and its CLI available on PATH. Registration uses
+For a new standalone registration, the client must be installed and its CLI available on PATH. Standalone `connect` uses
 [Codex's CLI](https://learn.chatgpt.com/docs/extend/mcp?surface=cli) or
-[Claude Code's CLI](https://code.claude.com/docs/en/mcp), never arbitrary config-file rewrites.
+[Claude Code's CLI](https://code.claude.com/docs/en/mcp). Current setup uses bounded native
+`upgrade`: after a successful handshake it atomically patches only the inkscape transport
+binding in the existing TOML/JSON, preserving other servers, preferences, environment and
+timeouts. TOML comments/formatting outside the managed binding survive. The old config is
+backed up. New command/args/transport replace the old binding; obsolete HTTP fields are removed.
 Codex respects CODEX_HOME; Claude registers in user scope. Other servers are preserved.
-A differing existing inkscape entry is refused; explicitly rename/remove it first.
+Standalone `connect` refuses a differing entry; setup automatically replaces it. Ordinary
+setup also refreshes existing registrations without requiring `--connect-client`; this flag
+selects a new registration. An existing profile can be refreshed with `upgrade` without
+a client CLI, while standalone `connect` still requires it. Published v0.1.2 retains the
+previous preserve/refuse behavior.
 Claude local/project configuration may shadow a user entry; check `/mcp` in the client.
 
 ```sh
@@ -29,6 +37,7 @@ Claude local/project configuration may shadow a user entry; check `/mcp` in the 
 ./scripts/mcp-client.sh --client claude config
 ./scripts/mcp-client.sh --client codex check
 ./scripts/mcp-client.sh --client codex connect
+./scripts/mcp-client.sh --client codex upgrade
 ./scripts/mcp-client.sh --client codex disconnect
 ```
 
@@ -38,15 +47,16 @@ request has a fixed deadline, including when unrelated notifications arrive. `co
 the same check before registration and verifies saved user configuration afterward.
 This verifies server availability; it does not run a model session or prove a client's
 permission choices. Restart/reconnect the client to load the changed server and skill.
-No path launches Inkscape GUI. All five actions run through the separate native Rust
+No path launches Inkscape GUI. Management actions run through the separate native Rust
 `bin/inkscape-mcp-client` executable. The Bash interfaces above are unchanged. The manager
 reads configuration as data and invokes client CLIs with argument lists; it never loads
 private Python, the supervisor or Inkscape helpers. MCP requests have 30-second fixed
 deadlines, bounded response sizes and owned-process shutdown.
 
-For [skill updates](agent-skill.md), use `--update-skill` with `--install-skill`, or the
-standalone installer with `--update`. Customizations merge against the saved baseline;
-conflicts preserve installed content and leave a proposed merge for review.
+Current setup replaces an installed skill even on an ordinary rerun, archiving its
+previous complete tree outside skill discovery. `--install-skill` selects a new installation;
+`--update-skill` is a compatibility alias. For a manual merge preserving customizations,
+use standalone `install-skill.sh --update`. See [skill updates](agent-skill.md).
 
 ## Remove and reinstall
 

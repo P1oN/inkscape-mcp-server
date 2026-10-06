@@ -85,6 +85,9 @@ fn entry(
     if !regular_optional(&path)? {
         return Ok(None);
     }
+    if fs::metadata(&path)?.len() > 4 * 1024 * 1024 {
+        return Err("Client configuration exceeds size limit".into());
+    }
     let text = fs::read_to_string(path)?;
     let (data, key): (Value, _) = match client {
         Client::Codex => (
@@ -108,7 +111,6 @@ fn entry(
         if require_match
             && (item.get("command").and_then(Value::as_str) != launcher.to_str()
                 || item.get("args").is_some_and(|v| v != &json!([]))
-                || item.get("env").is_some_and(|v| v != &json!({}))
                 || item.get("url").is_some_and(|v| !v.is_null() && v != ""))
         {
             return Err(
@@ -117,6 +119,112 @@ fn entry(
         }
     }
     Ok(result)
+}
+// Setup owns the inkscape transport binding; all other client settings stay intact.
+fn upgraded_config(text: &str, client: Client, launcher: &Path) -> Result<String> {
+    let launcher = launcher.to_str().ok_or("Invalid launcher path")?;
+    match client {
+        Client::Codex => {
+            let mut document = text.parse::<toml_edit::DocumentMut>()?;
+            if !document.contains_key("mcp_servers") {
+                document["mcp_servers"] = toml_edit::Item::Table(toml_edit::Table::new());
+            }
+            let servers = document["mcp_servers"]
+                .as_table_like_mut()
+                .ok_or("Invalid client server table")?;
+            if !servers.contains_key(NAME) {
+                servers.insert(NAME, toml_edit::Item::Table(toml_edit::Table::new()));
+            }
+            let server = servers
+                .get_mut(NAME)
+                .unwrap()
+                .as_table_like_mut()
+                .ok_or("Invalid inkscape entry")?;
+            for key in [
+                "url",
+                "http_headers",
+                "env_http_headers",
+                "bearer_token_env_var",
+                "type",
+            ] {
+                server.remove(key);
+            }
+            server.insert("command", toml_edit::value(launcher));
+            server.insert("args", toml_edit::value(toml_edit::Array::new()));
+            if !server.contains_key("env") {
+                server.insert("env", toml_edit::value(toml_edit::InlineTable::new()));
+            }
+            Ok(document.to_string())
+        }
+        Client::Claude => {
+            let mut document: Value = if text.is_empty() {
+                json!({})
+            } else {
+                serde_json::from_str(text)?
+            };
+            let root = document
+                .as_object_mut()
+                .ok_or("Invalid client configuration")?;
+            let servers = root
+                .entry("mcpServers")
+                .or_insert_with(|| json!({}))
+                .as_object_mut()
+                .ok_or("Invalid client server table")?;
+            let server = servers
+                .entry(NAME)
+                .or_insert_with(|| json!({}))
+                .as_object_mut()
+                .ok_or("Invalid inkscape entry")?;
+            for key in ["url", "headers"] {
+                server.remove(key);
+            }
+            server.insert("type".into(), json!("stdio"));
+            server.insert("command".into(), json!(launcher));
+            server.insert("args".into(), json!([]));
+            server.entry("env").or_insert_with(|| json!({}));
+            Ok(serde_json::to_string_pretty(&document)? + "\n")
+        }
+    }
+}
+fn upgrade_registration(profiles: &Profiles, client: Client, launcher: &Path) -> Result<()> {
+    let path = profiles.config(client);
+    let existing = regular_optional(&path)?;
+    if existing && fs::metadata(&path)?.len() > 4 * 1024 * 1024 {
+        return Err("Client configuration exceeds size limit".into());
+    }
+    let before = if existing {
+        fs::read_to_string(&path)?
+    } else {
+        String::new()
+    };
+    let after = upgraded_config(&before, client, launcher)?;
+    if before == after {
+        return Ok(());
+    }
+    let parent = path.parent().ok_or("Missing client profile")?;
+    fs::create_dir_all(parent)?;
+    let mut staged = tempfile::NamedTempFile::new_in(parent)?;
+    staged.write_all(after.as_bytes())?;
+    staged.flush()?;
+    if existing {
+        staged
+            .as_file()
+            .set_permissions(fs::metadata(&path)?.permissions())?;
+    }
+    if regular_optional(&path)? != existing || (existing && fs::read_to_string(&path)? != before) {
+        return Err("Client configuration changed during setup; retry".into());
+    }
+    if existing {
+        let mut backup = tempfile::Builder::new()
+            .prefix("inkscape-config-backup.")
+            .tempfile_in(parent)?;
+        backup.write_all(before.as_bytes())?;
+        backup.flush()?;
+        let (_, saved) = backup.keep()?;
+        eprintln!("Previous client configuration saved at {}", saved.display());
+    }
+    staged.persist(&path).map_err(|e| e.error)?;
+    Ok(())
 }
 fn records(repo: &Path) -> Result<(PathBuf, Vec<String>)> {
     let local = repo.join(".inkscape-mcp-local");
@@ -387,6 +495,12 @@ fn archive_with(
 }
 fn manage(repo: &Path, profiles: &Profiles, client: Client, action: &str) -> Result<()> {
     let launcher = repo.join("run-mcp.sh");
+    if action == "upgrade-existing" {
+        if entry(profiles, client, &launcher, false)?.is_none() {
+            return Ok(());
+        }
+        return manage(repo, profiles, client, "upgrade");
+    }
     if action == "config" {
         match client {
             Client::Codex => println!(
@@ -409,7 +523,7 @@ fn manage(repo: &Path, profiles: &Profiles, client: Client, action: &str) -> Res
         );
         return Ok(());
     }
-    let current = entry(profiles, client, &launcher, true)?;
+    let current = entry(profiles, client, &launcher, action != "upgrade")?;
     let (record, mut clients) = records(repo)?;
     if action == "uninstall" {
         for other in &clients {
@@ -435,12 +549,14 @@ fn manage(repo: &Path, profiles: &Profiles, client: Client, action: &str) -> Res
             path.is_file()
         }
     });
-    if !cli_available {
+    if !cli_available && action != "upgrade" {
         return Err("Client CLI missing; install it or use the config action".into());
     }
-    if action == "connect" {
+    if action == "connect" || action == "upgrade" {
         let mut report = probe(&mut Command::new(&launcher), REQUEST_TIMEOUT)?;
-        if current.is_none() {
+        if action == "upgrade" {
+            upgrade_registration(profiles, client, &launcher)?;
+        } else if current.is_none() {
             let launcher = launcher.to_str().ok_or("Invalid launcher path")?;
             let args = match client {
                 Client::Codex => vec!["mcp", "add", NAME, "--", launcher],
@@ -504,12 +620,15 @@ fn main_result() -> Result<()> {
                     &args.next().ok_or("Missing --client value")?,
                 )?)
             }
-            "config" | "check" | "connect" | "disconnect" | "uninstall" if action.is_none() => {
+            "config" | "check" | "connect" | "upgrade" | "upgrade-existing" | "disconnect"
+            | "uninstall"
+                if action.is_none() =>
+            {
                 action = Some(arg)
             }
             "--help" | "-h" => {
                 println!(
-                    "Usage: inkscape-mcp-client --repo DIRECTORY --client codex|claude config|check|connect|disconnect|uninstall"
+                    "Usage: inkscape-mcp-client --repo DIRECTORY --client codex|claude config|check|connect|upgrade|disconnect|uninstall"
                 );
                 return Ok(());
             }
@@ -538,6 +657,48 @@ fn main() {
 mod tests {
     use super::*;
     use std::os::unix::fs::{PermissionsExt, symlink};
+    #[test]
+    fn upgrade_replaces_transport_preserving_configuration_and_comments() {
+        let (_root, repo, profiles) = fixture();
+        let launcher = repo.join("run-mcp.sh");
+        let codex = "# user preferences\nmodel = 'custom'\n[mcp_servers.other]\nurl = 'https://other.invalid'\n[mcp_servers.inkscape]\nurl = 'https://old.invalid'\nstartup_timeout_sec = 90\n[mcp_servers.inkscape.env]\nCUSTOM = 'kept'\n";
+        let claude = json!({"unrelated":{"keep":true},"mcpServers":{"other":{"url":"https://other.invalid"},"inkscape":{"url":"https://old.invalid","headers":{"old":"token"},"timeout":90,"env":{"CUSTOM":"kept"}}}}).to_string();
+        for (client, text) in [(Client::Codex, codex.to_owned()), (Client::Claude, claude)] {
+            fs::write(profiles.config(client), &text).unwrap();
+            upgrade_registration(&profiles, client, &launcher).unwrap();
+            let item = entry(&profiles, client, &launcher, true).unwrap().unwrap();
+            assert_eq!(item["command"], launcher.to_str().unwrap());
+            assert_eq!(item["args"], json!([]));
+            assert_eq!(item["env"]["CUSTOM"], "kept");
+            assert!(item.get("url").is_none());
+            let updated = fs::read_to_string(profiles.config(client)).unwrap();
+            assert!(updated.contains("other.invalid"));
+            assert!(updated.contains("90"));
+            if client == Client::Codex {
+                assert!(updated.contains("# user preferences"));
+                assert!(updated.contains("model = 'custom'"));
+            }
+            upgrade_registration(&profiles, client, &launcher).unwrap();
+            assert_eq!(
+                fs::read_to_string(profiles.config(client)).unwrap(),
+                updated
+            );
+        }
+        assert!(upgraded_config("mcp_servers = 7", Client::Codex, &launcher).is_err());
+        assert!(upgraded_config("[]", Client::Claude, &launcher).is_err());
+    }
+    #[test]
+    fn failed_upgrade_handshake_preserves_old_registration() {
+        let (_root, repo, profiles) = fixture();
+        let config = profiles.config(Client::Codex);
+        let original = "[mcp_servers.inkscape]\ncommand = '/old/run-mcp.sh'\n";
+        fs::write(&config, original).unwrap();
+        fs::write(repo.join("run-mcp.sh"), "#!/bin/sh\nexit 1\n").unwrap();
+        fs::set_permissions(repo.join("run-mcp.sh"), fs::Permissions::from_mode(0o700)).unwrap();
+        assert!(manage(&repo, &profiles, Client::Codex, "upgrade").is_err());
+        assert_eq!(fs::read_to_string(config).unwrap(), original);
+        assert!(records(&repo).unwrap().1.is_empty());
+    }
     fn fixture() -> (tempfile::TempDir, PathBuf, Profiles) {
         let root = tempfile::tempdir().unwrap();
         let repo = root.path().join("source space");

@@ -56,15 +56,16 @@ while [ "$#" -gt 0 ]; do
                 'Interactive setup asks about optional error reporting (default off).' \
                 'DSN input is hidden; use a file rather than putting it in shell history.' \
                 'Source setup automatically downloads missing build tools privately and builds on first use.' \
-                'Subsequent runs reuse the saved complete package; ready packages only save settings.' \
+                'Subsequent runs reuse matching source builds and refresh existing clients/skills.' \
                 '--local-tools builds with existing developer tools, without automatic tool downloads.' \
                 '--package selects a ready package; --check runs doctor before saving.' \
                 'Compatibility: --build aliases --local-tools; --bootstrap explicitly repeats automatic provisioning/build.' \
                 'Automatic provisioning supports Apple Silicon macOS 15+; Apple developer tools are required.' \
                 '--rebuild explicitly rebuilds; --version displays installed revision/build metadata.' \
-                '--connect-client codex|claude verifies handshake and registers through the client CLI.' \
-                '--update-skill with --install-skill merges upstream changes, preserving customizations.' \
-                'Does not launch Inkscape. Client settings change only with --connect-client.'
+                '--connect-client codex|claude verifies handshake and atomically updates the client configuration.' \
+                '--install-skill replaces bundled guidance, archiving the previous skill; --update-skill is a compatibility alias.' \
+                'Existing MCP registrations and installed skills are refreshed automatically; new clients require --connect-client.' \
+                'Preserves client preferences and saved MCP settings. Does not launch Inkscape.'
             exit 0;;
         *) fail "Unknown option: $1";;
     esac
@@ -78,8 +79,9 @@ previous_binary=
 if [ -f "$config" ]; then
     {
         IFS= read -r previous_version && IFS= read -r previous_binary &&
-        IFS= read -r previous_inkscape_dir && IFS= read -r previous_workspace &&
-        IFS= read -r previous_live && IFS= read -r previous_engine || fail "Incomplete setup configuration."
+        IFS= read -r previous_inkscape_dir && IFS= read -r previous_workspace || fail "Incomplete setup configuration."
+        IFS= read -r previous_live || [ -n "$previous_live" ] || previous_live=true
+        IFS= read -r previous_engine || [ -n "$previous_engine" ] || previous_engine=per_call
         if IFS= read -r extra || [ -n "$extra" ]; then fail "Unexpected setup configuration data."; fi
     } < "$config"
     [ "$previous_version" = inkscape-mcp-setup-v1 ] || fail "Unsupported setup configuration."
@@ -140,10 +142,12 @@ if [ -z "$package" ] && [ "$build" = false ] && [ -n "$previous_binary" ] &&
     package=${previous_binary%/bin/inkscape-mcp}
     if [ -f "$repo/rust/Cargo.toml" ]; then
         source_revision=
+        source_dirty=false
         if [ -e "$repo/.git" ]; then
             source_revision=$(git -C "$repo" rev-parse --verify HEAD 2>/dev/null || true)
             if [ -n "$source_revision" ] && ! git -C "$repo" diff --quiet HEAD -- rust runtime scripts skills setup.sh run-mcp.sh migration/contracts; then
-                printf '%s\n' 'Uncommitted source edits are present; use --rebuild to rebuild those changes explicitly.' >&2
+                source_dirty=true
+                printf '%s\n' 'Source edits are present; rebuilding automatically.' >&2
             fi
         elif [ -f "$repo/SOURCE_REVISION" ] && [ ! -L "$repo/SOURCE_REVISION" ]; then
             { IFS= read -r marker_version && IFS= read -r source_revision || true; } < "$repo/SOURCE_REVISION"
@@ -158,8 +162,10 @@ if [ -z "$package" ] && [ "$build" = false ] && [ -n "$previous_binary" ] &&
                 package=
             fi
         else
-            printf '%s\n' 'Source revisions cannot be compared; use --rebuild to rebuild after source changes.' >&2
+            printf '%s\n' 'Source revisions cannot be compared; rebuilding automatically.' >&2
+            package=
         fi
+        [ "$source_dirty" = false ] || package=
     fi
 fi
 if [ -z "$package" ] && [ "$build" = false ] && [ -f "$repo/rust/Cargo.toml" ]; then
@@ -187,9 +193,9 @@ telemetry=$config_dir/sentry.conf
 previous_dsn= previous_environment=production previous_enabled=false
 if [ -f "$telemetry" ]; then
     {
-        IFS= read -r telemetry_version && IFS= read -r previous_enabled &&
-        IFS= read -r previous_dsn && IFS= read -r previous_environment ||
-            fail "Incomplete Sentry configuration."
+        IFS= read -r telemetry_version && IFS= read -r previous_enabled || fail "Incomplete Sentry configuration."
+        IFS= read -r previous_dsn || [ -n "$previous_dsn" ] || previous_dsn=
+        IFS= read -r previous_environment || [ -n "$previous_environment" ] || previous_environment=production
         if IFS= read -r extra || [ -n "$extra" ]; then fail "Unexpected Sentry configuration data."; fi
     } < "$telemetry"
     [ "$telemetry_version" = inkscape-mcp-sentry-v1 ] || fail "Unsupported Sentry configuration."
@@ -202,6 +208,7 @@ if [ -z "$sentry" ] && [ -t 0 ]; then
     ask "Enable Sentry error reporting? [y/N; blank keeps existing setting]" '--sentry true|false'
     case "$answer" in y|Y|yes|YES) sentry=true;; n|N|no|NO) sentry=false;; '') sentry=$previous_enabled;; *) fail "Answer yes or no.";; esac
 fi
+if [ -z "$sentry" ] && [ -f "$telemetry" ]; then sentry=$previous_enabled; fi
 case "$sentry" in ''|true|false) ;; *) fail "Sentry must be true or false.";; esac
 [ "$sentry" != false ] || { [ -z "$sentry_dsn_file" ] && [ -z "$sentry_environment" ]; } ||
     fail "Disabled Sentry cannot have DSN or environment options."
@@ -271,13 +278,33 @@ printf '%s\n' 'inkscape-mcp-setup-v1' "$binary" "$inkscape_dir" "$workspace" "$l
 mv -f -- "$temporary" "$config"
 printf 'Saved settings in %s\nMCP command: %s/run-mcp.sh\n' "$config" "$repo" >&2
 if [ -n "$skill_client" ]; then
-    skill_options=(--client "$skill_client")
-    [ "$skill_update" = false ] || skill_options+=(--update)
+    skill_options=(--client "$skill_client" --replace)
     "$repo/scripts/install-skill.sh" "${skill_options[@]}" ||
         fail 'MCP settings were saved, but skill installation failed. See the message above and retry scripts/install-skill.sh.'
 fi
 
 if [ -n "$connect_client" ]; then
-    "$repo/scripts/mcp-client.sh" --client "$connect_client" connect ||
-        fail 'MCP settings were saved, but client connection failed. Retry scripts/mcp-client.sh --client '"$connect_client"' connect.'
+    "$repo/scripts/mcp-client.sh" --client "$connect_client" upgrade ||
+        fail 'MCP settings were saved, but client connection failed. Retry scripts/mcp-client.sh --client '"$connect_client"' upgrade.'
 fi
+# Refresh existing registrations and installed guidance even on an ordinary rerun.
+for existing_client in codex claude; do
+    [ "$existing_client" != "$connect_client" ] || continue
+    case "$existing_client" in
+        codex) existing_config=${CODEX_HOME:-${HOME:?HOME is required}/.codex}/config.toml;;
+        claude) existing_config=${HOME:?HOME is required}/.claude.json;;
+    esac
+    [ -e "$existing_config" ] || [ -L "$existing_config" ] || continue
+    "$package/bin/inkscape-mcp-client" --repo "$repo" --client "$existing_client" upgrade-existing ||
+        fail "Could not update the existing $existing_client registration."
+done
+for existing_client in codex claude; do
+    [ "$existing_client" != "$skill_client" ] || continue
+    case "$existing_client" in
+        codex) existing_skill=${CODEX_HOME:-${HOME:?HOME is required}/.codex}/skills/inkscape-mcp;;
+        claude) existing_skill=${HOME:?HOME is required}/.claude/skills/inkscape-mcp;;
+    esac
+    if [ -e "$existing_skill" ] || [ -L "$existing_skill" ]; then
+        "$repo/scripts/install-skill.sh" --client "$existing_client" --replace
+    fi
+done
