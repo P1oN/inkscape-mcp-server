@@ -305,6 +305,7 @@ for existing_client in codex claude; do
         claude) existing_skill=${HOME:?HOME is required}/.claude/skills/inkscape-mcp;;
     esac
     if [ -e "$existing_skill" ] || [ -L "$existing_skill" ]; then
-        "$repo/scripts/install-skill.sh" --client "$existing_client" --replace
+        "$repo/scripts/install-skill.sh" --client "$existing_client" --replace ||
+            fail "MCP settings were saved, but the existing $existing_client skill refresh failed. Retry \"$repo/scripts/install-skill.sh\" --client $existing_client --replace."
     fi
 done

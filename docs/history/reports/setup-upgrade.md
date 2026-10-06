@@ -47,3 +47,8 @@ Final rebuilt ready archive passed headless relocation/FILES verification (443 f
 empty-PATH real CLI pixels, approval/rollback/no-op checks and the real-Codex/synthetic-Claude
 client lifecycle. Documentation link checks covered 98 relative targets with no missing files.
 The public v0.1.2 assets and the development user's installed runtime were not replaced.
+
+PR #12 review follow-up: automatic skill refresh failures now include the client and a
+quoted standalone retry command after the installer's diagnostic. Isolated Codex/Claude
+symlink-refusal checks confirmed nonzero exit, saved setup settings and an unchanged
+symlink target. The 53 setup/Sentry checks, Bash syntax and diff checks passed again.
