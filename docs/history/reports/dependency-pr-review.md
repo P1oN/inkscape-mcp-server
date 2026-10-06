@@ -15,11 +15,14 @@ its successful status was not treated as a completed review.
   (Tokio/plist) or duplicate direct pin (regex). Incorporated into #15 so their final combined
   dependency graph is tested and merged together; original standalone CI failures are retained.
 
-Final selected versions: libc 0.2.190, serde 1.0.229, serde_json 1.0.151, Tokio 1.53.1,
+Final selected versions: libc 0.2.190, serde 1.0.229, serde_json 1.0.151, Tokio 1.53.2,
 regex 1.13.1, plist 1.10.1. sha2 remains 0.10.9. Plist keeps the crate's declared Rust 1.88
 compatibility; no MCP tools, schemas or instructions change, so catalogs need no regeneration.
 
-Review sources: [Tokio changelog](https://github.com/tokio-rs/tokio/blob/tokio-1.53.1/tokio/CHANGELOG.md),
+Tokio 1.53.2 supersedes the proposed 1.53.1 update with upstream fixes for blocking-pool
+shutdown and synchronization lock handling. The final patch version is validated below.
+
+Review sources: [Tokio changelog](https://github.com/tokio-rs/tokio/blob/tokio-1.53.2/tokio/CHANGELOG.md),
 [regex changelog](https://github.com/rust-lang/regex/blob/master/CHANGELOG.md),
 [plist changelog](https://github.com/ebarnard/rust-plist/blob/master/CHANGELOG.md),
 [sha2 changelog](https://github.com/RustCrypto/hashes/blob/master/sha2/CHANGELOG.md).

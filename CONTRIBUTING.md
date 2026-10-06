@@ -12,7 +12,7 @@ Native libxml/clang development dependencies are required; on macOS set
 for CLI/native acceptance. `scripts/dev-tools.sh` locates pinned Cargo and the macOS
 SDK, builds the development-only CLI in `rust/tooling`, and invokes a fixed command.
 The development executable and its dependencies are never copied into ready packages.
-Keep Tokio at the pinned 1.53.1 version or a verified newer version: 1.52.0 has a
+Keep Tokio at the pinned 1.53.2 version or a verified newer version: 1.52.0 has a
 [blocking-pool hang regression](https://github.com/tokio-rs/tokio/issues/8056).
 
 ```sh
