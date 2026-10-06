@@ -30,6 +30,12 @@ resource identity/bounds/CLI previews and automated guards/publication checks ar
 
 ## Research and deferred work
 
+- **SHA-2 API migration:** PRs #19/#20 were declined because `sha2 0.11` removes the digest
+  output's `LowerHex` implementation used by runtime/tooling hashes. If adopting it, migrate
+  both graphs together and prove byte-for-byte stable hexadecimal build, package, transaction
+  and recovery hashes before updating the pin. Existing `sha2 0.10.9` remains supported.
+
+
 - **Latency:** measure representative workloads before changing concurrency. Separate startup,
   inspection, edit, rendering and live transport costs. Preserve serialized snapshot/record ordering;
   historical Python/Rust benchmarks are not a current performance baseline.

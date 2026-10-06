@@ -9,16 +9,16 @@ description = "Native Rust migration of the Inkscape STDIO MCP server"
 
 [dependencies]
 rmcp = { version = "=3.5.0", default-features = false, features = ["server", "transport-io"] }
-tokio = { version = "=1.52.1", features = ["macros", "rt-multi-thread", "io-std", "time"] }
-serde_json = { version = "=1.0.149", features = ["preserve_order", "float_roundtrip", "arbitrary_precision"] }
-serde = "=1.0.228"
+tokio = { version = "=1.53.2", features = ["macros", "rt-multi-thread", "io-std", "time"] }
+serde_json = { version = "=1.0.151", features = ["preserve_order", "float_roundtrip", "arbitrary_precision"] }
+serde = "=1.0.229"
 libxml = "=0.3.21"
-libc = "=0.2.183"
+libc = "=0.2.190"
 sha2 = "=0.10.9"
 base64 = "=0.22.1"
 uuid = { version = "=1.26.1", features = ["v4"] }
 chrono = { version = "=0.4.45", default-features = false, features = ["clock"] }
-regex = "=1.12.3"
+regex = "=1.13.1"
 indexmap = "=2.14.2"
 tempfile = "=3.27.0"
 png = "=0.18.1"
@@ -27,7 +27,7 @@ cssparser = "=0.38.0"
 sentry = { version = "=0.49.3", default-features = false, features = ["backtrace", "contexts", "panic", "transport", "release-health", "logs", "metrics"] }
 toml = "=0.8.23"
 toml_edit = "=0.22.27"
-plist = "=1.8.0"
+plist = "=1.10.1"
 
 [profile.release]
 lto = "thin"

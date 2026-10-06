@@ -8,14 +8,14 @@ license = "MIT"
 
 # Development-only tools. These dependencies are never shipped in ready packages.
 [dependencies]
-serde_json = { version = "=1.0.149", features = ["preserve_order", "float_roundtrip", "arbitrary_precision"] }
+serde_json = { version = "=1.0.151", features = ["preserve_order", "float_roundtrip", "arbitrary_precision"] }
 sha2 = "=0.10.9"
 toml = "=0.8.23"
-regex = "=1.12.3"
+regex = "=1.13.1"
 tempfile = "=3.27.0"
 tar = "=0.4.46"
 flate2 = "=1.1.10"
-libc = "=0.2.183"
+libc = "=0.2.190"
 base64 = "=0.22.1"
 png = "=0.18.1"
 inkscape-mcp-rust = { path = ".." }
