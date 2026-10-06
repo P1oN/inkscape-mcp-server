@@ -1,0 +1,39 @@
+name: Bug report
+description: Report an installation, runtime or SVG editing problem
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: "For vulnerabilities use Security → Report a vulnerability. Remove secrets, personal paths and private artwork from diagnostics."
+  - type: input
+    id: version
+    attributes:
+      label: Version and build revision
+      description: Release tag and setup.sh --version output, if available
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: OS and architecture
+      placeholder: macOS 15, Apple M1 (arm64)
+    validations:
+      required: true
+  - type: input
+    id: client
+    attributes:
+      label: MCP client and Inkscape versions
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps, expected result and actual result
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Sanitized diagnostics
+      description: Include relevant error messages and run-mcp.sh --doctor output; never include Sentry DSNs or tokens.
+      render: text

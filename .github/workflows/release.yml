@@ -1,0 +1,44 @@
+name: Publish verified release
+
+"on":
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: New distribution tag (vMAJOR.MINOR.PATCH, optional prerelease suffix)
+        required: true
+        type: string
+      run_id:
+        description: Successful main push run of Rust checks and native packages
+        required: true
+        type: string
+      prerelease:
+        description: Mark this distribution as a prerelease
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      actions: read
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Validate and publish existing CI artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag }}
+          RELEASE_RUN_ID: ${{ inputs.run_id }}
+          RELEASE_PRERELEASE: ${{ inputs.prerelease }}
+        run: scripts/publish-verified-release.sh
