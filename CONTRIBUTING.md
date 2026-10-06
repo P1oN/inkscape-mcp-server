@@ -41,6 +41,11 @@ bootstrap cleanup, Git-free source identity and Git worktree build watches. Hist
 Python sources/tests and their former dependency files are retained under
 [scripts/history/python](scripts/history/python/README.md) as evidence, outside active paths.
 
+For workflow or publication changes, run `scripts/test-publish-verified-release.sh`, Bash syntax
+checks and actionlint. Release guard fixtures simulate GitHub and never publish a distribution.
+Main changes go through PRs with both quick and native checks; see
+[release operations](docs/install/github-builds.md#publishing-a-new-distribution).
+
 ## Required invariants
 
 Keep tools typed and bounded. Reuse the edit pipeline, snapshots, Operation Records,

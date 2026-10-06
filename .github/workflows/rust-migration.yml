@@ -14,31 +14,42 @@ name: Rust checks and native packages
           - all-posix
   push:
     branches: [main]
-    paths:
-      - "rust/**"
-      - "migration/**"
-      - "scripts/**"
-      - "skills/**"
-      - "setup.sh"
-      - "run-mcp.sh"
-      - "runtime/**"
-      - ".github/workflows/rust-migration.yml"
   pull_request:
-    paths:
-      - "rust/**"
-      - "migration/**"
-      - "scripts/**"
-      - "skills/**"
-      - "setup.sh"
-      - "run-mcp.sh"
-      - "runtime/**"
-      - ".github/workflows/rust-migration.yml"
 
 permissions:
   contents: read
 
 jobs:
+  quick-checks:
+    name: Quick Rust checks
+    runs-on: macos-15
+    timeout-minutes: 25
+    env:
+      RUSTUP_TOOLCHAIN: 1.99.0
+      CARGO_TERM_COLOR: always
+      SENTRY_DSN: ""
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Locate macOS SDK XML library
+        run: echo "LIBXML2=$(xcrun --show-sdk-path)/usr/lib/libxml2.tbd" >> "$GITHUB_ENV"
+      - name: Install pinned Rust tooling
+        run: rustup toolchain install 1.99.0 --profile minimal --component rustfmt --component clippy
+      - name: Bash syntax
+        run: |
+          for script in setup.sh run-mcp.sh uninstall.sh scripts/*.sh; do bash -n "$script"; done
+      - name: Release publication guard tests
+        run: scripts/test-publish-verified-release.sh
+      - name: Format and Clippy (both Cargo graphs)
+        run: |
+          cargo fmt --check --manifest-path rust/Cargo.toml
+          cargo clippy --locked --all-targets --manifest-path rust/Cargo.toml -- -D warnings
+          cargo fmt --check --manifest-path rust/tooling/Cargo.toml
+          cargo clippy --locked --all-targets --manifest-path rust/tooling/Cargo.toml -- -D warnings
+      - name: Development tooling tests
+        run: cargo test --locked --manifest-path rust/tooling/Cargo.toml
+
   native-posix:
+    needs: quick-checks
     name: Native candidate (${{ matrix.target }})
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 45
@@ -69,15 +80,6 @@ jobs:
         run: |
           rustc --version --verbose > rust-build-environment.txt
           test "$(sed -n 's/^host: //p' rust-build-environment.txt)" = "$EXPECTED_TARGET"
-      - name: Format
-        run: cargo fmt --check --manifest-path rust/Cargo.toml
-      - name: Clippy
-        run: cargo clippy --locked --all-targets --manifest-path rust/Cargo.toml -- -D warnings
-      - name: Development tooling checks
-        run: |
-          cargo fmt --check --manifest-path rust/tooling/Cargo.toml
-          cargo clippy --locked --all-targets --manifest-path rust/tooling/Cargo.toml -- -D warnings
-          cargo test --locked --manifest-path rust/tooling/Cargo.toml
       - name: Native tests
         run: cargo test --locked --manifest-path rust/Cargo.toml
       - name: Build release executable
@@ -156,6 +158,11 @@ jobs:
           PACKAGE: ${{ matrix.package }}
         run: |
           (cd dist && shasum -a 256 "inkscape-mcp-$PACKAGE.tar.gz" > "inkscape-mcp-$PACKAGE.tar.gz.sha256")
+      - name: Export committed source archive
+        if: matrix.package == 'macos-arm64'
+        run: |
+          scripts/dev-tools.sh source-archive --output dist/inkscape-mcp-source-bootstrap.tar.gz
+          (cd dist && shasum -a 256 inkscape-mcp-source-bootstrap.tar.gz > inkscape-mcp-source-bootstrap.tar.gz.sha256)
       - name: Upload verified installable package
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:

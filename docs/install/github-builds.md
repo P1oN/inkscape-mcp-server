@@ -47,7 +47,7 @@ current client/skill management. Historical [v0.1.0](https://github.com/P1oN/ink
 contains its original ready package. These archives and their acceptance evidence remain unchanged.
 
 The [Rust checks and native packages workflow](https://github.com/P1oN/inkscape-mcp-server/actions/workflows/rust-migration.yml)
-automatically builds **macOS arm64 (M chips)** after relevant pushes to `main` and for
+automatically builds **macOS arm64 (M chips)** after every push to `main` and for
 pull requests. It can also be started manually with **Run workflow → macos-arm64**.
 Manual `all-posix` additionally selects the prepared Intel Mac and Linux jobs; their
 existence does not prove compatibility before they have passed on their own runners.
@@ -90,3 +90,26 @@ CI does **not** perform native GUI Undo/Redo acceptance. Libraries are built on 
 runner; older OS/foreign ABI compatibility is not inferred. macOS packages use ad-hoc
 signing; Developer ID/notarization is not supplied. Existing local native evidence remains
 scoped to its recorded binary, and no macOS security setting is bypassed.
+
+## Publishing a new distribution
+
+The `Publish verified release` workflow is dispatched from `main` with a new tag, a successful
+`main` push run ID of `Rust checks and native packages`, and the prerelease choice. It downloads
+the existing `inkscape-mcp-macos-arm64` artifact, verifies both archive checksums and their exact
+source revision, and publishes ready/source archives with `RELEASE-METADATA.json`. No archive
+code is executed and no binaries are rebuilt during publication. Older CI artifacts lacking the
+source archive cannot be published with this workflow; run current main CI first.
+
+A draft is created first, all five assets are uploaded, then publication makes the new release
+immutable. On publication failure, inspect the retained draft before retrying; the workflow refuses
+an existing tag/release rather than replacing it. Existing historical releases remain unchanged.
+Release tags matching `v*` cannot be force-updated or deleted. Distribution tags remain separate
+from the runtime crate version. Choose a new distribution tag for each set of release assets.
+
+The native workflow runs on every PR and main push so required checks never wait forever because
+of path filters. `Quick Rust checks` performs syntax, fmt/Clippy, tooling and release-guard tests
+before `Native candidate (aarch64-apple-darwin)` starts runtime/package acceptance. Both checks
+are required by the main ruleset, which also requires a PR, resolved review threads, and current
+base-branch validation. Required approving reviews remain zero for the current solo maintainer;
+there is no administrator bypass. Dependabot opens weekly Cargo and Actions updates through this
+same PR/CI process. Issues use structured bug/feature forms; security reports remain private.

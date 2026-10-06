@@ -14,7 +14,7 @@ Check current code and Git status before relying on recorded results.
 
 ## Implemented
 
-Current unpublished follow-up: setup replaces existing MCP registrations and skill trees
+Current sources (PR #12): setup replaces existing MCP registrations and skill trees
 while preserving configuration/preferences and supplementing missing optional settings.
 Source edits/unknown revisions rebuild automatically. The published v0.1.2 archives retain
 the previous preserve/refuse installation policy. See the [upgrade ledger](history/reports/setup-upgrade.md).
@@ -65,6 +65,18 @@ documentation reconciliation and the committed-source PAX metadata repair. Histo
 Clean-machine Apple Silicon, real Claude, real artwork/artist and broader human-review
 race acceptance remain pending or user-deferred; Intel/Linux execution and Windows port
 remain separately scoped. Ad-hoc macOS signing is not Developer ID/notarization.
+
+## Repository maintenance
+
+The repository was detached from its fork network on 2026-10-06; GitHub reports `fork=false`.
+Git history and exported PR/release metadata were backed up beforehand. Existing PRs and releases
+remained available after detachment. Issues, Dependabot alerts/security updates and private
+vulnerability reporting are enabled; Wiki is disabled. Main requires PRs, resolved threads and
+quick/native CI with no force-push/deletion or bypass. Release tags are protected and new releases
+are immutable. The maintenance workflow changes provide weekly dependency updates, issue forms,
+separate early checks and publication from verified main CI artifacts; see
+[release operations](install/github-builds.md#publishing-a-new-distribution).
+Local release guard fixtures validate refusal and staged publication without publishing a release.
 
 ## Next work and rules
 
