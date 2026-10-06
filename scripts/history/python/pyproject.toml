@@ -3,7 +3,7 @@ name = "inkscape-mcp-runtime-tools"
 version = "0.1.0"
 description = "Private live helper and development tools for the Rust Inkscape MCP server"
 requires-python = ">=3.12"
-dependencies = ["lxml==6.1.1", "numpy==2.5.3", "cssselect==1.5.0", "tinycss2==1.5.1", "webencodings==0.6.1", "pillow==12.2.0"]
+dependencies = ["lxml==6.1.1", "numpy==2.5.3", "cssselect==1.5.0", "tinycss2==1.5.1", "webencodings==0.6.1", "pillow==12.3.0"]
 
 [dependency-groups]
 dev = ["pytest>=8.0", "ruff>=0.6"]
