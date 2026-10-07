@@ -105,6 +105,8 @@ arbitrary execution or tracing. Startup/reconnect must not launch Inkscape. Pres
 windows; native acceptance uses explicitly authorized owned synthetic documents.
 Approval tokens are client-supplied markers, not authenticated consent. Commit, push,
 release or installation requires user authorization; the user authorized documentation,
-PR #11 merge and release publication on 2026-10-06. This does not authorize changing their
-installed runtime. Restart/reconnect the selected MCP to load changed instructions while
+PR #11 merge and release publication on 2026-10-06, then this independent-update
+documentation/PR on 2026-10-07. The latter authorizes committing/pushing this branch and
+opening a PR into `main`; it does not authorize merging, publishing a release or changing
+the installed runtime. Restart/reconnect the selected MCP to load changed instructions while
 preserving GUI; existing GUI sessions retain their existing native helpers.

@@ -69,3 +69,18 @@ changed. Component download success is backend/CLI evidence; native successful G
 against published assets, clean-machine installation, actual Claude client behavior, live
 Inkscape reconnect/older-helper interactions and full media/ENOSPC failure qualification remain
 separate tasks in the active backlog. Ad-hoc signing is not Developer ID/notarization.
+
+## PR preparation after main integration
+
+On **2026-10-07**, branch `codex/independent-updates` incorporated `origin/main` at
+`26f21fc`, including its coordinated dependency updates. The two documentation conflicts
+were resolved by retaining both entries. Both locked Cargo graphs passed again: 321 runtime
+tests with two opt-in ignored (sequential), and 17 tooling tests. Both fmt/Clippy graphs,
+publication fixtures, Bash syntax and manifest regeneration passed; catalogs remained unchanged.
+The release build passed with the documented macOS `LIBXML2` SDK setting. An initial build
+without that setting failed to locate libxml; both logs remain in local evidence.
+
+These automated results are in `pr-*.log` under the existing raw-evidence directory.
+Earlier native package/management-window acceptance remains bound to its original builds;
+it is not transferred to this dependency-integrated source. Documentation indexes, changelog,
+usage and authorization notes were reconciled for the requested PR into `main`.

@@ -141,5 +141,6 @@ Publication itself builds nothing and executes no archive content. Instruction e
 still comes from the selected successful main CI run; clean-machine, real Claude and
 broader native drawing acceptance remain separately scoped.
 
-See [CONTRIBUTING](../../CONTRIBUTING.md) and the acceptance ledger for the automated and
-native checks performed for this implementation.
+See [CONTRIBUTING](../../CONTRIBUTING.md) and the
+[acceptance ledger](../history/reports/independent-updates.md) for the automated and native
+checks performed for this implementation.

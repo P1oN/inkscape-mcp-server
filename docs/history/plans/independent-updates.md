@@ -185,4 +185,3 @@ launcher self-update, Windows and Developer ID/
 notarization are follow-up scope. Runtime archives remain an internal transfer format in the
 first version; users do not download or extract them manually. No new MCP update tool or
 arbitrary execution capability is required.
-
