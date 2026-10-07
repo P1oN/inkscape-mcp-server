@@ -26,7 +26,7 @@ svgtypes = "=0.16.1"
 cssparser = "=0.38.0"
 sentry = { version = "=0.49.3", default-features = false, features = ["backtrace", "contexts", "panic", "transport", "release-health", "logs", "metrics"] }
 toml = "=0.8.23"
-toml_edit = "=0.22.27"
+toml_edit = "=0.25.15"
 plist = "=1.10.1"
 
 tar = "=0.4.46"
