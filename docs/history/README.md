@@ -21,6 +21,7 @@ builds. Use [current status](../AGENT_HANDOFF.md), [active backlog](../RUST_NEXT
 ## Reports and logs
 
 - [Independent updates](reports/independent-updates.md): unpublished launcher, component updates, recovery and scoped CLI/native management acceptance; [original user plan](plans/independent-updates.md).
+- [Dependency PR review](reports/dependency-pr-review.md): coordinated Rust graph updates and declined historical/API-breaking updates.
 
 - [Setup upgrade follow-up](reports/setup-upgrade.md): unpublished replacement/config-preservation policy and local regression acceptance.
 
