@@ -23,3 +23,5 @@ libxml = "=0.3.21"
 
 [profile.dev]
 opt-level = 1
+debug = 0
+incremental = false

@@ -15,6 +15,12 @@ The development executable and its dependencies are never copied into ready pack
 Keep Tokio at the pinned 1.53.2 version or a verified newer version: 1.52.0 has a
 [blocking-pool hang regression](https://github.com/tokio-rs/tokio/issues/8056).
 
+Development/test profiles omit debug symbols and incremental caches in both Cargo graphs.
+Release builds retain debug symbols for Sentry. For source-level debugging, opt in with
+`CARGO_PROFILE_DEV_DEBUG=2 CARGO_PROFILE_DEV_INCREMENTAL=true`; those builds consume more disk.
+See [development disk retention](docs/install/development-storage.md) for automatic package
+retention, disposable acceptance output and explicit cache cleanup.
+
 ```sh
 cargo fmt --check --manifest-path rust/Cargo.toml
 cargo clippy --locked --all-targets --manifest-path rust/Cargo.toml -- -D warnings

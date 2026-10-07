@@ -91,6 +91,20 @@ sha2 0.11 updates were declined; see the [review ledger](history/reports/depende
 
 ## Repository maintenance
 
+Local development storage now uses small development/test profiles (no debug symbols or
+incremental caches; release symbols unchanged). Failed private builds clean their staging;
+successful builds skip duplicate archives. Successful source setup sweeps marked old packages
+while retaining recent/selected/running/workspace paths. Automated acceptance can use
+`dev-tools.sh --temporary-output` to delete passing scratch output and retain failures.
+See [policy and explicit cache cleanup](install/development-storage.md). Historical evidence,
+unmarked builds and independent-update profiles are preserved; no MCP surface change.
+Validation: isolated cleanup/build/output guard fixtures, 17 tooling tests, tooling Clippy,
+both format checks, Cargo manifest parsing, Bash syntax, release guard fixtures and
+actionlint v1.7.7 passed. Tooling target rebuilt to approximately 663 MiB locally (previously
+5.2 GiB; this is a measured checkout, not a future size guarantee). The older installed
+package doctor probe refused linked assets before publication and retained its scratch
+output; no new native GUI acceptance or installed-runtime change is claimed.
+
 The repository was detached from its fork network on 2026-10-06; GitHub reports `fork=false`.
 Git history and exported PR/release metadata were backed up beforehand. Existing PRs and releases
 remained available after detachment. Issues, Dependabot alerts/security updates and private
@@ -117,3 +131,7 @@ documentation/PR on 2026-10-07. The latter authorizes committing/pushing this br
 opening a PR into `main`; it does not authorize merging, publishing a release or changing
 the installed runtime. Restart/reconnect the selected MCP to load changed instructions while
 preserving GUI; existing GUI sessions retain their existing native helpers.
+
+Cleanup PR review follow-up: relative/bare MCP commands now refuse cleanup conservatively.
+Temporary acceptance cancellation supervises only its owned child, bounds shutdown to five
+seconds and retains output. Isolated relative-process and stalled-child fixtures pass.
