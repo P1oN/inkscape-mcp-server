@@ -1,6 +1,6 @@
 # Inkscape MCP server — Rust
 
-[![M8ven status](https://m8ven.ai/badge/mcp/p1on/inkscape-mcp-server?variant=verified)](https://m8ven.ai/mcp/p1on/inkscape-mcp-server?s=readme)
+[![M8ven verified publisher](https://m8ven.ai/badge/mcp/p1on/inkscape-mcp-server?variant=verified)](https://m8ven.ai/mcp/p1on/inkscape-mcp-server?s=readme)
 
 A native Rust STDIO MCP server for inspecting, authoring and editing SVG, rendering/exporting
 with Inkscape, and controlling bounded live operations. The full surface has 112 tools,
