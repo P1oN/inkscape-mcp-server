@@ -22,7 +22,9 @@ package mentioned by a running process. Unmarked older builds, symlinks and stag
 with user additions, or packages with added/removed paths, are preserved. Independent-update runtime profiles keep their existing
 retention/rollback behavior; this cleaner does not operate on them.
 
-Process inspection/configuration errors refuse cleanup. SIGKILL or power loss cannot run
+Process inspection/configuration errors refuse cleanup. A runtime command using a relative
+or bare executable name also refuses the whole cleanup because its owning package cannot
+be identified safely. SIGKILL or power loss cannot run
 exit traps; unmarked interrupted staging is retained for explicit inspection. Automatic
 retention is an age/count policy, not a hard byte quota. A stopped client registered
 directly against an old marked package should select the current setup runtime before
@@ -38,7 +40,9 @@ scripts/dev-tools.sh --temporary-output doctor-acceptance --package dist/candida
 ```
 
 The wrapper creates a private synthetic output directory, deletes it only after a passing
-command, and prints its location on failure or interruption. Do not use this option when
+command, and prints its location on failure or interruption. Cancellation forwards the
+signal to the owned acceptance process and allows five seconds to stop before terminating
+that process; cancelled evidence is retained. Do not use this option when
 the output is needed for visual inspection or build-bound evidence. An explicit `--output`
 retains the existing behavior. Native GUI phases and update/installer/client profiles are
 excluded because they deliberately retain sessions, profiles or ownership evidence.

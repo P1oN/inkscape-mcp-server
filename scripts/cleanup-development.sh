@@ -26,6 +26,11 @@ config=$private/setup.conf
 [ ! -e "$config" ] || [ -f "$config" ] || fail 'Configuration must be a regular file.'
 # Fail closed if process inspection is unavailable. Inspect executable paths too.
 processes=$(ps -axo comm,args) || fail 'Cannot inspect active processes; cleanup refused.'
+# Relative/bare runtime commands do not identify which package owns the process.
+# Retain everything rather than guessing its working directory or executable.
+if printf '%s\n' "$processes" | /usr/bin/grep -Eq '(^|[[:space:]])([^/[:space:]][^[:space:]]*/)?inkscape-mcp(-[[:alnum:]-]+)?([[:space:]]|$)'; then
+    fail 'Unresolved relative MCP process; cleanup refused.'
+fi
 selected= workspace=
 if [ -f "$config" ]; then
     [ "$(sed -n '1p' "$config")" = inkscape-mcp-setup-v1 ] || fail 'Unknown setup configuration.'

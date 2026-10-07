@@ -52,7 +52,26 @@ cleanup_check() {
     fi
 }
 trap cleanup_check EXIT
-trap 'exit 130' INT
-trap 'exit 143' TERM
-"$target_dir/debug/inkscape-mcp-tools" "$@" --output "$output/result"
+child=
+cancel_check() {
+    local signal=$1 code=$2 attempt
+    trap '' INT TERM
+    if [ -n "$child" ]; then
+        kill -s "$signal" "$child" 2>/dev/null || true
+        # Bound cancellation even if the owned executable ignores the signal.
+        for attempt in 1 2 3 4 5; do
+            kill -0 "$child" 2>/dev/null || break
+            sleep 1
+        done
+        if kill -0 "$child" 2>/dev/null; then kill -KILL "$child" 2>/dev/null || true; fi
+        wait "$child" 2>/dev/null || true
+    fi
+    exit "$code"
+}
+trap 'cancel_check INT 130' INT
+trap 'cancel_check TERM 143' TERM
+"$target_dir/debug/inkscape-mcp-tools" "$@" --output "$output/result" &
+child=$!
+wait "$child"
+child=
 passed=true

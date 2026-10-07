@@ -131,3 +131,7 @@ documentation/PR on 2026-10-07. The latter authorizes committing/pushing this br
 opening a PR into `main`; it does not authorize merging, publishing a release or changing
 the installed runtime. Restart/reconnect the selected MCP to load changed instructions while
 preserving GUI; existing GUI sessions retain their existing native helpers.
+
+Cleanup PR review follow-up: relative/bare MCP commands now refuse cleanup conservatively.
+Temporary acceptance cancellation supervises only its owned child, bounds shutdown to five
+seconds and retains output. Isolated relative-process and stalled-child fixtures pass.

@@ -38,6 +38,12 @@ ln -s "$fixture/outside" "$private/build.aaaaaa"
 "$root/scripts/cleanup-development.sh" > "$fixture/preview"
 [ -d "$private/build.000005" ]
 grep -F 'Would-remove' "$fixture/preview" >/dev/null
+for command in ./bin/inkscape-mcp inkscape-mcp ./bin/inkscape-mcp-engine; do
+    printf '%s\n' "$command" > "$FIXTURE_PROCESS_FILE"
+    if "$root/scripts/cleanup-development.sh" --apply > "$fixture/refusal" 2>&1; then exit 1; fi
+    [ -d "$private/build.000005" ]
+done
+printf '%s\n' "$private/build.000002/package/bin/inkscape-mcp" > "$FIXTURE_PROCESS_FILE"
 "$root/scripts/cleanup-development.sh" --apply
 [ ! -e "$private/build.000005" ]
 for number in 1 2 3 4 6 7 8; do [ -d "$private/build.00000$number" ]; done
@@ -86,6 +92,11 @@ cat > "$fixture/tools/debug/inkscape-mcp-tools" <<'MOCK'
 output=${!#}
 mkdir -p "$output"
 printf 'fixture\n' > "$output/report.json"
+if [ "${FIXTURE_CHECK_STALL:-false}" = true ]; then
+    printf '%s\n' "$$" > "$FIXTURE_CHILD_PID"
+    trap '' TERM
+    while :; do sleep 1; done
+fi
 [ "${FIXTURE_CHECK_FAIL:-false}" = false ]
 MOCK
 chmod +x "$fixture/tools/debug/inkscape-mcp-tools"
@@ -95,6 +106,26 @@ checks=("$private"/check.*); [ "${#checks[@]}" -eq 0 ]
 if FIXTURE_CHECK_FAIL=true "$root/scripts/dev-tools.sh" --temporary-output authoring-acceptance; then exit 1; fi
 checks=("$private"/check.*); [ "${#checks[@]}" -eq 1 ]
 [ -f "${checks[0]}/result/report.json" ]
+export FIXTURE_CHILD_PID=$fixture/child.pid
+FIXTURE_CHECK_STALL=true "$root/scripts/dev-tools.sh" --temporary-output authoring-acceptance > "$fixture/cancel" 2>&1 &
+wrapper=$!
+for attempt in $(seq 1 100); do [ ! -f "$FIXTURE_CHILD_PID" ] || break; sleep 0.1; done
+[ -f "$FIXTURE_CHILD_PID" ]
+owned_child=$(cat "$FIXTURE_CHILD_PID")
+kill -TERM "$wrapper"
+# Watchdog prevents a regression from hanging CI indefinitely.
+(sleep 12; kill -KILL "$wrapper" "$owned_child" 2>/dev/null || true) &
+watchdog=$!
+set +e
+wait "$wrapper"
+cancel_code=$?
+set -e
+kill "$watchdog" 2>/dev/null || true
+wait "$watchdog" 2>/dev/null || true
+[ "$cancel_code" -eq 143 ]
+if kill -0 "$owned_child" 2>/dev/null; then exit 1; fi
+checks=("$private"/check.*); [ "${#checks[@]}" -eq 2 ]
+grep -F 'Acceptance evidence retained' "$fixture/cancel" >/dev/null
 for command in native-gui update-acceptance build-package; do
     if "$root/scripts/dev-tools.sh" --temporary-output "$command" > "$fixture/refusal" 2>&1; then exit 1; fi
 done
