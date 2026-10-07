@@ -1,5 +1,5 @@
 //! Owned synthetic gdbus and lock-holder for Rust regression tests.
-use inkscape_mcp_rust::{helper_svg, xml};
+use inkscape_mcp_rust::{helper_svg, xml, serde_json, libc};
 use serde_json::{Value, json};
 use std::{fs::{self, OpenOptions}, io::{Write, stdout}, os::fd::AsRawFd, path::Path, time::Duration};
 fn read(path: &Path) -> Value { serde_json::from_slice(&fs::read(path).unwrap()).unwrap() }

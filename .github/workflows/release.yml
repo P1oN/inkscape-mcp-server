@@ -11,6 +11,10 @@ name: Publish verified release
         description: Successful main push run of Rust checks and native packages
         required: true
         type: string
+      runtime_tag:
+        description: Optional immutable published runtime tag to reuse for a text-only distribution
+        required: false
+        type: string
       prerelease:
         description: Mark this distribution as a prerelease
         type: boolean
@@ -40,5 +44,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           RELEASE_TAG: ${{ inputs.tag }}
           RELEASE_RUN_ID: ${{ inputs.run_id }}
+          RELEASE_RUNTIME_TAG: ${{ inputs.runtime_tag }}
           RELEASE_PRERELEASE: ${{ inputs.prerelease }}
         run: scripts/publish-verified-release.sh

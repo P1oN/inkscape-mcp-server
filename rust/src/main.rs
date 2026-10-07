@@ -5,6 +5,7 @@ mod argument_numbers;
 mod argument_validation;
 mod arguments;
 mod artifact_stat;
+#[cfg(test)]
 mod authoring;
 mod authoring_analysis;
 mod batch;
@@ -823,6 +824,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
         return Ok(());
     }
+    inkscape_mcp_rust::update::instructions::active().map_err(std::io::Error::other)?;
     // Initialize before Tokio so worker threads inherit the Sentry client.
     let _telemetry = telemetry::init();
     let result = tokio::runtime::Builder::new_multi_thread()

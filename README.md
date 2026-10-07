@@ -146,3 +146,7 @@ refusal. `quality_report` adds closure/node diagnostics and conservative whole-d
 vector status; `save_document_as(vector_only=true)` refuses raster or unknown resource
 content. `replace_svg_fragment(dry_run=true)` returns a structural candidate without
 changing the drawing. See [usage and limits](docs/agent-usage-guide.md#closure-duplicate-path-nodes-and-vector-only-delivery).
+
+Current sources also support [independent instructions/runtime updates](docs/install/independent-updates.md) through a
+permanent native launcher and macOS management app. Opt in once with
+`./setup.sh --independent-updates`; published v0.1.2 archives retain their original behavior.

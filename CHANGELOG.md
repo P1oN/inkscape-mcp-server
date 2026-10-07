@@ -5,6 +5,11 @@ Detailed checkpoint evidence is indexed in [history](docs/history/README.md).
 
 ## Unreleased
 
+- Add opt-in independent instruction/runtime updates through a permanent native launcher,
+  verified GitHub assets, compatibility checks, skill merges and recoverable rollback.
+- Add a native macOS management app and CI/publication assets, including compatible
+  immutable-runtime reuse for instruction-only distributions. See the
+  [update guide](docs/install/independent-updates.md) for migration and qualification limits.
 - Synchronize reviewed libc/serde/serde_json, Tokio, regex and plist updates across both
   locked Cargo graphs; preserve the sha2 0.10 hash API.
 

@@ -1,6 +1,6 @@
 # Agent handoff — current status
 
-As of **2026-10-06**, the v0.1.2 prerelease surface includes installation/responsiveness
+As of **2026-10-07**, the v0.1.2 prerelease surface includes installation/responsiveness
 (PR #8), complete native Rust runtime and vector authoring (PR #9), computed live inspection
 and reviewed packages (PR #10), and vector-quality guards/fragment dry-run (PR #11).
 The [v0.1.2 tag](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.2) identifies
@@ -13,6 +13,20 @@ work, and [history](history/README.md) retains earlier checkpoint/acceptance evi
 Check current code and Git status before relying on recorded results.
 
 ## Implemented
+
+Current unpublished sources implement independent text/runtime updates: a permanent native
+launcher, typed verified assets, guarded skill merging, transaction recovery/rollback and a
+macOS management app. Native packages now contain six Rust executables. Migration remains
+opt-in; the user's installed runtime and clients were not changed. See the
+[guide](install/independent-updates.md) and [acceptance ledger](history/reports/independent-updates.md).
+Local CLI/package and explicitly authorized isolated management-window checks passed;
+published GUI downloads, live Inkscape reconnect and full media-failure qualification remain
+in the backlog. A later default-parallel run reproduced the existing native launch/lock test
+failure; sequential runtime tests passed. This does not establish a concurrency fix.
+PR #26 review repairs add bounded startup lock waiting, absent-client/skill preservation,
+window-close protection and verified distinct-runtime CI acceptance. Final local checks:
+326 runtime tests/two opt-in ignored, 17 tooling tests and both fmt/Clippy graphs passed;
+see the ledger for build-bound package and automated Cocoa delegate evidence.
 
 Current sources (PR #12): setup replaces existing MCP registrations and skill trees
 while preserving configuration/preferences and supplementing missing optional settings.
@@ -95,6 +109,8 @@ arbitrary execution or tracing. Startup/reconnect must not launch Inkscape. Pres
 windows; native acceptance uses explicitly authorized owned synthetic documents.
 Approval tokens are client-supplied markers, not authenticated consent. Commit, push,
 release or installation requires user authorization; the user authorized documentation,
-PR #11 merge and release publication on 2026-10-06. This does not authorize changing their
-installed runtime. Restart/reconnect the selected MCP to load changed instructions while
+PR #11 merge and release publication on 2026-10-06, then this independent-update
+documentation/PR on 2026-10-07. The latter authorizes committing/pushing this branch and
+opening a PR into `main`; it does not authorize merging, publishing a release or changing
+the installed runtime. Restart/reconnect the selected MCP to load changed instructions while
 preserving GUI; existing GUI sessions retain their existing native helpers.

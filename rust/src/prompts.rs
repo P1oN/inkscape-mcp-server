@@ -1,15 +1,6 @@
 //! Native prompt rendering from the checked reference message templates.
 use rmcp::{ErrorData, model::*};
 use serde_json::{Value, json};
-use std::sync::LazyLock;
-
-static TEMPLATES: LazyLock<Value> = LazyLock::new(|| {
-    serde_json::from_str(include_str!(
-        "../../migration/contracts/prompt-messages.json"
-    ))
-    .expect("reference prompt templates")
-});
-
 pub fn index(contract: &Value) -> Value {
     let mut prompts = contract["prompts/list"]["prompts"]
         .as_array()
@@ -46,12 +37,13 @@ pub fn render(
         )
         .unwrap());
     }
-    let mut rendered = TEMPLATES[&request.name].clone();
+    let instructions = inkscape_mcp_rust::update::instructions::active()
+        .map_err(|e| ErrorData::internal_error(e, None))?;
+    let mut rendered = instructions.prompts[&request.name].clone();
     if request.name == "compose_artwork" {
         for message in rendered["messages"].as_array_mut().unwrap() {
-            message["content"]["text"] = json!(crate::authoring::expand(
-                message["content"]["text"].as_str().unwrap()
-            ));
+            message["content"]["text"] =
+                json!(instructions.expand(message["content"]["text"].as_str().unwrap()));
         }
     }
     if matches!(

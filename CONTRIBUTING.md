@@ -59,8 +59,8 @@ separate from automated tests and requires authorization to launch a synthetic G
 
 ## Package and regression acceptance
 
-The builder requires all five native executables in one Cargo target directory:
-server, client manager, supervisor, INX helper and socket helper. Ready packages retain
+The builder requires all six native executables in one Cargo target directory:
+server, permanent launcher, client manager, supervisor, INX helper and socket helper. Ready packages retain
 fixed Bash interfaces, native context bridge and private D-Bus/GLib dependencies.
 
 ```sh
@@ -188,3 +188,21 @@ The authoring acceptance probe also checks explicit path closure/zero-length gua
 read-only fragment dry-run candidates, closed-shape advice and vector-only save refusal
 (including hidden resource images) through real STDIO. Keep default-value fixtures and
 all discovery profiles in sync when adding optional authoring parameters.
+
+Independent update checks use the runtime manifest:
+
+```sh
+cargo test --locked --manifest-path rust/Cargo.toml --test update_instructions --test update_manager
+scripts/dev-tools.sh build-instructions --output DIRECTORY --version VERSION --archive FILE
+scripts/dev-tools.sh build-update-manifest --output FILE --tag TAG --runtime FILE --instructions FILE --launcher FILE
+scripts/dev-tools.sh update-acceptance --package DIRECTORY --previous-package DIRECTORY --runtime-archive FILE --output DIRECTORY
+```
+
+The last command checks isolated package migration and all component download/rollback modes
+with deterministic API fixtures. Explicit `--previous-package` must have a distinct compiled
+build ID; per-component results and `report.json` state `runtime_exercised`, and same-build
+acceptance records a runtime no-op rather than claiming download/staging coverage. The native
+CI baseline is the same source with a fixture comment and a separately compiled identity;
+it is never published. Optional `--profile DIRECTORY` retains an isolated profile
+for explicitly authorized management-window acceptance. That probe does not claim real
+Claude, clean-machine or native Inkscape acceptance.

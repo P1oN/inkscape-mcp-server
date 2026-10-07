@@ -67,3 +67,7 @@ with `./setup.sh --connect-client codex` (or `claude`). See
 v0.1.2 ready and source packages include the same installer and skill; packages built
 from current sources include them as well. Previously published v0.1.0/v0.1.1 assets remain
 unchanged and do not contain the skill.
+
+Current sources also support [independent instructions/runtime updates](independent-updates.md) through a
+permanent native launcher and macOS management app. Opt in once with
+`./setup.sh --independent-updates`; published v0.1.2 archives retain their original behavior.

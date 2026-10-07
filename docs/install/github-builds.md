@@ -70,7 +70,7 @@ with installed tools/cached dependencies is explicit with `./setup.sh --local-to
 Fresh current source checkouts automatically prepare tools and build with `./setup.sh`.
 The historical v0.1.0 archive still runs doctor during setup; use its included instructions.
 
-Install Inkscape first. Current packages include five Rust executables,
+Install Inkscape first. Published v0.1.2 packages include five Rust executables,
 prebuilt bridge, D-Bus dependencies and matching debug symbols. Users do not install a
 compiler, Python, uv/pip or Homebrew. Current packages can register a client with `--connect-client codex|claude`;
 older assets require manual configuration of the absolute `run-mcp.sh` path. Setup can save an optional Sentry DSN/environment privately; CI receives
@@ -100,7 +100,7 @@ source revision, and publishes ready/source archives with `RELEASE-METADATA.json
 code is executed and no binaries are rebuilt during publication. Older CI artifacts lacking the
 source archive cannot be published with this workflow; run current main CI first.
 
-A draft is created first, all five assets are uploaded, then publication makes the new release
+A draft is created first, all ten current assets are uploaded, then publication makes the new release
 immutable. On publication failure, inspect the retained draft before retrying; the workflow refuses
 an existing tag/release rather than replacing it. Existing historical releases remain unchanged.
 Release tags matching `v*` cannot be force-updated or deleted. Distribution tags remain separate
@@ -113,3 +113,7 @@ are required by the main ruleset, which also requires a PR, resolved review thre
 base-branch validation. Required approving reviews remain zero for the current solo maintainer;
 there is no administrator bypass. Dependabot opens weekly Cargo and Actions updates through this
 same PR/CI process. Issues use structured bug/feature forms; security reports remain private.
+
+Current sources also support [independent instructions/runtime updates](independent-updates.md) through a
+permanent native launcher and macOS management app. Opt in once with
+`./setup.sh --independent-updates`; published v0.1.2 archives retain their original behavior.

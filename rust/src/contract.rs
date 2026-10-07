@@ -33,9 +33,14 @@ pub fn contract() -> Value {
     };
     let mut value: Value =
         serde_json::from_str(source).expect("checked-in reference contract must be valid JSON");
-    value["initialize"]["instructions"] = Value::String(crate::authoring::expand(
-        value["initialize"]["instructions"].as_str().unwrap(),
-    ));
+    let instructions = inkscape_mcp_rust::update::instructions::active()
+        .expect("instructions validated before server construction");
+    value["initialize"]["instructions"] =
+        Value::String(instructions.expand(&instructions.initialization));
+    for prompt in value["prompts/list"]["prompts"].as_array_mut().unwrap() {
+        let name = prompt["name"].as_str().unwrap().to_string();
+        prompt["description"] = instructions.prompts[&name]["description"].clone();
+    }
     value
 }
 
