@@ -84,3 +84,42 @@ These automated results are in `pr-*.log` under the existing raw-evidence direct
 Earlier native package/management-window acceptance remains bound to its original builds;
 it is not transferred to this dependency-integrated source. Documentation indexes, changelog,
 usage and authorization notes were reconciled for the requested PR into `main`.
+
+## PR #26 review repairs
+
+Verified `origin` is `P1oN/inkscape-mcp-server`, the checked-out branch is
+`codex/independent-updates`, and its starting HEAD matches PR #26 at `5f23598`.
+All six attached findings were valid and addressed:
+
+- The five-executable inventory now explicitly describes published v0.1.2 packages;
+  current-source publication describes ten assets.
+- The management window delegates closing to `windowShouldClose:` and remains visible
+  during a running operation, with the existing wait message. Quit protection remains.
+- MCP startup waits up to two seconds for installation-lock contention; management actions
+  retain immediate refusal. Settings validation/recovery still follow lock acquisition.
+- Migration skips recorded clients with absent entries/config files. Disconnect removes
+  the client from legacy records; existing bindings and unrelated settings are preserved.
+- Updates/rollback skip and report removed skills, use dense journal indices, and preserve
+  recreated destinations absent from the rollback record. Reload results reflect actual
+  skill changes. Regression checks include recovery after skipping the first destination.
+- Acceptance asserts `changed` and exact selected component identities, records per-mode
+  and overall `runtime_exercised`, and rejects an explicit same-build baseline. CI compiles
+  a distinct baseline from the same source plus a fixture comment; it is never published.
+
+Final checks: 326 sequential runtime tests passed, two opt-in ignored; 17 tooling tests
+passed; both fmt/Clippy graphs, release build, manifest regeneration, publication fixtures
+and actionlint v1.7.7 passed. Default catalog bytes remain unchanged. Logs use `review-*`
+in the existing raw-evidence directory. An initial full run timed out in the new startup
+fixture's four-second handshake budget during concurrent release compilation; the final
+fixture uses the existing 30-second package-acceptance budget while independently checking
+an 80 ms lock deadline. The failed log is retained; the full rerun passed.
+
+Actual package acceptance passed in same-build mode (`runtime_exercised: false`) and
+with a distinct compiled baseline (`true` for runtime-only/combined and the overall report).
+An explicit same-build baseline was refused. The final known-revision baseline is
+`4d97b3ededc77a88`, candidate `c6880c4a2e1cd6a8`, both at revision
+`5f23598b0a7e1b87672b7377c5e7beba4e271eef`; records are in `review-distinct-known-build/`.
+A native Cocoa delegate harness compiled with ARC/strict warnings and verified busy-close
+refusal, visible status text and idle-close permission without opening a management window.
+This is automated delegate evidence, not renewed native GUI acceptance. No user installation,
+client registration or Inkscape window was changed, and no release was published.

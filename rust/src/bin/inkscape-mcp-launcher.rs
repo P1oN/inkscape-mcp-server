@@ -175,7 +175,11 @@ fn run(options: &Options) -> Result<Value> {
     if options.action == "--version" {
         return Ok(report(&selector(root)?));
     }
-    let lock = Lock::acquire(root)?;
+    let lock = if options.action.is_empty() {
+        Lock::acquire_wait(root, std::time::Duration::from_secs(2))?
+    } else {
+        Lock::acquire(root)?
+    };
     let settings: Settings = inkscape_mcp_rust::update::storage::json(&root.join("settings.json"))?;
     settings.validate()?;
     if transaction::recover(root, &settings)? {
@@ -220,11 +224,13 @@ fn run(options: &Options) -> Result<Value> {
         return Ok(json!({"uninstalled":true,"archive":backup,"client_reconnect_required":true}));
     }
     if options.action == "rollback" {
-        let changed = transaction::rollback(root, &settings)?;
+        let activation = transaction::rollback(root, &settings)?;
+        let changed = activation.changed;
         let mut result = report(&selector(root)?);
         result["changed"] = json!(changed);
         result["client_reconnect_required"] = json!(changed);
-        result["skill_reload_required"] = json!(changed && !settings.skills.is_empty());
+        result["skill_reload_required"] = json!(activation.skills_changed);
+        result["skipped_skills"] = json!(activation.skipped_skills);
         return Ok(result);
     }
     let mut command = command(root, &selector(root)?.current, &settings)?;
@@ -260,6 +266,15 @@ fn main() {
                 println!("{value}");
             } else {
                 println!("{}", serde_json::to_string_pretty(&value).unwrap());
+                if value["skipped_skills"]
+                    .as_array()
+                    .is_some_and(|paths| !paths.is_empty())
+                {
+                    eprintln!(
+                        "Skipped removed or unchanged skill destinations: {}",
+                        value["skipped_skills"]
+                    );
+                }
                 if value["client_reconnect_required"] == true {
                     eprintln!(
                         "Activated. Reconnect your MCP client; reload its skill when indicated."

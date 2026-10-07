@@ -23,6 +23,10 @@ Local CLI/package and explicitly authorized isolated management-window checks pa
 published GUI downloads, live Inkscape reconnect and full media-failure qualification remain
 in the backlog. A later default-parallel run reproduced the existing native launch/lock test
 failure; sequential runtime tests passed. This does not establish a concurrency fix.
+PR #26 review repairs add bounded startup lock waiting, absent-client/skill preservation,
+window-close protection and verified distinct-runtime CI acceptance. Final local checks:
+326 runtime tests/two opt-in ignored, 17 tooling tests and both fmt/Clippy graphs passed;
+see the ledger for build-bound package and automated Cocoa delegate evidence.
 
 Current sources (PR #12): setup replaces existing MCP registrations and skill trees
 while preserving configuration/preferences and supplementing missing optional settings.

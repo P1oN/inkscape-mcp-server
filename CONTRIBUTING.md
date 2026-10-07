@@ -199,6 +199,10 @@ scripts/dev-tools.sh update-acceptance --package DIRECTORY --previous-package DI
 ```
 
 The last command checks isolated package migration and all component download/rollback modes
-with deterministic API fixtures. Optional `--profile DIRECTORY` retains an isolated profile
+with deterministic API fixtures. Explicit `--previous-package` must have a distinct compiled
+build ID; per-component results and `report.json` state `runtime_exercised`, and same-build
+acceptance records a runtime no-op rather than claiming download/staging coverage. The native
+CI baseline is the same source with a fixture comment and a separately compiled identity;
+it is never published. Optional `--profile DIRECTORY` retains an isolated profile
 for explicitly authorized management-window acceptance. That probe does not claim real
 Claude, clean-machine or native Inkscape acceptance.

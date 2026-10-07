@@ -609,6 +609,10 @@ fn manage(repo: &Path, profiles: &Profiles, client: Client, action: &str) -> Res
                 return Err("Client removal failed; installation retained".into());
             }
         }
+        if action == "disconnect" {
+            clients.retain(|name| name != client.name());
+            save_clients(&record, &clients)?;
+        }
         if action == "uninstall" {
             let backup = archive_with(repo, &profiles.skill(client), |a, b| fs::rename(a, b))?;
             println!("Installation moved to {}", backup.display());
@@ -668,11 +672,13 @@ pub fn cli() {
 /// Validate a permanent launcher before any one-time client binding change.
 pub fn migrate_bindings(repo: &Path, launcher: &Path) -> Result<()> {
     probe(&mut Command::new(launcher), REQUEST_TIMEOUT)?;
-    let profiles = Profiles::environment()?;
+    migrate_recorded_bindings(repo, &Profiles::environment()?, launcher)
+}
+fn migrate_recorded_bindings(repo: &Path, profiles: &Profiles, launcher: &Path) -> Result<()> {
     let (_, clients) = records(repo)?;
     for name in &clients {
         let client = Client::parse(name)?;
-        if entry(&profiles, client, launcher, false)?.is_some_and(|e| {
+        if entry(profiles, client, launcher, false)?.is_some_and(|e| {
             e["command"].as_str() != repo.join("run-mcp.sh").to_str()
                 && e["command"].as_str() != launcher.to_str()
         }) {
@@ -682,7 +688,9 @@ pub fn migrate_bindings(repo: &Path, launcher: &Path) -> Result<()> {
     for client in clients {
         let client = Client::parse(&client)?;
 
-        upgrade_registration(&profiles, client, launcher)?;
+        if entry(profiles, client, launcher, false)?.is_some() {
+            upgrade_registration(profiles, client, launcher)?;
+        }
     }
     Ok(())
 }
@@ -775,6 +783,35 @@ mod tests {
         }
         assert!(upgraded_config("mcp_servers = 7", Client::Codex, &launcher).is_err());
         assert!(upgraded_config("[]", Client::Claude, &launcher).is_err());
+    }
+    #[test]
+    fn migration_skips_absent_recorded_clients_and_preserves_unrelated_settings() {
+        for client in [Client::Codex, Client::Claude] {
+            let (_root, repo, profiles) = fixture();
+            let (record, _) = records(&repo).unwrap();
+            save_clients(&record, &[client.name().into()]).unwrap();
+            let launcher = repo.join("permanent-launcher");
+            migrate_recorded_bindings(&repo, &profiles, &launcher).unwrap();
+            assert!(!profiles.config(client).exists());
+            let unrelated = if client == Client::Codex {
+                "# preferences\nmodel = 'kept'\n[mcp_servers.other]\ncommand = 'keep'\n"
+            } else {
+                r#"{"preference":true,"mcpServers":{"other":{"command":"keep"}}}"#
+            };
+            fs::write(profiles.config(client), unrelated).unwrap();
+            migrate_recorded_bindings(&repo, &profiles, &launcher).unwrap();
+            assert_eq!(
+                fs::read_to_string(profiles.config(client)).unwrap(),
+                unrelated
+            );
+            let old = repo.join("run-mcp.sh");
+            upgrade_registration(&profiles, client, &old).unwrap();
+            migrate_recorded_bindings(&repo, &profiles, &launcher).unwrap();
+            assert_eq!(
+                entry(&profiles, client, &launcher, true).unwrap().unwrap()["command"],
+                launcher.to_str().unwrap()
+            );
+        }
     }
     #[test]
     fn failed_upgrade_handshake_preserves_old_registration() {

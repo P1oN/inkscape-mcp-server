@@ -290,10 +290,12 @@ pub fn update(
         channel: channel.into(),
     };
     doctor(root, &after.current, &settings)?;
-    let changed = transaction::activate(root, before, after.clone(), &settings, None)?;
+    let activation = transaction::activate(root, before, after.clone(), &settings, None)?;
+    let changed = activation.changed;
     result = report(&after);
     result["changed"] = json!(changed);
     result["client_reconnect_required"] = json!(changed);
-    result["skill_reload_required"] = json!(changed && !settings.skills.is_empty());
+    result["skill_reload_required"] = json!(activation.skills_changed);
+    result["skipped_skills"] = json!(activation.skipped_skills);
     Ok(result)
 }

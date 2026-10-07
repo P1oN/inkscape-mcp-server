@@ -99,6 +99,8 @@ window acceptance is separate from Inkscape drawing/Undo acceptance and clean-ma
 
 ## Recovery and preservation
 
+MCP startup waits up to two seconds for a brief installation-lock conflict, then reports
+a retryable error if it is still busy; update commands retain immediate lock refusal.
 Updates serialize under an installation lock and download only from the fixed GitHub
 repository through bounded HTTPS and approved redirect hosts. Lengths/SHA-256, archive
 paths/links/entry/decompression limits, identities, target and interface compatibility are
@@ -110,6 +112,9 @@ independent publisher authentication. Downloaded setup scripts are never execute
 symlinks, foreign ownership and writable-by-others paths. Skill merges use the existing
 three-way baseline semantics and preserve extra user files. Conflicts retain proposals
 outside skill discovery and leave the selected pair and installed skills unchanged.
+A removed skill destination is skipped and reported in CLI/GUI results; updates and rollback
+do not recreate it. Rollback also preserves destinations that were not changed by the
+selected update, including a skill recreated by the user after a skipped update.
 
 A durable journal covers skill-directory moves and the atomic selector change. Launch or
 update recovers an interrupted transaction to the preceding pair before continuing. If

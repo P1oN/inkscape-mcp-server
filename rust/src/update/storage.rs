@@ -3,7 +3,13 @@ use super::{
     manifests::*,
 };
 use serde::{Serialize, de::DeserializeOwned};
-use std::{collections::BTreeMap, fs, io::Write, path::Path};
+use std::{
+    collections::BTreeMap,
+    fs,
+    io::Write,
+    path::Path,
+    time::{Duration, Instant},
+};
 
 pub fn json<T: DeserializeOwned>(path: &Path) -> Result<T> {
     serde_json::from_slice(&read(path, 2 * 1024 * 1024)?).map_err(|e| e.to_string())
@@ -60,6 +66,9 @@ pub fn mkdir(path: &Path) -> Result<()> {
 pub struct Lock(fs::File);
 impl Lock {
     pub fn acquire(root: &Path) -> Result<Self> {
+        Self::acquire_wait(root, Duration::ZERO)
+    }
+    pub fn acquire_wait(root: &Path, timeout: Duration) -> Result<Self> {
         guarded(root)?;
         let path = root.join("update.lock");
         if path.exists() || path.is_symlink() {
@@ -76,8 +85,20 @@ impl Lock {
         #[cfg(unix)]
         {
             use std::os::fd::AsRawFd;
-            if unsafe { libc::flock(file.as_raw_fd(), libc::LOCK_EX | libc::LOCK_NB) } != 0 {
-                return Err("another update/launch recovery is active; retry later".into());
+            let deadline = Instant::now() + timeout;
+            loop {
+                if unsafe { libc::flock(file.as_raw_fd(), libc::LOCK_EX | libc::LOCK_NB) } == 0 {
+                    break;
+                }
+                let error = std::io::Error::last_os_error();
+                if error.kind() != std::io::ErrorKind::WouldBlock {
+                    return Err(error.to_string());
+                }
+                let remaining = deadline.saturating_duration_since(Instant::now());
+                if remaining.is_zero() {
+                    return Err("another update/launch recovery is active; retry later".into());
+                }
+                std::thread::sleep(remaining.min(Duration::from_millis(25)));
             }
         }
         Ok(Self(file))

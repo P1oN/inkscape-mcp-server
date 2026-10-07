@@ -115,10 +115,21 @@ jobs:
         run: |
           scripts/dev-tools.sh build-package --output "dist/inkscape-mcp-$PACKAGE" --archive "dist/inkscape-mcp-$PACKAGE.tar.gz"
           scripts/dev-tools.sh notices-acceptance --package "dist/inkscape-mcp-$PACKAGE" --output migration/results/ci-notices
+      - name: Build distinct native baseline for runtime-update acceptance
+        if: matrix.package == 'macos-arm64'
+        run: |
+          baseline_source=$(mktemp -d "$RUNNER_TEMP/update-baseline.XXXXXX")
+          git archive HEAD | tar -x -C "$baseline_source"
+          printf 'inkscape-mcp-source-v1\n%s\n' "$(git rev-parse HEAD)" > "$baseline_source/SOURCE_REVISION"
+          # Same implementation, distinct honest compiled identity; never publish this fixture.
+          printf '\n// Independent-update acceptance baseline fixture.\n' >> "$baseline_source/rust/src/lib.rs"
+          cargo build --locked --release --manifest-path "$baseline_source/rust/Cargo.toml" --target-dir "$GITHUB_WORKSPACE/rust/target"
+          scripts/dev-tools.sh build-package --binary rust/target/release/inkscape-mcp-rust --output dist/update-baseline
+          cargo build --locked --release --manifest-path rust/Cargo.toml
       - name: Permanent launcher and deterministic downloaded-update acceptance
         if: matrix.package == 'macos-arm64'
         run: |
-          scripts/dev-tools.sh update-acceptance --package dist/inkscape-mcp-macos-arm64 --runtime-archive dist/inkscape-mcp-macos-arm64.tar.gz --output migration/results/ci-updates
+          scripts/dev-tools.sh update-acceptance --package dist/inkscape-mcp-macos-arm64 --previous-package dist/update-baseline --runtime-archive dist/inkscape-mcp-macos-arm64.tar.gz --output migration/results/ci-updates
       - name: Rust STDIO security and resource invariants
         env:
           PACKAGE: ${{ matrix.package }}

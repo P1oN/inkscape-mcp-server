@@ -177,7 +177,11 @@ fn real_stdio_text_update_preserves_custom_skill_and_rollback_refuses_later_edit
     custom.extend_from_slice(&before);
     write(&skill.join("SKILL.md"), &custom).unwrap();
     let after = next(&f);
-    assert!(activate(&f.root, f.before.clone(), after.clone(), &f.settings, None).unwrap());
+    assert!(
+        activate(&f.root, f.before.clone(), after.clone(), &f.settings, None)
+            .unwrap()
+            .changed
+    );
     assert_eq!(selector(&f.root).unwrap(), after);
     let updated = String::from_utf8(read(&skill.join("SKILL.md"), 256 * 1024).unwrap()).unwrap();
     assert!(updated.contains("Local customization."));
@@ -185,7 +189,7 @@ fn real_stdio_text_update_preserves_custom_skill_and_rollback_refuses_later_edit
     write(&skill.join("extra.txt"), b"later user edit").unwrap();
     assert!(rollback(&f.root, &f.settings).is_err());
     fs::remove_file(skill.join("extra.txt")).unwrap();
-    assert!(rollback(&f.root, &f.settings).unwrap());
+    assert!(rollback(&f.root, &f.settings).unwrap().changed);
     assert_eq!(selector(&f.root).unwrap().current, f.before.current);
     assert_eq!(read(&skill.join("SKILL.md"), 256 * 1024).unwrap(), custom);
     assert_eq!(
@@ -209,6 +213,7 @@ fn skill_conflict_and_noop_preserve_active_state() {
             None
         )
         .unwrap()
+        .changed
     );
     let mut files = default_files();
     files.insert(
@@ -356,4 +361,126 @@ fn publication_write_failure_restores_selector_and_skills() {
     );
     assert!(!f.root.join("transaction.json").exists());
     probe(&f.root, &f.before.current, &f.settings).unwrap();
+}
+
+#[test]
+fn startup_waits_for_brief_lock_and_contention_has_a_deadline() {
+    use std::time::{Duration, Instant};
+    let f = fixture();
+    let lock = Lock::acquire(&f.root).unwrap();
+    let release = std::thread::spawn(move || {
+        std::thread::sleep(Duration::from_millis(100));
+        drop(lock);
+    });
+    let start = Instant::now();
+    inkscape_mcp_rust::client_management::probe(
+        Command::new(env!("CARGO_BIN_EXE_inkscape-mcp-launcher"))
+            .args(["--install-dir", f.root.to_str().unwrap()]),
+        // Startup also verifies the full debug runtime inventory; use the package
+        // acceptance budget independently of the much shorter lock deadline below.
+        Duration::from_secs(30),
+    )
+    .unwrap();
+    release.join().unwrap();
+    assert!(start.elapsed() >= Duration::from_millis(100));
+    let _lock = Lock::acquire(&f.root).unwrap();
+    let start = Instant::now();
+    assert!(Lock::acquire_wait(&f.root, Duration::from_millis(80)).is_err());
+    assert!(start.elapsed() >= Duration::from_millis(80));
+    assert!(start.elapsed() < Duration::from_secs(1));
+    assert!(Lock::acquire(&f.root).is_err());
+}
+
+#[test]
+fn removed_first_skill_is_skipped_and_remaining_skill_rolls_back() {
+    let mut f = fixture();
+    let first = f.settings.skills[0].clone();
+    let second = first.parent().unwrap().join("second-skill");
+    copy_tree(&first, &second, 16 * 1024 * 1024).unwrap();
+    f.settings.skills.push(second.clone());
+    let original = inventory(&second, 16 * 1024 * 1024).unwrap();
+    fs::remove_dir_all(&first).unwrap();
+    f.settings.validate().unwrap();
+    let activation = activate(&f.root, f.before.clone(), next(&f), &f.settings, None).unwrap();
+    assert!(activation.changed && activation.skills_changed);
+    assert_eq!(activation.skipped_skills, vec![first.clone()]);
+    assert_ne!(inventory(&second, 16 * 1024 * 1024).unwrap(), original);
+    assert!(!first.exists());
+    let restored = rollback(&f.root, &f.settings).unwrap();
+    assert_eq!(restored.skipped_skills, vec![first.clone()]);
+    assert_eq!(inventory(&second, 16 * 1024 * 1024).unwrap(), original);
+    assert!(!first.exists());
+    // A post-publication failure must use the same dense indices during recovery.
+    let before = selector(&f.root).unwrap();
+    fs::remove_dir_all(f.root.join("history")).unwrap();
+    fs::write(f.root.join("history"), "owned write-failure fixture").unwrap();
+    assert!(activate(&f.root, before.clone(), next(&f), &f.settings, None).is_err());
+    assert_eq!(selector(&f.root).unwrap(), before);
+    assert_eq!(inventory(&second, 16 * 1024 * 1024).unwrap(), original);
+    assert!(!f.root.join("transaction.json").exists());
+}
+
+#[test]
+fn rollback_preserves_removed_and_recreated_skills() {
+    let f = fixture();
+    let skill = &f.settings.skills[0];
+    activate(&f.root, f.before.clone(), next(&f), &f.settings, None).unwrap();
+    fs::remove_dir_all(skill).unwrap();
+    let restored = rollback(&f.root, &f.settings).unwrap();
+    assert!(restored.changed && !restored.skills_changed);
+    assert_eq!(restored.skipped_skills, vec![skill.clone()]);
+    assert!(!skill.exists());
+    // Roll forward while missing, then recreate a user skill before rollback.
+    rollback(&f.root, &f.settings).unwrap();
+    mkdir(skill).unwrap();
+    write(&skill.join("user.txt"), b"recreated by user").unwrap();
+    let user = inventory(skill, 1024).unwrap();
+    let restored = rollback(&f.root, &f.settings).unwrap();
+    assert!(!restored.skills_changed);
+    assert_eq!(restored.skipped_skills, vec![skill.clone()]);
+    assert_eq!(inventory(skill, 1024).unwrap(), user);
+}
+
+#[test]
+fn disconnected_client_is_removed_from_legacy_records() {
+    use std::os::unix::fs::PermissionsExt;
+    let temp = tempfile::tempdir().unwrap();
+    let root = temp.path().canonicalize().unwrap();
+    let repo = root.join("source");
+    mkdir(&repo.join(".inkscape-mcp-local")).unwrap();
+    let home = root.join("home");
+    mkdir(&home.join(".codex")).unwrap();
+    let bin = root.join("bin");
+    mkdir(&bin).unwrap();
+    for client in ["codex", "claude"] {
+        write(&bin.join(client), b"#!/bin/sh\nexit 0\n").unwrap();
+        fs::set_permissions(bin.join(client), fs::Permissions::from_mode(0o700)).unwrap();
+    }
+    let record = repo.join(".inkscape-mcp-local/clients.json");
+    write_json(&record, &vec!["codex", "claude"]).unwrap();
+    for client in ["codex", "claude"] {
+        let result = Command::new(env!("CARGO_BIN_EXE_inkscape-mcp-client"))
+            .args([
+                "--repo",
+                repo.to_str().unwrap(),
+                "--client",
+                client,
+                "disconnect",
+            ])
+            .env_clear()
+            .env("HOME", &home)
+            .env("CODEX_HOME", home.join(".codex"))
+            .env("PATH", &bin)
+            .output()
+            .unwrap();
+        assert!(
+            result.status.success(),
+            "{}",
+            String::from_utf8_lossy(&result.stderr)
+        );
+        let clients: Vec<String> = json(&record).unwrap();
+        assert!(!clients.iter().any(|name| name == client));
+    }
+    assert!(!home.join(".claude.json").exists());
+    assert!(!home.join(".codex/config.toml").exists());
 }

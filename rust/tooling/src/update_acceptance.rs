@@ -162,6 +162,7 @@ pub fn run(args: &Args) -> Result<()> {
         "CLI help missing component commands",
     )?;
     execute(&cli, &["update", "--runtime", "--instructions"], false)?;
+    let mut runtime_exercised = false;
     if args.flag("--runtime-archive") {
         use inkscape_mcp_rust::update::{
             download::{self, Transport},
@@ -239,6 +240,11 @@ pub fn run(args: &Args) -> Result<()> {
             (download::asset_url("v9.0.0","instructions.tar.gz")?,instruction_bytes),
             (download::asset_url("v9.0.0","inkscape-mcp-macos-arm64.tar.gz")?,runtime_bytes),
         ]));
+        let runtime_differs = release.runtime.build_id != selector.current.runtime.build_id;
+        ensure(
+            runtime_differs || !args.flag("--previous-package"),
+            "explicit previous package must have a different runtime build ID",
+        )?;
         let binding = fs::read(&config)?;
         for (label, component) in [
             ("instructions", Component::Instructions),
@@ -268,6 +274,29 @@ pub fn run(args: &Args) -> Result<()> {
                 None,
                 15,
             )?;
+            let runtime_expected = runtime_differs && !matches!(component, Component::Instructions);
+            let instructions_expected = !matches!(component, Component::Runtime);
+            ensure(
+                updated["changed"] == (runtime_expected || instructions_expected),
+                format!("{label} update did not change the expected components"),
+            )?;
+            let active = inkscape_mcp_rust::update::install::selector(&installation)?;
+            ensure(
+                active.current.runtime.build_id.as_str()
+                    == if runtime_expected {
+                        release.runtime.build_id.as_str()
+                    } else {
+                        selector.current.runtime.build_id.as_str()
+                    }
+                    && active.current.instructions.content_id.as_str()
+                        == if instructions_expected {
+                            release.instructions.content_id.as_str()
+                        } else {
+                            selector.current.instructions.content_id.as_str()
+                        },
+                format!("{label} selected unexpected runtime/instructions"),
+            )?;
+            runtime_exercised |= runtime_expected;
             if updated["changed"] == true {
                 transaction::rollback(&installation, &settings)?;
             }
@@ -282,7 +311,7 @@ pub fn run(args: &Args) -> Result<()> {
             )?;
             write_json(
                 &out.join(format!("{label}.json")),
-                &json!({"checked":checked,"updated":updated,"restored":true}),
+                &json!({"checked":checked,"updated":updated,"restored":true,"runtime_exercised":runtime_expected}),
             )?;
         }
     }
@@ -292,7 +321,7 @@ pub fn run(args: &Args) -> Result<()> {
     )?;
     write_json(
         &out.join("report.json"),
-        &json!({"passed":true,"migration":migration,"wire":wire,"checks":["relocated native package","permanent CLI from unrelated directory","source removal and offline STDIO","private settings preservation","Codex TOML and synthetic Claude JSON bindings","custom skill preservation","help and component-option refusal"],"scope":"Isolated profiles and actual native package/STDIO. Not real Claude, clean-machine or native GUI acceptance."}),
+        &json!({"passed":true,"runtime_exercised":runtime_exercised,"migration":migration,"wire":wire,"checks":["relocated native package","permanent CLI from unrelated directory","source removal and offline STDIO","private settings preservation","Codex TOML and synthetic Claude JSON bindings","custom skill preservation","help and component-option refusal"],"scope":"Isolated profiles and actual native package/STDIO. Not real Claude, clean-machine or native GUI acceptance."}),
     )?;
     Ok(())
 }

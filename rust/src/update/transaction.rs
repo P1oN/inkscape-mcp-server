@@ -207,31 +207,44 @@ fn prepare_skill(
         after,
     })
 }
+#[derive(Debug, Default)]
+pub struct Activation {
+    pub changed: bool,
+    pub skills_changed: bool,
+    pub skipped_skills: Vec<PathBuf>,
+}
 pub fn activate(
     root: &Path,
     before: Selector,
     after: Selector,
     settings: &Settings,
     restore: Option<&Journal>,
-) -> Result<bool> {
+) -> Result<Activation> {
     if before == after {
-        return Ok(false);
+        return Ok(Activation::default());
     }
     probe(root, &after.current, settings)?;
     let id = uuid::Uuid::new_v4().to_string();
     let base = transaction_path(root, &id)?;
     mkdir(&base)?;
     let mut skills = Vec::new();
+    let mut skipped_skills = Vec::new();
     if before.current.instructions.content_id != after.current.instructions.content_id
         || restore.is_some()
     {
-        for (i, path) in settings.skills.iter().enumerate() {
+        for path in &settings.skills {
+            if !path.try_exists().map_err(|e| e.to_string())? && !path.is_symlink() {
+                skipped_skills.push(path.clone());
+                continue;
+            }
+            // Journal indices must stay dense even when earlier destinations were removed.
+            let i = skills.len();
             if let Some(restore) = restore {
-                let old = restore
-                    .skills
-                    .iter()
-                    .position(|s| &s.destination == path)
-                    .ok_or("missing rollback skill record")?;
+                let Some(old) = restore.skills.iter().position(|s| &s.destination == path) else {
+                    // A skill recreated since a skipped update is not ours to roll back.
+                    skipped_skills.push(path.clone());
+                    continue;
+                };
                 let entry = &restore.skills[old];
                 let current = inventory(path, 16 * 1024 * 1024)?;
                 if current != entry.after {
@@ -297,14 +310,18 @@ pub fn activate(
         )?;
         fs::remove_file(root.join("transaction.json")).map_err(|e| e.to_string())?;
         sync_dir(root)?;
-        Ok(true)
+        Ok(Activation {
+            changed: true,
+            skills_changed: !journal.skills.is_empty(),
+            skipped_skills,
+        })
     })();
     if result.is_err() {
         recover(root, settings).map_err(|e| format!("update failed; recovery required: {e}"))?;
     }
     result
 }
-pub fn rollback(root: &Path, settings: &Settings) -> Result<bool> {
+pub fn rollback(root: &Path, settings: &Settings) -> Result<Activation> {
     let before = selector(root)?;
     let pair = before
         .previous
@@ -324,12 +341,6 @@ pub fn rollback(root: &Path, settings: &Settings) -> Result<bool> {
         previous: Some(before.current.clone()),
         channel: record.before.channel.clone(),
     };
-    // Runtime-only updates have no skill changes to restore.
-    activate(
-        root,
-        before,
-        after,
-        settings,
-        (!record.skills.is_empty()).then_some(&record),
-    )
+    // Only restore destinations actually changed by the selected update.
+    activate(root, before, after, settings, Some(&record))
 }

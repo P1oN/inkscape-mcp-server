@@ -1,7 +1,7 @@
 #import <Cocoa/Cocoa.h>
 
 // Thin UI: all compatibility, merging, download and recovery stay in the Rust launcher.
-@interface Manager : NSObject <NSApplicationDelegate>
+@interface Manager : NSObject <NSApplicationDelegate, NSWindowDelegate>
 @property NSWindow *window;
 @property NSTextField *installed;
 @property NSTextField *available;
@@ -21,7 +21,7 @@
     self.installation=[[NSUserDefaults standardUserDefaults] stringForKey:@"InstallationDirectory"] ?: [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Application Support/inkscape-mcp"];
     self.buttons=[NSMutableArray new];
     self.window=[[NSWindow alloc] initWithContentRect:NSMakeRect(0,0,620,400) styleMask:NSWindowStyleMaskTitled|NSWindowStyleMaskClosable|NSWindowStyleMaskMiniaturizable backing:NSBackingStoreBuffered defer:NO];
-    self.window.title=@"Inkscape MCP Manager";
+    self.window.title=@"Inkscape MCP Manager";self.window.delegate=self;
     NSStackView *stack=[NSStackView new]; stack.orientation=NSUserInterfaceLayoutOrientationVertical;stack.alignment=NSLayoutAttributeLeading;stack.spacing=16;stack.edgeInsets=NSEdgeInsetsMake(24,24,24,24);
     self.installed=[NSTextField wrappingLabelWithString:@"Reading installed versions…"];
     self.available=[NSTextField wrappingLabelWithString:@"Check for available updates when ready."];
@@ -36,6 +36,7 @@
     [NSLayoutConstraint activateConstraints:@[[stack.leadingAnchor constraintEqualToAnchor:self.window.contentView.leadingAnchor],[stack.trailingAnchor constraintEqualToAnchor:self.window.contentView.trailingAnchor],[stack.topAnchor constraintEqualToAnchor:self.window.contentView.topAnchor],[self.progress.widthAnchor constraintEqualToConstant:540]]];
     [self.window center];[self.window makeKeyAndOrderFront:nil];[NSApp activateIgnoringOtherApps:YES];[self run:@[@"--version"]];
 }
+- (BOOL)windowShouldClose:(NSWindow *)sender {if(self.running){self.status.stringValue=@"Wait for the current operation to finish before closing.";return NO;}return YES;}
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {return YES;}
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {if(self.running){self.status.stringValue=@"Wait for the current operation to finish before closing.";return NSTerminateCancel;}return NSTerminateNow;}
 - (void)choose:(id)sender {
@@ -76,6 +77,7 @@ static NSData *boundedRead(NSFileHandle *file,NSTask *task) {
         if([result[@"client_reconnect_required"] boolValue])self.status.stringValue=[result[@"skill_reload_required"] boolValue] ? @"Activated. Reconnect your MCP client and reload its skill. Open Inkscape drawings remain available." : @"Activated. Reconnect your MCP client. Open Inkscape drawings remain available.";
         else if([arguments containsObject:@"--check"])self.status.stringValue=[result[@"update_available"] boolValue] ? @"An update is available. Choose instructions, runtime, or both." : @"Your selected components are up to date.";
         else self.status.stringValue=@"Ready. Updates run only when you choose an action.";
+        NSArray *skipped=result[@"skipped_skills"];if(skipped.count)self.status.stringValue=[self.status.stringValue stringByAppendingFormat:@" Skipped removed or unchanged skills: %@.",[skipped componentsJoinedByString:@", "]];
     });
 }
 @end
