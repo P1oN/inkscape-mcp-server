@@ -17,6 +17,7 @@ source setup prepares the native toolchain on supported Apple Silicon hosts.
   (newer source feature; migration is opt-in)
 - [Compatibility](compatibility.md)
 - [Troubleshooting](troubleshooting.md)
+- [Development disk retention and cleanup](development-storage.md)
 
 Read/edit/validate work without Inkscape. Render/export/path geometry and explicitly
 requested live sessions require Inkscape. `diagnose_runtime` reports available support.

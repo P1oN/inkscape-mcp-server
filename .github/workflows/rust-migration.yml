@@ -39,6 +39,8 @@ jobs:
           for script in setup.sh run-mcp.sh uninstall.sh scripts/*.sh; do bash -n "$script"; done
       - name: Release publication guard tests
         run: scripts/test-publish-verified-release.sh
+      - name: Development cleanup guard tests
+        run: scripts/test-development-cleanup.sh
       - name: Format and Clippy (both Cargo graphs)
         run: |
           cargo fmt --check --manifest-path rust/Cargo.toml

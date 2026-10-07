@@ -323,3 +323,7 @@ if [ "$migrate" = true ]; then
 elif [ -n "$install_dir" ]; then
     fail '--install-dir requires --independent-updates.'
 fi
+if [ -f "$repo/rust/Cargo.toml" ] && [ -x "$repo/scripts/cleanup-development.sh" ]; then
+    "$repo/scripts/cleanup-development.sh" --apply >&2 ||
+        printf '%s\n' 'Setup succeeded; development cleanup was skipped (see diagnostic above).' >&2
+fi

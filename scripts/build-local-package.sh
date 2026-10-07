@@ -59,6 +59,15 @@ private=$repo/.inkscape-mcp-local
 [ ! -L "$private" ] || fail 'Private build directory must not be a symlink.'
 (umask 077; mkdir -p -- "$private")
 build_root=$(mktemp -d "$private/build.XXXXXX")
+complete=false
+cleanup_build() {
+    if [ "$complete" = false ] && [ ! -L "$private" ] && [ ! -L "$build_root" ]; then
+        case "$build_root" in "$private"/build.*) rm -rf -- "$build_root";; esac
+    fi
+}
+trap cleanup_build EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
 printf 'Preparing native source build in %s\n' "$build_root" >&2
 printf '%s\n' 'Building the locked Rust server and native runtime package...' >&2
 target_dir=${INKSCAPE_MCP_BUILD_TARGET_DIR:-$repo/rust/target}
@@ -66,7 +75,10 @@ cargo_options=(--locked)
 if [ "${INKSCAPE_MCP_BUILD_LOCAL_TOOLS_ONLY:-false}" = true ]; then cargo_options+=(--offline); fi
 "$cargo" build "${cargo_options[@]}" --release --manifest-path rust/Cargo.toml \
     --target "$native_target" --target-dir "$target_dir" >&2
+# Setup consumes the directory; distribution archives are an explicit separate build.
 "$repo/scripts/dev-tools.sh" build-package --output "$build_root/package" \
-    --archive "$build_root/package.tar.gz" \
     --binary "$target_dir/$native_target/release/inkscape-mcp-rust" >&2
+(cd -- "$build_root" && find package -print | LC_ALL=C sort) > "$build_root/.managed-files"
+printf '%s\n' 'inkscape-mcp-managed-build-v1' > "$build_root/.managed-build"
+complete=true
 printf '%s\n' "$build_root/package"

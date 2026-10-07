@@ -33,6 +33,11 @@ tar = "=0.4.46"
 flate2 = "=1.1.10"
 reqwest = { version = "=0.13.5", default-features = false, features = ["blocking", "json", "native-tls"] }
 
+# Keep local tests/checks small; release symbols remain available for Sentry.
+[profile.dev]
+debug = 0
+incremental = false
+
 [profile.release]
 lto = "thin"
 debug = true
