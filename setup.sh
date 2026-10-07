@@ -17,6 +17,7 @@ sentry= sentry_dsn_file= sentry_environment=
 skill_client=
 connect_client=
 skill_update=false
+migrate=false install_dir=
 while [ "$#" -gt 0 ]; do
     case "$1" in
         --package|--workspace|--inkscape|--engine|--live|--sentry|--sentry-dsn-file|--sentry-environment|--install-skill|--connect-client)
@@ -35,6 +36,8 @@ while [ "$#" -gt 0 ]; do
             build=true
             case "$1" in --bootstrap|--rebuild) bootstrap=true;; esac
             shift;;
+        --independent-updates) migrate=true; shift;;
+        --install-dir) [ "$#" -ge 2 ] || fail "Missing --install-dir value."; install_dir=$2; shift 2;;
         --update-skill) skill_update=true; shift;;
         --version)
             manifest=$repo/.inkscape-mcp-local/setup.conf
@@ -62,6 +65,7 @@ while [ "$#" -gt 0 ]; do
                 'Compatibility: --build aliases --local-tools; --bootstrap explicitly repeats automatic provisioning/build.' \
                 'Automatic provisioning supports Apple Silicon macOS 15+; Apple developer tools are required.' \
                 '--rebuild explicitly rebuilds; --version displays installed revision/build metadata.' \
+                '--independent-updates migrates once to the permanent launcher; --install-dir overrides its directory.' \
                 '--connect-client codex|claude verifies handshake and atomically updates the client configuration.' \
                 '--install-skill replaces bundled guidance, archiving the previous skill; --update-skill is a compatibility alias.' \
                 'Existing MCP registrations and installed skills are refreshed automatically; new clients require --connect-client.' \
@@ -278,7 +282,8 @@ printf '%s\n' 'inkscape-mcp-setup-v1' "$binary" "$inkscape_dir" "$workspace" "$l
 mv -f -- "$temporary" "$config"
 printf 'Saved settings in %s\nMCP command: %s/run-mcp.sh\n' "$config" "$repo" >&2
 if [ -n "$skill_client" ]; then
-    skill_options=(--client "$skill_client" --replace)
+    skill_mode=--replace; [ "$migrate" = false ] || skill_mode=--update
+    skill_options=(--client "$skill_client" "$skill_mode")
     "$repo/scripts/install-skill.sh" "${skill_options[@]}" ||
         fail 'MCP settings were saved, but skill installation failed. See the message above and retry scripts/install-skill.sh.'
 fi
@@ -305,7 +310,16 @@ for existing_client in codex claude; do
         claude) existing_skill=${HOME:?HOME is required}/.claude/skills/inkscape-mcp;;
     esac
     if [ -e "$existing_skill" ] || [ -L "$existing_skill" ]; then
-        "$repo/scripts/install-skill.sh" --client "$existing_client" --replace ||
+        skill_mode=--replace; [ "$migrate" = false ] || skill_mode=--update
+        "$repo/scripts/install-skill.sh" --client "$existing_client" "$skill_mode" ||
             fail "MCP settings were saved, but the existing $existing_client skill refresh failed. Retry \"$repo/scripts/install-skill.sh\" --client $existing_client --replace."
     fi
 done
+if [ "$migrate" = true ]; then
+    [ -x "$package/bin/inkscape-mcp-launcher" ] || fail 'Selected package predates independent updates; rebuild with current sources.'
+    migration_options=(migrate --source "$repo")
+    [ -z "$install_dir" ] || migration_options+=(--install-dir "$install_dir")
+    "$package/bin/inkscape-mcp-launcher" "${migration_options[@]}"
+elif [ -n "$install_dir" ]; then
+    fail '--install-dir requires --independent-updates.'
+fi

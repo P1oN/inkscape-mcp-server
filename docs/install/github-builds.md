@@ -113,3 +113,7 @@ are required by the main ruleset, which also requires a PR, resolved review thre
 base-branch validation. Required approving reviews remain zero for the current solo maintainer;
 there is no administrator bypass. Dependabot opens weekly Cargo and Actions updates through this
 same PR/CI process. Issues use structured bug/feature forms; security reports remain private.
+
+Current sources also support [independent instructions/runtime updates](independent-updates.md) through a
+permanent native launcher and macOS management app. Opt in once with
+`./setup.sh --independent-updates`; published v0.1.2 archives retain their original behavior.

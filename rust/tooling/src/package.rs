@@ -475,6 +475,7 @@ fn build(out: &Path, binary: &Path) -> Result<()> {
     let library = out.join("libexec/inkscape-mcp");
     fs::create_dir_all(&library)?;
     let mut manifest = json!({"target":target,"runtime":"native-rust","dbus_inputs":[],"release_signed":false,"notarized":false,"source_head":source_revision()?,"build_info":serde_json::from_str::<Value>(&output(Command::new(binary).arg("--version"))?)?});
+    manifest["update_contract"] = json!({"text_interface":inkscape_mcp_rust::update::manifests::TEXT_INTERFACE,"helper_protocol":inkscape_mcp_rust::update::manifests::HELPER_PROTOCOL,"launcher_minimum":inkscape_mcp_rust::update::manifests::LAUNCHER_VERSION});
     for name in [
         "inkscape_mcp_insert.inx",
         "inkscape_mcp_edit.inx",
@@ -487,6 +488,7 @@ fn build(out: &Path, binary: &Path) -> Result<()> {
     }
     copy(binary, &out.join("bin/inkscape-mcp"))?;
     for (name, key) in [
+        ("inkscape-mcp-launcher", "permanent_launcher"),
         ("inkscape-mcp-client", "client_manager"),
         ("inkscape-mcp-supervisor", "managed_supervisor"),
         ("inkscape-mcp-inx", "one_shot_helper"),
@@ -495,7 +497,7 @@ fn build(out: &Path, binary: &Path) -> Result<()> {
         let source = binary.parent().unwrap().join(name);
         ensure(
             source.is_file(),
-            format!("native binary missing: {name}; build all five binaries"),
+            format!("native binary missing: {name}; build all six binaries"),
         )?;
         copy(&source, &out.join("bin").join(name))?;
         manifest[key] = json!(format!("bin/{name}"));
@@ -566,6 +568,35 @@ fn build(out: &Path, binary: &Path) -> Result<()> {
             &Path::new(&root).join("inputs.json"),
             &library.join("licenses/bootstrap/native-inputs.json"),
         )?;
+    }
+    if os == "macos" {
+        let app = out.join("management/Inkscape MCP Manager.app/Contents");
+        fs::create_dir_all(app.join("MacOS"))?;
+        output(
+            Command::new("/usr/bin/clang")
+                .args([
+                    "-fobjc-arc",
+                    "-Wall",
+                    "-Wextra",
+                    "-Werror",
+                    "-Wno-unused-parameter",
+                    "runtime/manager/main.m",
+                    "-framework",
+                    "Cocoa",
+                    "-o",
+                ])
+                .arg(app.join("MacOS/inkscape-mcp-manager")),
+        )?;
+        fs::write(
+            app.join("Info.plist"),
+            r#"<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><dict><key>CFBundleExecutable</key><string>inkscape-mcp-manager</string><key>CFBundleIdentifier</key><string>org.inkscape-mcp.manager</string><key>CFBundleName</key><string>Inkscape MCP Manager</string><key>CFBundlePackageType</key><string>APPL</string><key>CFBundleShortVersionString</key><string>1.0</string><key>LSMinimumSystemVersion</key><string>15.0</string><key>NSHighResolutionCapable</key><true/></dict></plist>"#,
+        )?;
+        output(
+            Command::new("/usr/bin/codesign")
+                .args(["--force", "--sign", "-", "--timestamp=none"])
+                .arg(app.parent().unwrap()),
+        )?;
+        manifest["management_app"] = json!("management/Inkscape MCP Manager.app");
     }
     manifest["license_inventory"] = notices::collect(&out, &target, &triple)?;
     write_json(&library.join("package.json"), &manifest)?;

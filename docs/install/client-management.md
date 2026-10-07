@@ -103,3 +103,7 @@ archive errors/skill restoration and drawing/skill preservation. Run
 CODEX_HOME/HOME and a client PATH without Python, after damaging the helper runtime and
 supervisor. This uses real Codex and synthetic shell Claude; it does not claim real Claude
 or native GUI acceptance. The runner itself is development tooling, not an installation dependency.
+
+Current sources also support [independent instructions/runtime updates](independent-updates.md) through a
+permanent native launcher and macOS management app. Opt in once with
+`./setup.sh --independent-updates`; published v0.1.2 archives retain their original behavior.

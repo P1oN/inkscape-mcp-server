@@ -1,6 +1,7 @@
 # Active backlog
 
-Updated **2026-10-06** for the v0.1.2 release follow-up (PRs #8–11). This file contains only
+Updated **2026-10-07** after independent-update implementation and scoped acceptance.
+This file contains only
 unfinished work. Implemented Python removal and authoring plans are in
 [history](history/plans/python-removal-and-authoring.md); completed product milestones are
 in [the milestone index](history/README.md). Current behavior/validation is in
@@ -13,6 +14,23 @@ in [the milestone index](history/README.md). Current behavior/validation is in
 | Clean-machine Apple Silicon installation | Exercise source bootstrap on a separate clean macOS 15+ host: Apple SDK installation, pinned downloads, quarantine, first setup, client registration, render and reinstall. | Host/tool versions, commands, actual prompts/failures and preserved settings/drawings. Existing-host acceptance is insufficient. |
 | Real Claude Code acceptance | Use an installed Claude client in an isolated profile where supported; check registration scope, handshake, first workspace request, reconnect and disconnect. | Actual client version/config scope and results. Synthetic CLI routing remains separate. |
 | Complete broader review and release qualification | Resolve the previously skipped CodeRabbit review through a bounded review process and complete the host/client acceptance above before a stable release. v0.1.2 remains a prerelease; successful status alone is not proof of completed review. | Reviewed scope and unresolved findings are explicit; source/build identity and distribution checks stay bound to each archive. |
+
+## Independent updates — remaining release qualification
+
+The requested implementation is available in current unpublished sources. See the
+[installation guide](install/independent-updates.md), [original plan](history/plans/independent-updates.md)
+and [acceptance ledger](history/reports/independent-updates.md). No installed runtime was
+changed and no release was published.
+
+| Task | Next action | Completion evidence |
+| --- | --- | --- |
+| Published management GUI downloads | After an authorized release, exercise instructions-only, runtime-only and combined downloads and the no-update state in an isolated native app profile. | Native observations tied to actual published manifests and package identities; current component-success evidence is backend/CLI acceptance. |
+| Live reconnect and retained helpers | With explicit GUI authorization, reconnect an isolated client after updating and exercise owned synthetic Inkscape documents while an older helper path is retained. | Actual client/runtime identities, unchanged user windows and native results. No Inkscape GUI was launched for update acceptance. |
+| Storage/media failure qualification | Extend automated journal/move-boundary and post-selector write-failure checks with real ENOSPC, media failure and process termination. | Old or new pair remains launchable, recovery is idempotent, and skill edits are preserved. |
+
+Clean-machine installation, real Claude and broader release review remain in Priority 1.
+Automatic scheduling, differential downloads, launcher self-update, Windows and Developer ID
+signing/notarization remain future scope rather than implemented capabilities.
 
 ## Priority 2 — live drawing workflow
 

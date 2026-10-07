@@ -20,6 +20,8 @@ builds. Use [current status](../AGENT_HANDOFF.md), [active backlog](../RUST_NEXT
 
 ## Reports and logs
 
+- [Independent updates](reports/independent-updates.md): unpublished launcher, component updates, recovery and scoped CLI/native management acceptance; [original user plan](plans/independent-updates.md).
+
 - [Setup upgrade follow-up](reports/setup-upgrade.md): unpublished replacement/config-preservation policy and local regression acceptance.
 
 - [v0.1.2 release follow-up](reports/v0.1.2-release.md): documentation reconciliation, source archive regression and distribution identity/evidence.

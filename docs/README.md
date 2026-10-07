@@ -1,8 +1,9 @@
 # Documentation
 
 This index separates current usage, remaining work, architecture decisions and dated evidence.
-Current usage covers v0.1.2 and the PR #8–11 source surface. The handoff records
-release-specific evidence and outstanding acceptance as of 2026-10-06.
+Current usage distinguishes published v0.1.2 from newer source features, including opt-in
+independent updates. The handoff records release-specific evidence and outstanding acceptance
+as of 2026-10-07.
 
 ## Start here
 
@@ -18,7 +19,8 @@ release-specific evidence and outstanding acceptance as of 2026-10-06.
 ## Current guides
 
 - **Installation:** [source/package setup](install/install.md), [source prerequisites](install/local-bootstrap.md),
-  [GitHub builds](install/github-builds.md), [client management](install/client-management.md),
+  [GitHub builds](install/github-builds.md), [independent updates](install/independent-updates.md),
+  [client management](install/client-management.md),
   [host configuration](install/host-configs.md), [agent skill](install/agent-skill.md),
   [compatibility](install/compatibility.md), [troubleshooting](install/troubleshooting.md).
 - **Live integration:** [overview](live/README.md), [managed macOS session](live/macos-live-prototype.md),

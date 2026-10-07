@@ -24,7 +24,8 @@ pub fn binary() -> &'static Path {
                 .arg("-L")
                 .arg(format!("dependency={}", deps.display()));
             // Use Cargo's already built dependency artifacts; this performs no downloads.
-            for name in ["serde_json", "inkscape_mcp_rust", "libc"] {
+            {
+                let name = "inkscape_mcp_rust";
                 let prefix = format!("lib{name}-");
                 let path = std::fs::read_dir(&deps)
                     .unwrap()

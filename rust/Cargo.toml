@@ -29,6 +29,10 @@ toml = "=0.8.23"
 toml_edit = "=0.22.27"
 plist = "=1.8.0"
 
+tar = "=0.4.46"
+flate2 = "=1.1.10"
+reqwest = { version = "=0.13.5", default-features = false, features = ["blocking", "json", "native-tls"] }
+
 [profile.release]
 lto = "thin"
 debug = true

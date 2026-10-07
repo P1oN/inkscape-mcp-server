@@ -16,6 +16,19 @@ tar -czf "$fixture_root/artifacts/inkscape-mcp-source-bootstrap.tar.gz" -C "$fix
 for fixture_archive in inkscape-mcp-macos-arm64.tar.gz inkscape-mcp-source-bootstrap.tar.gz; do
     (cd "$fixture_root/artifacts" && shasum -a 256 "$fixture_archive" > "$fixture_archive.sha256")
 done
+mkdir -p "$fixture_root/instructions/inkscape-mcp-instructions" "$fixture_root/launcher/inkscape-mcp-launcher"
+printf 'fixture launcher\n' > "$fixture_root/launcher/inkscape-mcp-launcher/launcher"
+jq -n --arg sha "$fixture_sha" '{format:1,version:$sha,content_id:$sha,text_interface:1,launcher_minimum:1,files:{}}' > "$fixture_root/instructions/inkscape-mcp-instructions/manifest.json"
+tar -czf "$fixture_root/artifacts/inkscape-mcp-instructions.tar.gz" -C "$fixture_root/instructions" inkscape-mcp-instructions
+tar -czf "$fixture_root/artifacts/inkscape-mcp-launcher.tar.gz" -C "$fixture_root/launcher" inkscape-mcp-launcher
+for fixture_archive in inkscape-mcp-instructions.tar.gz inkscape-mcp-launcher.tar.gz; do
+    (cd "$fixture_root/artifacts" && shasum -a 256 "$fixture_archive" > "$fixture_archive.sha256")
+done
+fixture_asset() {
+    local file=$fixture_root/artifacts/$1
+    jq -n --arg name "$1" --arg hash "$(shasum -a 256 "$file" | cut -d ' ' -f 1)" --argjson bytes "$(wc -c < "$file" | tr -d ' ')" '{name:$name,bytes:$bytes,sha256:$hash}'
+}
+jq -n --arg sha "$fixture_sha" --argjson runtime "$(fixture_asset inkscape-mcp-macos-arm64.tar.gz)" --argjson instructions "$(fixture_asset inkscape-mcp-instructions.tar.gz)" --argjson launcher "$(fixture_asset inkscape-mcp-launcher.tar.gz)" --argjson bundle "$(cat "$fixture_root/instructions/inkscape-mcp-instructions/manifest.json")" '{format:1,tag:$sha,prerelease:true,runtime:{format:1,distribution_tag:$sha,build_id:"fixture",source_revision:$sha,os:"macos",architecture:"aarch64",minimum_os_major:15,text_interface:1,helper_protocol:5,launcher_minimum:1,asset:$runtime},instructions:$bundle,instruction_asset:$instructions,launcher_asset:$launcher}' > "$fixture_root/artifacts/inkscape-mcp-update-template.json"
 jq -n --arg sha "$fixture_sha" '{repository:{full_name:"example/repo"},head_repository:{full_name:"example/repo"},workflow_id:42,event:"push",head_branch:"main",status:"completed",conclusion:"success",head_sha:$sha}' > "$fixture_root/run.json"
 printf '[]\n' > "$fixture_root/tags.json"
 printf '[]\n' > "$fixture_root/releases.json"
@@ -31,15 +44,28 @@ if [ "$1" = api ]; then
         */actions/runs/123) cat "$root/run.json";;
         */git/matching-refs/tags/*) cat "$root/tags.json";;
         */releases\?per_page=100) cat "$root/releases.json";;
+        */releases/tags/v1.0.0) printf '{"draft":false,"immutable":true}
+';;
         *) exit 99;;
     esac
 elif [ "$1 $2" = 'run download' ]; then
     while [ "$1" != --dir ]; do shift; done
     cp "$root/artifacts/"* "$2/"
+elif [ "$1 $2" = 'release download' ]; then
+    pattern= destination=
+    while [ "$#" -gt 0 ]; do
+        case "$1" in --pattern) pattern=$2; shift 2;; --dir) destination=$2; shift 2;; *) shift;; esac
+    done
+    if [ "$pattern" = inkscape-mcp-update.json ]; then
+        cp "$root/reference/inkscape-mcp-update.json" "$destination/"
+    else
+        cp "$root/artifacts/inkscape-mcp-macos-arm64.tar.gz" "$root/reference/RELEASE-METADATA.json" "$destination/"
+    fi
 elif [ "$1" = release ]; then
+
     printf '%s\n' "$2" >> "$root/publication.log"
     if [ "$2" = upload ]; then
-        [ "$#" -eq 10 ]
+        [ "$#" -eq 15 ] || [ "$#" -eq 13 ]
         for asset in "${@:6}"; do [ -f "$asset" ]; done
     fi
 else
@@ -91,4 +117,14 @@ cp "$fixture_root/valid-source.tar.gz" "$fixture_root/artifacts/inkscape-mcp-sou
 (cd "$fixture_root/artifacts" && shasum -a 256 inkscape-mcp-source-bootstrap.tar.gz > inkscape-mcp-source-bootstrap.tar.gz.sha256)
 bash "$repo/scripts/publish-verified-release.sh" > "$fixture_root/output" 2>&1 || { cat "$fixture_root/output"; exit 1; }
 [ "$(cat "$fixture_root/publication.log")" = "$(printf 'create\nupload\nedit')" ]
-printf 'valid artifacts: draft, five assets, publication in order passed\n'
+printf 'valid artifacts: draft, ten assets, publication in order passed\n'
+mkdir "$fixture_root/reference"
+jq '.tag="v1.0.0" | .runtime.distribution_tag="v1.0.0"' "$fixture_root/artifacts/inkscape-mcp-update-template.json" > "$fixture_root/reference/inkscape-mcp-update.json"
+jq -n --arg sha "$fixture_sha" '{package_build:{revision:$sha,build_id:"fixture"},ci_run:"https://github.com/example/repo/actions/runs/122"}' > "$fixture_root/reference/RELEASE-METADATA.json"
+rm "$fixture_root/publication.log"
+RELEASE_RUNTIME_TAG=v1.0.0 bash "$repo/scripts/publish-verified-release.sh" > "$fixture_root/output" 2>&1 || { cat "$fixture_root/output"; exit 1; }
+[ "$(cat "$fixture_root/publication.log")" = "$(printf 'create\nupload\nedit')" ]
+printf 'reused immutable runtime: reference verified without execution or republication passed\n'
+jq '.runtime.helper_protocol=99' "$fixture_root/reference/inkscape-mcp-update.json" > "$fixture_root/reference/invalid.json"
+mv "$fixture_root/reference/invalid.json" "$fixture_root/reference/inkscape-mcp-update.json"
+RELEASE_RUNTIME_TAG=v1.0.0 expect_refusal 'incompatible reused runtime'

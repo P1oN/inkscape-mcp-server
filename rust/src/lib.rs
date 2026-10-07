@@ -1,4 +1,9 @@
-//! Reusable, bounded SVG kernels for the server and future native live helpers.
-//! No filesystem, subprocess, GUI, or MCP execution entry points.
+//! Bounded SVG kernels, client management and independent-update backend.
 pub mod helper_svg;
 pub mod xml;
+
+pub mod client_management;
+pub mod update;
+
+#[doc(hidden)]
+pub use {libc, serde_json};
