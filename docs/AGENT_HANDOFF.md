@@ -82,9 +82,12 @@ remain separately scoped. Ad-hoc macOS signing is not Developer ID/notarization.
 
 ## Dependency review
 
-Coordinated dependency updates are being reviewed in PR #15: both Cargo graphs must keep
-shared direct pins and lockfiles consistent. Historical Python and manifest-only sha2 0.11
-updates were declined; see the [review ledger](history/reports/dependency-pr-review.md).
+Earlier coordinated patches from PR #15 are incorporated. A follow-up replacement for
+Dependabot PRs #21–25 aligns base64 0.23.1, toml 1.1.6 and toml_edit 0.25.15 across both Cargo
+graphs, refreshing both locks and explicitly parsing TOML documents in package-notice readers.
+Local runtime/tooling tests, both fmt/Clippy graphs and release/package notice checks passed;
+hosted required CI remains pending on the replacement PR. Historical Python and manifest-only
+sha2 0.11 updates were declined; see the [review ledger](history/reports/dependency-pr-review.md).
 
 ## Repository maintenance
 
