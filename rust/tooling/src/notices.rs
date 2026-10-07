@@ -193,8 +193,10 @@ pub fn collect(output_dir: &Path, target: &str, triple: &str) -> Result<Value> {
         !pairs.is_empty() && pairs.len() <= 512,
         "unexpected native dependency graph size",
     )?;
-    let lock: toml::Value =
-        std::str::from_utf8(&read(Path::new("rust/Cargo.lock"), 4 * 1024 * 1024)?)?.parse()?;
+    let lock: toml::Value = toml::from_str(std::str::from_utf8(&read(
+        Path::new("rust/Cargo.lock"),
+        4 * 1024 * 1024,
+    )?)?)?;
     let locked: BTreeMap<_, _> = lock["package"]
         .as_array()
         .ok_or("lock packages missing")?

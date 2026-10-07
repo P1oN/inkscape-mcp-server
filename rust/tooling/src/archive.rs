@@ -199,12 +199,11 @@ pub fn crate_notices(
         )?;
         notices.insert(relative.into(), content);
     }
-    let metadata: toml::Value = std::str::from_utf8(
+    let metadata: toml::Value = toml::from_str(std::str::from_utf8(
         &notices
             .remove("Cargo.toml")
             .ok_or("crate Cargo.toml missing")?,
-    )?
-    .parse()?;
+    )?)?;
     let vcs = serde_json::from_slice(
         &notices
             .remove(".cargo_vcs_info.json")

@@ -31,3 +31,32 @@ Both locked Cargo graphs passed fmt and Clippy. Default-parallel runtime tests p
 310 tests with two opt-in tests ignored; tooling passed 17 tests. Required hosted quick/native
 CI will validate the final commit before merge. No GUI or installed-user runtime change
 is part of this review, and historical native GUI evidence is not transferred to a new binary.
+
+## Coordinated follow-up — 2026-10-07
+
+The user requested one replacement PR for Dependabot PRs #21–25 and closure of the standalone
+updates. Both Cargo graphs now select base64 0.23.1, toml 1.1.6+spec-1.1.0 and toml_edit
+0.25.15+spec-1.1.0. Both direct shared pins and lockfiles are aligned; unrelated dependency
+updates and the separate uncommitted development-cleanup work are excluded.
+
+Standalone runtime bumps failed locked tooling checks because the tooling graph includes
+the runtime as a path dependency. The standalone tooling base64 bump passed CI but split
+the direct pins. The tooling TOML bump failed the valid crate-notice test: TOML's
+`Value::from_str` parses an individual value, not a document, in newer versions.
+Both crate-manifest and Cargo.lock readers now use explicit `toml::from_str`; bounded reads,
+archive/hash checks and notice extraction guards remain in place. See the
+[upstream TOML migration notes](https://github.com/toml-rs/toml/blob/toml-v1.1.6/crates/toml/CHANGELOG.md)
+and [base64 release notes](https://github.com/marshallpierce/rust-base64/blob/v0.23.1/RELEASE-NOTES.md).
+
+Local validation: 326 sequential runtime tests passed/two opt-in ignored; 17 tooling tests,
+both fmt/Clippy graphs, locked release build and a fresh six-executable native package passed.
+The package notice probe passed 11 checks across 199 crates, including the updated Cargo.lock
+and actual registry crate manifests. Doctor passed all 12 profiles; isolated client lifecycle
+and source-management guards passed with the new package. No MCP schema/instruction changes
+require catalog regeneration.
+Hosted required CI is pending on the replacement PR; local checks do not establish a new
+native GUI result, clean-machine acceptance or installation into the user's runtime.
+
+Local builds used `CARGO_PROFILE_DEV_DEBUG=0 CARGO_INCREMENTAL=0` to limit scratch storage,
+without including development-profile changes in this dependency PR. Release symbols remain
+enabled. The user's existing checkout, settings, running MCP and Inkscape windows are preserved.
