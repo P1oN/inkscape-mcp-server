@@ -49,6 +49,7 @@ if [ "$1" = api ]; then
         *) exit 99;;
     esac
 elif [ "$1 $2" = 'run download' ]; then
+    [ "${RELEASE_FIXTURE_EXPIRED:-false}" != true ] || exit 1
     while [ "$1" != --dir ]; do shift; done
     cp "$root/artifacts/"* "$2/"
 elif [ "$1 $2" = 'release download' ]; then
@@ -83,6 +84,7 @@ expect_refusal() {
     printf '%s: refused before publication\n' "$1"
 }
 RELEASE_TAG=invalid expect_refusal 'invalid tag'
+RELEASE_FIXTURE_EXPIRED=true expect_refusal 'expired artifact'
 jq '.event="pull_request"' "$fixture_root/run.json" > "$fixture_root/invalid.json"
 cp "$fixture_root/run.json" "$fixture_root/valid.json"
 mv "$fixture_root/invalid.json" "$fixture_root/run.json"
@@ -115,6 +117,11 @@ tar -czf "$fixture_root/artifacts/inkscape-mcp-source-bootstrap.tar.gz" -C "$fix
 expect_refusal 'source revision mismatch'
 cp "$fixture_root/valid-source.tar.gz" "$fixture_root/artifacts/inkscape-mcp-source-bootstrap.tar.gz"
 (cd "$fixture_root/artifacts" && shasum -a 256 inkscape-mcp-source-bootstrap.tar.gz > inkscape-mcp-source-bootstrap.tar.gz.sha256)
+RELEASE_VALIDATE_ONLY=true RELEASE_CANDIDATE_OUTPUT="$fixture_root/validated-candidate" bash "$repo/scripts/publish-verified-release.sh" > "$fixture_root/output" 2>&1 || { cat "$fixture_root/output"; exit 1; }
+[ ! -e "$fixture_root/publication.log" ]
+jq -e --arg sha "$fixture_sha" '.source_revision == $sha and .package_build.build_id == "fixture"' "$fixture_root/validated-candidate/CANDIDATE.json" >/dev/null
+(cd "$fixture_root/validated-candidate" && jq -r .input_sha256 CANDIDATE.json | shasum -a 256 -c -) >/dev/null
+printf 'validate-only: exact digest-bound candidate retained without publication\n'
 bash "$repo/scripts/publish-verified-release.sh" > "$fixture_root/output" 2>&1 || { cat "$fixture_root/output"; exit 1; }
 [ "$(cat "$fixture_root/publication.log")" = "$(printf 'create\nupload\nedit')" ]
 printf 'valid artifacts: draft, ten assets, publication in order passed\n'

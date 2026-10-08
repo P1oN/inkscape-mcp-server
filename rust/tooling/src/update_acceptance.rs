@@ -11,8 +11,22 @@ pub fn run(args: &Args) -> Result<()> {
         "--profile",
         "--previous-package",
         "--runtime-archive",
+        "--runtime-package",
     ])?;
     let package = args.required("--package")?.canonicalize()?;
+    let runtime_package = if args.flag("--runtime-package") {
+        args.required("--runtime-package")?.canonicalize()?
+    } else {
+        package.clone()
+    };
+    let management_launcher = if args.flag("--runtime-package") {
+        inkscape_mcp_rust::runtime_layout::binary(
+            &inkscape_mcp_rust::runtime_layout::library(&runtime_package),
+            "inkscape-mcp-launcher",
+        )
+    } else {
+        package.join("bin/inkscape-mcp-launcher")
+    };
     let previous_package = if args.flag("--previous-package") {
         args.required("--previous-package")?.canonicalize()?
     } else {
@@ -111,7 +125,7 @@ pub fn run(args: &Args) -> Result<()> {
     )?;
     let installation = base.join("permanent installation");
     let migration: Value = serde_json::from_str(&execute(
-        &repo.join("bin/inkscape-mcp-launcher"),
+        &management_launcher,
         &[
             "migrate",
             "--source",
@@ -203,7 +217,9 @@ pub fn run(args: &Args) -> Result<()> {
         crate::archive::pack(&bundle, &instruction_archive)?;
         let instruction_bytes = fs::read(instruction_archive)?;
         let runtime_bytes = fs::read(args.required("--runtime-archive")?)?;
-        let metadata = crate::common::json(&package.join("libexec/inkscape-mcp/package.json"))?;
+        let metadata = crate::common::json(
+            &inkscape_mcp_rust::runtime_layout::library(&runtime_package).join("package.json"),
+        )?;
         let release = ReleaseManifest {
             format: 1,
             tag: "v9.0.0".into(),
@@ -218,7 +234,10 @@ pub fn run(args: &Args) -> Result<()> {
                 minimum_os_major: 15,
                 text_interface: TEXT_INTERFACE,
                 helper_protocol: HELPER_PROTOCOL,
-                launcher_minimum: 1,
+                launcher_minimum: metadata["update_contract"]["launcher_minimum"]
+                    .as_u64()
+                    .ok_or("missing launcher compatibility")?
+                    .try_into()?,
                 asset: Asset {
                     name: "inkscape-mcp-macos-arm64.tar.gz".into(),
                     identity: FileIdentity::of(&runtime_bytes),
@@ -296,6 +315,11 @@ pub fn run(args: &Args) -> Result<()> {
                         },
                 format!("{label} selected unexpected runtime/instructions"),
             )?;
+            inkscape_mcp_rust::client_management::probe(
+                Command::new(&launcher).env_clear().envs(environment),
+                std::time::Duration::from_secs(30),
+            )
+            .map_err(|e| e.to_string())?;
             runtime_exercised |= runtime_expected;
             if updated["changed"] == true {
                 transaction::rollback(&installation, &settings)?;
@@ -305,6 +329,11 @@ pub fn run(args: &Args) -> Result<()> {
                     == selector.current,
                 "rollback changed original pair",
             )?;
+            inkscape_mcp_rust::client_management::probe(
+                Command::new(&launcher).env_clear().envs(environment),
+                std::time::Duration::from_secs(30),
+            )
+            .map_err(|e| e.to_string())?;
             ensure(
                 fs::read(&skill)? == custom && fs::read(&config)? == binding,
                 "downloaded update/rollback changed customization or registration",

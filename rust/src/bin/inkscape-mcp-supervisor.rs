@@ -323,17 +323,16 @@ fn prepare_with(
             ))
         })
         .collect::<Result<Vec<_>>>()?;
-    let inx = library
-        .parent()
-        .and_then(Path::parent)
-        .ok_or("invalid package")?
-        .join("bin/inkscape-mcp-inx");
+    let inx = inkscape_mcp_rust::runtime_layout::binary(library, "inkscape-mcp-inx");
     // Validate the fixed native helper before modifying the isolated profile.
     read(&inx, LIMIT)?;
     let live = inx.with_file_name("inkscape-mcp-live");
     read(&live, LIMIT)?;
     let executable_bytes = read(binary, LIMIT)?;
-    let bridge_bytes = read(&library.join("context.so"), 16 * 1024 * 1024)?;
+    let bridge_bytes = read(
+        &inkscape_mcp_rust::runtime_layout::asset(library, "context.so"),
+        16 * 1024 * 1024,
+    )?;
     let mut info = plist::Value::from_reader(std::io::Cursor::new(read(
         &contents.join("Info.plist"),
         1024 * 1024,
@@ -418,22 +417,31 @@ fn supervise_with(
         for name in ["bus.log", "inkscape.stdout.log", "inkscape.stderr.log"] {
             dir.write(name, b"", 0o600)?;
         }
-        workspace().regular_file(0, relative(&library.join("dbus/bin/dbus-daemon"))?)?;
+        workspace().regular_file(
+            0,
+            relative(&inkscape_mcp_rust::runtime_layout::asset(
+                library,
+                "dbus/bin/dbus-daemon",
+            ))?,
+        )?;
         read(&library.join("dbus/session.conf"), 1024 * 1024)?;
         let log = dir.file("bus.log")?;
         let address = format!("unix:path={}", root.join("bus.sock").display());
         let mut bus = OwnedBus(
-            Command::new(library.join("dbus/bin/dbus-daemon"))
-                .arg(format!(
-                    "--config-file={}",
-                    library.join("dbus/session.conf").display()
-                ))
-                .arg(format!("--address={address}"))
-                .args(["--nofork", "--print-address=1"])
-                .stdin(Stdio::null())
-                .stdout(log.try_clone()?)
-                .stderr(log)
-                .spawn()?,
+            Command::new(inkscape_mcp_rust::runtime_layout::asset(
+                library,
+                "dbus/bin/dbus-daemon",
+            ))
+            .arg(format!(
+                "--config-file={}",
+                library.join("dbus/session.conf").display()
+            ))
+            .arg(format!("--address={address}"))
+            .args(["--nofork", "--print-address=1"])
+            .stdin(Stdio::null())
+            .stdout(log.try_clone()?)
+            .stderr(log)
+            .spawn()?,
         );
         let deadline = Instant::now() + ready_timeout;
         loop {
@@ -495,11 +503,7 @@ fn main_result() -> Result<()> {
     let root = PathBuf::from(&args[0]);
     let binary = fs::canonicalize(&args[1])?;
     let exe = std::env::current_exe()?;
-    let library = exe
-        .parent()
-        .and_then(Path::parent)
-        .ok_or("invalid supervisor installation")?
-        .join("libexec/inkscape-mcp");
+    let library = inkscape_mcp_rust::runtime_layout::library_for_executable(&exe)?;
     supervise_with(
         &root,
         &library,
@@ -556,7 +560,11 @@ mod tests {
     fn library(root: &Path, mode: &str) -> PathBuf {
         let library = root.join("package/libexec/inkscape-mcp");
         fs::create_dir_all(library.join("dbus/bin")).unwrap();
-        fs::copy(fixture_binary(), library.join("dbus/bin/dbus-daemon")).unwrap();
+        fs::copy(
+            fixture_binary(),
+            inkscape_mcp_rust::runtime_layout::asset(&library, "dbus/bin/dbus-daemon"),
+        )
+        .unwrap();
         fs::write(library.join("dbus/bin/dbus-daemon.mode"), mode).unwrap();
         fs::write(library.join("dbus/session.conf"), "fixture config").unwrap();
         library

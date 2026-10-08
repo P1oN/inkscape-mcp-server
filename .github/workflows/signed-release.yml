@@ -1,0 +1,200 @@
+name: Prepare and publish signed Manager
+
+"on":
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: New immutable distribution tag
+        required: true
+        type: string
+      run_id:
+        description: Successful main push native CI run with distinct baseline artifact
+        required: true
+        type: string
+      runtime_tag:
+        description: Optional immutable Developer ID qualified runtime release to reuse
+        type: string
+        required: false
+      prerelease:
+        description: Publish as a prerelease
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-release
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      actions: read
+      contents: read
+    outputs:
+      source_sha: ${{ steps.candidate.outputs.source_sha }}
+      signing_team: ${{ steps.candidate.outputs.signing_team }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Validate exact candidate without signing secrets
+        id: candidate
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag }}
+          RELEASE_RUN_ID: ${{ inputs.run_id }}
+          RELEASE_PRERELEASE: ${{ inputs.prerelease }}
+          SIGNED_RUNTIME_TAG: ${{ inputs.runtime_tag }}
+          EXPECTED_SIGNING_TEAM: ${{ vars.SIGNING_TEAM_ID }}
+          RELEASE_VALIDATE_ONLY: 'true'
+          RELEASE_CANDIDATE_OUTPUT: candidate
+        run: |
+          [[ "$EXPECTED_SIGNING_TEAM" =~ ^[A-Z0-9]{10}$ ]] || {
+            printf '%s\n' 'Set repository variable SIGNING_TEAM_ID before requesting signed preparation.' >&2
+            exit 1
+          }
+          printf 'signing_team=%s\n' "$EXPECTED_SIGNING_TEAM" >> "$GITHUB_OUTPUT"
+          scripts/publish-verified-release.sh
+          if [ -n "$SIGNED_RUNTIME_TAG" ]; then scripts/validate-runtime-reference.sh candidate "$SIGNED_RUNTIME_TAG"; fi
+          printf 'source_sha=%s\n' "$(jq -er .source_revision candidate/CANDIDATE.json)" >> "$GITHUB_OUTPUT"
+          gh run download "$RELEASE_RUN_ID" --name inkscape-mcp-update-baseline --dir baseline-input
+          (cd baseline-input && shasum -a 256 -c update-baseline.tar.gz.sha256)
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: signed-candidate
+          path: |
+            candidate/
+            baseline-input/
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0
+
+  prepare:
+    needs: validate
+    runs-on: macos-26
+    timeout-minutes: 60
+    environment: release-signing
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.validate.outputs.source_sha }}
+      - name: Install pinned development tooling
+        run: |
+          rustup toolchain install 1.99.0 --profile minimal
+          echo "LIBXML2=$(xcrun --show-sdk-path)/usr/lib/libxml2.tbd" >> "$GITHUB_ENV"
+      - name: Retrieve validated candidate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download "$GITHUB_RUN_ID" --name signed-candidate --dir validated
+      - name: Prepare Developer ID distribution with an ephemeral keychain
+        env:
+          SIGNING_CERTIFICATE_BASE64: ${{ secrets.SIGNING_CERTIFICATE_BASE64 }}
+          SIGNING_CERTIFICATE_PASSWORD: ${{ secrets.SIGNING_CERTIFICATE_PASSWORD }}
+          SIGNING_IDENTITY: ${{ vars.SIGNING_IDENTITY }}
+          SIGNING_TEAM_ID: ${{ needs.validate.outputs.signing_team }}
+          NOTARY_KEY_BASE64: ${{ secrets.NOTARY_KEY_BASE64 }}
+          NOTARY_KEY_ID: ${{ vars.NOTARY_KEY_ID }}
+          NOTARY_ISSUER_ID: ${{ vars.NOTARY_ISSUER_ID }}
+        run: scripts/prepare-signed-distribution.sh validated/candidate prepared
+      - name: Archive finalized distribution and baseline for verification
+        run: |
+          COPYFILE_DISABLE=1 tar -czf prepared.tar.gz prepared
+          shasum -a 256 prepared.tar.gz > prepared.tar.gz.sha256
+          cp -R validated/baseline-input baseline-input
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: signed-prepared
+          path: |
+            prepared.tar.gz
+            prepared.tar.gz.sha256
+            baseline-input/
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0
+      - name: Preserve exact containers and candidate identity for explicit notarization recovery
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: signed-preparation-failure
+          path: |
+            prepared/
+            validated/candidate/CANDIDATE.json
+          retention-days: 7
+
+  verify:
+    needs: [validate, prepare]
+    runs-on: macos-26
+    timeout-minutes: 45
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.validate.outputs.source_sha }}
+      - name: Install the supported native engine for isolated headless probes
+        run: brew install --cask inkscape
+      - name: Retrieve finalized payload without signing credentials
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run download "$GITHUB_RUN_ID" --name signed-prepared --dir inputs
+          (cd inputs && shasum -a 256 -c prepared.tar.gz.sha256)
+          python3 scripts/extract-ci-artifact.py inputs/prepared.tar.gz final
+          (cd inputs/baseline-input && shasum -a 256 -c update-baseline.tar.gz.sha256)
+          python3 scripts/extract-ci-artifact.py inputs/baseline-input/update-baseline.tar.gz baseline
+      - name: Verify signatures and fixed final package, installer and distinct-update probes
+        env:
+          EXPECTED_SIGNING_TEAM: ${{ needs.validate.outputs.signing_team }}
+        run: scripts/accept-signed-distribution.sh final/prepared baseline/update-baseline
+      - name: Stage exact verified publication assets
+        env:
+          EXPECTED_SIGNING_TEAM: ${{ needs.validate.outputs.signing_team }}
+        run: |
+          python3 scripts/verify-signed-distribution.py final/prepared > publication-inventory.json
+          mkdir publication
+          while IFS= read -r name; do cp "final/prepared/$name" publication/; done < <(jq -r 'keys[]' publication-inventory.json)
+          COPYFILE_DISABLE=1 tar -czf publication.tar.gz publication
+          shasum -a 256 publication.tar.gz > publication.tar.gz.sha256
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: signed-verified
+          path: |
+            publication.tar.gz
+            publication.tar.gz.sha256
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0
+
+  publish:
+    needs: [validate, verify]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment: release-publication
+    permissions:
+      actions: read
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.validate.outputs.source_sha }}
+      - name: Retrieve staged assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run download "$GITHUB_RUN_ID" --name signed-verified --dir inputs
+          (cd inputs && shasum -a 256 -c publication.tar.gz.sha256)
+          python3 scripts/extract-ci-artifact.py inputs/publication.tar.gz final
+      - name: Upload verified bytes, check remote digests, then publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_SIGNING_TEAM: ${{ needs.validate.outputs.signing_team }}
+        run: scripts/publish-signed-distribution.sh final/publication

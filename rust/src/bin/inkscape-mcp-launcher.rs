@@ -9,12 +9,14 @@ use inkscape_mcp_rust::update::{
 };
 use serde_json::{Value, json};
 use std::{env, path::PathBuf};
-const HELP: &str = "inkscape-mcp — permanent MCP launcher and updater\n\nNo arguments: start MCP (offline; JSON-RPC only on stdout).\n  update --check            Show installed and available versions (read-only)\n  update --instructions     Update server text and merge managed skills\n  update --runtime          Update the complete compatible runtime\n  update                    Update a compatible runtime/instruction pair\n  rollback                  Restore the preceding pair and owned skill state\n  disconnect --client NAME  Remove an owned Codex/Claude binding (runtime-independent)\n  uninstall                 Disconnect owned clients and archive the installation/skills\n  --version                 Show selected runtime/text/launcher identity\n  migrate --source DIR      Migrate a configured source/ready installation once\n\nOptions: --install-dir DIR (isolated installation), --channel stable|prerelease,\n         --release TAG (explicit immutable release), --json (structured result).\nDefault channel: stable. Prereleases require --channel prerelease.\nReconnect clients after activation; running MCP/Inkscape sessions retain their helpers.\nExit codes: 0 success/no update, 1 failed operation, 2 invalid arguments. Never prompts.\nAdd INSTALL_DIR/bin to PATH, or use its absolute inkscape-mcp path.";
+const HELP: &str = "inkscape-mcp — permanent MCP launcher and updater\n\nNo arguments: start MCP (offline; JSON-RPC only on stdout).\n  update --check            Show installed and available versions (read-only)\n  update --instructions     Update server text and merge managed skills\n  update --runtime          Update the complete compatible runtime\n  update                    Update a compatible runtime/instruction pair\n  rollback                  Restore the preceding pair and owned skill state\n  disconnect --client NAME  Remove an owned Codex/Claude binding (runtime-independent)\n  uninstall                 Disconnect owned clients and archive the installation/skills\n  --version                 Show selected runtime/text/launcher identity\n  install-inspect           Read installation and client discovery\n  install-prepare           Prepare a bounded installation request from stdin JSON\n  install-activate --preparation ID  Activate the reviewed prepared installation\n  install-recover           Recover interrupted installation changes\n  manager-prepare           Stage the bundled per-user Manager application\n  manager-activate --preparation ID --parent-pid PID  Replace after Manager exits\n  migrate --source DIR      Migrate a configured source/ready installation once\n\nOptions: --install-dir DIR (isolated installation), --channel stable|prerelease,\n         --release TAG (explicit immutable release), --json (structured result).\nDefault channel: stable. Prereleases require --channel prerelease.\nReconnect clients after activation; running MCP/Inkscape sessions retain their helpers.\nExit codes: 0 success/no update, 1 failed operation, 2 invalid arguments. Never prompts.\nAdd INSTALL_DIR/bin to PATH, or use its absolute inkscape-mcp path.";
 struct Options {
     client: Option<String>,
     action: String,
     root: PathBuf,
     source: Option<PathBuf>,
+    preparation: Option<String>,
+    parent_pid: Option<i32>,
     channel: Option<String>,
     release: Option<String>,
     component: Component,
@@ -50,6 +52,8 @@ fn parse() -> Result<Options> {
         client: None,
         root: default,
         source: None,
+        preparation: None,
+        parent_pid: None,
         channel: None,
         release: None,
         component: Component::Both,
@@ -63,7 +67,8 @@ fn parse() -> Result<Options> {
             return Err(format!("duplicate option: {key}"));
         }
         match key.as_str() {
-            "--install-dir" | "--source" | "--channel" | "--release" | "--client" => {
+            "--install-dir" | "--source" | "--channel" | "--release" | "--client"
+            | "--preparation" | "--parent-pid" => {
                 let value = input
                     .next()
                     .filter(|v| !v.starts_with("--"))
@@ -72,6 +77,10 @@ fn parse() -> Result<Options> {
                     "--install-dir" => options.root = value.into(),
                     "--client" => options.client = Some(value),
                     "--source" => options.source = Some(value.into()),
+                    "--preparation" => options.preparation = Some(value),
+                    "--parent-pid" => {
+                        options.parent_pid = Some(value.parse().map_err(|_| "invalid parent PID")?)
+                    }
                     "--channel" => options.channel = Some(value),
                     _ => options.release = Some(value),
                 }
@@ -101,6 +110,12 @@ fn parse() -> Result<Options> {
             | "migrate"
             | "disconnect"
             | "uninstall"
+            | "install-inspect"
+            | "install-prepare"
+            | "install-activate"
+            | "install-recover"
+            | "manager-prepare"
+            | "manager-activate"
     ) || !options.root.is_absolute()
         || options
             .channel
@@ -110,10 +125,22 @@ fn parse() -> Result<Options> {
         return Err("invalid command, channel or installation directory; see --help".into());
     }
     if options.action != "update" && (component || options.check || options.release.is_some())
-        || options.action != "migrate" && options.source.is_some()
+        || !matches!(options.action.as_str(), "migrate" | "install-inspect")
+            && options.source.is_some()
         || !matches!(options.action.as_str(), "update" | "migrate") && options.channel.is_some()
     {
         return Err("option does not apply to this command".into());
+    }
+    if options.preparation.is_some()
+        && !matches!(
+            options.action.as_str(),
+            "install-activate" | "manager-activate"
+        )
+    {
+        return Err("--preparation only applies to install-activate".into());
+    }
+    if options.parent_pid.is_some() && options.action != "manager-activate" {
+        return Err("--parent-pid only applies to manager-activate".into());
     }
     Ok(options)
 }
@@ -132,6 +159,59 @@ fn os_major() -> Result<u32> {
 }
 fn run(options: &Options) -> Result<Value> {
     let root = &options.root;
+    use inkscape_mcp_rust::update::installer;
+    match options.action.as_str() {
+        "manager-prepare" => return inkscape_mcp_rust::update::manager_app::prepare(root),
+        "manager-activate" => {
+            return inkscape_mcp_rust::update::manager_app::activate(
+                root,
+                options
+                    .preparation
+                    .as_deref()
+                    .ok_or("Manager activation requires --preparation")?,
+                options
+                    .parent_pid
+                    .ok_or("Manager activation requires --parent-pid")?,
+            );
+        }
+        "install-inspect" => {
+            return match &options.source {
+                Some(source) => installer::inspect_legacy(root, source),
+                None => installer::inspect(root),
+            };
+        }
+        "install-recover" => return installer::recover(root),
+        "install-activate" => {
+            return installer::activate(
+                root,
+                options
+                    .preparation
+                    .as_deref()
+                    .ok_or("activation requires --preparation")?,
+            );
+        }
+        "install-prepare" => {
+            if std::env::consts::OS != "macos"
+                || std::env::consts::ARCH != "aarch64"
+                || os_major()? < 15
+            {
+                return Err("native installation requires Apple Silicon macOS 15 or newer".into());
+            }
+            use std::io::Read;
+            let mut bytes = Vec::new();
+            std::io::stdin()
+                .take(16385)
+                .read_to_end(&mut bytes)
+                .map_err(|e| e.to_string())?;
+            if bytes.len() > 16384 {
+                return Err("installation request exceeds 16 KiB".into());
+            }
+            let request = serde_json::from_slice(&bytes)
+                .map_err(|e| format!("invalid installation request: {e}"))?;
+            return installer::prepare(root, request);
+        }
+        _ => {}
+    }
     if options.action == "disconnect" {
         inkscape_mcp_rust::client_management::disconnect_binding(
             options
@@ -180,6 +260,7 @@ fn run(options: &Options) -> Result<Value> {
     } else {
         Lock::acquire(root)?
     };
+    installer::recover_before_launch(root)?;
     let settings: Settings = inkscape_mcp_rust::update::storage::json(&root.join("settings.json"))?;
     settings.validate()?;
     if transaction::recover(root, &settings)? {
@@ -224,6 +305,9 @@ fn run(options: &Options) -> Result<Value> {
         return Ok(json!({"uninstalled":true,"archive":backup,"client_reconnect_required":true}));
     }
     if options.action == "rollback" {
+        if let Some(result) = installer::rollback_if_selected(root)? {
+            return Ok(result);
+        }
         let activation = transaction::rollback(root, &settings)?;
         let changed = activation.changed;
         let mut result = report(&selector(root)?);

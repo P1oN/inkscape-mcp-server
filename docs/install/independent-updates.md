@@ -7,6 +7,13 @@ releases without that contract are skipped; an explicit request for one explains
 manual-installation requirement. This change does not publish a release or migrate an
 existing user installation automatically.
 
+The unpublished native installation wizard now prepares and verifies offline runtime/text,
+client/skill changes and explicit bootstrap upgrades. The per-user app location is
+`~/Applications/Inkscape MCP Manager.app`; existing legacy migration remains available.
+See the [macOS distribution contract](macos-manager-distribution.md) for compatibility 2,
+signed-bundle layout, recovery and qualification limits. Compatibility format remains 1;
+text-only assets continue to support compatibility 1.
+
 ## One-time migration
 
 On Apple Silicon macOS 15+, select/build a current complete package using the existing
@@ -82,7 +89,8 @@ Inkscape sessions retain their original native helpers. Protocol compatibility i
 before activation and the existing live wire checks reject incompatible helpers. No version
 is garbage-collected in this iteration, so retained servers/supervisors/helpers keep their
 paths. The launcher has a separate version; unsupported formats/minimum launcher versions
-require a manual launcher upgrade rather than automatic self-replacement.
+require an explicit Manager/launcher upgrade. The new wizard stages that upgrade after
+exit; automatic background replacement remains out of scope.
 
 ## Graphical management
 

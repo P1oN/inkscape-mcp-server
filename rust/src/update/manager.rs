@@ -31,7 +31,7 @@ pub fn migrate(root: &Path, repo: &Path, channel: &str) -> Result<Value> {
         let launcher = root.join("bin/inkscape-mcp-launcher");
         drop(lock);
         crate::client_management::migrate_bindings(repo, &launcher).map_err(|e| e.to_string())?;
-        let mut result = report(&selected);
+        let mut result = installation_report(root, &selected);
         result["client_reconnect_required"] = json!(true);
         return Ok(result);
     }
@@ -136,6 +136,10 @@ pub fn migrate(root: &Path, repo: &Path, channel: &str) -> Result<Value> {
             .permissions(),
     )
     .map_err(|e| e.to_string())?;
+    write_json(
+        &root.join("bootstrap.json"),
+        &bootstrap_identity(&read(&executable, 128 * 1024 * 1024)?),
+    )?;
     // CLI entry point is another native copy; no wrapper executing downloaded scripts.
     let entry = root.join("bin/inkscape-mcp");
     write(&entry, &read(&executable, 128 * 1024 * 1024)?)?;
@@ -185,6 +189,9 @@ pub fn update(
     } else {
         Some(Lock::acquire(root)?)
     };
+    if !check {
+        super::installer::recover_before_launch(root)?;
+    }
     let settings: Settings = super::storage::json(&root.join("settings.json"))?;
     settings.validate()?;
     if !check {
@@ -222,7 +229,7 @@ pub fn update(
     pair.tag = manifest.tag.clone();
     let changed = pair.runtime.build_id != before.current.runtime.build_id
         || pair.instructions.content_id != before.current.instructions.content_id;
-    let mut result = report(&before);
+    let mut result = installation_report(root, &before);
     result["available"] = json!({"distribution":manifest.tag,"runtime_build":manifest.runtime.build_id,"runtime_revision":manifest.runtime.source_revision,"instructions_version":manifest.instructions.version,"instructions_content":manifest.instructions.content_id});
     result["update_available"] = json!(changed);
     result["client_reconnect_required"] = json!(false);
@@ -250,7 +257,7 @@ pub fn update(
         .tempdir_in(root.join("staging"))
         .map_err(|e| e.to_string())?;
     let stage = temporary.path();
-    if pair.instructions.content_id != before.current.instructions.content_id {
+    if pair.instructions != before.current.instructions {
         eprintln!(
             "Downloading and validating instruction bundle {}…",
             pair.instructions.version
@@ -292,7 +299,7 @@ pub fn update(
     doctor(root, &after.current, &settings)?;
     let activation = transaction::activate(root, before, after.clone(), &settings, None)?;
     let changed = activation.changed;
-    result = report(&after);
+    result = installation_report(root, &after);
     result["changed"] = json!(changed);
     result["client_reconnect_required"] = json!(changed);
     result["skill_reload_required"] = json!(activation.skills_changed);

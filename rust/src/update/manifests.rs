@@ -6,7 +6,7 @@ pub type Result<T> = std::result::Result<T, String>;
 pub const FORMAT: u32 = 1;
 pub const TEXT_INTERFACE: u32 = 1;
 pub const HELPER_PROTOCOL: u32 = 5;
-pub const LAUNCHER_VERSION: u32 = 1;
+pub const LAUNCHER_VERSION: u32 = 2;
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(deny_unknown_fields)]
@@ -147,7 +147,7 @@ impl ReleaseManifest {
             return Err("unsupported release format or identity".into());
         }
         if r.launcher_minimum > LAUNCHER_VERSION {
-            return Err("launcher upgrade required; install a newer launcher manually".into());
+            return Err("launcher upgrade required; download the current Inkscape MCP Manager distribution and upgrade the existing installation".into());
         }
         if r.os != os
             || r.architecture != architecture

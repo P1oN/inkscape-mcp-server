@@ -18,11 +18,7 @@ use std::{
 const ERROR: &str = "managed Inkscape launch failed; check launcher diagnostics";
 pub fn library() -> Result<PathBuf, String> {
     let executable = std::env::current_exe().map_err(|_| ERROR)?;
-    Ok(executable
-        .parent()
-        .and_then(Path::parent)
-        .ok_or(ERROR)?
-        .join("libexec/inkscape-mcp"))
+    crate::runtime_layout::library_for_executable(&executable)
 }
 fn workspace() -> Workspace {
     Workspace {
@@ -71,13 +67,23 @@ fn secure_directory(path: &Path) -> Result<PathBuf, String> {
     }
     Ok(absolute)
 }
-fn lock(path: &Path, deadline: Instant) -> Result<File, String> {
+struct LaunchLock(File);
+impl Drop for LaunchLock {
+    fn drop(&mut self) {
+        // Close alone can retain a flock while another thread's forked child holds
+        // the inherited open-file description. This lock belongs to this scope.
+        unsafe {
+            libc::flock(self.0.as_raw_fd(), libc::LOCK_UN);
+        }
+    }
+}
+fn lock(path: &Path, deadline: Instant) -> Result<LaunchLock, String> {
     let file = workspace()
         .lock_file(0, path.strip_prefix("/").map_err(|_| ERROR)?)
         .map_err(|_| ERROR)?;
     loop {
         if unsafe { libc::flock(file.as_raw_fd(), libc::LOCK_EX | libc::LOCK_NB) } == 0 {
-            return Ok(file);
+            return Ok(LaunchLock(file));
         }
         if std::io::Error::last_os_error().raw_os_error() != Some(libc::EWOULDBLOCK)
             || Instant::now() >= deadline
@@ -111,28 +117,14 @@ pub fn launch(cap: usize) -> Result<Attached, String> {
         return Ok(attached);
     }
     // Do not start another GUI when a surviving supervisor holds its lock but bus is lost.
-    let supervisor = workspace()
-        .lock_file(
-            0,
-            root.join("supervisor.lock")
-                .strip_prefix("/")
-                .map_err(|_| ERROR)?,
-        )
-        .map_err(|_| ERROR)?;
-    if unsafe { libc::flock(supervisor.as_raw_fd(), libc::LOCK_EX | libc::LOCK_NB) } != 0 {
-        return Err(ERROR.into());
-    }
+    let supervisor = lock(&root.join("supervisor.lock"), Instant::now())?;
     drop(supervisor);
     let library = library()?;
-    let supervisor = library
-        .parent()
-        .and_then(Path::parent)
-        .ok_or(ERROR)?
-        .join("bin/inkscape-mcp-supervisor");
+    let supervisor = crate::runtime_layout::binary(&library, "inkscape-mcp-supervisor");
     for path in [
         &supervisor,
-        &library.join("context.so"),
-        &library.join("dbus/bin/dbus-daemon"),
+        &crate::runtime_layout::asset(&library, "context.so"),
+        &crate::runtime_layout::asset(&library, "dbus/bin/dbus-daemon"),
     ] {
         workspace()
             .regular_file(0, path.strip_prefix("/").map_err(|_| ERROR)?)
@@ -190,6 +182,45 @@ pub fn launch(cap: usize) -> Result<Attached, String> {
 mod tests {
     use super::*;
     use std::os::unix::fs::{PermissionsExt, symlink};
+    #[test]
+    fn scope_release_unlocks_even_while_a_forked_child_retains_the_descriptor() {
+        let fixture = tempfile::tempdir().unwrap();
+        let path = fixture.path().canonicalize().unwrap().join("launch.lock");
+        let first = lock(&path, Instant::now()).unwrap();
+        let mut pipe = [0; 2];
+        assert_eq!(unsafe { libc::pipe(pipe.as_mut_ptr()) }, 0);
+        // The child uses only async-signal-safe libc calls and never executes an app.
+        let child = unsafe { libc::fork() };
+        if child == 0 {
+            unsafe {
+                libc::close(pipe[1]);
+                let mut byte = 0u8;
+                libc::read(pipe[0], (&mut byte as *mut u8).cast(), 1);
+                libc::_exit(0);
+            }
+        }
+        unsafe {
+            libc::close(pipe[0]);
+        }
+        if child < 0 {
+            unsafe {
+                libc::close(pipe[1]);
+            }
+            panic!("owned fixture fork failed");
+        }
+        drop(first);
+        let acquired = lock(&path, Instant::now());
+        unsafe {
+            let byte = 1u8;
+            libc::write(pipe[1], (&byte as *const u8).cast(), 1);
+            libc::close(pipe[1]);
+            libc::waitpid(child, std::ptr::null_mut(), 0);
+        }
+        assert!(
+            acquired.is_ok(),
+            "inherited descriptor retained the released scope lock"
+        );
+    }
     #[test]
     fn private_session_and_locks_refuse_link_escape_and_parallel_launch() {
         let fixture = tempfile::tempdir().unwrap();

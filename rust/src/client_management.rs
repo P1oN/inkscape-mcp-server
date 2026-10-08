@@ -695,6 +695,34 @@ fn migrate_recorded_bindings(repo: &Path, profiles: &Profiles, launcher: &Path) 
     Ok(())
 }
 
+/// Read only discovery for the native installer; never executes a discovered command.
+pub struct InstallationBinding {
+    pub name: String,
+    pub config: PathBuf,
+    pub entry: Option<Value>,
+    pub skill: PathBuf,
+}
+pub fn installation_bindings() -> Result<Vec<InstallationBinding>> {
+    let profiles = Profiles::environment()?;
+    [Client::Codex, Client::Claude]
+        .into_iter()
+        .map(|client| {
+            Ok(InstallationBinding {
+                name: client.name().into(),
+                config: profiles.config(client),
+                entry: entry(&profiles, client, Path::new("/unused"), false)?,
+                skill: profiles.skill(client),
+            })
+        })
+        .collect()
+}
+
+/// Build a preserving registration candidate; authorization/ownership is checked by
+/// the installer before this pure transformation is called.
+pub fn installation_registration(name: &str, before: &str, launcher: &Path) -> Result<String> {
+    upgraded_config(before, Client::parse(name)?, launcher)
+}
+
 /// Bounded candidate identity/doctor command. Uses the same owned-process deadline.
 pub fn bounded_output(command: &mut Command, limit: u64) -> Result<Vec<u8>> {
     let output = tempfile::tempfile()?;
@@ -720,6 +748,64 @@ pub fn bounded_output(command: &mut Command, limit: u64) -> Result<Vec<u8>> {
         return Err("Candidate output exceeds limit".into());
     }
     Ok(bytes)
+}
+/// Fixed signature metadata query, including stderr where codesign writes its result.
+pub fn signature_team(path: &Path) -> Result<Option<String>> {
+    bounded_output(
+        Command::new("/usr/bin/codesign")
+            .args(["--verify", "--strict"])
+            .arg(path),
+        8192,
+    )?;
+    let errors = tempfile::tempfile()?;
+    let mut reader = errors.try_clone()?;
+    let mut child = OwnedChild(
+        Command::new("/usr/bin/codesign")
+            .args(["--display", "--verbose=4"])
+            .arg(path)
+            .stdin(Stdio::null())
+            .stdout(Stdio::null())
+            .stderr(errors)
+            .spawn()?,
+    );
+    if !wait_until(&mut child.0, REQUEST_TIMEOUT)?.is_some_and(|s| s.success()) {
+        return Err("Signature metadata query failed or timed out".into());
+    }
+    reader.rewind()?;
+    let mut bytes = Vec::new();
+    reader.take(16385).read_to_end(&mut bytes)?;
+    if bytes.len() > 16384 {
+        return Err("Signature metadata exceeds limit".into());
+    }
+    let info = String::from_utf8(bytes)?;
+    let team = info
+        .lines()
+        .find_map(|line| line.strip_prefix("TeamIdentifier="))
+        .filter(|s| {
+            s.len() == 10
+                && s.bytes()
+                    .all(|c| c.is_ascii_uppercase() || c.is_ascii_digit())
+        });
+    if let Some(team) = team {
+        if !info
+            .lines()
+            .any(|line| line.starts_with("Authority=Developer ID Application:"))
+        {
+            return Err("Expected Developer ID Application signing authority".into());
+        }
+        bounded_output(
+            Command::new("/usr/bin/codesign")
+                .args([
+                    "--verify",
+                    "--strict",
+                    "-R",
+                    &format!("=anchor apple generic and certificate leaf[subject.OU] = \"{team}\""),
+                ])
+                .arg(path),
+            8192,
+        )?;
+    }
+    Ok(team.map(str::to_owned))
 }
 /// Recovery works without the replaceable runtime or helper binaries.
 pub fn disconnect_binding(name: &str, launcher: &Path) -> Result<()> {

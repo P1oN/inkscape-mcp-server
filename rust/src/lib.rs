@@ -3,6 +3,7 @@ pub mod helper_svg;
 pub mod xml;
 
 pub mod client_management;
+pub mod runtime_layout;
 pub mod update;
 
 #[doc(hidden)]

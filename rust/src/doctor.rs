@@ -189,43 +189,33 @@ pub fn report() -> Value {
         if cfg!(target_os = "macos") {
             checks.insert(
                 "prebuilt_context_architecture",
-                compatible_binary(&library.join("context.so")),
+                compatible_binary(&crate::runtime_layout::asset(library, "context.so")),
             );
         }
-        checks.insert(
-            "fixed_supervisor",
-            library
-                .parent()
-                .and_then(Path::parent)
-                .is_some_and(|package| {
-                    compatible_binary(&package.join("bin/inkscape-mcp-supervisor"))
-                }),
-        );
-        checks.insert(
-            "fixed_inx_helper",
-            library
-                .parent()
-                .and_then(Path::parent)
-                .is_some_and(|package| compatible_binary(&package.join("bin/inkscape-mcp-inx"))),
-        );
-        checks.insert(
-            "fixed_socket_helper",
-            library
-                .parent()
-                .and_then(Path::parent)
-                .is_some_and(|package| compatible_binary(&package.join("bin/inkscape-mcp-live"))),
-        );
+        for (check, name) in [
+            ("fixed_supervisor", "inkscape-mcp-supervisor"),
+            ("fixed_inx_helper", "inkscape-mcp-inx"),
+            ("fixed_socket_helper", "inkscape-mcp-live"),
+        ] {
+            checks.insert(
+                check,
+                compatible_binary(&crate::runtime_layout::binary(library, name)),
+            );
+        }
         checks.insert(
             "private_bus_config",
             regular(&library.join("dbus/session.conf")),
         );
         checks.insert(
             "dbus_daemon_architecture",
-            compatible_binary(&library.join("dbus/bin/dbus-daemon")),
+            compatible_binary(&crate::runtime_layout::asset(
+                library,
+                "dbus/bin/dbus-daemon",
+            )),
         );
         checks.insert(
             "gdbus_architecture",
-            compatible_binary(&library.join("dbus/bin/gdbus")),
+            compatible_binary(&crate::runtime_layout::asset(library, "dbus/bin/gdbus")),
         );
         checks.insert(
             "fixed_helper_assets",
@@ -240,12 +230,20 @@ pub fn report() -> Value {
         checks.insert(
             "private_bus_cli",
             checks["dbus_daemon_architecture"]
-                && probe(&library.join("dbus/bin/dbus-daemon"), &["--version".into()]).is_some(),
+                && probe(
+                    &crate::runtime_layout::asset(library, "dbus/bin/dbus-daemon"),
+                    &["--version".into()],
+                )
+                .is_some(),
         );
         checks.insert(
             "private_gdbus_cli",
             checks["gdbus_architecture"]
-                && probe(&library.join("dbus/bin/gdbus"), &["help".into()]).is_some(),
+                && probe(
+                    &crate::runtime_layout::asset(library, "dbus/bin/gdbus"),
+                    &["help".into()],
+                )
+                .is_some(),
         );
     } else {
         checks.insert("package_library", false);

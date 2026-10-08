@@ -106,10 +106,20 @@ pub fn runtime_path(root: &Path, pair: &Pair) -> Result<PathBuf> {
     Ok(root.join("runtime").join(&pair.runtime.build_id))
 }
 pub fn instruction_path(root: &Path, pair: &Pair) -> Result<PathBuf> {
-    pair.instructions.validate()?;
+    instruction_manifest_path(root, &pair.instructions)
+}
+fn instruction_manifest_path(root: &Path, manifest: &InstructionManifest) -> Result<PathBuf> {
+    manifest.validate()?;
+    let legacy = root.join("instructions").join(&manifest.content_id);
+    if legacy.exists() && Instructions::load(&legacy)?.manifest == *manifest {
+        return Ok(legacy);
+    }
+    // Labels and compatibility metadata are part of the immutable selected bundle.
+    // Equal text bytes across releases must not overwrite an older rollback bundle.
+    let identity = FileIdentity::of(&serde_json::to_vec(manifest).map_err(|e| e.to_string())?);
     Ok(root
         .join("instructions")
-        .join(&pair.instructions.content_id))
+        .join(format!("{}-{}", manifest.content_id, identity.sha256)))
 }
 pub fn validate_pair(root: &Path, pair: &Pair) -> Result<()> {
     let r = &pair.runtime;
@@ -133,7 +143,17 @@ pub fn verify_runtime(path: &Path, runtime: &RuntimeManifest) -> Result<()> {
     if actual != expected {
         return Err("runtime file inventory/checksums differ".into());
     }
-    let metadata: Value = json(&path.join("libexec/inkscape-mcp/package.json"))?;
+    let library = crate::runtime_layout::library(path);
+    let metadata: Value = json(&library.join("package.json"))?;
+    if library.ends_with("Contents/Resources") {
+        if metadata["layout"] != "macos-runtime-app-v2"
+            || runtime.launcher_minimum < 2
+            || path.join("libexec/inkscape-mcp/package.json").exists()
+        {
+            return Err("invalid or ambiguous runtime bundle layout/compatibility".into());
+        }
+        verify_bundle_signer(path, &metadata)?;
+    }
     if metadata["build_info"]["build_id"] != runtime.build_id
         || metadata["build_info"]["revision"] != runtime.source_revision
     {
@@ -146,14 +166,60 @@ pub fn verify_runtime(path: &Path, runtime: &RuntimeManifest) -> Result<()> {
         "inkscape-mcp-inx",
         "inkscape-mcp-live",
     ] {
-        guarded(&path.join("bin").join(name))?;
+        guarded(&crate::runtime_layout::binary(&library, name))?;
+    }
+    Ok(())
+}
+fn verify_bundle_signer(path: &Path, metadata: &Value) -> Result<()> {
+    if !cfg!(target_os = "macos") {
+        return Err("macOS runtime bundle requires macOS".into());
+    }
+    let actor = std::env::current_exe().map_err(|e| e.to_string())?;
+    let team = crate::client_management::signature_team(&actor).map_err(|e| e.to_string())?;
+    if let Some(team) = team {
+        let requirement =
+            format!("=anchor apple generic and certificate leaf[subject.OU] = \"{team}\"");
+        let code = metadata["code_inventory"]
+            .as_array()
+            .filter(|c| c.len() >= 9 && c.len() <= 64)
+            .ok_or("runtime native code inventory missing")?;
+        for name in code {
+            let name = name.as_str().ok_or("invalid runtime code inventory")?;
+            if !managed_relative(name)
+                || !(name.starts_with("Inkscape MCP Runtime.app/Contents/MacOS/")
+                    || name.starts_with("Inkscape MCP Runtime.app/Contents/Frameworks/"))
+            {
+                return Err("runtime code path is outside supported locations".into());
+            }
+            crate::client_management::bounded_output(
+                Command::new("/usr/bin/codesign")
+                    .args(["--verify", "--strict", "-R", &requirement])
+                    .arg(path.join(name)),
+                8192,
+            )
+            .map_err(|_| {
+                "runtime code signer differs from the trusted installer; preserved".to_string()
+            })?;
+        }
+        crate::client_management::bounded_output(
+            Command::new("/usr/bin/codesign")
+                .args(["--verify", "--deep", "--strict", "-R", &requirement])
+                .arg(path.join(crate::runtime_layout::RUNTIME_APP)),
+            8192,
+        )
+        .map_err(|_| "runtime bundle signer differs from the trusted installer".to_string())?;
+    } else if metadata["release_signed"] == true {
+        return Err("signed runtime requires its verified signed Manager/launcher; upgrade the Manager first".into());
     }
     Ok(())
 }
 pub fn command(root: &Path, pair: &Pair, settings: &Settings) -> Result<Command> {
     settings.validate()?;
     validate_pair(root, pair)?;
-    let mut command = Command::new(runtime_path(root, pair)?.join("bin/inkscape-mcp"));
+    let mut command = Command::new(crate::runtime_layout::binary(
+        &crate::runtime_layout::library(&runtime_path(root, pair)?),
+        "inkscape-mcp",
+    ));
     command.envs(&settings.environment).env(
         "INKSCAPE_MCP_INSTRUCTION_BUNDLE",
         instruction_path(root, pair)?,
@@ -197,7 +263,81 @@ pub fn selector(root: &Path) -> Result<Selector> {
     Ok(active)
 }
 pub fn report(active: &Selector) -> Value {
-    json!({"launcher_version":LAUNCHER_VERSION,"channel":active.channel,"distribution":active.current.tag,"runtime_build":active.current.runtime.build_id,"runtime_revision":active.current.runtime.source_revision,"instructions_version":active.current.instructions.version,"instructions_content":active.current.instructions.content_id,"rollback_available":active.previous.is_some()})
+    let actor_signing = if cfg!(target_os = "macos") {
+        match std::env::current_exe()
+            .map_err(|e| e.to_string())
+            .and_then(|path| {
+                crate::client_management::signature_team(&path).map_err(|e| e.to_string())
+            }) {
+            Ok(Some(team)) => json!({"status":"developer_id_verified","team_id":team}),
+            Ok(None) => json!({"status":"ad_hoc","team_id":null}),
+            Err(_) => json!({"status":"unverified","team_id":null}),
+        }
+    } else {
+        json!({"status":"not_applicable","team_id":null})
+    };
+    json!({"launcher_version":LAUNCHER_VERSION,"launcher_build":env!("INKSCAPE_MCP_BUILD_ID"),"launcher_revision":env!("INKSCAPE_MCP_REVISION"),"channel":active.channel,"distribution":active.current.tag,"runtime_build":active.current.runtime.build_id,"runtime_revision":active.current.runtime.source_revision,"instructions_version":active.current.instructions.version,"instructions_content":active.current.instructions.content_id,"rollback_available":active.previous.is_some(),"manager_helper_signing":actor_signing,"notarization_assessment":"not_checked_on_this_host"})
+}
+#[derive(Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct BootstrapIdentity {
+    pub format: u32,
+    pub build_id: String,
+    pub source_revision: String,
+    pub executable: FileIdentity,
+}
+pub fn bootstrap_identity(bytes: &[u8]) -> BootstrapIdentity {
+    BootstrapIdentity {
+        format: 1,
+        build_id: env!("INKSCAPE_MCP_BUILD_ID").into(),
+        source_revision: env!("INKSCAPE_MCP_REVISION").into(),
+        executable: FileIdentity::of(bytes),
+    }
+}
+/// Discovery reports saved bootstrap identity only after matching its actual bytes.
+/// Never execute an old launcher merely to learn its version.
+pub fn installation_report(root: &Path, active: &Selector) -> Value {
+    let mut result = report(active);
+    result["installer_build"] = result["launcher_build"].clone();
+    result["launcher_build"] = Value::Null;
+    result["launcher_revision"] = Value::Null;
+    let identity = root.join("bootstrap.json");
+    if identity.exists() || identity.is_symlink() {
+        let verified = (|| -> Result<BootstrapIdentity> {
+            let saved: BootstrapIdentity = super::storage::json(&identity)?;
+            if saved.format != 1
+                || !identifier(&saved.build_id)
+                || saved.build_id.len() > 128
+                || saved.executable.bytes > 128 * 1024 * 1024
+                || !hash(&saved.executable.sha256)
+                || !(saved.source_revision == "unknown"
+                    || saved.source_revision.len() == 40
+                        && saved.source_revision.bytes().all(|b| b.is_ascii_hexdigit()))
+            {
+                return Err("invalid bootstrap identity".into());
+            }
+            for name in ["bin/inkscape-mcp-launcher", "bin/inkscape-mcp"] {
+                if FileIdentity::of(&read(&root.join(name), saved.executable.bytes)?)
+                    != saved.executable
+                {
+                    return Err("bootstrap bytes changed".into());
+                }
+            }
+            Ok(saved)
+        })();
+        match verified {
+            Ok(saved) => {
+                result["launcher_build"] = json!(saved.build_id);
+                result["launcher_revision"] = json!(saved.source_revision);
+            }
+            Err(_) => result["bootstrap_damaged"] = json!(true),
+        }
+    } else if !root.join("bin/inkscape-mcp-launcher").is_file()
+        || !root.join("bin/inkscape-mcp").is_file()
+    {
+        result["bootstrap_damaged"] = json!(true);
+    }
+    result
 }
 pub fn stage_instructions(
     root: &Path,
@@ -208,7 +348,7 @@ pub fn stage_instructions(
     if &loaded.manifest != manifest {
         return Err("instruction artifact identity mismatch".into());
     }
-    let target = root.join("instructions").join(&manifest.content_id);
+    let target = instruction_manifest_path(root, manifest)?;
     if target.exists() {
         if Instructions::load(&target)?.manifest != *manifest {
             return Err("occupied instruction identity".into());

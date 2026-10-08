@@ -29,8 +29,8 @@ pub fn run(args: &Args) -> Result<()> {
 
 pub fn distribution(args: &Args) -> Result<()> {
     use inkscape_mcp_rust::update::manifests::{
-        Asset, FORMAT, FileIdentity, HELPER_PROTOCOL, LAUNCHER_VERSION, ReleaseManifest,
-        RuntimeManifest, TEXT_INTERFACE,
+        Asset, FORMAT, FileIdentity, HELPER_PROTOCOL, ReleaseManifest, RuntimeManifest,
+        TEXT_INTERFACE,
     };
     args.check(&[
         "--output",
@@ -50,8 +50,10 @@ pub fn distribution(args: &Args) -> Result<()> {
         &stage_root,
         std::path::Path::new("inkscape-mcp-macos-arm64"),
     )?;
-    let metadata =
-        json(&stage_root.join("inkscape-mcp-macos-arm64/libexec/inkscape-mcp/package.json"))?;
+    let metadata = json(
+        &inkscape_mcp_rust::runtime_layout::library(&stage_root.join("inkscape-mcp-macos-arm64"))
+            .join("package.json"),
+    )?;
     archive::extract(
         &instructions,
         &stage_root,
@@ -94,7 +96,10 @@ pub fn distribution(args: &Args) -> Result<()> {
             minimum_os_major: 15,
             text_interface: TEXT_INTERFACE,
             helper_protocol: HELPER_PROTOCOL,
-            launcher_minimum: LAUNCHER_VERSION,
+            launcher_minimum: metadata["update_contract"]["launcher_minimum"]
+                .as_u64()
+                .ok_or("missing launcher compatibility")?
+                .try_into()?,
             asset: asset(&runtime)?,
         },
         instructions: instruction_bundle.manifest,
