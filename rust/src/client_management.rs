@@ -695,6 +695,37 @@ fn migrate_recorded_bindings(repo: &Path, profiles: &Profiles, launcher: &Path) 
     Ok(())
 }
 
+/// Read only discovery for the native installer; never executes a discovered command.
+pub struct InstallationBinding {
+    pub name: String,
+    pub config: PathBuf,
+    pub entry: std::result::Result<Option<Value>, String>,
+    pub skill: PathBuf,
+}
+pub fn installation_bindings() -> Result<Vec<InstallationBinding>> {
+    let profiles = Profiles::environment()?;
+    Ok(installation_bindings_for(&profiles))
+}
+fn installation_bindings_for(profiles: &Profiles) -> Vec<InstallationBinding> {
+    [Client::Codex, Client::Claude]
+        .into_iter()
+        .map(|client| InstallationBinding {
+            name: client.name().into(),
+            config: profiles.config(client),
+            entry: entry(profiles, client, Path::new("/unused"), false)
+                // Parser diagnostics can contain private configuration contents.
+                .map_err(|_| format!("{} configuration is unreadable, unsafe, oversized or invalid; preserve it and repair it before selecting this client", client.name())),
+            skill: profiles.skill(client),
+        })
+        .collect()
+}
+
+/// Build a preserving registration candidate; authorization/ownership is checked by
+/// the installer before this pure transformation is called.
+pub fn installation_registration(name: &str, before: &str, launcher: &Path) -> Result<String> {
+    upgraded_config(before, Client::parse(name)?, launcher)
+}
+
 /// Bounded candidate identity/doctor command. Uses the same owned-process deadline.
 pub fn bounded_output(command: &mut Command, limit: u64) -> Result<Vec<u8>> {
     let output = tempfile::tempfile()?;
@@ -720,6 +751,64 @@ pub fn bounded_output(command: &mut Command, limit: u64) -> Result<Vec<u8>> {
         return Err("Candidate output exceeds limit".into());
     }
     Ok(bytes)
+}
+/// Fixed signature metadata query, including stderr where codesign writes its result.
+pub fn signature_team(path: &Path) -> Result<Option<String>> {
+    bounded_output(
+        Command::new("/usr/bin/codesign")
+            .args(["--verify", "--strict"])
+            .arg(path),
+        8192,
+    )?;
+    let errors = tempfile::tempfile()?;
+    let mut reader = errors.try_clone()?;
+    let mut child = OwnedChild(
+        Command::new("/usr/bin/codesign")
+            .args(["--display", "--verbose=4"])
+            .arg(path)
+            .stdin(Stdio::null())
+            .stdout(Stdio::null())
+            .stderr(errors)
+            .spawn()?,
+    );
+    if !wait_until(&mut child.0, REQUEST_TIMEOUT)?.is_some_and(|s| s.success()) {
+        return Err("Signature metadata query failed or timed out".into());
+    }
+    reader.rewind()?;
+    let mut bytes = Vec::new();
+    reader.take(16385).read_to_end(&mut bytes)?;
+    if bytes.len() > 16384 {
+        return Err("Signature metadata exceeds limit".into());
+    }
+    let info = String::from_utf8(bytes)?;
+    let team = info
+        .lines()
+        .find_map(|line| line.strip_prefix("TeamIdentifier="))
+        .filter(|s| {
+            s.len() == 10
+                && s.bytes()
+                    .all(|c| c.is_ascii_uppercase() || c.is_ascii_digit())
+        });
+    if let Some(team) = team {
+        if !info
+            .lines()
+            .any(|line| line.starts_with("Authority=Developer ID Application:"))
+        {
+            return Err("Expected Developer ID Application signing authority".into());
+        }
+        bounded_output(
+            Command::new("/usr/bin/codesign")
+                .args([
+                    "--verify",
+                    "--strict",
+                    "-R",
+                    &format!("=anchor apple generic and certificate leaf[subject.OU] = \"{team}\""),
+                ])
+                .arg(path),
+            8192,
+        )?;
+    }
+    Ok(team.map(str::to_owned))
 }
 /// Recovery works without the replaceable runtime or helper binaries.
 pub fn disconnect_binding(name: &str, launcher: &Path) -> Result<()> {
@@ -754,6 +843,34 @@ pub fn disconnect_owned_bindings(names: &[String], launcher: &Path) -> Result<()
 mod tests {
     use super::*;
     use std::os::unix::fs::{PermissionsExt, symlink};
+    #[test]
+    fn installation_discovery_isolates_invalid_oversized_and_linked_clients() {
+        for bad_client in [Client::Codex, Client::Claude] {
+            for state in ["invalid", "oversized", "linked", "linked-parent"] {
+                let (_temp, _repo, profiles) = fixture();
+                let path = profiles.config(bad_client);
+                match state {
+                    "invalid" => fs::write(&path, "private-token invalid syntax").unwrap(),
+                    "oversized" => fs::write(&path, vec![b' '; 4 * 1024 * 1024 + 1]).unwrap(),
+                    "linked" => symlink("missing", &path).unwrap(),
+                    _ => {
+                        let parent = path.parent().unwrap();
+                        fs::remove_dir(parent).unwrap();
+                        symlink("missing", parent).unwrap();
+                    }
+                }
+                let bindings = installation_bindings_for(&profiles);
+                for binding in bindings {
+                    if binding.name == bad_client.name() {
+                        let error = binding.entry.unwrap_err();
+                        assert!(!error.contains("private-token"));
+                    } else {
+                        assert!(binding.entry.unwrap().is_none());
+                    }
+                }
+            }
+        }
+    }
     #[test]
     fn upgrade_replaces_transport_preserving_configuration_and_comments() {
         let (_root, repo, profiles) = fixture();

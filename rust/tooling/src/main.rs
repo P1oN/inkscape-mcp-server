@@ -4,7 +4,9 @@ mod authoring;
 mod bootstrap;
 mod clients;
 mod common;
+mod distribution;
 mod install;
+mod installer_acceptance;
 mod invariants;
 mod launcher;
 mod live_workflow;
@@ -24,6 +26,31 @@ use common::{Args, Result};
 fn run() -> Result<()> {
     let args = Args::parse()?;
     match args.command.as_str() {
+        "unpack-runtime" => {
+            args.check(&["--archive", "--output"])?;
+            let output = args.required("--output")?;
+            std::fs::create_dir(&output)?;
+            archive::extract(
+                &args.required("--archive")?,
+                &output.canonicalize()?,
+                std::path::Path::new("inkscape-mcp-macos-arm64"),
+            )?;
+            Ok(())
+        }
+        "unpack-instructions" => {
+            args.check(&["--archive", "--output"])?;
+            let output = args.required("--output")?;
+            std::fs::create_dir(&output)?;
+            archive::extract(
+                &args.required("--archive")?,
+                &output.canonicalize()?,
+                std::path::Path::new("inkscape-mcp-instructions"),
+            )?;
+            Ok(())
+        }
+        "build-distribution" => distribution::run(&args),
+        "resume-notarization" => distribution::resume(&args),
+        "installer-acceptance" => installer_acceptance::run(&args),
         "update-acceptance" => update_acceptance::run(&args),
         "build-update-manifest" => update_assets::distribution(&args),
         "build-instructions" => update_assets::run(&args),
@@ -56,7 +83,7 @@ fn run() -> Result<()> {
         "manifests" => wire::manifests(&args),
         "help" => {
             println!(
-                "inkscape-mcp-tools: bootstrap-native | build-package | source-archive | discovery | manifests | sync-authoring-guidance | build-instructions | build-update-manifest\nAcceptance: update-acceptance; package, doctor, notices, launcher, sentry-setup, client, install, socket, security, frame, startup, responsiveness, defects, diagnostic, compare, special-file, renderer, authoring, live-workflow, engine-routes (append -acceptance).\nExplicit native GUI phases: native-gui | native-inx | native-socket.\nSee CONTRIBUTING.md for arguments and ownership requirements."
+                "inkscape-mcp-tools: bootstrap-native | build-package | build-distribution | resume-notarization | source-archive | discovery | manifests | sync-authoring-guidance | build-instructions | build-update-manifest\nAcceptance: installer-acceptance | update-acceptance; package, doctor, notices, launcher, sentry-setup, client, install, socket, security, frame, startup, responsiveness, defects, diagnostic, compare, special-file, renderer, authoring, live-workflow, engine-routes (append -acceptance).\nExplicit native GUI phases: native-gui | native-inx | native-socket.\nSee CONTRIBUTING.md for arguments and ownership requirements."
             );
             Ok(())
         }

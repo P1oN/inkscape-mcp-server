@@ -133,7 +133,7 @@ pub fn recover(root: &Path, settings: &Settings) -> Result<bool> {
     sync_dir(root)?;
     Ok(true)
 }
-fn prepare_skill(
+pub(crate) fn prepare_skill(
     root: &Path,
     base: &Path,
     index: usize,

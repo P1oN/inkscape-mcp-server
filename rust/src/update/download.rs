@@ -73,11 +73,23 @@ impl Transport for Https {
             if response.content_length().is_some_and(|n| n > limit) {
                 return Err("download exceeds declared byte limit".into());
             }
+            let total = response.content_length();
+            let mut response = response.take(limit + 1);
             let mut bytes = Vec::new();
-            response
-                .take(limit + 1)
-                .read_to_end(&mut bytes)
-                .map_err(|e| e.to_string())?;
+            let mut chunk = [0u8; 65536];
+            let mut next_report = 1024 * 1024;
+            loop {
+                let count = response.read(&mut chunk).map_err(|e| e.to_string())?;
+                if count == 0 {
+                    break;
+                }
+                bytes.extend_from_slice(&chunk[..count]);
+                if bytes.len() as u64 >= next_report {
+                    super::progress::download(bytes.len() as u64, total);
+                    next_report += 1024 * 1024;
+                }
+            }
+            super::progress::download(bytes.len() as u64, total);
             if bytes.len() as u64 > limit {
                 return Err("download exceeds byte limit".into());
             }

@@ -247,6 +247,7 @@ fn crash_recovery_at_each_move_boundary_is_idempotent_and_locked() {
         let f = fixture();
         let lock = Lock::acquire(&f.root).unwrap();
         assert!(Lock::acquire(&f.root).is_err());
+        assert!(inkscape_mcp_rust::update::installer::recover(&f.root).is_err());
         drop(lock);
         let after = next(&f);
         let base = f.root.join("backups/crash-fixture");
@@ -278,7 +279,15 @@ fn crash_recovery_at_each_move_boundary_is_idempotent_and_locked() {
         if phase >= 3 {
             write_json(&f.root.join("active.json"), &after).unwrap();
         }
-        assert!(recover(&f.root, &f.settings).unwrap(), "phase {phase}");
+        assert_eq!(
+            inkscape_mcp_rust::update::installer::inspect(&f.root).unwrap()["recovery_required"],
+            true
+        );
+        assert_eq!(
+            inkscape_mcp_rust::update::installer::recover(&f.root).unwrap()["changed"],
+            true,
+            "phase {phase}"
+        );
         assert!(!recover(&f.root, &f.settings).unwrap());
         assert_eq!(selector(&f.root).unwrap(), f.before);
         assert_eq!(inventory(skill, 16 * 1024 * 1024).unwrap(), before);

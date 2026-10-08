@@ -20,6 +20,8 @@ builds. Use [current status](../AGENT_HANDOFF.md), [active backlog](../RUST_NEXT
 
 ## Reports and logs
 
+- [Native macOS installer checkpoint](reports/macos-installer-2026-10-08.md): unfinished Priority 1 implementation and scoped local evidence.
+
 - [Independent updates](reports/independent-updates.md): unpublished launcher, component updates, recovery and scoped CLI/native management acceptance; [original user plan](plans/independent-updates.md).
 - [Dependency PR review](reports/dependency-pr-review.md): coordinated Rust graph updates and declined historical/API-breaking updates.
 

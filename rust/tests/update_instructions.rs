@@ -62,7 +62,7 @@ fn refuses_corrupt_unknown_and_oversized_bundles() {
     future.format = 2;
     assert!(future.validate().is_err());
     let mut future = m.clone();
-    future.launcher_minimum = 2;
+    future.launcher_minimum = LAUNCHER_VERSION + 1;
     assert!(future.validate().is_err());
     let mut future = m;
     future.text_interface = 2;

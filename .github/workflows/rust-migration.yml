@@ -38,7 +38,9 @@ jobs:
         run: |
           for script in setup.sh run-mcp.sh uninstall.sh scripts/*.sh; do bash -n "$script"; done
       - name: Release publication guard tests
-        run: scripts/test-publish-verified-release.sh
+        run: |
+          scripts/test-publish-verified-release.sh
+          python3 scripts/test-signed-distribution.py
       - name: Development cleanup guard tests
         run: scripts/test-development-cleanup.sh
       - name: Format and Clippy (both Cargo graphs)
@@ -187,7 +189,7 @@ jobs:
           mkdir -p dist/inkscape-mcp-launcher/bin
           cp dist/inkscape-mcp-macos-arm64/bin/inkscape-mcp-launcher dist/inkscape-mcp-launcher/bin/
           cp -R "dist/inkscape-mcp-macos-arm64/management/Inkscape MCP Manager.app" dist/inkscape-mcp-launcher/
-          tar -czf dist/inkscape-mcp-launcher.tar.gz -C dist inkscape-mcp-launcher
+          COPYFILE_DISABLE=1 tar -czf dist/inkscape-mcp-launcher.tar.gz -C dist inkscape-mcp-launcher
           scripts/dev-tools.sh build-update-manifest --output dist/inkscape-mcp-update-template.json --tag "$GITHUB_SHA" --runtime dist/inkscape-mcp-macos-arm64.tar.gz --instructions dist/inkscape-mcp-instructions.tar.gz --launcher dist/inkscape-mcp-launcher.tar.gz
           (cd dist && shasum -a 256 inkscape-mcp-instructions.tar.gz > inkscape-mcp-instructions.tar.gz.sha256)
           (cd dist && shasum -a 256 inkscape-mcp-launcher.tar.gz > inkscape-mcp-launcher.tar.gz.sha256)
@@ -199,6 +201,22 @@ jobs:
             dist/*.tar.gz
             dist/*.tar.gz.sha256
             dist/*-template.json
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0
+      - name: Retain distinct native baseline for signed-distribution acceptance
+        if: matrix.package == 'macos-arm64'
+        run: |
+          COPYFILE_DISABLE=1 tar -czf "$RUNNER_TEMP/update-baseline.tar.gz" -C dist update-baseline
+          (cd "$RUNNER_TEMP" && shasum -a 256 update-baseline.tar.gz > update-baseline.tar.gz.sha256)
+      - name: Upload distinct baseline fixture
+        if: matrix.package == 'macos-arm64'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: inkscape-mcp-update-baseline
+          path: |
+            ${{ runner.temp }}/update-baseline.tar.gz
+            ${{ runner.temp }}/update-baseline.tar.gz.sha256
           if-no-files-found: error
           retention-days: 30
           compression-level: 0

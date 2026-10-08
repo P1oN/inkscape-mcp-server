@@ -105,6 +105,7 @@ mod repeat;
 mod repeat_plan;
 mod retention;
 mod runtime;
+use inkscape_mcp_rust::runtime_layout;
 mod save;
 mod stdio_limit;
 mod structure;

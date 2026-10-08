@@ -41,7 +41,10 @@ pub fn binary(name: &str) -> Option<PathBuf> {
         && std::fs::symlink_metadata(library.join("package.json")).is_ok_and(|meta| meta.is_file())
     {
         match name {
-            "gdbus" | "dbus-daemon" => candidates.push(library.join("dbus/bin").join(name)),
+            "gdbus" | "dbus-daemon" => candidates.push(crate::runtime_layout::asset(
+                &library,
+                &format!("dbus/bin/{name}"),
+            )),
             "inkscape" if cfg!(target_os = "macos") => candidates.push(PathBuf::from(
                 "/Applications/Inkscape.app/Contents/MacOS/inkscape",
             )),
@@ -150,7 +153,7 @@ pub fn run_bounded_with_env(
     let mut command = Command::new(binary);
     command.envs(environment.iter().copied());
     if let Ok(library) = crate::live_launch::library()
-        && binary == &library.join("dbus/bin/gdbus")
+        && binary == &crate::runtime_layout::asset(&library, "dbus/bin/gdbus")
     {
         command.env("GIO_MODULE_DIR", library.join("dbus/lib/gio/modules"));
         command.env_remove("GIO_EXTRA_MODULES");

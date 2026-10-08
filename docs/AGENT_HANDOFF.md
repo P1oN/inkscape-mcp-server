@@ -12,6 +12,90 @@ Read [README](../README.md), [CONTRIBUTING](../CONTRIBUTING.md) and
 work, and [history](history/README.md) retains earlier checkpoint/acceptance evidence.
 Check current code and Git status before relying on recorded results.
 
+## Priority 1 development checkpoint — 2026-10-08
+
+This branch implements typed first-install preparation/activation/recovery,
+per-user Manager relocation, Runtime app layout, native installer UI and protected
+signed-release preparation/publication jobs. The latest complete **local** signed candidate
+is Runtime/helper build `1a52d477e623f8d5` (dirty source revision
+`8762cfe238a0074a58c63c062b8f703c481a2ee7`) in
+`.inkscape-mcp-local/priority1-signed3-complete2`. Developer ID Team `DN263AX69U`
+is verified. Its Runtime, Manager and DMG are Apple Accepted and stapled; all tickets
+validate. Final DMG SHA-256 is
+`f84aed5a88c6decaa55209903554168845d393ca1c36d2358e52b6e258e58aa8`.
+
+The local notarization profile is restored. Recovery reuses original Runtime submission
+`1609561d-6737-44f7-9453-40098fd160da` and Manager submission
+`39afddcd-d7a9-444b-911c-daea6e68004b`; no resigning or duplicate submission occurs.
+The fixed local assembly creates one DMG submission,
+`bd3fb7e8-fbd5-48b6-890f-4b1d5d64cc82`. Retained input/log/CodeDirectory identities
+are verified before stapling. This is recorded local recovery, **not** a successful
+main-CI candidate or protected whole-job interruption qualification.
+
+`priority1-signed-final3/report.json` independently verifies 25 signed paths, Developer ID
+Team/authority, secure timestamps and applicable hardening; all three tickets; current-host
+app and DMG Gatekeeper; actual runtime/launcher extraction; and the Manager in a read-only
+mounted DMG without launching it. The mount is detached. Runtime archive/offline payload,
+code inventory and Runtime bundle remain unchanged through reuse. Final update manifests
+and checksum sidecars bind actual assets. `LOCAL-PREPARATION.json` and the report remain
+publication_eligible=false. No synthetic CI/publication receipt is created.
+
+The finalized Runtime package passes relocation/rendering/approval/no-op/preservation
+acceptance (453 files). The **stapled** Manager passes the 19-boundary installer matrix,
+including custom-engine preservation, missing-engine picker recovery, foreign/ownership
+refusals, legacy/custom-root migration, skill and component recovery. Signed-payload
+failed-probe mutation is intentionally skipped; the separately scoped ad-hoc fixture
+covers it. Distinct-runtime instructions/runtime/combined updates and rollback pass,
+with real native doctor/STDIO/workspace probes and synthetic client profiles.
+Reports: `priority1-signed-package3`, `priority1-signed-installer3-final`,
+`priority1-signed-updates3` and `priority1-signed-final3` under `migration/results/`.
+
+PR #30 review repairs isolate unsafe/invalid/oversized client configurations, report
+client diagnostics in the Manager, and skip unmanaged/foreign-owned skills without
+adoption. Staging retains signer verification bound to the runtime inventory and exact
+helper bytes; normal launch checks that stored result without invoking `codesign`.
+Signed-release preparation limits credential inheritance and supports empty optional
+arguments on Bash 3.2. Publication verifies and publishes drafts by numeric release ID.
+These source changes postdate the signed candidate above; its notarization/native
+acceptance evidence does not qualify the repaired helper or Manager bytes.
+
+Review-repair validation: Rust test targets pass, with the nine update-manager tests
+run serially after a parallel run exceeded the startup initialization deadline.
+Tooling's 20 tests, both Clippy/format checks, release publication/refusal/recovery
+fixtures, Bash 3.2 empty/populated arguments and credential-inheritance fixtures,
+actionlint and the Manager Objective-C syntax check pass. Native GUI and fresh
+signed-artifact qualification were not repeated for these source changes.
+
+Before these review repairs, Rust validation recorded 337 passing tests/two opt-in
+ignored, tooling 20, both Clippy graphs and format checks. The engine repair preserves executable saved
+paths and repairs only missing/non-executable saved paths without changing other
+settings. The compiled adapter fixture exercises the actual approved headless engine;
+copied-app first execution timed out with quarantine retained and remains unqualified.
+No MCP surface/instruction changes require an installed-server restart in this iteration.
+
+Earlier complete build `7ad414e1314fd62b` retains separately bound native Cocoa
+relocation/workspace/first-install/no-op evidence and signed instructions-only reuse
+with exact Runtime bytes/submission. Those GUI observations are not transferred to
+new helper bytes. Fixed `resume-notarization` recovery of retained containers and
+changed-ZIP/same-Team-changed-payload refusals remains separately recorded.
+
+The four-job release flow now checks public repository `SIGNING_TEAM_ID` before
+retrieving a candidate and passes that same value through preparation, verification
+and publication. Six actual validation-shell cases, actionlint, signed-release guard
+fixtures and existing publication fixtures pass. The setup guide distinguishes repository
+Team configuration from protected signing secrets/variables. No GitHub configuration
+or credentials were exported/written. Last read-only inspection finds no release
+environments, signing secrets or variables; Claude Code is absent on this host.
+
+Priority 1 remains open: protected CI setup/execution, a successful committed main-CI
+candidate, complete signing-job interruption qualification, browser-quarantined
+other-Mac online/offline/client acceptance, clean source bootstrap, real Claude and
+broader release review are unqualified. The user has authorized committing/pushing this
+candidate and opening a draft PR for CI/review. No release is published.
+See the [distribution contract](install/macos-manager-distribution.md) and
+[scoped ledger](history/reports/macos-installer-2026-10-08.md).
+The user's installed runtime/client settings and Inkscape windows remain untouched.
+
 ## Implemented
 
 Current unpublished sources implement independent text/runtime updates: a permanent native
@@ -21,8 +105,8 @@ opt-in; the user's installed runtime and clients were not changed. See the
 [guide](install/independent-updates.md) and [acceptance ledger](history/reports/independent-updates.md).
 Local CLI/package and explicitly authorized isolated management-window checks passed;
 published GUI downloads, live Inkscape reconnect and full media-failure qualification remain
-in the backlog. A later default-parallel run reproduced the existing native launch/lock test
-failure; sequential runtime tests passed. This does not establish a concurrency fix.
+in the backlog. An earlier default-parallel run reproduced the native launch/lock regression. The
+2026-10-08 checkpoint above repairs and verifies it; historical failures remain in the ledger.
 PR #26 review repairs add bounded startup lock waiting, absent-client/skill preservation,
 window-close protection and verified distinct-runtime CI acceptance. Final local checks:
 326 runtime tests/two opt-in ignored, 17 tooling tests and both fmt/Clippy graphs passed;
@@ -119,6 +203,18 @@ Local release guard fixtures validate refusal and staged publication without pub
 
 Use the [single backlog](RUST_NEXT_PLAN.md). The [archived handoff](history/agent-checkpoints-through-pr11.md)
 retains previous checkpoint counts and detailed delivery history.
+
+2026-10-08: another-Mac installation feedback identified missing first-install UX in
+Manager, stale loading/error state and repeated macOS component approvals. The user
+requested an implementation plan and has requested Apple Developer access; membership and local signing/notarization credentials are now verified; protected CI
+credential setup and signed artifact qualification remain pending. The [active installation/signing/release plan](RUST_NEXT_PLAN.md#smooth-macos-installation-and-signed-releases--implementation-plan)
+scopes the offline DMG/native wizard, preservation/recovery, explicit bootstrap upgrade,
+Developer ID/notarization and evidence-bound release preparation/publication. v0.1.4
+published independent updates and v0.1.5 retained them; earlier “unpublished” statements
+above retain their original checkpoint context. Planning changes do not implement the
+wizard/signing or authorize publication/installed-runtime changes. Validation for this
+documentation update: link/path consistency and `git diff --check`; no native GUI or
+signed-package acceptance was performed.
 
 Follow [AGENTS.md](../AGENTS.md) and CONTRIBUTING: typed bounded tools, existing approval
 gates, snapshots/records/no-op handling, original/reference/appearance preservation, no

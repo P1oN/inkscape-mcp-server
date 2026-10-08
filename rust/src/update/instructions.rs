@@ -78,7 +78,7 @@ pub fn manifest(version: &str, files: &BTreeMap<String, Vec<u8>>) -> Instruction
         version: version.into(),
         content_id: content_id(&files),
         text_interface: TEXT_INTERFACE,
-        launcher_minimum: LAUNCHER_VERSION,
+        launcher_minimum: 1,
         files,
     }
 }

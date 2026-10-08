@@ -6,7 +6,9 @@ are retired; improve Rust against explicit contracts, invariants and regression 
 
 ## Development and checks
 
-Use Rust 1.99.0 and the two locked Cargo graphs. No Python environment is required.
+Use Rust 1.99.0 and the two locked Cargo graphs. Release-guard and signed-distribution
+scripts require `python3` with its standard library only. The retired Python MCP
+implementation and its Python environment are not required.
 Native libxml/clang development dependencies are required; on macOS set
 `LIBXML2="$(xcrun --show-sdk-path)/usr/lib/libxml2.tbd"`. Inkscape 1.4+ is required
 for CLI/native acceptance. `scripts/dev-tools.sh` locates pinned Cargo and the macOS
@@ -48,7 +50,10 @@ Python sources/tests and their former dependency files are retained under
 [scripts/history/python](scripts/history/python/README.md) as evidence, outside active paths.
 
 For workflow or publication changes, run `scripts/test-publish-verified-release.sh`, Bash syntax
-checks and actionlint. Release guard fixtures simulate GitHub and never publish a distribution.
+checks, `python3 scripts/test-signed-distribution.py` and actionlint. Release guard fixtures simulate GitHub and never publish a distribution.
+For retained notarization recovery, use the fixed `resume-notarization` development command
+described in `docs/install/macos-manager-distribution.md`. It reuses a saved submission;
+it never signs/submits code or replaces final acceptance and publication gates.
 Main changes go through PRs with both quick and native checks; see
 [release operations](docs/install/github-builds.md#publishing-a-new-distribution).
 
@@ -212,3 +217,12 @@ CI baseline is the same source with a fixture comment and a separately compiled 
 it is never published. Optional `--profile DIRECTORY` retains an isolated profile
 for explicitly authorized management-window acceptance. That probe does not claim real
 Claude, clean-machine or native Inkscape acceptance.
+
+### Native installer distribution checkpoint
+
+See [the distribution contract](docs/install/macos-manager-distribution.md) for the
+new `build-distribution` and `installer-acceptance` development commands and scoped
+limitations. Both require a verified package and a new output directory. These commands
+do not publish or change the user's installation. Native Manager window acceptance
+requires an explicitly authorized isolated profile. Ad-hoc checkpoints do not establish
+Developer ID, notarization, Gatekeeper or clean-host acceptance.

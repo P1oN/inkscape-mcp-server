@@ -131,6 +131,9 @@ pub fn tool(name: &str) -> Result<PathBuf> {
 }
 /// Capture owned build-tool output with a fixed timeout and finite spill files.
 pub fn output(command: &mut Command) -> Result<String> {
+    Ok(output_streams(command)?.0)
+}
+pub fn output_streams(command: &mut Command) -> Result<(String, String)> {
     let temporary = tempfile::tempdir()?;
     let out = temporary.path().join("stdout");
     let err = temporary.path().join("stderr");
@@ -159,7 +162,10 @@ pub fn output(command: &mut Command) -> Result<String> {
             String::from_utf8_lossy(&read(&err, 64 * 1024 * 1024)?)
         ),
     )?;
-    Ok(String::from_utf8(read(&out, 64 * 1024 * 1024)?)?)
+    Ok((
+        String::from_utf8(read(&out, 64 * 1024 * 1024)?)?,
+        String::from_utf8(read(&err, 64 * 1024 * 1024)?)?,
+    ))
 }
 pub fn command(program: impl AsRef<std::ffi::OsStr>, args: &[&str]) -> Result<String> {
     output(Command::new(program).args(args))

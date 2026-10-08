@@ -12,6 +12,11 @@ Operation Records, atomic rollback and genuine no-op behavior remain part of the
 
 ## Install and run
 
+The native first-install Manager has an unpublished Developer ID signed/notarized
+[local candidate](docs/install/macos-manager-distribution.md) with passing isolated
+installation/update checks. Protected CI delivery and final browser-downloaded/another-Mac
+acceptance remain pending.
+
 [v0.1.2](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.2) provides current
 source installation and a ready Apple Silicon package. It includes installation/client
 management, complete Python removal, reviewed live packages and vector-quality guards

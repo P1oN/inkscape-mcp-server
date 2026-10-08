@@ -117,3 +117,17 @@ same PR/CI process. Issues use structured bug/feature forms; security reports re
 Current sources also support [independent instructions/runtime updates](independent-updates.md) through a
 permanent native launcher and macOS management app. Opt in once with
 `./setup.sh --independent-updates`; published v0.1.2 archives retain their original behavior.
+
+## Signed Manager preparation (unpublished checkpoint)
+
+The four-stage workflow in `.github/workflows/signed-release.yml` validates exact successful
+main CI artifacts, transforms them under protected `release-signing`, verifies final native
+package/installer/distinct-update receipts without credentials, and publishes exact assets
+under protected `release-publication`. The checkout used for packaging is the candidate
+revision. Pinned Actions, explicit ephemeral keychain cleanup, Accepted tickets and remote
+asset digest/count checks gate publication. A failed existing draft requires explicit
+inspection/recovery; it is never overwritten. Legacy publication remains available for
+advanced historical assets. Signed immutable runtime reuse preserves original archive
+bytes and reference/build identities. See [the contract](macos-manager-distribution.md)
+and [scoped evidence](../history/reports/macos-installer-2026-10-08.md). No protected
+environments or signing secrets were configured, and this workflow has not been run.

@@ -5,6 +5,7 @@ mod live_protocol;
 #[allow(dead_code)]
 #[path = "../process.rs"]
 mod process;
+use inkscape_mcp_rust::runtime_layout;
 #[allow(dead_code)]
 #[path = "../workspace.rs"]
 mod workspace;
@@ -20,14 +21,9 @@ mod telemetry {
 }
 mod live_launch {
     pub fn library() -> Result<std::path::PathBuf, String> {
-        std::env::current_exe()
-            .ok()
-            .and_then(|p| {
-                p.parent()
-                    .and_then(std::path::Path::parent)
-                    .map(|p| p.join("libexec/inkscape-mcp"))
-            })
-            .ok_or("package unavailable".into())
+        inkscape_mcp_rust::runtime_layout::library_for_executable(
+            &std::env::current_exe().map_err(|e| e.to_string())?,
+        )
     }
 }
 use base64::{Engine, engine::general_purpose::STANDARD};

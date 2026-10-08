@@ -475,7 +475,7 @@ fn build(out: &Path, binary: &Path) -> Result<()> {
     let library = out.join("libexec/inkscape-mcp");
     fs::create_dir_all(&library)?;
     let mut manifest = json!({"target":target,"runtime":"native-rust","dbus_inputs":[],"release_signed":false,"notarized":false,"source_head":source_revision()?,"build_info":serde_json::from_str::<Value>(&output(Command::new(binary).arg("--version"))?)?});
-    manifest["update_contract"] = json!({"text_interface":inkscape_mcp_rust::update::manifests::TEXT_INTERFACE,"helper_protocol":inkscape_mcp_rust::update::manifests::HELPER_PROTOCOL,"launcher_minimum":inkscape_mcp_rust::update::manifests::LAUNCHER_VERSION});
+    manifest["update_contract"] = json!({"text_interface":inkscape_mcp_rust::update::manifests::TEXT_INTERFACE,"helper_protocol":inkscape_mcp_rust::update::manifests::HELPER_PROTOCOL,"launcher_minimum":1});
     for name in [
         "inkscape_mcp_insert.inx",
         "inkscape_mcp_edit.inx",
@@ -573,6 +573,32 @@ fn build(out: &Path, binary: &Path) -> Result<()> {
         let app = out.join("management/Inkscape MCP Manager.app/Contents");
         fs::create_dir_all(app.join("MacOS"))?;
         output(
+            Command::new("/usr/bin/codesign")
+                .args(["--force", "--sign", "-", "--timestamp=none"])
+                .arg(out.join("bin/inkscape-mcp-launcher")),
+        )?;
+        copy(
+            &out.join("bin/inkscape-mcp-launcher"),
+            &app.join("Helpers/inkscape-mcp-launcher"),
+        )?;
+        let instruction_files = inkscape_mcp_rust::update::instructions::default_files();
+        let instruction_manifest = inkscape_mcp_rust::update::instructions::manifest(
+            manifest["build_info"]["build_id"]
+                .as_str()
+                .ok_or("missing build ID")?,
+            &instruction_files,
+        );
+        let instruction_root = app.join("Resources/instructions");
+        for (name, bytes) in instruction_files {
+            let path = instruction_root.join(name);
+            fs::create_dir_all(path.parent().unwrap())?;
+            fs::write(path, bytes)?;
+        }
+        write_json(
+            &instruction_root.join("manifest.json"),
+            &serde_json::to_value(instruction_manifest)?,
+        )?;
+        output(
             Command::new("/usr/bin/clang")
                 .args([
                     "-fobjc-arc",
@@ -590,6 +616,18 @@ fn build(out: &Path, binary: &Path) -> Result<()> {
         fs::write(
             app.join("Info.plist"),
             r#"<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><dict><key>CFBundleExecutable</key><string>inkscape-mcp-manager</string><key>CFBundleIdentifier</key><string>org.inkscape-mcp.manager</string><key>CFBundleName</key><string>Inkscape MCP Manager</string><key>CFBundlePackageType</key><string>APPL</string><key>CFBundleShortVersionString</key><string>1.0</string><key>LSMinimumSystemVersion</key><string>15.0</string><key>NSHighResolutionCapable</key><true/></dict></plist>"#,
+        )?;
+        let info = fs::read_to_string(app.join("Info.plist"))?;
+        let build = hash(&app.join("MacOS/inkscape-mcp-manager"))?;
+        fs::write(
+            app.join("Info.plist"),
+            info.replace(
+                "</dict></plist>",
+                &format!(
+                    "<key>InkscapeMCPBuildID</key><string>{}</string></dict></plist>",
+                    &build[..16]
+                ),
+            ),
         )?;
         output(
             Command::new("/usr/bin/codesign")

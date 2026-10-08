@@ -208,7 +208,7 @@ pub fn run(args: &Args) -> Result<()> {
         copy_tree(&source, &package)?;
     }
     let files = verify_files(&package)?;
-    let library = package.join("libexec/inkscape-mcp");
+    let library = inkscape_mcp_rust::runtime_layout::library(&package);
     ensure(
         !library.join("python").exists()
             && walk(&package)?.iter().all(|p| {
@@ -239,7 +239,13 @@ pub fn run(args: &Args) -> Result<()> {
     let original=b"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\"><rect id=\"r\" width=\"100\" height=\"100\" fill=\"#ff0000\"/></svg>";
     fs::write(workspace.join("fixture.svg"), original)?;
     let mut wire = Wire::spawn(
-        &mut command_with_env(&package.join("bin/inkscape-mcp"), &env),
+        &mut command_with_env(
+            &inkscape_mcp_rust::runtime_layout::binary(
+                &inkscape_mcp_rust::runtime_layout::library(&package),
+                "inkscape-mcp",
+            ),
+            &env,
+        ),
         &out.join("packaged-server.stderr.log"),
     )?;
     let result = (|| -> Result<()> {
@@ -437,9 +443,12 @@ pub fn doctor(args: &Args) -> Result<()> {
     let root = root.path().canonicalize()?;
     let package = root.join("installed");
     copy_tree(&source, &package)?;
-    let library = package.join("libexec/inkscape-mcp");
+    let library = inkscape_mcp_rust::runtime_layout::library(&package);
     let env = environment(&root, &library)?;
-    let executable = package.join("bin/inkscape-mcp");
+    let executable = inkscape_mcp_rust::runtime_layout::binary(
+        &inkscape_mcp_rust::runtime_layout::library(&package),
+        "inkscape-mcp",
+    );
     let mut profiles = 0;
     let mut check = |label: &str,
                      expected: bool,
@@ -491,12 +500,15 @@ pub fn doctor(args: &Args) -> Result<()> {
     for (label, path, key) in [
         (
             "supervisor",
-            package.join("bin/inkscape-mcp-supervisor"),
+            inkscape_mcp_rust::runtime_layout::binary(
+                &inkscape_mcp_rust::runtime_layout::library(&package),
+                "inkscape-mcp-supervisor",
+            ),
             "fixed_supervisor",
         ),
         (
             "bridge",
-            library.join("context.so"),
+            inkscape_mcp_rust::runtime_layout::asset(&library, "context.so"),
             "prebuilt_context_architecture",
         ),
         (
@@ -506,22 +518,28 @@ pub fn doctor(args: &Args) -> Result<()> {
         ),
         (
             "socket",
-            package.join("bin/inkscape-mcp-live"),
+            inkscape_mcp_rust::runtime_layout::binary(
+                &inkscape_mcp_rust::runtime_layout::library(&package),
+                "inkscape-mcp-live",
+            ),
             "fixed_socket_helper",
         ),
         (
             "inx",
-            package.join("bin/inkscape-mcp-inx"),
+            inkscape_mcp_rust::runtime_layout::binary(
+                &inkscape_mcp_rust::runtime_layout::library(&package),
+                "inkscape-mcp-inx",
+            ),
             "fixed_inx_helper",
         ),
         (
             "bus",
-            library.join("dbus/bin/dbus-daemon"),
+            inkscape_mcp_rust::runtime_layout::asset(&library, "dbus/bin/dbus-daemon"),
             "dbus_daemon_architecture",
         ),
         (
             "gdbus",
-            library.join("dbus/bin/gdbus"),
+            inkscape_mcp_rust::runtime_layout::asset(&library, "dbus/bin/gdbus"),
             "gdbus_architecture",
         ),
         ("manifest", library.join("package.json"), "package_manifest"),
@@ -536,9 +554,18 @@ pub fn doctor(args: &Args) -> Result<()> {
         result?;
     }
     let (path, key) = if cfg!(target_os = "macos") {
-        (library.join("context.so"), "prebuilt_context_architecture")
+        (
+            inkscape_mcp_rust::runtime_layout::asset(&library, "context.so"),
+            "prebuilt_context_architecture",
+        )
     } else {
-        (package.join("bin/inkscape-mcp-inx"), "fixed_inx_helper")
+        (
+            inkscape_mcp_rust::runtime_layout::binary(
+                &inkscape_mcp_rust::runtime_layout::library(&package),
+                "inkscape-mcp-inx",
+            ),
+            "fixed_inx_helper",
+        )
     };
     let held = root.join("held-asset");
     fs::rename(&path, &held)?;
@@ -624,10 +651,16 @@ fn native_cli(package: &Path, root: &Path, env: &[(String, String)], out: &Path)
         write_json(&native.join("insert-request.json"), &request)?;
         let before = fs::read(&source)?;
         let (status, stdout, stderr) = capture_full(
-            command_with_env(&package.join("bin/inkscape-mcp-inx"), env)
-                .arg("--id=r")
-                .arg(&source)
-                .env("INKSCAPE_MCP_MANAGED_DIR", &native),
+            command_with_env(
+                &inkscape_mcp_rust::runtime_layout::binary(
+                    &inkscape_mcp_rust::runtime_layout::library(package),
+                    "inkscape-mcp-inx",
+                ),
+                env,
+            )
+            .arg("--id=r")
+            .arg(&source)
+            .env("INKSCAPE_MCP_MANAGED_DIR", &native),
         )?;
         let reply = crate::common::json(&native.join("insert-result.json"))?;
         ensure(
@@ -648,18 +681,21 @@ fn native_cli(package: &Path, root: &Path, env: &[(String, String)], out: &Path)
     fs::set_permissions(&bus_dir, fs::Permissions::from_mode(0o700))?;
     let socket = bus_dir.join("bus.sock");
     let address = format!("unix:path={}", socket.display());
-    let library = package.join("libexec/inkscape-mcp");
+    let library = inkscape_mcp_rust::runtime_layout::library(package);
     let log = fs::File::create(out.join("packaged-bus.log"))?;
-    let child = command_with_env(&library.join("dbus/bin/dbus-daemon"), env)
-        .arg(format!(
-            "--config-file={}",
-            library.join("dbus/session.conf").display()
-        ))
-        .arg(format!("--address={address}"))
-        .args(["--nofork", "--print-address=1"])
-        .stdout(log.try_clone()?)
-        .stderr(log)
-        .spawn()?;
+    let child = command_with_env(
+        &inkscape_mcp_rust::runtime_layout::asset(&library, "dbus/bin/dbus-daemon"),
+        env,
+    )
+    .arg(format!(
+        "--config-file={}",
+        library.join("dbus/session.conf").display()
+    ))
+    .arg(format!("--address={address}"))
+    .args(["--nofork", "--print-address=1"])
+    .stdout(log.try_clone()?)
+    .stderr(log)
+    .spawn()?;
     struct OwnedBus(std::process::Child);
     impl Drop for OwnedBus {
         fn drop(&mut self) {
@@ -687,7 +723,11 @@ fn native_cli(package: &Path, root: &Path, env: &[(String, String)], out: &Path)
         std::thread::sleep(std::time::Duration::from_millis(10));
     }
     let (status, id) = capture(
-        command_with_env(&library.join("dbus/bin/gdbus"), env).args([
+        command_with_env(
+            &inkscape_mcp_rust::runtime_layout::asset(&library, "dbus/bin/gdbus"),
+            env,
+        )
+        .args([
             "call",
             "--address",
             &address,

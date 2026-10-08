@@ -27,8 +27,14 @@ jq -e -s --arg ref "refs/tags/$release_tag" 'add | all(.[]; .ref != $ref)' <<< "
 release_list=$(gh api --paginate "repos/$release_repo/releases?per_page=100")
 jq -e -s --arg tag "$release_tag" 'add | all(.[]; .tag_name != $tag)' <<< "$release_list" >/dev/null || fail 'Release already exists, including a possible failed draft; inspect it before retrying.'
 
-release_dir=$(mktemp -d)
-trap 'rm -rf -- "$release_dir"' EXIT
+if [ "${RELEASE_VALIDATE_ONLY:-false}" = true ]; then
+    release_dir=${RELEASE_CANDIDATE_OUTPUT:?RELEASE_CANDIDATE_OUTPUT is required}
+    [ ! -e "$release_dir" ] && [ ! -L "$release_dir" ] || fail 'Candidate output must be new.'
+    (umask 077; mkdir -- "$release_dir")
+else
+    release_dir=$(mktemp -d)
+fi
+if [ "${RELEASE_VALIDATE_ONLY:-false}" != true ]; then trap 'rm -rf -- "$release_dir"' EXIT; fi
 gh run download "$release_run" --repo "$release_repo" --name inkscape-mcp-macos-arm64 --dir "$release_dir"
 release_assets=(inkscape-mcp-macos-arm64.tar.gz inkscape-mcp-macos-arm64.tar.gz.sha256 inkscape-mcp-source-bootstrap.tar.gz inkscape-mcp-source-bootstrap.tar.gz.sha256 inkscape-mcp-instructions.tar.gz inkscape-mcp-instructions.tar.gz.sha256 inkscape-mcp-launcher.tar.gz inkscape-mcp-launcher.tar.gz.sha256 inkscape-mcp-update-template.json)
 [ "$(find "$release_dir" -mindepth 1 -maxdepth 1 | wc -l | tr -d ' ')" = 9 ] || fail 'Unexpected CI artifact files.'
@@ -62,6 +68,13 @@ for release_component in runtime instruction_asset launcher_asset; do
 done
 release_instructions=$(tar -xOf "$release_dir/inkscape-mcp-instructions.tar.gz" inkscape-mcp-instructions/manifest.json)
 jq -e --argjson instructions "$release_instructions" '.instructions == $instructions' "$release_template" >/dev/null || fail 'Instruction manifest differs from verified CI evidence.'
+if [ "${RELEASE_VALIDATE_ONLY:-false}" = true ]; then
+    [ -z "${RELEASE_RUNTIME_TAG:-}" ] || fail 'Signed runtime reuse requires separate verified distribution evidence; legacy candidate validation cannot authorize reuse.'
+    release_digests=$(cd "$release_dir" && shasum -a 256 "${release_assets[@]}")
+    jq -n --arg sha "$release_sha" --arg run "$release_run" --arg repo "$release_repo" --arg tag "$release_tag" --argjson prerelease "$release_prerelease" --argjson package "$release_metadata" --arg hashes "$release_digests" \
+        '{format:1,source_revision:$sha,run_id:$run,repository:$repo,tag:$tag,prerelease:$prerelease,package_build:$package.build_info,input_sha256:$hashes}' > "$release_dir/CANDIDATE.json"
+    exit 0
+fi
 release_runtime_tag=${RELEASE_RUNTIME_TAG:-}
 if [ -n "$release_runtime_tag" ]; then
     [[ "$release_runtime_tag" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[A-Za-z0-9]+([.-][A-Za-z0-9]+)*)?$ ]] || fail 'Invalid referenced runtime tag.'
