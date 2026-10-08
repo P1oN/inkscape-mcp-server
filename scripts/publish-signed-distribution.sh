@@ -37,6 +37,12 @@ if [ -z "$publication_recovery" ]; then gh release create "$publication_tag" "${
 publication_files=()
 while IFS= read -r name; do publication_files+=("$publication_assets/$name"); done < <(jq -r --argjson existing "$publication_existing" 'keys[] | select(. as $name | $existing | index($name) | not)' <<< "$publication_inventory")
 if [ "${#publication_files[@]}" -gt 0 ]; then gh release upload "$publication_tag" --repo "$publication_repo" "${publication_files[@]}"; fi
-publication_remote=$(gh api "repos/$publication_repo/releases/tags/$publication_tag")
-jq -e --arg tag "$publication_tag" --arg sha "$publication_sha" --argjson local "$publication_inventory" '.draft == true and .tag_name == $tag and .target_commitish == $sha and (.assets|length) == ($local|length) and (.assets|map(.name)|unique|length) == ($local|length) and all(.assets[]; $local[.name].bytes == .size and ("sha256:"+$local[.name].sha256) == .digest)' <<< "$publication_remote" >/dev/null || { printf '%s\n' 'Remote draft identity or asset digests/count differ; draft retained.' >&2; exit 1; }
-gh release edit "$publication_tag" --repo "$publication_repo" --draft=false
+publication_id=$publication_recovery
+if [ -z "$publication_id" ]; then
+    publication_created=$(gh api --paginate "repos/$publication_repo/releases?per_page=100")
+    publication_id=$(jq -er -s --arg tag "$publication_tag" 'add | map(select(.tag_name == $tag and .draft == true)) | if length == 1 then .[0].id else error("Expected one matching draft") end' <<< "$publication_created")
+fi
+[[ "$publication_id" =~ ^[1-9][0-9]{0,19}$ ]] || exit 1
+publication_remote=$(gh api "repos/$publication_repo/releases/$publication_id")
+jq -e --arg id "$publication_id" --arg tag "$publication_tag" --arg sha "$publication_sha" --argjson preview "$(jq -r .prerelease "$publication_assets/CANDIDATE.json")" --argjson local "$publication_inventory" '(.id|tostring) == $id and .prerelease == $preview and .draft == true and .tag_name == $tag and .target_commitish == $sha and (.assets|length) == ($local|length) and (.assets|map(.name)|unique|length) == ($local|length) and all(.assets[]; $local[.name].bytes == .size and ("sha256:"+$local[.name].sha256) == .digest)' <<< "$publication_remote" >/dev/null || { printf '%s\n' 'Remote draft identity or asset digests/count differ; draft retained.' >&2; exit 1; }
+gh api --method PATCH "repos/$publication_repo/releases/$publication_id" -F draft=false >/dev/null

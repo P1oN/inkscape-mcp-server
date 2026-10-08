@@ -6,7 +6,9 @@ are retired; improve Rust against explicit contracts, invariants and regression 
 
 ## Development and checks
 
-Use Rust 1.99.0 and the two locked Cargo graphs. No Python environment is required.
+Use Rust 1.99.0 and the two locked Cargo graphs. Release-guard and signed-distribution
+scripts require `python3` with its standard library only. The retired Python MCP
+implementation and its Python environment are not required.
 Native libxml/clang development dependencies are required; on macOS set
 `LIBXML2="$(xcrun --show-sdk-path)/usr/lib/libxml2.tbd"`. Inkscape 1.4+ is required
 for CLI/native acceptance. `scripts/dev-tools.sh` locates pinned Cargo and the macOS

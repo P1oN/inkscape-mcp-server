@@ -169,6 +169,10 @@ pub fn inspect(root: &Path) -> Result<Value> {
     let mut candidates = BTreeSet::new();
     let mut clients = Vec::new();
     for crate::client_management::InstallationBinding { name, entry, .. } in bindings()? {
+        let (entry, error) = match entry {
+            Ok(entry) => (entry, None),
+            Err(error) => (None, Some(error)),
+        };
         let command = entry
             .as_ref()
             .and_then(|e| e["command"].as_str())
@@ -204,7 +208,7 @@ pub fn inspect(root: &Path) -> Result<Value> {
         if let Some(path) = &candidate {
             candidates.insert(path.clone());
         }
-        clients.push(json!({"name": name, "available":client_available(&name), "configured": entry.is_some(), "candidate": candidate, "command_exists": command.as_ref().is_some_and(|p| p.is_file()), "foreign_binding": entry.is_some() && candidate.is_none()}));
+        clients.push(json!({"name": name, "available":client_available(&name), "error":error, "configured": entry.is_some(), "candidate": candidate, "command_exists": command.as_ref().is_some_and(|p| p.is_file()), "foreign_binding": entry.is_some() && candidate.is_none()}));
     }
     let mut result = json!({"state":"not_installed","installation":root,"clients":clients,"candidates":candidates,"choice_required":candidates.len()>1,"recovery_required":present(&root.join("installation-journal.json")) || present(&root.join("transaction.json"))});
     let mut configured_engine = None;
@@ -270,6 +274,15 @@ pub fn inspect_legacy(root: &Path, source: &Path) -> Result<Value> {
     result["legacy_build"] = metadata["build_info"].clone();
     Ok(result)
 }
+fn skill_owned(root: &Path, skill: &Path, settings: &Settings) -> Result<bool> {
+    let marker = skill.join(".inkscape-mcp-owner");
+    if !present(&marker) {
+        return Ok(false);
+    }
+    let owner = String::from_utf8(read(&marker, 8192)?).map_err(|e| e.to_string())?;
+    Ok(owner.trim() == root.to_string_lossy()
+        || owner.trim() == settings.legacy_skill_owner.to_string_lossy())
+}
 fn allowed(root: &Path, destination: &Path) -> Result<bool> {
     if [
         "settings.json",
@@ -284,17 +297,32 @@ fn allowed(root: &Path, destination: &Path) -> Result<bool> {
     {
         return Ok(true);
     }
-    for crate::client_management::InstallationBinding { config, skill, .. } in bindings()? {
-        if destination == config
-            || [
-                "SKILL.md",
-                "agents/openai.yaml",
-                ".inkscape-mcp-upstream/SKILL.md",
-                ".inkscape-mcp-upstream/agents/openai.yaml",
-                ".inkscape-mcp-owner",
-            ]
-            .iter()
-            .any(|p| skill.join(p) == destination)
+    binding_allowed(destination, bindings()?)
+}
+fn binding_allowed(
+    destination: &Path,
+    bindings: Vec<crate::client_management::InstallationBinding>,
+) -> Result<bool> {
+    for crate::client_management::InstallationBinding {
+        config,
+        skill,
+        entry,
+        ..
+    } in bindings
+    {
+        if destination == config {
+            entry?;
+            return Ok(true);
+        }
+        if [
+            "SKILL.md",
+            "agents/openai.yaml",
+            ".inkscape-mcp-upstream/SKILL.md",
+            ".inkscape-mcp-upstream/agents/openai.yaml",
+            ".inkscape-mcp-owner",
+        ]
+        .iter()
+        .any(|p| skill.join(p) == destination)
         {
             return Ok(true);
         }
@@ -559,6 +587,10 @@ pub fn prepare(root: &Path, mut request: Request) -> Result<Value> {
     {
         selected = old.clone();
     }
+    // Authorize the retained rollback runtime for this helper before replacing it.
+    if let Some(previous) = &selected.previous {
+        stage_runtime(root, &runtime_path(root, previous)?, &previous.runtime)?;
+    }
     super::progress::stage("probe", "Checking the installed MCP connection…");
     doctor(root, &selected.current, &settings)?;
     probe(root, &selected.current, &settings)?;
@@ -566,6 +598,7 @@ pub fn prepare(root: &Path, mut request: Request) -> Result<Value> {
     let base = root.join("backups").join(&id);
     mkdir(&base)?;
     let mut changes = Vec::new();
+    let mut skipped_skills = Vec::new();
     let launcher = root.join("bin/inkscape-mcp-launcher");
     let current = std::env::current_exe().map_err(|e| e.to_string())?;
     // Always our bundled executable, never the discovered legacy launcher.
@@ -613,6 +646,7 @@ pub fn prepare(root: &Path, mut request: Request) -> Result<Value> {
         if !request.clients.contains(&name) {
             continue;
         }
+        let entry = entry?;
         if !client_available(&name) {
             return Err(format!(
                 "{name} client is missing; install it before connecting"
@@ -637,7 +671,11 @@ pub fn prepare(root: &Path, mut request: Request) -> Result<Value> {
         let after = crate::client_management::installation_registration(&name, &before, &launcher)
             .map_err(|e| e.to_string())?;
         add(root, &base, &mut changes, config, after.as_bytes(), false)?;
-        if present(&skill) {
+        let owned = skill_owned(root, &skill, &settings)?;
+        if present(&skill) && !owned {
+            settings.skills.retain(|p| p != &skill);
+            skipped_skills.push(skill);
+        } else if owned {
             let merged = transaction::prepare_skill(
                 root,
                 &base,
@@ -745,7 +783,7 @@ pub fn prepare(root: &Path, mut request: Request) -> Result<Value> {
     };
     write_json(&root.join("installation-prepared.json"), &plan)?;
     Ok(
-        json!({"state":"prepared","preparation_id":id,"changes":plan.changes.iter().map(|c|&c.destination).collect::<Vec<_>>(),"installed":report(&plan.selector)}),
+        json!({"state":"prepared","skipped_skills":skipped_skills,"preparation_id":id,"changes":plan.changes.iter().map(|c|&c.destination).collect::<Vec<_>>(),"installed":report(&plan.selector)}),
     )
 }
 fn apply_file(path: &Path, bytes: &[u8], mode: u32) -> Result<()> {
@@ -912,6 +950,56 @@ pub fn activate(root: &Path, id: &str) -> Result<Value> {
 mod tests {
     use super::*;
     use crate::update::instructions::Instructions;
+    #[test]
+    fn recovery_checks_only_the_target_clients_configuration() {
+        let make = || {
+            vec![
+                crate::client_management::InstallationBinding {
+                    name: "claude".into(),
+                    config: "/home/.claude.json".into(),
+                    entry: Err("unsafe configuration".into()),
+                    skill: "/home/skill".into(),
+                },
+                crate::client_management::InstallationBinding {
+                    name: "codex".into(),
+                    config: "/home/.codex/config.toml".into(),
+                    entry: Ok(None),
+                    skill: "/home/codex-skill".into(),
+                },
+            ]
+        };
+        assert!(binding_allowed(Path::new("/home/.codex/config.toml"), make()).unwrap());
+        assert!(binding_allowed(Path::new("/home/.claude.json"), make()).is_err());
+        assert!(binding_allowed(Path::new("/home/skill/SKILL.md"), make()).unwrap());
+    }
+    #[test]
+    fn skill_ownership_preserves_unmanaged_and_foreign_skills() {
+        let (_temp, root, plan, _) = journal();
+        let skill = root.join("custom-skill");
+        mkdir(&skill).unwrap();
+        write(&skill.join("SKILL.md"), b"user content").unwrap();
+        let settings = Settings {
+            format: 1,
+            legacy_skill_owner: root.join("legacy"),
+            environment: BTreeMap::new(),
+            skills: Vec::new(),
+        };
+        assert!(!skill_owned(&root, &skill, &settings).unwrap());
+        let marker = skill.join(".inkscape-mcp-owner");
+        for (owner, expected) in [
+            (root.join("foreign"), false),
+            (root.clone(), true),
+            (settings.legacy_skill_owner.clone(), true),
+        ] {
+            write(&marker, owner.to_str().unwrap().as_bytes()).unwrap();
+            assert_eq!(skill_owned(&root, &skill, &settings).unwrap(), expected);
+        }
+        fs::remove_file(&marker).unwrap();
+        std::os::unix::fs::symlink("missing", &marker).unwrap();
+        assert!(skill_owned(&root, &skill, &settings).is_err());
+        assert_eq!(read(&skill.join("SKILL.md"), 128).unwrap(), b"user content");
+        assert!(!plan.changes.is_empty());
+    }
     #[test]
     fn custom_engine_discovery_and_missing_engine_repair_preserve_other_settings() {
         use std::os::unix::fs::PermissionsExt;

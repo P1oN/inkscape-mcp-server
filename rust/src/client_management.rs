@@ -699,20 +699,23 @@ fn migrate_recorded_bindings(repo: &Path, profiles: &Profiles, launcher: &Path) 
 pub struct InstallationBinding {
     pub name: String,
     pub config: PathBuf,
-    pub entry: Option<Value>,
+    pub entry: std::result::Result<Option<Value>, String>,
     pub skill: PathBuf,
 }
 pub fn installation_bindings() -> Result<Vec<InstallationBinding>> {
     let profiles = Profiles::environment()?;
+    Ok(installation_bindings_for(&profiles))
+}
+fn installation_bindings_for(profiles: &Profiles) -> Vec<InstallationBinding> {
     [Client::Codex, Client::Claude]
         .into_iter()
-        .map(|client| {
-            Ok(InstallationBinding {
-                name: client.name().into(),
-                config: profiles.config(client),
-                entry: entry(&profiles, client, Path::new("/unused"), false)?,
-                skill: profiles.skill(client),
-            })
+        .map(|client| InstallationBinding {
+            name: client.name().into(),
+            config: profiles.config(client),
+            entry: entry(profiles, client, Path::new("/unused"), false)
+                // Parser diagnostics can contain private configuration contents.
+                .map_err(|_| format!("{} configuration is unreadable, unsafe, oversized or invalid; preserve it and repair it before selecting this client", client.name())),
+            skill: profiles.skill(client),
         })
         .collect()
 }
@@ -840,6 +843,34 @@ pub fn disconnect_owned_bindings(names: &[String], launcher: &Path) -> Result<()
 mod tests {
     use super::*;
     use std::os::unix::fs::{PermissionsExt, symlink};
+    #[test]
+    fn installation_discovery_isolates_invalid_oversized_and_linked_clients() {
+        for bad_client in [Client::Codex, Client::Claude] {
+            for state in ["invalid", "oversized", "linked", "linked-parent"] {
+                let (_temp, _repo, profiles) = fixture();
+                let path = profiles.config(bad_client);
+                match state {
+                    "invalid" => fs::write(&path, "private-token invalid syntax").unwrap(),
+                    "oversized" => fs::write(&path, vec![b' '; 4 * 1024 * 1024 + 1]).unwrap(),
+                    "linked" => symlink("missing", &path).unwrap(),
+                    _ => {
+                        let parent = path.parent().unwrap();
+                        fs::remove_dir(parent).unwrap();
+                        symlink("missing", parent).unwrap();
+                    }
+                }
+                let bindings = installation_bindings_for(&profiles);
+                for binding in bindings {
+                    if binding.name == bad_client.name() {
+                        let error = binding.entry.unwrap_err();
+                        assert!(!error.contains("private-token"));
+                    } else {
+                        assert!(binding.entry.unwrap().is_none());
+                    }
+                }
+            }
+        }
+    }
     #[test]
     fn upgrade_replaces_transport_preserving_configuration_and_comments() {
         let (_root, repo, profiles) = fixture();

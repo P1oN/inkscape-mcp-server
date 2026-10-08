@@ -148,39 +148,48 @@ root=pathlib.Path(os.environ['SIGNED_FIXTURE_ROOT']);args=sys.argv[1:]
 with (root/'gh.log').open('a') as file:file.write(json.dumps(args)+'\\n')
 mode=os.environ['SIGNED_FIXTURE_MODE']
 if args[0]=='api':
- if '/releases/tags/' in args[1]:
-  inventory=json.loads(os.environ['SIGNED_FIXTURE_INVENTORY'])
-  entries=[dict(name=name,size=v['bytes'],digest='sha256:'+v['sha256']) for name,v in inventory.items()]
-  if mode=='remote-duplicate':entries[-1]=entries[0]
-  print(json.dumps(dict(draft=True,tag_name='v9.0.0',target_commitish='a'*40,assets=entries)))
+ if '--method' in args and args[args.index('--method')+1]=='PATCH':
+  assert args[-2:]==['-F','draft=false']
+  print('{}')
+ elif '/releases/tags/' in args[1]:sys.exit(1)
  elif args[1].endswith('/releases/42'):
   inventory=json.loads(os.environ['SIGNED_FIXTURE_INVENTORY'])
-  existing=[dict(name=name,size=v['bytes'],digest='sha256:'+v['sha256']) for name,v in (list(inventory.items()) if mode=='recover-complete' else list(inventory.items())[:2])]
+  existing=[dict(name=name,size=v['bytes'],digest='sha256:'+v['sha256']) for name,v in (list(inventory.items()) if mode=='recover-complete' or (root/'uploaded').exists() else list(inventory.items())[:2])]
+  if mode=='remote-duplicate':existing[-1]=existing[0]
   if mode=='recover-corrupt':existing[0]['digest']='sha256:'+'0'*64
   if mode=='recover-foreign':existing.append(dict(name='foreign',size=1,digest='sha256:'+'0'*64))
   if mode=='recover-duplicate':existing.append(existing[0])
   print(json.dumps(dict(id=42,draft=mode!='recover-published',tag_name='v9.0.0',target_commitish=('b' if mode=='recover-source' else 'a')*40,prerelease=True,assets=existing)))
  elif '/releases?' in args[-1]:
-  print('[{"id":42,"draft":true,"tag_name":"v9.0.0"}]' if mode.startswith('recover-') else '[{"tag_name":"v9.0.0"}]' if mode=='draft' else '[]')
+  if (root/'created').exists() and mode=='missing-created-draft':print('[]')
+  elif (root/'created').exists() and mode=='duplicate-created-draft':print('[{"id":42,"draft":true,"tag_name":"v9.0.0"},{"id":43,"draft":true,"tag_name":"v9.0.0"}]')
+  else:
+   if mode=='second-page' and (root/'created').exists():print('[]')
+   print('[{"id":42,"draft":true,"tag_name":"v9.0.0"}]' if mode.startswith('recover-') or (root/'created').exists() else '[{"tag_name":"v9.0.0"}]' if mode=='draft' else '[]')
  else:print('[]')
-elif args[:2]==['release','upload'] and mode=='upload-failure':sys.exit(1)
+elif args[:2]==['release','create']:(root/'created').touch()
+elif args[:2]==['release','upload']:
+ if mode=='upload-failure':sys.exit(1)
+ (root/'uploaded').touch()
 ''');gh.chmod(0o755)
-    for mode in ('draft','upload-failure','remote-duplicate','success'):
-        log.write_text('');env=os.environ.copy();env.update(PATH=str(mock)+':'+env['PATH'],GITHUB_REPOSITORY='fixture/repository',RUNNER_TEMP=str(root),SIGNED_FIXTURE_ROOT=str(root),SIGNED_FIXTURE_MODE=mode,SIGNED_FIXTURE_INVENTORY=json.dumps(validate(root)))
+    for mode in ('draft','upload-failure','remote-duplicate','missing-created-draft','duplicate-created-draft','second-page','success'):
+        log.write_text('');(root/'created').unlink(missing_ok=True);(root/'uploaded').unlink(missing_ok=True);env=os.environ.copy();env.update(PATH=str(mock)+':'+env['PATH'],GITHUB_REPOSITORY='fixture/repository',RUNNER_TEMP=str(root),SIGNED_FIXTURE_ROOT=str(root),SIGNED_FIXTURE_MODE=mode,SIGNED_FIXTURE_INVENTORY=json.dumps(validate(root)))
         result=subprocess.run(['bash',str(pathlib.Path(__file__).with_name('publish-signed-distribution.sh')),str(root)],env=env,capture_output=True,text=True)
-        calls=[json.loads(line) for line in log.read_text().splitlines()];published=any(v[:2]==['release','edit'] for v in calls)
-        assert published==(mode=='success') and (result.returncode==0)==(mode=='success'),(mode,result.stderr)
+        calls=[json.loads(line) for line in log.read_text().splitlines()];published=any(v[:3]==['api','--method','PATCH'] for v in calls)
+        assert published==(mode in ('success','second-page')) and (result.returncode==0)==(mode in ('success','second-page')),(mode,result.stderr)
         if mode=='draft':assert not any(v[:2]==['release','create'] for v in calls)
         print(mode+': publication boundary passed')
     for mode in ('recover-success', 'recover-complete', 'recover-corrupt', 'recover-foreign', 'recover-duplicate', 'recover-published', 'recover-source'):
         log.write_text('')
+        (root/'created').unlink(missing_ok=True)
+        (root/'uploaded').unlink(missing_ok=True)
         env['SIGNED_FIXTURE_MODE'] = mode
         result = subprocess.run([
             'bash', str(pathlib.Path(__file__).with_name('publish-signed-distribution.sh')),
             str(root), '--recover-draft', '42',
         ], env=env, capture_output=True, text=True)
         calls = [json.loads(line) for line in log.read_text().splitlines()]
-        mutations = [call for call in calls if call[0] == 'release']
+        mutations = [call for call in calls if call[0] == 'release' or call[:3] == ['api', '--method', 'PATCH']]
         assert (result.returncode == 0) == (mode in ('recover-success', 'recover-complete')), result.stderr
         if mode in ('recover-success', 'recover-complete'):
             assert all(call[:2] != ['release', 'create'] for call in mutations)
@@ -191,7 +200,7 @@ elif args[:2]==['release','upload'] and mode=='upload-failure':sys.exit(1)
                 assert '--clobber' not in upload
             else:
                 assert all(call[:2] != ['release', 'upload'] for call in mutations)
-            assert mutations[-1][:2] == ['release', 'edit']
+            assert mutations[-1][:3] == ['api', '--method', 'PATCH']
         else:
             assert not mutations, mutations
         print(mode + ': explicit draft recovery boundary passed')
@@ -225,3 +234,51 @@ with tempfile.TemporaryDirectory() as directory:
         assert (result.returncode == 0) == (label == 'valid'), result.stderr
         assert target.exists() == (label == 'valid')
         print(label + ': extraction boundary passed')
+
+# Exercise the real preparation fragment without a keychain, Cargo or signing.
+with tempfile.TemporaryDirectory() as directory:
+    root = pathlib.Path(directory)
+    (root / 'scripts').mkdir()
+    (root / 'mock').mkdir()
+    (root / 'private').mkdir()
+    probe = '''#!/bin/bash
+set -eu
+for name in SIGNING_CERTIFICATE_BASE64 SIGNING_CERTIFICATE_PASSWORD NOTARY_KEY_BASE64 signing_certificate signing_certificate_password signing_notary_key; do
+    ! /usr/bin/env | /usr/bin/grep -q "^$name=" || exit 9
+done
+'''
+    build = root / 'scripts/dev-tools.sh'
+    build.write_text(probe + 'test ! -e "$signing_private/certificate.p12"\n')
+    build.chmod(0o755)
+    for name in ('security', 'xcrun'):
+        command = root / 'mock' / name
+        command.write_text(probe + ('test -f "$signing_private/notary.p8"\n' if name == 'xcrun' else ''))
+        command.chmod(0o755)
+    decoder = root / 'mock/base64'
+    decoder.write_text("#!/usr/bin/env python3\nimport base64,sys\nassert sys.argv[1:]==['-D']\nsys.stdout.buffer.write(base64.b64decode(sys.stdin.buffer.read(), validate=True))\n")
+    decoder.chmod(0o755)
+    random = root / 'mock/openssl'
+    random.write_text(probe + "printf '%s\\n' 'synthetic-keychain-password'\n")
+    random.chmod(0o755)
+    source = pathlib.Path(__file__).with_name('prepare-signed-distribution.sh').read_text()
+    fragment = source.split('# Keep raw credentials', 1)[1].split('signing_tool=', 1)[0]
+    fragment = '# Keep raw credentials' + fragment
+    env = os.environ.copy()
+    env.update(PATH=str(root/'mock')+':'+env['PATH'], signing_private=str(root/'private'),
+               signing_keychain=str(root/'private/test.keychain'), SIGNING_CERTIFICATE_BASE64='Y2VydA==',
+               NOTARY_KEY_BASE64='a2V5', SIGNING_CERTIFICATE_PASSWORD='synthetic-password',
+               NOTARY_KEY_ID='fixture', NOTARY_ISSUER_ID='fixture', signing_certificate='inherited',
+               signing_certificate_password='inherited', signing_notary_key='inherited')
+    subprocess.run(['/bin/bash', '-eu', '-c', fragment], cwd=root, env=env, check=True)
+    assert not list((root/'private').iterdir())
+    expression = '${signing_reference_options[@]+"${signing_reference_options[@]}"}'
+    assert expression in source
+    subprocess.run(['/bin/bash', '-eu', '-c', f'''signing_reference_options=()
+set -- {expression}
+test "$#" = 0
+signing_reference_options=(--runtime-reference 'path with spaces')
+set -- {expression}
+test "$#" = 2
+test "$2" = 'path with spaces'
+'''], check=True)
+    print('signing secrets and Bash empty/populated arguments: passed')

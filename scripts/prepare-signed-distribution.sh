@@ -22,16 +22,26 @@ cleanup_signing() {
 trap cleanup_signing EXIT
 trap 'exit 130' INT
 trap 'exit 143' TERM
-(umask 077; printf '%s' "${SIGNING_CERTIFICATE_BASE64:?Signing certificate required}" | base64 -D > "$signing_private/certificate.p12")
-(umask 077; printf '%s' "${NOTARY_KEY_BASE64:?Notarization API key required}" | base64 -D > "$signing_private/notary.p8")
+# Keep raw credentials in unexported shell variables, including during Cargo build.rs.
+signing_certificate=${SIGNING_CERTIFICATE_BASE64:?Signing certificate required}
+signing_notary_key=${NOTARY_KEY_BASE64:?Notarization API key required}
+signing_certificate_password=${SIGNING_CERTIFICATE_PASSWORD:?Certificate password required}
+unset SIGNING_CERTIFICATE_BASE64 SIGNING_CERTIFICATE_PASSWORD NOTARY_KEY_BASE64
+export -n signing_certificate signing_notary_key signing_certificate_password
+scripts/dev-tools.sh help >/dev/null
+(umask 077; printf '%s' "$signing_certificate" | base64 -D > "$signing_private/certificate.p12")
+(umask 077; printf '%s' "$signing_notary_key" | base64 -D > "$signing_private/notary.p8")
+unset signing_certificate signing_notary_key
 signing_password=$(openssl rand -hex 32)
 security create-keychain -p "$signing_password" "$signing_keychain"
 security set-keychain-settings -lut 21600 "$signing_keychain"
 security unlock-keychain -p "$signing_password" "$signing_keychain"
-security import "$signing_private/certificate.p12" -k "$signing_keychain" -P "${SIGNING_CERTIFICATE_PASSWORD:?Certificate password required}" -T /usr/bin/codesign >/dev/null
+security import "$signing_private/certificate.p12" -k "$signing_keychain" -P "$signing_certificate_password" -T /usr/bin/codesign >/dev/null
+unset signing_certificate_password
 security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$signing_password" "$signing_keychain" >/dev/null
 xcrun notarytool store-credentials inkscape-release --keychain "$signing_keychain" --key "$signing_private/notary.p8" --key-id "${NOTARY_KEY_ID:?Key ID required}" --issuer "${NOTARY_ISSUER_ID:?Issuer ID required}" >/dev/null
-scripts/dev-tools.sh help >/dev/null
+rm -f -- "$signing_private/certificate.p12" "$signing_private/notary.p8"
+unset signing_password
 signing_tool=$PWD/rust/tooling/target/debug/inkscape-mcp-tools
 "$signing_tool" unpack-runtime --archive "$signing_candidate/inkscape-mcp-macos-arm64.tar.gz" --output "$signing_private/extracted"
 "$signing_tool" unpack-instructions --archive "$signing_candidate/inkscape-mcp-instructions.tar.gz" --output "$signing_private/text"
@@ -45,7 +55,7 @@ fi
 signing_channel=prerelease
 [ "$(jq -r .prerelease "$signing_candidate/CANDIDATE.json")" = true ] || signing_channel=stable
 "$signing_tool" build-distribution --package "$signing_package" --output "$signing_output" --tag "$(jq -r .tag "$signing_candidate/CANDIDATE.json")" --channel "$signing_channel" \
-    "${signing_reference_options[@]}" --instructions "$signing_private/text/inkscape-mcp-instructions" --identity "$SIGNING_IDENTITY" --team-id "${SIGNING_TEAM_ID:?Team ID required}" --notary-profile inkscape-release --keychain "$signing_keychain"
+    ${signing_reference_options[@]+"${signing_reference_options[@]}"} --instructions "$signing_private/text/inkscape-mcp-instructions" --identity "$SIGNING_IDENTITY" --team-id "${SIGNING_TEAM_ID:?Team ID required}" --notary-profile inkscape-release --keychain "$signing_keychain"
 signing_output=$(cd "$signing_output" && pwd -P)
 # Remove credentials before executing any final packaged probe.
 cleanup_signing

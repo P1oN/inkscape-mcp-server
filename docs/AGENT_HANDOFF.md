@@ -50,8 +50,24 @@ with real native doctor/STDIO/workspace probes and synthetic client profiles.
 Reports: `priority1-signed-package3`, `priority1-signed-installer3-final`,
 `priority1-signed-updates3` and `priority1-signed-final3` under `migration/results/`.
 
-Current Rust validation remains 337 passing tests/two opt-in ignored, tooling 20,
-both Clippy graphs and format checks. The engine repair preserves executable saved
+PR #30 review repairs isolate unsafe/invalid/oversized client configurations, report
+client diagnostics in the Manager, and skip unmanaged/foreign-owned skills without
+adoption. Staging retains signer verification bound to the runtime inventory and exact
+helper bytes; normal launch checks that stored result without invoking `codesign`.
+Signed-release preparation limits credential inheritance and supports empty optional
+arguments on Bash 3.2. Publication verifies and publishes drafts by numeric release ID.
+These source changes postdate the signed candidate above; its notarization/native
+acceptance evidence does not qualify the repaired helper or Manager bytes.
+
+Review-repair validation: Rust test targets pass, with the nine update-manager tests
+run serially after a parallel run exceeded the startup initialization deadline.
+Tooling's 20 tests, both Clippy/format checks, release publication/refusal/recovery
+fixtures, Bash 3.2 empty/populated arguments and credential-inheritance fixtures,
+actionlint and the Manager Objective-C syntax check pass. Native GUI and fresh
+signed-artifact qualification were not repeated for these source changes.
+
+Before these review repairs, Rust validation recorded 337 passing tests/two opt-in
+ignored, tooling 20, both Clippy graphs and format checks. The engine repair preserves executable saved
 paths and repairs only missing/non-executable saved paths without changing other
 settings. The compiled adapter fixture exercises the actual approved headless engine;
 copied-app first execution timed out with quarantine retained and remains unqualified.

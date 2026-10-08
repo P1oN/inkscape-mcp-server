@@ -193,10 +193,11 @@ static NSData *boundedRead(NSFileHandle *file,NSTask *task,void (^lineHandler)(N
             NSMutableArray *missing=[NSMutableArray new];
             for(NSDictionary *client in result[@"clients"]){if(![client[@"available"] boolValue])[missing addObject:[client[@"name"] isEqualToString:@"codex"] ? @"Codex" : @"Claude Code"];}
             self.status.stringValue=[result[@"installed"][@"bootstrap_damaged"] boolValue] ? @"The permanent launcher is damaged. Upgrade the bundled installation to repair it." : [result[@"recovery_required"] boolValue] ? @"An interrupted installation needs recovery. Choose Recover / retry." : [self.state isEqualToString:@"damaged"] ? @"This installation could not be verified. Choose Recover / retry, or select a verified installation with Choose installation." : [result[@"choice_required"] boolValue] && !self.legacySource ? @"Multiple installations were found. Select the one you want to upgrade." : @"Ready. Choose clients and a workspace, then Install or Update.";
+            for(NSDictionary *client in result[@"clients"]){if([client[@"error"] isKindOfClass:NSString.class])self.status.stringValue=[self.status.stringValue stringByAppendingFormat:@" %@",client[@"error"]];}
             if(missing.count)self.status.stringValue=[self.status.stringValue stringByAppendingFormat:@" %@ was not found. Install the client before selecting it.",[missing componentsJoinedByString:@" / "]];
             return;
         }
-        if(result[@"preparation_id"]){self.preparation=result[@"preparation_id"];self.cancelButton.enabled=YES;self.state=@"prepared";self.installButton.title=@"Install now";self.status.stringValue=[NSString stringWithFormat:@"Ready to install into %@. The MCP connection passed. Existing settings, drawings and client preferences will be preserved. Choose Install now to activate.",self.installation];return;}
+        if(result[@"preparation_id"]){self.preparation=result[@"preparation_id"];self.cancelButton.enabled=YES;self.state=@"prepared";self.installButton.title=@"Install now";self.status.stringValue=[NSString stringWithFormat:@"Ready to install into %@. The MCP connection passed. Existing settings, drawings and client preferences will be preserved. Choose Install now to activate.%@",self.installation,[result[@"skipped_skills"] count] ? @" User-owned skills will be preserved without management." : @""];return;}
         NSInteger requestedChannel=self.channel.indexOfSelectedItem;
         if(result[@"runtime_build"])[self showInstalled:result];
         if([arguments containsObject:@"--check"])[self.channel selectItemAtIndex:requestedChannel];
@@ -206,7 +207,7 @@ static NSData *boundedRead(NSFileHandle *file,NSTask *task,void (^lineHandler)(N
         else if([arguments containsObject:@"--check"])[self setPhase:@"installed" message:[result[@"update_available"] boolValue] ? @"An update is available. Choose Update, or an individual component." : @"No update is available for the selected channel."];
         else if([arguments containsObject:@"install-recover"]){self.preparation=nil;[self inspect];}
         else [self setPhase:@"installed" message:@"Ready. Updates run when you choose an action."];
-        NSArray *skipped=result[@"skipped_skills"];if(skipped.count)self.status.stringValue=[self.status.stringValue stringByAppendingString:@" Removed skills were preserved as removed."];
+        NSArray *skipped=result[@"skipped_skills"];if(skipped.count)self.status.stringValue=[self.status.stringValue stringByAppendingString:@" Skipped skills were preserved."];
     });
 }
 - (void)showInstalled:(NSDictionary *)result {
