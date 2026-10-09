@@ -91,8 +91,13 @@ For Developer ID preparation, `build-distribution` additionally requires all of
 `--identity`, `--team-id`, and `--notary-profile`. Never place credential values in
 repository files or logs. The protected CI flow is implemented in `.github/workflows/signed-release.yml`:
 validate successful main CI inputs, prepare with an ephemeral keychain, verify native
-probes without credentials, then upload/check remote digests/publish. It has not run.
-Configure protected `release-signing` and `release-publication` environments before use.
+probes without credentials, then upload/check remote digests/publish. The first protected
+run `37973923331` passed candidate validation but stopped before signing-credential
+import because the tooling build did not select installed Rust 1.99.0. Preparation
+now explicitly selects that toolchain; a successful protected rerun is still required.
+The protected `release-signing` and `release-publication` environments are configured
+as of 2026-10-09, restricted to `main` with P1oN review. Required signing secret names
+and notarization variables are present; actual credential validity awaits a protected run.
 Set the public `SIGNING_TEAM_ID` **repository Actions variable** to the verified Team
 (`DN263AX69U` for this setup). Validation rejects an absent/malformed value before
 candidate retrieval and passes that same checked value to preparation, verification
@@ -145,8 +150,9 @@ signed payloads from the same Team are refused before credential access. Whole-j
 recovery after an actual protected-CI interruption remains unqualified.
 
 A read-only GitHub API check on 2026-10-08 finds no repository release environments.
-Both environments and protected credentials still need setup before CI delivery;
-local Keychain signing does not populate GitHub secrets.
+As of 2026-10-09, both environments and required credential names/variables are
+configured; actual protected signing and publication remain unverified. Local
+Keychain signing does not populate GitHub secrets.
 
 Application tickets are copied as ordinary `Contents/CodeResources` files (see
 [Apple’s ticket lookup implementation](https://github.com/apple-oss-distributions/Security/blob/main/OSX/libsecurity_codesigning/lib/notarization.cpp)).

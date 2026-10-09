@@ -130,4 +130,9 @@ inspection/recovery; it is never overwritten. Legacy publication remains availab
 advanced historical assets. Signed immutable runtime reuse preserves original archive
 bytes and reference/build identities. See [the contract](macos-manager-distribution.md)
 and [scoped evidence](../history/reports/macos-installer-2026-10-08.md). No protected
-environments or signing secrets were configured, and this workflow has not been run.
+environments or signing secrets had been configured at that checkpoint. As of
+2026-10-09, both environments restrict deployment to `main` with P1oN review, and the
+required secret names/variables are present. The first protected run
+`37973923331` passed validation but stopped before import because the tooling build
+did not select installed Rust 1.99.0. Preparation now explicitly selects the toolchain;
+a successful protected rerun is needed to validate credentials and qualify the distribution.

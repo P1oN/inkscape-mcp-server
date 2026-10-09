@@ -72,3 +72,35 @@ Protected signing/publication setup and execution, a fresh committed main-CI can
 new whole-distribution qualification and the other-Mac browser acceptance remain open.
 Real Claude Code is unavailable locally. No public release or unsigned fallback was
 published; prior signed candidates retain their own historical scope.
+
+## Later delivery state — 2026-10-09
+
+PR #31 quick/native CI `37903764794` and CodeRabbit status passed, with no diff
+comments. It merged as `97707eac7f60723affd083dd72f5c407cd653a99`. Fresh main CI
+`37970554352` is running; only its successful main-push artifacts may feed signed
+preparation. The earlier observations above retain their original checkpoint scope.
+
+GitHub now contains `release-signing` and `release-publication`, each restricted to
+the `main` branch with P1oN as required reviewer. Repository `SIGNING_TEAM_ID` is
+`DN263AX69U`; the signing environment has `SIGNING_IDENTITY`, `NOTARY_KEY_ID` and
+`NOTARY_ISSUER_ID`. Its three required secret names are present. Secret contents
+were not read or exported. Credential validity still requires actual protected CI.
+No release was published at this checkpoint.
+
+## First protected preparation — pinned toolchain failure
+
+Main CI `37970554352` completed successfully for `97707ea`; all native gates and
+verified runtime/baseline artifacts passed. Signed workflow `37973923331` was
+dispatched for v0.1.6 from those exact inputs. Candidate validation passed. The
+release-signing deployment was approved under the user's publication instruction.
+Preparation stopped before certificate import with “Development tools require
+Rust 1.99.0.” Installing a rustup toolchain does not select it, and this runner's
+default Cargo differed from the pinned version. No notarization or publication
+occurred; verify/publish were skipped. The failure artifact retains candidate identity.
+
+Preparation now selects `RUSTUP_TOOLCHAIN=1.99.0` explicitly for the development
+tooling build, preserving the runner's global default. The existing real-fragment
+fixture starts with inherited `stable` and checks that the build receives 1.99.0
+while still receiving no raw signing credentials. Bash 3.2 argument checks, signed
+release fixtures, publication fixtures and actionlint qualify this source repair;
+a fresh committed CI candidate and real protected rerun are still required.

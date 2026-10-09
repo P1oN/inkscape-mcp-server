@@ -28,7 +28,7 @@ signing_notary_key=${NOTARY_KEY_BASE64:?Notarization API key required}
 signing_certificate_password=${SIGNING_CERTIFICATE_PASSWORD:?Certificate password required}
 unset SIGNING_CERTIFICATE_BASE64 SIGNING_CERTIFICATE_PASSWORD NOTARY_KEY_BASE64
 export -n signing_certificate signing_notary_key signing_certificate_password
-scripts/dev-tools.sh help >/dev/null
+RUSTUP_TOOLCHAIN=1.99.0 scripts/dev-tools.sh help >/dev/null
 (umask 077; printf '%s' "$signing_certificate" | base64 -D > "$signing_private/certificate.p12")
 (umask 077; printf '%s' "$signing_notary_key" | base64 -D > "$signing_private/notary.p8")
 unset signing_certificate signing_notary_key
