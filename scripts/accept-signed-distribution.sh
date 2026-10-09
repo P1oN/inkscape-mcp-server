@@ -31,6 +31,7 @@ while IFS= read -r native_path; do
 done < <(jq -er '.code[].path' "$acceptance_root/distribution-evidence.json")
 "$acceptance_tool" package-acceptance --package "$acceptance_package" --output "$acceptance_root/acceptance/package" --engine-mode per_call
 "$acceptance_tool" installer-acceptance --manager-app "$acceptance_root/Inkscape MCP Manager.app" --package "$acceptance_package" --output "$acceptance_root/acceptance/installer"
+"$acceptance_tool" startup-acceptance --binary "$acceptance_root/acceptance/installer/installation/bin/inkscape-mcp-launcher" --output "$acceptance_root/acceptance/launcher-startup"
 "$acceptance_tool" update-acceptance --package "$acceptance_root/acceptance-input/inkscape-mcp-macos-arm64" --runtime-package "$acceptance_package" --previous-package "$acceptance_baseline" --runtime-archive "$acceptance_root/inkscape-mcp-macos-arm64.tar.gz" --output "$acceptance_root/acceptance/updates"
 python3 scripts/record-signed-acceptance.py "$acceptance_root"
 python3 scripts/verify-signed-distribution.py "$acceptance_root" >/dev/null

@@ -55,12 +55,16 @@ with tempfile.TemporaryDirectory() as directory:
             if name.endswith('.sha256'):
                 original = name.removesuffix('.sha256')
                 (root/name).write_text(digest(root/original)+'  '+original+'\n')
-        receipt=dict(format=1,passed=True,runtime_exercised=True,source_revision='a'*40,team_id='ABCDE12345',checks=dict(signatures=True,package=True,installer=True,updates=True),assets={name:digest(root/name) for name in assets if name!='FINAL-ACCEPTANCE.json'})
+        receipt=dict(format=1,passed=True,runtime_exercised=True,source_revision='a'*40,team_id='ABCDE12345',checks=dict(signatures=True,package=True,installer=True,updates=True,launcher_startup=True),launcher_startup=dict(sessions=128,completed=128,parallel=4,binary_sha256='b'*64),assets={name:digest(root/name) for name in assets if name!='FINAL-ACCEPTANCE.json'})
         (root/'FINAL-ACCEPTANCE.json').write_text(json.dumps(receipt))
     reset()
     validate(root)
+    helper = root/'Inkscape MCP Manager.app/Contents/Helpers/inkscape-mcp-launcher'
+    helper.parent.mkdir(parents=True)
+    helper.write_bytes(b'synthetic final launcher')
     for relative, value in (
         ('package/acceptance.json', dict(passed=True)),
+        ('launcher-startup/comparison.json', dict(passed=True,sessions=128,completed=128,parallel=4,binary_sha256=digest(helper))),
         ('updates/report.json', dict(passed=True, runtime_exercised=True)),
         ('installer/report.json', dict(passed=True, missing_client_exercised=True,
                                       foreign_binding_refused=True, skill_conflict_preserved=True,
@@ -74,6 +78,16 @@ with tempfile.TemporaryDirectory() as directory:
     recorded = subprocess.run(['python3', str(recorder), str(root)], capture_output=True, text=True)
     assert recorded.returncode == 0, recorded.stderr
     validate(root)
+    startup_path = root/'acceptance/launcher-startup/comparison.json'
+    full_startup = json.loads(startup_path.read_text())
+    for label, mutation in [('failed launcher startup', dict(passed=False)), ('incomplete launcher sessions', dict(completed=127)), ('serial launcher test', dict(parallel=1)), ('different launcher', dict(binary_sha256='0'*64))]:
+        startup_path.write_text(json.dumps(dict(full_startup, **mutation)))
+        receipt_before = (root/'FINAL-ACCEPTANCE.json').read_bytes()
+        refused = subprocess.run(['python3', str(recorder), str(root)], capture_output=True, text=True)
+        assert refused.returncode != 0
+        assert (root/'FINAL-ACCEPTANCE.json').read_bytes() == receipt_before
+        print(label + ': refused before recording acceptance')
+    startup_path.write_text(json.dumps(full_startup))
     installer_path = root/'acceptance/installer/report.json'
     full_installer = json.loads(installer_path.read_text())
     for gate in ('missing_client_exercised', 'foreign_binding_refused',
@@ -103,6 +117,8 @@ with tempfile.TemporaryDirectory() as directory:
         ('missing context bridge','distribution-evidence.json',lambda v:v.update(code=[row for row in v['code'] if not row['path'].endswith('context.so')])),
         ('absent distinct-runtime gate','FINAL-ACCEPTANCE.json',lambda v:v.update(runtime_exercised=False)),
         ('failed acceptance','FINAL-ACCEPTANCE.json',lambda v:v['checks'].update(installer=False)),
+        ('missing launcher gate','FINAL-ACCEPTANCE.json',lambda v:v['checks'].pop('launcher_startup')),
+        ('serial launcher receipt','FINAL-ACCEPTANCE.json',lambda v:v['launcher_startup'].update(parallel=1)),
     ]
     for label, name, mutation in cases:
         reset(); value=json.loads((root/name).read_text());mutation(value);(root/name).write_text(json.dumps(value))

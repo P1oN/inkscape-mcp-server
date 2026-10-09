@@ -12,6 +12,30 @@ Read [README](../README.md), [CONTRIBUTING](../CONTRIBUTING.md) and
 work, and [history](history/README.md) retains earlier checkpoint/acceptance evidence.
 Check current code and Git status before relying on recorded results.
 
+## Release follow-up — 2026-10-09
+
+PR #30 is merged as `6499d29ea3a067963efa3ecb07134c2fb7b668d1`.
+[Main native CI 37851864135](https://github.com/P1oN/inkscape-mcp-server/actions/runs/37851864135)
+passes and supplies build `f80f0fd90eef4ad9`. Local signing/notarization of those
+exact CI inputs succeeds, but final installer/update qualification exposed missing
+per-actor runtime receipts; concurrent launcher startup also exposed lock starvation.
+That candidate remains unqualified and unpublished.
+
+The follow-up verifies and records the installed bootstrap's exact bytes and signer
+when a management helper stages a runtime, and independently verifies probe callers.
+Launch releases the recovery lock after reading the selector/settings snapshot, before
+hashing immutable runtime/text trees. The signed release gate now requires 128 successful
+sessions with four workers against the final installed launcher; installer success is
+recorded only after its last independent probe.
+
+Local validation includes 37 library tests, nine serial update-manager tests, tooling's
+20 tests, Clippy/format and release guard fixtures. Modified signed tooling passes the
+installer/update matrices against the original signed CI Runtime. A freshly compiled,
+Developer ID signed helper passes isolated installation and 128/four-worker startup
+(16.65 seconds); it is not a newly notarized Manager or fresh CI artifact.
+Protected GitHub environments, signing secrets and variables remain absent. No release
+has been published. See the [scoped ledger](history/reports/signed-runtime-receipts-2026-10-09.md).
+
 ## Priority 1 development checkpoint — 2026-10-08
 
 This branch implements typed first-install preparation/activation/recovery,

@@ -20,6 +20,8 @@ builds. Use [current status](../AGENT_HANDOFF.md), [active backlog](../RUST_NEXT
 
 ## Reports and logs
 
+- [Signed runtime receipts and launcher concurrency](reports/signed-runtime-receipts-2026-10-09.md): PR #30 merge, main CI, failed final candidate and scoped release fixes.
+
 - [Native macOS installer checkpoint](reports/macos-installer-2026-10-08.md): unfinished Priority 1 implementation and scoped local evidence.
 
 - [Independent updates](reports/independent-updates.md): unpublished launcher, component updates, recovery and scoped CLI/native management acceptance; [original user plan](plans/independent-updates.md).
