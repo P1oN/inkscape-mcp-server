@@ -1,6 +1,6 @@
 # Active backlog
 
-Updated **2026-10-08** with the requested macOS installation and signed-release plan.
+Updated **2026-10-09** with the requested macOS installation and signed-release plan.
 This file contains only
 unfinished work. Implemented Python removal and authoring plans are in
 [history](history/plans/python-removal-and-authoring.md); completed product milestones are
@@ -30,6 +30,13 @@ and signed instructions-only reuse evidence. The local notarization profile is r
 The complete delivery flow has local implementation and guard coverage, but protected
 CI execution, whole-job interruption qualification and browser-downloaded/another-Mac
 acceptance remain unqualified. No release has been published.
+
+Release follow-up: PR #30 is merged and main CI `37851864135` passes. Local signed
+build `f80f0fd90eef4ad9` was notarized, but failed final installer/update and concurrent
+startup qualification. Receipt handoff and launch-lock fixes pass scoped local checks;
+they still require committed CI and fresh signed-distribution qualification. Protected
+GitHub signing configuration is absent, and no release is published. See the
+[2026-10-09 ledger](history/reports/signed-runtime-receipts-2026-10-09.md).
 
 **Outcome:** one Apple Silicon DMG, a native installation/upgrade wizard, preserved
 settings/artwork, and Developer ID signed/notarized executable distributions. Normal

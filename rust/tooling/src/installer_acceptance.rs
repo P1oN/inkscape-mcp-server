@@ -780,7 +780,6 @@ pub fn run(args: &Args) -> Result<()> {
     legacy_acceptance(&launcher, &output_dir, &request, &inkscape)?;
     custom_engine_acceptance(&launcher, &output_dir, &request, &inkscape)?;
     let report = json!({"passed":true,"custom_engine_reused":true,"missing_engine_picker_repair":true,"publication_boundaries":changes.len()+1,"fresh_clients":["codex","claude"],"client_profiles":"synthetic","mcp_doctor_stdio":"real native package","native_gui":false,"installed_user_runtime_changed":false,"missing_client_exercised":missing_client_exercised,"failed_probe_exercised":failed_probe_exercised,"ownership_refusal_exercised":ownership_refusal_exercised,"foreign_binding_refused":true,"skill_conflict_preserved":true,"legacy_custom_root_migration":true,"component_recovery":true,"multi_root_inspection_preserved":true,"no_op_preserves_rollback":true,"build_info":json(&inkscape_mcp_rust::runtime_layout::library(&package).join("package.json"))?["build_info"],"results":["read-only discovery","unknown request, symlink workspace and overlap refused","foreign binding refused","skill conflict preserves selection/customization","multiple legacy candidates require choice","legacy migration into custom root","preparation preserves bindings","every file boundary recovers twice","fresh activation","byte-bound bootstrap discovery","component recovery through Manager operation","preferences/comments","customized/removed skills","equal-content instruction version upgrade","no-op activation preserves rollback history","retry","saved channel","original drawing preservation"]});
-    write_json(&output_dir.join("report.json"), &report)?;
     // Ensure the final selector is verified independently of GUI status labels.
     let settings = storage::json(&root.join("settings.json"))?;
     inkscape_mcp_rust::update::install::probe(
@@ -788,6 +787,7 @@ pub fn run(args: &Args) -> Result<()> {
         &inkscape_mcp_rust::update::install::selector(&root)?.current,
         &settings,
     )?;
+    write_json(&output_dir.join("report.json"), &report)?;
     println!("{}", serde_json::to_string(&report)?);
     Ok(())
 }

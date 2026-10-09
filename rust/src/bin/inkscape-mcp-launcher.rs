@@ -317,8 +317,11 @@ fn run(options: &Options) -> Result<Value> {
         result["skipped_skills"] = json!(activation.skipped_skills);
         return Ok(result);
     }
-    let mut command = command(root, &selector(root)?.current, &settings)?;
+    let pair = selector(root)?.current;
+    // Recovery and the selector/settings snapshot require serialization. Runtime
+    // and instruction trees are immutable; hashing them must not starve launches.
     drop(lock);
+    let mut command = command(root, &pair, &settings)?;
     #[cfg(unix)]
     {
         use std::os::unix::process::CommandExt;

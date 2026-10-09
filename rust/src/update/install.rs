@@ -255,6 +255,13 @@ pub fn command(root: &Path, pair: &Pair, settings: &Settings) -> Result<Command>
     Ok(command)
 }
 pub fn probe(root: &Path, pair: &Pair, settings: &Settings) -> Result<()> {
+    // Activation/acceptance may be performed by a different signed helper. Verify
+    // it here, outside normal startup, before issuing a receipt for its own bytes.
+    let path = runtime_path(root, pair)?;
+    if crate::runtime_layout::library(&path).ends_with("Contents/Resources") {
+        validate_pair(root, pair)?;
+        record_runtime_verification(root, &path, &pair.runtime)?;
+    }
     let mut version = command(root, pair, settings)?;
     version.arg("--version");
     let identity: Value = serde_json::from_slice(
@@ -423,12 +430,49 @@ fn verification_path(root: &Path, runtime: &RuntimeManifest, actor: &FileIdentit
         .join(&runtime.build_id)
         .join(format!("{}.json", actor.sha256))
 }
+fn installed_bootstrap(root: &Path) -> Result<Option<(PathBuf, FileIdentity)>> {
+    let record = root.join("bootstrap.json");
+    if !record.exists() && !record.is_symlink() {
+        return Ok(None);
+    }
+    let saved: BootstrapIdentity = json(&record)?;
+    if saved.format != 1 {
+        return Err("unsupported bootstrap identity".into());
+    }
+    saved.executable.validate(128 * 1024 * 1024)?;
+    for name in ["bin/inkscape-mcp-launcher", "bin/inkscape-mcp"] {
+        if FileIdentity::of(&read(&root.join(name), saved.executable.bytes)?) != saved.executable {
+            return Err("bootstrap bytes changed".into());
+        }
+    }
+    Ok(Some((
+        root.join("bin/inkscape-mcp-launcher"),
+        saved.executable,
+    )))
+}
 fn record_runtime_verification(root: &Path, path: &Path, runtime: &RuntimeManifest) -> Result<()> {
     if crate::runtime_layout::library(path).ends_with("Contents/Resources") {
-        let proof = verification_identity(path, runtime)?;
+        let mut proof = verification_identity(path, runtime)?;
         let destination = verification_path(root, runtime, &proof.actor);
         mkdir(destination.parent().unwrap())?;
         write_json(&destination, &proof)?;
+        // A management helper can stage on behalf of the installed launcher. Never
+        // execute that launcher or trust the saved hash alone: verify its signer too.
+        // A damaged/foreign bootstrap stays untrusted; the wizard can replace it.
+        if let Ok(Some((bootstrap, actor))) = installed_bootstrap(root)
+            && actor != proof.actor
+        {
+            let current = std::env::current_exe().map_err(|e| e.to_string())?;
+            let team =
+                crate::client_management::signature_team(&current).map_err(|e| e.to_string())?;
+            if crate::client_management::signature_team(&bootstrap).is_ok_and(|other| other == team)
+                && installed_bootstrap(root)
+                    .is_ok_and(|saved| saved.is_some_and(|(_, identity)| identity == actor))
+            {
+                proof.actor = actor;
+                write_json(&verification_path(root, runtime, &proof.actor), &proof)?;
+            }
+        }
     }
     Ok(())
 }
@@ -533,6 +577,30 @@ pub fn import_settings(repo: &Path) -> Result<(PathBuf, Settings)> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn installed_bootstrap_requires_both_recorded_files_and_refuses_links() {
+        let temp = tempfile::tempdir().unwrap();
+        let root = temp.path().canonicalize().unwrap();
+        assert!(installed_bootstrap(&root).unwrap().is_none());
+        mkdir(&root.join("bin")).unwrap();
+        for name in ["inkscape-mcp", "inkscape-mcp-launcher"] {
+            write(&root.join("bin").join(name), b"recorded bootstrap").unwrap();
+        }
+        write_json(
+            &root.join("bootstrap.json"),
+            &bootstrap_identity(b"recorded bootstrap"),
+        )
+        .unwrap();
+        assert_eq!(
+            installed_bootstrap(&root).unwrap().unwrap().1,
+            FileIdentity::of(b"recorded bootstrap")
+        );
+        write(&root.join("bin/inkscape-mcp"), b"user changed CLI").unwrap();
+        assert!(installed_bootstrap(&root).is_err());
+        fs::remove_file(root.join("bin/inkscape-mcp")).unwrap();
+        std::os::unix::fs::symlink("inkscape-mcp-launcher", root.join("bin/inkscape-mcp")).unwrap();
+        assert!(installed_bootstrap(&root).is_err());
+    }
     #[test]
     fn launch_checks_cached_actor_and_inventory_without_signer_processes() {
         let temp = tempfile::tempdir().unwrap();

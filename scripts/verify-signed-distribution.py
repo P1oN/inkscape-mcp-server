@@ -84,7 +84,10 @@ def validate(root):
         if asset == 'FINAL-ACCEPTANCE.json':
             continue
         require(acceptance['assets'][asset] == digest(root / asset), 'Acceptance bound to different final asset: ' + asset)
-    require(all(acceptance['checks'].get(key) is True for key in ('signatures', 'package', 'installer', 'updates')), 'Missing final native gate')
+    require(all(acceptance['checks'].get(key) is True for key in ('signatures', 'package', 'installer', 'updates', 'launcher_startup')), 'Missing final native gate')
+    startup = acceptance.get('launcher_startup', {})
+    require(startup.get('sessions') == startup.get('completed') == 128 and startup.get('parallel') == 4
+            and re.fullmatch('[0-9a-f]{64}', startup.get('binary_sha256', '')), 'Missing concurrent launcher startup evidence')
     for name in ASSETS:
         if name.endswith('.sha256'):
             fields = (root / name).read_text().split()
