@@ -34,8 +34,10 @@ acceptance remain unqualified. No release has been published.
 Release follow-up: PR #30 is merged and main CI `37851864135` passes. Local signed
 build `f80f0fd90eef4ad9` was notarized, but failed final installer/update and concurrent
 startup qualification. Receipt handoff and launch-lock fixes pass scoped local checks;
-they still require committed CI and fresh signed-distribution qualification. Protected
-GitHub signing configuration is absent, and no release is published. See the
+the fixes are merged through PR #31 and fresh main CI `37970554352` is running.
+Protected environments and signing credential names/variables are configured; actual
+protected signing and fresh distribution qualification remain unverified. No release
+is published. See the
 [2026-10-09 ledger](history/reports/signed-runtime-receipts-2026-10-09.md).
 
 **Outcome:** one Apple Silicon DMG, a native installation/upgrade wizard, preserved

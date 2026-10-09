@@ -130,4 +130,7 @@ inspection/recovery; it is never overwritten. Legacy publication remains availab
 advanced historical assets. Signed immutable runtime reuse preserves original archive
 bytes and reference/build identities. See [the contract](macos-manager-distribution.md)
 and [scoped evidence](../history/reports/macos-installer-2026-10-08.md). No protected
-environments or signing secrets were configured, and this workflow has not been run.
+environments or signing secrets had been configured at that checkpoint. As of
+2026-10-09, both environments restrict deployment to `main` with P1oN review, and the
+required secret names/variables are present. A real protected signing run is still
+needed to validate those credentials and qualify the distribution.

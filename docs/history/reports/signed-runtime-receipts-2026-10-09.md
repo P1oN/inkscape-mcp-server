@@ -72,3 +72,17 @@ Protected signing/publication setup and execution, a fresh committed main-CI can
 new whole-distribution qualification and the other-Mac browser acceptance remain open.
 Real Claude Code is unavailable locally. No public release or unsigned fallback was
 published; prior signed candidates retain their own historical scope.
+
+## Later delivery state — 2026-10-09
+
+PR #31 quick/native CI `37903764794` and CodeRabbit status passed, with no diff
+comments. It merged as `97707eac7f60723affd083dd72f5c407cd653a99`. Fresh main CI
+`37970554352` is running; only its successful main-push artifacts may feed signed
+preparation. The earlier observations above retain their original checkpoint scope.
+
+GitHub now contains `release-signing` and `release-publication`, each restricted to
+the `main` branch with P1oN as required reviewer. Repository `SIGNING_TEAM_ID` is
+`DN263AX69U`; the signing environment has `SIGNING_IDENTITY`, `NOTARY_KEY_ID` and
+`NOTARY_ISSUER_ID`. Its three required secret names are present. Secret contents
+were not read or exported. Credential validity still requires actual protected CI.
+No release was published at this checkpoint.
