@@ -34,9 +34,11 @@ acceptance remain unqualified. No release has been published.
 Release follow-up: PR #30 is merged and main CI `37851864135` passes. Local signed
 build `f80f0fd90eef4ad9` was notarized, but failed final installer/update and concurrent
 startup qualification. Receipt handoff and launch-lock fixes pass scoped local checks;
-the fixes are merged through PR #31 and fresh main CI `37970554352` is running.
+the fixes are merged through PR #31 and fresh main CI `37970554352` passed.
 Protected environments and signing credential names/variables are configured; actual
-protected signing and fresh distribution qualification remain unverified. No release
+protected signing and fresh distribution qualification remain unverified. First
+protected run `37973923331` stopped before import because its installed toolchain
+was not selected; preparation now explicitly selects Rust 1.99.0 for its tool build. No release
 is published. See the
 [2026-10-09 ledger](history/reports/signed-runtime-receipts-2026-10-09.md).
 

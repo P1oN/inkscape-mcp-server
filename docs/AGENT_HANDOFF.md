@@ -34,11 +34,14 @@ installer/update matrices against the original signed CI Runtime. A freshly comp
 Developer ID signed helper passes isolated installation and 128/four-worker startup
 (16.65 seconds); it is not a newly notarized Manager or fresh CI artifact.
 PR #31 is now merged as `97707eac7f60723affd083dd72f5c407cd653a99`; its quick/native
-CI and review status passed. Fresh main CI is run `37970554352`. GitHub now has
+CI and review status passed. Fresh main CI `37970554352` passed. GitHub now has
 `release-signing` and `release-publication`, restricted to `main` with P1oN review.
 Repository Team ID is `DN263AX69U`; all three signing secret names and required
-notarization variables are present. Secret contents have not been retrieved or validated
-by a real protected job yet. No release has been published. See the [scoped ledger](history/reports/signed-runtime-receipts-2026-10-09.md).
+notarization variables are present. Secret contents were not retrieved. First protected run `37973923331` passed
+candidate validation but stopped before import because the installed Rust 1.99.0
+toolchain was not selected. Preparation now pins its tooling-build environment;
+the regression fixture starts with inherited `stable`. A protected rerun and final
+signed qualification remain required. No release has been published. See the [scoped ledger](history/reports/signed-runtime-receipts-2026-10-09.md).
 
 ## Priority 1 development checkpoint — 2026-10-08
 

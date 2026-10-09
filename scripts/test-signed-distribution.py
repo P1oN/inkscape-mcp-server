@@ -264,7 +264,7 @@ for name in SIGNING_CERTIFICATE_BASE64 SIGNING_CERTIFICATE_PASSWORD NOTARY_KEY_B
 done
 '''
     build = root / 'scripts/dev-tools.sh'
-    build.write_text(probe + 'test ! -e "$signing_private/certificate.p12"\n')
+    build.write_text(probe + 'test "$RUSTUP_TOOLCHAIN" = 1.99.0\n' + 'test ! -e "$signing_private/certificate.p12"\n')
     build.chmod(0o755)
     for name in ('security', 'xcrun'):
         command = root / 'mock' / name
@@ -280,7 +280,7 @@ done
     fragment = source.split('# Keep raw credentials', 1)[1].split('signing_tool=', 1)[0]
     fragment = '# Keep raw credentials' + fragment
     env = os.environ.copy()
-    env.update(PATH=str(root/'mock')+':'+env['PATH'], signing_private=str(root/'private'),
+    env.update(RUSTUP_TOOLCHAIN='stable', PATH=str(root/'mock')+':'+env['PATH'], signing_private=str(root/'private'),
                signing_keychain=str(root/'private/test.keychain'), SIGNING_CERTIFICATE_BASE64='Y2VydA==',
                NOTARY_KEY_BASE64='a2V5', SIGNING_CERTIFICATE_PASSWORD='synthetic-password',
                NOTARY_KEY_ID='fixture', NOTARY_ISSUER_ID='fixture', signing_certificate='inherited',
@@ -297,4 +297,4 @@ set -- {expression}
 test "$#" = 2
 test "$2" = 'path with spaces'
 '''], check=True)
-    print('signing secrets and Bash empty/populated arguments: passed')
+    print('pinned tooling, signing secrets and Bash empty/populated arguments: passed')

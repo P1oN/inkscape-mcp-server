@@ -91,7 +91,10 @@ For Developer ID preparation, `build-distribution` additionally requires all of
 `--identity`, `--team-id`, and `--notary-profile`. Never place credential values in
 repository files or logs. The protected CI flow is implemented in `.github/workflows/signed-release.yml`:
 validate successful main CI inputs, prepare with an ephemeral keychain, verify native
-probes without credentials, then upload/check remote digests/publish. It has not run.
+probes without credentials, then upload/check remote digests/publish. The first protected
+run `37973923331` passed candidate validation but stopped before signing-credential
+import because the tooling build did not select installed Rust 1.99.0. Preparation
+now explicitly selects that toolchain; a successful protected rerun is still required.
 The protected `release-signing` and `release-publication` environments are configured
 as of 2026-10-09, restricted to `main` with P1oN review. Required signing secret names
 and notarization variables are present; actual credential validity awaits a protected run.

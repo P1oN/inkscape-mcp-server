@@ -86,3 +86,21 @@ the `main` branch with P1oN as required reviewer. Repository `SIGNING_TEAM_ID` i
 `NOTARY_ISSUER_ID`. Its three required secret names are present. Secret contents
 were not read or exported. Credential validity still requires actual protected CI.
 No release was published at this checkpoint.
+
+## First protected preparation — pinned toolchain failure
+
+Main CI `37970554352` completed successfully for `97707ea`; all native gates and
+verified runtime/baseline artifacts passed. Signed workflow `37973923331` was
+dispatched for v0.1.6 from those exact inputs. Candidate validation passed. The
+release-signing deployment was approved under the user's publication instruction.
+Preparation stopped before certificate import with “Development tools require
+Rust 1.99.0.” Installing a rustup toolchain does not select it, and this runner's
+default Cargo differed from the pinned version. No notarization or publication
+occurred; verify/publish were skipped. The failure artifact retains candidate identity.
+
+Preparation now selects `RUSTUP_TOOLCHAIN=1.99.0` explicitly for the development
+tooling build, preserving the runner's global default. The existing real-fragment
+fixture starts with inherited `stable` and checks that the build receives 1.99.0
+while still receiving no raw signing credentials. Bash 3.2 argument checks, signed
+release fixtures, publication fixtures and actionlint qualify this source repair;
+a fresh committed CI candidate and real protected rerun are still required.

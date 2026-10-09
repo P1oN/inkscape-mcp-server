@@ -132,5 +132,7 @@ bytes and reference/build identities. See [the contract](macos-manager-distribut
 and [scoped evidence](../history/reports/macos-installer-2026-10-08.md). No protected
 environments or signing secrets had been configured at that checkpoint. As of
 2026-10-09, both environments restrict deployment to `main` with P1oN review, and the
-required secret names/variables are present. A real protected signing run is still
-needed to validate those credentials and qualify the distribution.
+required secret names/variables are present. The first protected run
+`37973923331` passed validation but stopped before import because the tooling build
+did not select installed Rust 1.99.0. Preparation now explicitly selects the toolchain;
+a successful protected rerun is needed to validate credentials and qualify the distribution.
