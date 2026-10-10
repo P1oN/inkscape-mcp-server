@@ -8,7 +8,7 @@ if [ "$#" = 3 ]; then
     publication_recovery=$3
 fi
 publication_assets=$(cd "$1" && pwd -P)
-publication_inventory=$(python3 scripts/verify-signed-distribution.py "$publication_assets")
+publication_inventory=$(scripts/release-guard.sh verify-signed-distribution "$publication_assets")
 publication_tag=$(jq -er .tag "$publication_assets/CANDIDATE.json")
 publication_sha=$(jq -er .source_revision "$publication_assets/CANDIDATE.json")
 publication_repo=${GITHUB_REPOSITORY:?}

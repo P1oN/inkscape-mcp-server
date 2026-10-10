@@ -118,6 +118,9 @@ Revision and build IDs are compiled automatically into telemetry and package met
 ## Development
 
 The legacy Python MCP server, its tests and paired Python/Rust comparison scripts are retired.
+All Python sources, including the historical archive and obsolete eval runners, have been
+removed. Release validation uses the portable Rust guard and Bash fixtures; no Lua or
+Python interpreter is needed. Original Python sources remain available in Git history.
 Development now uses Rust regression/invariant tests, true STDIO and package/native acceptance.
 The managed GUI session now runs through a separate native Rust supervisor. The socket snapshot bridge now uses the Rust `inkscape-mcp-live` executable. Development and package tools now use Rust/Bash; ready packages contain no CPython or helper wheels. One-shot native insertion
 and the ten fixed selection edits run through the Rust `inkscape-mcp-inx` executable;

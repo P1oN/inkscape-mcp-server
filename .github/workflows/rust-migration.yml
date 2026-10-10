@@ -20,6 +20,22 @@ permissions:
   contents: read
 
 jobs:
+  release-guards:
+    name: Portable Rust release guards
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install pinned portable tooling
+        run: rustup toolchain install 1.99.0 --profile minimal --component clippy
+      - name: Validate without native SDK dependencies or Python
+        env:
+          RUSTUP_TOOLCHAIN: 1.99.0
+        run: |
+          test -z "$(git ls-files -- '*.py' '*.pyi' '*.pyc' '*.whl' '*.egg' '**/pyproject.toml' .python-version)"
+          scripts/test-signed-distribution.sh
+          cargo clippy --locked --manifest-path rust/tooling/Cargo.toml --no-default-features --bin inkscape-mcp-release-guard --all-targets -- -D warnings
+
   quick-checks:
     name: Quick Rust checks
     runs-on: macos-15
@@ -40,7 +56,7 @@ jobs:
       - name: Release publication guard tests
         run: |
           scripts/test-publish-verified-release.sh
-          python3 scripts/test-signed-distribution.py
+          scripts/test-signed-distribution.sh
       - name: Development cleanup guard tests
         run: scripts/test-development-cleanup.sh
       - name: Format and Clippy (both Cargo graphs)
@@ -53,7 +69,7 @@ jobs:
         run: cargo test --locked --manifest-path rust/tooling/Cargo.toml
 
   native-posix:
-    needs: quick-checks
+    needs: [quick-checks, release-guards]
     name: Native candidate (${{ matrix.target }})
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 45
