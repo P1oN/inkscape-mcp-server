@@ -44,3 +44,10 @@ target. The integration target now requires the same `native` feature as its exe
 and that import uses the same platform condition as its test. Local revalidation passes
 the exact portable Clippy command, eight guard tests and signing shell fixtures, formatting,
 and all four native source/bootstrap integration tests. Fresh Linux CI remains required.
+
+Run 38072603182 passed portable, quick and native candidate checks. Before merging,
+main's newer signing fixes required a modify/delete conflict resolution: Python remains
+removed, and its added fingerprint normalization, literal keychain search-path,
+empty search-list and fail-closed cleanup cases now run in the Bash fixture. Local
+signed-distribution/publication fixtures, Bash syntax and actionlint pass; the merged
+branch must pass fresh CI before main integration and signed-release preparation.
