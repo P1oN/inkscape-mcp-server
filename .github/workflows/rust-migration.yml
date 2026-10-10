@@ -32,7 +32,7 @@ jobs:
         env:
           RUSTUP_TOOLCHAIN: 1.99.0
         run: |
-          test -z "$(git ls-files -- '*.py' '*.pyi' '*.pyc' '*.whl' '*.egg' '**/pyproject.toml' .python-version)"
+          test -z "$(git ls-files -- '*.py' '*.pyi' '*.pyc' '*.whl' '*.egg' 'pyproject.toml' '**/pyproject.toml' .python-version)"
           scripts/test-signed-distribution.sh
           cargo clippy --locked --manifest-path rust/tooling/Cargo.toml --no-default-features --bin inkscape-mcp-release-guard --all-targets -- -D warnings
 

@@ -51,3 +51,8 @@ removed, and its added fingerprint normalization, literal keychain search-path,
 empty search-list and fail-closed cleanup cases now run in the Bash fixture. Local
 signed-distribution/publication fixtures, Bash syntax and actionlint pass; the merged
 branch must pass fresh CI before main integration and signed-release preparation.
+
+Run 38082828121 passed all three CI jobs. A subsequent review identified that the
+reintroduction guard's nested `pyproject.toml` pathspec omitted the repository root.
+The explicit root path is now included; an isolated Git index confirms both root and
+nested manifests are detected, and actionlint passes. Final commit CI is required again.
