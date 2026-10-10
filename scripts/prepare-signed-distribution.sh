@@ -17,12 +17,21 @@ signing_keychain=$signing_private/release.keychain-db
 signing_keychains=()
 signing_search_changed=false
 cleanup_signing() {
+    local signing_cleanup_status=0
     if [ "$signing_search_changed" = true ]; then
-        security list-keychains -d user -s ${signing_keychains[@]+"${signing_keychains[@]}"} >/dev/null 2>&1 || true
+        if ! security list-keychains -d user -s ${signing_keychains[@]+"${signing_keychains[@]}"} >/dev/null; then
+            printf '%s\n' 'Failed to restore keychain search list; signing preparation cannot continue.' >&2
+            signing_cleanup_status=1
+        fi
     fi
-    security delete-keychain "$signing_keychain" >/dev/null 2>&1 || true
+    # Destroy credentials even if restoration fails; this isolated CI job must fail closed.
+    if ! security delete-keychain "$signing_keychain" >/dev/null 2>&1 && [ -e "$signing_keychain" ]; then
+        printf '%s\n' 'Failed to unregister signing keychain; removing its private files.' >&2
+        signing_cleanup_status=1
+    fi
     rm -rf -- "$signing_private"
     unset SIGNING_CERTIFICATE_BASE64 SIGNING_CERTIFICATE_PASSWORD NOTARY_KEY_BASE64
+    return "$signing_cleanup_status"
 }
 trap cleanup_signing EXIT
 trap 'exit 130' INT
@@ -35,11 +44,18 @@ unset SIGNING_CERTIFICATE_BASE64 SIGNING_CERTIFICATE_PASSWORD NOTARY_KEY_BASE64
 export -n signing_certificate signing_notary_key signing_certificate_password
 RUSTUP_TOOLCHAIN=1.99.0 scripts/dev-tools.sh help >/dev/null
 security list-keychains -d user > "$signing_private/search-list"
-python3 -c 'import pathlib, shlex, sys; sys.stdout.buffer.write(b"\0".join(p.encode() for p in shlex.split(pathlib.Path(sys.argv[1]).read_text())) + b"\0")' "$signing_private/search-list" > "$signing_private/search-paths"
-while IFS= read -r -d '' signing_path; do
-    [ -z "$signing_path" ] || signing_keychains+=("$signing_path")
-done < "$signing_private/search-paths"
-rm -f -- "$signing_private/search-list" "$signing_private/search-paths"
+while IFS= read -r signing_path; do
+    case "$signing_path" in
+        *\"*\")
+            # security prints literal contents inside framing quotes, not shell escapes.
+            signing_path=${signing_path#*\"}
+            signing_path=${signing_path%\"}
+            signing_keychains+=("$signing_path") ;;
+        '') ;;
+        *) fail 'Unexpected keychain search-list format; nothing changed.' ;;
+    esac
+done < "$signing_private/search-list"
+rm -f -- "$signing_private/search-list"
 (umask 077; printf '%s' "$signing_certificate" | base64 -D > "$signing_private/certificate.p12")
 (umask 077; printf '%s' "$signing_notary_key" | base64 -D > "$signing_private/notary.p8")
 unset signing_certificate signing_notary_key

@@ -273,7 +273,7 @@ done
         command.write_text(probe + ('test -f "$signing_private/notary.p8"\ntest "$SIGNING_IDENTITY" = "Developer ID Application: Fixture (DN263AX69U)"\n' if name == 'xcrun' else '''if [ "$1" = list-keychains ]; then
     if [ "$#" = 3 ]; then
         if [ "${FIXTURE_EMPTY_SEARCH:-false}" != true ]; then
-            printf '%s\\n' '    "/fixture/login keychain-db"' '    "/fixture/other.keychain-db"'
+            printf '%s\\n' '    "/fixture/login keychain-db"' '    "/fixture/other.keychain-db"' '    "/fixture/quo"ted\\keychain-db"'
         fi
     else
         python3 - "$@" <<'PY'
@@ -281,7 +281,13 @@ import json, os, sys
 with open(os.environ['FIXTURE_SEARCH_EVENTS'], 'a') as events:
     events.write(json.dumps(sys.argv[1:]) + '\\n')
 PY
+        if [ "${FIXTURE_RESTORE_FAIL:-false}" = true ] && [ "${5:-}" = '/fixture/login keychain-db' ]; then
+            exit 1
+        fi
     fi
+fi
+if [ "$1" = delete-keychain ]; then
+    printf '%s\\n' called >> "$FIXTURE_CLEANUP_EVENTS"
 fi
 if [ "$1" = find-identity ]; then
     if [ "${FIXTURE_IDENTITY:-valid}" = valid ]; then
@@ -301,14 +307,15 @@ fi
     source = pathlib.Path(__file__).with_name('prepare-signed-distribution.sh').read_text()
     fragment = source.split('# Keep raw credentials', 1)[1].split('signing_tool=', 1)[0]
     setup = 'signing_keychains=()' + source.split('signing_keychains=()', 1)[1].split('# Keep raw credentials', 1)[0]
-    fragment = setup + '# Keep raw credentials' + fragment
+    fragment = setup + '# Keep raw credentials' + fragment + '\ncleanup_signing\ntrap - EXIT INT TERM\n'
     env = os.environ.copy()
     env.update(RUSTUP_TOOLCHAIN='stable', PATH=str(root/'mock')+':'+env['PATH'], signing_private=str(root/'private'),
                signing_keychain=str(root/'private/test.keychain'), SIGNING_CERTIFICATE_BASE64='Y2VydA==',
                NOTARY_KEY_BASE64='a2V5', SIGNING_CERTIFICATE_PASSWORD='synthetic-password',
                NOTARY_KEY_ID='fixture', NOTARY_ISSUER_ID='fixture', SIGNING_IDENTITY='Developer ID Application: Fixture (DN263AX69U)', signing_certificate='inherited',
                signing_certificate_password='inherited', signing_notary_key='inherited',
-               FIXTURE_SEARCH_EVENTS=str(root/'search-events.jsonl'))
+               FIXTURE_SEARCH_EVENTS=str(root/'search-events.jsonl'),
+               FIXTURE_CLEANUP_EVENTS=str(root/'cleanup-events'))
     subprocess.run(['/bin/bash', '-eu', '-c', fragment], cwd=root, env=env, check=True)
     assert not (root/'private').exists()
     for identity, valid in (
@@ -331,7 +338,7 @@ fi
     assert result.returncode != 0 and 'no valid matching signing identity' in result.stderr
     assert not (root/'private').exists()
     events = [json.loads(line) for line in (root/'search-events.jsonl').read_text().splitlines()]
-    original = ['/fixture/login keychain-db', '/fixture/other.keychain-db']
+    original = ['/fixture/login keychain-db', '/fixture/other.keychain-db', '/fixture/quo"ted\\keychain-db']
     assert len(events) == 10
     for index in range(0, len(events), 2):
         assert events[index] == ['list-keychains', '-d', 'user', '-s', env['signing_keychain'], *original]
@@ -345,6 +352,13 @@ fi
         ['list-keychains', '-d', 'user', '-s', env['signing_keychain']],
         ['list-keychains', '-d', 'user', '-s'],
     ]
+    deletions = (root/'cleanup-events').read_text().splitlines()
+    (root/'private').mkdir()
+    result = subprocess.run(['/bin/bash', '-eu', '-c', fragment], cwd=root,
+                            env=dict(env, FIXTURE_RESTORE_FAIL='true'), capture_output=True, text=True)
+    assert result.returncode != 0 and 'Failed to restore keychain search list' in result.stderr
+    assert not (root/'private').exists()
+    assert len((root/'cleanup-events').read_text().splitlines()) > len(deletions)
     expression = '${signing_reference_options[@]+"${signing_reference_options[@]}"}'
     assert expression in source
     subprocess.run(['/bin/bash', '-eu', '-c', f'''signing_reference_options=()

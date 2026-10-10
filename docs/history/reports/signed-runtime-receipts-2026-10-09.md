@@ -181,3 +181,11 @@ Preparation now resolves the exact matching fingerprint’s name and exports tha
 name for codesign and build-distribution. The real-fragment fixture checks that
 subsequent notarization setup receives the resolved full name for both name and
 fingerprint inputs. Signed/publication fixtures, Bash syntax and actionlint pass.
+
+Later PR #33 feedback adds literal quote/backslash path preservation: parsing now
+removes only the framing quotes emitted by security, without shell interpretation.
+Cleanup reports search-list restoration failure and returns nonzero, preventing
+qualification or publication. It still destroys the ephemeral keychain/private files
+on that failure path to satisfy credential cleanup; retaining private keys after
+a teardown error is intentionally not adopted. Fixtures inject restoration failure
+and verify a failing exit plus credential deletion, and preserve literal path contents.
