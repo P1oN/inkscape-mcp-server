@@ -20,6 +20,11 @@ required-features = ["native"]
 name = "inkscape-mcp-release-guard"
 path = "src/release_guard/main.rs"
 
+[[test]]
+name = "source"
+path = "tests/source.rs"
+required-features = ["native"]
+
 [dependencies]
 serde_json = { version = "=1.0.151", features = ["preserve_order", "float_roundtrip", "arbitrary_precision"] }
 sha2 = "=0.10.9"

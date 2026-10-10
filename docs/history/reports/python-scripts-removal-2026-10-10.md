@@ -37,3 +37,10 @@ fixtures, tooling formatting/Clippy, Bash syntax and actionlint. Tracked source 
 contains no Python sources, bytecode, wheels, Python project manifest or version file;
 active workflows/scripts contain no Python invocations. Linux execution is covered by the
 new CI job and remains pending its actual run. Native GUI acceptance was not repeated.
+
+The first Linux CI run (38072235086) passed the portable guard and shell fixtures,
+then failed Clippy on a macOS-only `PathBuf` import in the native source integration
+target. The integration target now requires the same `native` feature as its executable,
+and that import uses the same platform condition as its test. Local revalidation passes
+the exact portable Clippy command, eight guard tests and signing shell fixtures, formatting,
+and all four native source/bootstrap integration tests. Fresh Linux CI remains required.

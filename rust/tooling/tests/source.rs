@@ -1,8 +1,6 @@
-use std::{
-    fs,
-    path::{Path, PathBuf},
-    process::Command,
-};
+#[cfg(all(target_os = "macos", target_arch = "aarch64"))]
+use std::path::PathBuf;
+use std::{fs, path::Path, process::Command};
 fn binary() -> &'static str {
     env!("CARGO_BIN_EXE_inkscape-mcp-tools")
 }
