@@ -9,6 +9,7 @@ import subprocess
 import tempfile
 import io
 import tarfile
+import shutil
 
 verifier = runpy.run_path(str(pathlib.Path(__file__).with_name('verify-signed-distribution.py')))
 assets, digest, validate = (verifier[key] for key in ('ASSETS', 'digest', 'validate'))
@@ -255,6 +256,7 @@ with tempfile.TemporaryDirectory() as directory:
 with tempfile.TemporaryDirectory() as directory:
     root = pathlib.Path(directory)
     (root / 'scripts').mkdir()
+    shutil.copytree(pathlib.Path(__file__).parent / 'certificates', root / 'scripts/certificates')
     (root / 'mock').mkdir()
     (root / 'private').mkdir()
     probe = '''#!/bin/bash
@@ -268,7 +270,20 @@ done
     build.chmod(0o755)
     for name in ('security', 'xcrun'):
         command = root / 'mock' / name
-        command.write_text(probe + ('test -f "$signing_private/notary.p8"\n' if name == 'xcrun' else '''if [ "$1" = find-identity ]; then
+        command.write_text(probe + ('test -f "$signing_private/notary.p8"\n' if name == 'xcrun' else '''if [ "$1" = list-keychains ]; then
+    if [ "$#" = 3 ]; then
+        if [ "${FIXTURE_EMPTY_SEARCH:-false}" != true ]; then
+            printf '%s\\n' '    "/fixture/login keychain-db"' '    "/fixture/other.keychain-db"'
+        fi
+    else
+        python3 - "$@" <<'PY'
+import json, os, sys
+with open(os.environ['FIXTURE_SEARCH_EVENTS'], 'a') as events:
+    events.write(json.dumps(sys.argv[1:]) + '\\n')
+PY
+    fi
+fi
+if [ "$1" = find-identity ]; then
     if [ "${FIXTURE_IDENTITY:-valid}" = valid ]; then
         printf '%s\\n' '  1) CC8B39272E03B790FCB94930A98CC6C4722B235B "Developer ID Application: Fixture (DN263AX69U)"' '     1 valid identities found'
     else
@@ -285,32 +300,51 @@ fi
     random.chmod(0o755)
     source = pathlib.Path(__file__).with_name('prepare-signed-distribution.sh').read_text()
     fragment = source.split('# Keep raw credentials', 1)[1].split('signing_tool=', 1)[0]
-    fragment = '# Keep raw credentials' + fragment
+    setup = 'signing_keychains=()' + source.split('signing_keychains=()', 1)[1].split('# Keep raw credentials', 1)[0]
+    fragment = setup + '# Keep raw credentials' + fragment
     env = os.environ.copy()
     env.update(RUSTUP_TOOLCHAIN='stable', PATH=str(root/'mock')+':'+env['PATH'], signing_private=str(root/'private'),
                signing_keychain=str(root/'private/test.keychain'), SIGNING_CERTIFICATE_BASE64='Y2VydA==',
                NOTARY_KEY_BASE64='a2V5', SIGNING_CERTIFICATE_PASSWORD='synthetic-password',
                NOTARY_KEY_ID='fixture', NOTARY_ISSUER_ID='fixture', SIGNING_IDENTITY='Developer ID Application: Fixture (DN263AX69U)', signing_certificate='inherited',
-               signing_certificate_password='inherited', signing_notary_key='inherited')
+               signing_certificate_password='inherited', signing_notary_key='inherited',
+               FIXTURE_SEARCH_EVENTS=str(root/'search-events.jsonl'))
     subprocess.run(['/bin/bash', '-eu', '-c', fragment], cwd=root, env=env, check=True)
-    assert not list((root/'private').iterdir())
+    assert not (root/'private').exists()
     for identity, valid in (
         ('cc8b39272e03b790fcb94930a98cc6c4722b235b', True),
         ('Developer ID Application: Wrong (DN263AX69U)', False),
         ('Developer ID Application: Fixture', False),
     ):
+        (root/'private').mkdir()
         result = subprocess.run(['/bin/bash', '-eu', '-c',
                                  'fail() { printf "%s\\n" "$*" >&2; exit 1; };\n' + fragment],
                                 cwd=root, env=dict(env, SIGNING_IDENTITY=identity), capture_output=True, text=True)
         assert (result.returncode == 0) == valid, result.stderr
         if not valid:
             assert 'no valid matching signing identity' in result.stderr
-        for path in (root/'private').iterdir():
-            path.unlink()
+        assert not (root/'private').exists()
+    (root/'private').mkdir()
     result = subprocess.run(['/bin/bash', '-eu', '-c',
                              'fail() { printf "%s\\n" "$*" >&2; exit 1; };\n' + fragment],
                             cwd=root, env=dict(env, FIXTURE_IDENTITY='missing'), capture_output=True, text=True)
     assert result.returncode != 0 and 'no valid matching signing identity' in result.stderr
+    assert not (root/'private').exists()
+    events = [json.loads(line) for line in (root/'search-events.jsonl').read_text().splitlines()]
+    original = ['/fixture/login keychain-db', '/fixture/other.keychain-db']
+    assert len(events) == 10
+    for index in range(0, len(events), 2):
+        assert events[index] == ['list-keychains', '-d', 'user', '-s', env['signing_keychain'], *original]
+        assert events[index+1] == ['list-keychains', '-d', 'user', '-s', *original]
+    (root/'private').mkdir()
+    subprocess.run(['/bin/bash', '-eu', '-c', fragment], cwd=root,
+                   env=dict(env, FIXTURE_EMPTY_SEARCH='true'), check=True, capture_output=True)
+    assert not (root/'private').exists()
+    events = [json.loads(line) for line in (root/'search-events.jsonl').read_text().splitlines()]
+    assert events[-2:] == [
+        ['list-keychains', '-d', 'user', '-s', env['signing_keychain']],
+        ['list-keychains', '-d', 'user', '-s'],
+    ]
     expression = '${signing_reference_options[@]+"${signing_reference_options[@]}"}'
     assert expression in source
     subprocess.run(['/bin/bash', '-eu', '-c', f'''signing_reference_options=()

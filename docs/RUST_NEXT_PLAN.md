@@ -44,7 +44,10 @@ PR #32 merged as `09a626e`, and main CI `37977730375` passed. Protected rerun
 in its imported keychain. Export/private-key inclusion and runner trust state need
 verification. The user updated both certificate secrets on 2026-10-10; attempt 2
 failed with the same identity error. A public certificate/identity preflight is now
-implemented, pending protected execution. No release is published. See the
+implemented. Investigation found a missing temporary-keychain search-list entry
+and a G1-issued local certificate on a runner configured with G2. The repair now
+supplies pinned public G1/G2 intermediates and preserves/restores the search list;
+protected execution remains pending. No release is published. See the
 [2026-10-09 ledger](history/reports/signed-runtime-receipts-2026-10-09.md).
 
 **Outcome:** one Apple Silicon DMG, a native installation/upgrade wizard, preserved

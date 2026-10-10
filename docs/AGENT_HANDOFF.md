@@ -48,7 +48,11 @@ valid local identity; remote export/private-key and trust state remain unverifie
 The user updated both certificate secrets on 2026-10-10; attempt 2 failed with the
 same unavailable-identity error. A public certificate/identity preflight now checks
 exact identity and reports trust errors before notarization; protected execution of
-that diagnostic is pending. Final signed qualification remains required. No release has been published. See the [scoped ledger](history/reports/signed-runtime-receipts-2026-10-09.md).
+that diagnostic is pending. Investigation also found that the temporary keychain
+was absent from the search list and the local certificate uses G1 while the runner
+explicitly installs G2. The repair supplies pinned public G1/G2 intermediates and
+preserves/restores the search list; native public G1 chain validation passes.
+Protected execution and final signed qualification remain required. No release has been published. See the [scoped ledger](history/reports/signed-runtime-receipts-2026-10-09.md).
 
 ## Priority 1 development checkpoint — 2026-10-08
 
