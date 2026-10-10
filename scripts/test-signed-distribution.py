@@ -268,7 +268,14 @@ done
     build.chmod(0o755)
     for name in ('security', 'xcrun'):
         command = root / 'mock' / name
-        command.write_text(probe + ('test -f "$signing_private/notary.p8"\n' if name == 'xcrun' else ''))
+        command.write_text(probe + ('test -f "$signing_private/notary.p8"\n' if name == 'xcrun' else '''if [ "$1" = find-identity ]; then
+    if [ "${FIXTURE_IDENTITY:-valid}" = valid ]; then
+        printf '%s\\n' '  1) CC8B39272E03B790FCB94930A98CC6C4722B235B "Developer ID Application: Fixture (DN263AX69U)"' '     1 valid identities found'
+    else
+        printf '%s\\n' '     0 valid identities found'
+    fi
+fi
+'''))
         command.chmod(0o755)
     decoder = root / 'mock/base64'
     decoder.write_text("#!/usr/bin/env python3\nimport base64,sys\nassert sys.argv[1:]==['-D']\nsys.stdout.buffer.write(base64.b64decode(sys.stdin.buffer.read(), validate=True))\n")
@@ -283,10 +290,27 @@ done
     env.update(RUSTUP_TOOLCHAIN='stable', PATH=str(root/'mock')+':'+env['PATH'], signing_private=str(root/'private'),
                signing_keychain=str(root/'private/test.keychain'), SIGNING_CERTIFICATE_BASE64='Y2VydA==',
                NOTARY_KEY_BASE64='a2V5', SIGNING_CERTIFICATE_PASSWORD='synthetic-password',
-               NOTARY_KEY_ID='fixture', NOTARY_ISSUER_ID='fixture', signing_certificate='inherited',
+               NOTARY_KEY_ID='fixture', NOTARY_ISSUER_ID='fixture', SIGNING_IDENTITY='Developer ID Application: Fixture (DN263AX69U)', signing_certificate='inherited',
                signing_certificate_password='inherited', signing_notary_key='inherited')
     subprocess.run(['/bin/bash', '-eu', '-c', fragment], cwd=root, env=env, check=True)
     assert not list((root/'private').iterdir())
+    for identity, valid in (
+        ('cc8b39272e03b790fcb94930a98cc6c4722b235b', True),
+        ('Developer ID Application: Wrong (DN263AX69U)', False),
+        ('Developer ID Application: Fixture', False),
+    ):
+        result = subprocess.run(['/bin/bash', '-eu', '-c',
+                                 'fail() { printf "%s\\n" "$*" >&2; exit 1; };\n' + fragment],
+                                cwd=root, env=dict(env, SIGNING_IDENTITY=identity), capture_output=True, text=True)
+        assert (result.returncode == 0) == valid, result.stderr
+        if not valid:
+            assert 'no valid matching signing identity' in result.stderr
+        for path in (root/'private').iterdir():
+            path.unlink()
+    result = subprocess.run(['/bin/bash', '-eu', '-c',
+                             'fail() { printf "%s\\n" "$*" >&2; exit 1; };\n' + fragment],
+                            cwd=root, env=dict(env, FIXTURE_IDENTITY='missing'), capture_output=True, text=True)
+    assert result.returncode != 0 and 'no valid matching signing identity' in result.stderr
     expression = '${signing_reference_options[@]+"${signing_reference_options[@]}"}'
     assert expression in source
     subprocess.run(['/bin/bash', '-eu', '-c', f'''signing_reference_options=()

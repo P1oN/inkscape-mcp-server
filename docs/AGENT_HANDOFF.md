@@ -40,8 +40,15 @@ Repository Team ID is `DN263AX69U`; all three signing secret names and required
 notarization variables are present. Secret contents were not retrieved. First protected run `37973923331` passed
 candidate validation but stopped before import because the installed Rust 1.99.0
 toolchain was not selected. Preparation now pins its tooling-build environment;
-the regression fixture starts with inherited `stable`. A protected rerun and final
-signed qualification remain required. No release has been published. See the [scoped ledger](history/reports/signed-runtime-receipts-2026-10-09.md).
+the regression fixture starts with inherited `stable`. PR #32 merged as `09a626e`;
+fresh main CI `37977730375` passed. Protected rerun `37981279488` passed candidate
+validation and built tooling, then codesign reported that the requested Developer ID
+identity was unavailable in the imported keychain. The configured name matches the
+valid local identity; remote export/private-key and trust state remain unverified.
+The user updated both certificate secrets on 2026-10-10; attempt 2 failed with the
+same unavailable-identity error. A public certificate/identity preflight now checks
+exact identity and reports trust errors before notarization; protected execution of
+that diagnostic is pending. Final signed qualification remains required. No release has been published. See the [scoped ledger](history/reports/signed-runtime-receipts-2026-10-09.md).
 
 ## Priority 1 development checkpoint — 2026-10-08
 

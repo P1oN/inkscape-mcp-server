@@ -39,6 +39,20 @@ security unlock-keychain -p "$signing_password" "$signing_keychain"
 security import "$signing_private/certificate.p12" -k "$signing_keychain" -P "$signing_certificate_password" -T /usr/bin/codesign >/dev/null
 unset signing_certificate_password
 security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$signing_password" "$signing_keychain" >/dev/null
+# Public certificate names/fingerprints and trust errors only; never dump key material.
+security find-identity -p codesigning "$signing_keychain"
+signing_identities=$(security find-identity -v -p codesigning "$signing_keychain")
+signing_identity=${SIGNING_IDENTITY:?Developer ID Application identity required}
+signing_identity_error() {
+    security find-certificate -a -Z "$signing_keychain" || true
+    fail 'Imported keychain has no valid matching signing identity; check the P12 certificate/private key and certificate trust chain.'
+}
+if [[ "$signing_identity" =~ ^[[:xdigit:]]{40}$ ]]; then
+    printf '%s\n' "$signing_identities" | grep -Fi -- "$signing_identity" >/dev/null || signing_identity_error
+else
+    printf '%s\n' "$signing_identities" | grep -F -- "\"$signing_identity\"" >/dev/null || signing_identity_error
+fi
+unset signing_identities signing_identity
 xcrun notarytool store-credentials inkscape-release --keychain "$signing_keychain" --key "$signing_private/notary.p8" --key-id "${NOTARY_KEY_ID:?Key ID required}" --issuer "${NOTARY_ISSUER_ID:?Issuer ID required}" >/dev/null
 rm -f -- "$signing_private/certificate.p12" "$signing_private/notary.p8"
 unset signing_password

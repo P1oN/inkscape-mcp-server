@@ -104,3 +104,41 @@ fixture starts with inherited `stable` and checks that the build receives 1.99.0
 while still receiving no raw signing credentials. Bash 3.2 argument checks, signed
 release fixtures, publication fixtures and actionlint qualify this source repair;
 a fresh committed CI candidate and real protected rerun are still required.
+
+## Second protected preparation — imported identity unavailable
+
+PR #32 merged as `09a626e2aaae12ccd36a32d621534d5693f2c3d4`; its PR checks
+and fresh main CI `37977730375` passed. Main CI retained the verified native
+package and distinct baseline. Protected workflow `37981279488` validated those
+exact inputs for v0.1.6, then received release-signing approval under the user’s
+publication request. The pinned tooling build completed successfully. Preparation
+then failed at signing the packaging tool: “Developer ID Application: Boryslav
+Mytrofanov (DN263AX69U): no identity found.” The certificate import and notary
+credential setup commands returned successfully, but that does not prove the imported
+keychain contains the requested usable signing identity. Verify/publication were
+skipped; no release or notarization submission was made by this attempt.
+
+Read-only local inspection still finds the valid matching Developer ID identity,
+certificate SHA-1 `CC8B39272E03B790FCB94930A98CC6C4722B235B`; the GitHub
+SIGNING_IDENTITY variable matches its name exactly. Remote secret contents were
+not retrieved. Export type/private-key inclusion and the runner’s imported
+identity/trust state remain to be established before another signing attempt.
+
+## Signing-secret retry — 2026-10-10
+
+The user updated SIGNING_CERTIFICATE_BASE64 and SIGNING_CERTIFICATE_PASSWORD
+at 16:56 UTC and authorized another attempt. Attempt 2 of `37981279488` reused
+the unchanged, unexpired validated candidate from main CI `37977730375`. The
+release-signing deployment was approved. Tooling compiled, import and credential
+setup commands returned successfully, but codesign again reported “no identity
+found” for the configured Developer ID. Verify/publication were skipped. The
+secret update alone therefore does not establish a usable signing identity.
+
+Preparation now prints public identity names/fingerprints and trust-policy errors
+after import, checks for the exact valid configured identity (full name or SHA-1),
+and prints public certificate metadata on failure. It never dumps private keys or
+P12 contents. This distinguishes the runner’s imported certificate/identity state
+before notarization and avoids further blind signing retries. Fixtures cover exact
+name and fingerprint success, wrong/partial-name rejection, missing identity,
+credential inheritance and Bash 3.2 arguments. The protected diagnostic rerun
+still requires this source to pass review/CI and merge. No release is published.
