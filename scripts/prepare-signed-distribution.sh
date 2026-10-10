@@ -67,10 +67,18 @@ signing_identity_error() {
     fail 'Imported keychain has no valid matching signing identity; check the P12 certificate/private key and certificate trust chain.'
 }
 if [[ "$signing_identity" =~ ^[[:xdigit:]]{40}$ ]]; then
-    printf '%s\n' "$signing_identities" | grep -Fi -- "$signing_identity" >/dev/null || signing_identity_error
+    signing_identity=$(printf '%s\n' "$signing_identities" | \
+        grep -Ei "^[[:space:]]*[0-9]+\)[[:space:]]+$signing_identity[[:space:]]+\"" | \
+        sed -n 's/^[^"]*"\([^"]*\)"[[:space:]]*$/\1/p') || signing_identity_error
 else
     printf '%s\n' "$signing_identities" | grep -F -- "\"$signing_identity\"" >/dev/null || signing_identity_error
 fi
+case "$signing_identity" in
+    'Developer ID Application: '*) ;;
+    *) signing_identity_error ;;
+esac
+# The Rust distribution parser requires the full Developer ID name, not its SHA-1.
+export SIGNING_IDENTITY="$signing_identity"
 unset signing_identities signing_identity
 xcrun notarytool store-credentials inkscape-release --keychain "$signing_keychain" --key "$signing_private/notary.p8" --key-id "${NOTARY_KEY_ID:?Key ID required}" --issuer "${NOTARY_ISSUER_ID:?Issuer ID required}" >/dev/null
 rm -f -- "$signing_private/certificate.p12" "$signing_private/notary.p8"

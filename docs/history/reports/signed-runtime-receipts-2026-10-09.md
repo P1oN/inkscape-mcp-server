@@ -174,3 +174,10 @@ list under Bash 3.2, exact identity checks, credential scrubbing and private-fil
 cleanup. Signed/publication fixtures, Bash syntax and actionlint pass. Protected
 execution and final signed qualification remain unproven; no new credential export
 is requested before this workflow repair is tested.
+
+PR #33 review identified that fingerprint preflight success still passed a SHA-1
+to the Rust distribution parser, which accepts only full Developer ID names.
+Preparation now resolves the exact matching fingerprint’s name and exports that
+name for codesign and build-distribution. The real-fragment fixture checks that
+subsequent notarization setup receives the resolved full name for both name and
+fingerprint inputs. Signed/publication fixtures, Bash syntax and actionlint pass.

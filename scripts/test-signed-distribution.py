@@ -270,7 +270,7 @@ done
     build.chmod(0o755)
     for name in ('security', 'xcrun'):
         command = root / 'mock' / name
-        command.write_text(probe + ('test -f "$signing_private/notary.p8"\n' if name == 'xcrun' else '''if [ "$1" = list-keychains ]; then
+        command.write_text(probe + ('test -f "$signing_private/notary.p8"\ntest "$SIGNING_IDENTITY" = "Developer ID Application: Fixture (DN263AX69U)"\n' if name == 'xcrun' else '''if [ "$1" = list-keychains ]; then
     if [ "$#" = 3 ]; then
         if [ "${FIXTURE_EMPTY_SEARCH:-false}" != true ]; then
             printf '%s\\n' '    "/fixture/login keychain-db"' '    "/fixture/other.keychain-db"'
