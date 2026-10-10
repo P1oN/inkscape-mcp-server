@@ -20,6 +20,8 @@ builds. Use [current status](../AGENT_HANDOFF.md), [active backlog](../RUST_NEXT
 
 ## Reports and logs
 
+- [Remaining Python source and release-script removal](reports/python-scripts-removal-2026-10-10.md): portable Rust release guards, Bash fixtures and removal of the retired source archive.
+
 - [Signed runtime receipts and launcher concurrency](reports/signed-runtime-receipts-2026-10-09.md): PR #30 merge, main CI, failed final candidate and scoped release fixes.
 
 - [Native macOS installer checkpoint](reports/macos-installer-2026-10-08.md): unfinished Priority 1 implementation and scoped local evidence.
@@ -54,9 +56,9 @@ builds. Use [current status](../AGENT_HANDOFF.md), [active backlog](../RUST_NEXT
 
 Tracked JSON comparisons, provenance and hash-bound snapshots remain in [`migration/`](../../migration/README.md).
 Local raw packages/traces/SVG/PNGs remain Git-ignored under `migration/results/`; availability on
-another checkout is not guaranteed. Retired Python source lives in
-[`scripts/history/python/`](../../scripts/history/python/README.md). The archive index centralizes
-navigation without rewriting recorded JSON paths/hashes or duplicating binary artifacts.
+another checkout is not guaranteed. Retired Python sources were removed on 2026-10-10;
+their original bytes remain in Git history. The archive index centralizes navigation
+without rewriting recorded JSON paths/hashes or duplicating binary artifacts.
 
 Markdown moves normalize links for the new location; record content and limitations are preserved.
 Exact original file bytes remain accessible at their original Git revisions. Historical commands

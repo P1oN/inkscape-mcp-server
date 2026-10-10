@@ -42,6 +42,8 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+      - name: Install portable Rust release guards
+        run: rustup toolchain install 1.99.0 --profile minimal
       - name: Validate exact candidate without signing secrets
         id: candidate
         env:
@@ -140,6 +142,8 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ needs.validate.outputs.source_sha }}
+      - name: Install portable Rust release guards
+        run: rustup toolchain install 1.99.0 --profile minimal
       - name: Install the supported native engine for isolated headless probes
         run: brew install --cask inkscape
       - name: Retrieve finalized payload without signing credentials
@@ -148,9 +152,9 @@ jobs:
         run: |
           gh run download "$GITHUB_RUN_ID" --name signed-prepared --dir inputs
           (cd inputs && shasum -a 256 -c prepared.tar.gz.sha256)
-          python3 scripts/extract-ci-artifact.py inputs/prepared.tar.gz final
+          scripts/release-guard.sh extract-ci-artifact inputs/prepared.tar.gz final
           (cd inputs/baseline-input && shasum -a 256 -c update-baseline.tar.gz.sha256)
-          python3 scripts/extract-ci-artifact.py inputs/baseline-input/update-baseline.tar.gz baseline
+          scripts/release-guard.sh extract-ci-artifact inputs/baseline-input/update-baseline.tar.gz baseline
       - name: Verify signatures and fixed final package, installer and distinct-update probes
         env:
           EXPECTED_SIGNING_TEAM: ${{ needs.validate.outputs.signing_team }}
@@ -159,7 +163,7 @@ jobs:
         env:
           EXPECTED_SIGNING_TEAM: ${{ needs.validate.outputs.signing_team }}
         run: |
-          python3 scripts/verify-signed-distribution.py final/prepared > publication-inventory.json
+          scripts/release-guard.sh verify-signed-distribution final/prepared > publication-inventory.json
           mkdir publication
           while IFS= read -r name; do cp "final/prepared/$name" publication/; done < <(jq -r 'keys[]' publication-inventory.json)
           COPYFILE_DISABLE=1 tar -czf publication.tar.gz publication
@@ -186,13 +190,15 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ needs.validate.outputs.source_sha }}
+      - name: Install portable Rust release guards
+        run: rustup toolchain install 1.99.0 --profile minimal
       - name: Retrieve staged assets
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh run download "$GITHUB_RUN_ID" --name signed-verified --dir inputs
           (cd inputs && shasum -a 256 -c publication.tar.gz.sha256)
-          python3 scripts/extract-ci-artifact.py inputs/publication.tar.gz final
+          scripts/release-guard.sh extract-ci-artifact inputs/publication.tar.gz final
       - name: Upload verified bytes, check remote digests, then publish
         env:
           GH_TOKEN: ${{ github.token }}

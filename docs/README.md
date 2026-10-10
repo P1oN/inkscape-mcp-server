@@ -40,7 +40,7 @@ Update affected links when moving a file. Keep `AGENT_HANDOFF.md`, `RUST_NEXT_PL
 
 Historical JSON evidence and source snapshots in `migration/` retain their original paths,
 hashes and labels. Moving a Markdown guide does not rewrite those immutable records.
-Python source history remains beside the archived code in `scripts/history/python/`.
+Retired Python sources have been removed; recover their original versions from Git history.
 Generated MCP manifests describe the registry and are regenerated only when its exposed
 surface or instructions change; documentation rearrangement does not change that surface.
 

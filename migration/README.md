@@ -13,6 +13,7 @@ Active development/acceptance commands are in [CONTRIBUTING](../CONTRIBUTING.md)
 
 All narrative history is indexed in [docs/history](../docs/history/README.md). The previous
 long migration README is [archived there](../docs/history/migration-evidence-log.md).
-Python source recovery/history is documented [beside its code](../scripts/history/python/README.md).
+Retired Python sources have been removed at the user's request and remain recoverable
+from Git history. Historical commands in the evidence retain their original scope.
 Use [current status](../docs/AGENT_HANDOFF.md) and [active backlog](../docs/RUST_NEXT_PLAN.md)
 for new work; do not execute historical parity commands as a development requirement.

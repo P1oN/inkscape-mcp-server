@@ -10,7 +10,7 @@ execute packaged Rust binaries; no second MCP server or arbitrary extension is e
 Doctor checks native binaries, context bridge and private bus.
 
 Shared bounded SVG kernels and their regressions are in `rust/src/helper_svg` and
-`rust/tests`. Historical Python fixtures/tests moved to
-[scripts/history/python](../scripts/history/python/README.md). Use current Rust/Bash
+`rust/tests`. Historical Python fixtures/tests have been removed and remain available
+in Git history. Use current Rust/Bash
 checks in [CONTRIBUTING](../CONTRIBUTING.md) and read
 [helper semantics](../docs/live/live-helper-kernels.md).

@@ -6,9 +6,10 @@ are retired; improve Rust against explicit contracts, invariants and regression 
 
 ## Development and checks
 
-Use Rust 1.99.0 and the two locked Cargo graphs. Release-guard and signed-distribution
-scripts require `python3` with its standard library only. The retired Python MCP
-implementation and its Python environment are not required.
+Use Rust 1.99.0 and the two locked Cargo graphs. Development, release guards and
+signed-distribution checks use Rust and Bash; no Python or Lua is required.
+`scripts/release-guard.sh` builds the portable release validator from the tooling graph
+without its native SDK/application dependencies (`--no-default-features`).
 Native libxml/clang development dependencies are required; on macOS set
 `LIBXML2="$(xcrun --show-sdk-path)/usr/lib/libxml2.tbd"`. Inkscape 1.4+ is required
 for CLI/native acceptance. `scripts/dev-tools.sh` locates pinned Cargo and the macOS
@@ -46,11 +47,12 @@ completed requests, the pending request and stderr. Never conceal timeouts with 
 Cargo tests compile native synthetic process/bus/engine fixtures with the same Rust toolchain.
 The development crate covers archive traversal/links/checksums, owned ELF relocation,
 bootstrap cleanup, Git-free source identity and Git worktree build watches. Historical
-Python sources/tests and their former dependency files are retained under
-[scripts/history/python](scripts/history/python/README.md) as evidence, outside active paths.
+Python sources/tests, obsolete eval runners and their dependency files have been removed
+at the user's request; original files remain available in Git history. Recorded historical
+commands and provenance describe their original revisions, not current prerequisites.
 
 For workflow or publication changes, run `scripts/test-publish-verified-release.sh`, Bash syntax
-checks, `python3 scripts/test-signed-distribution.py` and actionlint. Release guard fixtures simulate GitHub and never publish a distribution.
+checks, `scripts/test-signed-distribution.sh` and actionlint. Release guard fixtures simulate GitHub and never publish a distribution.
 For retained notarization recovery, use the fixed `resume-notarization` development command
 described in `docs/install/macos-manager-distribution.md`. It reuses a saved submission;
 it never signs/submits code or replaces final acceptance and publication gates.

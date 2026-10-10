@@ -14,6 +14,16 @@ Check current code and Git status before relying on recorded results.
 
 ## Release follow-up — 2026-10-09
 
+On 2026-10-10 the user requested removal of all Python, including historical sources.
+The active signed-release guards now use `scripts/release-guard.sh`, a portable Rust
+binary in the existing tooling Cargo graph (`--no-default-features` avoids native SDK
+dependencies). Rust and Bash fixtures retain signature/receipt/reference/archive and
+publication/recovery refusals. All 62 Python files, the retired source archive, obsolete
+eval runners and version/dependency files were removed. Historical reports, JSON evidence
+and license/provenance records retain their original scope; original sources remain in Git.
+No MCP schema or runtime instruction changed. The signing-identity issue is separate and
+still requires a fresh protected run after this source passes CI.
+
 PR #30 is merged as `6499d29ea3a067963efa3ecb07134c2fb7b668d1`.
 [Main native CI 37851864135](https://github.com/P1oN/inkscape-mcp-server/actions/runs/37851864135)
 passes and supplies build `f80f0fd90eef4ad9`. Local signing/notarization of those
