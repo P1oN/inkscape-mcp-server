@@ -104,3 +104,88 @@ fixture starts with inherited `stable` and checks that the build receives 1.99.0
 while still receiving no raw signing credentials. Bash 3.2 argument checks, signed
 release fixtures, publication fixtures and actionlint qualify this source repair;
 a fresh committed CI candidate and real protected rerun are still required.
+
+## Second protected preparation — imported identity unavailable
+
+PR #32 merged as `09a626e2aaae12ccd36a32d621534d5693f2c3d4`; its PR checks
+and fresh main CI `37977730375` passed. Main CI retained the verified native
+package and distinct baseline. Protected workflow `37981279488` validated those
+exact inputs for v0.1.6, then received release-signing approval under the user’s
+publication request. The pinned tooling build completed successfully. Preparation
+then failed at signing the packaging tool: “Developer ID Application: Boryslav
+Mytrofanov (DN263AX69U): no identity found.” The certificate import and notary
+credential setup commands returned successfully, but that does not prove the imported
+keychain contains the requested usable signing identity. Verify/publication were
+skipped; no release or notarization submission was made by this attempt.
+
+Read-only local inspection still finds the valid matching Developer ID identity,
+certificate SHA-1 `CC8B39272E03B790FCB94930A98CC6C4722B235B`; the GitHub
+SIGNING_IDENTITY variable matches its name exactly. Remote secret contents were
+not retrieved. Export type/private-key inclusion and the runner’s imported
+identity/trust state remain to be established before another signing attempt.
+
+## Signing-secret retry — 2026-10-10
+
+The user updated SIGNING_CERTIFICATE_BASE64 and SIGNING_CERTIFICATE_PASSWORD
+at 16:56 UTC and authorized another attempt. Attempt 2 of `37981279488` reused
+the unchanged, unexpired validated candidate from main CI `37977730375`. The
+release-signing deployment was approved. Tooling compiled, import and credential
+setup commands returned successfully, but codesign again reported “no identity
+found” for the configured Developer ID. Verify/publication were skipped. The
+secret update alone therefore does not establish a usable signing identity.
+
+Preparation now prints public identity names/fingerprints and trust-policy errors
+after import, checks for the exact valid configured identity (full name or SHA-1),
+and prints public certificate metadata on failure. It never dumps private keys or
+P12 contents. This distinguishes the runner’s imported certificate/identity state
+before notarization and avoids further blind signing retries. Fixtures cover exact
+name and fingerprint success, wrong/partial-name rejection, missing identity,
+credential inheritance and Bash 3.2 arguments. The protected diagnostic rerun
+still requires this source to pass review/CI and merge. No release is published.
+
+## Investigation — keychain search list and G1 issuer (2026-10-10)
+
+Read-only inspection confirms the local Developer ID certificate’s issuer is
+Developer ID Certification Authority / Apple Certification Authority (G1), not
+G2. Its SHA-256 is `d8f70be5fde6b4e49b6fa7938e269dc067dec2f057e1bba74704aaccb53a30f0`.
+Native `security verify-cert -p codeSign -N -L`, with the explicit public G1
+intermediate and Apple root, validates that certificate. A disposable public-only
+keychain test confirms `security create-keychain` does not add the new keychain
+to the user search list; deletion preserves the original list. No user private key
+was exported or read. A certificate-only import passes import but fails partition
+setup, so successful CI partition setup is evidence against a simple certificate-only
+export; the exact remote identity remains unknown until the diagnostic runs.
+
+The failed runner image is `macos-26-arm64/20260907.0351`. Its
+[configuration](https://github.com/actions/runner-images/blob/macos-26-arm64/20260907.0351/images/macos/scripts/build/configure-machine.sh)
+explicitly installs DeveloperIDG2CA, not G1. Our script omitted keychain search-list
+registration, unlike [GitHub’s documented setup](https://docs.github.com/en/actions/how-tos/deploy/deploy-to-third-party-platforms/sign-xcode-applications).
+Apple’s codesign manual says --keychain constrains identity lookup, but certificate
+chain construction still uses the standard keychain search list. These establish a
+workflow defect and a plausible explanation for the failure, without proving the
+contents of the remote P12.
+
+Preparation now snapshots the original search list, adds its ephemeral keychain
+while preserving existing entries, and restores the list during cleanup. It imports
+checksum-pinned public G1 and G2 intermediates from [Apple PKI](https://www.apple.com/certificateauthority/)
+into that keychain. It adds no trust roots or custom trust settings. Real-fragment
+fixtures cover search paths with spaces, success/failure restoration, an empty search
+list under Bash 3.2, exact identity checks, credential scrubbing and private-file
+cleanup. Signed/publication fixtures, Bash syntax and actionlint pass. Protected
+execution and final signed qualification remain unproven; no new credential export
+is requested before this workflow repair is tested.
+
+PR #33 review identified that fingerprint preflight success still passed a SHA-1
+to the Rust distribution parser, which accepts only full Developer ID names.
+Preparation now resolves the exact matching fingerprint’s name and exports that
+name for codesign and build-distribution. The real-fragment fixture checks that
+subsequent notarization setup receives the resolved full name for both name and
+fingerprint inputs. Signed/publication fixtures, Bash syntax and actionlint pass.
+
+Later PR #33 feedback adds literal quote/backslash path preservation: parsing now
+removes only the framing quotes emitted by security, without shell interpretation.
+Cleanup reports search-list restoration failure and returns nonzero, preventing
+qualification or publication. It still destroys the ephemeral keychain/private files
+on that failure path to satisfy credential cleanup; retaining private keys after
+a teardown error is intentionally not adopted. Fixtures inject restoration failure
+and verify a failing exit plus credential deletion, and preserve literal path contents.

@@ -38,8 +38,16 @@ the fixes are merged through PR #31 and fresh main CI `37970554352` passed.
 Protected environments and signing credential names/variables are configured; actual
 protected signing and fresh distribution qualification remain unverified. First
 protected run `37973923331` stopped before import because its installed toolchain
-was not selected; preparation now explicitly selects Rust 1.99.0 for its tool build. No release
-is published. See the
+was not selected; preparation now explicitly selects Rust 1.99.0 for its tool build.
+PR #32 merged as `09a626e`, and main CI `37977730375` passed. Protected rerun
+`37981279488` built tooling but could not find the configured Developer ID identity
+in its imported keychain. Export/private-key inclusion and runner trust state need
+verification. The user updated both certificate secrets on 2026-10-10; attempt 2
+failed with the same identity error. A public certificate/identity preflight is now
+implemented. Investigation found a missing temporary-keychain search-list entry
+and a G1-issued local certificate on a runner configured with G2. The repair now
+supplies pinned public G1/G2 intermediates and preserves/restores the search list;
+protected execution remains pending. No release is published. See the
 [2026-10-09 ledger](history/reports/signed-runtime-receipts-2026-10-09.md).
 
 **Outcome:** one Apple Silicon DMG, a native installation/upgrade wizard, preserved
