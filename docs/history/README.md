@@ -20,6 +20,10 @@ builds. Use [current status](../AGENT_HANDOFF.md), [active backlog](../RUST_NEXT
 
 ## Reports and logs
 
+- [v0.1.7 signed release](reports/v0.1.7-signed-release.md): current-main publication,
+  exact final asset verification, real Claude discovery on signed bytes and retained
+  evidence from the initial unpublished candidate; remaining host/client gates.
+
 - [v0.1.6 signed release](reports/v0.1.6-signed-release.md): successful main/protected CI,
   Accepted notarizations, final-byte acceptance and publication; remaining host gates.
 

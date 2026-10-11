@@ -1,13 +1,13 @@
 # Independent instructions and runtime updates
 
-Current sources and the v0.1.6 signed prerelease include a permanent native launcher
+Current sources and the v0.1.7 signed prerelease include a permanent native launcher
 and a macOS management application. These features are absent from historical v0.1.2
 archives. Published distributions expose updates through `inkscape-mcp-update.json`. Historical
 releases without that contract are skipped; an explicit request for one explains the
 manual-installation requirement. Publishing a release does not migrate an existing
 user installation automatically.
 
-The [v0.1.6 signed prerelease](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.6)
+The [v0.1.7 signed prerelease](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.7)
 includes the native installation wizard, which prepares and verifies offline runtime/text,
 client/skill changes and explicit bootstrap upgrades. The per-user app location is
 `~/Applications/Inkscape MCP Manager.app`; existing legacy migration remains available.
@@ -152,8 +152,9 @@ The release workflow's optional `runtime_tag` references a previously published 
 compatible runtime. Publication verifies its archive identity and retained publication
 evidence, then references the original distribution rather than uploading/replacing it.
 Publication itself builds nothing and executes no archive content. Instruction evidence
-still comes from the selected successful main CI run; clean-machine, real Claude and
-broader native drawing acceptance remain separately scoped.
+still comes from the selected successful main CI run. Real Claude CLI discovery passes
+on v0.1.7 signed bytes; authenticated workspace interaction, clean-machine and broader
+native drawing acceptance remain separate gates.
 
 See [CONTRIBUTING](../../CONTRIBUTING.md) and the
 [acceptance ledger](../history/reports/independent-updates.md) for the automated and native

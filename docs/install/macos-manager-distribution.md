@@ -1,12 +1,15 @@
 # macOS Manager distribution contract
 
-The [v0.1.6 prerelease](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.6)
+The [v0.1.7 prerelease](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.7)
 publishes the Developer ID signed/notarized Manager DMG and compatible component assets.
-Source `59a9593`, build `ec46066ff9bb32b0`, Team `DN263AX69U` passed protected
+Source `684ce4c`, build `65afcd383ad71d71`, Team `DN263AX69U` passed protected
 signing, all three Accepted notarizations, final package/installer/update checks and
-128 launcher sessions with four workers. See the [release ledger](../history/reports/v0.1.6-signed-release.md).
+128 launcher sessions with four workers. Actual isolated Claude Code 2.1.296 discovery
+and disconnect pass on these signed bytes. See the [release ledger](../history/reports/v0.1.7-signed-release.md).
 Browser-downloaded/another-Mac acceptance and whole-job interruption qualification
 remain open; the release remains a prerelease.
+Use the [another-Mac acceptance checklist](another-mac-acceptance.md) to record the
+remaining host/client/update cases against the exact published artifact.
 
 The historical 2026-10-08 working tree has a local Developer ID signed/notarized native installer
 candidate (`1a52d477e623f8d5`, Team `DN263AX69U`). Apple Accepted all three containers,
