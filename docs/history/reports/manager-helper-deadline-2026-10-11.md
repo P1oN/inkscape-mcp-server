@@ -31,3 +31,14 @@ Validation: Manager Objective-C syntax check with warnings treated as errors, to
 fmt/Clippy (all targets), all 29 tooling tests, portable Clippy and git diff --check
 pass locally. The five subprocess scenarios are included in the macOS tooling test
 job. No MCP schema/instruction changes require manifest regeneration.
+
+An authorized isolated native window fixture also passed. It compiled the current
+Manager source with only the operation budget shortened from 600 to one second
+(the two-second escalation grace was retained), and used a synthetic bundled helper
+that ignored SIGTERM. The window showed “The operation timed out. Use Recover /
+retry before trying again.” with its busy indicator off and controls enabled.
+Recover / retry completed the same failure cycle; the idle window closed normally.
+The app session exited with status zero and no process from the fixture directory
+remained. Its HOME and installation were separate from the user's configuration.
+This establishes native timeout presentation for the development fixture, not
+acceptance of a new signed distribution or the original Documents-path cause.
