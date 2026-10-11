@@ -17,7 +17,8 @@ with all 15 assets verified. Final signed package/installer/distinct-update chec
 See [release evidence](history/reports/v0.1.6-signed-release.md). The implementation
 plan below retains its original context; outstanding exit gates are another-Mac/browser
 quarantine acceptance, clean-host source bootstrap, real Claude and whole-job interruption
-qualification, plus the explicitly listed published-GUI/reconnect/storage cases.
+qualification, plus live reconnect/storage cases. Published native GUI downloads
+passed in an isolated local profile; the lock-file open stall below remains unresolved.
 
 ### Smooth macOS installation and signed releases — implementation plan
 
@@ -292,8 +293,8 @@ acceptance there does not establish another-Mac signed installation acceptance.
 
 | Task | Next action | Completion evidence |
 | --- | --- | --- |
-| Published management GUI downloads | After an authorized release, exercise instructions-only, runtime-only and combined downloads and the no-update state in an isolated native app profile. | Native observations tied to actual published manifests and package identities; current component-success evidence is backend/CLI acceptance. |
 | Live reconnect and retained helpers | With explicit GUI authorization, reconnect an isolated client after updating and exercise owned synthetic Inkscape documents while an older helper path is retained. | Actual client/runtime identities, unchanged user windows and native results. No Inkscape GUI was launched for update acceptance. |
+| Bounded Manager helper operations | Investigate the Documents-profile lock-file open stall and ensure a stalled helper leaves a recoverable UI within an operation deadline. | Native reproduction/sample and bounded recovery checks; see the [v0.1.6 ledger](history/reports/v0.1.6-signed-release.md). |
 | Storage/media failure qualification | Extend automated journal/move-boundary and post-selector write-failure checks with real ENOSPC, media failure and process termination. | Old or new pair remains launchable, recovery is idempotent, and skill edits are preserved. |
 
 Clean-machine installation, real Claude and broader release review remain in Priority 1.

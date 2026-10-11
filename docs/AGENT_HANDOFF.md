@@ -25,8 +25,11 @@ The intermediate-certificate/keychain search-list repair resolved the prior iden
 failure. See the [release ledger](history/reports/v0.1.6-signed-release.md).
 
 Priority 1 remains open for browser-quarantined/another-Mac installation, real Claude,
-clean-host source bootstrap and whole-job interruption qualification. Published GUI
-download/reconnect and storage/media failure cases retain their backlog scope. No
+clean-host source bootstrap and whole-job interruption qualification. Published native
+instructions-only/runtime-only/combined downloads, rollback and no-update observations
+passed in an isolated local profile on macOS 27.0. Live reconnect and storage/media
+failure cases remain open, as does a helper lock-file open stall in a Documents-based
+test profile; see the release ledger for the scoped observations. No
 installed user runtime, client settings or Inkscape windows were changed by this release.
 
 ## Historical release follow-up — 2026-10-09–10
