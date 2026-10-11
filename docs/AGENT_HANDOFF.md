@@ -12,7 +12,27 @@ Read [README](../README.md), [CONTRIBUTING](../CONTRIBUTING.md) and
 work, and [history](history/README.md) retains earlier checkpoint/acceptance evidence.
 Check current code and Git status before relying on recorded results.
 
-## Release follow-up — 2026-10-09
+## Published signed prerelease — 2026-10-11
+
+[v0.1.6](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.6) is published.
+PR #34 merged as `59a95936e85ebdb797fb6a5ce7250bd9fee5f3b8`; main CI
+`38086442144` passed. Protected signed-release run `38158685812` passed all four
+stages, including final signed package/installer/distinct-update checks and 128/128
+launcher sessions with four workers. Build `ec46066ff9bb32b0`, Team `DN263AX69U`,
+has Accepted Runtime, Manager and DMG notarizations. All 15 remote asset digests match
+the verified inventory; local extraction/revalidation of the staged publication passes.
+The intermediate-certificate/keychain search-list repair resolved the prior identity
+failure. See the [release ledger](history/reports/v0.1.6-signed-release.md).
+
+Priority 1 remains open for browser-quarantined/another-Mac installation, real Claude,
+clean-host source bootstrap and whole-job interruption qualification. Published native
+instructions-only/runtime-only/combined downloads, rollback and no-update observations
+passed in an isolated local profile on macOS 27.0. Live reconnect and storage/media
+failure cases remain open, as does a helper lock-file open stall in a Documents-based
+test profile; see the release ledger for the scoped observations. No
+installed user runtime, client settings or Inkscape windows were changed by this release.
+
+## Historical release follow-up — 2026-10-09–10
 
 On 2026-10-10 the user requested removal of all Python, including historical sources.
 The active signed-release guards now use `scripts/release-guard.sh`, a portable Rust

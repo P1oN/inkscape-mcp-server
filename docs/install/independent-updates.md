@@ -1,13 +1,14 @@
 # Independent instructions and runtime updates
 
-Current sources add a permanent native launcher and a macOS management application.
-These features are not in the published v0.1.2 archives. Update downloads become available
-when an immutable distribution with `inkscape-mcp-update.json` is published. Historical
+Current sources and the v0.1.6 signed prerelease include a permanent native launcher
+and a macOS management application. These features are absent from historical v0.1.2
+archives. Published distributions expose updates through `inkscape-mcp-update.json`. Historical
 releases without that contract are skipped; an explicit request for one explains the
-manual-installation requirement. This change does not publish a release or migrate an
-existing user installation automatically.
+manual-installation requirement. Publishing a release does not migrate an existing
+user installation automatically.
 
-The unpublished native installation wizard now prepares and verifies offline runtime/text,
+The [v0.1.6 signed prerelease](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.6)
+includes the native installation wizard, which prepares and verifies offline runtime/text,
 client/skill changes and explicit bootstrap upgrades. The per-user app location is
 `~/Applications/Inkscape MCP Manager.app`; existing legacy migration remains available.
 See the [macOS distribution contract](macos-manager-distribution.md) for compatibility 2,
