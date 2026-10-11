@@ -122,7 +122,9 @@ jobs:
           retention-days: 7
           compression-level: 0
       - name: Preserve exact containers and candidate identity for explicit notarization recovery
-        if: failure()
+        # Cancellation must retain submitted containers too; the runner has a bounded teardown window.
+        if: always() && (failure() || cancelled())
+        timeout-minutes: 4
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: signed-preparation-failure

@@ -137,8 +137,12 @@ clean-host final acceptance remain pending. macOS release tar steps use `COPYFIL
 cannot violate the fixed archive root; extracted Manager signatures/tickets still validate.
 
 For an interrupted notarization poll, retain the exact prepared containers, submitted
-ZIPs and `notary-*.json` records. The protected job preserves these and its validated
-candidate identity in the failure artifact. Maintainers can resume a fixed container:
+ZIPs and `notary-*.json` records. The protected job attempts to preserve these and its
+validated candidate identity in `signed-preparation-failure` after failure or
+cancellation, with a four-minute upload limit. Runner loss or forced teardown can
+still prevent the upload; confirm that the artifact exists before recovery.
+Cancellation upload and whole-job recovery require actual protected-run qualification.
+Maintainers can resume a fixed container:
 
 ```sh
 scripts/dev-tools.sh resume-notarization --output ABSOLUTE_RETAINED_DIRECTORY \
