@@ -9,6 +9,16 @@ in [the milestone index](history/README.md). Current behavior/validation is in
 
 ## Priority 1 — validation and delivery
 
+**Delivery checkpoint, 2026-10-11:** PR #34 is merged as `59a9593`; main CI
+`38086442144` and protected signed-release run `38158685812` pass. Signed/notarized
+[v0.1.6](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.6) is published
+with all 15 assets verified. Final signed package/installer/distinct-update checks and
+128/four-worker startup pass for build `ec46066ff9bb32b0`, Team `DN263AX69U`.
+See [release evidence](history/reports/v0.1.6-signed-release.md). The implementation
+plan below retains its original context; outstanding exit gates are another-Mac/browser
+quarantine acceptance, clean-host source bootstrap, real Claude and whole-job interruption
+qualification, plus the explicitly listed published-GUI/reconnect/storage cases.
+
 ### Smooth macOS installation and signed releases — implementation plan
 
 Requested on 2026-10-08 after installation on another Mac exposed repeated macOS

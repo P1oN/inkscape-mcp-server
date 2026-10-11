@@ -1,12 +1,19 @@
 # macOS Manager distribution contract
 
-The 2026-10-08 working tree has a local Developer ID signed/notarized native installer
+The [v0.1.6 prerelease](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.6)
+publishes the Developer ID signed/notarized Manager DMG and compatible component assets.
+Source `59a9593`, build `ec46066ff9bb32b0`, Team `DN263AX69U` passed protected
+signing, all three Accepted notarizations, final package/installer/update checks and
+128 launcher sessions with four workers. See the [release ledger](../history/reports/v0.1.6-signed-release.md).
+Browser-downloaded/another-Mac acceptance and whole-job interruption qualification
+remain open; the release remains a prerelease.
+
+The historical 2026-10-08 working tree has a local Developer ID signed/notarized native installer
 candidate (`1a52d477e623f8d5`, Team `DN263AX69U`). Apple Accepted all three containers,
 and isolated package/installer/update checks pass. Earlier build `7ad414e1314fd62b`
 has separately bound native first-install checks. These candidates remain
-unpublished and unqualified on a browser-quarantined clean host. Use the existing
-[source installation](../../README.md) until the signed release gates in
-[Priority 1](../RUST_NEXT_PLAN.md) pass.
+unpublished and unqualified on a browser-quarantined clean host. Their evidence is
+separate from the published candidate above.
 
 PR #30 review repairs add per-client configuration diagnostics and preserve unmanaged
 or foreign-owned skills without adopting them. Runtime staging verifies the signer and
@@ -14,8 +21,8 @@ stores a private, guarded receipt outside the bundle, bound to `FILES.json`, bui
 and the exact helper bytes. Startup rechecks the inventory and receipt without running
 `codesign`. Helper upgrades authorize retained rollback runtimes and keep receipts for
 older helpers. A missing or changed receipt refuses launch and requires installation
-preparation again. These source changes require fresh signed-artifact qualification;
-the local candidate evidence above remains bound to its earlier bytes.
+preparation again. These changes passed final signed-artifact CI qualification in v0.1.6;
+the historical local candidate evidence remains bound to its earlier bytes.
 
 The default application location is `~/Applications/Inkscape MCP Manager.app`.
 The Manager stages a verified copy and asks to install/reopen it. A separate bundled
