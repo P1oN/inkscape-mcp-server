@@ -121,15 +121,24 @@ jobs:
           if-no-files-found: error
           retention-days: 7
           compression-level: 0
-      - name: Preserve exact containers and candidate identity for explicit notarization recovery
-        if: failure()
+      - name: Archive containers and candidate identity with executable permissions
+        # Cancellation must retain submitted containers too; the runner has a bounded teardown window.
+        if: always() && (failure() || cancelled())
+        timeout-minutes: 1
+        run: |
+          set --
+          if [ -d prepared ]; then set -- "$@" prepared; fi
+          if [ -f validated/candidate/CANDIDATE.json ]; then set -- "$@" validated/candidate/CANDIDATE.json; fi
+          if [ "$#" -gt 0 ]; then COPYFILE_DISABLE=1 tar -cf preparation-recovery.tar "$@"; fi
+      - name: Preserve archive for explicit notarization recovery
+        if: always() && (failure() || cancelled())
+        timeout-minutes: 3
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: signed-preparation-failure
-          path: |
-            prepared/
-            validated/candidate/CANDIDATE.json
+          path: preparation-recovery.tar
           retention-days: 7
+          compression-level: 0
 
   verify:
     needs: [validate, prepare]
