@@ -1,12 +1,19 @@
 # macOS Manager distribution contract
 
-The 2026-10-08 working tree has a local Developer ID signed/notarized native installer
+The [v0.1.6 prerelease](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.6)
+publishes the Developer ID signed/notarized Manager DMG and compatible component assets.
+Source `59a9593`, build `ec46066ff9bb32b0`, Team `DN263AX69U` passed protected
+signing, all three Accepted notarizations, final package/installer/update checks and
+128 launcher sessions with four workers. See the [release ledger](../history/reports/v0.1.6-signed-release.md).
+Browser-downloaded/another-Mac acceptance and whole-job interruption qualification
+remain open; the release remains a prerelease.
+
+The historical 2026-10-08 working tree has a local Developer ID signed/notarized native installer
 candidate (`1a52d477e623f8d5`, Team `DN263AX69U`). Apple Accepted all three containers,
 and isolated package/installer/update checks pass. Earlier build `7ad414e1314fd62b`
 has separately bound native first-install checks. These candidates remain
-unpublished and unqualified on a browser-quarantined clean host. Use the existing
-[source installation](../../README.md) until the signed release gates in
-[Priority 1](../RUST_NEXT_PLAN.md) pass.
+unpublished and unqualified on a browser-quarantined clean host. Their evidence is
+separate from the published candidate above.
 
 PR #30 review repairs add per-client configuration diagnostics and preserve unmanaged
 or foreign-owned skills without adopting them. Runtime staging verifies the signer and
@@ -14,8 +21,8 @@ stores a private, guarded receipt outside the bundle, bound to `FILES.json`, bui
 and the exact helper bytes. Startup rechecks the inventory and receipt without running
 `codesign`. Helper upgrades authorize retained rollback runtimes and keep receipts for
 older helpers. A missing or changed receipt refuses launch and requires installation
-preparation again. These source changes require fresh signed-artifact qualification;
-the local candidate evidence above remains bound to its earlier bytes.
+preparation again. These changes passed final signed-artifact CI qualification in v0.1.6;
+the historical local candidate evidence remains bound to its earlier bytes.
 
 The default application location is `~/Applications/Inkscape MCP Manager.app`.
 The Manager stages a verified copy and asks to install/reopen it. A separate bundled
@@ -94,10 +101,11 @@ validate successful main CI inputs, prepare with an ephemeral keychain, verify n
 probes without credentials, then upload/check remote digests/publish. The first protected
 run `37973923331` passed candidate validation but stopped before signing-credential
 import because the tooling build did not select installed Rust 1.99.0. Preparation
-now explicitly selects that toolchain; a successful protected rerun is still required.
+now explicitly selects that toolchain. Protected run `38158685812` subsequently passed
+all stages and published v0.1.6.
 The protected `release-signing` and `release-publication` environments are configured
 as of 2026-10-09, restricted to `main` with P1oN review. Required signing secret names
-and notarization variables are present; actual credential validity awaits a protected run.
+and notarization variables are present; their protected execution passed in v0.1.6.
 Set the public `SIGNING_TEAM_ID` **repository Actions variable** to the verified Team
 (`DN263AX69U` for this setup). Validation rejects an absent/malformed value before
 candidate retrieval and passes that same checked value to preparation, verification
@@ -124,8 +132,8 @@ to match, uploads only missing assets without replacement, and verifies the comp
 remote set before publishing. Wrong, foreign, duplicate or published assets/releases
 are refused without mutation. No automatic draft deletion or tag replacement is offered.
 Local signed distinct-runtime update/rollback and immutable-runtime reuse pass.
-Protected CI delivery, signing-job retry qualification and clean-host final acceptance
-remain pending. macOS release tar steps use `COPYFILE_DISABLE=1` so AppleDouble entries
+Protected CI delivery passes in v0.1.6; signing-job interruption/retry qualification and
+clean-host final acceptance remain pending. macOS release tar steps use `COPYFILE_DISABLE=1` so AppleDouble entries
 cannot violate the fixed archive root; extracted Manager signatures/tickets still validate.
 
 For an interrupted notarization poll, retain the exact prepared containers, submitted

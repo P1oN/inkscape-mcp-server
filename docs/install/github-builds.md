@@ -1,5 +1,16 @@
 # Download a GitHub build for Apple Silicon
 
+The current signed prerelease is
+[v0.1.6](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.6).
+Download **Inkscape-MCP-Manager.dmg** for Apple Silicon macOS 15+ with Inkscape 1.4+,
+open the Manager, select clients/workspace, review installation, then reconnect clients.
+It includes an offline runtime. Developer ID Team `DN263AX69U`, Accepted Runtime,
+Manager and DMG notarizations, and final package/installer/update/concurrent-startup
+checks are recorded in [release evidence](../history/reports/v0.1.6-signed-release.md).
+Browser-quarantined installation on another Mac remains an outstanding acceptance gate.
+Source and component archives are advanced downloads; the commands below describe
+historical archive installation and CI artifacts.
+
 [Release v0.1.2](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.2)
 contains `inkscape-mcp-macos-arm64.tar.gz` (ready runtime) and
 `inkscape-mcp-source-bootstrap.tar.gz` (source installer), each with a `.sha256` file.
@@ -118,7 +129,7 @@ Current sources also support [independent instructions/runtime updates](independ
 permanent native launcher and macOS management app. Opt in once with
 `./setup.sh --independent-updates`; published v0.1.2 archives retain their original behavior.
 
-## Signed Manager preparation (unpublished checkpoint)
+## Signed Manager publication
 
 The four-stage workflow in `.github/workflows/signed-release.yml` validates exact successful
 main CI artifacts, transforms them under protected `release-signing`, verifies final native
@@ -135,4 +146,6 @@ environments or signing secrets had been configured at that checkpoint. As of
 required secret names/variables are present. The first protected run
 `37973923331` passed validation but stopped before import because the tooling build
 did not select installed Rust 1.99.0. Preparation now explicitly selects the toolchain;
-a successful protected rerun is needed to validate credentials and qualify the distribution.
+that failure was repaired. Protected run `38158685812` now passes all four stages and
+publishes v0.1.6. Its exact source/build, notarization IDs, final hashes and outstanding
+host qualification are recorded in the [release ledger](../history/reports/v0.1.6-signed-release.md).

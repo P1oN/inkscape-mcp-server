@@ -20,6 +20,9 @@ builds. Use [current status](../AGENT_HANDOFF.md), [active backlog](../RUST_NEXT
 
 ## Reports and logs
 
+- [v0.1.6 signed release](reports/v0.1.6-signed-release.md): successful main/protected CI,
+  Accepted notarizations, final-byte acceptance and publication; remaining host gates.
+
 - [Remaining Python source and release-script removal](reports/python-scripts-removal-2026-10-10.md): portable Rust release guards, Bash fixtures and removal of the retired source archive.
 
 - [Signed runtime receipts and launcher concurrency](reports/signed-runtime-receipts-2026-10-09.md): PR #30 merge, main CI, failed final candidate and scoped release fixes.

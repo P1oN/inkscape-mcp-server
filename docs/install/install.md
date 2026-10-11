@@ -1,6 +1,14 @@
 # Install the Rust Inkscape MCP server
 
-Install Inkscape 1.4 or newer. Choose the instructions for your source/package version:
+On Apple Silicon macOS 15+, install Inkscape 1.4 or newer and download the
+[v0.1.6 Manager DMG](https://github.com/P1oN/inkscape-mcp-server/releases/download/v0.1.6/Inkscape-MCP-Manager.dmg).
+Open the Manager, choose clients and an existing SVG workspace, review installation,
+then restart/reconnect the clients. The signed/notarized prerelease includes an offline
+runtime and requires no Terminal or build tools. See the
+[distribution contract](macos-manager-distribution.md) for layout and acceptance scope.
+
+For advanced source/component installation or historical downloads, choose the
+instructions for your source/package version:
 
 | Distribution | First setup | Client and skill management |
 |---|---|---|
