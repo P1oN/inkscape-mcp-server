@@ -253,7 +253,7 @@ fn run(options: &Options) -> Result<Value> {
         );
     }
     if options.action == "--version" {
-        return Ok(report(&selector(root)?));
+        return Ok(installation_report(root, &selector(root)?));
     }
     let lock = if options.action.is_empty() {
         Lock::acquire_wait(root, std::time::Duration::from_secs(2))?
@@ -310,7 +310,7 @@ fn run(options: &Options) -> Result<Value> {
         }
         let activation = transaction::rollback(root, &settings)?;
         let changed = activation.changed;
-        let mut result = report(&selector(root)?);
+        let mut result = installation_report(root, &selector(root)?);
         result["changed"] = json!(changed);
         result["client_reconnect_required"] = json!(changed);
         result["skill_reload_required"] = json!(activation.skills_changed);

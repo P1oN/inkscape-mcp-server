@@ -162,7 +162,7 @@ pub fn migrate(root: &Path, repo: &Path, channel: &str) -> Result<Value> {
     write_json(&root.join("active.json"), &selector)?;
     drop(lock);
     crate::client_management::migrate_bindings(repo,&target).map_err(|e|format!("installation staged; client migration failed: {e}; retry binding migration with the client manager"))?;
-    let mut result = report(&selector);
+    let mut result = installation_report(root, &selector);
     result["launcher_path"] = json!(target);
     result["cli_path"] = json!(entry);
     result["client_reconnect_required"] = json!(true);
