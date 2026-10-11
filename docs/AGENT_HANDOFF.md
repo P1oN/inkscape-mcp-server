@@ -303,3 +303,15 @@ preserving GUI; existing GUI sessions retain their existing native helpers.
 Cleanup PR review follow-up: relative/bare MCP commands now refuse cleanup conservatively.
 Temporary acceptance cancellation supervises only its owned child, bounds shutdown to five
 seconds and retains output. Isolated relative-process and stalled-child fixtures pass.
+
+## Installed launcher identity follow-up — 2026-10-12
+
+Published v0.1.7 Manager relocation, v0.1.6-to-v0.1.7 runtime update, rollback,
+retry and no-update checks passed in the existing isolated profile. Settings and
+SVG bytes were preserved; identical instruction content was reused. Rollback
+exposed an incorrect launcher build label when the bundled helper differs from
+the permanent launcher. Operation/version responses now reuse byte-verified
+bootstrap discovery; the executing helper has its separate installer identity.
+See the [scoped evidence](history/reports/installed-launcher-identity-2026-10-12.md).
+This source repair still needs fresh CI/signed qualification. Another-Mac and
+live/client gates remain open; no user's installation or Inkscape windows changed.

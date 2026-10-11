@@ -493,3 +493,34 @@ fn disconnected_client_is_removed_from_legacy_records() {
     assert!(!home.join(".claude.json").exists());
     assert!(!home.join(".codex/config.toml").exists());
 }
+
+#[test]
+fn launcher_version_reports_verified_installed_bytes_instead_of_the_actor() {
+    let f = fixture();
+    mkdir(&f.root.join("bin")).unwrap();
+    let bytes = b"older installed launcher; must never execute";
+    for name in ["inkscape-mcp", "inkscape-mcp-launcher"] {
+        write(&f.root.join("bin").join(name), bytes).unwrap();
+    }
+    let mut saved = bootstrap_identity(bytes);
+    saved.build_id = "older-bootstrap".into();
+    saved.source_revision = "unknown".into();
+    write_json(&f.root.join("bootstrap.json"), &saved).unwrap();
+    let version = || {
+        let output = Command::new(env!("CARGO_BIN_EXE_inkscape-mcp-launcher"))
+            .args(["--version", "--install-dir"])
+            .arg(&f.root)
+            .arg("--json")
+            .output()
+            .unwrap();
+        assert!(output.status.success());
+        serde_json::from_slice::<Value>(&output.stdout).unwrap()
+    };
+    let verified = version();
+    assert_eq!(verified["launcher_build"], "older-bootstrap");
+    assert_ne!(verified["installer_build"], verified["launcher_build"]);
+    write(&f.root.join("bin/inkscape-mcp"), b"changed launcher").unwrap();
+    let damaged = version();
+    assert!(damaged["launcher_build"].is_null());
+    assert_eq!(damaged["bootstrap_damaged"], true);
+}

@@ -783,7 +783,7 @@ pub fn prepare(root: &Path, mut request: Request) -> Result<Value> {
     };
     write_json(&root.join("installation-prepared.json"), &plan)?;
     Ok(
-        json!({"state":"prepared","skipped_skills":skipped_skills,"preparation_id":id,"changes":plan.changes.iter().map(|c|&c.destination).collect::<Vec<_>>(),"installed":report(&plan.selector)}),
+        json!({"state":"prepared","skipped_skills":skipped_skills,"preparation_id":id,"changes":plan.changes.iter().map(|c|&c.destination).collect::<Vec<_>>(),"installed":installation_report(root, &plan.selector)}),
     )
 }
 fn apply_file(path: &Path, bytes: &[u8], mode: u32) -> Result<()> {
@@ -905,7 +905,7 @@ pub fn activate(root: &Path, id: &str) -> Result<Value> {
     doctor(root, &plan.selector.current, &settings)?;
     probe(root, &plan.selector.current, &settings)?;
     if plan.changes.is_empty() {
-        let mut result = report(&plan.selector);
+        let mut result = installation_report(root, &plan.selector);
         result["changed"] = json!(false);
         result["state"] = json!("completed");
         result["client_reconnect_required"] = json!(false);
@@ -933,7 +933,7 @@ pub fn activate(root: &Path, id: &str) -> Result<Value> {
             "complete",
             "Installation completed. Restart connected clients to load it.",
         );
-        let mut result = report(&plan.selector);
+        let mut result = installation_report(root, &plan.selector);
         result["changed"] = json!(!plan.changes.is_empty());
         result["state"] = json!("completed");
         result["client_reconnect_required"] = json!(true);
