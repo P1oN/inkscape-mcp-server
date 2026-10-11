@@ -20,9 +20,11 @@ builds. Use [current status](../AGENT_HANDOFF.md), [active backlog](../RUST_NEXT
 
 ## Reports and logs
 
+- [Remaining Python source and release-script removal](reports/python-scripts-removal-2026-10-10.md): portable Rust release guards, Bash fixtures and removal of the retired source archive.
+
 - [Manager helper deadlines](reports/manager-helper-deadline-2026-10-11.md): bounded pipe I/O and termination escalation; automated subprocess acceptance.
 
-- [Remaining Python source and release-script removal](reports/python-scripts-removal-2026-10-10.md): portable Rust release guards, Bash fixtures and removal of the retired source archive.
+- [Actual storage/process-failure acceptance](reports/storage-failure-2026-10-11.md): APFS ENOSPC, installed startup, retry and one real journal interruption; explicit remaining limits.
 
 - [Signed runtime receipts and launcher concurrency](reports/signed-runtime-receipts-2026-10-09.md): PR #30 merge, main CI, failed final candidate and scoped release fixes.
 
