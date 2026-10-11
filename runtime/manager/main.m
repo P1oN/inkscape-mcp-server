@@ -1,4 +1,5 @@
 #import <Cocoa/Cocoa.h>
+#import "task_io.h"
 
 static NSString *managerHome(void) {
     NSString *value=NSProcessInfo.processInfo.environment[@"HOME"];
@@ -132,13 +133,6 @@ static NSString *managerHome(void) {
 - (void)recover:(id)sender {if([[NSFileManager defaultManager] fileExistsAtPath:self.installation])[self run:@[@"install-recover"] request:nil];else [self inspect];}
 - (void)update:(NSArray *)options {NSMutableArray *args=[NSMutableArray arrayWithObject:@"update"];[args addObjectsFromArray:options];[args addObjectsFromArray:@[@"--channel",self.channel.indexOfSelectedItem==0 ? @"stable" : @"prerelease"]];[self run:args request:nil];}
 - (void)usePrereleases:(id)sender {[self.channel selectItemAtIndex:1];self.previewChannelButton.hidden=YES;[self changeOptions:sender];self.status.stringValue=@"Prereleases selected. These are preview versions. Choose Check updates to review availability; installation changes only when you choose Update.";}
-static NSData *boundedRead(NSFileHandle *file,NSTask *task,void (^lineHandler)(NSData *)) {
-    NSMutableData *data=[NSMutableData new];NSMutableData *pending=[NSMutableData new];
-    while(YES){NSData *part=[file readDataOfLength:4096];if(!part.length)break;if(data.length+part.length>1024*1024){if(task.running)[task terminate];break;}[data appendData:part];
-        if(lineHandler){[pending appendData:part];while(YES){NSRange end=[pending rangeOfData:[NSData dataWithBytes:"\n" length:1] options:0 range:NSMakeRange(0,pending.length)];if(end.location==NSNotFound)break;if(end.location<=4096)lineHandler([pending subdataWithRange:NSMakeRange(0,end.location)]);[pending replaceBytesInRange:NSMakeRange(0,end.location+1) withBytes:NULL length:0];}if(pending.length>4096)[pending setLength:0];}
-    }
-    return data;
-}
 - (void)run:(NSArray *)arguments request:(NSDictionary *)request {
     if(self.running)return;
     NSString *executable=[[NSBundle mainBundle].bundlePath stringByAppendingPathComponent:@"Contents/Helpers/inkscape-mcp-launcher"];
@@ -147,10 +141,13 @@ static NSData *boundedRead(NSFileHandle *file,NSTask *task,void (^lineHandler)(N
     NSPipe *input=request ? [NSPipe pipe] : nil;task.standardInput=input ?: [NSFileHandle fileHandleWithNullDevice];NSPipe *output=[NSPipe pipe];NSPipe *errors=[NSPipe pipe];task.standardOutput=output;task.standardError=errors;
     NSError *error=nil;if(![task launchAndReturnError:&error]){[self setPhase:@"failed" message:error.localizedDescription];return;}
     self.running=task;for(NSButton *button in self.buttons)button.enabled=NO;self.channel.enabled=NO;self.candidates.enabled=NO;[self.progress startAnimation:nil];[self setPhase:@"busy" message:[arguments containsObject:@"install-prepare"] ? @"Checking prerequisites, preparing files and checking the MCP connection…" : @"Verifying and applying the selected operation…"];
-    if(request){NSData *data=[NSJSONSerialization dataWithJSONObject:request options:0 error:nil];[input.fileHandleForWriting writeData:data];[input.fileHandleForWriting closeFile];}
     dispatch_group_t group=dispatch_group_create();__block NSData *out=nil;__block NSData *err=nil;
-    dispatch_group_async(group,dispatch_get_global_queue(QOS_CLASS_USER_INITIATED,0),^{out=boundedRead(output.fileHandleForReading,task,nil);});
-    dispatch_group_async(group,dispatch_get_global_queue(QOS_CLASS_USER_INITIATED,0),^{err=boundedRead(errors.fileHandleForReading,task,^(NSData *line){
+    __block BOOL timedOut=NO;
+    NSTimeInterval deadline=NSProcessInfo.processInfo.systemUptime+602;
+    managerTaskDeadline(task,600,2,^BOOL{return self.running==task;},^{timedOut=YES;});
+    if(request){NSData *data=[NSJSONSerialization dataWithJSONObject:request options:0 error:nil];dispatch_group_async(group,dispatch_get_global_queue(QOS_CLASS_USER_INITIATED,0),^{managerWriteInput(input.fileHandleForWriting,data,deadline);});}
+    dispatch_group_async(group,dispatch_get_global_queue(QOS_CLASS_USER_INITIATED,0),^{out=managerReadOutput(output.fileHandleForReading,task,deadline,nil);});
+    dispatch_group_async(group,dispatch_get_global_queue(QOS_CLASS_USER_INITIATED,0),^{err=managerReadOutput(errors.fileHandleForReading,task,deadline,^(NSData *line){
         NSDictionary *event=[NSJSONSerialization JSONObjectWithData:line options:0 error:nil];
         if(![event isKindOfClass:NSDictionary.class] || ![event[@"event"] isEqualToString:@"progress"])return;
         dispatch_async(dispatch_get_main_queue(),^{if(self.running!=task)return;
@@ -159,10 +156,10 @@ static NSData *boundedRead(NSFileHandle *file,NSTask *task,void (^lineHandler)(N
             }else if([@[@"prerequisites",@"prepare",@"probe",@"activate",@"complete"] containsObject:event[@"stage"]] && [event[@"message"] isKindOfClass:NSString.class])self.status.stringValue=event[@"message"];
         });
     });});
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW,600*NSEC_PER_SEC),dispatch_get_main_queue(),^{if(self.running==task && task.running)[task terminate];});
     dispatch_group_async(group,dispatch_get_global_queue(QOS_CLASS_USER_INITIATED,0),^{[task waitUntilExit];});
     dispatch_group_notify(group,dispatch_get_main_queue(),^{
         self.running=nil;for(NSButton *button in self.buttons)button.enabled=YES;self.cancelButton.enabled=self.preparation!=nil;self.channel.enabled=YES;self.candidates.enabled=YES;[self.progress stopAnimation:nil];
+        if(timedOut){self.preparation=nil;self.cancelButton.enabled=NO;[self setPhase:@"failed" message:@"The operation timed out. Use Recover / retry before trying again."];return;}
         NSDictionary *result=out.length ? [NSJSONSerialization JSONObjectWithData:out options:0 error:nil] : nil;
         if(![result isKindOfClass:NSDictionary.class]){[self setPhase:@"failed" message:err.length ? [[NSString alloc] initWithData:err encoding:NSUTF8StringEncoding] : @"Operation interrupted. Use Recover / retry before trying again."];return;}
         self.previewChannelButton.hidden=YES;
