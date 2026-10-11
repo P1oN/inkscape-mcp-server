@@ -26,7 +26,7 @@ impl Wire {
             .env("HOME", root)
             .env("PATH", "/usr/bin:/bin")
             .env("INKSCAPE_MCP_WORKSPACE_ROOTS", root)
-            .env("INKSCAPE_MCP_LIVE_ENABLED", "false")
+            .env("INKSCAPE_MCP_LIVE_ENABLED", "true")
             .env("SENTRY_DSN", "")
             .stdin(Stdio::piped())
             .stdout(Stdio::piped())
@@ -121,14 +121,37 @@ fn exercise(root: &Path, modern: bool) -> Vec<Value> {
         ),
         (
             "tools/call",
+            json!({"name":"live_wait_for_change","arguments":{"timeout_s":0}}),
+        ),
+        (
+            "tools/call",
             json!({"name":"missing_fixture_tool","arguments":{}}),
         ),
     ]
     .into_iter()
     .enumerate()
     {
+        let live_wait = params["name"] == "live_wait_for_change";
         let mut response = wire.request(index + 1, method, params, modern);
         assert!(response.get("error").is_none(), "{method}: {response}");
+        if method == "tools/list" {
+            assert!(
+                response["result"]["tools"]
+                    .as_array()
+                    .unwrap()
+                    .iter()
+                    .any(|tool| tool["name"] == "live_wait_for_change")
+            );
+        }
+        if live_wait {
+            assert_eq!(response["result"]["isError"], true);
+            assert!(
+                response["result"]["content"][0]["text"]
+                    .as_str()
+                    .unwrap()
+                    .starts_with("no live session available;")
+            );
+        }
         if modern {
             assert_eq!(response["result"]["resultType"], "complete", "{method}");
             response["result"]

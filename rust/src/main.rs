@@ -747,7 +747,9 @@ impl ServerHandler for Server {
                 Ok(value) => {
                     json!({"resultType":"complete","content":[{"type":"text","text":serde_json::to_string(&value).unwrap()}],"structuredContent":value,"isError":false})
                 }
-                Err(message) => json!({"content":[{"type":"text","text":message}],"isError":true}),
+                Err(message) => {
+                    json!({"resultType":"complete","content":[{"type":"text","text":message}],"isError":true})
+                }
             };
             let result: CallToolResult = serde_json::from_value(value)
                 .map_err(|_| telemetry::internal_error("live wait serialization failed", None))?;

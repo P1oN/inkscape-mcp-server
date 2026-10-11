@@ -51,6 +51,12 @@ discriminators/cache fields and equal legacy payloads after those envelope field
 are removed. The 16-mode discovery matrix matches every frozen contract exactly.
 MCP manifests were regenerated and remain unchanged.
 
+Review found an omitted discriminator on the asynchronous live-wait error branch.
+The STDIO regression now exposes live tools without connecting or launching
+Inkscape, calls a zero-timeout wait with no session, and verifies that the actual
+no-session refusal has a modern discriminator and unchanged legacy content. It
+failed on the omitted field before the one-line repair and passes afterward.
+
 This proves local real-CLI discovery and protocol behavior. Published v0.1.6 retains
 the reproduced incompatibility with this Claude version. Qualification on new signed
 bytes, authenticated interactive client/tool use, live Inkscape reconnect and the
