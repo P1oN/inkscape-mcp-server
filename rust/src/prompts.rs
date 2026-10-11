@@ -70,6 +70,7 @@ pub fn render(
                 json!(text.replace("__MIGRATION_GOAL_SLOT_9a6c0__", clean));
         }
     }
+    rendered["resultType"] = json!("complete");
     let result: GetPromptResult = serde_json::from_value(rendered)
         .map_err(|_| ErrorData::internal_error("prompt serialization failed", None))?;
     Ok(result.into())
