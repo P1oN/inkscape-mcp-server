@@ -12,12 +12,17 @@ Operation Records, atomic rollback and genuine no-op behavior remain part of the
 
 ## Install and run
 
-The native first-install Manager has an unpublished Developer ID signed/notarized
-[local candidate](docs/install/macos-manager-distribution.md) with passing isolated
-installation/update checks. Protected CI delivery and final browser-downloaded/another-Mac
-acceptance remain pending.
+For Apple Silicon macOS 15+ with Inkscape 1.4+, download the
+[v0.1.6 Manager DMG](https://github.com/P1oN/inkscape-mcp-server/releases/download/v0.1.6/Inkscape-MCP-Manager.dmg).
+Open the Manager, choose clients and an existing SVG workspace, review installation,
+then restart/reconnect Codex or Claude. The installer includes an offline runtime;
+ordinary installation needs no Terminal, compiler or Python. Existing settings and
+artwork are preserved. This is a Developer ID signed, notarized **prerelease** with
+passing final CI installation/update checks; browser-downloaded/another-Mac acceptance
+remains pending. See [release evidence](docs/history/reports/v0.1.6-signed-release.md)
+and the [distribution contract](docs/install/macos-manager-distribution.md).
 
-[v0.1.2](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.2) provides current
+[v0.1.2](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.2) provides historical
 source installation and a ready Apple Silicon package. It includes installation/client
 management, complete Python removal, reviewed live packages and vector-quality guards
 from PRs #8–11. Older v0.1.0/v0.1.1 previews retain their original behavior.
