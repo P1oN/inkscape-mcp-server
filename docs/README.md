@@ -1,9 +1,9 @@
 # Documentation
 
 This index separates current usage, remaining work, architecture decisions and dated evidence.
-Current usage distinguishes published v0.1.2 from newer source features, including opt-in
-independent updates. The handoff records release-specific evidence and outstanding acceptance
-as of 2026-10-07.
+Current usage distinguishes the published v0.1.7 signed Manager from historical archives
+and advanced source installation. The handoff records release-specific evidence and
+outstanding acceptance as of 2026-10-12.
 
 ## Start here
 
@@ -20,6 +20,7 @@ as of 2026-10-07.
 
 - **Installation:** [source/package setup](install/install.md), [source prerequisites](install/local-bootstrap.md),
   [GitHub builds](install/github-builds.md), [independent updates](install/independent-updates.md),
+  [another-Mac delivery acceptance](install/another-mac-acceptance.md),
   [client management](install/client-management.md),
   [host configuration](install/host-configs.md), [agent skill](install/agent-skill.md),
   [compatibility](install/compatibility.md), [troubleshooting](install/troubleshooting.md).
