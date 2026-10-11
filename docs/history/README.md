@@ -52,6 +52,8 @@ builds. Use [current status](../AGENT_HANDOFF.md), [active backlog](../RUST_NEXT
   [through PR #9 preparation](agent-checkpoints-through-pr9.md).
 - Release history: [current changelog](../../CHANGELOG.md), [inherited changelog](original-changelog.md).
 
+- [Real Claude Code protocol acceptance](reports/real-claude-protocol-2026-10-11.md): reproduced v0.1.6 discovery failure, modern response envelopes and legacy wire invariants.
+
 ## Evidence storage
 
 Tracked JSON comparisons, provenance and hash-bound snapshots remain in [`migration/`](../../migration/README.md).

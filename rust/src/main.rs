@@ -126,6 +126,12 @@ use rmcp::{ErrorData, RoleServer, ServerHandler, ServiceExt, model::*, service::
 use serde_json::{Value, json};
 use std::sync::{Arc, Mutex};
 
+fn modern_protocol(context: &RequestContext<RoleServer>) -> bool {
+    context
+        .protocol_version()
+        .is_some_and(|version| version >= ProtocolVersion::V_2026_07_28)
+}
+
 /// Preserve the frozen wire shape without cloning a potentially large JSON tree
 /// through an intermediate Value and rmcp's compatibility deserializer.
 fn tool_result(native: Result<Value, String>) -> CallToolResult {
@@ -139,7 +145,6 @@ fn tool_result(native: Result<Value, String>) -> CallToolResult {
                 Some(value)
             };
             let mut result = CallToolResult::success(vec![ContentBlock::text(text)]);
-            result.result_type = None;
             result.structured_content = structured_content;
             result.meta = wrapped.then(|| {
                 serde_json::from_value(json!({"fastmcp": {"wrap_result": true}}))
@@ -147,11 +152,7 @@ fn tool_result(native: Result<Value, String>) -> CallToolResult {
             });
             result
         }
-        Err(message) => {
-            let mut result = CallToolResult::error(vec![ContentBlock::text(message)]);
-            result.result_type = None;
-            result
-        }
+        Err(message) => CallToolResult::error(vec![ContentBlock::text(message)]),
     }
 }
 
@@ -191,10 +192,13 @@ impl Server {
                 .lock()
                 .map_err(|_| telemetry::internal_error("registry lock failed", None))?
                 .clone();
-            let value = match render::call(&registry, name, arguments) {
+            let mut value = match render::call(&registry, name, arguments) {
                 Ok(value) => value,
-                Err(message) => json!({"content":[{"type":"text","text":message}],"isError":true}),
+                Err(message) => {
+                    json!({"resultType":"complete","content":[{"type":"text","text":message}],"isError":true})
+                }
             };
+            value["resultType"] = json!("complete");
             let result: CallToolResult = serde_json::from_value(value)
                 .map_err(|_| telemetry::internal_error("render serialization failed", None))?;
             return Ok(result.into());
@@ -475,11 +479,7 @@ impl Server {
         } else {
             format!("Unknown tool: '{}'", name)
         };
-        let result: CallToolResult = serde_json::from_value(json!({
-            "content": [{"type": "text", "text": message}], "isError": true
-        }))
-        .expect("tool error wire shape");
-        Ok(result.into())
+        Ok(tool_result(Err(message)).into())
     }
     fn read_resource_blocking(
         &self,
@@ -644,13 +644,30 @@ impl Server {
             None,
         )
     }
-    fn decode<T: serde::de::DeserializeOwned>(&self, key: &str) -> Result<T, ErrorData> {
-        serde_json::from_value(self.contract[key].clone())
+    fn decode<T: serde::de::DeserializeOwned>(
+        &self,
+        key: &str,
+        modern: bool,
+    ) -> Result<T, ErrorData> {
+        let mut value = self.contract[key].clone();
+        if key != "initialize" {
+            value["resultType"] = json!("complete");
+            if modern {
+                value["ttlMs"] = json!(0);
+                value["cacheScope"] = json!("private");
+            }
+        }
+        serde_json::from_value(value)
             .map_err(|_| telemetry::internal_error("invalid frozen contract", None))
     }
 }
 
 impl ServerHandler for Server {
+    fn supported_protocol_versions(&self) -> std::borrow::Cow<'static, [ProtocolVersion]> {
+        // Do not advertise future SDK revisions until their wire behavior is tested.
+        std::borrow::Cow::Borrowed(ProtocolVersion::known_up_to(&ProtocolVersion::V_2026_07_28))
+    }
+
     async fn get_prompt(
         &self,
         request: GetPromptRequestParams,
@@ -659,39 +676,40 @@ impl ServerHandler for Server {
         prompts::render(&self.contract, request)
     }
     fn get_info(&self) -> ServerConfig {
-        self.decode("initialize").expect("reference initialization")
+        self.decode("initialize", false)
+            .expect("reference initialization")
     }
 
     async fn list_tools(
         &self,
         _: Option<PaginatedRequestParams>,
-        _: RequestContext<RoleServer>,
+        context: RequestContext<RoleServer>,
     ) -> Result<ListToolsResult, ErrorData> {
-        self.decode("tools/list")
+        self.decode("tools/list", modern_protocol(&context))
     }
 
     async fn list_resources(
         &self,
         _: Option<PaginatedRequestParams>,
-        _: RequestContext<RoleServer>,
+        context: RequestContext<RoleServer>,
     ) -> Result<ListResourcesResult, ErrorData> {
-        self.decode("resources/list")
+        self.decode("resources/list", modern_protocol(&context))
     }
 
     async fn list_resource_templates(
         &self,
         _: Option<PaginatedRequestParams>,
-        _: RequestContext<RoleServer>,
+        context: RequestContext<RoleServer>,
     ) -> Result<ListResourceTemplatesResult, ErrorData> {
-        self.decode("resources/templates/list")
+        self.decode("resources/templates/list", modern_protocol(&context))
     }
 
     async fn list_prompts(
         &self,
         _: Option<PaginatedRequestParams>,
-        _: RequestContext<RoleServer>,
+        context: RequestContext<RoleServer>,
     ) -> Result<ListPromptsResult, ErrorData> {
-        self.decode("prompts/list")
+        self.decode("prompts/list", modern_protocol(&context))
     }
 
     async fn call_tool(
@@ -727,7 +745,7 @@ impl ServerHandler for Server {
                 .await
             {
                 Ok(value) => {
-                    json!({"content":[{"type":"text","text":serde_json::to_string(&value).unwrap()}],"structuredContent":value,"isError":false})
+                    json!({"resultType":"complete","content":[{"type":"text","text":serde_json::to_string(&value).unwrap()}],"structuredContent":value,"isError":false})
                 }
                 Err(message) => json!({"content":[{"type":"text","text":message}],"isError":true}),
             };
@@ -771,6 +789,7 @@ impl ServerHandler for Server {
         request: ReadResourceRequestParams,
         context: RequestContext<RoleServer>,
     ) -> Result<ReadResourceResponse, ErrorData> {
+        let modern = modern_protocol(&context);
         let operation = if matches!(
             request.uri.as_str(),
             "inkscape://workspace"
@@ -793,7 +812,7 @@ impl ServerHandler for Server {
         let dropped = Arc::new(std::sync::atomic::AtomicBool::new(false));
         let _cancel_on_drop = process::CancelOnDrop(dropped.clone());
         let ct = context.ct.clone();
-        tokio::task::spawn_blocking(move || {
+        let mut response = tokio::task::spawn_blocking(move || {
             let _permit = permit;
             let _operation = operation;
             process::with_cancellation(
@@ -802,7 +821,15 @@ impl ServerHandler for Server {
             )
         })
         .await
-        .map_err(|_| telemetry::internal_error("resource worker failed", None))?
+        .map_err(|_| telemetry::internal_error("resource worker failed", None))??;
+        if let ReadResourceResponse::Complete(result) = &mut response {
+            result.result_type = Some(ResultType::COMPLETE);
+            if modern {
+                result.ttl_ms = Some(0);
+                result.cache_scope = Some(CacheScope::Private);
+            }
+        }
+        Ok(response)
     }
 }
 
@@ -877,6 +904,54 @@ mod wire_result_tests {
     use super::*;
 
     #[test]
+    fn discovery_advertises_only_the_tested_protocol_ceiling() {
+        let server = Server {
+            contract: Arc::new(contract::contract()),
+            operations: Arc::new(tokio::sync::Mutex::new(())),
+            workers: Arc::new(tokio::sync::Semaphore::new(4)),
+            registry: Arc::new(Mutex::new(document::Registry::new())),
+            capabilities: Arc::new(Mutex::new(None)),
+            runtime_bus: Arc::new(Mutex::new(None)),
+            live: Arc::new(Mutex::new(live::Live::new())),
+        };
+        let discovery = DiscoverResult::from_server_info(
+            server.supported_protocol_versions().into_owned(),
+            server.get_info(),
+        );
+        assert_eq!(
+            serde_json::to_value(discovery).unwrap()["supportedVersions"],
+            json!([
+                "2024-11-05",
+                "2025-03-26",
+                "2025-06-18",
+                "2025-11-25",
+                "2026-07-28"
+            ])
+        );
+        for (requested, expected) in [
+            ("2024-11-05", "2024-11-05"),
+            ("2025-03-26", "2025-03-26"),
+            ("2026-07-28", "2025-03-26"),
+            ("2099-01-01", "2025-03-26"),
+        ] {
+            let request = serde_json::from_value(json!({
+                "protocolVersion": requested,
+                "capabilities": {},
+                "clientInfo": {"name": "protocol-regression", "version": "1"}
+            }))
+            .unwrap();
+            assert_eq!(
+                server
+                    .negotiate_initialize(&request)
+                    .unwrap()
+                    .protocol_version
+                    .as_str(),
+                expected
+            );
+        }
+    }
+
+    #[test]
     fn cancelled_detection_does_not_publish_or_replace_capability_cache() {
         let registry = document::Registry::new();
         for previous in [None, Some(json!({"previous_success": true}))] {
@@ -930,8 +1005,14 @@ mod wire_result_tests {
                 }),
             })
             .unwrap();
+            let mut result = ServerResult::CallToolResult(tool_result(input));
             assert_eq!(
-                serde_json::to_value(tool_result(input)).unwrap(),
+                serde_json::to_value(&result).unwrap()["resultType"],
+                "complete"
+            );
+            result.strip_result_type_for_legacy_peer();
+            assert_eq!(
+                serde_json::to_value(result).unwrap(),
                 serde_json::to_value(legacy).unwrap()
             );
         }

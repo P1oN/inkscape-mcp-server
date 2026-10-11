@@ -4,6 +4,10 @@ These options are included in v0.1.2 sources and ready runtime, and current `mai
 Historical v0.1.1 assets lack these options.
 Install Inkscape first, then configure an existing SVG workspace with setup.
 
+Claude Code 2.1.296 exposes a tool-discovery incompatibility in published v0.1.6.
+The current protocol repair has local real-CLI acceptance but still needs a new
+qualified signed distribution; see the [scoped evidence](../history/reports/real-claude-protocol-2026-10-11.md).
+
 ```sh
 ./setup.sh --connect-client codex --install-skill codex
 ./setup.sh --connect-client claude --install-skill claude
