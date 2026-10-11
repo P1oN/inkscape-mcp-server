@@ -1,6 +1,6 @@
 # Agent handoff — current status
 
-As of **2026-10-07**, the v0.1.2 prerelease surface includes installation/responsiveness
+The historical **2026-10-07** v0.1.2 prerelease surface includes installation/responsiveness
 (PR #8), complete native Rust runtime and vector authoring (PR #9), computed live inspection
 and reviewed packages (PR #10), and vector-quality guards/fragment dry-run (PR #11).
 The [v0.1.2 tag](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.2) identifies
@@ -12,25 +12,33 @@ Read [README](../README.md), [CONTRIBUTING](../CONTRIBUTING.md) and
 work, and [history](history/README.md) retains earlier checkpoint/acceptance evidence.
 Check current code and Git status before relying on recorded results.
 
-## Published signed prerelease — 2026-10-11
+## Published signed prerelease — 2026-10-12
 
-[v0.1.6](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.6) is published.
-PR #34 merged as `59a95936e85ebdb797fb6a5ce7250bd9fee5f3b8`; main CI
-`38086442144` passed. Protected signed-release run `38158685812` passed all four
-stages, including final signed package/installer/distinct-update checks and 128/128
-launcher sessions with four workers. Build `ec46066ff9bb32b0`, Team `DN263AX69U`,
-has Accepted Runtime, Manager and DMG notarizations. All 15 remote asset digests match
-the verified inventory; local extraction/revalidation of the staged publication passes.
-The intermediate-certificate/keychain search-list repair resolved the prior identity
-failure. See the [release ledger](history/reports/v0.1.6-signed-release.md).
+[v0.1.7](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.7) is published
+from `684ce4c9f4721243fde45ab6a3727332b2b07e50`. Main CI `38171170748` and protected
+release run `38173489174` passed. Build `65afcd383ad71d71`, Team `DN263AX69U`, has
+Accepted Runtime/Manager/DMG notarizations, final signed package/installer/distinct-update
+checks and 128/128 launcher sessions with four workers. All 15 remote asset digests/sizes
+match the verified inventory; the tag points to the exact source and the release is immutable.
+The published runtime repairs modern Claude discovery; Manager helper I/O has bounded
+operation/read/write deadlines and termination escalation. Actual Claude Code 2.1.296
+fresh isolated installation, two healthy discovery connections and owned disconnect pass
+on these signed bytes, preserving unrelated settings/artwork. No authenticated model or
+workspace-tool session is claimed. See the [release ledger](history/reports/v0.1.7-signed-release.md).
 
-Priority 1 remains open for browser-quarantined/another-Mac installation, real Claude,
-clean-host source bootstrap and whole-job interruption qualification. Published native
-instructions-only/runtime-only/combined downloads, rollback and no-update observations
-passed in an isolated local profile on macOS 27.0. Live reconnect and storage/media
-failure cases remain open, as does a helper lock-file open stall in a Documents-based
-test profile; see the release ledger for the scoped observations. No
-installed user runtime, client settings or Inkscape windows were changed by this release.
+The initial signed candidate passed final acceptance but publication failed when PR #38
+changed main workflows during signing. The current-main retry succeeded with workflow
+merges deferred. The follow-up adds workflow-tree preflights and release-window guidance.
+PR #38 retains failure/cancellation containers with executable permissions; actual protected
+cancellation upload and whole-job recovery still need qualification.
+
+Priority 1 remains open for the full [another-Mac matrix](install/another-mac-acceptance.md),
+clean-host source bootstrap, authenticated real-client workspace interaction, separately
+authorized live reconnect and remaining storage/media failures. Same-host v0.1.6 Chrome
+quarantine/Finder mount and retained headless-session tests have separate scoped evidence.
+The Documents-profile lock-file open stall has a retained native sample; bounded Manager
+recovery passed, but its filesystem cause remains unproven. No user installation, client
+settings or Inkscape windows were changed by these isolated checks.
 
 ## Historical release follow-up — 2026-10-09–10
 
@@ -41,8 +49,8 @@ dependencies). Rust and Bash fixtures retain signature/receipt/reference/archive
 publication/recovery refusals. All 62 Python files, the retired source archive, obsolete
 eval runners and version/dependency files were removed. Historical reports, JSON evidence
 and license/provenance records retain their original scope; original sources remain in Git.
-No MCP schema or runtime instruction changed. The signing-identity issue is separate and
-still requires a fresh protected run after this source passes CI.
+No MCP schema or runtime instruction changed in that removal. The signing-identity issue
+was subsequently resolved and protected delivery passed in v0.1.6.
 
 PR #30 is merged as `6499d29ea3a067963efa3ecb07134c2fb7b668d1`.
 [Main native CI 37851864135](https://github.com/P1oN/inkscape-mcp-server/actions/runs/37851864135)

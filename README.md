@@ -13,13 +13,13 @@ Operation Records, atomic rollback and genuine no-op behavior remain part of the
 ## Install and run
 
 For Apple Silicon macOS 15+ with Inkscape 1.4+, download the
-[v0.1.6 Manager DMG](https://github.com/P1oN/inkscape-mcp-server/releases/download/v0.1.6/Inkscape-MCP-Manager.dmg).
+[v0.1.7 Manager DMG](https://github.com/P1oN/inkscape-mcp-server/releases/download/v0.1.7/Inkscape-MCP-Manager.dmg).
 Open the Manager, choose clients and an existing SVG workspace, review installation,
 then restart/reconnect Codex or Claude. The installer includes an offline runtime;
 ordinary installation needs no Terminal, compiler or Python. Existing settings and
 artwork are preserved. This is a Developer ID signed, notarized **prerelease** with
 passing final CI installation/update checks; browser-downloaded/another-Mac acceptance
-remains pending. See [release evidence](docs/history/reports/v0.1.6-signed-release.md)
+remains pending. See [release evidence](docs/history/reports/v0.1.7-signed-release.md)
 and the [distribution contract](docs/install/macos-manager-distribution.md).
 
 [v0.1.2](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.2) provides historical
@@ -90,8 +90,8 @@ manual configuration, standalone checks, legacy skill handling and recovery.
 
 Startup/reconnect/doctor never launch Inkscape. Explicit GUI launch requires a user request.
 Live operations use the selected open drawing; headless operations use working copies.
-Clean-machine installation, real Claude Code client acceptance and broader native GUI checks
-remain follow-up work; [current status](docs/AGENT_HANDOFF.md) records validation scope.
+Clean-machine installation, authenticated real-client workspace interaction and broader
+native GUI checks remain follow-up work; [current status](docs/AGENT_HANDOFF.md) records validation scope.
 
 ## Optional agent skill
 

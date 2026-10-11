@@ -66,6 +66,13 @@ jobs:
           printf 'source_sha=%s\n' "$(jq -er .source_revision candidate/CANDIDATE.json)" >> "$GITHUB_OUTPUT"
           gh run download "$RELEASE_RUN_ID" --name inkscape-mcp-update-baseline --dir baseline-input
           (cd baseline-input && shasum -a 256 -c update-baseline.tar.gz.sha256)
+      - name: Check candidate workflow compatibility with the publication token
+        run: |
+          git fetch --no-tags origin main
+          if ! git diff --quiet "$(jq -er .source_revision candidate/CANDIDATE.json)" FETCH_HEAD -- .github/workflows/; then
+            printf '%s\n' 'Candidate workflows differ from current main. Use a successful current-main candidate; GITHUB_TOKEN cannot authorize workflow changes through the release API.' >&2
+            exit 1
+          fi
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: signed-candidate
@@ -208,6 +215,13 @@ jobs:
           gh run download "$GITHUB_RUN_ID" --name signed-verified --dir inputs
           (cd inputs && shasum -a 256 -c publication.tar.gz.sha256)
           scripts/release-guard.sh extract-ci-artifact inputs/publication.tar.gz final
+      - name: Check main workflows have not changed during signing
+        run: |
+          git fetch --no-tags origin main
+          if ! git diff --quiet HEAD FETCH_HEAD -- .github/workflows/; then
+            printf '%s\n' 'Main workflows changed during signing. Publication stopped before creating or modifying a release. Retain these verified assets and retry from a successful current-main candidate.' >&2
+            exit 1
+          fi
       - name: Upload verified bytes, check remote digests, then publish
         env:
           GH_TOKEN: ${{ github.token }}

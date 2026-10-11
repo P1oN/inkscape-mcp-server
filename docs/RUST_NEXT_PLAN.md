@@ -1,6 +1,6 @@
 # Active backlog
 
-Updated **2026-10-09** with the requested macOS installation and signed-release plan.
+Updated **2026-10-12** with the requested macOS installation and signed-release plan.
 This file contains only
 unfinished work. Implemented Python removal and authoring plans are in
 [history](history/plans/python-removal-and-authoring.md); completed product milestones are
@@ -9,57 +9,35 @@ in [the milestone index](history/README.md). Current behavior/validation is in
 
 ## Priority 1 — validation and delivery
 
-**Delivery checkpoint, 2026-10-11:** PR #34 is merged as `59a9593`; main CI
-`38086442144` and protected signed-release run `38158685812` pass. Signed/notarized
-[v0.1.6](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.6) is published
-with all 15 assets verified. Final signed package/installer/distinct-update checks and
-128/four-worker startup pass for build `ec46066ff9bb32b0`, Team `DN263AX69U`.
-See [release evidence](history/reports/v0.1.6-signed-release.md). The implementation
-plan below retains its original context; outstanding exit gates are another-Mac/browser
-quarantine acceptance, clean-host source bootstrap, real Claude and whole-job interruption
-qualification, plus live reconnect/storage cases. Published native GUI downloads
-passed in an isolated local profile; the lock-file open stall below remains unresolved.
+**Delivery checkpoint, 2026-10-12:** signed/notarized
+[v0.1.7](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.7) is published
+from `684ce4c`, build `65afcd383ad71d71`, Team `DN263AX69U`. Main CI
+`38171170748` and protected release run `38173489174` passed, including final
+signed package/installer/distinct-update checks and 128/four-worker startup. All 15
+remote asset digests/sizes and the tag match the verified candidate. Actual isolated
+Claude Code 2.1.296 discovery/disconnect passes on the published matching bytes.
+See [release evidence](history/reports/v0.1.7-signed-release.md).
+
+Outstanding exit gates remain the full [another-Mac/browser matrix](install/another-mac-acceptance.md),
+clean-host source bootstrap, authenticated real-client workspace interaction,
+separately authorized live reconnect, protected whole-job interruption/recovery and
+remaining storage/media cases. Published v0.1.6 native GUI download/update results,
+same-host Chrome quarantine/Finder mount, actual ENOSPC/process interruption and held
+headless sessions keep their documented scope. Bounded Manager helper recovery is
+implemented/qualified; the Documents-profile filesystem stall's cause is still unproven.
+The numbered implementation plan below retains the full requested requirements.
 
 ### Smooth macOS installation and signed releases — implementation plan
 
-Requested on 2026-10-08 after installation on another Mac exposed repeated macOS
-component approvals and a Manager stuck at “Reading installed versions…” with
-“No launcher found”. Apple Developer Program membership and App Store Connect access
-are confirmed active on 2026-10-08. A usable Developer ID Application identity for
-Team `DN263AX69U` is now installed, and the local `inkscape-release` notarization
-profile successfully authenticates. Local signed/notarized qualification passes;
-protected CI credential setup and clean-host delivery remain pending. This section is
-the active implementation backlog. The installer/layout/release development checkpoint is
-recorded in the [ledger](history/reports/macos-installer-2026-10-08.md). Latest complete
-local Runtime/helper build `1a52d477e623f8d5` has Accepted Runtime/Manager/DMG,
-validated tickets, 453-file package acceptance, stapled-Manager 19-boundary installer
-acceptance and distinct-runtime update/rollback checks. It repairs custom/missing engine
-path recovery. Local recovery preserves original Runtime/Manager submissions and records
-one new DMG submission; all final assets are explicitly non-CI/local evidence.
-Earlier build `7ad414e1314fd62b` retains separately bound native Cocoa first-install/no-op
-and signed instructions-only reuse evidence. The local notarization profile is restored.
-The complete delivery flow has local implementation and guard coverage, but protected
-CI execution, whole-job interruption qualification and browser-downloaded/another-Mac
-acceptance remain unqualified. No release has been published.
-
-Release follow-up: PR #30 is merged and main CI `37851864135` passes. Local signed
-build `f80f0fd90eef4ad9` was notarized, but failed final installer/update and concurrent
-startup qualification. Receipt handoff and launch-lock fixes pass scoped local checks;
-the fixes are merged through PR #31 and fresh main CI `37970554352` passed.
-Protected environments and signing credential names/variables are configured; actual
-protected signing and fresh distribution qualification remain unverified. First
-protected run `37973923331` stopped before import because its installed toolchain
-was not selected; preparation now explicitly selects Rust 1.99.0 for its tool build.
-PR #32 merged as `09a626e`, and main CI `37977730375` passed. Protected rerun
-`37981279488` built tooling but could not find the configured Developer ID identity
-in its imported keychain. Export/private-key inclusion and runner trust state need
-verification. The user updated both certificate secrets on 2026-10-10; attempt 2
-failed with the same identity error. A public certificate/identity preflight is now
-implemented. Investigation found a missing temporary-keychain search-list entry
-and a G1-issued local certificate on a runner configured with G2. The repair now
-supplies pinned public G1/G2 intermediates and preserves/restores the search list;
-protected execution remains pending. No release is published. See the
-[2026-10-09 ledger](history/reports/signed-runtime-receipts-2026-10-09.md).
+Requested on 2026-10-08 after another-Mac installation exposed repeated macOS
+approvals and a Manager stuck reading installed versions. Developer ID Team
+`DN263AX69U`, local notarization and protected signing/publication are now qualified.
+The original installer/layout checkpoints and failed release attempts remain in the
+[installer ledger](history/reports/macos-installer-2026-10-08.md),
+[receipt/concurrency ledger](history/reports/signed-runtime-receipts-2026-10-09.md) and
+[v0.1.6 evidence](history/reports/v0.1.6-signed-release.md). v0.1.7's unpublished initial
+candidate and successful current-main retry are recorded separately in its release ledger.
+Completed credentials/publication work does not satisfy the remaining host/client gates.
 
 **Outcome:** one Apple Silicon DMG, a native installation/upgrade wizard, preserved
 settings/artwork, and Developer ID signed/notarized executable distributions. Normal
@@ -280,7 +258,7 @@ The following existing delivery qualification remains open:
 | Task | Next action | Completion evidence |
 | --- | --- | --- |
 | Clean-machine Apple Silicon installation | Exercise source bootstrap on a separate clean macOS 15+ host: Apple SDK installation, pinned downloads, quarantine, first setup, client registration, render and reinstall. | Host/tool versions, commands, actual prompts/failures and preserved settings/drawings. Existing-host acceptance is insufficient. |
-| Real Claude Code acceptance | Use an installed Claude client in an isolated profile where supported; check registration scope, handshake, first workspace request, reconnect and disconnect. | Actual client version/config scope and results. Synthetic CLI routing remains separate. |
+| Real Claude Code acceptance | Published v0.1.7 real CLI discovery/disconnect passes; complete authenticated workspace interaction and interactive reconnect in an isolated profile. | Actual client/version/config scope and tool results; CLI diagnostics alone do not prove authenticated interaction. |
 | Complete broader review and release qualification | Resolve the previously skipped CodeRabbit review through a bounded review process and complete the host/client acceptance above before a stable release. v0.1.2 remains a prerelease; successful status alone is not proof of completed review. | Reviewed scope and unresolved findings are explicit; source/build identity and distribution checks stay bound to each archive. |
 
 ## Independent updates — remaining release qualification
@@ -294,10 +272,11 @@ acceptance there does not establish another-Mac signed installation acceptance.
 | Task | Next action | Completion evidence |
 | --- | --- | --- |
 | Live reconnect and retained helpers | With explicit GUI authorization, reconnect an isolated client after updating and exercise owned synthetic Inkscape documents while an older helper path is retained. | Actual client/runtime identities, unchanged user windows and native results. No Inkscape GUI was launched for update acceptance. |
-| Bounded Manager helper operations | Investigate the Documents-profile lock-file open stall and ensure a stalled helper leaves a recoverable UI within an operation deadline. | Native reproduction/sample and bounded recovery checks; see the [v0.1.6 ledger](history/reports/v0.1.6-signed-release.md). |
+| Documents-profile filesystem stall | Bounded Manager recovery is implemented and qualified; determine the cause of the retained lock-file open stall without changing user files. | Native sample/reproduction and scoped recovery checks; see the [deadline report](history/reports/manager-helper-deadline-2026-10-11.md). |
 | Storage/media failure qualification | Extend automated journal/move-boundary and post-selector write-failure checks with real ENOSPC, media failure and process termination. | Old or new pair remains launchable, recovery is idempotent, and skill edits are preserved. |
 
-Clean-machine installation, real Claude and broader release review remain in Priority 1.
+Clean-machine installation, authenticated real-client interaction and broader release
+review remain in Priority 1.
 Automatic scheduling, differential downloads, unattended launcher self-update and Windows
 remain future scope. User-requested Manager/launcher upgrade and Developer ID
 signing/notarization are now scoped in the implementation plan above.
