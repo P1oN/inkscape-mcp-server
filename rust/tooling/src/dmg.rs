@@ -33,8 +33,6 @@ pub fn build(root: &Path, destination: &Path) -> Result<()> {
             .is_file(),
         "Manager must contain the installer background before app signing",
     )?;
-    #[cfg(unix)]
-    std::os::unix::fs::symlink("/Applications", root.join("Applications"))?;
     let scratch = tempfile::tempdir()?;
     let scratch_path = scratch.path().canonicalize()?;
     let source = scratch_path.join("dmg-layout.m");
@@ -79,6 +77,9 @@ pub fn build(root: &Path, destination: &Path) -> Result<()> {
     // Even a failed/timed-out attach can have mounted it: attempt cleanup on that path too.
     let result: Result<()> = (|| {
         mount(&writable, &point, false)?;
+        // Only mutate the private image, preserving the caller's root for retries.
+        #[cfg(unix)]
+        std::os::unix::fs::symlink("/Applications", point.join("Applications"))?;
         output(Command::new(&helper).arg("write").arg(&point))?;
         output(Command::new(&helper).arg("verify").arg(&point))?;
         Ok(())
@@ -133,8 +134,19 @@ mod tests {
         let resources = root.join("Inkscape MCP Manager.app/Contents/Resources");
         fs::create_dir_all(&resources).unwrap();
         fs::write(resources.join("installer-background.tiff"), BACKGROUND).unwrap();
+        // Conversion fails after layout creation when its parent does not exist.
+        // Retrying the same input must not encounter a leftover Applications link.
+        let failed_image = temp.path().join("missing/Manager.dmg");
+        assert!(build(&root, &failed_image).is_err());
+        assert!(!failed_image.exists());
+        assert!(!root.join("Applications").is_symlink());
         let image = temp.path().join("Manager.dmg");
         build(&root, &image).unwrap();
+        assert!(!root.join("Applications").is_symlink());
+        assert_eq!(
+            fs::read(resources.join("installer-background.tiff")).unwrap(),
+            BACKGROUND
+        );
         assert!(image.metadata().unwrap().len() > 1024);
         assert!(build(&root, &image).is_err());
     }

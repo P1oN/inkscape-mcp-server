@@ -99,6 +99,15 @@ SHA-256 38c5dc0046a1f25486288e15cdde1640a468e630ab1fb3fc93fa7a1647ca5d86
 
 Evidence: `.inkscape-mcp-local/resize-{tooling-tests,native-test,clippy,package-build,distribution-build,mounted-check}.log`.
 
+PR #42 review follow-up moves Applications-link creation into the private writable
+mounted image. The caller's source root is no longer mutated, including on failure.
+The native regression forces conversion failure after layout creation, retries the
+same root successfully, checks that no source Applications link remains and confirms
+the original TIFF bytes. Existing-output refusal and compressed-image remount/alias
+checks remain covered. The explicit native test, all 29 tooling tests, tooling Clippy
+with warnings denied, format and diff checks passed. Evidence is retained in
+`.inkscape-mcp-local/pr42-repair-{native,tests,clippy}.log`.
+
 ### Earlier Finder observation
 
 The initial actual Finder window showed the title, background, Manager icon, chevron
