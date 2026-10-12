@@ -85,6 +85,17 @@ legacy layout downloads and launchers remain supported; the new layout adapter s
 bundle paths only when bundle metadata exists. Never redirect old runtime assets to
 new bytes or claim notarization for unsigned historical runtime reuse.
 
+The current source window groups client connections, SVG workspace, Inkscape and
+update channel into native sections. **Review installation** (or **Review changes**)
+prepares and probes the connection; **Install now** activates that reviewed result.
+Changing choices invalidates the preparation. Status and the primary action remain
+visible while settings scroll. **Advanced** contains the installation picker,
+version/signature details, component-only updates and rollback. **Check updates**
+appears after a verified runtime is installed, and **Update now** appears when the
+selected channel has an available update. Recovery appears when attention is needed.
+These window changes are local and not included in v0.1.7; see the
+[UI report](../history/reports/manager-ui-refresh-2026-10-12.md).
+
 The Manager invokes fixed Rust operations: `install-inspect`, `install-prepare`,
 `install-activate`, `install-recover`, `manager-prepare`, and `manager-activate`.
 Preparation takes bounded JSON through stdin and performs archive verification,
