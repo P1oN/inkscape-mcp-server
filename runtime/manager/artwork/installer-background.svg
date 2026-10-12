@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="480" viewBox="0 0 720 480">
+  <defs>
+    <radialGradient id="blue"><stop stop-color="#e3efff"/><stop offset="1" stop-color="#e3efff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="violet"><stop stop-color="#ede9ff"/><stop offset="1" stop-color="#ede9ff" stop-opacity="0"/></radialGradient>
+    <linearGradient id="white-right"><stop offset=".8" stop-color="white" stop-opacity="0"/><stop offset=".98" stop-color="white"/></linearGradient>
+    <linearGradient id="white-bottom" x2="0" y2="1"><stop offset=".83" stop-color="white" stop-opacity="0"/><stop offset=".98" stop-color="white"/></linearGradient>
+  </defs>
+  <rect width="720" height="480" fill="#faf9f7"/>
+  <ellipse cx="0" cy="0" rx="390" ry="270" fill="url(#blue)"/>
+  <ellipse cx="720" cy="480" rx="390" ry="270" fill="url(#blue)"/>
+  <ellipse cx="0" cy="480" rx="310" ry="220" fill="url(#violet)"/>
+  <ellipse cx="720" cy="0" rx="310" ry="220" fill="url(#violet)"/>
+  <g id="bezier-curves" fill="none" stroke="#b1afff" stroke-width="1" opacity=".8">
+    <path d="M590 -20 C598 80 650 110 744 93 M-20 388 C62 382 93 440 175 445"/>
+    <path d="M584 28 L626 66 L698 112 M28 370 L88 416 L175 445" stroke-width=".65" opacity=".6"/>
+    <g fill="#faf9ff"><circle cx="584" cy="28" r="3.5"/><circle cx="698" cy="112" r="3.5"/><circle cx="28" cy="370" r="3.5"/><circle cx="175" cy="445" r="3.5"/></g>
+    <g fill="#cbc9ff" stroke-width=".5"><rect x="622" y="62" width="8" height="8"/><rect x="84" y="412" width="8" height="8"/></g>
+  </g>
+  <!-- Blend into Finder's white canvas when the user enlarges the window. -->
+  <rect width="720" height="480" fill="url(#white-right)"/>
+  <rect width="720" height="480" fill="url(#white-bottom)"/>
+  <text x="360" y="96" text-anchor="middle" font-family="Helvetica Neue, Helvetica, sans-serif" font-size="32" font-weight="600" fill="#252830">Inkscape MCP Manager</text>
+  <path id="drag-arrow" d="M355 233 L369 247 L355 261" fill="none" stroke="#555a63" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

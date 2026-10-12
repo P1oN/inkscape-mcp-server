@@ -5,6 +5,7 @@ mod bootstrap;
 mod clients;
 mod common;
 mod distribution;
+mod dmg;
 mod install;
 mod installer_acceptance;
 mod invariants;

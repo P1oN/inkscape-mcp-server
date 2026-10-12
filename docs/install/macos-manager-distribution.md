@@ -28,13 +28,40 @@ preparation again. These changes passed final signed-artifact CI qualification i
 the historical local candidate evidence remains bound to its earlier bytes.
 
 The default application location is `~/Applications/Inkscape MCP Manager.app`.
+Current sources also recognize a verified Manager explicitly copied by the user to
+`/Applications/Inkscape MCP Manager.app`; it is used in place, without making a second
+per-user copy. Launching from the mounted image or Downloads retains the existing
+guarded per-user relocation/reopen flow.
 The Manager stages a verified copy and asks to install/reopen it. A separate bundled
 helper waits for that Manager to exit before replacing the destination. A running
 destination app causes refusal; the installer never kills it. An inventory-bound
 journal restores interrupted directory moves and preserves later edits. Runtime state
 remains in `~/Library/Application Support/inkscape-mcp`.
 
-The DMG contains one Manager application. Its Resources contain matching instructions
+The DMG contains one Manager application and an `Applications` shortcut to `/Applications`.
+Its language-neutral presentation uses a light background, deliberately authored
+Bezier accents, a right-facing chevron and the Manager's own app icon. The filename
+labels are real Finder objects; the background contains only the product name.
+The background is a 720×480-point, 1×/2× TIFF; `.DS_Store` fixes the icon view,
+160-point icons, positions and window bounds without automating Finder or changing
+user preferences. These bounds set the initial size; Finder still permits resizing.
+The artwork fades to white at its right/bottom edges to blend with the enlarged canvas.
+The TIFF is sealed inside the Manager's `Contents/Resources` before app signing,
+so no separate `.background` folder appears even when hidden files are shown.
+A development-only native helper creates the background alias on
+the writable image; preparation detaches, compresses to UDZO and verifies the alias
+on a different read-only mount before the existing DMG signing/notarization steps.
+Failed detach preserves the scratch mount instead of recursively cleaning it.
+The helper is never shipped in the Manager or exposed as an MCP tool.
+
+Editable sources and generated resources live in `runtime/manager/artwork/`.
+`bash scripts/render-manager-artwork.sh` regenerates the TIFF and `.icns` using
+headless Inkscape and Apple's `sips`, `tiffutil` and `iconutil`. Ordinary builds use
+the checked-in resources and need no artwork generator, Python or Finder automation.
+See the [presentation evidence](../history/reports/manager-dmg-design-2026-10-12.md)
+for local checks and the distinction from signed-release acceptance.
+
+The Manager's Resources contain matching instructions
 and an offline runtime archive. The runtime archive has a fixed
 `inkscape-mcp-macos-arm64/` top directory, an external `FILES.json`, and an
 `Inkscape MCP Runtime.app`. Rust executables and private D-Bus tools reside in
@@ -95,6 +122,13 @@ Developer tooling (new output directories are required):
 scripts/dev-tools.sh build-distribution --package VERIFIED_PACKAGE --output NEW_DIRECTORY \
   --channel prerelease --tag LOCAL_TAG
 scripts/dev-tools.sh installer-acceptance --package VERIFIED_PACKAGE --output NEW_EVIDENCE_DIRECTORY
+```
+
+The explicit native metadata/mount regression is:
+
+```sh
+cargo test --locked --manifest-path rust/tooling/Cargo.toml --bin inkscape-mcp-tools \
+  dmg::tests::compressed_image_resolves_background_after_remount -- --ignored --nocapture
 ```
 
 For Developer ID preparation, `build-distribution` additionally requires all of

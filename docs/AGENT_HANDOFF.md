@@ -12,6 +12,29 @@ Read [README](../README.md), [CONTRIBUTING](../CONTRIBUTING.md) and
 work, and [history](history/README.md) retains earlier checkpoint/acceptance evidence.
 Check current code and Git status before relying on recorded results.
 
+## Local Manager DMG presentation — 2026-10-12
+
+Isolated worktree branch `codex/manager-dmg-design` implements the approved
+language-neutral DMG concept: editable SVG masters, native app icon, Retina background,
+Applications shortcut and bounded native Finder metadata generation without Finder
+automation. A verified Manager copied to `/Applications` stays there; the existing
+per-user relocation/recovery path remains the default for launches elsewhere.
+Both Cargo test/Clippy/format graphs, the explicit mount/convert/remount regression,
+release fixtures, final-layout runtime package acceptance and the runtime-only
+19-boundary installer matrix pass locally. The signed-Manager matrix correctly
+refuses this ad-hoc helper/tooling at its Developer ID preflight.
+The local ad-hoc preview is unnotarized, not a release. Finder showed the earlier
+layout's artwork/icons; metadata adds a titlebar allowance. The resize follow-up
+fades the artwork to white at its right/bottom edges and seals the background inside
+the app before signing, removing the separate root background directory.
+A CUA window-binding failure prevented a final visual capture;
+final readonly mount, signature/icon and background-alias checks passed.
+See the [scoped evidence](history/reports/manager-dmg-design-2026-10-12.md).
+No installed runtime/client settings, Inkscape GUI or original checkout was changed.
+The user authorized committing this work and opening a PR; no release is published.
+MCP schemas/instructions are unchanged, so
+no catalog regeneration or server restart is required.
+
 ## Published signed prerelease — 2026-10-12
 
 [v0.1.7](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.7) is published

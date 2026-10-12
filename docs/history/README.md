@@ -21,6 +21,9 @@ builds. Use [current status](../AGENT_HANDOFF.md), [active backlog](../RUST_NEXT
 ## Reports and logs
 
 - [Manager first install and shared Codex registration](reports/manager-first-install-2026-10-12.md): other-Mac failure report, app/CLI registration without executable discovery, full local installer acceptance and isolated native UI check.
+- [Manager DMG presentation](reports/manager-dmg-design-2026-10-12.md): isolated
+  worktree implementation, editable artwork, native metadata/remount checks and
+  local ad-hoc preview; explicitly scoped Finder evidence and release limitations.
 
 - [v0.1.7 signed release](reports/v0.1.7-signed-release.md): current-main publication,
   exact final asset verification, real Claude discovery on signed bytes and retained
