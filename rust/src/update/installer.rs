@@ -647,7 +647,10 @@ pub fn prepare(root: &Path, mut request: Request) -> Result<Value> {
             continue;
         }
         let entry = entry?;
-        if !client_available(&name) {
+        // Codex app and CLI share this profile. Registration is a preserving
+        // config edit, so it does not require discovering or executing either
+        // client (Finder launches commonly have no CLI on PATH).
+        if name != "codex" && !client_available(&name) {
             return Err(format!(
                 "{name} client is missing; install it before connecting"
             ));

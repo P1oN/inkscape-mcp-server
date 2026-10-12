@@ -70,7 +70,8 @@ fn custom_engine_acceptance(
     let home = output_dir.join("custom-engine-home");
     fs::create_dir_all(home.join(".codex"))?;
     fs::create_dir(home.join("bin"))?;
-    for client in ["codex", "claude"] {
+    {
+        let client = "claude";
         fs::copy(
             output_dir.join("home/bin").join(client),
             home.join("bin").join(client),
@@ -221,7 +222,8 @@ fn legacy_acceptance(
     let home = output_dir.join("legacy-home");
     fs::create_dir_all(home.join(".codex"))?;
     fs::create_dir(home.join("bin"))?;
-    for client in ["codex", "claude"] {
+    {
+        let client = "claude";
         fs::copy(
             output_dir.join("home/bin").join(client),
             home.join("bin").join(client),
@@ -345,7 +347,10 @@ pub fn run(args: &Args) -> Result<()> {
     let workspace = output_dir.join("drawings");
     fs::create_dir(&workspace)?;
     fs::write(workspace.join("original.svg"), "preserved original")?;
-    for name in ["codex", "claude"] {
+    // Codex registration must work without its CLI on Finder's PATH. The
+    // synthetic profile is shared by the app and CLI; neither is executed.
+    {
+        let name = "claude";
         use std::os::unix::fs::PermissionsExt;
         fs::write(
             home.join("bin").join(name),

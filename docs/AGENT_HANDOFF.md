@@ -40,6 +40,21 @@ The Documents-profile lock-file open stall has a retained native sample; bounded
 recovery passed, but its filesystem cause remains unproven. No user installation, client
 settings or Inkscape windows were changed by these isolated checks.
 
+The other-Mac user reports that v0.1.7 Manager installation completes smoothly,
+but checking updates before runtime installation produces a missing
+`~/.codex/settings.json` error, and connecting Codex reports the client missing
+despite the desktop app being installed. The user confirms they did not select
+`~/.codex` through the installation picker and reports the desktop app in
+`/Applications`. The origin of the selected installation path remains unconfirmed;
+runtime installation/reconnect acceptance remains open. The follow-up makes
+update-before-install explain the required next action without creating files,
+shows the selected installation path, and registers the default Codex selection
+for both app and CLI through their shared profile without requiring executable
+discovery. Local complete installer acceptance without a synthetic Codex CLI,
+19 recovery boundaries and an isolated native window check pass; see the
+[first-install report](history/reports/manager-first-install-2026-10-12.md).
+This is not yet a published fix.
+
 ## Historical release follow-up — 2026-10-09–10
 
 On 2026-10-10 the user requested removal of all Python, including historical sources.
