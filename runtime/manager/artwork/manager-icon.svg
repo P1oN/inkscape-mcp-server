@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="tile" x2=".7" y2="1"><stop stop-color="#fffefd"/><stop offset="1" stop-color="#eae6e0"/></linearGradient>
+    <linearGradient id="ink" x2=".6" y2="1"><stop stop-color="#354658"/><stop offset="1" stop-color="#111820"/></linearGradient>
+    <linearGradient id="violet" x2=".4" y2="1"><stop stop-color="#b39aff"/><stop offset="1" stop-color="#6250ed"/></linearGradient>
+    <filter id="shadow" x="-.2" y="-.2" width="1.4" height="1.5"><feGaussianBlur stdDeviation="12"/></filter>
+  </defs>
+  <rect x="70" y="88" width="884" height="884" rx="206" fill="#192233" opacity=".16" filter="url(#shadow)"/>
+  <rect x="70" y="66" width="884" height="884" rx="206" fill="url(#tile)" stroke="#fff" stroke-width="3"/>
+  <g id="ink-mountain">
+    <path d="M216 533 L472 224 Q512 177 552 224 L808 533 Q846 580 789 598 L624 647 L400 647 L235 598 Q178 580 216 533Z" fill="url(#ink)"/>
+    <path d="M403 317 L493 219 Q512 200 531 219 L618 317 L566 300 Q551 297 538 310 L516 338 Q502 353 487 336 L464 305 L443 322 Q427 335 403 317Z" fill="#fcfbf8"/>
+  </g>
+  <g id="pen-nib">
+    <path d="M500 503 C489 605 453 661 408 712 Q455 746 463 804 L561 804 Q569 746 616 712 C571 661 535 605 524 503Z" fill="#17202a"/>
+    <path d="M512 530 L506 705 C478 720 487 749 512 749 C537 749 546 720 518 705Z" fill="#f9f7f3"/>
+  </g>
+  <g id="connected-nodes" fill="url(#violet)" stroke="url(#violet)" stroke-width="25" stroke-linecap="round">
+    <path d="M324 654 L512 510 L700 654" fill="none"/>
+    <circle cx="324" cy="654" r="47" stroke-width="5"/><circle cx="512" cy="510" r="47" stroke-width="5"/><circle cx="700" cy="654" r="47" stroke-width="5"/>
+    <g fill="#f5f0ff" stroke="none"><circle cx="324" cy="654" r="19"/><circle cx="512" cy="510" r="19"/><circle cx="700" cy="654" r="19"/></g>
+  </g>
+</svg>

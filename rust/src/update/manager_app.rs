@@ -26,6 +26,9 @@ struct Plan {
 fn parent() -> Result<PathBuf> {
     Ok(PathBuf::from(std::env::var_os("HOME").ok_or("HOME missing")?).join("Applications"))
 }
+fn installed_location(source: &Path, per_user_parent: &Path) -> bool {
+    source == per_user_parent.join(APP) || source == Path::new("/Applications").join(APP)
+}
 fn current_app() -> Result<PathBuf> {
     let exe = std::env::current_exe().map_err(|e| e.to_string())?;
     let contents = exe
@@ -180,8 +183,8 @@ pub fn prepare(root: &Path) -> Result<Value> {
     let _lock = Lock::acquire(root)?;
     recover(root)?;
     let target = parent.join(APP);
-    if source == target {
-        return Ok(json!({"manager_ready":true,"manager_application":target}));
+    if installed_location(&source, &parent) {
+        return Ok(json!({"manager_ready":true,"manager_application":source}));
     }
     idle(&target)?;
     let before = if target.exists() || target.is_symlink() {
@@ -302,6 +305,23 @@ pub fn activate(root: &Path, id: &str, parent_pid: i32) -> Result<Value> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn copied_managers_in_both_applications_folders_are_ready_without_relocation() {
+        let parent = Path::new("/Users/example/Applications");
+        assert!(installed_location(&parent.join(APP), parent));
+        assert!(installed_location(
+            &Path::new("/Applications").join(APP),
+            parent
+        ));
+        for path in [
+            "/Volumes/Inkscape MCP Manager/Inkscape MCP Manager.app",
+            "/Users/example/Downloads/Inkscape MCP Manager.app",
+            "/Applications/Other.app",
+            "/Applications/Subfolder/Inkscape MCP Manager.app",
+        ] {
+            assert!(!installed_location(Path::new(path), parent));
+        }
+    }
     fn fixture() -> (tempfile::TempDir, PathBuf, Plan) {
         let temp = tempfile::tempdir().unwrap();
         let root = temp.path().canonicalize().unwrap();

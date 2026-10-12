@@ -821,21 +821,7 @@ pub fn run(args: &Args) -> Result<()> {
         )?;
     }
     let dmg = out.join("Inkscape-MCP-Manager.dmg");
-    output(
-        Command::new("/usr/bin/hdiutil")
-            .args([
-                "create",
-                "-format",
-                "UDZO",
-                "-fs",
-                "HFS+",
-                "-volname",
-                "Inkscape MCP",
-            ])
-            .arg("-srcfolder")
-            .arg(dmg_root.path())
-            .arg(&dmg),
-    )?;
+    crate::dmg::build(dmg_root.path(), &dmg)?;
     if signing.team.is_some() {
         output(
             Command::new("/usr/bin/codesign")

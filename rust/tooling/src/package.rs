@@ -617,6 +617,11 @@ fn build(out: &Path, binary: &Path) -> Result<()> {
             app.join("Info.plist"),
             r#"<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><dict><key>CFBundleExecutable</key><string>inkscape-mcp-manager</string><key>CFBundleIdentifier</key><string>org.inkscape-mcp.manager</string><key>CFBundleName</key><string>Inkscape MCP Manager</string><key>CFBundlePackageType</key><string>APPL</string><key>CFBundleShortVersionString</key><string>1.0</string><key>LSMinimumSystemVersion</key><string>15.0</string><key>NSHighResolutionCapable</key><true/></dict></plist>"#,
         )?;
+        fs::write(app.join("Resources/Manager.icns"), crate::dmg::ICON)?;
+        fs::write(
+            app.join("Resources/installer-background.tiff"),
+            crate::dmg::BACKGROUND,
+        )?;
         let info = fs::read_to_string(app.join("Info.plist"))?;
         let build = hash(&app.join("MacOS/inkscape-mcp-manager"))?;
         fs::write(
@@ -624,7 +629,7 @@ fn build(out: &Path, binary: &Path) -> Result<()> {
             info.replace(
                 "</dict></plist>",
                 &format!(
-                    "<key>InkscapeMCPBuildID</key><string>{}</string></dict></plist>",
+                    "<key>CFBundleIconFile</key><string>Manager.icns</string><key>InkscapeMCPBuildID</key><string>{}</string></dict></plist>",
                     &build[..16]
                 ),
             ),
