@@ -184,6 +184,16 @@ pub fn update(
     version: Option<&str>,
     os_major: u32,
 ) -> Result<Value> {
+    if [
+        "active.json",
+        "installation-journal.json",
+        "transaction.json",
+    ]
+    .iter()
+    .all(|name| !root.join(name).exists() && !root.join(name).is_symlink())
+    {
+        return Err("No MCP runtime is installed in the selected folder. Choose Install first, or select an existing MCP installation. The Codex settings folder is not an MCP installation.".into());
+    }
     let lock = if check {
         None
     } else {

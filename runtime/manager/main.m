@@ -10,6 +10,7 @@ static NSString *managerHome(void) {
 @interface Manager : NSObject <NSApplicationDelegate, NSWindowDelegate>
 @property NSWindow *window;
 @property NSTextField *installed;
+@property NSTextField *installationLabel;
 @property NSTextField *available;
 @property NSTextField *status;
 @property NSTextField *workspaceLabel;
@@ -57,9 +58,10 @@ static NSString *managerHome(void) {
     self.available=[NSTextField wrappingLabelWithString:@"The bundled version can be installed offline. Check online for newer versions when ready."];
     self.status=[NSTextField wrappingLabelWithString:@"Checking this installation…"];
     [stack addArrangedSubview:self.installed];[stack addArrangedSubview:self.available];
+    self.installationLabel=[NSTextField wrappingLabelWithString:[@"MCP installation: " stringByAppendingString:self.installation]];[stack addArrangedSubview:self.installationLabel];
     self.candidates=[NSPopUpButton new];[self.candidates addItemWithTitle:@"New installation"];
     NSStackView *found=[NSStackView stackViewWithViews:@[self.candidates,[self button:@"Use selected installation" action:@selector(selectCandidate:)],[self button:@"Choose installation…" action:@selector(choose:)]]];found.spacing=8;[stack addArrangedSubview:found];
-    self.codex=[self button:@"Codex" action:@selector(changeOptions:)];self.codex.buttonType=NSButtonTypeSwitch;self.codex.state=NSControlStateValueOn;
+    self.codex=[self button:@"Codex (app + CLI)" action:@selector(changeOptions:)];self.codex.buttonType=NSButtonTypeSwitch;self.codex.state=NSControlStateValueOn;
     self.claude=[self button:@"Claude Code" action:@selector(changeOptions:)];self.claude.buttonType=NSButtonTypeSwitch;
     self.skills=[self button:@"Install agent skill" action:@selector(changeOptions:)];self.skills.buttonType=NSButtonTypeSwitch;self.skills.state=NSControlStateValueOn;
     NSStackView *clients=[NSStackView stackViewWithViews:@[[NSTextField labelWithString:@"Connect"],self.codex,self.claude,self.skills]];clients.spacing=12;[stack addArrangedSubview:clients];
@@ -95,6 +97,7 @@ static NSString *managerHome(void) {
 - (void)selectPath:(NSString *)path {
     if([[NSFileManager defaultManager] fileExistsAtPath:[path stringByAppendingPathComponent:@".inkscape-mcp-local/setup.conf"]]){self.legacySource=path;self.installButton.title=@"Upgrade existing installation";[self run:@[@"install-inspect",@"--source",path] request:nil];}
     else {self.legacySource=nil;self.installation=path;[[NSUserDefaults standardUserDefaults] setObject:path forKey:@"InstallationDirectory"];[self inspect];}
+    self.installationLabel.stringValue=[@"MCP installation: " stringByAppendingString:self.installation];
     self.preparation=nil;
 }
 - (void)selectCandidate:(id)sender {
@@ -188,7 +191,7 @@ static NSString *managerHome(void) {
             if([result[@"workspace"] isKindOfClass:NSString.class] && ![result[@"workspace"] containsString:@":"]){self.workspace=result[@"workspace"];self.workspaceLabel.stringValue=self.workspace;}
             if([result[@"inkscape"] isKindOfClass:NSString.class]){self.inkscape=result[@"inkscape"];self.inkscapeLabel.stringValue=self.inkscape;}else self.inkscapeLabel.stringValue=@"Inkscape was not found. Install Inkscape 1.4 or newer, then choose it here.";
             NSMutableArray *missing=[NSMutableArray new];
-            for(NSDictionary *client in result[@"clients"]){if(![client[@"available"] boolValue])[missing addObject:[client[@"name"] isEqualToString:@"codex"] ? @"Codex" : @"Claude Code"];}
+            for(NSDictionary *client in result[@"clients"]){if(![client[@"name"] isEqualToString:@"codex"] && ![client[@"available"] boolValue])[missing addObject:@"Claude Code"];}
             self.status.stringValue=[result[@"installed"][@"bootstrap_damaged"] boolValue] ? @"The permanent launcher is damaged. Upgrade the bundled installation to repair it." : [result[@"recovery_required"] boolValue] ? @"An interrupted installation needs recovery. Choose Recover / retry." : [self.state isEqualToString:@"damaged"] ? @"This installation could not be verified. Choose Recover / retry, or select a verified installation with Choose installation." : [result[@"choice_required"] boolValue] && !self.legacySource ? @"Multiple installations were found. Select the one you want to upgrade." : @"Ready. Choose clients and a workspace, then Install or Update.";
             for(NSDictionary *client in result[@"clients"]){if([client[@"error"] isKindOfClass:NSString.class])self.status.stringValue=[self.status.stringValue stringByAppendingFormat:@" %@",client[@"error"]];}
             if(missing.count)self.status.stringValue=[self.status.stringValue stringByAppendingFormat:@" %@ was not found. Install the client before selecting it.",[missing componentsJoinedByString:@" / "]];

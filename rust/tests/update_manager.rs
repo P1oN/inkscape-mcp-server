@@ -294,6 +294,26 @@ fn crash_recovery_at_each_move_boundary_is_idempotent_and_locked() {
     }
 }
 struct Fake(BTreeMap<String, Vec<u8>>);
+#[test]
+fn update_before_install_explains_next_step_without_mutation() {
+    use inkscape_mcp_rust::update::manager::{self, Component};
+    let temp = tempfile::tempdir().unwrap();
+    let root = temp.path().join("missing-installation");
+    for check in [true, false] {
+        let error = manager::update(
+            &root,
+            &Fake(BTreeMap::new()),
+            Component::Both,
+            check,
+            None,
+            None,
+            27,
+        )
+        .unwrap_err();
+        assert!(error.contains("Choose Install first"), "{error}");
+        assert!(!root.exists());
+    }
+}
 impl Transport for Fake {
     fn get(&self, url: &str, limit: u64) -> Result<Vec<u8>> {
         let bytes = self.0.get(url).ok_or("fixture network failure")?.clone();

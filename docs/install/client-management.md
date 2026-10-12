@@ -29,6 +29,12 @@ binding in the existing TOML/JSON, preserving other servers, preferences, enviro
 timeouts. TOML comments/formatting outside the managed binding survive. The old config is
 backed up. New command/args/transport replace the old binding; obsolete HTTP fields are removed.
 Codex respects CODEX_HOME; Claude registers in user scope. Other servers are preserved.
+The native Manager selects **Codex (app + CLI)** by default and registers one shared
+user-level entry in `$CODEX_HOME/config.toml` (normally `~/.codex/config.toml`).
+The desktop app and CLI using that same profile both load the entry; separate
+profiles need their own registration. The Manager does not require the Codex CLI
+on PATH or execute Codex during registration. Restart the app and reconnect CLI
+sessions after installation. See [OpenAI's developer settings](https://learn.chatgpt.com/docs/developer-settings).
 Standalone `connect` refuses a differing entry; setup automatically replaces it. Ordinary
 setup also refreshes existing registrations without requiring `--connect-client`; this flag
 selects a new registration. An existing profile can be refreshed with `upgrade` without
