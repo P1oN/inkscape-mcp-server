@@ -20,6 +20,9 @@ builds. Use [current status](../AGENT_HANDOFF.md), [active backlog](../RUST_NEXT
 
 ## Reports and logs
 
+- [Manager window refresh](reports/manager-ui-refresh-2026-10-12.md): native setup
+  hierarchy, contextual actions, automated AppKit state/layout checks and scoped
+  real-window evidence; local and unpublished.
 - [Manager first install and shared Codex registration](reports/manager-first-install-2026-10-12.md): other-Mac failure report, app/CLI registration without executable discovery, full local installer acceptance and isolated native UI check.
 - [Manager DMG presentation](reports/manager-dmg-design-2026-10-12.md): isolated
   worktree implementation, editable artwork, native metadata/remount checks and

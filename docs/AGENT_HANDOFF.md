@@ -12,6 +12,23 @@ Read [README](../README.md), [CONTRIBUTING](../CONTRIBUTING.md) and
 work, and [history](history/README.md) retains earlier checkpoint/acceptance evidence.
 Check current code and Git status before relying on recorded results.
 
+## Local Manager window refresh — 2026-10-12
+
+The isolated `codex/manager-ui-refresh-v2` working tree groups client, workspace,
+Inkscape and update choices into native cards, pins status and primary actions, and
+collapses installation/version/component/recovery details under Advanced. Setup
+uses Review installation → Install now; available updates use Update now. Missing
+prerequisites and unavailable update/rollback actions are gated; operation errors
+retain installed-version context. The Rust installer operations are unchanged.
+Tooling tests, Clippy, formatting and strict native compilation pass. A hidden
+AppKit fixture checks action routing, preparation invalidation, recovery and minimum
+window layout in both appearances. The isolated real window opened correctly;
+CUA timed out after folder selection, so native review/activation acceptance is
+incomplete. No user runtime/client profile or Inkscape window was changed.
+This UI is local and unpublished; see the
+[scoped report](history/reports/manager-ui-refresh-2026-10-12.md).
+MCP schemas/instructions are unchanged; no catalog regeneration or restart is needed.
+
 ## Local Manager DMG presentation — 2026-10-12
 
 Isolated worktree branch `codex/manager-dmg-design` implements the approved
