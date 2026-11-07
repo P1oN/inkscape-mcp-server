@@ -1,5 +1,19 @@
 # Agent handoff — current status
 
+## Headless Boolean Union preservation
+
+The #51 follow-up imports engine geometry into the original tree for `boolean_union`. The lowest
+editable sibling keeps its ID, paint, fill rule and position. The other operands are
+consumed only when surviving objects do not reference them. The import refuses an
+unidentifiable or non-closed result or a changed coordinate frame or fill rule.
+
+`engine-routes-acceptance` compares the saved SVG structure and rendered pixels
+with an independent three-shape union, including a retained hole, a clone of the
+survivor and an overlapping gradient-filled neighbor. It checks both unsafe operand
+refusals and byte-exact snapshot rollback. The new regression caught unrelated SVG
+attribute changes on the previous binary. Both engine modes passed locally with
+Inkscape 1.4.3. See the [contributor checklist](../CONTRIBUTING.md#required-invariants).
+
 The historical **2026-10-07** v0.1.2 prerelease surface includes installation/responsiveness
 (PR #8), complete native Rust runtime and vector authoring (PR #9), computed live inspection
 and reviewed packages (PR #10), and vector-quality guards/fragment dry-run (PR #11).

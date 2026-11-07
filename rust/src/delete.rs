@@ -30,7 +30,7 @@ impl Mutation {
         }
         Ok(Self { ids })
     }
-    pub fn mutate(&self, document: &mut Document) -> Result<String, String> {
+    pub(crate) fn check_references(&self, document: &Document) -> Result<(), String> {
         let root = document
             .get_root_element()
             .ok_or("document could not be parsed safely")?;
@@ -122,6 +122,14 @@ impl Mutation {
                 }
             }
         }
+        Ok(())
+    }
+
+    pub fn mutate(&self, document: &mut Document) -> Result<String, String> {
+        self.check_references(document)?;
+        let root = document
+            .get_root_element()
+            .ok_or("document could not be parsed safely")?;
         let mut removed = Vec::new();
         for id in &self.ids {
             let Some(mut target) = elements(root.clone())
