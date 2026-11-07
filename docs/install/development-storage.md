@@ -25,7 +25,8 @@ source revision, how to recreate it and whether it is temporary output, a cache,
 evidence or a rollback copy. Remove task-owned disposable output after successful
 steps. After a failure or cancellation, retain the diagnostics and reproducer needed
 for investigation. Preserve configuration, original artwork, uncommitted work, reports
-and required screenshots and provenance. Schedule background cleanup only at the user's request.
+and required screenshots and provenance. Schedule background cleanup only at the
+user's request.
 
 ## Source setup
 
@@ -38,10 +39,11 @@ package mentioned by a running process. Unmarked older builds, symlinks, staging
 with user additions and packages with added or removed paths are preserved. Independent-update
 runtime profiles follow their own retention and rollback policy.
 
-Before rerunning setup or applying cleanup, identify builds needed for rollback or an
-ongoing investigation. Keep required copies outside the managed build directories and
-leave selected or running packages in place. Defer setup or cleanup if required copies
-cannot be preserved. The automatic age and count rules apply only to marked disposable builds.
+Before rerunning setup or applying package cleanup, inspect eligible builds for packages
+and symbols needed for rollback or an ongoing investigation. Keep required copies outside
+the managed build directories and leave selected or running packages in place. Defer setup
+or package cleanup if required copies cannot be preserved. The automatic age and count
+rules apply only to marked disposable builds.
 The package inventory checks paths, so preserve any in-place changes you need to keep
 outside the managed build directory before running setup or cleanup.
 
@@ -98,16 +100,19 @@ Passing reports apply to the bytes tested in the original run.
 
 ## Explicit cleanup
 
-Preview or apply package retention without rebuilding anything:
+Preview package retention and check the candidates against the preservation rules above
+before applying it:
 
 ```sh
 scripts/cleanup-development.sh
 scripts/cleanup-development.sh --apply
 ```
 
-Before selecting `--caches`, retain a complete copy of each unique release `.dSYM` outside
-both default Cargo target directories. Use package-only cleanup if any required symbols
-cannot be preserved. Preview or remove both default targets while development tools are idle:
+Before selecting `--caches`, retain release symbols and their matching executables outside
+both default Cargo target directories. Keep each unique macOS `.dSYM` bundle and the matching
+Linux release `.dwp` files for builds with packed debug information. If any required files
+cannot be preserved, leave the targets in place. Preview or remove both default targets
+while development tools are idle:
 
 ```sh
 scripts/cleanup-development.sh --caches
