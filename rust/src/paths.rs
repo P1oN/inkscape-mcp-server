@@ -2,7 +2,7 @@
 use crate::{
     arguments,
     document::{INKSCAPE_NS, Registry, elements},
-    identity, placement, process, render, style, transaction,
+    find, geometry, identity, placement, process, render, style, transaction,
     workspace::Workspace,
     xml,
 };
@@ -11,6 +11,7 @@ use serde_json::{Value, json};
 use std::{
     collections::{HashMap, HashSet},
     path::Path,
+    time::Duration,
 };
 
 fn action(op: &str) -> &'static str {
@@ -89,7 +90,7 @@ fn is_svg(node: &Node) -> bool {
         .is_some_and(|ns| ns.get_href() == "http://www.w3.org/2000/svg")
 }
 
-fn union_fill_rule(node: &Node) -> Option<String> {
+fn direct_fill_rule(node: &Node) -> Option<String> {
     let mut declarations =
         crate::css::analysis_declarations(&node.get_property_no_ns("style").unwrap_or_default())?;
     if declarations.keys().any(|key| {
@@ -112,7 +113,7 @@ fn union_fill_rule(node: &Node) -> Option<String> {
     )
 }
 
-fn editable_union_shape(node: &Node) -> bool {
+fn editable_boolean_shape(node: &Node) -> bool {
     matches!(
         node.get_name().as_str(),
         "path" | "rect" | "circle" | "ellipse" | "polygon" | "polyline"
@@ -122,7 +123,7 @@ fn editable_union_shape(node: &Node) -> bool {
                 && matches!(child.get_name().as_str(), "title" | "desc")
                 && child.get_child_elements().is_empty()
         })
-        && union_fill_rule(node).is_some()
+        && direct_fill_rule(node).is_some()
         && !node.get_properties_ns().keys().any(|(key, ns)| {
             matches!(key.as_str(), "path-effect" | "original-d")
                 || (ns.as_ref().is_some_and(|ns| ns.get_href() == INKSCAPE_NS)
@@ -141,7 +142,14 @@ fn editable_union_shape(node: &Node) -> bool {
 }
 
 // Document order determines the survivor and the order given to Inkscape.
-fn union_operands(document: &Document, ids: &[String]) -> Result<Vec<(String, Node)>, String> {
+fn boolean_operands(
+    document: &Document,
+    ids: &[String],
+    op: &str,
+) -> Result<Vec<(String, Node)>, String> {
+    if op == "boolean_difference" && ids.len() != 2 {
+        return Err("boolean_difference requires exactly two objects".into());
+    }
     let mut selected: HashMap<_, _> = ids.iter().map(|id| (id.as_str(), false)).collect();
     let mut operands = Vec::with_capacity(ids.len());
     for node in elements(document.get_root_element().unwrap()) {
@@ -149,7 +157,7 @@ fn union_operands(document: &Document, ids: &[String]) -> Result<Vec<(String, No
             && let Some(seen) = selected.get_mut(id.as_str())
         {
             if *seen {
-                return Err(format!("boolean_union operand ID is ambiguous: {id}"));
+                return Err(format!("{op} operand ID is ambiguous: {id}"));
             }
             *seen = true;
             operands.push((id, node));
@@ -160,9 +168,11 @@ fn union_operands(document: &Document, ids: &[String]) -> Result<Vec<(String, No
         || parent.is_none()
         || operands
             .iter()
-            .any(|(_, node)| node.get_parent() != parent || !editable_union_shape(node))
+            .any(|(_, node)| node.get_parent() != parent || !editable_boolean_shape(node))
     {
-        return Err("boolean_union requires sibling shapes with directly editable geometry".into());
+        return Err(format!(
+            "{op} requires sibling shapes with directly editable geometry"
+        ));
     }
     crate::delete::Mutation {
         ids: operands[1..].iter().map(|(id, _)| id.clone()).collect(),
@@ -172,7 +182,7 @@ fn union_operands(document: &Document, ids: &[String]) -> Result<Vec<(String, No
 }
 
 fn same_merge_frame(body: &Node, result: &Node) -> bool {
-    let (Some(body_rule), Some(result_rule)) = (union_fill_rule(body), union_fill_rule(result))
+    let (Some(body_rule), Some(result_rule)) = (direct_fill_rule(body), direct_fill_rule(result))
     else {
         return false;
     };
@@ -222,14 +232,20 @@ fn same_merge_frame(body: &Node, result: &Node) -> bool {
     old.is_none() && new.is_none()
 }
 
-fn apply_union_geometry(operands: Vec<(String, Node)>, incoming: &Document) -> Result<(), String> {
+fn apply_boolean_geometry(
+    operands: Vec<(String, Node)>,
+    incoming: &Document,
+    op: &str,
+) -> Result<(), String> {
     let mut operands = operands.into_iter();
-    let (body_id, mut body) = operands.next().ok_or("union has no body")?;
+    let (body_id, mut body) = operands.next().ok_or("boolean operation has no body")?;
     let result = find(incoming, &body_id)
         .filter(|n| n.get_name() == "path" && is_svg(n))
-        .ok_or("boolean_union produced no identifiable editable body path")?;
+        .ok_or_else(|| format!("{op} produced no identifiable editable body path"))?;
     if !same_merge_frame(&body, &result) {
-        return Err("boolean_union result changed the body coordinate frame or fill rule".into());
+        return Err(format!(
+            "{op} result changed the body coordinate frame or fill rule"
+        ));
     }
     let consumed: HashSet<_> = operands.as_slice().iter().map(|(id, _)| id).collect();
     if elements(incoming.get_root_element().unwrap())
@@ -239,31 +255,171 @@ fn apply_union_geometry(operands: Vec<(String, Node)>, incoming: &Document) -> R
                 .is_some_and(|id| consumed.contains(&id))
         })
     {
-        return Err("boolean_union engine result retained a consumed operand".into());
+        return Err(format!("{op} engine result retained a consumed operand"));
     }
     let d = result
         .get_property_no_ns("d")
         .filter(|d| !d.trim().is_empty())
-        .ok_or("boolean_union produced no body geometry")?;
+        .ok_or_else(|| format!("{op} produced no body geometry"))?;
     if !crate::geometry_quality::path(&d, 0.)
         .is_ok_and(|review| review.open_subpaths == 0 && review.segments > 2)
     {
-        return Err("boolean_union produced no valid closed path geometry".into());
+        return Err(format!("{op} produced no valid closed path geometry"));
     }
     body.set_name("path")
-        .map_err(|_| "cannot update union body")?;
+        .map_err(|_| "cannot update boolean body")?;
     for key in SHAPE_GEOMETRY {
         if *key != "d" && body.get_property_no_ns(key).is_some() {
             body.remove_property_no_ns(key)
-                .map_err(|_| "cannot replace union geometry")?;
+                .map_err(|_| "cannot replace boolean geometry")?;
         }
     }
     body.set_property("d", &d)
-        .map_err(|_| "cannot write union geometry")?;
+        .map_err(|_| "cannot write boolean geometry")?;
     for (_, mut operand) in operands {
         operand.unlink_node();
     }
     Ok(())
+}
+
+fn has_unbounded_region_style(raw: &str) -> bool {
+    crate::css::analysis_declarations(raw).is_none_or(|style| {
+        style.iter().any(|(key, value)| {
+            !matches!(
+                key.as_str(),
+                "fill"
+                    | "fill-rule"
+                    | "fill-opacity"
+                    | "stroke"
+                    | "stroke-width"
+                    | "stroke-opacity"
+                    | "stroke-linecap"
+                    | "stroke-linejoin"
+                    | "stroke-miterlimit"
+                    | "stroke-dasharray"
+                    | "stroke-dashoffset"
+                    | "opacity"
+                    | "visibility"
+                    | "display"
+                    | "paint-order"
+                    | "color"
+                    | "stop-color"
+                    | "stop-opacity"
+            ) || ["var(", "env(", "attr(", "calc("]
+                .iter()
+                .any(|function| value.to_ascii_lowercase().contains(function))
+        })
+    })
+}
+
+fn can_bound_difference(document: &Document, body: &Node, ids: &[String]) -> bool {
+    let root = document.get_root_element().unwrap();
+    // Query boxes cover ordinary paint and transforms. Effects, dynamic content,
+    // external references or bbox-relative clipping can change pixels elsewhere.
+    if elements(root.clone()).iter().any(|node| {
+        matches!(
+            node.get_name().as_str(),
+            "filter"
+                | "mask"
+                | "marker"
+                | "foreignObject"
+                | "script"
+                | "link"
+                | "animate"
+                | "animateColor"
+                | "animateMotion"
+                | "animateTransform"
+                | "set"
+                | "discard"
+        ) || node.get_properties_ns().iter().any(|((key, _), value)| {
+            matches!(
+                key.as_str(),
+                "filter"
+                    | "mask"
+                    | "marker"
+                    | "marker-start"
+                    | "marker-mid"
+                    | "marker-end"
+                    | "vector-effect"
+                    | "path-effect"
+                    | "base"
+            ) || (key == "style" && has_unbounded_region_style(value))
+                // Query output is line-oriented and trims the ID column.
+                || (key == "id" && (value.trim() != value || value.contains([',', '\r', '\n'])))
+                || (key == "clipPathUnits" && value != "userSpaceOnUse")
+                || (key == "href" && !value.starts_with('#'))
+        })
+    }) {
+        return false;
+    }
+    let mut ancestor = body.get_parent();
+    let mut ancestors = Vec::new();
+    while let Some(node) = ancestor.filter(Node::is_element_node) {
+        if node != root && node.get_name() != "g" {
+            return false;
+        }
+        ancestors.extend(node.get_property_no_ns("id"));
+        ancestor = node.get_parent();
+    }
+    // A surviving use, text path, clip or other reference to the body or one
+    // of its containers can move the visual effect outside the operand boxes.
+    crate::delete::Mutation { ids: ids.to_vec() }
+        .check_references_with(document, ancestors)
+        .is_ok()
+}
+
+fn difference_region(
+    registry: &Registry,
+    id: &str,
+    snapshot: &str,
+    ids: &[String],
+    survivor: &str,
+) -> Option<Value> {
+    let [first, second] = ids else {
+        return None;
+    };
+    let entry = registry.entries.get(id)?;
+    let before = transaction::snapshot_source(registry, entry, snapshot).ok()?;
+    let document = placement::load(registry, id).ok()?;
+    let root = document.get_root_element()?;
+    let (sx, sy, tx, ty) = geometry::root_mapping(&root).ok()?;
+    let timeout = process::timeout().min(Duration::from_secs(2));
+    let before = find::query_source(&registry.workspace, entry, &before, timeout).ok()?;
+    let operands = [before.get(first)?, before.get(second)?];
+    let after = find::query_source(&registry.workspace, entry, &entry.working(), timeout).ok()?;
+    let mut edges = [
+        f64::INFINITY,
+        f64::INFINITY,
+        f64::NEG_INFINITY,
+        f64::NEG_INFINITY,
+    ];
+    for &[x, y, w, h] in operands.into_iter().chain([after.get(survivor)?]) {
+        // At large magnitudes the CLI's printed precision cannot support pixel padding.
+        if w <= 0.
+            || h <= 0.
+            || [x, y, w, h]
+                .iter()
+                .any(|v| !v.is_finite() || v.abs() > 100_000.)
+        {
+            return None;
+        }
+        edges = [
+            edges[0].min(x),
+            edges[1].min(y),
+            edges[2].max(x + w),
+            edges[3].max(y + h),
+        ];
+    }
+    // Pad and round out in CSS pixels to account for CLI rounding and antialiasing.
+    let [left, top, right, bottom] = edges;
+    let x = (left.floor() - 1. - tx) / sx;
+    let y = (top.floor() - 1. - ty) / sy;
+    let region = json!({"x":x,"y":y,"width":((right.ceil() + 1. - tx) / sx) - x,
+        "height":((bottom.ceil() + 1. - ty) / sy) - y});
+    let [left, top, right, bottom] = geometry::Region::build(&root, &region, 512, "transparent")
+        .ok()?
+        .bounds;
+    (right > left && bottom > top).then_some(region)
 }
 
 fn finish_outline(old: &Document, new: &mut Document, ids: &[String]) -> Result<(), String> {
@@ -493,12 +649,13 @@ pub fn apply(registry: &Registry, op: &str, args: &Value) -> Result<Value, Strin
     }
     let dry = arguments::boolean(args, "dry_run", true)?;
     let approval = arguments::string(args, "approval_token")?;
+    let preserve_tree = matches!(op, "boolean_union" | "boolean_difference");
     let mut result = json!({"doc_id":id,"op":op,"dry_run":dry,"changed":false,"affected_ids":[],"result_id":null,"summary":null,"operation_id":null,"snapshot_id":null,"preview_before":null,"preview_after":null});
     if dry {
         let document = placement::load(registry, id)?;
         let ids = targets(&document, &raw, op)?;
-        let bottom = if op == "boolean_union" {
-            union_operands(&document, &ids)?
+        let bottom = if preserve_tree {
+            boolean_operands(&document, &ids, op)?
                 .into_iter()
                 .next()
                 .map(|(id, _)| id)
@@ -520,6 +677,7 @@ pub fn apply(registry: &Registry, op: &str, args: &Value) -> Result<Value, Strin
     }
     let mut captured = Vec::new();
     let mut survivor = None;
+    let mut bounded = false;
     let applied = transaction::apply(
         registry,
         id,
@@ -530,12 +688,14 @@ pub fn apply(registry: &Registry, op: &str, args: &Value) -> Result<Value, Strin
         |document| {
             let ids = targets(document, &raw, op)?;
             captured = ids.clone();
-            if op == "boolean_union" {
-                let operands = union_operands(document, &ids)?;
+            if preserve_tree {
+                let operands = boolean_operands(document, &ids, op)?;
+                bounded = op == "boolean_difference"
+                    && can_bound_difference(document, &operands[0].1, &ids);
                 let engine_ids: Vec<_> = operands.iter().map(|(id, _)| id.clone()).collect();
                 let new = run(registry, id, op, &engine_ids)?;
                 validate_result(document, &new)?;
-                apply_union_geometry(operands, &new)?;
+                apply_boolean_geometry(operands, &new, op)?;
                 survivor = engine_ids.into_iter().next();
                 return Ok(format!("applied {op} to {} objects", ids.len()));
             }
@@ -590,6 +750,14 @@ pub fn apply(registry: &Registry, op: &str, args: &Value) -> Result<Value, Strin
         "preview_after",
     ] {
         result[key] = applied[key].clone();
+    }
+    if bounded
+        && applied["changed"] == true
+        && let (Some(snapshot), Some(survivor)) =
+            (applied["snapshot_id"].as_str(), survivor.as_deref())
+        && let Some(region) = difference_region(registry, id, snapshot, &captured, survivor)
+    {
+        result["changed_region"] = region;
     }
     result["affected_ids"] = json!(captured);
     result["result_id"] = json!(survivor);
@@ -673,8 +841,8 @@ mod tests {
                 4096,
             )
             .unwrap();
-            let operands = union_operands(&original, &ids).unwrap();
-            let error = apply_union_geometry(operands, &incoming).unwrap_err();
+            let operands = boolean_operands(&original, &ids, "boolean_union").unwrap();
+            let error = apply_boolean_geometry(operands, &incoming, "boolean_union").unwrap_err();
             assert!(error.contains(reason), "{error}");
             assert_eq!(xml::serialize(&original), before);
         }
@@ -691,8 +859,9 @@ mod tests {
             4096,
         )
         .unwrap();
-        let operands = union_operands(&original, &["other".into(), "body".into()]).unwrap();
-        apply_union_geometry(operands, &incoming).unwrap();
+        let operands =
+            boolean_operands(&original, &["other".into(), "body".into()], "boolean_union").unwrap();
+        apply_boolean_geometry(operands, &incoming, "boolean_union").unwrap();
         let body = find(&original, "body").unwrap();
         assert_eq!(body.get_name(), "path");
         assert_eq!(body.get_property_no_ns("d").as_deref(), Some("M0 0H5V5Z"));

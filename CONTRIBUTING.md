@@ -123,7 +123,10 @@ refusal. Inspect the retained SVG and PNGs separately for silhouette quality.
 
 `engine-routes-acceptance` checks a typed Boolean Union of three shapes, including a
 hole, an overlapping painted neighbor, a clone of the survivor and a referenced-operand
-refusal. CI runs the suite in both `per_call` and `shell` modes.
+refusal. The Difference fixture passes the returned region directly to
+`compare_region` and checks bounds that include the consumed cutter and omission
+when a surviving clone can repaint elsewhere. CI runs both Boolean operations
+in `per_call` and `shell` modes.
 
 Startup defaults to 128 fresh sessions/four concurrent
 servers with immediate mutation/discovery and no retries. Responsiveness checks both

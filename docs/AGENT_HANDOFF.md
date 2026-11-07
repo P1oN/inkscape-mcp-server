@@ -1,5 +1,17 @@
 # Agent handoff — current status
 
+## Headless Boolean Difference verification
+
+The #50 follow-up adds optional `changed_region` to an applied Boolean Difference
+result. When present, the response supplies every required argument for
+`compare_region`. Both pre-edit operand bounds and the saved survivor are covered
+in SVG document units. Unreliable or indirect visual bounds are omitted.
+
+The Difference import keeps the lower editable sibling's ID, paint and stacking
+position, and refuses a referenced cutter. The real STDIO regression checks
+structure, independent pixels, byte-exact rollback, focused comparison without
+post-edit inspection, and bounds for a scaled, letterboxed canvas.
+
 ## Headless Boolean Union preservation
 
 The #51 follow-up imports engine geometry into the original tree for `boolean_union`. The lowest

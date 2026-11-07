@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="96" viewBox="0 0 128 96">
+<title>Nested boolean cut</title><desc>Preserve the clipped and linked surrounding art.</desc>
+<defs><clipPath id="trim"><rect x="4" y="4" width="86" height="58" rx="8"/></clipPath><linearGradient id="paint"><stop stop-color="#ef8c43"/><stop offset="1" stop-color="#ad3666"/></linearGradient><path id="mark" d="M0 0h12v6H0z"/></defs>
+<g id="outer" transform="translate(17 12) rotate(8 45 32)">
+ <g id="inner" transform="translate(3 5) scale(1.12 .86)" clip-path="url(#trim)">
+  <rect id="underlay" x="5" y="5" width="76" height="54" rx="5" fill="#ebdac0"/>
+  <rect id="body" x="12" y="10" width="60" height="43" fill="#18666a"/>
+  <rect id="neighbor" x="70" y="16" width="27" height="31" rx="4" fill="url(#paint)"/>
+  <use id="badge" href="#mark" x="59" y="46" fill="#f6cf58"/>
+ </g>
+</g>
+<use id="outside" href="#mark" x="105" y="76" fill="#493e82"/>
+</svg>
