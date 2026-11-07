@@ -604,6 +604,14 @@ fn boolean_union(wire: &mut Wire, workspace: &Path, out: &Path) -> Result<()> {
             SOURCE.replace(ISLAND, &format!("<g>{ISLAND}</g>")),
             "sibling shapes with directly editable geometry",
         ),
+        (
+            "union-css-geometry.svg",
+            SOURCE.replace(
+                "fill-rule:evenodd",
+                "fill-rule:evenodd;/* local frame */transform:translate(4px,0)",
+            ),
+            "sibling shapes with directly editable geometry",
+        ),
     ] {
         let doc = open(wire, name, &svg)?;
         let dir = workspace

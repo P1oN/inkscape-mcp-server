@@ -337,7 +337,7 @@ fn importance(value: &str) -> (&str, bool) {
     }
     (value, false)
 }
-fn analysis_declarations(raw: &str) -> Option<indexmap::IndexMap<String, String>> {
+pub(crate) fn analysis_declarations(raw: &str) -> Option<indexmap::IndexMap<String, String>> {
     if raw.len() > 65536 || raw.contains(['\\', '{', '}', '\"', '\'']) {
         return None;
     }

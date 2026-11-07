@@ -1,7 +1,7 @@
 //! Fixed high-risk geometry Actions, private bounded CLI staging and shared reversible edits.
 use crate::{
     arguments,
-    document::{Registry, elements},
+    document::{INKSCAPE_NS, Registry, elements},
     identity, placement, process, render, style, transaction,
     workspace::Workspace,
     xml,
@@ -81,17 +81,41 @@ const SHAPE_GEOMETRY: &[&str] = &[
     "d", "x", "y", "width", "height", "rx", "ry", "cx", "cy", "r", "points",
 ];
 
+fn is_svg(node: &Node) -> bool {
+    node.get_namespace()
+        .is_some_and(|ns| ns.get_href() == "http://www.w3.org/2000/svg")
+}
+
+fn union_fill_rule(node: &Node) -> Option<String> {
+    let mut declarations =
+        crate::css::analysis_declarations(&node.get_property_no_ns("style").unwrap_or_default())?;
+    if declarations.keys().any(|key| {
+        SHAPE_GEOMETRY.contains(&key.as_str())
+            || matches!(
+                key.as_str(),
+                "all" | "transform" | "rotate" | "scale" | "translate" | "offset"
+            )
+            || ["offset-", "animation", "transition"]
+                .iter()
+                .any(|prefix| key.starts_with(prefix))
+    }) {
+        return None;
+    }
+    Some(
+        declarations
+            .swap_remove("fill-rule")
+            .or_else(|| node.get_property_no_ns("fill-rule"))
+            .unwrap_or_else(|| "inherit".into()),
+    )
+}
+
 fn editable_union_shape(node: &Node) -> bool {
     matches!(
         node.get_name().as_str(),
         "path" | "rect" | "circle" | "ellipse" | "polygon" | "polyline"
-    ) && node
-        .get_namespace()
-        .is_some_and(|ns| ns.get_href() == "http://www.w3.org/2000/svg")
+    ) && is_svg(node)
         && node.get_child_elements().is_empty()
-        && !style::declarations(node)
-            .keys()
-            .any(|key| SHAPE_GEOMETRY.contains(&key.as_str()) || key == "transform")
+        && union_fill_rule(node).is_some()
         && !node.get_properties_ns().keys().any(|(key, ns)| {
             matches!(key.as_str(), "path-effect" | "original-d")
                 || (key == "type"
@@ -133,23 +157,37 @@ fn union_operands(document: &Document, ids: &[String]) -> Result<Vec<(String, No
 }
 
 fn same_merge_frame(body: &Node, result: &Node) -> bool {
+    let (Some(body_rule), Some(result_rule)) = (union_fill_rule(body), union_fill_rule(result))
+    else {
+        return false;
+    };
     if body.get_property_no_ns("transform") != result.get_property_no_ns("transform")
-        || style::declarations(result).contains_key("transform")
-        || effective(body, "fill-rule").as_deref().unwrap_or("inherit")
-            != effective(result, "fill-rule")
-                .as_deref()
-                .unwrap_or("inherit")
+        || body_rule != result_rule
     {
         return false;
     }
     let mut old = body.get_parent().filter(Node::is_element_node);
     let mut new = result.get_parent().filter(Node::is_element_node);
     while let (Some(a), Some(b)) = (&old, &new) {
-        if !matches!(a.get_name().as_str(), "svg" | "g") || a.get_name() != b.get_name() {
+        if !is_svg(a)
+            || !is_svg(b)
+            || !matches!(a.get_name().as_str(), "svg" | "g")
+            || a.get_name() != b.get_name()
+        {
             return false;
         }
-        let original = a.get_properties_ns();
-        let mut incoming = b.get_properties_ns();
+        // The plain SVG export omits layer labels and group mode. They stay on
+        // the original nodes and do not change the coordinate frame.
+        let frame_attributes = |node: &Node| {
+            let mut attrs = node.get_properties_ns();
+            attrs.retain(|(key, ns), _| {
+                !(matches!(key.as_str(), "label" | "groupmode")
+                    && ns.as_ref().is_some_and(|ns| ns.get_href() == INKSCAPE_NS))
+            });
+            attrs
+        };
+        let original = frame_attributes(a);
+        let mut incoming = frame_attributes(b);
         // Inkscape fills in missing IDs and a root version during export.
         for key in ["id", "version"] {
             let key = (key.to_owned(), None);
@@ -170,11 +208,7 @@ fn apply_union_geometry(operands: Vec<(String, Node)>, incoming: &Document) -> R
     let mut operands = operands.into_iter();
     let (body_id, mut body) = operands.next().ok_or("union has no body")?;
     let result = find(incoming, &body_id)
-        .filter(|n| {
-            n.get_name() == "path"
-                && n.get_namespace()
-                    .is_some_and(|ns| ns.get_href() == "http://www.w3.org/2000/svg")
-        })
+        .filter(|n| n.get_name() == "path" && is_svg(n))
         .ok_or("boolean_union produced no identifiable editable body path")?;
     if !same_merge_frame(&body, &result) {
         return Err("boolean_union result changed the body coordinate frame or fill rule".into());

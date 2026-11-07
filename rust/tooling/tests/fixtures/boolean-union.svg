@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="128" height="96" viewBox="0 0 128 96">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="128" height="96" viewBox="0 0 128 96">
 <title>Nested union with a retained hole</title>
 <defs><clipPath id="trim"><rect x="4" y="4" width="86" height="60" rx="8"/></clipPath><linearGradient id="paint"><stop stop-color="#ef8c43"/><stop offset="1" stop-color="#ad3666"/></linearGradient><path id="mark" d="M0 0h12v6H0z"/></defs>
-<g id="outer" transform="translate(8 6)">
+<g id="outer" inkscape:groupmode="layer" inkscape:label="Scene" transform="translate(8 6)">
  <g id="inner" transform="translate(3 5)" clip-path="url(#trim)">
   <rect id="underlay" x="5" y="5" width="76" height="58" rx="5" fill="#ebdac0"/>
   <path id="body" style="fill:#18666a;fill-rule:evenodd" d="M12 10H58V53H12Z M25 22H35V34H25Z"/>

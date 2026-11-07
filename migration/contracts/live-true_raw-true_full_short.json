@@ -15145,7 +15145,7 @@
       {
         "name": "boolean_union",
         "title": "Boolean union",
-        "description": "Union two or more paths into one via the Inkscape engine (``path-union``).\n\nRisk class: high (destructive geometry; approval-gated).",
+        "description": "Union editable sibling shapes into one closed path, keeping the lowest shape’s ID, paint, fill rule and position.\n\nRisk class: high (destructive geometry; approval-gated).",
         "inputSchema": {
           "additionalProperties": false,
           "properties": {
