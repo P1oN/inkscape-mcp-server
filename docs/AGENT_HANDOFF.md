@@ -4,8 +4,8 @@
 
 Manager v0.1.8 can fail before Inkscape discovery when installed in
 `/Applications`. The source fix confines the macOS system-directory exception
-to read-only inputs of the running Manager, validates the app before using
-its bundled package and keeps the existing managed-write guards. The original
+to read-only inputs of the running Manager. Installation uses a private copy of
+the app after checking its signature and keeps the existing managed-write guards. The original
 reproduction and ad-hoc development acceptance are recorded in the
 [debugging report](history/reports/manager-applications-install-2026-10-13.md).
 Signed-release acceptance is a separate step.

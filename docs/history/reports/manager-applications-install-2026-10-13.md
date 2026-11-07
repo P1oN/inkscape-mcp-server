@@ -37,20 +37,17 @@ root:admin group-writable permissions; changing those permissions is not a repai
 
 ## Local source repair
 
-The repair keeps `guarded()` strict for all
-managed write destinations. Read-only admission is confined to the exact running
-`/Applications/Inkscape MCP Manager.app/Contents/Helpers/inkscape-mcp-launcher`,
-its Info.plist and Resources tree. Only the root-owned, admin-group-owned,
-non-world-writable `/Applications` ancestor receives the group-write exception.
-Symlinks, foreign owners and writable descendants remain refused. Root-owned
-immutable app inputs are accepted for administrator-installed applications.
+The repair keeps the strict guards on managed writes. Read-only access through
+`/Applications` is restricted to the app containing the exact running Manager
+helper. The system directory exception applies only to the root-owned,
+admin-group-owned, non-world-writable ancestor. The app guard rejects symlinks,
+foreign owners and group- or world-writable descendants, including sticky ones.
 
-Manager startup still verifies the app signature. Installation preparation explicitly
-verifies the complete current app before accepting its bundled inputs. Instruction
-loading, bounded reads, source inventories, helper identity hashing and quarantine
-source reads use the narrow read policy. Quarantine destinations retain strict
-write guards; signature, manifest, inventory and receipt checks remain enforced.
-Writable-path diagnostics now include the actual rejected ancestor.
+For an install that uses system Manager inputs, preparation makes a bounded
+private copy of the app and verifies its complete signature. Extraction and
+instruction staging use the package and instructions from that verified copy.
+The copy preserves quarantine metadata through descriptors opened without
+following symlinks. Writable-path diagnostics identify the rejected ancestor.
 
 The first development iteration passed startup/discovery but exposed further strict
 reads during preparation. The helper identity and quarantine-copy source paths were

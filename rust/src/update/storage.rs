@@ -203,7 +203,7 @@ fn preserve_quarantine(source: &Path, target: &Path) -> Result<()> {
     let open = |path: &Path| -> Result<fs::File> {
         fs::OpenOptions::new()
             .read(true)
-            .custom_flags(libc::O_NOFOLLOW | libc::O_NONBLOCK)
+            .custom_flags(libc::O_NOFOLLOW_ANY | libc::O_NONBLOCK)
             .open(path)
             .map_err(|e| e.to_string())
     };

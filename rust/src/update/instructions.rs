@@ -89,23 +89,34 @@ pub fn guarded(path: &Path) -> Result<()> {
 // Only immutable inputs belonging to this running Manager may cross the macOS
 // root:admin Applications ancestor. Managed destinations always use guarded().
 const SYSTEM_MANAGER_APP: &str = "/Applications/Inkscape MCP Manager.app";
+fn system_manager_app(executable: &Path) -> Option<&'static Path> {
+    let app = Path::new(SYSTEM_MANAGER_APP);
+    (cfg!(target_os = "macos") && executable == app.join("Contents/Helpers/inkscape-mcp-launcher"))
+        .then_some(app)
+}
 fn manager_input(path: &Path, executable: &Path) -> bool {
-    let app = Path::new(SYSTEM_MANAGER_APP).join("Contents");
-    cfg!(target_os = "macos")
-        && executable == app.join("Helpers/inkscape-mcp-launcher")
-        && (path == executable
-            || path == app.join("Info.plist")
-            || path.starts_with(app.join("Resources")))
+    system_manager_app(executable).is_some_and(|app| {
+        path == executable
+            || path == app.join("Contents/Info.plist")
+            || path.starts_with(app.join("Contents/Resources"))
+    })
 }
 pub(super) fn bundled_manager_input(path: &Path) -> bool {
     std::env::current_exe().is_ok_and(|exe| manager_input(path, &exe))
 }
 pub(super) fn guarded_read(path: &Path) -> Result<()> {
-    guarded_with_source(
-        path,
-        bundled_manager_input(path).then(|| Path::new(SYSTEM_MANAGER_APP)),
-    )
+    let manager_app = std::env::current_exe()
+        .ok()
+        .as_deref()
+        .and_then(system_manager_app)
+        .filter(|app| path.starts_with(app));
+    guarded_with_source(path, manager_app)
 }
+#[cfg(unix)]
+fn is_admin_applications(uid: u32, gid: u32, mode: u32, directory: bool) -> bool {
+    uid == 0 && gid == 80 && mode & 0o002 == 0 && directory
+}
+
 fn guarded_with_source(path: &Path, manager_app: Option<&Path>) -> Result<()> {
     if !path.is_absolute() {
         return Err("managed path must be absolute".into());
@@ -132,10 +143,12 @@ fn guarded_with_source(path: &Path, manager_app: Option<&Path>) -> Result<()> {
             let in_bundle = manager_app.is_some_and(|app| current.starts_with(app));
             let allow_writable_ancestor =
                 if manager_app.is_some() && current == Path::new("/Applications") {
-                    metadata.uid() == 0
-                        && metadata.gid() == 80
-                        && metadata.is_dir()
-                        && metadata.mode() & 0o002 == 0
+                    is_admin_applications(
+                        metadata.uid(),
+                        metadata.gid(),
+                        metadata.mode(),
+                        metadata.is_dir(),
+                    )
                 } else {
                     // A sticky temporary ancestor is normal outside the app. Inside
                     // the signed bundle, every descendant must be immutable to others.
@@ -161,6 +174,9 @@ pub fn read(path: &Path, limit: u64) -> Result<Vec<u8>> {
     #[cfg(unix)]
     {
         use std::os::unix::fs::OpenOptionsExt;
+        #[cfg(target_os = "macos")]
+        options.custom_flags(libc::O_NOFOLLOW_ANY);
+        #[cfg(not(target_os = "macos"))]
         options.custom_flags(libc::O_NOFOLLOW);
     }
     let file = options.open(path).map_err(|e| e.to_string())?;
@@ -337,6 +353,20 @@ pub fn active() -> Result<&'static Instructions> {
 #[cfg(test)]
 mod source_guard_tests {
     use super::*;
+    #[test]
+    fn applications_exception_requires_root_admin_and_denies_world_write() {
+        assert!(is_admin_applications(0, 80, 0o775, true));
+        for (uid, gid, mode, directory) in [
+            (501, 80, 0o775, true),
+            (0, 20, 0o775, true),
+            (0, 80, 0o777, true),
+            (0, 80, 0o1777, true),
+            (0, 80, 0o775, false),
+        ] {
+            assert!(!is_admin_applications(uid, gid, mode, directory));
+        }
+    }
+
     #[test]
     fn source_exception_is_confined_to_the_running_system_manager_inputs() {
         let exe = Path::new(

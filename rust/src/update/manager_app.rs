@@ -66,8 +66,15 @@ fn verify(app: &Path) -> Result<()> {
     .map_err(|_| "Manager signature verification failed".to_string())?;
     Ok(())
 }
-pub(super) fn verify_current() -> Result<()> {
-    verify(&current_app()?)
+fn copy_verified_app(source: &Path, target: &Path) -> Result<()> {
+    copy_tree(source, target, 1024 * 1024 * 1024)?;
+    verify(target)
+}
+
+pub(super) fn snapshot_current(target: &Path) -> Result<PathBuf> {
+    let source = current_app()?;
+    copy_verified_app(&source, target)?;
+    Ok(source)
 }
 #[cfg(target_os = "macos")]
 #[link(name = "proc")]
@@ -208,8 +215,7 @@ pub fn prepare(root: &Path) -> Result<Value> {
     let id = uuid::Uuid::new_v4().to_string();
     let stage = parent.join(format!(".inkscape-mcp-manager-stage-{id}.app"));
     let backup = parent.join(format!(".inkscape-mcp-manager-backup-{id}.app"));
-    copy_tree(&source, &stage, 1024 * 1024 * 1024)?;
-    verify(&stage)?;
+    copy_verified_app(&source, &stage)?;
     let after = inventory(&stage, 1024 * 1024 * 1024)?;
     let plan = Plan {
         format: 1,
@@ -308,6 +314,44 @@ pub fn activate(root: &Path, id: &str, parent_pid: i32) -> Result<Value> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[cfg(target_os = "macos")]
+    #[test]
+    fn verified_snapshot_rejects_modified_signed_instructions() {
+        let temp = tempfile::tempdir().unwrap();
+        let root = temp.path().canonicalize().unwrap();
+        let app = root.join("Original.app");
+        let executable = app.join("Contents/MacOS/manager");
+        let instructions = app.join("Contents/Resources/instructions/initialize.txt");
+        mkdir(executable.parent().unwrap()).unwrap();
+        mkdir(instructions.parent().unwrap()).unwrap();
+        fs::copy("/usr/bin/true", &executable).unwrap();
+        let plist = br#"<?xml version="1.0" encoding="UTF-8"?>
+    <plist version="1.0"><dict>
+    <key>CFBundleIdentifier</key><string>org.inkscape-mcp.manager</string>
+    <key>CFBundleExecutable</key><string>manager</string>
+    <key>CFBundlePackageType</key><string>APPL</string>
+    </dict></plist>"#;
+        write(&app.join("Contents/Info.plist"), plist).unwrap();
+        write(&instructions, b"sealed instructions").unwrap();
+        crate::client_management::bounded_output(
+            Command::new("/usr/bin/codesign")
+                .args(["--force", "--sign", "-"])
+                .arg(&app),
+            8192,
+        )
+        .unwrap();
+
+        let valid = root.join("Verified.app");
+        copy_verified_app(&app, &valid).unwrap();
+        write(&instructions, b"modified instructions").unwrap();
+        let error = copy_verified_app(&app, &root.join("Modified.app")).unwrap_err();
+        assert_eq!(error, "Manager signature verification failed");
+        assert_eq!(
+            fs::read(valid.join("Contents/Resources/instructions/initialize.txt")).unwrap(),
+            b"sealed instructions",
+        );
+    }
     #[test]
     fn copied_managers_in_both_applications_folders_are_ready_without_relocation() {
         let parent = Path::new("/Users/example/Applications");
