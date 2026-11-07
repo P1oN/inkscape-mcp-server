@@ -24,4 +24,7 @@ Check current code and Git status before relying on recorded counts or validatio
 - Run appropriate checks from CONTRIBUTING, update docs, and regenerate `llms.txt` and
   `llms-full.txt` when the exposed surface changes. Distinguish automated tests from native GUI
   acceptance. Restart the MCP server to load changed instructions, preserving the existing GUI.
+- For builds, acceptance runs and artifact cleanup, follow
+  [development disk retention](docs/install/development-storage.md) before heavy checks,
+  at long-task stage boundaries and at task completion.
 - Do not commit, publish a PR or send messages unless the user asks.
