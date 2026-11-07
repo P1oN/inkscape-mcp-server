@@ -8,7 +8,7 @@ Native Rust runtime and build tools; ready packages contain no Python runtime.
 - add_radial_gradient: Add a `<radialGradient>` to the document `<defs>` (created if absent).
 - apply_edits: Apply an ordered list of typed DOM edits to a document as ONE atomic, reversible operation.
 - apply_palette: Apply many `from -> to` colour replacements in a single reversible operation.
-- boolean_difference: Subtract the top path(s) from the bottom one via the Inkscape engine (``path-difference``).
+- boolean_difference: Subtract the upper editable sibling shape from the lower one via Inkscape.
 - boolean_union: Union editable sibling shapes into one closed path, keeping the lowest shape’s ID, paint, fill rule and position.
 - break_apart: Break a compound path into its subpaths via the Inkscape engine (``path-break-apart``).
 - capture_frame: Capture the next numbered PNG screenshot in a per-run frame series.

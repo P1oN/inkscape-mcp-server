@@ -105,7 +105,7 @@ pub(crate) fn input(
         Path::new(&entry.source),
     )
 }
-fn input_source(
+pub(crate) fn input_source(
     workspace: &Workspace,
     root_index: usize,
     source: &Path,

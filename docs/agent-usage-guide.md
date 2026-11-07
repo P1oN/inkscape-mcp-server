@@ -115,6 +115,17 @@ The generative flow (E14). All writes land on a **working copy**, never the orig
    member escalates the batch to HIGH and needs an `approval_token`). Prefer it over N round-trips
    when you already know the edits; path geometry and cross-document composition are not batchable.
 
+   For `boolean_difference`, select two editable siblings in SVG stacking order.
+   The lower shape keeps its ID, paint and position. The upper shape is consumed
+   if no surviving element references it. Apply refuses results whose coordinate
+   frame or fill rule cannot be preserved.
+
+   When the applied response includes `changed_region`, pass its `doc_id`,
+   `snapshot_id`, and `changed_region` (as `region`) directly to `compare_region`.
+   The bounds cover the original operands and the survivor in document user units.
+   For effects, styles or references that can repaint elsewhere, or if the engine
+   cannot supply trustworthy bounds, use `render_preview` or a known region.
+
    For `boolean_union`, select two or more directly editable sibling shapes in the
    full profile with raw Actions enabled. The lowest shape becomes an editable path at
    the same position, keeping its ID, paint, fill rule, transform and surviving references.

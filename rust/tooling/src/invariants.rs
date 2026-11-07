@@ -51,7 +51,7 @@ pub fn run(args: &Args) -> Result<()> {
         command.env("PATH", vendor);
     }
     if args.command == "engine-routes-acceptance" && mode == "shell" {
-        require_shell_union(&root, &mut command)?;
+        require_shell_boolean(&root, &mut command)?;
     }
     let mut wire = Wire::spawn(&mut command, &out.join("server.stderr.log"))?;
     let initialized = wire.initialize()?;
@@ -65,7 +65,10 @@ pub fn run(args: &Args) -> Result<()> {
                 let evidence = out.join("union");
                 fs::create_dir_all(&evidence)?;
                 boolean_union(&mut wire, &workspace, &evidence)?;
-                Ok(checks + 1)
+                let difference_evidence = out.join("difference");
+                fs::create_dir_all(&difference_evidence)?;
+                boolean_difference(&mut wire, &workspace, &difference_evidence)?;
+                Ok(checks + 2)
             })
         }
         _ => Err("unknown invariant suite".into()),
@@ -312,9 +315,9 @@ fn compare(wire: &mut Wire, root: &Path, workspace: &Path, out: &Path) -> Result
     )?;
     Ok(3)
 }
-fn require_shell_union(root: &Path, command: &mut std::process::Command) -> Result<()> {
-    // Keep the normal fallbacks for other routes in the suite. The Union
-    // fixture must exercise a successful warm action even if one-shot works.
+fn require_shell_boolean(root: &Path, command: &mut std::process::Command) -> Result<()> {
+    // Keep the normal fallbacks for other routes in the suite. Boolean
+    // fixtures must exercise successful warm actions even if one-shot works.
     let engine = tool("inkscape")
         .unwrap_or_else(|_| {
             if cfg!(target_os = "macos") {
@@ -332,7 +335,7 @@ fn require_shell_union(root: &Path, command: &mut std::process::Command) -> Resu
         r#"#!/bin/sh
 for arg in "$@"; do
     case "$arg" in
-        --actions=*path-union*) echo 'Union fell back from shell to one-shot' >&2; exit 77 ;;
+        --actions=*path-union*|--actions=*path-difference*) echo 'Boolean operation fell back from shell to one-shot' >&2; exit 77 ;;
     esac
 done
 exec "$INKSCAPE_MCP_ACCEPTANCE_ENGINE" "$@"
@@ -676,6 +679,238 @@ fn boolean_union(wire: &mut Wire, workspace: &Path, out: &Path) -> Result<()> {
                 && inventory(&dir.join("snapshots"))? == snapshots
                 && fs::read(workspace.join(name))? == svg.as_bytes(),
             format!("unsafe union must refuse without changing the drawing or snapshots: {name}"),
+        )?;
+    }
+    Ok(())
+}
+
+fn boolean_difference(wire: &mut Wire, workspace: &Path, out: &Path) -> Result<()> {
+    const SOURCE: &str = include_str!("../tests/fixtures/boolean-difference.svg");
+    const BODY: &str = r##"<rect id="body" x="12" y="10" width="60" height="43" fill="#18666a"/>"##;
+    const CUTTER: &str = r#"<circle id="cutter" cx="38" cy="30" r="11"/>"#;
+    let input = SOURCE.replace(BODY, &format!("{BODY}\n  {CUTTER}"));
+    let reference = SOURCE.replace(
+        BODY,
+        r##"<path id="body" fill="#18666a" fill-rule="evenodd" d="M12 10H72V53H12Z M27 30A11 11 0 1 0 49 30A11 11 0 1 0 27 30Z"/>"##,
+    );
+    let open = |wire: &mut Wire, name: &str, svg: &str| open_fixture(wire, workspace, name, svg);
+    let preview = |wire: &mut Wire, doc: &Value, name: &str| {
+        fixture_pixels(wire, workspace, doc, &out.join(name))
+    };
+    let original = open(wire, "boolean-uncut.svg", SOURCE)?;
+    let before = preview(wire, &original, "boolean-before.png")?;
+    let doc = open(wire, "boolean.svg", &input)?;
+    let working = workspace
+        .join(".inkscape-mcp/documents")
+        .join(doc.as_str().ok_or("boolean document ID missing")?)
+        .join("working/document.svg");
+    let initial = fs::read(&working)?;
+    for id in ["body", "cutter"] {
+        let found = data(wire.call("find_objects", json!({"doc_id":doc,"id_prefix":id}))?)?;
+        ensure(
+            found["objects"][0]["object_id"] == id && found["count"] == 1,
+            format!("fixture object lookup failed: {id}"),
+        )?;
+    }
+    let plan = data(wire.call(
+        "boolean_difference",
+        json!({"doc_id":doc,"object_ids":["cutter","body"]}),
+    )?)?;
+    let unapproved = wire.call(
+        "boolean_difference",
+        json!({"doc_id":doc,"object_ids":["cutter","body"],"dry_run":false}),
+    )?;
+    ensure(
+        plan["dry_run"] == true
+            && plan["changed"] == false
+            && plan["result_id"] == "body"
+            && plan["snapshot_id"].is_null()
+            && plan.get("changed_region").is_none()
+            && error(&unapproved)
+            && unapproved["result"]["content"][0]["text"]
+                .as_str()
+                .is_some_and(|text| text.contains("requires an explicit approval_token"))
+            && fs::read(&working)? == initial,
+        "boolean dry run or approval gate failed",
+    )?;
+    let applied = data(wire.call(
+        "boolean_difference",
+        json!({"doc_id":doc,"object_ids":["cutter","body"],"dry_run":false,"approval_token":"owned fixture"}),
+    )?)?;
+    ensure(
+        applied["changed"] == true
+            && applied["result_id"] == "body"
+            && applied["snapshot_id"]
+                .as_str()
+                .is_some_and(|s| !s.is_empty()),
+        "boolean edit was not recorded",
+    )?;
+    let region = &applied["changed_region"];
+    ensure(
+        region["width"].as_f64().is_some_and(|w| w > 0. && w < 128.)
+            && region["height"].as_f64().is_some_and(|h| h > 0. && h < 96.),
+        "boolean result did not report a focused region",
+    )?;
+    let comparison = data(wire.call(
+        "compare_region",
+        json!({"doc_id":applied["doc_id"],"snapshot_id":applied["snapshot_id"],"region":region,"width_px":128,"inline":false}),
+    )?)?;
+    let region_preview = |side: &str| {
+        let path = comparison[side]["workspace_relative_path"]
+            .as_str()
+            .ok_or("region preview missing")?;
+        read(&workspace.join(path), 16 * 1024 * 1024)
+    };
+    ensure(
+        comparison["region"] == *region && region_preview("before")? != region_preview("after")?,
+        "returned region did not show a before/after change",
+    )?;
+    let validated = data(wire.call("validate_document", json!({"doc_id":doc}))?)?;
+    ensure(validated["ok"] == true, "boolean result did not validate")?;
+    data(wire.call(
+        "save_document_as",
+        json!({"doc_id":doc,"dest_path":"boolean-final.svg","vector_only":true}),
+    )?)?;
+    let saved = fs::read(workspace.join("boolean-final.svg"))?;
+    fs::write(out.join("boolean-final.svg"), &saved)?;
+    let restored = data(wire.call(
+        "restore_snapshot",
+        json!({"doc_id":doc,"snapshot_id":applied["snapshot_id"]}),
+    )?)?;
+    ensure(
+        fs::read(&working)? == initial
+            && restored["restored_sha256"] == sha(&initial)
+            && fs::read(workspace.join("boolean.svg"))? == input.as_bytes()
+            && fs::read(workspace.join("boolean-final.svg"))? == saved,
+        "boolean rollback, saved copy, or original preservation failed",
+    )?;
+
+    let saved_doc = parse_geometry_fixture(&saved)?;
+    let root = saved_doc.get_root_element().ok_or("boolean root missing")?;
+    let inner = root
+        .get_child_elements()
+        .into_iter()
+        .find(|n| n.get_property_no_ns("id").as_deref() == Some("outer"))
+        .and_then(|n| n.get_first_element_child())
+        .ok_or("boolean group missing")?;
+    let children = inner.get_child_elements();
+    let body = children
+        .get(1)
+        .ok_or("boolean body missing from its stack position")?;
+    let d = body
+        .get_property_no_ns("d")
+        .ok_or("boolean path data missing")?;
+    let expected = parse_geometry_fixture(
+        SOURCE
+            .replace(BODY, r##"<path id="body" fill="#18666a"/>"##)
+            .as_bytes(),
+    )?;
+    let mut context =
+        libxml::xpath::Context::new(&expected).map_err(|_| "cannot create fixture XPath")?;
+    let mut expected_body = context
+        .findnodes("//*[@id='body']", None)
+        .map_err(|_| "cannot find expected body")?
+        .pop()
+        .ok_or("expected body missing")?;
+    expected_body
+        .set_property("d", &d)
+        .map_err(|_| "cannot set expected path data")?;
+    ensure(
+        saved_doc.node_to_string(&root)
+            == expected
+                .node_to_string(&expected.get_root_element().ok_or("expected root missing")?),
+        "boolean paint, ID, or surrounding SVG structure changed",
+    )?;
+
+    let saved_id =
+        data(wire.call("open_document", json!({"path":"boolean-final.svg"}))?)?["doc_id"].clone();
+    let actual = preview(wire, &saved_id, "boolean-final.png")?;
+    let reference = open(wire, "boolean-reference.svg", &reference)?;
+    let expected = preview(wire, &reference, "boolean-reference.png")?;
+    let (before, _) = before.as_chunks::<4>();
+    let (expected, _) = expected.as_chunks::<4>();
+    let (actual, _) = actual.as_chunks::<4>();
+    let changed: Vec<_> = before
+        .iter()
+        .zip(expected)
+        .enumerate()
+        .filter_map(|(i, (a, b))| (a != b).then_some(i))
+        .collect();
+    ensure(!changed.is_empty(), "boolean reference has no cut")?;
+    let mut cut = vec![false; 256 * 192];
+    for i in changed {
+        let (x, y) = (i % 256, i / 256);
+        for row in y.saturating_sub(2)..=(y + 2).min(191) {
+            for col in x.saturating_sub(2)..=(x + 2).min(255) {
+                cut[row * 256 + col] = true;
+            }
+        }
+    }
+    ensure(
+        actual
+            .iter()
+            .zip(expected)
+            .zip(cut)
+            .all(|((a, b), inside)| {
+                a.iter()
+                    .zip(b)
+                    .all(|(a, b)| a.abs_diff(*b) <= if inside { 4 } else { 0 })
+            }),
+        "boolean render differs from reference",
+    )?;
+
+    let linked = input.replace("href=\"#mark\" x=\"105\"", "href=\"#cutter\" x=\"105\"");
+    let linked = open(wire, "boolean-linked.svg", &linked)?;
+    let working = workspace
+        .join(".inkscape-mcp/documents")
+        .join(
+            linked
+                .as_str()
+                .ok_or("boolean linked document ID missing")?,
+        )
+        .join("working/document.svg");
+    let before = fs::read(&working)?;
+    let refused = wire.call(
+        "boolean_difference",
+        json!({"doc_id":linked,"object_ids":["body","cutter"],"dry_run":false,"approval_token":"owned fixture"}),
+    )?;
+    ensure(
+        error(&refused)
+            && refused
+                .to_string()
+                .contains("reference IDs in the removed subtree")
+            && fs::read(working)? == before,
+        "boolean difference must preserve a cutter referenced by surviving artwork",
+    )?;
+    {
+        // The cutter extends beyond the body, and the viewBox is scaled and letterboxed.
+        let svg = r##"<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="10 20 100 50"><g id="group"><rect id="body" x="20" y="25" width="40" height="30"/><circle id="cutter" cx="56" cy="38" r="12"/></g></svg>"##;
+        let doc = open(wire, "boolean-extended-cutter.svg", svg)?;
+        let apply = |wire: &mut Wire, doc: &Value| {
+            data(wire.call(
+                "boolean_difference",
+                json!({"doc_id":doc,"object_ids":["body","cutter"],"dry_run":false,"approval_token":"owned fixture"}),
+            )?)
+        };
+        let applied = apply(wire, &doc)?;
+        let region = &applied["changed_region"];
+        let x = region["x"].as_f64().ok_or("missing extended-cutter x")?;
+        let y = region["y"].as_f64().ok_or("missing extended-cutter y")?;
+        let right = x + region["width"].as_f64().ok_or("missing region width")?;
+        let bottom = y + region["height"].as_f64().ok_or("missing region height")?;
+        ensure(
+            (19.0..=20.0).contains(&x)
+                && (24.0..=25.0).contains(&y)
+                && (68.0..=70.0).contains(&right)
+                && (55.0..=57.0).contains(&bottom),
+            format!("region missed the cutter or used the wrong coordinate system: {region}"),
+        )?;
+        let svg = svg.replace("</svg>", r##"<use href="#group" x="65"/></svg>"##);
+        let doc = open(wire, "boolean-clone.svg", &svg)?;
+        let applied = apply(wire, &doc)?;
+        ensure(
+            applied["changed"] == true && applied.get("changed_region").is_none(),
+            "region should be omitted when a clone of a changed ancestor can repaint elsewhere",
         )?;
     }
     Ok(())

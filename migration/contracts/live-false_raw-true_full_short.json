@@ -10567,7 +10567,7 @@
       {
         "name": "boolean_difference",
         "title": "Boolean difference",
-        "description": "Subtract the top path(s) from the bottom one via the Inkscape engine (``path-difference``).\n\nRisk class: high (destructive geometry; approval-gated).",
+        "description": "Subtract the upper editable sibling shape from the lower one via Inkscape.\n\nRisk class: high (destructive geometry; approval-gated).\n\nAfter an applied edit, use doc_id and snapshot_id with compare_region. Pass changed_region as region when present.",
         "inputSchema": {
           "additionalProperties": false,
           "properties": {
@@ -10603,7 +10603,7 @@
           "type": "object"
         },
         "outputSchema": {
-          "description": "Outcome of one path-geometry tool call (dry-run OR applied).\n\nFor a DRY RUN (`dry_run=True`): `changed` is False, `summary` describes the intended effect,\nand `operation_id` / `snapshot_id` / previews are all `None` (nothing was written). For an\nAPPLIED run: `changed` is True and `operation_id`, `snapshot_id`, and the before/after preview\npaths (workspace-relative, or `None` when a render was unavailable) link the recorded,\nreversible operation. `affected_ids` lists the validated targets the op ran against.\n\n`result_id` is the id of the surviving merged element after a MERGE op (`boolean_union`,\n`boolean_difference`, `combine_paths`): the BOTTOM-most target — the one first in document\norder — per the standardized id-survival rule. It is immediately usable as an\ninput to a chained boolean with no re-inspect. It is `None` for a dry run, for non-merge ops\n(e.g. `simplify_path`, `break_apart`, `stroke_to_path`), and if the engine produced no\nrecognizable surviving target.",
+          "description": "When changed is true, snapshot_id names the pre-edit state and doc_id identifies the edited working copy. An applied merge reports the identifiable surviving ID as result_id; an operation without a unique result returns null. A dry run may predict a merge ID and has a null snapshot_id. A no-op keeps the original working copy and returns empty snapshot_id and operation_id strings. After an applied edit, use doc_id and snapshot_id with compare_region. Pass changed_region as region when present.",
           "properties": {
             "doc_id": {
               "type": "string"
@@ -10633,6 +10633,33 @@
                 }
               ],
               "default": null
+            },
+            "changed_region": {
+              "description": "Optional conservative bounds of the original operands and resulting shape in document coordinates. Omitted when unavailable.",
+              "additionalProperties": false,
+              "properties": {
+                "x": {
+                  "type": "number"
+                },
+                "y": {
+                  "type": "number"
+                },
+                "width": {
+                  "exclusiveMinimum": 0,
+                  "type": "number"
+                },
+                "height": {
+                  "exclusiveMinimum": 0,
+                  "type": "number"
+                }
+              },
+              "required": [
+                "x",
+                "y",
+                "width",
+                "height"
+              ],
+              "type": "object"
             },
             "summary": {
               "anyOf": [

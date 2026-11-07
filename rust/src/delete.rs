@@ -31,12 +31,20 @@ impl Mutation {
         Ok(Self { ids })
     }
     pub(crate) fn check_references(&self, document: &Document) -> Result<(), String> {
+        self.check_references_with(document, [])
+    }
+
+    pub(crate) fn check_references_with(
+        &self,
+        document: &Document,
+        protected_ids: impl IntoIterator<Item = String>,
+    ) -> Result<(), String> {
         let root = document
             .get_root_element()
             .ok_or("document could not be parsed safely")?;
         let nodes = elements(root.clone());
         let mut removed_nodes = HashSet::new();
-        let mut removed_ids = HashSet::new();
+        let mut removed_ids: HashSet<_> = protected_ids.into_iter().collect();
         for target in nodes.iter().filter(|n| {
             n.get_property_no_ns("id")
                 .is_some_and(|id| self.ids.contains(&id))
@@ -124,7 +132,6 @@ impl Mutation {
         }
         Ok(())
     }
-
     pub fn mutate(&self, document: &mut Document) -> Result<String, String> {
         self.check_references(document)?;
         let root = document

@@ -1,14 +1,14 @@
 //! Read-only AND filtering with the reference cascade and one bounded CLI query.
 use crate::{
     arguments, css,
-    document::{Registry, elements},
+    document::{Entry, Registry, elements},
     inspect, process, render, style,
     workspace::Workspace,
     xml,
 };
 use serde_json::{Value, json};
-use std::{collections::HashMap, path::Path};
-type Box4 = [f64; 4];
+use std::{collections::HashMap, path::Path, time::Duration};
+pub(crate) type Box4 = [f64; 4];
 fn boxed(b: Box4) -> Value {
     json!({"x":b[0],"y":b[1],"width":b[2],"height":b[3]})
 }
@@ -34,10 +34,14 @@ fn parse_rows(raw: &[u8]) -> HashMap<String, Box4> {
     }
     result
 }
-fn query(registry: &Registry, id: &str) -> Result<HashMap<String, Box4>, String> {
-    let entry = registry.entries.get(id).ok_or("document id not found")?;
+pub(crate) fn query_source(
+    workspace: &Workspace,
+    entry: &Entry,
+    source: &Path,
+    timeout: Duration,
+) -> Result<HashMap<String, Box4>, String> {
     let binary = process::inkscape_binary().ok_or("inkscape engine unavailable")?;
-    let input = render::input(&registry.workspace, entry)?;
+    let input = render::input_source(workspace, entry.root, source, Path::new(&entry.source))?;
     let temporary = tempfile::Builder::new()
         .prefix("imcp-query-")
         .tempdir()
@@ -49,8 +53,8 @@ fn query(registry: &Registry, id: &str) -> Result<HashMap<String, Box4>, String>
                 .canonicalize()
                 .map_err(|_| "query staging unavailable")?,
         ],
-        max_input: registry.workspace.max_input,
-        max_output: registry.workspace.max_output,
+        max_input: workspace.max_input,
+        max_output: workspace.max_output,
     };
     stage.write_new(0, Path::new("input.svg"), &input.bytes)?;
     let outcome = process::run_bounded(
@@ -62,13 +66,10 @@ fn query(registry: &Registry, id: &str) -> Result<HashMap<String, Box4>, String>
                 .into_owned(),
             "--query-all".into(),
         ],
-        process::timeout(),
-        registry.workspace.max_output,
+        timeout,
+        workspace.max_output,
     )?;
-    if !outcome.success
-        || outcome.timed_out
-        || outcome.stdout.len() >= registry.workspace.max_output
-    {
+    if !outcome.success || outcome.timed_out || outcome.stdout.len() >= workspace.max_output {
         return Ok(HashMap::new());
     }
     Ok(parse_rows(&outcome.stdout))
@@ -126,7 +127,13 @@ pub fn apply(registry: &Registry, args: &Value) -> Result<Value, String> {
         }
     }
     let boxes = if accurate {
-        query(registry, id).unwrap_or_default()
+        query_source(
+            &registry.workspace,
+            entry,
+            &entry.working(),
+            process::timeout(),
+        )
+        .unwrap_or_default()
     } else {
         HashMap::new()
     };
