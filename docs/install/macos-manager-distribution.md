@@ -1,5 +1,15 @@
 # macOS Manager distribution contract
 
+**Known v0.1.8 installation issue:** copying Manager to `/Applications` can produce
+`managed path is writable by other users` before Inkscape discovery or installation.
+The installer incorrectly applies its managed-state permission rules to immutable
+bundled inputs beneath the normal root:admin application folder. Quit Manager, copy it to your user's
+`~/Applications` folder, and open that copy as a temporary workaround. If the
+system copy is administrator-owned, use the original DMG to install a user-owned
+copy in `~/Applications`. A local source fix and its scoped validation
+are recorded in the [debugging report](../history/reports/manager-applications-install-2026-10-13.md);
+the fix is not included in the published v0.1.8 bytes.
+
 The [v0.1.7 prerelease](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.7)
 publishes the Developer ID signed/notarized Manager DMG and compatible component assets.
 Source `684ce4c`, build `65afcd383ad71d71`, Team `DN263AX69U` passed protected

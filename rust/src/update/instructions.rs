@@ -84,6 +84,40 @@ pub fn manifest(version: &str, files: &BTreeMap<String, Vec<u8>>) -> Instruction
 }
 // Refuse every symlink ancestor, foreign owned file and group/world writable bundle path.
 pub fn guarded(path: &Path) -> Result<()> {
+    guarded_with_source(path, None)
+}
+// Only immutable inputs belonging to this running Manager may cross the macOS
+// root:admin Applications ancestor. Managed destinations always use guarded().
+const SYSTEM_MANAGER_APP: &str = "/Applications/Inkscape MCP Manager.app";
+fn system_manager_app(executable: &Path) -> Option<&'static Path> {
+    let app = Path::new(SYSTEM_MANAGER_APP);
+    (cfg!(target_os = "macos") && executable == app.join("Contents/Helpers/inkscape-mcp-launcher"))
+        .then_some(app)
+}
+fn manager_input(path: &Path, executable: &Path) -> bool {
+    system_manager_app(executable).is_some_and(|app| {
+        path == executable
+            || path == app.join("Contents/Info.plist")
+            || path.starts_with(app.join("Contents/Resources"))
+    })
+}
+pub(super) fn bundled_manager_input(path: &Path) -> bool {
+    std::env::current_exe().is_ok_and(|exe| manager_input(path, &exe))
+}
+pub(super) fn guarded_read(path: &Path) -> Result<()> {
+    let manager_app = std::env::current_exe()
+        .ok()
+        .as_deref()
+        .and_then(system_manager_app)
+        .filter(|app| path.starts_with(app));
+    guarded_with_source(path, manager_app)
+}
+#[cfg(unix)]
+fn is_admin_applications(uid: u32, gid: u32, mode: u32, directory: bool) -> bool {
+    uid == 0 && gid == 80 && mode & 0o002 == 0 && directory
+}
+
+fn guarded_with_source(path: &Path, manager_app: Option<&Path>) -> Result<()> {
     if !path.is_absolute() {
         return Err("managed path must be absolute".into());
     }
@@ -101,14 +135,32 @@ pub fn guarded(path: &Path) -> Result<()> {
         #[cfg(unix)]
         {
             use std::os::unix::fs::MetadataExt;
-            // System ancestors may be root-owned; bundle itself must be user-owned.
+            // Managed state stays user-owned; the running app's read-only inputs
+            // may also be root-owned after an administrator installed the app.
             if metadata.uid() != unsafe { libc::geteuid() } && metadata.uid() != 0 {
                 return Err("managed path has foreign ownership".into());
             }
-            if metadata.mode() & 0o022 != 0 && metadata.mode() & 0o1000 == 0 {
-                return Err("managed path is writable by other users".into());
+            let in_bundle = manager_app.is_some_and(|app| current.starts_with(app));
+            let allow_writable_ancestor =
+                if manager_app.is_some() && current == Path::new("/Applications") {
+                    is_admin_applications(
+                        metadata.uid(),
+                        metadata.gid(),
+                        metadata.mode(),
+                        metadata.is_dir(),
+                    )
+                } else {
+                    // A sticky temporary ancestor is normal outside the app. Inside
+                    // the signed bundle, every descendant must be immutable to others.
+                    !in_bundle && metadata.mode() & 0o1000 != 0
+                };
+            if metadata.mode() & 0o022 != 0 && !allow_writable_ancestor {
+                return Err(format!(
+                    "{}: managed path is writable by other users",
+                    current.display()
+                ));
             }
-            if current == path && metadata.uid() != unsafe { libc::geteuid() } {
+            if current == path && metadata.uid() != unsafe { libc::geteuid() } && !in_bundle {
                 return Err("managed file must be user-owned".into());
             }
         }
@@ -116,12 +168,15 @@ pub fn guarded(path: &Path) -> Result<()> {
     Ok(())
 }
 pub fn read(path: &Path, limit: u64) -> Result<Vec<u8>> {
-    guarded(path)?;
+    guarded_read(path)?;
     let mut options = fs::OpenOptions::new();
     options.read(true);
     #[cfg(unix)]
     {
         use std::os::unix::fs::OpenOptionsExt;
+        #[cfg(target_os = "macos")]
+        options.custom_flags(libc::O_NOFOLLOW_ANY);
+        #[cfg(not(target_os = "macos"))]
         options.custom_flags(libc::O_NOFOLLOW);
     }
     let file = options.open(path).map_err(|e| e.to_string())?;
@@ -239,7 +294,7 @@ impl Instructions {
         })
     }
     pub fn load(root: &Path) -> Result<Self> {
-        guarded(root)?;
+        guarded_read(root)?;
         let manifest: InstructionManifest =
             serde_json::from_slice(&read(&root.join("manifest.json"), 64 * 1024)?)
                 .map_err(|e| e.to_string())?;
@@ -293,4 +348,78 @@ pub fn active() -> Result<&'static Instructions> {
         })
         .as_ref()
         .map_err(Clone::clone)
+}
+
+#[cfg(test)]
+mod source_guard_tests {
+    use super::*;
+    #[test]
+    fn applications_exception_requires_root_admin_and_denies_world_write() {
+        assert!(is_admin_applications(0, 80, 0o775, true));
+        for (uid, gid, mode, directory) in [
+            (501, 80, 0o775, true),
+            (0, 20, 0o775, true),
+            (0, 80, 0o777, true),
+            (0, 80, 0o1777, true),
+            (0, 80, 0o775, false),
+        ] {
+            assert!(!is_admin_applications(uid, gid, mode, directory));
+        }
+    }
+
+    #[test]
+    fn source_exception_is_confined_to_the_running_system_manager_inputs() {
+        let exe = Path::new(
+            "/Applications/Inkscape MCP Manager.app/Contents/Helpers/inkscape-mcp-launcher",
+        );
+        for input in [
+            "Helpers/inkscape-mcp-launcher",
+            "Info.plist",
+            "Resources",
+            "Resources/offline-runtime.tar.gz",
+            "Resources/instructions/manifest.json",
+        ] {
+            assert_eq!(
+                manager_input(&exe.parent().unwrap().parent().unwrap().join(input), exe),
+                cfg!(target_os = "macos")
+            );
+        }
+        for input in [
+            "/Applications",
+            "/Applications/Other.app/Contents/Resources",
+            "/Applications/Inkscape MCP Manager.app/Contents/MacOS/inkscape-mcp-manager",
+            "/Users/example/Library/Application Support/inkscape-mcp/settings.json",
+        ] {
+            assert!(!manager_input(Path::new(input), exe));
+        }
+        assert!(!manager_input(
+            Path::new("/Applications/Inkscape MCP Manager.app/Contents/Resources"),
+            Path::new("/Users/example/bin/inkscape-mcp-launcher")
+        ));
+    }
+    #[test]
+    fn source_reads_still_refuse_writable_descendants_and_symlinks() {
+        use std::os::unix::fs::{PermissionsExt, symlink};
+        let scratch = tempfile::tempdir().unwrap();
+        let root = scratch.path().canonicalize().unwrap();
+        let file = root.join("input");
+        std::fs::write(&file, b"immutable").unwrap();
+        guarded_with_source(&file, Some(&root)).unwrap();
+        std::fs::set_permissions(&file, std::fs::Permissions::from_mode(0o664)).unwrap();
+        assert!(
+            guarded_with_source(&file, Some(&root))
+                .unwrap_err()
+                .contains("writable by other users")
+        );
+        std::fs::set_permissions(&file, std::fs::Permissions::from_mode(0o644)).unwrap();
+        let link = root.join("linked");
+        symlink(&file, &link).unwrap();
+        assert!(
+            guarded_with_source(&link, Some(&root))
+                .unwrap_err()
+                .contains("symlink")
+        );
+        std::fs::set_permissions(&root, std::fs::Permissions::from_mode(0o775)).unwrap();
+        assert!(guarded_with_source(&file, Some(&root)).is_err());
+    }
 }

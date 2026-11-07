@@ -416,9 +416,19 @@ pub fn prepare(root: &Path, mut request: Request) -> Result<Value> {
     {
         return Err("choose one or both supported clients and a valid channel".into());
     }
-    for path in [&request.package, &request.instructions, &request.workspace] {
-        ancestor(path)?;
-        guarded(path)?;
+    let bundled_package = instructions::bundled_manager_input(&request.package);
+    let bundled_instructions = instructions::bundled_manager_input(&request.instructions);
+    for (path, bundled) in [
+        (&request.package, bundled_package),
+        (&request.instructions, bundled_instructions),
+        (&request.workspace, false),
+    ] {
+        if bundled {
+            instructions::guarded_read(path)?;
+        } else {
+            ancestor(path)?;
+            guarded(path)?;
+        }
         if root.starts_with(path) || path.starts_with(root) {
             return Err(
                 "installation overlaps package, instructions, workspace or Inkscape".into(),
@@ -454,6 +464,18 @@ pub fn prepare(root: &Path, mut request: Request) -> Result<Value> {
         .prefix("offline-")
         .tempdir_in(root.join("staging"))
         .map_err(|e| e.to_string())?;
+    if bundled_package || bundled_instructions {
+        let snapshot = offline.path().join("Manager.app");
+        let source = super::manager_app::snapshot_current(&snapshot)?;
+        for (input, bundled) in [
+            (&mut request.package, bundled_package),
+            (&mut request.instructions, bundled_instructions),
+        ] {
+            if bundled {
+                *input = snapshot.join(input.strip_prefix(&source).map_err(|e| e.to_string())?);
+            }
+        }
+    }
     if request.package.is_file() {
         let staging = offline.path().canonicalize().map_err(|e| e.to_string())?;
         super::archive::extract(
