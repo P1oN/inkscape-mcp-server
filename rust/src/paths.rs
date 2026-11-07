@@ -282,6 +282,36 @@ fn apply_boolean_geometry(
     Ok(())
 }
 
+fn has_unbounded_region_style(raw: &str) -> bool {
+    crate::css::analysis_declarations(raw).is_none_or(|style| {
+        style.iter().any(|(key, value)| {
+            !matches!(
+                key.as_str(),
+                "fill"
+                    | "fill-rule"
+                    | "fill-opacity"
+                    | "stroke"
+                    | "stroke-width"
+                    | "stroke-opacity"
+                    | "stroke-linecap"
+                    | "stroke-linejoin"
+                    | "stroke-miterlimit"
+                    | "stroke-dasharray"
+                    | "stroke-dashoffset"
+                    | "opacity"
+                    | "visibility"
+                    | "display"
+                    | "paint-order"
+                    | "color"
+                    | "stop-color"
+                    | "stop-opacity"
+            ) || ["var(", "env(", "attr(", "calc("]
+                .iter()
+                .any(|function| value.to_ascii_lowercase().contains(function))
+        })
+    })
+}
+
 fn can_bound_difference(document: &Document, body: &Node, ids: &[String]) -> bool {
     let root = document.get_root_element().unwrap();
     // Query boxes cover ordinary paint and transforms. Effects, dynamic content,
@@ -304,8 +334,7 @@ fn can_bound_difference(document: &Document, body: &Node, ids: &[String]) -> boo
         ) || node.get_properties_ns().iter().any(|((key, _), value)| {
             matches!(
                 key.as_str(),
-                "style"
-                    | "filter"
+                "filter"
                     | "mask"
                     | "marker"
                     | "marker-start"
@@ -314,7 +343,10 @@ fn can_bound_difference(document: &Document, body: &Node, ids: &[String]) -> boo
                     | "vector-effect"
                     | "path-effect"
                     | "base"
-            ) || (key == "clipPathUnits" && value != "userSpaceOnUse")
+            ) || (key == "style" && has_unbounded_region_style(value))
+                // Query output is line-oriented and trims the ID column.
+                || (key == "id" && (value.trim() != value || value.contains([',', '\r', '\n'])))
+                || (key == "clipPathUnits" && value != "userSpaceOnUse")
                 || (key == "href" && !value.starts_with('#'))
         })
     }) {

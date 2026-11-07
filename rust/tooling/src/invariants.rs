@@ -884,7 +884,7 @@ fn boolean_difference(wire: &mut Wire, workspace: &Path, out: &Path) -> Result<(
     )?;
     {
         // The cutter extends beyond the body, and the viewBox is scaled and letterboxed.
-        let svg = r##"<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="10 20 100 50"><g id="group"><rect id="body" x="20" y="25" width="40" height="30"/><circle id="cutter" cx="56" cy="38" r="12"/></g></svg>"##;
+        let svg = r##"<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="10 20 100 50"><g id="group"><rect id="body" x="20" y="25" width="40" height="30" style="fill:#18666a;stroke:none"/><circle id="cutter" cx="56" cy="38" r="12"/></g></svg>"##;
         let doc = open(wire, "boolean-extended-cutter.svg", svg)?;
         let apply = |wire: &mut Wire, doc: &Value| {
             data(wire.call(
