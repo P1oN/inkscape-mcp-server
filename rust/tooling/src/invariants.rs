@@ -50,6 +50,9 @@ pub fn run(args: &Args) -> Result<()> {
         fs::set_permissions(engine, fs::Permissions::from_mode(0o700))?;
         command.env("PATH", vendor);
     }
+    if args.command == "engine-routes-acceptance" && mode == "shell" {
+        require_shell_union(&root, &mut command)?;
+    }
     let mut wire = Wire::spawn(&mut command, &out.join("server.stderr.log"))?;
     let initialized = wire.initialize()?;
     let result = match args.command.as_str() {
@@ -309,6 +312,41 @@ fn compare(wire: &mut Wire, root: &Path, workspace: &Path, out: &Path) -> Result
     )?;
     Ok(3)
 }
+fn require_shell_union(root: &Path, command: &mut std::process::Command) -> Result<()> {
+    // Keep the normal fallbacks for other routes in the suite. The Union
+    // fixture must exercise a successful warm action even if one-shot works.
+    let engine = tool("inkscape")
+        .unwrap_or_else(|_| {
+            if cfg!(target_os = "macos") {
+                "/Applications/Inkscape.app/Contents/MacOS/inkscape".into()
+            } else {
+                "/usr/bin/inkscape".into()
+            }
+        })
+        .canonicalize()?;
+    let vendor = root.join("shell-probe");
+    fs::create_dir(&vendor)?;
+    let proxy = vendor.join("inkscape");
+    fs::write(
+        &proxy,
+        r#"#!/bin/sh
+for arg in "$@"; do
+    case "$arg" in
+        --actions=*path-union*) echo 'Union fell back from shell to one-shot' >&2; exit 77 ;;
+    esac
+done
+exec "$INKSCAPE_MCP_ACCEPTANCE_ENGINE" "$@"
+"#,
+    )?;
+    fs::set_permissions(proxy, fs::Permissions::from_mode(0o700))?;
+    let path = std::env::var_os("PATH").unwrap_or_default();
+    let paths = std::env::join_paths(std::iter::once(vendor).chain(std::env::split_paths(&path)))?;
+    command
+        .env("PATH", paths)
+        .env("INKSCAPE_MCP_ACCEPTANCE_ENGINE", engine);
+    Ok(())
+}
+
 fn routes(wire: &mut Wire, root: &Path, workspace: &Path, out: &Path) -> Result<usize> {
     png(&workspace.join("tile.png"), 16, [213, 47, 89, 255])?;
     png(&root.join("outside.png"), 16, [213, 47, 89, 255])?;
@@ -602,6 +640,14 @@ fn boolean_union(wire: &mut Wire, workspace: &Path, out: &Path) -> Result<()> {
         (
             "union-cross-parent.svg",
             SOURCE.replace(ISLAND, &format!("<g>{ISLAND}</g>")),
+            "sibling shapes with directly editable geometry",
+        ),
+        (
+            "union-connector.svg",
+            SOURCE.replace(
+                "id=\"body\"",
+                "id=\"body\" inkscape:connector-type=\"polyline\"",
+            ),
             "sibling shapes with directly editable geometry",
         ),
         (

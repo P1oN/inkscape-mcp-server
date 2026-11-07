@@ -77,6 +77,9 @@ fn effective(n: &Node, key: &str) -> Option<String> {
         .cloned()
         .or_else(|| n.get_property_no_ns(key))
 }
+const SODIPODI_NS: &str = "http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd";
+const LEGACY_SODIPODI_NS: &str = "http://sodipodi.sourceforge.net/DTD/sodipodi-0.0.dtd";
+
 const SHAPE_GEOMETRY: &[&str] = &[
     "d", "x", "y", "width", "height", "rx", "ry", "cx", "cy", "r", "points",
 ];
@@ -114,13 +117,25 @@ fn editable_union_shape(node: &Node) -> bool {
         node.get_name().as_str(),
         "path" | "rect" | "circle" | "ellipse" | "polygon" | "polyline"
     ) && is_svg(node)
-        && node.get_child_elements().is_empty()
+        && node.get_child_elements().iter().all(|child| {
+            is_svg(child)
+                && matches!(child.get_name().as_str(), "title" | "desc")
+                && child.get_child_elements().is_empty()
+        })
         && union_fill_rule(node).is_some()
         && !node.get_properties_ns().keys().any(|(key, ns)| {
             matches!(key.as_str(), "path-effect" | "original-d")
+                || (ns.as_ref().is_some_and(|ns| ns.get_href() == INKSCAPE_NS)
+                    && matches!(
+                        key.as_str(),
+                        "connector-type"
+                            | "connector-curvature"
+                            | "connection-start"
+                            | "connection-end"
+                    ))
                 || (key == "type"
                     && ns.as_ref().is_some_and(|ns| {
-                        ns.get_href() == "http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                        matches!(ns.get_href().as_str(), SODIPODI_NS | LEGACY_SODIPODI_NS)
                     }))
         })
 }
@@ -171,18 +186,21 @@ fn same_merge_frame(body: &Node, result: &Node) -> bool {
     while let (Some(a), Some(b)) = (&old, &new) {
         if !is_svg(a)
             || !is_svg(b)
-            || !matches!(a.get_name().as_str(), "svg" | "g")
+            || !matches!(a.get_name().as_str(), "svg" | "g" | "a")
             || a.get_name() != b.get_name()
         {
             return false;
         }
-        // The plain SVG export omits layer labels and group mode. They stay on
+        // The plain SVG export omits editor metadata. It stays on
         // the original nodes and do not change the coordinate frame.
         let frame_attributes = |node: &Node| {
             let mut attrs = node.get_properties_ns();
             attrs.retain(|(key, ns), _| {
-                !(matches!(key.as_str(), "label" | "groupmode")
-                    && ns.as_ref().is_some_and(|ns| ns.get_href() == INKSCAPE_NS))
+                !ns.as_ref().is_some_and(|ns| match ns.get_href().as_str() {
+                    INKSCAPE_NS => matches!(key.as_str(), "label" | "groupmode" | "version"),
+                    SODIPODI_NS | LEGACY_SODIPODI_NS => key == "docname",
+                    _ => false,
+                })
             });
             attrs
         };
@@ -660,6 +678,33 @@ mod tests {
             assert!(error.contains(reason), "{error}");
             assert_eq!(xml::serialize(&original), before);
         }
+    }
+    #[test]
+    fn union_converts_a_primitive_and_keeps_its_descriptive_children() {
+        let original = xml::parse(
+            br#"<svg xmlns="http://www.w3.org/2000/svg"><rect id="body" x="1" y="1" width="4" height="4" rx="1" fill="red"><title id="label">Union body</title></rect><circle id="other" cx="3" cy="3" r="2"/></svg>"#,
+            4096,
+        )
+        .unwrap();
+        let incoming = xml::parse(
+            br#"<svg xmlns="http://www.w3.org/2000/svg"><path id="body" d="M0 0H5V5Z"/></svg>"#,
+            4096,
+        )
+        .unwrap();
+        let operands = union_operands(&original, &["other".into(), "body".into()]).unwrap();
+        apply_union_geometry(operands, &incoming).unwrap();
+        let body = find(&original, "body").unwrap();
+        assert_eq!(body.get_name(), "path");
+        assert_eq!(body.get_property_no_ns("d").as_deref(), Some("M0 0H5V5Z"));
+        assert_eq!(body.get_property_no_ns("fill").as_deref(), Some("red"));
+        for attr in ["x", "y", "width", "height", "rx"] {
+            assert!(body.get_property_no_ns(attr).is_none(), "{attr}");
+        }
+        assert_eq!(
+            find(&original, "label").unwrap().get_content(),
+            "Union body"
+        );
+        assert!(find(&original, "other").is_none());
     }
     #[test]
     fn root_replacement_preserves_original_document_siblings() {
