@@ -90,6 +90,8 @@ manual configuration, standalone checks, legacy skill handling and recovery.
 
 Startup/reconnect/doctor never launch Inkscape. Explicit GUI launch requires a user request.
 Live operations use the selected open drawing; headless operations use working copies.
+Set `INKSCAPE_MCP_TOOL_PROFILE=compact` in the MCP server environment and reconnect
+for the [compact headless Boolean Difference workflow](docs/agent-usage-guide.md#compact-headless-profile).
 Clean-machine installation, authenticated real-client workspace interaction and broader
 native GUI checks remain follow-up work; [current status](docs/AGENT_HANDOFF.md) records validation scope.
 
