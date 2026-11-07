@@ -77,6 +77,143 @@ fn effective(n: &Node, key: &str) -> Option<String> {
         .cloned()
         .or_else(|| n.get_property_no_ns(key))
 }
+const SHAPE_GEOMETRY: &[&str] = &[
+    "d", "x", "y", "width", "height", "rx", "ry", "cx", "cy", "r", "points",
+];
+
+fn editable_union_shape(node: &Node) -> bool {
+    matches!(
+        node.get_name().as_str(),
+        "path" | "rect" | "circle" | "ellipse" | "polygon" | "polyline"
+    ) && node
+        .get_namespace()
+        .is_some_and(|ns| ns.get_href() == "http://www.w3.org/2000/svg")
+        && node.get_child_elements().is_empty()
+        && !style::declarations(node)
+            .keys()
+            .any(|key| SHAPE_GEOMETRY.contains(&key.as_str()) || key == "transform")
+        && !node.get_properties_ns().keys().any(|(key, ns)| {
+            matches!(key.as_str(), "path-effect" | "original-d")
+                || (key == "type"
+                    && ns.as_ref().is_some_and(|ns| {
+                        ns.get_href() == "http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                    }))
+        })
+}
+
+// Document order determines the survivor and the order given to Inkscape.
+fn union_operands(document: &Document, ids: &[String]) -> Result<Vec<(String, Node)>, String> {
+    let mut selected: HashMap<_, _> = ids.iter().map(|id| (id.as_str(), false)).collect();
+    let mut operands = Vec::with_capacity(ids.len());
+    for node in elements(document.get_root_element().unwrap()) {
+        if let Some(id) = node.get_property_no_ns("id")
+            && let Some(seen) = selected.get_mut(id.as_str())
+        {
+            if *seen {
+                return Err(format!("boolean_union operand ID is ambiguous: {id}"));
+            }
+            *seen = true;
+            operands.push((id, node));
+        }
+    }
+    let parent = operands.first().and_then(|(_, node)| node.get_parent());
+    if operands.len() != ids.len()
+        || parent.is_none()
+        || operands
+            .iter()
+            .any(|(_, node)| node.get_parent() != parent || !editable_union_shape(node))
+    {
+        return Err("boolean_union requires sibling shapes with directly editable geometry".into());
+    }
+    crate::delete::Mutation {
+        ids: operands[1..].iter().map(|(id, _)| id.clone()).collect(),
+    }
+    .check_references(document)?;
+    Ok(operands)
+}
+
+fn same_merge_frame(body: &Node, result: &Node) -> bool {
+    if body.get_property_no_ns("transform") != result.get_property_no_ns("transform")
+        || style::declarations(result).contains_key("transform")
+        || effective(body, "fill-rule").as_deref().unwrap_or("inherit")
+            != effective(result, "fill-rule")
+                .as_deref()
+                .unwrap_or("inherit")
+    {
+        return false;
+    }
+    let mut old = body.get_parent().filter(Node::is_element_node);
+    let mut new = result.get_parent().filter(Node::is_element_node);
+    while let (Some(a), Some(b)) = (&old, &new) {
+        if !matches!(a.get_name().as_str(), "svg" | "g") || a.get_name() != b.get_name() {
+            return false;
+        }
+        let original = a.get_properties_ns();
+        let mut incoming = b.get_properties_ns();
+        // Inkscape fills in missing IDs and a root version during export.
+        for key in ["id", "version"] {
+            let key = (key.to_owned(), None);
+            if !original.contains_key(&key) {
+                incoming.remove(&key);
+            }
+        }
+        if original != incoming {
+            return false;
+        }
+        old = a.get_parent().filter(Node::is_element_node);
+        new = b.get_parent().filter(Node::is_element_node);
+    }
+    old.is_none() && new.is_none()
+}
+
+fn apply_union_geometry(operands: Vec<(String, Node)>, incoming: &Document) -> Result<(), String> {
+    let mut operands = operands.into_iter();
+    let (body_id, mut body) = operands.next().ok_or("union has no body")?;
+    let result = find(incoming, &body_id)
+        .filter(|n| {
+            n.get_name() == "path"
+                && n.get_namespace()
+                    .is_some_and(|ns| ns.get_href() == "http://www.w3.org/2000/svg")
+        })
+        .ok_or("boolean_union produced no identifiable editable body path")?;
+    if !same_merge_frame(&body, &result) {
+        return Err("boolean_union result changed the body coordinate frame or fill rule".into());
+    }
+    let consumed: HashSet<_> = operands.as_slice().iter().map(|(id, _)| id).collect();
+    if elements(incoming.get_root_element().unwrap())
+        .iter()
+        .any(|node| {
+            node.get_property_no_ns("id")
+                .is_some_and(|id| consumed.contains(&id))
+        })
+    {
+        return Err("boolean_union engine result retained a consumed operand".into());
+    }
+    let d = result
+        .get_property_no_ns("d")
+        .filter(|d| !d.trim().is_empty())
+        .ok_or("boolean_union produced no body geometry")?;
+    if !crate::geometry_quality::path(&d, 0.)
+        .is_ok_and(|review| review.open_subpaths == 0 && review.segments > 2)
+    {
+        return Err("boolean_union produced no valid closed path geometry".into());
+    }
+    body.set_name("path")
+        .map_err(|_| "cannot update union body")?;
+    for key in SHAPE_GEOMETRY {
+        if *key != "d" && body.get_property_no_ns(key).is_some() {
+            body.remove_property_no_ns(key)
+                .map_err(|_| "cannot replace union geometry")?;
+        }
+    }
+    body.set_property("d", &d)
+        .map_err(|_| "cannot write union geometry")?;
+    for (_, mut operand) in operands {
+        operand.unlink_node();
+    }
+    Ok(())
+}
+
 fn finish_outline(old: &Document, new: &mut Document, ids: &[String]) -> Result<(), String> {
     for id in ids {
         if let Some(mut node) = find(new, id)
@@ -308,7 +445,15 @@ pub fn apply(registry: &Registry, op: &str, args: &Value) -> Result<Value, Strin
     if dry {
         let document = placement::load(registry, id)?;
         let ids = targets(&document, &raw, op)?;
-        result["result_id"] = json!(bottom(&document, &ids, op));
+        let bottom = if op == "boolean_union" {
+            union_operands(&document, &ids)?
+                .into_iter()
+                .next()
+                .map(|(id, _)| id)
+        } else {
+            bottom(&document, &ids, op)
+        };
+        result["result_id"] = json!(bottom);
         result["summary"] = json!(format!(
             "dry-run: would apply {op} (Inkscape {}) to {} object(s): {} — no change written",
             action(op),
@@ -333,6 +478,15 @@ pub fn apply(registry: &Registry, op: &str, args: &Value) -> Result<Value, Strin
         |document| {
             let ids = targets(document, &raw, op)?;
             captured = ids.clone();
+            if op == "boolean_union" {
+                let operands = union_operands(document, &ids)?;
+                let engine_ids: Vec<_> = operands.iter().map(|(id, _)| id.clone()).collect();
+                let new = run(registry, id, op, &engine_ids)?;
+                validate_result(document, &new)?;
+                apply_union_geometry(operands, &new)?;
+                survivor = engine_ids.into_iter().next();
+                return Ok(format!("applied {op} to {} objects", ids.len()));
+            }
             let bottom = bottom(document, &ids, op);
             let mut new = run(registry, id, op, &ids)?;
             if let Some(bottom) = bottom {
@@ -438,6 +592,40 @@ mod tests {
             assert!(validate_result(&old, &new).is_err());
         }
         assert!(find(&old, "b").is_some());
+    }
+    #[test]
+    fn union_refuses_unsafe_engine_geometry_before_editing_the_tree() {
+        let original = xml::parse(
+            br#"<svg xmlns="http://www.w3.org/2000/svg"><path id="body" fill-rule="evenodd" d="M0 0H4V4Z"/><circle id="other" cx="3" cy="3" r="2"/></svg>"#,
+            4096,
+        )
+        .unwrap();
+        let before = xml::serialize(&original);
+        let ids = ["body".into(), "other".into()];
+        for (result, reason) in [
+            (
+                r#"<path id="body" fill-rule="nonzero" d="M0 0H5V5Z"/>"#,
+                "coordinate frame or fill rule",
+            ),
+            (
+                r#"<path id="body" fill-rule="evenodd" d="M0 0H5V5"/>"#,
+                "no valid closed path geometry",
+            ),
+            (
+                r#"<path id="body" fill-rule="evenodd" d="M0 0H5V5Z"/><circle id="other"/>"#,
+                "retained a consumed operand",
+            ),
+        ] {
+            let incoming = xml::parse(
+                format!(r#"<svg xmlns="http://www.w3.org/2000/svg">{result}</svg>"#).as_bytes(),
+                4096,
+            )
+            .unwrap();
+            let operands = union_operands(&original, &ids).unwrap();
+            let error = apply_union_geometry(operands, &incoming).unwrap_err();
+            assert!(error.contains(reason), "{error}");
+            assert_eq!(xml::serialize(&original), before);
+        }
     }
     #[test]
     fn root_replacement_preserves_original_document_siblings() {

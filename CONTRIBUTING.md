@@ -64,6 +64,13 @@ Main changes go through PRs with both quick and native checks; see
 Keep tools typed and bounded. Reuse the edit pipeline, snapshots, Operation Records,
 no-op handling and approval gates. Preserve originals, workspace/symlink protections,
 SVG IDs/references and appearance; reject unsafe structural edits before mutation.
+For each new typed geometry operation, document the allowed geometry, ID and operand
+changes. Extend `engine-routes-acceptance` with an editable fixture containing painted
+neighbors and local references. Check the rendered result against an independent
+reference and verify the saved SVG's editability, fill and fill rule, surviving references,
+paint order and unrelated nodes and attributes. Exercise unsafe and referenced-operand
+refusals, then verify snapshot rollback and unchanged source bytes through STDIO in both
+engine modes.
 Use argument-list subprocesses, safe XML parsing and no arbitrary shell/code/extensions.
 Do not add bitmap tracing. Do not commit, publish or send messages without authorization.
 Windows is backlog. Prepared CI jobs are not evidence of real target validation.
@@ -113,6 +120,10 @@ scripts/dev-tools.sh authoring-acceptance --binary rust/target/release/inkscape-
 These probes use deliberate editable flower/fold/snowball and overlapping-shape fixtures,
 real CLI pixels, read-only report checks, approved deletion/no-op/restore and reference
 refusal. Inspect the retained SVG and PNGs separately for silhouette quality.
+
+`engine-routes-acceptance` checks a typed Boolean Union of three shapes, including a
+hole, an overlapping painted neighbor, a clone of the survivor and a referenced-operand
+refusal. CI runs the suite in both `per_call` and `shell` modes.
 
 Startup defaults to 128 fresh sessions/four concurrent
 servers with immediate mutation/discovery and no retries. Responsiveness checks both

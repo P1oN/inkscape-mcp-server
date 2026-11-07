@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="96" viewBox="0 0 128 96">
+<title>Nested union with a retained hole</title>
+<defs><clipPath id="trim"><rect x="4" y="4" width="86" height="60" rx="8"/></clipPath><linearGradient id="paint"><stop stop-color="#ef8c43"/><stop offset="1" stop-color="#ad3666"/></linearGradient><path id="mark" d="M0 0h12v6H0z"/></defs>
+<g id="outer" transform="translate(8 6)">
+ <g id="inner" transform="translate(3 5)" clip-path="url(#trim)">
+  <rect id="underlay" x="5" y="5" width="76" height="58" rx="5" fill="#ebdac0"/>
+  <path id="body" style="fill:#18666a;fill-rule:evenodd" d="M12 10H58V53H12Z M25 22H35V34H25Z"/>
+  <rect id="neighbor" x="68" y="21" width="25" height="18" rx="4" fill="url(#paint)"/>
+  <rect id="wing" x="50" y="16" width="28" height="22" fill="#d85f4b"/>
+  <use id="badge" href="#mark" x="59" y="46" fill="#f6cf58"/>
+  <rect id="island" x="45" y="56" width="9" height="5" fill="#5274ab"/>
+ </g>
+</g>
+<use id="body-copy" href="#body" transform="translate(90 66) scale(.42)"/>
+<use id="outside" href="#mark" x="105" y="54" fill="#493e82"/>
+</svg>

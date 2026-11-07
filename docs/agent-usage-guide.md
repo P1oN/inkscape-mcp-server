@@ -115,6 +115,13 @@ The generative flow (E14). All writes land on a **working copy**, never the orig
    member escalates the batch to HIGH and needs an `approval_token`). Prefer it over N round-trips
    when you already know the edits; path geometry and cross-document composition are not batchable.
 
+   For `boolean_union`, select two or more directly editable sibling shapes in the
+   full profile with raw Actions enabled. The lowest shape becomes an editable path at
+   the same position, keeping its ID, paint, fill rule, transform and surviving references.
+   The other operands are consumed. Union refuses when a surviving element references a
+   consumed operand or when the engine does not return an identifiable closed path in
+   the survivor's coordinate frame with the same fill rule.
+
 4. **Render and look before you trust the edit (a loud default).** `render_preview(doc_id, …)`
    rasterizes the working copy and returns the PNG **inline** as an MCP image content block (when
    under the inline byte threshold) — so the agent can *look* at what it just made and decide the

@@ -57,7 +57,14 @@ pub fn run(args: &Args) -> Result<()> {
         "special-file-acceptance" => special(&mut wire, &root, &workspace),
         "defects-acceptance" => defects(&mut wire, &workspace, &initialized),
         "compare-acceptance" => compare(&mut wire, &root, &workspace, &out),
-        "engine-routes-acceptance" => routes(&mut wire, &root, &workspace, &out),
+        "engine-routes-acceptance" => {
+            routes(&mut wire, &root, &workspace, &out).and_then(|checks| {
+                let evidence = out.join("union");
+                fs::create_dir_all(&evidence)?;
+                boolean_union(&mut wire, &workspace, &evidence)?;
+                Ok(checks + 1)
+            })
+        }
         _ => Err("unknown invariant suite".into()),
     };
     wire.save_trace(&out.join("server.trace.json"))?;
@@ -399,4 +406,223 @@ fn routes(wire: &mut Wire, root: &Path, workspace: &Path, out: &Path) -> Result<
         "original SVG changed",
     )?;
     Ok(8)
+}
+
+fn open_fixture(wire: &mut Wire, workspace: &Path, name: &str, svg: &str) -> Result<Value> {
+    fs::write(workspace.join(name), svg)?;
+    Ok(data(wire.call("open_document", json!({"path":name}))?)?["doc_id"].clone())
+}
+
+fn fixture_pixels(
+    wire: &mut Wire,
+    workspace: &Path,
+    doc: &Value,
+    evidence: &Path,
+) -> Result<Vec<u8>> {
+    let result = data(wire.call(
+        "render_preview",
+        json!({"doc_id":doc,"width_px":256,"inline":false}),
+    )?)?;
+    let bytes = read(
+        &workspace.join(result["artifact_path"].as_str().ok_or("preview missing")?),
+        16 * 1024 * 1024,
+    )?;
+    fs::write(evidence, &bytes)?;
+    let mut reader = png::Decoder::new(std::io::Cursor::new(bytes)).read_info()?;
+    let mut pixels = vec![0; reader.output_buffer_size().ok_or("PNG size missing")?];
+    let info = reader.next_frame(&mut pixels)?;
+    ensure(
+        (info.width, info.height, info.color_type, info.bit_depth)
+            == (256, 192, png::ColorType::Rgba, png::BitDepth::Eight),
+        "unexpected geometry fixture render format",
+    )?;
+    Ok(pixels)
+}
+
+fn parse_geometry_fixture(svg: &[u8]) -> Result<libxml::tree::Document> {
+    Ok(libxml::parser::Parser::default().parse_string_with_options(
+        svg,
+        libxml::parser::ParserOptions {
+            no_blanks: true,
+            no_net: true,
+            ..Default::default()
+        },
+    )?)
+}
+
+fn boolean_union(wire: &mut Wire, workspace: &Path, out: &Path) -> Result<()> {
+    const SOURCE: &str = include_str!("../tests/fixtures/boolean-union.svg");
+    const WING: &str = r##"<rect id="wing" x="50" y="16" width="28" height="22" fill="#d85f4b"/>"##;
+    const ISLAND: &str =
+        r##"<rect id="island" x="45" y="56" width="9" height="5" fill="#5274ab"/>"##;
+    const BODY_D: &str = "M12 10H58V53H12Z M25 22H35V34H25Z";
+    const UNION_D: &str = "M12 10H58V16H78V38H58V53H12Z M25 22H35V34H25Z M45 56H54V61H45Z";
+
+    let open = |wire: &mut Wire, name: &str, svg: &str| open_fixture(wire, workspace, name, svg);
+    let doc = open(wire, "union.svg", SOURCE)?;
+    let doc_dir = workspace
+        .join(".inkscape-mcp/documents")
+        .join(doc.as_str().ok_or("union document ID missing")?);
+    let working = doc_dir.join("working/document.svg");
+    let original_working = fs::read(&working)?;
+    let before = inventory(&doc_dir)?;
+    let operands = json!(["island", "wing", "body"]);
+    let planned = data(wire.call("boolean_union", json!({"doc_id":doc,"object_ids":operands}))?)?;
+    let unapproved = wire.call(
+        "boolean_union",
+        json!({"doc_id":doc,"object_ids":operands,"dry_run":false}),
+    )?;
+    ensure(
+        planned["result_id"] == "body"
+            && planned["changed"] == false
+            && planned["snapshot_id"].is_null()
+            && error(&unapproved)
+            && inventory(&doc_dir)? == before,
+        "union plan or missing-approval refusal changed document state",
+    )?;
+    let apply = |wire: &mut Wire, doc: &Value| {
+        wire.call(
+            "boolean_union",
+            json!({"doc_id":doc,"object_ids":operands,"dry_run":false,"approval_token":"owned fixture"}),
+        )
+    };
+    let applied = data(apply(wire, &doc)?)?;
+    let operation = applied["operation_id"]
+        .as_str()
+        .ok_or("union operation missing")?;
+    let record: Value = serde_json::from_slice(&fs::read(
+        doc_dir.join("operations").join(format!("{operation}.json")),
+    )?)?;
+    ensure(
+        applied["changed"] == true
+            && applied["result_id"] == "body"
+            && applied["affected_ids"] == operands
+            && applied["snapshot_id"]
+                .as_str()
+                .is_some_and(|id| !id.is_empty())
+            && record["status"] == "applied"
+            && record["snapshot_id"] == applied["snapshot_id"],
+        "union did not record a reversible edit for the selected shapes",
+    )?;
+    let validated = data(wire.call("validate_document", json!({"doc_id":doc}))?)?;
+    ensure(validated["ok"] == true, "union result did not validate")?;
+    data(wire.call(
+        "save_document_as",
+        json!({"doc_id":doc,"dest_path":"union-final.svg","vector_only":true}),
+    )?)?;
+    let saved = fs::read(workspace.join("union-final.svg"))?;
+    fs::write(out.join("union-final.svg"), &saved)?;
+
+    let reference_svg = SOURCE
+        .replace(WING, "")
+        .replace(ISLAND, "")
+        .replace(BODY_D, UNION_D);
+    fs::write(out.join("union-reference.svg"), &reference_svg)?;
+    let saved_svg = parse_geometry_fixture(&saved)?;
+    let expected = parse_geometry_fixture(reference_svg.as_bytes())?;
+    let body = |svg: &libxml::tree::Document| -> Result<libxml::tree::Node> {
+        let mut context =
+            libxml::xpath::Context::new(svg).map_err(|_| "cannot create fixture XPath")?;
+        let mut nodes = context
+            .findnodes("//*[@id='body']", None)
+            .map_err(|_| "cannot find union body")?;
+        ensure(nodes.len() == 1, "union must retain one body ID")?;
+        Ok(nodes.pop().ok_or("missing union body")?)
+    };
+    let actual_body = body(&saved_svg)?;
+    let d = actual_body
+        .get_property_no_ns("d")
+        .ok_or("union path data missing")?;
+    ensure(
+        actual_body.get_name() == "path" && !d.trim().is_empty(),
+        "union result lacks an editable path",
+    )?;
+    body(&expected)?
+        .set_property("d", &d)
+        .map_err(|_| "cannot set expected path data")?;
+    let normalized_root = |svg: &libxml::tree::Document| -> Result<String> {
+        Ok(svg.node_to_string(&svg.get_root_element().ok_or("union root missing")?))
+    };
+    ensure(
+        normalized_root(&saved_svg)? == normalized_root(&expected)?,
+        "union changed paint, fill rule, references, paint order, or unrelated SVG structure",
+    )?;
+
+    let reopened =
+        data(wire.call("open_document", json!({"path":"union-final.svg"}))?)?["doc_id"].clone();
+    let report = data(wire.call(
+        "quality_report",
+        json!({"doc_id":reopened,"editability":{"object_roles":[{"object_id":"body","role":"closed_shape"}]}}),
+    )?)?;
+    let geometry = &report["editability"]["geometry"];
+    ensure(
+        geometry["truncated"] == false
+            && geometry["findings"].as_array().is_some_and(|findings| {
+                findings.iter().all(|finding| {
+                    finding["object_id"] != "body"
+                        || !matches!(
+                            finding["code"].as_str(),
+                            Some("open_shape" | "path_geometry_unknown")
+                        )
+                })
+            }),
+        "saved union did not pass the editable closed path checks",
+    )?;
+    let reference = open(wire, "union-reference.svg", &reference_svg)?;
+    let actual = fixture_pixels(wire, workspace, &reopened, &out.join("union-final.png"))?;
+    let expected = fixture_pixels(
+        wire,
+        workspace,
+        &reference,
+        &out.join("union-reference.png"),
+    )?;
+    ensure(
+        actual == expected,
+        "saved union render differs from the independent reference",
+    )?;
+
+    let restored = data(wire.call(
+        "restore_snapshot",
+        json!({"doc_id":doc,"snapshot_id":applied["snapshot_id"]}),
+    )?)?;
+    ensure(
+        fs::read(&working)? == original_working
+            && restored["restored_sha256"] == sha(&original_working)
+            && fs::read(workspace.join("union.svg"))? == SOURCE.as_bytes()
+            && fs::read(workspace.join("union-final.svg"))? == saved,
+        "union rollback, saved copy, or original preservation failed",
+    )?;
+
+    for (name, svg, reason) in [
+        (
+            "union-linked.svg",
+            SOURCE.replace("href=\"#mark\" x=\"105\"", "href=\"#island\" x=\"105\""),
+            "reference IDs in the removed subtree",
+        ),
+        (
+            "union-cross-parent.svg",
+            SOURCE.replace(ISLAND, &format!("<g>{ISLAND}</g>")),
+            "sibling shapes with directly editable geometry",
+        ),
+    ] {
+        let doc = open(wire, name, &svg)?;
+        let dir = workspace
+            .join(".inkscape-mcp/documents")
+            .join(doc.as_str().ok_or("union document ID missing")?);
+        let working = dir.join("working/document.svg");
+        let before = fs::read(&working)?;
+        let snapshots = inventory(&dir.join("snapshots"))?;
+        let refused = apply(wire, &doc)?;
+        ensure(
+            error(&refused)
+                && refused["result"]["content"][0]["text"]
+                    .as_str()
+                    .is_some_and(|text| text.contains(reason))
+                && fs::read(working)? == before
+                && inventory(&dir.join("snapshots"))? == snapshots
+                && fs::read(workspace.join(name))? == svg.as_bytes(),
+            format!("unsafe union must refuse without changing the drawing or snapshots: {name}"),
+        )?;
+    }
+    Ok(())
 }
