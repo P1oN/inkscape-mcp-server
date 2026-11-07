@@ -322,7 +322,7 @@ pub fn manifests(args: &Args) -> Result<()> {
         !root.path().join("absent-session").exists(),
         "startup mutated session",
     )?;
-    let header = "# inkscape-mcp: Rust STDIO server\n\nRun ./setup.sh then ./run-mcp.sh. See README.md and docs/agent-usage-guide.md.\nNative Rust runtime and build tools; ready packages contain no Python runtime.\n";
+    let header = "# inkscape-mcp: Rust STDIO server\n\nRun ./setup.sh then ./run-mcp.sh. See README.md and docs/agent-usage-guide.md.\nNative Rust runtime and build tools; ready packages contain no Python runtime.\n\nThis catalog shows the full surface. Set INKSCAPE_MCP_TOOL_PROFILE=compact for the short headless Boolean Difference workflow.\n";
     let mut index = format!("{header}\n## Tools\n");
     let mut tools = contract["tools/list"]["tools"]
         .as_array()

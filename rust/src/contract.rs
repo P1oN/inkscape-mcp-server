@@ -3,11 +3,26 @@
 
 use serde_json::Value;
 
+const COMPACT_TOOLS: &[&str] = &[
+    // The workspace and create tools also support the installer's health probe.
+    "get_workspace_info",
+    "create_document",
+    "open_document",
+    "find_objects",
+    "boolean_difference",
+    "validate_document",
+    "render_preview",
+    "compare_region",
+    "save_document_as",
+    "restore_snapshot",
+];
+
 pub fn contract() -> Value {
-    let live = flag("INKSCAPE_MCP_LIVE_ENABLED", true);
-    let raw = flag("INKSCAPE_MCP_RAW_ACTION_ENABLED", false);
+    let compact = choice("INKSCAPE_MCP_TOOL_PROFILE", "compact");
+    let live = !compact && flag("INKSCAPE_MCP_LIVE_ENABLED", true);
+    let raw = !compact && flag("INKSCAPE_MCP_RAW_ACTION_ENABLED", false);
     let core = choice("INKSCAPE_MCP_TOOL_PROFILE", "core");
-    let short = choice("INKSCAPE_MCP_TOOL_DESC", "short");
+    let short = compact || choice("INKSCAPE_MCP_TOOL_DESC", "short");
     macro_rules! select {
         ($filename:literal) => {
             include_str!(concat!("../../migration/contracts/", $filename, ".json"))
@@ -33,6 +48,12 @@ pub fn contract() -> Value {
     };
     let mut value: Value =
         serde_json::from_str(source).expect("checked-in reference contract must be valid JSON");
+    if compact {
+        value["tools/list"]["tools"]
+            .as_array_mut()
+            .unwrap()
+            .retain(|tool| COMPACT_TOOLS.contains(&tool["name"].as_str().unwrap()));
+    }
     let instructions = inkscape_mcp_rust::update::instructions::active()
         .expect("instructions validated before server construction");
     value["initialize"]["instructions"] =

@@ -76,6 +76,12 @@ pub fn run(args: &Args) -> Result<()> {
     wire.save_trace(&out.join("server.trace.json"))?;
     let checks = result?;
     wire.close();
+    let checks = if args.command == "engine-routes-acceptance" {
+        difference_profiles(&mut command, &root, &out)?;
+        checks + 2
+    } else {
+        checks
+    };
     if args.command == "defects-acceptance" {
         let failed = root.join("failed-workspace");
         fs::create_dir(&failed)?;
@@ -682,6 +688,110 @@ fn boolean_union(wire: &mut Wire, workspace: &Path, out: &Path) -> Result<()> {
         )?;
     }
     Ok(())
+}
+
+fn difference_profiles(command: &mut std::process::Command, root: &Path, out: &Path) -> Result<()> {
+    let mut full_short_tools: Option<Vec<Value>> = None;
+    for (profile, live_and_raw, descriptions) in
+        [("full", "false", "short"), ("compact", "true", "full")]
+    {
+        let workspace = root.join(profile);
+        let evidence = out.join("profiles").join(profile);
+        fs::create_dir(&workspace)?;
+        fs::create_dir_all(&evidence)?;
+        command
+            .env("INKSCAPE_MCP_WORKSPACE_ROOTS", &workspace)
+            .env("INKSCAPE_MCP_MANAGED_DIR", workspace.join("absent-session"))
+            .env(
+                "INKSCAPE_MCP_LIVE_RENDEZVOUS",
+                workspace.join("absent-rendezvous"),
+            )
+            .env("INKSCAPE_MCP_LIVE_ENABLED", live_and_raw)
+            .env("INKSCAPE_MCP_RAW_ACTION_ENABLED", live_and_raw)
+            .env("INKSCAPE_MCP_TOOL_PROFILE", profile)
+            .env("INKSCAPE_MCP_TOOL_DESC", descriptions);
+        let mut wire = Wire::spawn(command, &evidence.join("server.stderr.log"))?;
+        let result = (|| {
+            wire.initialize()?;
+            let tools = check_difference_profile(&mut wire, profile)?;
+            if let Some(full) = &full_short_tools {
+                ensure(
+                    tools.iter().all(|tool| full.contains(tool)),
+                    "compact tools differ from the full headless short contracts",
+                )?;
+            } else {
+                full_short_tools = Some(tools);
+            }
+            boolean_difference(&mut wire, &workspace, &evidence)?;
+            ensure(
+                !workspace.join("absent-session").exists()
+                    && !workspace.join("absent-rendezvous").exists(),
+                format!("profile {profile} created a live session"),
+            )
+        })();
+        wire.save_trace(&evidence.join("server.trace.json"))?;
+        result?;
+        wire.close();
+    }
+    let expected = fs::read(out.join("difference/boolean-final.svg"))?;
+    for profile in ["full", "compact"] {
+        ensure(
+            fs::read(out.join("profiles").join(profile).join("boolean-final.svg"))? == expected,
+            format!("profile {profile} produced a different saved Difference"),
+        )?;
+    }
+    Ok(())
+}
+
+fn check_difference_profile(wire: &mut Wire, profile: &str) -> Result<Vec<Value>> {
+    let discovery = wire.request("tools/list", None)?;
+    let tools = discovery["result"]["tools"]
+        .as_array()
+        .ok_or("missing profile discovery")?;
+    let names: Vec<_> = tools
+        .iter()
+        .filter_map(|tool| tool["name"].as_str())
+        .collect();
+    ensure(
+        names.contains(&"boolean_difference"),
+        format!("typed Difference missing in {profile}"),
+    )?;
+    for name in [
+        "run_raw_action",
+        "run_action_chain",
+        "validate_action_chain",
+        "boolean_union",
+        "live_status",
+    ] {
+        let denied = wire.call(name, json!({}))?;
+        ensure(
+            !names.contains(&name)
+                && error(&denied)
+                && denied["result"]["content"][0]["text"]
+                    .as_str()
+                    .is_some_and(|text| text.starts_with("Unknown tool:")),
+            format!("{profile} exposed unavailable tool {name}"),
+        )?;
+    }
+    if profile == "compact" {
+        ensure(
+            names
+                == [
+                    "get_workspace_info",
+                    "open_document",
+                    "create_document",
+                    "render_preview",
+                    "compare_region",
+                    "find_objects",
+                    "boolean_difference",
+                    "save_document_as",
+                    "restore_snapshot",
+                    "validate_document",
+                ],
+            "compact profile contains unexpected tools",
+        )?;
+    }
+    Ok(tools.clone())
 }
 
 fn boolean_difference(wire: &mut Wire, workspace: &Path, out: &Path) -> Result<()> {

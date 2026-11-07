@@ -14355,6 +14355,184 @@
         }
       },
       {
+        "name": "boolean_difference",
+        "title": "Boolean difference",
+        "description": "Subtract the upper editable sibling shape from the lower one via Inkscape.\n\nRisk class: high (destructive geometry; approval-gated).\n\nAfter an applied edit, use doc_id and snapshot_id with compare_region. Pass changed_region as region when present.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "doc_id": {
+              "type": "string"
+            },
+            "object_ids": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "dry_run": {
+              "default": true,
+              "type": "boolean"
+            },
+            "approval_token": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "required": [
+            "doc_id",
+            "object_ids"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "description": "When changed is true, snapshot_id names the pre-edit state and doc_id identifies the edited working copy. An applied merge reports the identifiable surviving ID as result_id; an operation without a unique result returns null. A dry run may predict a merge ID and has a null snapshot_id. A no-op keeps the original working copy and returns empty snapshot_id and operation_id strings. After an applied edit, use doc_id and snapshot_id with compare_region. Pass changed_region as region when present.",
+          "properties": {
+            "doc_id": {
+              "type": "string"
+            },
+            "op": {
+              "type": "string"
+            },
+            "dry_run": {
+              "type": "boolean"
+            },
+            "changed": {
+              "type": "boolean"
+            },
+            "affected_ids": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "result_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "changed_region": {
+              "description": "Optional conservative bounds of the original operands and resulting shape in document coordinates. Omitted when unavailable.",
+              "additionalProperties": false,
+              "properties": {
+                "x": {
+                  "type": "number"
+                },
+                "y": {
+                  "type": "number"
+                },
+                "width": {
+                  "exclusiveMinimum": 0,
+                  "type": "number"
+                },
+                "height": {
+                  "exclusiveMinimum": 0,
+                  "type": "number"
+                }
+              },
+              "required": [
+                "x",
+                "y",
+                "width",
+                "height"
+              ],
+              "type": "object"
+            },
+            "summary": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "operation_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "snapshot_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "preview_before": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "preview_after": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "required": [
+            "doc_id",
+            "op",
+            "dry_run",
+            "changed",
+            "affected_ids"
+          ],
+          "type": "object"
+        },
+        "annotations": {
+          "title": "Boolean difference",
+          "readOnlyHint": false,
+          "destructiveHint": true,
+          "idempotentHint": false,
+          "openWorldHint": false
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": [
+              "high",
+              "paths"
+            ]
+          }
+        }
+      },
+      {
         "name": "export_web_profile",
         "title": "Export web profile",
         "description": "Export a web-oriented asset set: a responsive PNG set plus one plain SVG.\n\nRisk class: low (export to a sandbox-checked dir; no original overwrite).",

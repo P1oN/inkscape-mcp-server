@@ -126,7 +126,10 @@ hole, an overlapping painted neighbor, a clone of the survivor and a referenced-
 refusal. The Difference fixture passes the returned region directly to
 `compare_region` and checks bounds that include the consumed cutter and omission
 when a surviving clone can repaint elsewhere. CI runs both Boolean operations
-in `per_call` and `shell` modes.
+in `per_call` and `shell` modes. Separate STDIO sessions exercise Difference in
+full discovery with raw Actions off and in the compact profile with live and
+raw enabled in the environment. They verify the compact allowlist, refusal of
+unadvertised tools and byte-identical saved SVGs across profiles.
 
 Startup defaults to 128 fresh sessions/four concurrent
 servers with immediate mutation/discovery and no retries. Responsiveness checks both

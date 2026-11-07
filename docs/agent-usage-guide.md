@@ -36,6 +36,30 @@ both **generated from the live registry** by `scripts/dev-tools.sh manifests`.
 
 ## 1. Picking the right tool
 
+### Compact headless profile
+
+Set `INKSCAPE_MCP_TOOL_PROFILE=compact` in the MCP server's environment and reconnect.
+The compact profile advertises ten tools with short descriptions. It uses the same
+schemas, shared initialization guidance, approvals and working-copy pipeline as the
+standard profile. Live tools and raw Action tools are excluded from this tool profile.
+
+1. Use `open_document` and keep the returned `doc_id`. Look up each known ID with
+   `find_objects(id_prefix=…)` and select the exact `object_id` from the response.
+2. Dry-run `boolean_difference` with two editable siblings. After explicit user approval,
+   apply with `dry_run=false` and the approval token. The result identifies the surviving
+   lower shape and the pre-edit snapshot.
+3. When the applied response includes `changed_region`, pass its `doc_id`,
+   `snapshot_id`, and `changed_region` (as `region`) straight to `compare_region`
+   before another edit. When the region is absent, use a known region or inspect
+   `render_preview`. Check `validate_document` for structural issues.
+4. Save to a new path with `save_document_as`. Use `restore_snapshot` to roll back the
+   working copy. An SVG saved to a separate path remains at that path after rollback.
+
+`get_workspace_info` and `create_document` also support the installer health check.
+`boolean_difference` is available in the full profile with raw Actions disabled.
+
+### Full profile discovery
+
 Three read-only discovery tools answer "which tool do I call?" without reading source:
 
 - **`how_do_i(goal)`** — map a natural-language goal ("draw a rectangle", "make my svg smaller for

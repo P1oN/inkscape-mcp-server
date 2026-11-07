@@ -3,6 +3,8 @@
 Run ./setup.sh then ./run-mcp.sh. See README.md and docs/agent-usage-guide.md.
 Native Rust runtime and build tools; ready packages contain no Python runtime.
 
+This catalog shows the full surface. Set INKSCAPE_MCP_TOOL_PROFILE=compact for the short headless Boolean Difference workflow.
+
 ## Actual MCP initialization and surface
 
 {

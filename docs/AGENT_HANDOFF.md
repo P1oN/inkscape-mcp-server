@@ -10,6 +10,15 @@ reproduction and ad-hoc development acceptance are recorded in the
 [debugging report](history/reports/manager-applications-install-2026-10-13.md).
 Signed-release acceptance is a separate step.
 
+## Compact headless profile
+
+`INKSCAPE_MCP_TOOL_PROFILE=compact` exposes ten tools for opening and locating
+objects, approved Boolean Difference, verification, saving and restoring snapshots.
+Full discovery also exposes typed Difference with raw Actions disabled. Both
+profiles use the existing approval and working-copy transaction. See the
+[workflow](agent-usage-guide.md#compact-headless-profile) and
+[matched Codex CLI pilot](history/reports/compact-headless-profile-2026-11-07.md).
+
 ## Headless Boolean Difference verification
 
 The #50 follow-up adds optional `changed_region` to an applied Boolean Difference
