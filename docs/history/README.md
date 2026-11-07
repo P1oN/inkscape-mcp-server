@@ -20,6 +20,8 @@ builds. Use [current status](../AGENT_HANDOFF.md), [active backlog](../RUST_NEXT
 
 ## Reports and logs
 
+- [Manager installation from /Applications](reports/manager-applications-install-2026-10-13.md)
+  records the published v0.1.8 reproduction and isolated development validation.
 - [Manager window refresh](reports/manager-ui-refresh-2026-10-12.md): native setup
   hierarchy, contextual actions, automated AppKit state/layout checks and scoped
   real-window evidence; local and unpublished.

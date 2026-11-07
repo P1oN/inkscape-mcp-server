@@ -417,13 +417,23 @@ pub fn prepare(root: &Path, mut request: Request) -> Result<Value> {
         return Err("choose one or both supported clients and a valid channel".into());
     }
     for path in [&request.package, &request.instructions, &request.workspace] {
-        ancestor(path)?;
-        guarded(path)?;
+        if path == &request.workspace {
+            ancestor(path)?;
+            guarded(path)?;
+        } else {
+            instructions::guarded_read(path)?;
+        }
         if root.starts_with(path) || path.starts_with(root) {
             return Err(
                 "installation overlaps package, instructions, workspace or Inkscape".into(),
             );
         }
+    }
+    if [&request.package, &request.instructions]
+        .into_iter()
+        .any(|path| instructions::bundled_manager_input(path))
+    {
+        super::manager_app::verify_current()?;
     }
     external_engine(&request.inkscape)?;
     if request.inkscape.starts_with(root) {

@@ -66,6 +66,9 @@ fn verify(app: &Path) -> Result<()> {
     .map_err(|_| "Manager signature verification failed".to_string())?;
     Ok(())
 }
+pub(super) fn verify_current() -> Result<()> {
+    verify(&current_app()?)
+}
 #[cfg(target_os = "macos")]
 #[link(name = "proc")]
 unsafe extern "C" {

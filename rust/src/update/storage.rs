@@ -1,5 +1,5 @@
 use super::{
-    instructions::{guarded, read},
+    instructions::{guarded, guarded_read, read},
     manifests::*,
 };
 use serde::{Serialize, de::DeserializeOwned};
@@ -131,7 +131,7 @@ pub fn inventory_with_local(
     limit: u64,
     skip_local: bool,
 ) -> Result<BTreeMap<String, FileIdentity>> {
-    guarded(root)?;
+    guarded_read(root)?;
     let mut pending = vec![root.to_path_buf()];
     let mut files = BTreeMap::new();
     let mut bytes = 0;
@@ -142,7 +142,7 @@ pub fn inventory_with_local(
         if pending.len() + files.len() > 50000 {
             return Err("managed tree exceeds entry limit".into());
         }
-        guarded(&path)?;
+        guarded_read(&path)?;
         let metadata = fs::symlink_metadata(&path).map_err(|e| e.to_string())?;
         if metadata.is_dir() {
             for entry in fs::read_dir(path).map_err(|e| e.to_string())? {
@@ -198,8 +198,9 @@ pub fn copy_tree(source: &Path, target: &Path, limit: u64) -> Result<()> {
 #[cfg(target_os = "macos")]
 fn preserve_quarantine(source: &Path, target: &Path) -> Result<()> {
     use std::os::{fd::AsRawFd, unix::fs::OpenOptionsExt};
+    guarded_read(source)?;
+    guarded(target)?;
     let open = |path: &Path| -> Result<fs::File> {
-        guarded(path)?;
         fs::OpenOptions::new()
             .read(true)
             .custom_flags(libc::O_NOFOLLOW | libc::O_NONBLOCK)
