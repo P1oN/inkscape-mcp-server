@@ -124,11 +124,25 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends inkscape
           inkscape --version
-      - name: Install native packaging dependencies and Inkscape (macOS)
+      - name: Install Inkscape (macOS)
         if: runner.os == 'macOS'
+        run: brew install --cask inkscape
+      - name: Prepare reviewed native packaging inputs (Apple Silicon)
+        if: matrix.package == 'macos-arm64'
         run: |
-          brew install glib dbus
-          brew install --cask inkscape
+          native_root="$RUNNER_TEMP/inkscape-native-inputs"
+          native_lock=rust/package/bootstrap-native-macos-arm64.json
+          scripts/dev-tools.sh bootstrap-native --lock "$native_lock" --output "$native_root"
+          glib_prefix="$native_root/glib/$(jq -er '.bottles[] | select(.name == "glib") | .version' "$native_lock")"
+          dbus_prefix="$native_root/dbus/$(jq -er '.bottles[] | select(.name == "dbus") | .version' "$native_lock")"
+          {
+            printf 'INKSCAPE_MCP_BUILD_NATIVE_ROOT=%s\n' "$native_root"
+            printf 'INKSCAPE_MCP_BUILD_GLIB_PREFIX=%s\n' "$glib_prefix"
+          } >> "$GITHUB_ENV"
+          printf '%s\n' "$glib_prefix/bin" "$dbus_prefix/bin" >> "$GITHUB_PATH"
+      - name: Install native packaging dependencies (Intel Mac)
+        if: matrix.package == 'macos-x86_64'
+        run: brew install glib dbus
       - name: Build native installable archive
         env:
           PACKAGE: ${{ matrix.package }}
