@@ -45,6 +45,10 @@ builds. Use [current status](../AGENT_HANDOFF.md), [active backlog](../RUST_NEXT
 
 - [Actual storage/process-failure acceptance](reports/storage-failure-2026-10-11.md): APFS ENOSPC, installed startup, retry and one real journal interruption; explicit remaining limits.
 
+- [Post-switch disk failure and retained-helper acceptance](reports/update-resilience-2026-11-08.md)
+  records real ENOSPC during history creation, rollback and retry, and a native edit
+  and no-op after reconnecting to the same Inkscape window with the previous helper.
+
 - [Signed runtime receipts and launcher concurrency](reports/signed-runtime-receipts-2026-10-09.md): PR #30 merge, main CI, failed final candidate and scoped release fixes.
 
 - [Native macOS installer checkpoint](reports/macos-installer-2026-10-08.md): unfinished Priority 1 implementation and scoped local evidence.
