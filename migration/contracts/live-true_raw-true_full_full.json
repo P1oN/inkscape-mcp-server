@@ -15030,7 +15030,7 @@
           "type": "object"
         },
         "outputSchema": {
-          "description": "When changed is true, snapshot_id names the pre-edit state and doc_id identifies the edited working copy. An applied merge reports the identifiable surviving ID as result_id; an operation without a unique result returns null. A dry run may predict a merge ID and has a null snapshot_id. A no-op keeps the original working copy and returns empty snapshot_id and operation_id strings. After an applied edit, use doc_id and snapshot_id with compare_region. Pass changed_region as region when present.",
+          "description": "When changed is true, snapshot_id names the pre-edit state and doc_id identifies the edited working copy. An applied merge reports the identifiable surviving ID as result_id; an operation without a unique result returns null. A dry run may predict a merge ID and has a null snapshot_id. A no-op keeps the original working copy and returns empty snapshot_id and operation_id strings. After an applied edit, use doc_id and snapshot_id with compare_region. Pass changed_region as region when present. To compare an applied change with its snapshot, pass doc_id, snapshot_id and your own region to compare_region. Use render_preview if you do not know the bounds.",
           "properties": {
             "doc_id": {
               "type": "string"
@@ -15181,7 +15181,7 @@
           "type": "object"
         },
         "outputSchema": {
-          "description": "When changed is true, snapshot_id names the pre-edit state and doc_id identifies the edited working copy. An applied merge reports the identifiable surviving ID as result_id; an operation without a unique result returns null. A dry run may predict a merge ID and has a null snapshot_id. A no-op keeps the original working copy and returns empty snapshot_id and operation_id strings. After an applied edit, use doc_id and snapshot_id with compare_region. Pass changed_region as region when present.",
+          "description": "When changed is true, snapshot_id names the pre-edit state and doc_id identifies the edited working copy. An applied merge reports the identifiable surviving ID as result_id; an operation without a unique result returns null. A dry run may predict a merge ID and has a null snapshot_id. A no-op keeps the original working copy and returns empty snapshot_id and operation_id strings. After an applied edit, use doc_id and snapshot_id with compare_region. Pass changed_region as region when present. To compare an applied change with its snapshot, pass doc_id, snapshot_id and your own region to compare_region. Use render_preview if you do not know the bounds.",
           "properties": {
             "doc_id": {
               "type": "string"
@@ -15510,7 +15510,7 @@
           "type": "object"
         },
         "outputSchema": {
-          "description": "When changed is true, snapshot_id names the pre-edit state and doc_id identifies the edited working copy. An applied merge reports the identifiable surviving ID as result_id; an operation without a unique result returns null. A dry run may predict a merge ID and has a null snapshot_id. A no-op keeps the original working copy and returns empty snapshot_id and operation_id strings. After an applied edit, use doc_id and snapshot_id with compare_region. Pass changed_region as region when present.",
+          "description": "When changed is true, snapshot_id names the pre-edit state and doc_id identifies the edited working copy. An applied merge reports the identifiable surviving ID as result_id; an operation without a unique result returns null. A dry run may predict a merge ID and has a null snapshot_id. A no-op keeps the original working copy and returns empty snapshot_id and operation_id strings. After an applied edit, use doc_id and snapshot_id with compare_region. Pass changed_region as region when present. To compare an applied change with its snapshot, pass doc_id, snapshot_id and your own region to compare_region. Use render_preview if you do not know the bounds.",
           "properties": {
             "doc_id": {
               "type": "string"
@@ -15661,7 +15661,7 @@
           "type": "object"
         },
         "outputSchema": {
-          "description": "When changed is true, snapshot_id names the pre-edit state and doc_id identifies the edited working copy. An applied merge reports the identifiable surviving ID as result_id; an operation without a unique result returns null. A dry run may predict a merge ID and has a null snapshot_id. A no-op keeps the original working copy and returns empty snapshot_id and operation_id strings. After an applied edit, use doc_id and snapshot_id with compare_region. Pass changed_region as region when present.",
+          "description": "When changed is true, snapshot_id names the pre-edit state and doc_id identifies the edited working copy. An applied merge reports the identifiable surviving ID as result_id; an operation without a unique result returns null. A dry run may predict a merge ID and has a null snapshot_id. A no-op keeps the original working copy and returns empty snapshot_id and operation_id strings. After an applied edit, use doc_id and snapshot_id with compare_region. Pass changed_region as region when present. To compare an applied change with its snapshot, pass doc_id, snapshot_id and your own region to compare_region. Use render_preview if you do not know the bounds.",
           "properties": {
             "doc_id": {
               "type": "string"
@@ -15812,7 +15812,7 @@
           "type": "object"
         },
         "outputSchema": {
-          "description": "When changed is true, snapshot_id names the pre-edit state and doc_id identifies the edited working copy. An applied merge reports the identifiable surviving ID as result_id; an operation without a unique result returns null. A dry run may predict a merge ID and has a null snapshot_id. A no-op keeps the original working copy and returns empty snapshot_id and operation_id strings. After an applied edit, use doc_id and snapshot_id with compare_region. Pass changed_region as region when present.",
+          "description": "When changed is true, snapshot_id names the pre-edit state and doc_id identifies the edited working copy. An applied merge reports the identifiable surviving ID as result_id; an operation without a unique result returns null. A dry run may predict a merge ID and has a null snapshot_id. A no-op keeps the original working copy and returns empty snapshot_id and operation_id strings. After an applied edit, use doc_id and snapshot_id with compare_region. Pass changed_region as region when present. To compare an applied change with its snapshot, pass doc_id, snapshot_id and your own region to compare_region. Use render_preview if you do not know the bounds.",
           "properties": {
             "doc_id": {
               "type": "string"
@@ -15963,7 +15963,7 @@
           "type": "object"
         },
         "outputSchema": {
-          "description": "When changed is true, snapshot_id names the pre-edit state and doc_id identifies the edited working copy. An applied merge reports the identifiable surviving ID as result_id; an operation without a unique result returns null. A dry run may predict a merge ID and has a null snapshot_id. A no-op keeps the original working copy and returns empty snapshot_id and operation_id strings. After an applied edit, use doc_id and snapshot_id with compare_region. Pass changed_region as region when present.",
+          "description": "When changed is true, snapshot_id names the pre-edit state and doc_id identifies the edited working copy. An applied merge reports the identifiable surviving ID as result_id; an operation without a unique result returns null. A dry run may predict a merge ID and has a null snapshot_id. A no-op keeps the original working copy and returns empty snapshot_id and operation_id strings. After an applied edit, use doc_id and snapshot_id with compare_region. Pass changed_region as region when present. To compare an applied change with its snapshot, pass doc_id, snapshot_id and your own region to compare_region. Use render_preview if you do not know the bounds.",
           "properties": {
             "doc_id": {
               "type": "string"
