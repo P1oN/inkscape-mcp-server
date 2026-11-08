@@ -139,9 +139,20 @@ pub fn call(live: &mut Live, workspace: &Workspace, args: &Value) -> Result<Valu
     );
     let dry = arguments::boolean(args, "dry_run", true)?;
     let nonce = format!("mcp_{}", uuid::Uuid::new_v4().simple());
-    let (active, selection, svg) = live
+    let (active, selection, svg, available) = live
         .session
-        .operation(|t| Ok((t.active_document()?, t.selection()?, t.document_svg()?)))
+        .operation(|t| {
+            let active = t.active_document()?;
+            let selection = t.selection()?;
+            let svg = t.document_svg()?;
+            // A no-op must validate the binding in the same scope as its snapshot.
+            let available = if dry {
+                Ok(false)
+            } else {
+                t.package_available()
+            };
+            Ok((active, selection, svg, available))
+        })
         .map_err(|e| e.public_message().to_string())?;
     let ids = crate::live_models::ids(&selection["object_ids"]);
     let applied =
@@ -177,11 +188,7 @@ pub fn call(live: &mut Live, workspace: &Workspace, args: &Value) -> Result<Valu
             "drawing, document or selection changed since review; prepare a new package".into(),
         );
     }
-    let available = live
-        .session
-        .operation(|t| t.package_available())
-        .map_err(|e| e.public_message().to_string())?;
-    if !available {
+    if !available.map_err(|e| e.public_message().to_string())? {
         return Err("reviewed packages require the guarded managed native helper".into());
     }
     // A net no-op is validated and guarded but never dispatched/recorded.

@@ -173,7 +173,14 @@ impl Managed {
 }
 impl Transport for Managed {
     fn package_available(&mut self) -> Result<bool, Error> {
-        Ok(self.guarded && self.edit_available()?)
+        if !self.guarded || !self.edit_available()? {
+            return Ok(false);
+        }
+        // Applied no-ops take this path without dispatching a native edit.
+        self.operation(|this| {
+            this.require_selected()?;
+            Ok(true)
+        })
     }
     fn change_package(&mut self, params: &Value) -> Result<Value, Error> {
         if !self.guarded {
@@ -1064,6 +1071,76 @@ mod tests {
                 svg
             );
         }
+    }
+    #[test]
+    fn reviewed_package_requires_reselection_and_refuses_observed_changes() {
+        let (root, dbus, log) = fixture_for_effect("effect-mutated");
+        let directory = root.path().canonicalize().unwrap();
+        let mut backend = Managed::new(dbus, directory.join("stdout.log"), true);
+        backend.effect_directory(directory.clone());
+        let docs = backend.list_documents().unwrap();
+        let window = docs[0]["window_id"].as_str().unwrap();
+        let document = docs[0]["document_id"].as_str().unwrap();
+        backend.select_document(window, document).unwrap();
+        let active = backend.active_document().unwrap();
+        let svg = backend.document_svg().unwrap();
+        let review = json!({
+            "operation":null,
+            "edits":[{"op":"style","style":{},"transform":"translate(5 2)"}],
+            "expected_fingerprint":crate::live_effect::fingerprint(&svg, 1024 * 1024).unwrap(),
+            "expected_selection":["r"],
+            "expected_document":active
+        });
+
+        backend.connect().unwrap();
+        assert!(backend.selected_document().is_none());
+        assert_eq!(
+            backend.package_available(),
+            Err(Error::Context(
+                "choose the task drawing with live_select_document before editing"
+            ))
+        );
+        backend.select_document(window, document).unwrap();
+        assert!(backend.package_available().unwrap());
+
+        let changed_selection = "drawing or selection changed since review; prepare a new package";
+        let changed_document =
+            Error::Context("task drawing changed; call live_select_document before editing");
+        for (name, bytes, expected) in [
+            (
+                "drawing.svg",
+                svg.replace("<rect id=\"r\"", "<rect id=\"r\" fill=\"red\"")
+                    .into_bytes(),
+                Error::EditRefused(changed_selection.into()),
+            ),
+            (
+                "probe-control.json",
+                serde_json::to_vec(&json!({"selection_ids":["r","g"]})).unwrap(),
+                Error::EditRefused(changed_selection.into()),
+            ),
+            (
+                "context.json",
+                serde_json::to_vec(&json!([document, window, "Another drawing"])).unwrap(),
+                changed_document,
+            ),
+        ] {
+            let path = directory.join(name);
+            std::fs::write(&path, &bytes).unwrap();
+            assert_eq!(backend.change_package(&review), Err(expected), "{name}");
+            assert_eq!(std::fs::read(&path).unwrap(), bytes, "{name}");
+            if name != "context.json" {
+                std::fs::remove_file(path).unwrap();
+            }
+        }
+        assert_eq!(
+            std::fs::read_to_string(directory.join("fixture.svg")).unwrap(),
+            svg
+        );
+        assert!(!directory.join("insert-request.json").exists());
+        assert!(!trace(&log).iter().any(|argv| {
+            argv.get(10)
+                .is_some_and(|action| action == "org.inkscape-mcp.edit.noprefs")
+        }));
     }
     #[test]
     fn changed_effect_result_is_confirmed_against_independent_helper_fingerprint() {

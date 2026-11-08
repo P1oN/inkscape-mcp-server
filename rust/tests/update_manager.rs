@@ -168,6 +168,65 @@ fn next(f: &Fixture) -> Selector {
     next.previous = Some(f.before.current.clone());
     next
 }
+
+fn stage_interrupted_update(f: &Fixture) -> Journal {
+    let id = "crash-fixture";
+    let base = f.root.join("backups").join(id);
+    mkdir(&base).unwrap();
+    let skills = f
+        .settings
+        .skills
+        .iter()
+        .enumerate()
+        .map(|(i, skill)| {
+            let staged = base.join(format!("new-{i}"));
+            let before = inventory(skill, 16 * 1024 * 1024).unwrap();
+            copy_tree(skill, &staged, 16 * 1024 * 1024).unwrap();
+            write(&staged.join("SKILL.md"), b"candidate").unwrap();
+            SkillChange {
+                destination: skill.clone(),
+                before,
+                after: inventory(&staged, 16 * 1024 * 1024).unwrap(),
+            }
+        })
+        .collect();
+    let journal = Journal {
+        format: 1,
+        id: id.into(),
+        before: f.before.clone(),
+        after: next(f),
+        skills,
+    };
+    write_json(&base.join("selector-before.json"), &journal.before).unwrap();
+    write_json(&f.root.join("transaction.json"), &journal).unwrap();
+    journal
+}
+
+fn publish_interrupted_update(root: &Path, journal: &Journal, phase: usize) {
+    let base = root.join("backups").join(&journal.id);
+    for (i, skill) in journal.skills.iter().enumerate() {
+        if phase >= 1 {
+            fs::rename(&skill.destination, base.join(format!("old-{i}"))).unwrap();
+        }
+        if phase >= 2 {
+            fs::rename(base.join(format!("new-{i}")), &skill.destination).unwrap();
+        }
+    }
+    if phase >= 3 {
+        write_json(&root.join("active.json"), &journal.after).unwrap();
+    }
+    for (i, skill) in journal.skills.iter().enumerate() {
+        if phase >= 4 {
+            fs::rename(&skill.destination, base.join(format!("interrupted-{i}"))).unwrap();
+        }
+        if phase >= 5 {
+            fs::rename(base.join(format!("old-{i}")), &skill.destination).unwrap();
+        }
+    }
+    if phase >= 6 {
+        fs::rename(base.join("selector-before.json"), root.join("active.json")).unwrap();
+    }
+}
 #[test]
 fn real_stdio_text_update_preserves_custom_skill_and_rollback_refuses_later_edits() {
     let f = fixture();
@@ -243,42 +302,49 @@ fn skill_conflict_and_noop_preserve_active_state() {
 }
 #[test]
 fn crash_recovery_at_each_move_boundary_is_idempotent_and_locked() {
-    for phase in 0..4 {
+    use std::{
+        io::Read,
+        os::unix::process::ExitStatusExt,
+        process::Stdio,
+        time::{Duration, Instant},
+    };
+    const CHILD_ROOT: &str = "INKSCAPE_TEST_INTERRUPTED_UPDATE_ROOT";
+    const CHILD_PHASE: &str = "INKSCAPE_TEST_INTERRUPTED_UPDATE_PHASE";
+    if let Some(root) = std::env::var_os(CHILD_ROOT) {
+        let root = PathBuf::from(root);
+        let phase = std::env::var(CHILD_PHASE).unwrap().parse().unwrap();
+        let _lock = Lock::acquire(&root).unwrap();
+        let journal: Journal = json(&root.join("transaction.json")).unwrap();
+        publish_interrupted_update(&root, &journal, phase);
+        write(&root.join("fixture-ready"), b"ready").unwrap();
+        // EOF also releases the child if the parent unwinds before killing it.
+        let _ = std::io::stdin().read(&mut [0]);
+        return;
+    }
+    for phase in 0..7 {
         let f = fixture();
-        let lock = Lock::acquire(&f.root).unwrap();
+        let journal = stage_interrupted_update(&f);
+        let mut child = Command::new(std::env::current_exe().unwrap())
+            .args([
+                "--exact",
+                "crash_recovery_at_each_move_boundary_is_idempotent_and_locked",
+            ])
+            .env(CHILD_ROOT, &f.root)
+            .env(CHILD_PHASE, phase.to_string())
+            .stdin(Stdio::piped())
+            .stdout(Stdio::null())
+            .spawn()
+            .unwrap();
+        let deadline = Instant::now() + Duration::from_secs(10);
+        while !f.root.join("fixture-ready").is_file() {
+            assert!(child.try_wait().unwrap().is_none(), "fixture exited");
+            assert!(Instant::now() < deadline, "fixture readiness timed out");
+            std::thread::sleep(Duration::from_millis(10));
+        }
         assert!(Lock::acquire(&f.root).is_err());
         assert!(inkscape_mcp_rust::update::installer::recover(&f.root).is_err());
-        drop(lock);
-        let after = next(&f);
-        let base = f.root.join("backups/crash-fixture");
-        mkdir(&base).unwrap();
-        let skill = &f.settings.skills[0];
-        let before = inventory(skill, 16 * 1024 * 1024).unwrap();
-        copy_tree(skill, &base.join("new-0"), 16 * 1024 * 1024).unwrap();
-        write(&base.join("new-0/SKILL.md"), b"candidate").unwrap();
-        let updated = inventory(&base.join("new-0"), 16 * 1024 * 1024).unwrap();
-        let journal = Journal {
-            format: 1,
-            id: "crash-fixture".into(),
-            before: f.before.clone(),
-            after: after.clone(),
-            skills: vec![SkillChange {
-                destination: skill.clone(),
-                before: before.clone(),
-                after: updated,
-            }],
-        };
-        write_json(&base.join("selector-before.json"), &f.before).unwrap();
-        write_json(&f.root.join("transaction.json"), &journal).unwrap();
-        if phase >= 1 {
-            fs::rename(skill, base.join("old-0")).unwrap();
-        }
-        if phase >= 2 {
-            fs::rename(base.join("new-0"), skill).unwrap();
-        }
-        if phase >= 3 {
-            write_json(&f.root.join("active.json"), &after).unwrap();
-        }
+        child.kill().unwrap();
+        assert_eq!(child.wait().unwrap().signal(), Some(libc::SIGKILL));
         assert_eq!(
             inkscape_mcp_rust::update::installer::inspect(&f.root).unwrap()["recovery_required"],
             true
@@ -290,7 +356,56 @@ fn crash_recovery_at_each_move_boundary_is_idempotent_and_locked() {
         );
         assert!(!recover(&f.root, &f.settings).unwrap());
         assert_eq!(selector(&f.root).unwrap(), f.before);
-        assert_eq!(inventory(skill, 16 * 1024 * 1024).unwrap(), before);
+        let skill = &journal.skills[0];
+        assert_eq!(
+            inventory(&skill.destination, 16 * 1024 * 1024).unwrap(),
+            skill.before
+        );
+        if phase == 3 {
+            inkscape_mcp_rust::client_management::probe(
+                Command::new(env!("CARGO_BIN_EXE_inkscape-mcp-launcher"))
+                    .arg("--install-dir")
+                    .arg(&f.root),
+                Duration::from_secs(30),
+            )
+            .unwrap();
+        }
+    }
+}
+
+#[test]
+fn invalid_recovery_inputs_leave_both_skills_and_selector_in_place() {
+    for (name, expected_error) in [
+        ("selector-before.json", "recovery selector backup differs"),
+        ("old-0", "missing recovery skill backup"),
+        ("interrupted-0", "transaction destination occupied"),
+    ] {
+        let mut f = fixture();
+        let first = &f.settings.skills[0];
+        let second = first.with_file_name("second-skill");
+        copy_tree(first, &second, 16 * 1024 * 1024).unwrap();
+        f.settings.skills.push(second);
+        let journal = stage_interrupted_update(&f);
+        publish_interrupted_update(&f.root, &journal, 3);
+        let base = f.root.join("backups").join(&journal.id);
+        match name {
+            "selector-before.json" => write_json(&base.join(name), &journal.after).unwrap(),
+            "old-0" => fs::rename(base.join(name), base.join("retained-old-0")).unwrap(),
+            _ => write(&base.join(name), b"preserve existing evidence").unwrap(),
+        }
+        let error = recover(&f.root, &f.settings).unwrap_err();
+        assert!(error.contains(expected_error), "{error}");
+        assert_eq!(selector(&f.root).unwrap(), journal.after);
+        for skill in &journal.skills {
+            assert_eq!(
+                inventory(&skill.destination, 16 * 1024 * 1024).unwrap(),
+                skill.after,
+                "recovery modified {} with {name} invalid",
+                skill.destination.display()
+            );
+        }
+        assert!(f.root.join("transaction.json").is_file());
+        assert!(!base.join("interrupted-1").exists());
     }
 }
 struct Fake(BTreeMap<String, Vec<u8>>);

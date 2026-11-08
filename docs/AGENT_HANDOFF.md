@@ -1,5 +1,18 @@
 # Agent handoff — current status
 
+## Update recovery and live review guards
+
+Interrupted component updates now check the selector backup, skill inventories
+and recovery destinations before moving any skill. The regression tests kill a
+lock-holding test process at seven staged publication and recovery boundaries,
+verify idempotent recovery, and start the restored runtime through the permanent launcher.
+
+Managed live packages require the task drawing to be selected again after
+reconnect, including for approved no-ops. A synthetic D-Bus fixture changes the
+drawing, selection and active window after review and verifies refusal without
+dispatching an edit. Real disk-full and native GUI acceptance remain in the
+[backlog](RUST_NEXT_PLAN.md#independent-updates--remaining-release-qualification).
+
 ## Manager installed in /Applications
 
 Manager v0.1.8 can fail before Inkscape discovery when installed in

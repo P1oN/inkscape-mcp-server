@@ -129,12 +129,16 @@ fn main() {
             if mode == "effect-switch" {write(&root.join("context.json"),json!(["abcdefab-1234-1234-1234-123456789abc","12345678-1234-1234-1234-123456789abc","Changed"]));}
         }
         "select-list" => {
-            let data = match mode {
+            let data = if let Some(ids) = control["selection_ids"].as_array() {
+                ids.iter()
+                    .map(|id| format!("{} cloned: false ref: 0 href: 0 total href: 0\n", id.as_str().unwrap()))
+                    .collect::<String>().into_bytes()
+            } else { match mode {
                 "selection-empty" => vec![], "selection-overflow" => vec![b'x';1024*1024+1],
                 "selection-invalid" => b"changed format\n".to_vec(), "selection-utf8" => vec![255],
                 mode if mode.starts_with("effect-") => b"r cloned: true ref: 1 href: 0 total href: 0\n".to_vec(),
                 _ => "r cloned: true ref: 1 href: 0 total href: 0\nПривіт cloned: false ref: 0 href: 0 total href: 0\nr cloned: true ref: 1 href: 0 total href: 0\n".as_bytes().to_vec(),
-            }; append(&root.join("stdout.log"),&data);
+            } }; append(&root.join("stdout.log"),&data);
         }
         "query-x" => if mode != "selection-incomplete" {append(&root.join("stdout.log"),b"0\n")},
         "export-filename" => fs::write(root.join("filename"),&parameter[3..parameter.len()-3]).unwrap(),
