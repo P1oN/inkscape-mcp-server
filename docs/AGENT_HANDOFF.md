@@ -10,8 +10,10 @@ verify idempotent recovery, and start the restored runtime through the permanent
 Managed live packages require the task drawing to be selected again after
 reconnect, including for approved no-ops. A synthetic D-Bus fixture changes the
 drawing, selection and active window after review and verifies refusal without
-dispatching an edit. Real disk-full and native GUI acceptance remain in the
-[backlog](RUST_NEXT_PLAN.md#independent-updates--remaining-release-qualification).
+dispatching an edit. Local acceptance also exercised a real ENOSPC during
+post-switch history creation and an edit followed by a no-op after reconnecting
+to the same native window with the previous helper.
+See the [acceptance report](history/reports/update-resilience-2026-11-08.md).
 
 ## Manager installed in /Applications
 

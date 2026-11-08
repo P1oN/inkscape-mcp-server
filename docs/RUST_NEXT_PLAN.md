@@ -20,7 +20,7 @@ See [release evidence](history/reports/v0.1.7-signed-release.md).
 
 Outstanding exit gates remain the full [another-Mac/browser matrix](install/another-mac-acceptance.md),
 clean-host source bootstrap, authenticated real-client workspace interaction,
-separately authorized live reconnect, protected whole-job interruption/recovery and
+signed-distribution live reconnect, protected whole-job interruption/recovery and
 remaining storage/media cases. Published v0.1.6 native GUI download/update results,
 same-host Chrome quarantine/Finder mount, actual ENOSPC/process interruption and held
 headless sessions keep their documented scope. Bounded Manager helper recovery is
@@ -269,11 +269,15 @@ See the
 and [acceptance ledger](history/reports/independent-updates.md). Historical local
 acceptance there does not establish another-Mac signed installation acceptance.
 
+The [2026-11-08 acceptance report](history/reports/update-resilience-2026-11-08.md)
+records local rollback and retry after a post-switch history-write ENOSPC and
+native edit/no-op acceptance after reconnecting with the previous helper.
+
 | Task | Next action | Completion evidence |
 | --- | --- | --- |
-| Live reconnect and retained helpers | With explicit GUI authorization, reconnect an isolated client after updating and exercise owned synthetic Inkscape documents while an older helper path is retained. | Actual client/runtime identities, unchanged user windows and native results. No Inkscape GUI was launched for update acceptance. |
+| Signed-distribution live reconnect | Repeat the retained-helper update and reconnect with the signed distribution and a real client on the release-qualification host. | Bind native edit/no-op results to the signed package, client, runtime, helper and window identities. |
 | Documents-profile filesystem stall | Bounded Manager recovery is implemented and qualified; determine the cause of the retained lock-file open stall without changing user files. | Native sample/reproduction and scoped recovery checks; see the [deadline report](history/reports/manager-helper-deadline-2026-10-11.md). |
-| Storage/media failure qualification | Component update fixtures now kill a lock-holding test process at staged publication and recovery boundaries and verify that the permanent launcher starts the restored runtime. Exercise real ENOSPC and media failure next, including during recovery. | Old or new pair remains launchable, recovery is idempotent, and skill edits are preserved. |
+| Storage/media failure qualification | Exercise ENOSPC during recovery itself and storage media failure. The local post-switch history-write case exercised rollback with recovery space available on the installation volume. | Old or new pair remains launchable, recovery is idempotent, and skill edits are preserved. |
 
 Clean-machine installation, authenticated real-client interaction and broader release
 review remain in Priority 1.
