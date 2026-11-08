@@ -90,10 +90,14 @@ pub fn recover(root: &Path, settings: &Settings) -> Result<bool> {
     if current != journal.before && current != journal.after {
         return Err("selector changed after interrupted update; manual recovery required".into());
     }
-    // Preflight every destination before restoring anything.
+    // Preflight all recovery inputs before moving a skill or changing the selector.
+    let selector_backup = base.join("selector-before.json");
+    if current != journal.before && json::<Selector>(&selector_backup)? != journal.before {
+        return Err("recovery selector backup differs".into());
+    }
     for (i, skill) in journal.skills.iter().enumerate() {
         let old = base.join(format!("old-{i}"));
-        if skill.destination.exists() {
+        let actual = if skill.destination.exists() || skill.destination.is_symlink() {
             let actual = inventory(&skill.destination, 16 * 1024 * 1024)?;
             if actual != skill.before && actual != skill.after {
                 return Err(format!(
@@ -102,9 +106,24 @@ pub fn recover(root: &Path, settings: &Settings) -> Result<bool> {
                     base.display()
                 ));
             }
-        }
-        if old.exists() && inventory(&old, 16 * 1024 * 1024)? != skill.before {
-            return Err("transaction backup changed".into());
+            Some(actual)
+        } else {
+            None
+        };
+        if old.exists() || old.is_symlink() {
+            if inventory(&old, 16 * 1024 * 1024)? != skill.before {
+                return Err("transaction backup changed".into());
+            }
+            if actual.is_some() {
+                guarded(&skill.destination)?;
+                let interrupted = base.join(format!("interrupted-{i}"));
+                if interrupted.try_exists().map_err(|e| e.to_string())? || interrupted.is_symlink()
+                {
+                    return Err("transaction destination occupied".into());
+                }
+            }
+        } else if actual.as_ref() != Some(&skill.before) {
+            return Err("missing recovery skill backup".into());
         }
     }
     for (i, skill) in journal.skills.iter().enumerate().rev() {
@@ -121,11 +140,6 @@ pub fn recover(root: &Path, settings: &Settings) -> Result<bool> {
         }
     }
     if current != journal.before {
-        let selector_backup = base.join("selector-before.json");
-        let saved: Selector = json(&selector_backup)?;
-        if saved != journal.before {
-            return Err("recovery selector backup differs".into());
-        }
         fs::rename(selector_backup, root.join("active.json")).map_err(|e| e.to_string())?;
         sync_dir(root)?;
     }

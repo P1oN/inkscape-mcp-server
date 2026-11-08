@@ -139,9 +139,20 @@ pub fn call(live: &mut Live, workspace: &Workspace, args: &Value) -> Result<Valu
     );
     let dry = arguments::boolean(args, "dry_run", true)?;
     let nonce = format!("mcp_{}", uuid::Uuid::new_v4().simple());
-    let (active, selection, svg) = live
+    let (active, selection, svg, available) = live
         .session
-        .operation(|t| Ok((t.active_document()?, t.selection()?, t.document_svg()?)))
+        .operation(|t| {
+            let active = t.active_document()?;
+            let selection = t.selection()?;
+            let svg = t.document_svg()?;
+            // A no-op must validate the binding in the same scope as its snapshot.
+            let available = if dry {
+                Ok(false)
+            } else {
+                t.package_available()
+            };
+            Ok((active, selection, svg, available))
+        })
         .map_err(|e| e.public_message().to_string())?;
     let ids = crate::live_models::ids(&selection["object_ids"]);
     let applied =
@@ -177,11 +188,7 @@ pub fn call(live: &mut Live, workspace: &Workspace, args: &Value) -> Result<Valu
             "drawing, document or selection changed since review; prepare a new package".into(),
         );
     }
-    let available = live
-        .session
-        .operation(|t| t.package_available())
-        .map_err(|e| e.public_message().to_string())?;
-    if !available {
+    if !available.map_err(|e| e.public_message().to_string())? {
         return Err("reviewed packages require the guarded managed native helper".into());
     }
     // A net no-op is validated and guarded but never dispatched/recorded.
@@ -224,12 +231,13 @@ mod tests {
     use crate::live_transport::{Preference, Probe, Transport};
     use std::sync::{
         Arc, Mutex,
-        atomic::{AtomicUsize, Ordering},
+        atomic::{AtomicBool, AtomicUsize, Ordering},
     };
     const SVG: &str = r#"<svg xmlns="http://www.w3.org/2000/svg" width="100" height="80"><rect id="r" width="10" height="10" style="fill:red"/></svg>"#;
     struct Fake {
         svg: Arc<Mutex<String>>,
         dispatch: Arc<AtomicUsize>,
+        selected: Arc<AtomicBool>,
     }
     impl Transport for Fake {
         fn name(&self) -> &str {
@@ -255,7 +263,13 @@ mod tests {
             Ok(self.svg.lock().unwrap().clone())
         }
         fn package_available(&mut self) -> Result<bool, Error> {
-            Ok(true)
+            if self.selected.load(Ordering::SeqCst) {
+                Ok(true)
+            } else {
+                Err(Error::Context(
+                    "choose the task drawing with live_select_document before editing",
+                ))
+            }
         }
         fn change_package(&mut self, params: &Value) -> Result<Value, Error> {
             self.dispatch.fetch_add(1, Ordering::SeqCst);
@@ -283,6 +297,7 @@ mod tests {
         };
         let svg = Arc::new(Mutex::new(SVG.into()));
         let dispatch = Arc::new(AtomicUsize::new(0));
+        let selected = Arc::new(AtomicBool::new(true));
         let mut live = Live::new();
         live.session.settings.enabled = true;
         live.session
@@ -300,6 +315,7 @@ mod tests {
                     Ok(Box::new(Fake {
                         svg: svg.clone(),
                         dispatch: dispatch.clone(),
+                        selected: selected.clone(),
                     }))
                 },
                 || (),
@@ -327,6 +343,13 @@ mod tests {
             args(json!([{"op":"style","fill":"blue"},{"op":"text","text":"refuse rectangle"}]));
         assert!(call(&mut live, &workspace, &invalid).is_err());
         let noop = args(json!([{"op":"style","fill":"red"}]));
+        selected.store(false, Ordering::SeqCst);
+        assert!(
+            call(&mut live, &workspace, &noop)
+                .unwrap_err()
+                .contains("live_select_document")
+        );
+        selected.store(true, Ordering::SeqCst);
         assert_eq!(
             call(&mut live, &workspace, &noop).unwrap()["changed"],
             false
