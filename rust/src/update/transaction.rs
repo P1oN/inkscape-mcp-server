@@ -114,9 +114,13 @@ pub fn recover(root: &Path, settings: &Settings) -> Result<bool> {
             if inventory(&old, 16 * 1024 * 1024)? != skill.before {
                 return Err("transaction backup changed".into());
             }
-            let interrupted = base.join(format!("interrupted-{i}"));
-            if actual.is_some() && (interrupted.exists() || interrupted.is_symlink()) {
-                return Err("transaction destination occupied".into());
+            if actual.is_some() {
+                guarded(&skill.destination)?;
+                let interrupted = base.join(format!("interrupted-{i}"));
+                if interrupted.try_exists().map_err(|e| e.to_string())? || interrupted.is_symlink()
+                {
+                    return Err("transaction destination occupied".into());
+                }
             }
         } else if actual.as_ref() != Some(&skill.before) {
             return Err("missing recovery skill backup".into());

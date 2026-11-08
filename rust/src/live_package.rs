@@ -231,12 +231,13 @@ mod tests {
     use crate::live_transport::{Preference, Probe, Transport};
     use std::sync::{
         Arc, Mutex,
-        atomic::{AtomicUsize, Ordering},
+        atomic::{AtomicBool, AtomicUsize, Ordering},
     };
     const SVG: &str = r#"<svg xmlns="http://www.w3.org/2000/svg" width="100" height="80"><rect id="r" width="10" height="10" style="fill:red"/></svg>"#;
     struct Fake {
         svg: Arc<Mutex<String>>,
         dispatch: Arc<AtomicUsize>,
+        selected: Arc<AtomicBool>,
     }
     impl Transport for Fake {
         fn name(&self) -> &str {
@@ -262,7 +263,13 @@ mod tests {
             Ok(self.svg.lock().unwrap().clone())
         }
         fn package_available(&mut self) -> Result<bool, Error> {
-            Ok(true)
+            if self.selected.load(Ordering::SeqCst) {
+                Ok(true)
+            } else {
+                Err(Error::Context(
+                    "choose the task drawing with live_select_document before editing",
+                ))
+            }
         }
         fn change_package(&mut self, params: &Value) -> Result<Value, Error> {
             self.dispatch.fetch_add(1, Ordering::SeqCst);
@@ -290,6 +297,7 @@ mod tests {
         };
         let svg = Arc::new(Mutex::new(SVG.into()));
         let dispatch = Arc::new(AtomicUsize::new(0));
+        let selected = Arc::new(AtomicBool::new(true));
         let mut live = Live::new();
         live.session.settings.enabled = true;
         live.session
@@ -307,6 +315,7 @@ mod tests {
                     Ok(Box::new(Fake {
                         svg: svg.clone(),
                         dispatch: dispatch.clone(),
+                        selected: selected.clone(),
                     }))
                 },
                 || (),
@@ -334,6 +343,13 @@ mod tests {
             args(json!([{"op":"style","fill":"blue"},{"op":"text","text":"refuse rectangle"}]));
         assert!(call(&mut live, &workspace, &invalid).is_err());
         let noop = args(json!([{"op":"style","fill":"red"}]));
+        selected.store(false, Ordering::SeqCst);
+        assert!(
+            call(&mut live, &workspace, &noop)
+                .unwrap_err()
+                .contains("live_select_document")
+        );
+        selected.store(true, Ordering::SeqCst);
         assert_eq!(
             call(&mut live, &workspace, &noop).unwrap()["changed"],
             false

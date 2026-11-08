@@ -378,6 +378,7 @@ fn invalid_recovery_inputs_leave_both_skills_and_selector_in_place() {
     for (name, expected_error) in [
         ("selector-before.json", "recovery selector backup differs"),
         ("old-0", "missing recovery skill backup"),
+        ("old-0/SKILL.md", "transaction backup changed"),
         ("interrupted-0", "transaction destination occupied"),
     ] {
         let mut f = fixture();
@@ -391,6 +392,7 @@ fn invalid_recovery_inputs_leave_both_skills_and_selector_in_place() {
         match name {
             "selector-before.json" => write_json(&base.join(name), &journal.after).unwrap(),
             "old-0" => fs::rename(base.join(name), base.join("retained-old-0")).unwrap(),
+            "old-0/SKILL.md" => write(&base.join(name), b"altered backup").unwrap(),
             _ => write(&base.join(name), b"preserve existing evidence").unwrap(),
         }
         let error = recover(&f.root, &f.settings).unwrap_err();
