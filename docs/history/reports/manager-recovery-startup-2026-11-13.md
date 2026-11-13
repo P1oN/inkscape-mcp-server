@@ -34,8 +34,34 @@ implicit checks do not offer older semantic versions. MCP startup/reconnect rema
 
 ## Validation and independent review
 
-Validation results are recorded after completion of the final checks. Native AppKit
-state/layout and task-I/O fixtures are automated checks, not interactive GUI acceptance.
+The complete runtime Cargo suite passes serially outside the sandbox, including the
+15 update-manager regressions. The initial sandbox run refused a Unix socket; an
+outside-sandbox parallel run exceeded three synthetic D-Bus fixtures' one-second
+budgets. The serial run passes without relaxing any timeout or changing live behavior.
+Both locked Cargo graphs pass formatting and all-target Clippy with warnings denied.
+The tooling graph passes 30 tests; its separate native DMG mount test remains ignored.
+Hidden AppKit state/layout and task-I/O fixtures pass, including channel changes,
+unavailable/error/timeout states, stale replies and component preflight routing.
+These are automated checks, not interactive GUI acceptance.
+
+The release package (build `d9fb7a4d6a4014b6`, based on the unpublished `c97fb36`
+working-tree snapshot) passes isolated installer acceptance: 19 ordinary publication
+boundaries plus all nine boundaries of the stale-binding transfer, idempotent recovery,
+whole-skill concurrent edits, preserving customizations, conflicts/foreign refusal,
+legacy migration, saved engine repair and nonstandard CODEX_HOME. The permanent
+installed launcher completes a real MCP initialize, tools/list and get_workspace_info.
+Discovery exactly matches the current live-enabled/raw-disabled contract (101 tools);
+the test compares the complete tools result, not a historical count.
+
+The original `/private/tmp` acceptance profiles exposed the existing external-engine
+guard against world-writable ancestors in the custom-engine fixture. The passing profile
+is under the task's user-owned visualization directory; no guard or system permission
+was weakened. Package doctor uses Inkscape 1.4.3 headlessly and passes outside the sandbox.
+
+The implementation is in [PR #62](https://github.com/P1oN/inkscape-mcp-server/pull/62).
+Main requires Quick Rust checks, Native candidate (aarch64-apple-darwin), an up-to-date
+base and resolved review threads. The ruleset requires zero approving GitHub reviews;
+the separate independent agent review below is still completed as requested.
 
 The independent agent's first pass found four issues: same-tag partial updates, incomplete
 review identity, first-install external-change race and incompatible-latest discovery.
@@ -48,9 +74,14 @@ diff whitespace checks. It did not perform interactive GUI acceptance.
 
 No real user installation, profile, skill, drawing, Manager/Inkscape session, system
 permissions, Gatekeeper or quarantine settings are changed. Isolated profiles and owned
-fixtures are under `/private/tmp/inkscape-manager-*`; their ownership/recreation policy
+fixtures are under `/private/tmp/inkscape-manager-*` and the task visualization directory;
+their ownership/recreation policy
 is in `/private/tmp/inkscape-manager-task.json`. Cargo caches have a combined 6 GiB budget.
-Successful disposable packages/profiles are removed after compact evidence is retained.
+Successful disposable packages/profiles are archived and round-trip verified (every
+path/type, bytes, symlink target, owner/group and permissions), then removed after
+process/open-file checks. Compact reports, the real MCP trace, inventories/provenance
+and complete archives retain the matching executables and dSYM bundles under
+`manager61-evidence` in the task visualization directory.
 
 Interactive Manager review/activation, signed-final-byte behavior, Gatekeeper/browser
 download and another-Mac acceptance remain unverified for this change. No release is
