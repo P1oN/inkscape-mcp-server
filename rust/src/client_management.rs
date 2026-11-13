@@ -89,12 +89,29 @@ fn entry(
         return Err("Client configuration exceeds size limit".into());
     }
     let text = fs::read_to_string(path)?;
+    let result = parsed_entry(&text, client)?;
+    if let Some(ref item) = result
+        && require_match
+        && (item.get("command").and_then(Value::as_str) != launcher.to_str()
+            || item.get("args").is_some_and(|v| v != &json!([]))
+            || item.get("url").is_some_and(|v| !v.is_null() && v != ""))
+    {
+        return Err(
+            "Existing inkscape entry differs; preserved. Remove or rename it first.".into(),
+        );
+    }
+    Ok(result)
+}
+fn parsed_entry(text: &str, client: Client) -> Result<Option<Value>> {
+    if text.is_empty() {
+        return Ok(None);
+    }
     let (data, key): (Value, _) = match client {
         Client::Codex => (
-            serde_json::to_value(toml::from_str::<toml::Value>(&text)?)?,
+            serde_json::to_value(toml::from_str::<toml::Value>(text)?)?,
             "mcp_servers",
         ),
-        Client::Claude => (serde_json::from_str(&text)?, "mcpServers"),
+        Client::Claude => (serde_json::from_str(text)?, "mcpServers"),
     };
     if !data.is_object() {
         return Err("Invalid client configuration".into());
@@ -104,19 +121,10 @@ fn entry(
         return Err("Invalid client server table".into());
     }
     let result = entries.get(NAME).cloned();
-    if let Some(ref item) = result {
-        if !item.is_object() {
-            return Err("Invalid inkscape entry".into());
-        }
-        if require_match
-            && (item.get("command").and_then(Value::as_str) != launcher.to_str()
-                || item.get("args").is_some_and(|v| v != &json!([]))
-                || item.get("url").is_some_and(|v| !v.is_null() && v != ""))
-        {
-            return Err(
-                "Existing inkscape entry differs; preserved. Remove or rename it first.".into(),
-            );
-        }
+    if let Some(ref item) = result
+        && !item.is_object()
+    {
+        return Err("Invalid inkscape entry".into());
     }
     Ok(result)
 }
@@ -724,6 +732,9 @@ fn installation_bindings_for(profiles: &Profiles) -> Vec<InstallationBinding> {
 /// the installer before this pure transformation is called.
 pub fn installation_registration(name: &str, before: &str, launcher: &Path) -> Result<String> {
     upgraded_config(before, Client::parse(name)?, launcher)
+}
+pub fn installation_entry(name: &str, text: &str) -> Result<Option<Value>> {
+    parsed_entry(text, Client::parse(name)?)
 }
 
 /// Bounded candidate identity/doctor command. Uses the same owned-process deadline.

@@ -20,6 +20,9 @@ builds. Use [current status](../AGENT_HANDOFF.md), [active backlog](../RUST_NEXT
 
 ## Reports and logs
 
+- [Manager recovery and launch checks](reports/manager-recovery-startup-2026-11-13.md)
+  records Issue #61, preserving stale recovery, component review and asynchronous checks.
+
 - [Compact headless profile](reports/compact-headless-profile-2026-11-07.md)
   records the matched Codex CLI pilot and scoped STDIO acceptance.
 - [Manager installation from /Applications](reports/manager-applications-install-2026-10-13.md)

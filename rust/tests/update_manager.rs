@@ -411,6 +411,218 @@ fn invalid_recovery_inputs_leave_both_skills_and_selector_in_place() {
     }
 }
 struct Fake(BTreeMap<String, Vec<u8>>);
+#[cfg(all(target_os = "macos", target_arch = "aarch64"))]
+fn release_fixture(f: &Fixture, tag: &str) -> ReleaseManifest {
+    ReleaseManifest {
+        format: 1,
+        tag: tag.into(),
+        prerelease: true,
+        runtime: f.before.current.runtime.clone(),
+        instructions: f.before.current.instructions.clone(),
+        instruction_asset: Asset {
+            name: "text.tar.gz".into(),
+            identity: FileIdentity::of(b"fixture"),
+        },
+        launcher_asset: Asset {
+            name: "launcher.tar.gz".into(),
+            identity: FileIdentity::of(b"fixture"),
+        },
+    }
+}
+#[cfg(all(target_os = "macos", target_arch = "aarch64"))]
+fn releases_fixture(releases: &[ReleaseManifest]) -> Fake {
+    let mut fake = Fake(BTreeMap::new());
+    fake.0.insert("https://api.github.com/repos/P1oN/inkscape-mcp-server/releases?per_page=100&page=1".into(),serde_json::to_vec(&releases.iter().map(|r|json!({"tag_name":r.tag,"draft":false,"prerelease":r.prerelease,"assets":[{"name":download::MANIFEST_ASSET}]})).collect::<Vec<_>>()).unwrap());
+    for release in releases {
+        fake.0.insert(
+            download::asset_url(&release.tag, download::MANIFEST_ASSET).unwrap(),
+            serde_json::to_vec(release).unwrap(),
+        );
+    }
+    fake
+}
+#[cfg(all(target_os = "macos", target_arch = "aarch64"))]
+#[test]
+fn same_release_completes_either_partial_order_and_review_binds_all_manifest_bytes() {
+    use inkscape_mcp_rust::update::manager::{self, Component};
+    let f = fixture();
+    let mut release = release_fixture(&f, "v2.0.0");
+    release.runtime.build_id = "new-runtime".into();
+    let mut files = default_files();
+    files
+        .get_mut("initialize.txt")
+        .unwrap()
+        .extend_from_slice(b"\nnew instructions\n");
+    release.instructions = manifest("new-text", &files);
+    for component in [Component::Instructions, Component::Runtime] {
+        let mut partial = f.before.clone();
+        partial.current.tag = release.tag.clone();
+        match component {
+            Component::Runtime => partial.current.instructions = release.instructions.clone(),
+            _ => partial.current.runtime = release.runtime.clone(),
+        };
+        write_json(&f.root.join("active.json"), &partial).unwrap();
+        let check = manager::update(
+            &f.root,
+            &releases_fixture(&[release.clone()]),
+            component,
+            true,
+            Some("prerelease"),
+            None,
+            27,
+        )
+        .unwrap();
+        assert_eq!(
+            check["update_available"], true,
+            "remaining component hidden by selected tag"
+        );
+    }
+    write_json(&f.root.join("active.json"), &f.before).unwrap();
+    let checked = manager::update(
+        &f.root,
+        &releases_fixture(&[release.clone()]),
+        Component::Both,
+        true,
+        Some("prerelease"),
+        None,
+        27,
+    )
+    .unwrap();
+    for asset in [false, true] {
+        let mut replaced = release.clone();
+        if asset {
+            replaced.runtime.asset.identity = FileIdentity::of(b"replacement runtime archive");
+        } else {
+            files
+                .get_mut("initialize.txt")
+                .unwrap()
+                .extend_from_slice(b"changed under same text version");
+            replaced.instructions = manifest("new-text", &files);
+        }
+        let result = manager::update_reviewed(
+            &f.root,
+            &releases_fixture(&[replaced]),
+            Component::Both,
+            false,
+            Some("prerelease"),
+            Some(&release.tag),
+            27,
+            checked["review_id"].as_str(),
+        );
+        assert!(result.unwrap_err().contains("reviewed update changed"));
+        assert_eq!(selector(&f.root).unwrap(), f.before);
+    }
+}
+#[cfg(all(target_os = "macos", target_arch = "aarch64"))]
+#[test]
+fn discovery_skips_incompatible_releases_but_refuses_corrupt_manifests() {
+    let f = fixture();
+    let release = release_fixture(&f, "v2.0.0");
+    let mut incompatible = release.clone();
+    incompatible.tag = "v3.0.0".into();
+    incompatible.runtime.launcher_minimum = LAUNCHER_VERSION + 1;
+    let fake = releases_fixture(&[incompatible.clone(), release.clone()]);
+    assert_eq!(
+        download::discover_compatible(&fake, "prerelease", None, 27)
+            .unwrap()
+            .tag,
+        release.tag
+    );
+    assert!(
+        download::discover_compatible(&fake, "prerelease", Some(&incompatible.tag), 27)
+            .unwrap_err()
+            .contains("launcher upgrade")
+    );
+    incompatible.runtime.asset.identity.sha256 = "invalid".into();
+    assert!(
+        download::discover_compatible(
+            &releases_fixture(&[incompatible, release]),
+            "prerelease",
+            None,
+            27
+        )
+        .is_err()
+    );
+}
+#[cfg(all(target_os = "macos", target_arch = "aarch64"))]
+#[test]
+fn startup_checks_prepared_but_uninstalled_components_and_never_mutates() {
+    use inkscape_mcp_rust::update::manager;
+    let f = fixture();
+    fs::remove_file(f.root.join("settings.json")).unwrap();
+    fs::remove_file(f.root.join("active.json")).unwrap();
+    let bundle = f.root.parent().unwrap().join("ManagerResources");
+    mkdir(&bundle).unwrap();
+    copy_tree(
+        &instruction_path(&f.root, &f.before.current).unwrap(),
+        &bundle.join("instructions"),
+        2 * 1024 * 1024,
+    )
+    .unwrap();
+    write_json(
+        &bundle.join("offline-components.json"),
+        &json!({"runtime_build":f.before.current.runtime.build_id,"distribution":"v1.0.0"}),
+    )
+    .unwrap();
+    let release = ReleaseManifest {
+        format: 1,
+        tag: "v2.0.0".into(),
+        prerelease: true,
+        runtime: f.before.current.runtime.clone(),
+        instructions: f.before.current.instructions.clone(),
+        instruction_asset: Asset {
+            name: "text.tar.gz".into(),
+            identity: FileIdentity::of(b"fixture"),
+        },
+        launcher_asset: Asset {
+            name: "launcher.tar.gz".into(),
+            identity: FileIdentity::of(b"fixture"),
+        },
+    };
+    let fake_for = |release: &ReleaseManifest| {
+        Fake(BTreeMap::from([
+        ("https://api.github.com/repos/P1oN/inkscape-mcp-server/releases?per_page=100&page=1".into(),serde_json::to_vec(&json!([{"tag_name":release.tag,"draft":false,"prerelease":release.prerelease,"assets":[{"name":download::MANIFEST_ASSET}]}])).unwrap()),
+        (download::asset_url(&release.tag,download::MANIFEST_ASSET).unwrap(),serde_json::to_vec(release).unwrap())]))
+    };
+    let before = inventory(&f.root, 1024 * 1024 * 1024).unwrap();
+    assert_eq!(
+        manager::check_bundled(&f.root, &fake_for(&release), &bundle, "prerelease", 27).unwrap()["update_available"],
+        false
+    );
+    let mut changed = release.clone();
+    changed.runtime.build_id = "new-runtime".into();
+    let result =
+        manager::check_bundled(&f.root, &fake_for(&changed), &bundle, "prerelease", 27).unwrap();
+    assert_eq!(result["update_available"], true);
+    assert_eq!(result["baseline"], "bundled");
+    assert!(manager::check_bundled(&f.root, &fake_for(&changed), &bundle, "stable", 27).is_err());
+    assert!(
+        manager::check_bundled(&f.root, &Fake(BTreeMap::new()), &bundle, "prerelease", 27).is_err()
+    );
+    changed.runtime.helper_protocol += 1;
+    assert!(
+        manager::check_bundled(&f.root, &fake_for(&changed), &bundle, "prerelease", 27).is_err()
+    );
+    assert_eq!(inventory(&f.root, 1024 * 1024 * 1024).unwrap(), before);
+    assert!(!f.root.join("settings.json").exists() && !f.root.join("update.lock").exists());
+    struct Racing<'a>(&'a Fake, &'a Path);
+    impl Transport for Racing<'_> {
+        fn get(&self, url: &str, limit: u64) -> Result<Vec<u8>> {
+            fs::write(self.1.join("active.json"), b"external installation").unwrap();
+            self.0.get(url, limit)
+        }
+    }
+    let fake = fake_for(&release);
+    assert!(
+        manager::check_bundled(&f.root, &Racing(&fake, &f.root), &bundle, "prerelease", 27)
+            .unwrap_err()
+            .contains("installation changed")
+    );
+    assert_eq!(
+        fs::read(f.root.join("active.json")).unwrap(),
+        b"external installation"
+    );
+}
 #[test]
 fn update_before_install_explains_next_step_without_mutation() {
     use inkscape_mcp_rust::update::manager::{self, Component};

@@ -598,6 +598,10 @@ fn build(out: &Path, binary: &Path) -> Result<()> {
             &instruction_root.join("manifest.json"),
             &serde_json::to_value(instruction_manifest)?,
         )?;
+        write_json(
+            &app.join("Resources/offline-components.json"),
+            &json!({"runtime_build":manifest["build_info"]["build_id"],"distribution":"development"}),
+        )?;
         output(
             Command::new("/usr/bin/clang")
                 .args([

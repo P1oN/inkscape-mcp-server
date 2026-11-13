@@ -94,6 +94,9 @@ impl InstructionManifest {
                 "unsupported instruction format/interface; upgrade the launcher manually".into(),
             );
         }
+        self.validate_contents()
+    }
+    fn validate_contents(&self) -> Result<()> {
         if !identifier(&self.version)
             || !hash(&self.content_id)
             || self.files.len() > 64
@@ -134,11 +137,12 @@ pub struct ReleaseManifest {
     pub launcher_asset: Asset,
 }
 impl ReleaseManifest {
-    pub fn compatible(&self, os: &str, architecture: &str, os_major: u32) -> Result<()> {
-        self.instructions.validate()?;
+    pub(super) fn validate_metadata(&self) -> Result<()> {
+        self.instructions.validate_contents()?;
         let r = &self.runtime;
         if self.format != FORMAT
             || r.format != FORMAT
+            || self.instructions.format != FORMAT
             || !identifier(&self.tag)
             || !identifier(&r.distribution_tag)
             || !identifier(&r.build_id)
@@ -146,6 +150,15 @@ impl ReleaseManifest {
         {
             return Err("unsupported release format or identity".into());
         }
+        r.asset.validate(512 * 1024 * 1024)?;
+        self.instruction_asset.validate(4 * 1024 * 1024)?;
+        self.launcher_asset.validate(128 * 1024 * 1024)?;
+        Ok(())
+    }
+    pub fn compatible(&self, os: &str, architecture: &str, os_major: u32) -> Result<()> {
+        self.validate_metadata()?;
+        self.instructions.validate()?;
+        let r = &self.runtime;
         if r.launcher_minimum > LAUNCHER_VERSION {
             return Err("launcher upgrade required; download the current Inkscape MCP Manager distribution and upgrade the existing installation".into());
         }
@@ -163,9 +176,6 @@ impl ReleaseManifest {
         {
             return Err("incompatible runtime, instructions or native-helper protocol".into());
         }
-        r.asset.validate(512 * 1024 * 1024)?;
-        self.instruction_asset.validate(4 * 1024 * 1024)?;
-        self.launcher_asset.validate(128 * 1024 * 1024)?;
         Ok(())
     }
 }

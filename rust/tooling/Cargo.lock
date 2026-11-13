@@ -1092,6 +1092,7 @@ dependencies = [
  "regex",
  "reqwest",
  "rmcp",
+ "semver",
  "sentry",
  "serde",
  "serde_json",

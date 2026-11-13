@@ -18,6 +18,13 @@ remote asset digests/sizes and the tag match the verified candidate. Actual isol
 Claude Code 2.1.296 discovery/disconnect passes on the published matching bytes.
 See [release evidence](history/reports/v0.1.7-signed-release.md).
 
+The current-source Manager implements component-specific online review, verified stale
+binding/skill recovery and launch-only asynchronous update checks in Issue #61. The
+[scoped report](history/reports/manager-recovery-startup-2026-11-13.md) distinguishes
+automated checks from remaining native/signed/another-Mac qualification. Repeat the
+wizard recovery, startup-offline and reviewed component actions with the next signed
+distribution on the qualification host; current-source checks are not release acceptance.
+
 Outstanding exit gates remain the full [another-Mac/browser matrix](install/another-mac-acceptance.md),
 clean-host source bootstrap, authenticated real-client workspace interaction,
 signed-distribution live reconnect, protected whole-job interruption/recovery and

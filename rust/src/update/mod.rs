@@ -10,4 +10,5 @@ pub mod manifests;
 pub mod storage;
 pub mod transaction;
 
+mod ownership;
 mod progress;

@@ -1,5 +1,23 @@
 # Agent handoff — current status
 
+## Manager recovery and launch checks — 2026-11-13
+
+Issue [#61](https://github.com/P1oN/inkscape-mcp-server/issues/61) adds evidence-based
+stale legacy binding recovery and skill transfer to the existing prepared installer
+transaction, with complete private backups, three-way merging and whole-skill/config
+review guards. Unknown ownership is preserved. The UI displays the effective Codex
+profile/configuration, including CODEX_HOME.
+
+Manager launch now starts a bounded asynchronous read-only release check, including
+before installation is complete. It compares installed/sealed offline component
+identities, skips valid incompatible releases, preserves the chosen channel, and
+invalidates stale replies. Online component actions review and pin the complete
+release identity before activation. MCP startup/reconnect stays offline.
+
+See the [scoped validation report](history/reports/manager-recovery-startup-2026-11-13.md)
+for automated/native evidence, independent review and distribution limitations.
+This source change is not a new signed release and does not modify any real user profile.
+
 ## Update recovery and live review guards
 
 Interrupted component updates now check the selector backup, skill inventories
