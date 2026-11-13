@@ -71,6 +71,9 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
 @property BOOL updateAvailable;
 @property BOOL configurationChanged;
 @property NSArray<NSDictionary *> *clientDiscovery;
+@property NSTask *checkTask;
+@property NSUInteger generation;
+@property BOOL startupChecked;
 @end
 @implementation Manager
 - (NSButton *)button:(NSString *)title action:(SEL)action {
@@ -92,12 +95,12 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
     BOOL idle=self.running==nil;
     for(NSButton *button in self.buttons)button.enabled=idle;
     self.channel.enabled=idle;self.candidates.enabled=idle;
-    self.installButton.title=self.preparation ? @"Install now" : self.updateAvailable && !self.configurationChanged ? @"Update now" : self.hasInstallation || self.legacySource ? @"Review changes" : @"Review installation";
-    self.installButton.enabled=idle && (self.preparation || (self.updateAvailable && !self.configurationChanged) || (self.workspace && self.inkscape && (self.codex.state==NSControlStateValueOn || self.claude.state==NSControlStateValueOn)));
+    self.installButton.title=self.preparation ? @"Install now" : self.hasInstallation && self.updateAvailable && !self.configurationChanged ? @"Review update" : self.hasInstallation || self.legacySource ? @"Review changes" : @"Review installation";
+    self.installButton.enabled=idle && (self.preparation || (self.hasInstallation && self.updateAvailable && !self.configurationChanged) || (self.workspace && self.inkscape && (self.codex.state==NSControlStateValueOn || self.claude.state==NSControlStateValueOn)));
     self.cancelButton.hidden=self.preparation==nil;self.cancelButton.enabled=idle && self.preparation!=nil;
-    self.checkButton.hidden=!self.hasInstallation;self.checkButton.enabled=idle && self.hasInstallation && !self.recoveryRequired;
-    for(NSButton *button in self.updateButtons)button.enabled=idle && self.hasInstallation && !self.recoveryRequired;
-    self.rollbackButton.enabled=idle && self.hasInstallation && self.rollbackAvailable && !self.recoveryRequired;
+    self.checkButton.hidden=NO;self.checkButton.enabled=idle && !self.recoveryRequired && !self.preparation;
+    for(NSButton *button in self.updateButtons)button.enabled=idle && self.hasInstallation && !self.recoveryRequired && !self.preparation;
+    self.rollbackButton.enabled=idle && self.hasInstallation && self.rollbackAvailable && !self.recoveryRequired && !self.preparation;
     self.recoverButton.hidden=!self.recoveryRequired && ![@[@"failed",@"damaged"] containsObject:self.state ?: @""];
     self.progress.hidden=idle;
     self.channelHint.stringValue=self.channel.indexOfSelectedItem==0 ? @"Stable releases are recommended for everyday use." : @"Prereleases include preview features and may be less stable.";
@@ -106,6 +109,7 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
         BOOL selected=[client[@"name"] isEqualToString:@"codex"] ? self.codex.state==NSControlStateValueOn : self.claude.state==NSControlStateValueOn;
         if(selected && [client[@"error"] isKindOfClass:NSString.class])hint=client[@"error"];
         else if(selected && [client[@"name"] isEqualToString:@"claude"] && ![client[@"available"] boolValue])hint=@"Claude Code was not found. Install it before connecting, or deselect it.";
+        if(selected && [client[@"name"] isEqualToString:@"codex"] && client[@"config"]){hint=[NSString stringWithFormat:@"Codex profile: %@\nConfiguration: %@\n%@",client[@"profile"],client[@"config"],client[@"error"] ?: client[@"binding"][@"explanation"] ?: hint];}
     }
     self.clientHint.stringValue=hint;
 }
@@ -205,16 +209,19 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
 - (void)inspect {[self setPhase:@"loading" message:@"Checking installed files and client settings…"];[self run:@[@"install-inspect"] request:nil];}
 - (void)cancelPrepared:(id)sender {if(self.running)return;self.preparation=nil;self.cancelButton.enabled=NO;[self inspect];}
 - (void)changeOptions:(id)sender {
-    self.preparation=nil;self.configurationChanged=YES;
+    [self invalidateCheck];
+    self.preparation=nil;if(sender!=self.channel)self.configurationChanged=YES;
     if(sender==self.channel){self.updateAvailable=NO;self.available.stringValue=self.hasInstallation ? @"Check for updates on the selected channel." : @"The bundled version is ready to install offline.";}
     if(!self.recoveryRequired)[self setPhase:@"ready" message:self.codex.state!=NSControlStateValueOn && self.claude.state!=NSControlStateValueOn ? @"Select at least one client to continue." : !self.workspace ? @"Choose an SVG workspace to continue. Installation works offline." : !self.inkscape ? @"Choose Inkscape to continue." : @"Review your choices to verify the MCP connection before installing."];
     else [self refreshControls];
+    if(sender==self.channel)[self startUpdateCheck];
 }
 - (void)choose:(id)sender {
     NSOpenPanel *panel=[NSOpenPanel openPanel];panel.canChooseDirectories=YES;panel.canChooseFiles=NO;panel.allowsMultipleSelection=NO;panel.message=@"Advanced recovery: choose a permanent installation or legacy source folder.";
     if([panel runModal]==NSModalResponseOK){[self selectPath:panel.URL.path];}
 }
 - (void)selectPath:(NSString *)path {
+    [self invalidateCheck];
     if([[NSFileManager defaultManager] fileExistsAtPath:[path stringByAppendingPathComponent:@".inkscape-mcp-local/setup.conf"]]){self.legacySource=path;self.installButton.title=@"Upgrade existing installation";[self run:@[@"install-inspect",@"--source",path] request:nil];}
     else {self.legacySource=nil;self.installation=path;[[NSUserDefaults standardUserDefaults] setObject:path forKey:@"InstallationDirectory"];[self inspect];}
     [self setPath:self.installation label:self.installationLabel];
@@ -237,7 +244,7 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
     return [[NSUserDefaults standardUserDefaults] stringForKey:@"BundledLegacyPackageDirectory"] ?: [[NSBundle mainBundle].bundlePath stringByDeletingLastPathComponent].stringByDeletingLastPathComponent;
 }
 - (void)install:(id)sender {
-    if(self.updateAvailable && !self.configurationChanged && !self.preparation){[self both:sender];return;}
+    if(self.hasInstallation && self.updateAvailable && !self.configurationChanged && !self.preparation){[self both:sender];return;}
     if(self.preparation){[self run:@[@"install-activate",@"--preparation",self.preparation] request:nil];return;}
     if(!self.workspace || !self.inkscape){[self setPhase:@"failed" message:@"Choose an SVG workspace and Inkscape before installing."];return;}
     NSMutableArray *clients=[NSMutableArray new];if(self.codex.state==NSControlStateValueOn)[clients addObject:@"codex"];if(self.claude.state==NSControlStateValueOn)[clients addObject:@"claude"];
@@ -249,16 +256,53 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
     if(self.legacySource)request[@"legacy_source"]=self.legacySource;
     [self run:@[@"install-prepare"] request:request];
 }
-- (void)check:(id)sender {[self update:@[@"--check"]];}
+- (void)check:(id)sender {[self startUpdateCheck];}
 - (void)instructions:(id)sender {[self update:@[@"--instructions"]];}
 - (void)runtime:(id)sender {[self update:@[@"--runtime"]];}
 - (void)both:(id)sender {[self update:@[]];}
 - (void)rollback:(id)sender {[self run:@[@"rollback"] request:nil];}
 - (void)recover:(id)sender {if([[NSFileManager defaultManager] fileExistsAtPath:self.installation])[self run:@[@"install-recover"] request:nil];else [self inspect];}
-- (void)update:(NSArray *)options {NSMutableArray *args=[NSMutableArray arrayWithObject:@"update"];[args addObjectsFromArray:options];[args addObjectsFromArray:@[@"--channel",self.channel.indexOfSelectedItem==0 ? @"stable" : @"prerelease"]];[self run:args request:nil];}
+- (void)update:(NSArray *)options {NSMutableArray *args=[NSMutableArray arrayWithObjects:@"update",@"--check",nil];[args addObjectsFromArray:options];[args addObjectsFromArray:@[@"--channel",self.channel.indexOfSelectedItem==0 ? @"stable" : @"prerelease"]];[self run:args request:nil];}
+- (void)invalidateCheck {
+    self.generation++;NSTask *task=self.checkTask;self.checkTask=nil;
+    if(task.running){[task terminate];dispatch_after(dispatch_time(DISPATCH_TIME_NOW,2*NSEC_PER_SEC),dispatch_get_main_queue(),^{if(task.running)kill(task.processIdentifier,SIGKILL);});}
+}
+- (BOOL)acceptsCheck:(NSUInteger)generation installation:(NSString *)installation channel:(NSInteger)channel {
+    return generation==self.generation && [installation isEqualToString:self.installation] && channel==self.channel.indexOfSelectedItem && !self.running && !self.preparation && !self.recoveryRequired;
+}
+- (void)applyCheck:(NSDictionary *)result error:(NSString *)error generation:(NSUInteger)generation installation:(NSString *)installation channel:(NSInteger)channel {
+    if(![self acceptsCheck:generation installation:installation channel:channel])return;
+    self.updateAvailable=!error && [result[@"update_available"] boolValue];
+    self.available.stringValue=error ? [NSString stringWithFormat:@"Update check unavailable: %@ Local setup remains available.",error] : self.updateAvailable ? [NSString stringWithFormat:@"Available: %@. %@",result[@"available"][@"distribution"],self.hasInstallation ? @"Choose Review update to see the component plan." : @"Install the bundled version, then review this update."] : @"No newer compatible update on this channel.";
+    self.previewChannelButton.hidden=!(error && channel==0 && [error isEqualToString:@"no compatible update release found on the selected channel"]);
+    [self refreshControls];
+}
+- (void)startUpdateCheck {
+    if(self.checkTask || self.running || self.preparation || self.recoveryRequired)return;
+    NSString *executable=[[NSBundle mainBundle].bundlePath stringByAppendingPathComponent:@"Contents/Helpers/inkscape-mcp-launcher"];
+    NSTask *task=[NSTask new];task.executableURL=[NSURL fileURLWithPath:executable];
+    NSUInteger generation=self.generation;NSString *installation=[self.installation copy];NSInteger channel=self.channel.indexOfSelectedItem;
+    task.arguments=@[@"manager-check",@"--source",[NSBundle mainBundle].resourcePath,@"--install-dir",installation,@"--channel",channel==0 ? @"stable" : @"prerelease",@"--json"];
+    NSPipe *output=[NSPipe pipe];task.standardOutput=output;task.standardError=[NSFileHandle fileHandleWithNullDevice];task.standardInput=[NSFileHandle fileHandleWithNullDevice];
+    NSError *error=nil;if(![task launchAndReturnError:&error]){[self applyCheck:nil error:@"Unable to start the bundled update checker." generation:generation installation:installation channel:channel];return;}
+    self.checkTask=task;self.available.stringValue=@"Checking GitHub for compatible updates…";
+    __block BOOL timedOut=NO;NSTimeInterval deadline=NSProcessInfo.processInfo.systemUptime+22;
+    managerTaskDeadline(task,20,2,^BOOL{return self.checkTask==task;},^{timedOut=YES;});
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY,0),^{
+        NSData *out=managerReadOutput(output.fileHandleForReading,task,deadline,nil);[task waitUntilExit];
+        dispatch_async(dispatch_get_main_queue(),^{
+            if(self.checkTask!=task)return;self.checkTask=nil;
+            NSDictionary *result=out.length ? [NSJSONSerialization JSONObjectWithData:out options:0 error:nil] : nil;
+            if(![result isKindOfClass:NSDictionary.class])result=nil;
+            NSString *failure=timedOut ? @"The request timed out." : task.terminationStatus!=0 || !result ? result[@"error"] ?: @"GitHub could not be reached." : nil;
+            [self applyCheck:result error:failure generation:generation installation:installation channel:channel];
+        });
+    });
+}
 - (void)usePrereleases:(id)sender {[self.channel selectItemAtIndex:1];self.previewChannelButton.hidden=YES;[self changeOptions:self.channel];[self setPhase:self.state message:@"Prereleases selected. Choose Check updates to review availability, then Update now to install."];}
 - (void)run:(NSArray *)arguments request:(NSDictionary *)request {
     if(self.running)return;
+    [self invalidateCheck];
     NSString *executable=[[NSBundle mainBundle].bundlePath stringByAppendingPathComponent:@"Contents/Helpers/inkscape-mcp-launcher"];
     if(![[NSFileManager defaultManager] isExecutableFileAtPath:executable]){[self setPhase:@"failed" message:@"The bundled installer is missing or damaged. Download a complete Manager distribution and retry."];return;}
     NSTask *task=[NSTask new];task.executableURL=[NSURL fileURLWithPath:executable];NSMutableArray *args=[arguments mutableCopy];[args addObjectsFromArray:@[@"--install-dir",self.installation,@"--json"]];task.arguments=args;
@@ -303,7 +347,14 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
             [NSApp terminate:nil];return;
         }
         if([arguments containsObject:@"install-inspect"]){[self applyInspection:result];return;}
-        if(result[@"preparation_id"]){self.preparation=result[@"preparation_id"];[self setPhase:@"prepared" message:[NSString stringWithFormat:@"The MCP connection passed. Install into %@? Your drawings and client preferences are preserved.%@",self.installation.stringByAbbreviatingWithTildeInPath,[result[@"skipped_skills"] count] ? @" User-owned skills will be left untouched." : @""]];return;}
+        if(result[@"preparation_id"]){self.preparation=result[@"preparation_id"];NSMutableString *review=[NSMutableString stringWithFormat:@"The MCP connection passed. Install into %@?",self.installation];for(NSDictionary *action in result[@"recovery_actions"])[review appendFormat:@"\n%@\nConfiguration: %@\nSkill: %@\nPrivate backup: %@",action[@"action"],action[@"config"],action[@"skill"],result[@"backup"]];if([result[@"skipped_skills"] count])[review appendString:@" User-owned skills will be left untouched."];[self setPhase:@"prepared" message:review];NSAlert *details=[NSAlert new];details.messageText=@"Review installation";details.informativeText=review;[details addButtonWithTitle:@"Continue review"];[details runModal];return;}
+        if([arguments containsObject:@"update"] && [arguments containsObject:@"--check"]){
+            NSDictionary *plan=result[@"plan"];if(![result[@"update_available"] boolValue]){[self setPhase:@"installed" message:@"No newer compatible update is available for these components."];return;}
+            NSAlert *review=[NSAlert new];review.messageText=[NSString stringWithFormat:@"Update to %@?",plan[@"release"]];
+            review.informativeText=[NSString stringWithFormat:@"Runtime: %@ → %@ (%@)\nInstructions: %@ → %@ (%@)\nThe verified release plan will be checked again before changes. Customized skills are merged; conflicts preserve the active installation.",plan[@"runtime"][@"from"],plan[@"runtime"][@"to"],[plan[@"runtime"][@"changes"] boolValue] ? @"changes" : @"kept",plan[@"instructions"][@"from"],plan[@"instructions"][@"to"],[plan[@"instructions"][@"changes"] boolValue] ? @"changes" : @"kept"];
+            [review addButtonWithTitle:@"Update now"];[review addButtonWithTitle:@"Cancel"];
+            if([review runModal]==NSAlertFirstButtonReturn){NSMutableArray *activate=[arguments mutableCopy];[activate removeObject:@"--check"];[activate addObjectsFromArray:@[@"--release",plan[@"release"],@"--preparation",result[@"review_id"]]];[self run:activate request:nil];}else [self setPhase:@"installed" message:@"Update cancelled. The active components were preserved."];return;
+        }
         NSInteger requestedChannel=self.channel.indexOfSelectedItem;
         if(result[@"runtime_build"])[self showInstalled:result];
         if([arguments containsObject:@"--check"])[self.channel selectItemAtIndex:requestedChannel];
@@ -333,6 +384,7 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
     else if([result[@"state"] isEqualToString:@"damaged"])message=@"This installation could not be verified. Recover it or select another installation in Advanced.";
     else if([result[@"choice_required"] boolValue] && !self.legacySource){message=@"Multiple installations were found. Choose the one to upgrade in Advanced.";self.advancedButton.state=NSControlStateValueOn;self.advancedCard.hidden=NO;}
     [self setPhase:self.recoveryRequired || [result[@"state"] isEqualToString:@"damaged"] ? @"damaged" : result[@"state"] ?: @"not_installed" message:message];
+    if(!self.startupChecked){self.startupChecked=YES;[self startUpdateCheck];}
 }
 - (void)showInstalled:(NSDictionary *)result {
     self.hasInstallation=YES;self.rollbackAvailable=[result[@"rollback_available"] boolValue];

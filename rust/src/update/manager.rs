@@ -175,6 +175,66 @@ pub enum Component {
     Runtime,
     Both,
 }
+fn newer_release(candidate: &str, baseline: &str) -> bool {
+    match (
+        semver::Version::parse(candidate.trim_start_matches('v')),
+        semver::Version::parse(baseline.trim_start_matches('v')),
+    ) {
+        // A previous component-only update may already have selected this tag.
+        // Remaining component identities must still be eligible for completion.
+        (Ok(candidate), Ok(baseline)) => candidate >= baseline,
+        _ => true,
+    }
+}
+/// Startup discovery has no write lock, recovery or settings dependency on a fresh
+/// profile. The Manager supplies its sealed offline component metadata.
+pub fn check_bundled(
+    root: &Path,
+    transport: &impl Transport,
+    bundle: &Path,
+    channel: &str,
+    os_major: u32,
+) -> Result<Value> {
+    if root.join("active.json").exists() || root.join("active.json").is_symlink() {
+        return update(
+            root,
+            transport,
+            Component::Both,
+            true,
+            Some(channel),
+            None,
+            os_major,
+        );
+    }
+    if root.join("installation-journal.json").exists() || root.join("transaction.json").exists() {
+        return Err("Recover the interrupted installation before checking updates.".into());
+    }
+    let metadata: Value = super::storage::json(&bundle.join("offline-components.json"))?;
+    let runtime = metadata["runtime_build"]
+        .as_str()
+        .filter(|v| identifier(v))
+        .ok_or("bundled runtime identity is missing")?;
+    let text = instructions::Instructions::load(&bundle.join("instructions"))?;
+    let manifest = download::discover_compatible(transport, channel, None, os_major)?;
+    let changed = newer_release(
+        &manifest.tag,
+        metadata["distribution"].as_str().unwrap_or("development"),
+    ) && (manifest.runtime.build_id != runtime
+        || manifest.instructions.content_id != text.manifest.content_id);
+    if [
+        "active.json",
+        "installation-journal.json",
+        "transaction.json",
+    ]
+    .iter()
+    .any(|name| root.join(name).exists() || root.join(name).is_symlink())
+    {
+        return Err("installation changed during release discovery; check again".into());
+    }
+    Ok(
+        json!({"baseline":"bundled","update_available":changed,"available":{"distribution":manifest.tag,"runtime_build":manifest.runtime.build_id,"instructions_version":manifest.instructions.version},"client_reconnect_required":false,"skill_reload_required":false}),
+    )
+}
 pub fn update(
     root: &Path,
     transport: &impl Transport,
@@ -183,6 +243,21 @@ pub fn update(
     channel: Option<&str>,
     version: Option<&str>,
     os_major: u32,
+) -> Result<Value> {
+    update_reviewed(
+        root, transport, component, check, channel, version, os_major, None,
+    )
+}
+#[allow(clippy::too_many_arguments)]
+pub fn update_reviewed(
+    root: &Path,
+    transport: &impl Transport,
+    component: Component,
+    check: bool,
+    channel: Option<&str>,
+    version: Option<&str>,
+    os_major: u32,
+    review: Option<&str>,
 ) -> Result<Value> {
     if [
         "active.json",
@@ -209,8 +284,7 @@ pub fn update(
     }
     let before = selector(root)?;
     let channel = channel.unwrap_or(&before.channel);
-    let manifest = download::discover(transport, channel, version)?;
-    manifest.compatible(std::env::consts::OS, std::env::consts::ARCH, os_major)?;
+    let manifest = download::discover_compatible(transport, channel, version, os_major)?;
     let mut pair = before.current.clone();
     match component {
         Component::Instructions => {
@@ -237,14 +311,36 @@ pub fn update(
         pair.instructions = before.current.instructions.clone();
     }
     pair.tag = manifest.tag.clone();
-    let changed = pair.runtime.build_id != before.current.runtime.build_id
-        || pair.instructions.content_id != before.current.instructions.content_id;
+    let changed = (version.is_some() || newer_release(&manifest.tag, &before.current.tag))
+        && (pair.runtime.build_id != before.current.runtime.build_id
+            || pair.instructions.content_id != before.current.instructions.content_id);
     let mut result = installation_report(root, &before);
     result["available"] = json!({"distribution":manifest.tag,"runtime_build":manifest.runtime.build_id,"runtime_revision":manifest.runtime.source_revision,"instructions_version":manifest.instructions.version,"instructions_content":manifest.instructions.content_id});
     result["update_available"] = json!(changed);
     result["client_reconnect_required"] = json!(false);
     result["skill_reload_required"] = json!(false);
+    result["plan"] = json!({"runtime":{"from":before.current.runtime.build_id,"to":pair.runtime.build_id,"changes":pair.runtime.build_id != before.current.runtime.build_id},"instructions":{"from":before.current.instructions.version,"to":pair.instructions.version,"changes":pair.instructions.content_id != before.current.instructions.content_id},"channel":channel,"release":manifest.tag});
+    let review_id = FileIdentity::of(
+            &serde_json::to_vec(&json!({"before":before,"settings":settings,"plan":result["plan"],"target":pair,"manifest":manifest}))
+            .map_err(|e| e.to_string())?,
+    )
+    .sha256;
+    result["review_id"] = json!(review_id);
+    if review.is_some_and(|expected| expected != review_id) {
+        return Err("The reviewed update changed. Check and review again before applying.".into());
+    }
     if check {
+        if selector(root)? != before
+            || serde_json::to_value(super::storage::json::<Settings>(
+                &root.join("settings.json"),
+            )?)
+            .map_err(|e| e.to_string())?
+                != serde_json::to_value(&settings).map_err(|e| e.to_string())?
+            || root.join("installation-journal.json").exists()
+            || root.join("transaction.json").exists()
+        {
+            return Err("installation changed during release discovery; check again".into());
+        }
         return Ok(result);
     }
     let _lock = lock;
@@ -315,4 +411,17 @@ pub fn update(
     result["skill_reload_required"] = json!(activation.skills_changed);
     result["skipped_skills"] = json!(activation.skipped_skills);
     Ok(result)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn release_order_handles_numeric_versions_and_prereleases() {
+        assert!(newer_release("v0.1.10", "v0.1.9"));
+        assert!(!newer_release("v0.1.7", "v0.1.8"));
+        assert!(!newer_release("v1.0.0-beta.1", "v1.0.0"));
+        assert!(newer_release("v1.0.0", "v1.0.0-beta.1"));
+        assert!(newer_release("v1.0.0", "v1.0.0"));
+    }
 }

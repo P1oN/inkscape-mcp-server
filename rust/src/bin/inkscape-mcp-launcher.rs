@@ -116,6 +116,7 @@ fn parse() -> Result<Options> {
             | "install-recover"
             | "manager-prepare"
             | "manager-activate"
+            | "manager-check"
     ) || !options.root.is_absolute()
         || options
             .channel
@@ -125,16 +126,21 @@ fn parse() -> Result<Options> {
         return Err("invalid command, channel or installation directory; see --help".into());
     }
     if options.action != "update" && (component || options.check || options.release.is_some())
-        || !matches!(options.action.as_str(), "migrate" | "install-inspect")
-            && options.source.is_some()
-        || !matches!(options.action.as_str(), "update" | "migrate") && options.channel.is_some()
+        || !matches!(
+            options.action.as_str(),
+            "migrate" | "install-inspect" | "manager-check"
+        ) && options.source.is_some()
+        || !matches!(
+            options.action.as_str(),
+            "update" | "migrate" | "manager-check"
+        ) && options.channel.is_some()
     {
         return Err("option does not apply to this command".into());
     }
     if options.preparation.is_some()
         && !matches!(
             options.action.as_str(),
-            "install-activate" | "manager-activate"
+            "install-activate" | "manager-activate" | "update"
         )
     {
         return Err("--preparation only applies to install-activate".into());
@@ -161,6 +167,18 @@ fn run(options: &Options) -> Result<Value> {
     let root = &options.root;
     use inkscape_mcp_rust::update::installer;
     match options.action.as_str() {
+        "manager-check" => {
+            return manager::check_bundled(
+                root,
+                &Https::new()?,
+                options
+                    .source
+                    .as_deref()
+                    .ok_or("bundled resources are required")?,
+                options.channel.as_deref().unwrap_or("stable"),
+                os_major()?,
+            );
+        }
         "manager-prepare" => return inkscape_mcp_rust::update::manager_app::prepare(root),
         "manager-activate" => {
             return inkscape_mcp_rust::update::manager_app::activate(
@@ -242,7 +260,7 @@ fn run(options: &Options) -> Result<Value> {
         );
     }
     if options.action == "update" {
-        return manager::update(
+        return manager::update_reviewed(
             root,
             &Https::new()?,
             options.component,
@@ -250,6 +268,7 @@ fn run(options: &Options) -> Result<Value> {
             options.channel.as_deref(),
             options.release.as_deref(),
             os_major()?,
+            options.preparation.as_deref(),
         );
     }
     if options.action == "--version" {

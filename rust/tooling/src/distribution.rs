@@ -746,6 +746,10 @@ pub fn run(args: &Args) -> Result<()> {
         )?;
     }
     let info = fs::read_to_string(app.join("Contents/Info.plist"))?;
+    write_json(
+        &app.join("Contents/Resources/offline-components.json"),
+        &json!({"runtime_build":metadata["build_info"]["build_id"],"distribution":tag}),
+    )?;
     fs::write(app.join("Contents/Info.plist"), info.replace("</dict></plist>",&format!("<key>InkscapeMCPChannel</key><string>{channel}</string><key>InkscapeMCPDistribution</key><string>{tag}</string></dict></plist>")))?;
     sign(&app.join("Contents/MacOS/inkscape-mcp-manager"), &signing)?;
     sign(&app, &signing)?;

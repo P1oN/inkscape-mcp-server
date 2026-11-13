@@ -167,3 +167,9 @@ changing the drawing. See [usage and limits](docs/agent-usage-guide.md#closure-d
 Current sources also support [independent instructions/runtime updates](docs/install/independent-updates.md) through a
 permanent native launcher and macOS management app. Opt in once with
 `./setup.sh --independent-updates`; published v0.1.2 archives retain their original behavior.
+Current-source Manager checks compatible updates asynchronously on launch and reviews
+component changes before activation. Its installation review can repair a confirmed stale
+legacy binding and transfer an owned skill with private backups and preserving merges.
+The effective Codex profile/configuration is visible, including CODEX_HOME overrides.
+Unknown ownership is preserved. These fixes require a new distribution; they do not alter
+the already published v0.1.7. MCP startup/reconnect stays offline.

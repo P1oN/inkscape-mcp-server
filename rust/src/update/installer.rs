@@ -44,6 +44,12 @@ struct Prepared {
     id: String,
     changes: Vec<Change>,
     selector: Selector,
+    #[serde(default)]
+    observations: BTreeMap<PathBuf, Option<FileIdentity>>,
+    #[serde(default)]
+    skills: BTreeMap<PathBuf, BTreeMap<String, FileIdentity>>,
+    #[serde(default)]
+    missing_sources: Vec<PathBuf>,
 }
 fn present(path: &Path) -> bool {
     path.exists() || path.is_symlink()
@@ -57,6 +63,27 @@ fn optional(path: &Path) -> Result<Option<FileIdentity>> {
         return Err("installation destination must be a regular file".into());
     }
     Ok(Some(FileIdentity::of(&read(path, 128 * 1024 * 1024)?)))
+}
+fn verify_observations(plan: &Prepared) -> Result<()> {
+    for (path, expected) in &plan.observations {
+        if optional(path)? != *expected {
+            return Err("client configuration changed after review; prepare again".into());
+        }
+    }
+    for (path, expected) in &plan.skills {
+        let actual = if present(path) {
+            inventory(path, 16 * 1024 * 1024)?
+        } else {
+            BTreeMap::new()
+        };
+        if actual != *expected {
+            return Err("skill changed after review; prepare again".into());
+        }
+    }
+    if plan.missing_sources.iter().any(|p| present(p)) {
+        return Err("previous source reappeared after review; select and verify it".into());
+    }
+    Ok(())
 }
 fn ancestor(path: &Path) -> Result<()> {
     if !path.is_absolute()
@@ -168,7 +195,13 @@ pub fn inspect(root: &Path) -> Result<Value> {
     ancestor(root)?;
     let mut candidates = BTreeSet::new();
     let mut clients = Vec::new();
-    for crate::client_management::InstallationBinding { name, entry, .. } in bindings()? {
+    for crate::client_management::InstallationBinding {
+        name,
+        entry,
+        config,
+        skill,
+    } in bindings()?
+    {
         let (entry, error) = match entry {
             Ok(entry) => (entry, None),
             Err(error) => (None, Some(error)),
@@ -177,38 +210,15 @@ pub fn inspect(root: &Path) -> Result<Value> {
             .as_ref()
             .and_then(|e| e["command"].as_str())
             .map(PathBuf::from);
-        let candidate = command.as_ref().and_then(|p| {
-            if !p.is_absolute()
-                || entry.as_ref().is_some_and(|e| {
-                    e["args"].as_array().is_some_and(|a| !a.is_empty())
-                        || e["url"].as_str().is_some_and(|s| !s.is_empty())
-                })
-            {
-                return None;
-            }
-            if p.file_name().is_some_and(|n| n == "run-mcp.sh") {
-                let source = p.parent()?;
-                if ancestor(source).is_ok()
-                    && source.join(".inkscape-mcp-local/setup.conf").is_file()
-                {
-                    return Some(source.to_owned());
-                }
-            }
-            if p.file_name()
-                .is_some_and(|n| n == "inkscape-mcp-launcher" || n == "inkscape-mcp")
-                && p.parent()?.file_name().is_some_and(|n| n == "bin")
-            {
-                let source = p.parent()?.parent()?;
-                if ancestor(source).is_ok() && source.join("active.json").is_file() {
-                    return Some(source.to_owned());
-                }
-            }
-            None
-        });
+        let assessment = super::ownership::assess(root, entry.as_ref(), &skill);
+        let candidate = (assessment.status == "existing"
+            || assessment.status == "selected" && present(&root.join("active.json")))
+        .then(|| assessment.source.clone())
+        .flatten();
         if let Some(path) = &candidate {
             candidates.insert(path.clone());
         }
-        clients.push(json!({"name": name, "available":client_available(&name), "error":error, "configured": entry.is_some(), "candidate": candidate, "command_exists": command.as_ref().is_some_and(|p| p.is_file()), "foreign_binding": entry.is_some() && candidate.is_none()}));
+        clients.push(json!({"name": name, "profile":config.parent(), "config":config, "binding":assessment, "available":client_available(&name), "error":error, "configured": entry.is_some(), "candidate": candidate, "command_exists": command.as_ref().is_some_and(|p| p.is_file()), "foreign_binding": assessment.status == "uncertain"}));
     }
     let mut result = json!({"state":"not_installed","installation":root,"clients":clients,"candidates":candidates,"choice_required":candidates.len()>1,"recovery_required":present(&root.join("installation-journal.json")) || present(&root.join("transaction.json"))});
     let mut configured_engine = None;
@@ -379,7 +389,13 @@ fn add(
 }
 fn loaded(root: &Path, journal: &str) -> Result<(Prepared, PathBuf)> {
     let plan: Prepared = super::storage::json(&root.join(journal))?;
-    if plan.format != 1 || !identifier(&plan.id) || plan.changes.len() > 32 {
+    if plan.format != 1
+        || !identifier(&plan.id)
+        || plan.changes.len() > 32
+        || plan.observations.len() > 2
+        || plan.skills.len() > 2
+        || plan.missing_sources.len() > 2
+    {
         return Err("invalid installation journal".into());
     }
     let base = root.join("backups").join(&plan.id);
@@ -563,9 +579,27 @@ pub fn prepare(root: &Path, mut request: Request) -> Result<Value> {
     {
         return Err("package does not support the installation contract".into());
     }
+    let offline_metadata = request
+        .instructions
+        .parent()
+        .ok_or("missing bundled resource directory")?
+        .join("offline-components.json");
+    let distribution = if present(&offline_metadata) {
+        let offline: Value = super::storage::json(&offline_metadata)?;
+        if offline["runtime_build"] != metadata["build_info"]["build_id"] {
+            return Err("offline runtime metadata differs from the verified package".into());
+        }
+        offline["distribution"]
+            .as_str()
+            .filter(|tag| identifier(tag))
+            .ok_or("invalid offline distribution identity")?
+            .to_owned()
+    } else {
+        "bundled".into()
+    };
     let runtime = RuntimeManifest {
         format: 1,
-        distribution_tag: "bundled".into(),
+        distribution_tag: distribution.clone(),
         build_id: metadata["build_info"]["build_id"]
             .as_str()
             .ok_or("missing build")?
@@ -596,7 +630,7 @@ pub fn prepare(root: &Path, mut request: Request) -> Result<Value> {
         current: Pair {
             runtime,
             instructions: bundle.manifest,
-            tag: "bundled".into(),
+            tag: distribution,
         },
         previous: existing.as_ref().map(|s| s.current.clone()),
         channel: existing
@@ -621,6 +655,10 @@ pub fn prepare(root: &Path, mut request: Request) -> Result<Value> {
     mkdir(&base)?;
     let mut changes = Vec::new();
     let mut skipped_skills = Vec::new();
+    let mut observations = BTreeMap::new();
+    let mut skills = BTreeMap::new();
+    let mut missing_sources = Vec::new();
+    let mut recovery_actions = Vec::new();
     let launcher = root.join("bin/inkscape-mcp-launcher");
     let current = std::env::current_exe().map_err(|e| e.to_string())?;
     // Always our bundled executable, never the discovered legacy launcher.
@@ -669,6 +707,22 @@ pub fn prepare(root: &Path, mut request: Request) -> Result<Value> {
             continue;
         }
         let entry = entry?;
+        let config_before = optional(&config)?;
+        let before = if let Some(id) = &config_before {
+            String::from_utf8(read(&config, id.bytes)?)
+                .map_err(|_| "invalid client configuration encoding")?
+        } else {
+            String::new()
+        };
+        if crate::client_management::installation_entry(&name, &before)
+            .map_err(|_| "client configuration changed; review again")?
+            != entry
+        {
+            return Err("client configuration changed; review again".into());
+        }
+        observations.insert(config.clone(), config_before);
+        let assessment = super::ownership::assess(root, entry.as_ref(), &skill);
+        let stale = assessment.status == "stale";
         // Codex app and CLI share this profile. Registration is a preserving
         // config edit, so it does not require discovering or executing either
         // client (Finder launches commonly have no CLI on PATH).
@@ -677,37 +731,54 @@ pub fn prepare(root: &Path, mut request: Request) -> Result<Value> {
                 "{name} client is missing; install it before connecting"
             ));
         }
-        if entry.as_ref().is_some_and(|e| {
-            e["command"].as_str() != launcher.to_str()
-                && request
-                    .legacy_source
-                    .as_ref()
-                    .is_none_or(|s| e["command"].as_str() != s.join("run-mcp.sh").to_str())
-                || e["args"].as_array().is_some_and(|a| !a.is_empty())
-                || e["url"].as_str().is_some_and(|s| !s.is_empty())
-        }) {
-            return Err("client binding belongs to another installation; explicitly select its verified source or preserve it".into());
+        if entry.is_some()
+            && !stale
+            && assessment.status != "selected"
+            && !(assessment.status == "existing"
+                && request.legacy_source.as_ref() == assessment.source.as_ref())
+        {
+            return Err(format!(
+                "client binding belongs to another installation; {} Effective configuration: {}",
+                assessment.explanation,
+                config.display()
+            ));
         }
-        let before = if present(&config) {
-            String::from_utf8(read(&config, 4 * 1024 * 1024)?).map_err(|e| e.to_string())?
-        } else {
-            String::new()
-        };
+        if stale {
+            missing_sources.push(assessment.source.clone().unwrap());
+            recovery_actions.push(json!({"client":name,"config":config,"skill":skill,"previous_source":assessment.source,"action":"Back up the full configuration, replace the confirmed stale registration and transfer the managed skill using its preserved baseline."}));
+        }
         let after = crate::client_management::installation_registration(&name, &before, &launcher)
             .map_err(|e| e.to_string())?;
         add(root, &base, &mut changes, config, after.as_bytes(), false)?;
-        let owned = skill_owned(root, &skill, &settings)?;
+        let owned = stale || skill_owned(root, &skill, &settings)?;
+        if owned || !present(&skill) {
+            let skill_before = if present(&skill) {
+                inventory(&skill, 16 * 1024 * 1024)?
+            } else {
+                BTreeMap::new()
+            };
+            skills.insert(skill.clone(), skill_before);
+        }
         if present(&skill) && !owned {
             settings.skills.retain(|p| p != &skill);
             skipped_skills.push(skill);
         } else if owned {
+            copy_tree(
+                &skill,
+                &base.join(format!("skill-original-{}", changes.len())),
+                16 * 1024 * 1024,
+            )?;
+            let mut merge_settings = settings.clone();
+            if stale {
+                merge_settings.legacy_skill_owner = assessment.source.unwrap();
+            }
             let merged = transaction::prepare_skill(
                 root,
                 &base,
                 changes.len(),
                 &skill,
                 &selected.current,
-                &settings,
+                &merge_settings,
             )?;
             let staged = base.join(format!("new-{}", changes.len()));
             for file in [
@@ -805,10 +876,14 @@ pub fn prepare(root: &Path, mut request: Request) -> Result<Value> {
         id: id.clone(),
         changes,
         selector: selected,
+        observations,
+        skills,
+        missing_sources,
     };
+    verify_observations(&plan)?;
     write_json(&root.join("installation-prepared.json"), &plan)?;
     Ok(
-        json!({"state":"prepared","skipped_skills":skipped_skills,"preparation_id":id,"changes":plan.changes.iter().map(|c|&c.destination).collect::<Vec<_>>(),"installed":installation_report(root, &plan.selector)}),
+        json!({"state":"prepared","skipped_skills":skipped_skills,"recovery_actions":recovery_actions,"backup":base,"preparation_id":id,"changes":plan.changes.iter().map(|c|&c.destination).collect::<Vec<_>>(),"installed":installation_report(root, &plan.selector)}),
     )
 }
 fn apply_file(path: &Path, bytes: &[u8], mode: u32) -> Result<()> {
@@ -910,6 +985,7 @@ pub fn activate(root: &Path, id: &str) -> Result<Value> {
     if plan.id != id {
         return Err("prepared installation identity differs; prepare again".into());
     }
+    verify_observations(&plan)?;
     for c in &plan.changes {
         if optional(&c.destination)? != c.before {
             return Err("installation changed after preparation; prepare again".into());
@@ -929,6 +1005,7 @@ pub fn activate(root: &Path, id: &str) -> Result<Value> {
     super::progress::stage("probe", "Rechecking the prepared MCP connection…");
     doctor(root, &plan.selector.current, &settings)?;
     probe(root, &plan.selector.current, &settings)?;
+    verify_observations(&plan)?;
     if plan.changes.is_empty() {
         let mut result = installation_report(root, &plan.selector);
         result["changed"] = json!(false);
@@ -975,6 +1052,30 @@ pub fn activate(root: &Path, id: &str) -> Result<Value> {
 mod tests {
     use super::*;
     use crate::update::instructions::Instructions;
+    #[test]
+    fn review_observations_detect_unchanged_files_extra_skill_edits_and_returned_source() {
+        let (_temp, root, mut plan, _) = journal();
+        let config = root.join("config-fixture");
+        write(&config, b"private fixture").unwrap();
+        plan.observations
+            .insert(config.clone(), optional(&config).unwrap());
+        let skill = root.join("skill-fixture");
+        mkdir(&skill).unwrap();
+        write(&skill.join("extra"), b"user").unwrap();
+        plan.skills
+            .insert(skill.clone(), inventory(&skill, 16 * 1024 * 1024).unwrap());
+        let source = root.join("removed-source");
+        plan.missing_sources.push(source.clone());
+        verify_observations(&plan).unwrap();
+        write(&config, b"later private fixture").unwrap();
+        assert!(verify_observations(&plan).is_err());
+        write(&config, b"private fixture").unwrap();
+        write(&skill.join("extra"), b"later user").unwrap();
+        assert!(verify_observations(&plan).is_err());
+        write(&skill.join("extra"), b"user").unwrap();
+        mkdir(&source).unwrap();
+        assert!(verify_observations(&plan).is_err());
+    }
     #[test]
     fn recovery_checks_only_the_target_clients_configuration() {
         let make = || {
@@ -1144,6 +1245,9 @@ mod tests {
             id: "checkpoint".into(),
             changes,
             selector,
+            observations: BTreeMap::new(),
+            skills: BTreeMap::new(),
+            missing_sources: Vec::new(),
         };
         write_json(&root.join("installation-journal.json"), &plan).unwrap();
         (temp, root, plan, base)

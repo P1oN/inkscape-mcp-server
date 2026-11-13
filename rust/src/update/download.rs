@@ -118,6 +118,22 @@ pub fn discover(
     channel: &str,
     version: Option<&str>,
 ) -> Result<ReleaseManifest> {
+    discover_inner(transport, channel, version, None)
+}
+pub fn discover_compatible(
+    transport: &impl Transport,
+    channel: &str,
+    version: Option<&str>,
+    os_major: u32,
+) -> Result<ReleaseManifest> {
+    discover_inner(transport, channel, version, Some(os_major))
+}
+fn discover_inner(
+    transport: &impl Transport,
+    channel: &str,
+    version: Option<&str>,
+    os_major: Option<u32>,
+) -> Result<ReleaseManifest> {
     if !matches!(channel, "stable" | "prerelease") {
         return Err("channel must be stable or prerelease".into());
     }
@@ -159,6 +175,20 @@ pub fn discover(
                 .map_err(|e| format!("invalid update manifest: {e}"))?;
             if manifest.tag != tag || manifest.prerelease != prerelease {
                 return Err("release manifest identity/channel mismatch".into());
+            }
+            // Malformed identities/checksums are errors, never a reason to skip
+            // validation. A valid release requiring another target/interface can
+            // be skipped in automatic discovery, but explicit selection explains it.
+            if let Some(os_major) = os_major {
+                manifest.validate_metadata()?;
+                if let Err(error) =
+                    manifest.compatible(std::env::consts::OS, std::env::consts::ARCH, os_major)
+                {
+                    if version.is_some() {
+                        return Err(error);
+                    }
+                    continue;
+                }
             }
             return Ok(manifest);
         }

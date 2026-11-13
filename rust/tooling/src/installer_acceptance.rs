@@ -14,13 +14,23 @@ fn invoke(
     args: &[&str],
     request: Option<&Value>,
 ) -> Result<Value> {
+    invoke_profile(launcher, home, &home.join(".codex"), root, args, request)
+}
+fn invoke_profile(
+    launcher: &Path,
+    home: &Path,
+    codex: &Path,
+    root: &Path,
+    args: &[&str],
+    request: Option<&Value>,
+) -> Result<Value> {
     let mut command = Command::new(launcher);
     command
         .args(args)
         .args(["--install-dir", root.to_str().unwrap(), "--json"])
         .env_clear()
         .env("HOME", home)
-        .env("CODEX_HOME", home.join(".codex"))
+        .env("CODEX_HOME", codex)
         .env(
             "PATH",
             format!("{}:/usr/bin:/bin", home.join("bin").display()),
@@ -58,7 +68,7 @@ fn refuse(
         .ok_or("installation refusal unexpectedly succeeded")?;
     ensure(
         error.to_string().contains(expected),
-        "installation failed for an unrelated reason",
+        format!("installation did not refuse for the expected guard: {expected}"),
     )
 }
 fn custom_engine_acceptance(
@@ -212,6 +222,150 @@ fn custom_engine_acceptance(
             == json!(new.join(relative_engine)),
         "repaired engine is not visible on reopen",
     )
+}
+fn stale_binding_acceptance(launcher: &Path, output_dir: &Path, request: &Value) -> Result<()> {
+    let home = output_dir.join("stale-home");
+    let codex = home.join("nonstandard-codex-profile");
+    fs::create_dir_all(&codex)?;
+    let root = home.join("installation");
+    let source = home.join("Downloads/removed-installation");
+    fs::create_dir_all(source.parent().unwrap())?;
+    let skill = codex.join("skills/inkscape-mcp");
+    let files = instructions::default_files();
+    for name in ["SKILL.md", "agents/openai.yaml"] {
+        for path in [
+            skill.join(name),
+            skill.join(".inkscape-mcp-upstream").join(name),
+        ] {
+            fs::create_dir_all(path.parent().unwrap())?;
+            fs::write(path, &files[&format!("skills/inkscape-mcp/{name}")])?;
+        }
+    }
+    fs::write(skill.join(".inkscape-mcp-owner"), source.to_str().unwrap())?;
+    let mut local = fs::read(skill.join("SKILL.md"))?;
+    local.extend_from_slice(b"\nUser customization retained.\n");
+    fs::write(skill.join("SKILL.md"), &local)?;
+    fs::write(skill.join("extra.txt"), b"User addition retained.")?;
+    let before_skill = storage::inventory(&skill, 16 * 1024 * 1024)?;
+    let config = codex.join("config.toml");
+    let config_before = format!(
+        "# user comment\nmodel='fixture'\n[mcp_servers.other]\ncommand='/keep'\n[mcp_servers.inkscape]\ncommand={}\nargs=[]\nenv={{PRIVATE='secret-fixture-value'}}\n",
+        serde_json::to_string(source.join("run-mcp.sh").to_str().unwrap())?
+    );
+    fs::write(&config, &config_before)?;
+    let call = |args: &[&str], body: Option<&Value>| {
+        invoke_profile(launcher, &home, &codex, &root, args, body)
+    };
+    let inspection = call(&["install-inspect"], None)?;
+    ensure(
+        inspection["clients"][0]["config"] == json!(config)
+            && inspection["clients"][0]["binding"]["status"] == "stale",
+        "stale binding/profile not identified",
+    )?;
+    ensure(
+        !serde_json::to_string(&inspection)?.contains("secret-fixture-value"),
+        "inspection disclosed fixture secret",
+    )?;
+    let mut request = request.clone();
+    request["clients"] = json!(["codex"]);
+    let prepared = call(&["install-prepare"], Some(&request))?;
+    ensure(
+        prepared["recovery_actions"]
+            .as_array()
+            .is_some_and(|a| a.len() == 1),
+        "stale repair missing from Review",
+    )?;
+    ensure(
+        fs::read_to_string(&config)? == config_before
+            && storage::inventory(&skill, 16 * 1024 * 1024)? == before_skill
+            && !root.join("active.json").exists(),
+        "Review changed config or skill",
+    )?;
+    let id = prepared["preparation_id"].as_str().unwrap();
+    fs::write(skill.join("extra.txt"), b"Later user change")?;
+    ensure(
+        call(&["install-activate", "--preparation", id], None).is_err(),
+        "activation erased post-review extra-file edit",
+    )?;
+    fs::write(skill.join("extra.txt"), b"User addition retained.")?;
+    let plan = json(&root.join("installation-prepared.json"))?;
+    let changes = plan["changes"].as_array().unwrap();
+    let base = root.join("backups").join(id);
+    // New ownership transfer participates in the same durable compensation as
+    // registration publication, including every partial publication boundary.
+    for boundary in 0..=changes.len() {
+        write_json(&root.join("installation-journal.json"), &plan)?;
+        for (i, change) in changes.iter().enumerate().take(boundary) {
+            let destination = Path::new(change["destination"].as_str().unwrap());
+            fs::create_dir_all(destination.parent().unwrap())?;
+            fs::copy(base.join(format!("after-{i}")), destination)?;
+            use std::os::unix::fs::PermissionsExt;
+            fs::set_permissions(
+                destination,
+                fs::Permissions::from_mode(change["mode"].as_u64().unwrap() as u32),
+            )?;
+        }
+        call(&["install-recover"], None)?;
+        ensure(
+            call(&["install-recover"], None)?["changed"] == false,
+            "stale recovery is not idempotent",
+        )?;
+        ensure(
+            fs::read_to_string(&config)? == config_before
+                && storage::inventory(&skill, 16 * 1024 * 1024)? == before_skill,
+            "stale compensation lost private config or skill",
+        )?;
+    }
+    call(&["install-activate", "--preparation", id], None)?;
+    let installed = fs::read_to_string(&config)?;
+    ensure(
+        installed.contains("PRIVATE = 'secret-fixture-value'")
+            || installed.contains("PRIVATE='secret-fixture-value'"),
+        "registration lost environment",
+    )?;
+    ensure(
+        installed.contains("# user comment")
+            && installed.contains("/keep")
+            && fs::read(skill.join("SKILL.md"))? == local
+            && fs::read(skill.join("extra.txt"))? == b"User addition retained."
+            && fs::read_to_string(skill.join(".inkscape-mcp-owner"))? == root.to_str().unwrap(),
+        "adoption lost preferences or skill customization",
+    )?;
+    ensure(
+        !home.join(".codex").exists(),
+        "installer ignored nonstandard CODEX_HOME",
+    )?;
+    let settings = storage::json(&root.join("settings.json"))?;
+    inkscape_mcp_rust::update::install::probe(
+        &root,
+        &inkscape_mcp_rust::update::install::selector(&root)?.current,
+        &settings,
+    )?;
+    // Compare discovery with the current checked-in contract, never a historical
+    // tool count. The permanent installed launcher serves all these requests.
+    let mut command = Command::new(root.join("bin/inkscape-mcp-launcher"));
+    command
+        .env_clear()
+        .env("HOME", &home)
+        .env("CODEX_HOME", &codex)
+        .env("PATH", "/usr/bin:/bin");
+    let mut wire = crate::wire::Wire::spawn(&mut command, &home.join("installed-mcp.stderr.log"))?;
+    wire.initialize()?;
+    let tools = wire.request("tools/list", Some(json!({})))?;
+    let reference: Value = serde_json::from_str(include_str!(
+        "../../../migration/contracts/live-true_raw-false_full_full.json"
+    ))?;
+    ensure(
+        tools["result"] == reference["tools/list"],
+        "installed launcher discovery differs from the current contract",
+    )?;
+    let workspace = wire.call("get_workspace_info", json!({}))?;
+    ensure(
+        workspace["result"]["isError"] != true && workspace["result"].is_object(),
+        "installed workspace request failed",
+    )?;
+    wire.save_trace(&home.join("installed-mcp.trace.json"))?;
+    Ok(())
 }
 fn legacy_acceptance(
     launcher: &Path,
@@ -784,6 +938,7 @@ pub fn run(args: &Args) -> Result<()> {
     )?;
     legacy_acceptance(&launcher, &output_dir, &request, &inkscape)?;
     custom_engine_acceptance(&launcher, &output_dir, &request, &inkscape)?;
+    stale_binding_acceptance(&launcher, &output_dir, &request)?;
     let report = json!({"passed":true,"custom_engine_reused":true,"missing_engine_picker_repair":true,"publication_boundaries":changes.len()+1,"fresh_clients":["codex","claude"],"client_profiles":"synthetic","mcp_doctor_stdio":"real native package","native_gui":false,"installed_user_runtime_changed":false,"missing_client_exercised":missing_client_exercised,"failed_probe_exercised":failed_probe_exercised,"ownership_refusal_exercised":ownership_refusal_exercised,"foreign_binding_refused":true,"skill_conflict_preserved":true,"legacy_custom_root_migration":true,"component_recovery":true,"multi_root_inspection_preserved":true,"no_op_preserves_rollback":true,"build_info":json(&inkscape_mcp_rust::runtime_layout::library(&package).join("package.json"))?["build_info"],"results":["read-only discovery","unknown request, symlink workspace and overlap refused","foreign binding refused","skill conflict preserves selection/customization","multiple legacy candidates require choice","legacy migration into custom root","preparation preserves bindings","every file boundary recovers twice","fresh activation","byte-bound bootstrap discovery","component recovery through Manager operation","preferences/comments","customized/removed skills","equal-content instruction version upgrade","no-op activation preserves rollback history","retry","saved channel","original drawing preservation"]});
     // Ensure the final selector is verified independently of GUI status labels.
     let settings = storage::json(&root.join("settings.json"))?;

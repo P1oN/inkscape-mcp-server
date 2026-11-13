@@ -98,13 +98,45 @@ exit; automatic background replacement remains out of scope.
 Open `Inkscape MCP Manager.app` inside the permanent installation from Finder. It shows
 installed runtime/revision, instruction and launcher versions; choose an update channel and
 check available versions, update instructions/runtime/both, or roll back. Use **Choose
-installation** for an isolated/custom directory. Opening it only reads offline status.
+installation** for an isolated/custom directory. Current-source Manager also checks
+GitHub asynchronously on each launch, with a 20-second overall deadline. Local setup
+stays available offline. This check reads release metadata only; it never installs,
+activates or recovers anything. MCP startup/reconnect remains offline.
 The app calls fixed CLI commands with JSON results; all download, merge, compatibility,
 transaction and recovery logic stays in Rust. Update failures and reconnect/reload requests
 are displayed in the window. It does not launch Inkscape or restart clients.
 
-The application is ad-hoc signed, not Developer ID signed or notarized. Native management
-window acceptance is separate from Inkscape drawing/Undo acceptance and clean-machine use.
+Checks use the selected stable/prerelease channel, validated release contracts and actual
+installed component identities. Before installation is complete, they use sealed offline
+runtime/text metadata without requiring settings.json. Numeric release ordering prevents
+an older release being offered over a newer installed distribution. A different unpublished
+build can still be offered when its distribution has no comparable version.
+Manual **Check updates** remains available before installation. A first-launch offer
+explains that the offline installation must be completed before applying an online update.
+**Review update**, **Instructions only** and **Runtime only** show the verified component
+plan before **Update now**. Activation pins the release and rejects a changed review
+identity. Checks coalesce; changing choices/root/channel or starting review/activation
+invalidates an outstanding reply.
+
+Published v0.1.7 is Developer ID signed/notarized; local development apps use ad-hoc
+signatures. Native management-window acceptance is separate from automated AppKit checks,
+Inkscape drawing/Undo acceptance and clean-machine use.
+
+The client card displays the effective Codex profile and config.toml, honoring CODEX_HOME.
+An existing other installation is offered as an explicit source selection. A removed legacy
+source is eligible for recovery only when its exact registration, matching skill owner and
+known upstream baseline agree. Known baselines are compiled project skill bytes or a fully
+validated staged instruction bundle. A similar path name alone, an unknown baseline or an
+unverified skill is preserved; deselect that client or reconcile its configuration manually.
+Discovered launchers are never executed to establish ownership.
+
+**Review installation** lists a confirmed stale-registration repair and managed-skill
+transfer with its private backup directory. Only **Install now** publishes them. The
+transaction retains the full original config and skill (including baseline/additions), uses
+the existing three-way merge/conflict refusal, and rechecks config/whole-skill identities
+and source absence before activation. Later edits or a reappearing source require a new
+review. Interrupted publication restores the old config and skill owner together; unrelated
+settings, environment values, registrations and artwork stay preserved.
 
 ## Recovery and preservation
 
