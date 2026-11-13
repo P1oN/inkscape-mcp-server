@@ -109,7 +109,7 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
         BOOL selected=[client[@"name"] isEqualToString:@"codex"] ? self.codex.state==NSControlStateValueOn : self.claude.state==NSControlStateValueOn;
         if(selected && [client[@"error"] isKindOfClass:NSString.class])hint=client[@"error"];
         else if(selected && [client[@"name"] isEqualToString:@"claude"] && ![client[@"available"] boolValue])hint=@"Claude Code was not found. Install it before connecting, or deselect it.";
-        if(selected && [client[@"name"] isEqualToString:@"codex"] && client[@"config"]){hint=[NSString stringWithFormat:@"Codex profile: %@\nConfiguration: %@\n%@",client[@"profile"],client[@"config"],client[@"error"] ?: client[@"binding"][@"explanation"] ?: hint];}
+        if(selected && [client[@"name"] isEqualToString:@"codex"] && client[@"config"]){NSString *explanation=[client[@"error"] isKindOfClass:NSString.class] ? client[@"error"] : client[@"binding"][@"explanation"];hint=[NSString stringWithFormat:@"Codex profile: %@\nConfiguration: %@\n%@",client[@"profile"],client[@"config"],explanation ?: hint];}
     }
     self.clientHint.stringValue=hint;
 }

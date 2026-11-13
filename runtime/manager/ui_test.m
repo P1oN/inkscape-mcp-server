@@ -21,6 +21,8 @@ int main(void) {@autoreleasepool {
     require(manager.codex.state==NSControlStateValueOn && manager.skills.state==NSControlStateValueOn,@"default registration changed");
     require(!manager.installButton.enabled && !manager.checkButton.hidden && manager.checkButton.enabled && !manager.rollbackButton.enabled,@"fresh install cannot check bundled updates");
     require(manager.checksStarted==1,@"first inspection does not check updates");
+    [manager applyInspection:@{@"state":@"not_installed",@"clients":@[@{@"name":@"codex",@"error":NSNull.null,@"profile":@"/owned/custom-codex",@"config":@"/owned/custom-codex/config.toml",@"binding":@{@"explanation":@"Confirmed stale source; review recovery."}}],@"candidates":@[]}];
+    require([manager.clientHint.stringValue containsString:@"Confirmed stale source"] && [manager.clientHint.stringValue containsString:@"/owned/custom-codex/config.toml"],@"JSON null suppresses ownership guidance or effective profile");
     require(manager.advancedCard.hidden && manager.recoverButton.hidden && manager.cancelButton.hidden,@"fresh setup starts cluttered");
     NSDictionary *installed=@{@"distribution":@"v-test",@"runtime_build":@"runtime-test",@"instructions_version":@"text-test",@"launcher_build":@"launcher-test",@"launcher_version":@1,@"rollback_available":@YES,@"channel":@"prerelease"};
     [manager applyInspection:@{@"state":@"installed",@"installed":installed,@"workspace":@"/owned/drawings",@"inkscape":@"/Applications/Inkscape.app/Contents/MacOS/inkscape",@"candidates":@[],@"clients":@[@{@"name":@"claude",@"available":@NO}]}];

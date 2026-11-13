@@ -69,6 +69,11 @@ The second pass also found channel changes routing the primary action into offli
 All five were addressed with dedicated regression coverage. The final independent pass
 found no remaining blocking findings and independently passed strict Clang syntax and
 diff whitespace checks. It did not perform interactive GUI acceptance.
+GitHub review additionally identified a JSON-null error suppressing the Codex binding
+explanation. The UI now selects only string errors; a producer-shaped AppKit fixture
+covers the null response and displayed effective configuration. This subsequent UI-only
+change is checked by the native automated fixture; the recorded MCP/package evidence
+above remains tied to its stated build.
 
 ## Scope and retention
 
