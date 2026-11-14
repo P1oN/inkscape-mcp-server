@@ -31,11 +31,11 @@ pub struct Request {
 }
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
-struct Change {
-    destination: PathBuf,
-    before: Option<FileIdentity>,
-    after: FileIdentity,
-    mode: u32,
+pub(super) struct Change {
+    pub(super) destination: PathBuf,
+    pub(super) before: Option<FileIdentity>,
+    pub(super) after: FileIdentity,
+    pub(super) mode: u32,
 }
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -54,7 +54,7 @@ struct Prepared {
 fn present(path: &Path) -> bool {
     path.exists() || path.is_symlink()
 }
-fn optional(path: &Path) -> Result<Option<FileIdentity>> {
+pub(super) fn optional(path: &Path) -> Result<Option<FileIdentity>> {
     if !present(path) {
         return Ok(None);
     }
@@ -220,7 +220,12 @@ pub fn inspect(root: &Path) -> Result<Value> {
         }
         clients.push(json!({"name": name, "profile":config.parent(), "config":config, "binding":assessment, "available":client_available(&name), "error":error, "configured": entry.is_some(), "candidate": candidate, "command_exists": command.as_ref().is_some_and(|p| p.is_file()), "foreign_binding": assessment.status == "uncertain"}));
     }
-    let mut result = json!({"state":"not_installed","installation":root,"clients":clients,"candidates":candidates,"choice_required":candidates.len()>1,"recovery_required":present(&root.join("installation-journal.json")) || present(&root.join("transaction.json"))});
+    let mut result = json!({"state":"not_installed","installation":root,"clients":clients,"candidates":candidates,"choice_required":candidates.len()>1,"recovery_required":present(&root.join("installation-journal.json")) || present(&root.join("transaction.json")) || present(&root.join("manager-journal.json"))});
+    if let Ok(outcome) = super::storage::json::<Value>(&root.join("manager-outcome.json"))
+        && let Some(error) = outcome["error"].as_str()
+    {
+        result["manager_update_error"] = json!(error);
+    }
     let mut configured_engine = None;
     if present(&root.join("active.json")) {
         match selector(root).and_then(|s| {
@@ -339,7 +344,7 @@ fn binding_allowed(
     }
     Ok(false)
 }
-fn add(
+pub(super) fn add(
     root: &Path,
     base: &Path,
     changes: &mut Vec<Change>,
@@ -886,7 +891,7 @@ pub fn prepare(root: &Path, mut request: Request) -> Result<Value> {
         json!({"state":"prepared","skipped_skills":skipped_skills,"recovery_actions":recovery_actions,"backup":base,"preparation_id":id,"changes":plan.changes.iter().map(|c|&c.destination).collect::<Vec<_>>(),"installed":installation_report(root, &plan.selector)}),
     )
 }
-fn apply_file(path: &Path, bytes: &[u8], mode: u32) -> Result<()> {
+pub(super) fn apply_file(path: &Path, bytes: &[u8], mode: u32) -> Result<()> {
     mkdir(path.parent().ok_or("missing destination parent")?)?;
     use std::io::Write;
     use std::os::unix::fs::PermissionsExt;
@@ -937,7 +942,8 @@ fn recover_locked(root: &Path) -> Result<bool> {
 }
 pub fn recover(root: &Path) -> Result<Value> {
     let _lock = Lock::acquire(root)?;
-    let mut changed = recover_locked(root)?;
+    let mut changed = super::manager_app::recover_online(root)?;
+    changed |= recover_locked(root)?;
     if present(&root.join("transaction.json")) {
         let settings: Settings = super::storage::json(&root.join("settings.json"))?;
         settings.validate()?;
@@ -947,7 +953,8 @@ pub fn recover(root: &Path) -> Result<Value> {
 }
 /// Called under the launch/update lock before reading the active selector.
 pub fn recover_before_launch(root: &Path) -> Result<bool> {
-    recover_locked(root)
+    let changed = super::manager_app::recover_online(root)?;
+    Ok(recover_locked(root)? || changed)
 }
 /// Restore the last wizard upgrade only while all changed destinations still match.
 /// Later client/skill edits are preserved and require manual reconciliation.

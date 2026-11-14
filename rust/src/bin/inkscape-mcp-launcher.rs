@@ -9,7 +9,7 @@ use inkscape_mcp_rust::update::{
 };
 use serde_json::{Value, json};
 use std::{env, path::PathBuf};
-const HELP: &str = "inkscape-mcp — permanent MCP launcher and updater\n\nNo arguments: start MCP (offline; JSON-RPC only on stdout).\n  update --check            Show installed and available versions (read-only)\n  update --instructions     Update server text and merge managed skills\n  update --runtime          Update the complete compatible runtime\n  update                    Update a compatible runtime/instruction pair\n  rollback                  Restore the preceding pair and owned skill state\n  disconnect --client NAME  Remove an owned Codex/Claude binding (runtime-independent)\n  uninstall                 Disconnect owned clients and archive the installation/skills\n  --version                 Show selected runtime/text/launcher identity\n  install-inspect           Read installation and client discovery\n  install-prepare           Prepare a bounded installation request from stdin JSON\n  install-activate --preparation ID  Activate the reviewed prepared installation\n  install-recover           Recover interrupted installation changes\n  manager-prepare           Stage the bundled per-user Manager application\n  manager-activate --preparation ID --parent-pid PID  Replace after Manager exits\n  migrate --source DIR      Migrate a configured source/ready installation once\n\nOptions: --install-dir DIR (isolated installation), --channel stable|prerelease,\n         --release TAG (explicit immutable release), --json (structured result).\nDefault channel: stable. Prereleases require --channel prerelease.\nReconnect clients after activation; running MCP/Inkscape sessions retain their helpers.\nExit codes: 0 success/no update, 1 failed operation, 2 invalid arguments. Never prompts.\nAdd INSTALL_DIR/bin to PATH, or use its absolute inkscape-mcp path.";
+const HELP: &str = "inkscape-mcp — permanent MCP launcher and updater\n\nNo arguments: start MCP (offline; JSON-RPC only on stdout).\n  update --check            Show installed and available versions (read-only)\n  update --instructions     Update server text and merge managed skills\n  update --runtime          Update the complete compatible runtime\n  update                    Update a compatible runtime/instruction pair\n  rollback                  Restore the preceding pair and owned skill state\n  disconnect --client NAME  Remove an owned Codex/Claude binding (runtime-independent)\n  uninstall                 Disconnect owned clients and archive the installation/skills\n  --version                 Show selected runtime/text/launcher identity\n  install-inspect           Read installation and client discovery\n  install-prepare           Prepare a bounded installation request from stdin JSON\n  install-activate --preparation ID  Activate the reviewed prepared installation\n  install-recover           Recover interrupted installation changes\n  manager-online-check      Read eligible Manager metadata independently\n  manager-online-prepare    Download/verify a Manager for explicit Review\n  manager-online-activate   Internal reviewed restart handoff (retained helper only)\n  manager-prepare           Stage the bundled per-user Manager application\n  manager-activate --preparation ID --parent-pid PID  Replace after Manager exits\n  migrate --source DIR      Migrate a configured source/ready installation once\n\nOptions: --install-dir DIR (isolated installation), --channel stable|prerelease,\n         --release TAG (explicit immutable release), --json (structured result).\nDefault channel: stable. Prereleases require --channel prerelease.\nReconnect clients after activation; running MCP/Inkscape sessions retain their helpers.\nExit codes: 0 success/no update, 1 failed operation, 2 invalid arguments. Never prompts.\nAdd INSTALL_DIR/bin to PATH, or use its absolute inkscape-mcp path.";
 struct Options {
     client: Option<String>,
     action: String,
@@ -117,6 +117,10 @@ fn parse() -> Result<Options> {
             | "manager-prepare"
             | "manager-activate"
             | "manager-check"
+            | "manager-online-check"
+            | "manager-online-prepare"
+            | "manager-online-activate"
+            | "bootstrap-info"
     ) || !options.root.is_absolute()
         || options
             .channel
@@ -132,7 +136,11 @@ fn parse() -> Result<Options> {
         ) && options.source.is_some()
         || !matches!(
             options.action.as_str(),
-            "update" | "migrate" | "manager-check"
+            "update"
+                | "migrate"
+                | "manager-check"
+                | "manager-online-check"
+                | "manager-online-prepare"
         ) && options.channel.is_some()
     {
         return Err("option does not apply to this command".into());
@@ -140,12 +148,17 @@ fn parse() -> Result<Options> {
     if options.preparation.is_some()
         && !matches!(
             options.action.as_str(),
-            "install-activate" | "manager-activate" | "update"
+            "install-activate" | "manager-activate" | "manager-online-activate" | "update"
         )
     {
         return Err("--preparation only applies to install-activate".into());
     }
-    if options.parent_pid.is_some() && options.action != "manager-activate" {
+    if options.parent_pid.is_some()
+        && !matches!(
+            options.action.as_str(),
+            "manager-activate" | "manager-online-activate"
+        )
+    {
         return Err("--parent-pid only applies to manager-activate".into());
     }
     Ok(options)
@@ -167,6 +180,12 @@ fn run(options: &Options) -> Result<Value> {
     let root = &options.root;
     use inkscape_mcp_rust::update::installer;
     match options.action.as_str() {
+        "bootstrap-info" => {
+            let path = std::env::current_exe().map_err(|e| e.to_string())?;
+            return Ok(
+                json!({"bootstrap":bootstrap_identity(&inkscape_mcp_rust::update::instructions::read(&path,128*1024*1024)?),"launcher_version":LAUNCHER_VERSION,"text_interface":TEXT_INTERFACE,"helper_protocol":HELPER_PROTOCOL}),
+            );
+        }
         "manager-check" => {
             return manager::check_bundled(
                 root,
@@ -174,10 +193,43 @@ fn run(options: &Options) -> Result<Value> {
                 options
                     .source
                     .as_deref()
-                    .ok_or("bundled resources are required")?,
+                    .ok_or("bundled resources required")?,
                 options.channel.as_deref().unwrap_or("stable"),
                 os_major()?,
             );
+        }
+        "manager-online-check" => {
+            return inkscape_mcp_rust::update::manager_release::check(
+                &inkscape_mcp_rust::update::manager_app::current_app()?,
+                &Https::new()?,
+                options.channel.as_deref().unwrap_or("stable"),
+                os_major()?,
+            );
+        }
+        "manager-online-prepare" => {
+            return inkscape_mcp_rust::update::manager_app::prepare_online(
+                root,
+                &Https::new()?,
+                options.channel.as_deref().unwrap_or("stable"),
+                os_major()?,
+            );
+        }
+        "manager-online-activate" => {
+            let result = inkscape_mcp_rust::update::manager_app::activate_online(
+                root,
+                options
+                    .preparation
+                    .as_deref()
+                    .ok_or("Manager review required")?,
+                options.parent_pid.ok_or("Manager parent required")?,
+            );
+            // Retain a concrete result even after the UI exits or its pipe closes.
+            let status = match &result {
+                Ok(value) => value.clone(),
+                Err(error) => json!({"error":error}),
+            };
+            write_json(&root.join("manager-outcome.json"), &status)?;
+            return result;
         }
         "manager-prepare" => return inkscape_mcp_rust::update::manager_app::prepare(root),
         "manager-activate" => {

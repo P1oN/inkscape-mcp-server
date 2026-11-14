@@ -95,6 +95,13 @@ exit; automatic background replacement remains out of scope.
 
 ## Graphical management
 
+Manager itself now has a separate **Review Manager update…** action followed by explicit
+**Update Manager and restart**. Its asynchronous check works even when runtime discovery
+requires a newer launcher or settings.json does not exist. The signed app/bootstrap plan,
+profile-preserving restart and interruption recovery are described in
+[reviewed Manager updates](manager-self-update.md). Historical manifests remain unchanged.
+
+
 Open `Inkscape MCP Manager.app` inside the permanent installation from Finder. It shows
 installed runtime/revision, instruction and launcher versions; choose an update channel and
 check available versions, update instructions/runtime/both, or roll back. Use **Choose

@@ -24,6 +24,7 @@ const ASSETS: &[&str] = &[
     "inkscape-mcp-instructions.tar.gz.sha256",
     "inkscape-mcp-launcher.tar.gz.sha256",
     "inkscape-mcp-source-bootstrap.tar.gz.sha256",
+    "inkscape-mcp-manager-update-v1.json",
 ];
 fn require(ok: bool, message: impl Into<String>) -> Result<()> {
     if ok {
@@ -127,6 +128,23 @@ fn validate(root: &Path, expected_team: &str) -> Result<Value> {
     let e = load(root, "distribution-evidence.json")?;
     let a = load(root, "FINAL-ACCEPTANCE.json")?;
     let m = load(root, "inkscape-mcp-update.json")?;
+    let manager = load(root, "inkscape-mcp-manager-update-v1.json")?;
+    require(
+        manager["format"] == 1
+            && manager["tag"] == c["tag"]
+            && manager["prerelease"] == c["prerelease"]
+            && manager["publisher"] == expected_team
+            && manager["bundle_identifier"] == "org.inkscape-mcp.manager"
+            && manager["os"] == "macos"
+            && manager["architecture"] == "aarch64"
+            && manager["asset"] == m["launcher_asset"]
+            && manager["manager_revision"] == c["source_revision"]
+            && manager["bootstrap"]["build_id"] == c["package_build"]["build_id"]
+            && manager["bootstrap"]["source_revision"] == c["package_build"]["revision"]
+            && manager["files"]["Contents/Helpers/inkscape-mcp-launcher"]
+                == manager["bootstrap"]["executable"],
+        "Manager manifest identity/final archive differs",
+    )?;
     require(
         c["format"] == 1 && hex(string(&c, "/source_revision")?, 40),
         "Invalid candidate provenance",
@@ -313,6 +331,7 @@ fn record(root: &Path, expected_team: &str) -> Result<()> {
     let c = load(root, "CANDIDATE.json")?;
     for name in [
         "package/acceptance.json",
+        "manager-update/report.json",
         "installer/report.json",
         "updates/report.json",
         "launcher-startup/comparison.json",

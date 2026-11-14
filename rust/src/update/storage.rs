@@ -71,8 +71,24 @@ impl Lock {
     pub fn acquire_wait(root: &Path, timeout: Duration) -> Result<Self> {
         guarded(root)?;
         let path = root.join("update.lock");
+        Self::at(&path, timeout)
+    }
+    pub(super) fn manager(parent: &Path) -> Result<Self> {
+        super::manager_app::destination_parent(parent)?;
+        Self::at(&parent.join(".inkscape-mcp-manager.lock"), Duration::ZERO)
+    }
+    fn at(path: &Path, timeout: Duration) -> Result<Self> {
         if path.exists() || path.is_symlink() {
-            guarded(&path)?;
+            // /Applications itself is specially checked by manager(); the lock
+            // still must be a private regular file owned by this user.
+            #[cfg(unix)]
+            {
+                use std::os::unix::fs::MetadataExt;
+                let m = fs::symlink_metadata(path).map_err(|e| e.to_string())?;
+                if !m.is_file() || m.uid() != unsafe { libc::geteuid() } || m.mode() & 0o077 != 0 {
+                    return Err("unsafe update lock".into());
+                }
+            }
         }
         let mut options = fs::OpenOptions::new();
         options.read(true).write(true).create(true);
@@ -81,7 +97,7 @@ impl Lock {
             use std::os::unix::fs::OpenOptionsExt;
             options.mode(0o600).custom_flags(libc::O_NOFOLLOW);
         }
-        let file = options.open(&path).map_err(|e| e.to_string())?;
+        let file = options.open(path).map_err(|e| e.to_string())?;
         #[cfg(unix)]
         {
             use std::os::fd::AsRawFd;

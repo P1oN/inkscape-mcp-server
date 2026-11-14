@@ -49,6 +49,7 @@ impl Fixture {
         self.write("CANDIDATE.json", &self.c);
         self.write("distribution-evidence.json", &self.e);
         self.write("inkscape-mcp-update.json", &self.m);
+        self.write("inkscape-mcp-manager-update-v1.json",&json!({"format":1,"tag":self.c["tag"],"prerelease":self.c["prerelease"],"publisher":TEAM,"bundle_identifier":"org.inkscape-mcp.manager","os":"macos","architecture":"aarch64","asset":self.m["launcher_asset"],"manager_revision":self.c["source_revision"],"bootstrap":{"build_id":self.c["package_build"]["build_id"],"source_revision":self.c["package_build"]["revision"],"executable":{"bytes":12,"sha256":"b".repeat(64)}},"files":{"Contents/Helpers/inkscape-mcp-launcher":{"bytes":12,"sha256":"b".repeat(64)}}}));
         for name in ASSETS.iter().filter(|n| n.ends_with(".sha256")) {
             let original = name.strip_suffix(".sha256").unwrap();
             fs::write(
@@ -216,6 +217,11 @@ fn immutable_reference_and_distinct_manager() {
     e["runtime_reference"] = f.m["runtime"].clone();
     f.write("CANDIDATE.json", &c);
     f.write("distribution-evidence.json", &e);
+    let mut manager = load(f.root(), "inkscape-mcp-manager-update-v1.json").unwrap();
+    manager["manager_revision"] = c["source_revision"].clone();
+    manager["bootstrap"]["build_id"] = c["package_build"]["build_id"].clone();
+    manager["bootstrap"]["source_revision"] = c["package_build"]["revision"].clone();
+    f.write("inkscape-mcp-manager-update-v1.json", &manager);
     f.receipt();
     assert!(validate(f.root(), TEAM).is_ok());
 }
@@ -234,6 +240,7 @@ fn recording_refuses_incomplete_gates_without_replacing_receipt() {
     let startup = json!({"passed":true,"sessions":128,"completed":128,"parallel":4,"binary_sha256":digest(&helper).unwrap()});
     for (name, v) in [
         ("package/acceptance.json", json!({"passed":true})),
+        ("manager-update/report.json", json!({"passed":true})),
         ("installer/report.json", installer.clone()),
         (
             "updates/report.json",

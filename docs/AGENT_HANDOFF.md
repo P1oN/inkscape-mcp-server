@@ -1,5 +1,22 @@
 # Agent handoff — current status
 
+## Reviewed Manager self-update — 2026-11-14
+
+Issue [#63](https://github.com/P1oN/inkscape-mcp-server/issues/63) is implemented in an isolated
+worktree from `origin/main` (`1b1b8f3`). Manager discovery is separate from component checks,
+uses its own backward-compatible immutable-release asset and does not need settings.json.
+Verified staging, precise Review and an explicit **Update Manager and restart** confirmation
+feed the existing Manager replacement/backup journal and installer file machinery.
+Application and installation locks, a pre-exit readiness handshake and actual startup
+acknowledgment protect coordinated app/bootstrap replacement. Runtime/text, complete
+profiles/skills and existing sessions remain selected and intact.
+
+See the [update contract and recovery guide](install/manager-self-update.md) and
+[validation report](history/reports/manager-self-update-2026-11-14.md). Automated/native
+checks and independent final-diff review are recorded there with their actual scope.
+Interactive product GUI, notarized final-byte/Gatekeeper and another-Mac qualification
+remain separate; no release/tag or real user installation/profile/session is changed.
+
 ## Manager recovery and launch checks — 2026-11-13
 
 Issue [#61](https://github.com/P1oN/inkscape-mcp-server/issues/61) adds evidence-based

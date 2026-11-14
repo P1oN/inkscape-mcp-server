@@ -1,5 +1,8 @@
 # History and acceptance evidence
 
+- [Reviewed Manager self-update, 2026-11-14](reports/manager-self-update-2026-11-14.md):
+  isolated implementation, independent review and automated/native acceptance scope.
+
 This is the single index for narrative history. Records retain their checkpoint scope:
 “current”, “next”, “uncommitted”, counts, commands and package paths describe their original
 builds. Use [current status](../AGENT_HANDOFF.md), [active backlog](../RUST_NEXT_PLAN.md) and
