@@ -8,7 +8,9 @@ uses its own backward-compatible immutable-release asset and does not need setti
 Verified staging, precise Review and an explicit **Update Manager and restart** confirmation
 feed the existing Manager replacement/backup journal and installer file machinery.
 Application and installation locks, a pre-exit readiness handshake and actual startup
-acknowledgment protect coordinated app/bootstrap replacement. Runtime/text, complete
+acknowledgment with an atomic matching commit record protect coordinated app/bootstrap
+replacement. Directory-inode locks coordinate the actual app destination; damaged baseline
+installations can upgrade Manager with an explicit repair warning. Runtime/text, complete
 profiles/skills and existing sessions remain selected and intact.
 
 See the [update contract and recovery guide](install/manager-self-update.md) and

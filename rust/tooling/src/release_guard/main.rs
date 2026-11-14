@@ -137,6 +137,10 @@ fn validate(root: &Path, expected_team: &str) -> Result<Value> {
             && manager["bundle_identifier"] == "org.inkscape-mcp.manager"
             && manager["os"] == "macos"
             && manager["architecture"] == "aarch64"
+            && manager["component_format"].as_u64().is_some_and(|n| n > 0)
+            && manager["text_interface"].as_u64().is_some_and(|n| n > 0)
+            && manager["helper_protocol"].as_u64().is_some_and(|n| n > 0)
+            && manager["launcher_version"].as_u64().is_some_and(|n| n >= 2)
             && manager["asset"] == m["launcher_asset"]
             && manager["manager_revision"] == c["source_revision"]
             && manager["bootstrap"]["build_id"] == c["package_build"]["build_id"]
@@ -341,6 +345,31 @@ fn record(root: &Path, expected_team: &str) -> Result<()> {
             "Native acceptance failed",
         )?;
     }
+    let manager = load(root, "inkscape-mcp-manager-update-v1.json")?;
+    let tested = load(&root.join("acceptance"), "manager-update/report.json")?;
+    require(
+        string(&tested, "/manifest_sha256")?
+            == digest(&root.join("inkscape-mcp-manager-update-v1.json"))?,
+        "Manager manifest changed after acceptance",
+    )?;
+    for key in ["manager_build", "bootstrap"] {
+        require(
+            at(&tested, &format!("/{key}"))? == at(&manager, &format!("/{key}"))?,
+            format!("Manager acceptance tested different {key}"),
+        )?;
+    }
+    let asset = at(&manager, "/asset")?;
+    require(
+        at(&tested, "/archive")? == asset,
+        "Manager acceptance tested a different archive",
+    )?;
+    let name = string(asset, "/name")?;
+    require(ASSETS.contains(&name), "Unexpected Manager archive")?;
+    require(
+        digest(&root.join(name))? == string(asset, "/sha256")?
+            && json!(regular(&root.join(name))?.len()) == *at(asset, "/bytes")?,
+        "Manager archive changed after acceptance",
+    )?;
     require(
         load(&root.join("acceptance"), "updates/report.json")?["runtime_exercised"] == true,
         "Distinct-runtime activation required",

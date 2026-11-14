@@ -60,6 +60,9 @@ int main(void) {@autoreleasepool {
     require(manager.managerOffer!=nil && manager.managerUpdateButton.enabled,@"incomplete/damaged runtime hides independent Manager offer");
     [manager applyCheck:nil error:@"launcher upgrade required" generation:manager.generation installation:manager.installation channel:manager.channel.indexOfSelectedItem];
     require(manager.managerOffer!=nil && manager.managerUpdateButton.enabled,@"runtime compatibility failure hides Manager update");
+    manager.recoveryRequired=NO;
+    [manager applyCheck:nil error:@"launcher upgrade required" generation:manager.generation installation:manager.installation channel:manager.channel.indexOfSelectedItem];
+    require(manager.managerOffer!=nil && manager.managerUpdateButton.enabled && [manager.available.stringValue containsString:@"launcher upgrade required"],@"accepted runtime compatibility failure hides Manager update");
     [manager updateManager:nil];require([manager.lastArguments.firstObject isEqual:@"manager-online-prepare"],@"Manager action bypasses verified staging");
     NSUInteger oldGeneration=manager.generation;[manager invalidateCheck];
     [manager applyManagerCheck:managerUpdate error:nil generation:oldGeneration installation:manager.installation channel:manager.channel.indexOfSelectedItem];require(manager.managerOffer==nil,@"stale Manager offer accepted after review/context invalidation");

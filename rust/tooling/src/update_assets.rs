@@ -180,6 +180,10 @@ pub fn manager(args: &Args) -> Result<()> {
             .as_u64()
             .ok_or("launcher version missing")?
             .try_into()?,
+        component_format: compiled["component_format"]
+            .as_u64()
+            .ok_or("component format missing")?
+            .try_into()?,
         text_interface: compiled["text_interface"]
             .as_u64()
             .ok_or("text interface missing")?
@@ -215,12 +219,12 @@ pub fn manager(args: &Args) -> Result<()> {
 }
 
 pub fn verify_manager(args: &Args) -> Result<()> {
-    use inkscape_mcp_rust::update::{
-        download, manager_release as r, manifests::FileIdentity, storage,
-    };
+    use inkscape_mcp_rust::update::{download, manager_release as r, manifests::FileIdentity};
     args.check(&["--directory", "--output"])?;
     let root = args.required("--directory")?.canonicalize()?;
-    let manifest: r::Manifest = storage::json(&root.join(r::ASSET))?;
+    let manifest_bytes =
+        inkscape_mcp_rust::update::instructions::read(&root.join(r::ASSET), 2 * 1024 * 1024)?;
+    let manifest: r::Manifest = serde_json::from_slice(&manifest_bytes)?;
     manifest.validate()?;
     let archive = root.join(&manifest.asset.name);
     ensure(
@@ -252,7 +256,7 @@ pub fn verify_manager(args: &Args) -> Result<()> {
     std::fs::create_dir_all(&output)?;
     write_json(
         &output.join("report.json"),
-        &serde_json::json!({"passed":true,"archive":manifest.asset,"manager_build":manifest.manager_build,"bootstrap":manifest.bootstrap}),
+        &serde_json::json!({"passed":true,"manifest_sha256":FileIdentity::of(&manifest_bytes).sha256,"archive":manifest.asset,"manager_build":manifest.manager_build,"bootstrap":manifest.bootstrap}),
     )?;
     Ok(())
 }

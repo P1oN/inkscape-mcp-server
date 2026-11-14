@@ -183,7 +183,7 @@ fn run(options: &Options) -> Result<Value> {
         "bootstrap-info" => {
             let path = std::env::current_exe().map_err(|e| e.to_string())?;
             return Ok(
-                json!({"bootstrap":bootstrap_identity(&inkscape_mcp_rust::update::instructions::read(&path,128*1024*1024)?),"launcher_version":LAUNCHER_VERSION,"text_interface":TEXT_INTERFACE,"helper_protocol":HELPER_PROTOCOL}),
+                json!({"bootstrap":bootstrap_identity(&inkscape_mcp_rust::update::instructions::read(&path,128*1024*1024)?),"launcher_version":LAUNCHER_VERSION,"component_format":FORMAT,"text_interface":TEXT_INTERFACE,"helper_protocol":HELPER_PROTOCOL}),
             );
         }
         "manager-check" => {

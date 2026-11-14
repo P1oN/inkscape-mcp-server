@@ -64,6 +64,7 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
 @property NSString *legacySource;
 @property NSString *preparation;
 @property NSString *state;
+@property NSString *pendingRuntimeWarning;
 @property NSTask *running;
 @property BOOL hasInstallation;
 @property BOOL recoveryRequired;
@@ -406,14 +407,15 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
             NSMutableString *precise=[NSMutableString stringWithFormat:@"%@\nInstalled bootstrap: %@\nTarget bootstrap: %@ · %@ · SHA-256 %@\n",review.informativeText,oldBootstrap,target[@"bootstrap"][@"build_id"],target[@"bootstrap"][@"source_revision"],target[@"bootstrap"][@"executable"][@"sha256"]];
             for(NSDictionary *change in result[@"bootstrap_changes"]){NSDictionary *from=change[@"from"];[precise appendFormat:@"\n%@\n%@ → %@",change[@"destination"],[from isKindOfClass:NSDictionary.class] ? from[@"sha256"] : @"absent",change[@"to"][@"sha256"]];}
             if(![result[@"bootstrap_changes"] count])[precise appendString:@"Bootstrap: kept. Only Manager changes."];
-            [precise appendFormat:@"\nManager source: %@ → %@\nTarget launcher compatibility: %@; text interface: %@; helper protocol: %@\nChannel: %@",result[@"installed_manager"][@"InkscapeMCPRevision"] ?: @"unknown",target[@"manager_revision"],target[@"launcher_version"],target[@"text_interface"],target[@"helper_protocol"],[target[@"prerelease"] boolValue] ? @"prerelease" : @"stable"];
+            [precise appendFormat:@"\nManager source: %@ → %@\nTarget launcher compatibility: %@; text interface: %@; helper protocol: %@; component/settings format: %@\nChannel: %@",result[@"installed_manager"][@"InkscapeMCPRevision"] ?: @"unknown",target[@"manager_revision"],target[@"launcher_version"],target[@"text_interface"],target[@"helper_protocol"],target[@"component_format"],[target[@"prerelease"] boolValue] ? @"prerelease" : @"stable"];
+            [precise appendString:[result[@"baseline_healthy"] boolValue] ? @"\nMCP baseline: verified before this update." : @"\nThe existing MCP installation is unverified or incomplete. This updates Manager while retaining that state; review the installation separately if needed."];
             review.informativeText=precise;
             [review addButtonWithTitle:@"Update Manager and restart"];[review addButtonWithTitle:@"Cancel"];
             if([review runModal]!=NSAlertFirstButtonReturn){[self setPhase:@"ready" message:@"Manager update cancelled. The verified candidate is retained; no installed files changed."];return;}
             [self beginManagerActivation:result];return;
         }
         if([arguments containsObject:@"manager-prepare"]){
-            if([result[@"manager_ready"] boolValue]){[self inspect];return;}
+            if([result[@"manager_ready"] boolValue]){self.pendingRuntimeWarning=[result[@"runtime_warning"] isKindOfClass:NSString.class] ? result[@"runtime_warning"] : nil;[self inspect];return;}
             NSAlert *review=[NSAlert new];review.messageText=[result[@"replaces_existing_manager"] boolValue] ? @"Upgrade the Manager application?" : @"Install the Manager application?";
             review.informativeText=[NSString stringWithFormat:@"The verified application will be installed at %@ and reopened there. Existing runtime settings and drawings are preserved. A running destination Manager must be closed first.",result[@"manager_application"]];
             [review addButtonWithTitle:@"Install and reopen"];[review addButtonWithTitle:@"Cancel"];
@@ -461,6 +463,7 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
     else if(self.recoveryRequired)message=@"An interrupted installation needs recovery. Choose Recover / retry.";
     else if([result[@"state"] isEqualToString:@"damaged"])message=@"This installation could not be verified. Recover it or select another installation in Advanced.";
     else if([result[@"choice_required"] boolValue] && !self.legacySource){message=@"Multiple installations were found. Choose the one to upgrade in Advanced.";self.advancedButton.state=NSControlStateValueOn;self.advancedCard.hidden=NO;}
+    if(self.pendingRuntimeWarning){message=self.pendingRuntimeWarning;self.pendingRuntimeWarning=nil;}
     if([result[@"manager_update_error"] isKindOfClass:NSString.class])message=[NSString stringWithFormat:@"Manager update: %@",result[@"manager_update_error"]];
     [self setPhase:self.recoveryRequired || [result[@"state"] isEqualToString:@"damaged"] ? @"damaged" : result[@"state"] ?: @"not_installed" message:message];
     if(!self.startupChecked){NSString *saved=[[NSUserDefaults standardUserDefaults] stringForKey:@"UpdateChannel"] ?: [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedUpdateChannel"];if(saved)[self.channel selectItemAtIndex:[saved isEqualToString:@"stable"] ? 0 : 1];self.startupChecked=YES;}[self startUpdateCheck];

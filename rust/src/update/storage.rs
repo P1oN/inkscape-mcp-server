@@ -75,12 +75,33 @@ impl Lock {
     }
     pub(super) fn manager(parent: &Path) -> Result<Self> {
         super::manager_app::destination_parent(parent)?;
-        Self::at(&parent.join(".inkscape-mcp-manager.lock"), Duration::ZERO)
+        // Lock the existing directory inode, not a private file in the shared
+        // /Applications directory. Different administrators can open it without
+        // changing permissions; no unlink/recreate can split the lock inode.
+        let mut options = fs::OpenOptions::new();
+        options.read(true);
+        #[cfg(unix)]
+        {
+            use std::os::unix::fs::OpenOptionsExt;
+            options.custom_flags(libc::O_NOFOLLOW | libc::O_DIRECTORY);
+        }
+        let file = options.open(parent).map_err(|e| e.to_string())?;
+        let lock = Self::from_file(file, Duration::ZERO)?;
+        super::manager_app::destination_parent(parent)?;
+        #[cfg(unix)]
+        {
+            use std::os::unix::fs::MetadataExt;
+            let opened = lock.0.metadata().map_err(|e| e.to_string())?;
+            let current = fs::symlink_metadata(parent).map_err(|e| e.to_string())?;
+            if !opened.is_dir() || opened.dev() != current.dev() || opened.ino() != current.ino() {
+                return Err("Manager destination parent changed while locking".into());
+            }
+        }
+        Ok(lock)
     }
     fn at(path: &Path, timeout: Duration) -> Result<Self> {
         if path.exists() || path.is_symlink() {
-            // /Applications itself is specially checked by manager(); the lock
-            // still must be a private regular file owned by this user.
+            // Installation locks remain private regular files owned by this user.
             #[cfg(unix)]
             {
                 use std::os::unix::fs::MetadataExt;
@@ -98,6 +119,9 @@ impl Lock {
             options.mode(0o600).custom_flags(libc::O_NOFOLLOW);
         }
         let file = options.open(path).map_err(|e| e.to_string())?;
+        Self::from_file(file, timeout)
+    }
+    fn from_file(file: fs::File, timeout: Duration) -> Result<Self> {
         #[cfg(unix)]
         {
             use std::os::fd::AsRawFd;
@@ -129,6 +153,46 @@ impl Drop for Lock {
                 libc::flock(self.0.as_raw_fd(), libc::LOCK_UN);
             }
         }
+    }
+}
+#[cfg(all(test, unix))]
+mod directory_lock_tests {
+    use super::*;
+    #[test]
+    fn parent_directory_lock_contends_across_processes_and_preopened_descriptors() {
+        const KEY: &str = "INKSCAPE_MCP_DIRECTORY_LOCK_CHILD";
+        if let Some(parent) = std::env::var_os(KEY) {
+            assert!(Lock::manager(Path::new(&parent)).is_err());
+            return;
+        }
+        let temp = tempfile::tempdir().unwrap();
+        let parent = temp.path().canonicalize().unwrap();
+        let lock = Lock::manager(&parent).unwrap();
+        let previously_opened = fs::File::open(&parent).unwrap();
+        assert!(Lock::from_file(fs::File::open(&parent).unwrap(), Duration::ZERO).is_err());
+        let mut child = std::process::Command::new(std::env::current_exe().unwrap())
+            .args(["--exact", "update::storage::directory_lock_tests::parent_directory_lock_contends_across_processes_and_preopened_descriptors"])
+            .env(KEY, &parent)
+            .spawn().unwrap();
+        let deadline = Instant::now() + Duration::from_secs(10);
+        loop {
+            if let Some(status) = child.try_wait().unwrap() {
+                assert!(status.success());
+                break;
+            }
+            if Instant::now() >= deadline {
+                let _ = child.kill();
+                let _ = child.wait();
+                panic!("owned directory-lock child timed out");
+            }
+            std::thread::sleep(Duration::from_millis(10));
+        }
+        drop(lock);
+        let lock = Lock::from_file(previously_opened, Duration::ZERO).unwrap();
+        assert!(Lock::manager(&parent).is_err());
+        assert_eq!(fs::read_dir(&parent).unwrap().count(), 0);
+        drop(lock);
+        Lock::manager(&parent).unwrap();
     }
 }
 pub fn managed_relative(s: &str) -> bool {

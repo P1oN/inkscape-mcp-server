@@ -30,6 +30,7 @@ pub struct Manifest {
     pub manager_revision: String,
     pub bootstrap: super::install::BootstrapIdentity,
     pub launcher_version: u32,
+    pub component_format: u32,
     pub text_interface: u32,
     pub helper_protocol: u32,
     pub asset: Asset,
@@ -47,6 +48,7 @@ impl Manifest {
             || !identifier(&self.bootstrap.build_id)
             || !identifier(&self.bootstrap.source_revision)
             || self.launcher_version < 2
+            || self.component_format == 0
             || self.text_interface == 0
             || self.helper_protocol == 0
             || self.minimum_os_major < 15
@@ -89,8 +91,8 @@ impl Manifest {
             && major >= self.minimum_os_major
     }
     pub fn preserves_pair(&self, pair: &super::install::Pair) -> Result<()> {
-        if pair.runtime.format != FORMAT
-            || pair.instructions.format != FORMAT
+        if pair.runtime.format != self.component_format
+            || pair.instructions.format != self.component_format
             || pair.runtime.text_interface != self.text_interface
             || pair.instructions.text_interface != self.text_interface
             || pair.runtime.helper_protocol != self.helper_protocol
@@ -105,7 +107,12 @@ impl Manifest {
 
 /// No filesystem mutation, runtime compatibility filtering or settings dependency.
 pub fn discover(transport: &impl Transport, channel: &str, major: u32) -> Result<Option<Manifest>> {
-    discover_inner(transport, channel, major, None)
+    discover_inner(
+        transport,
+        channel,
+        (std::env::consts::OS, std::env::consts::ARCH, major),
+        None,
+    )
 }
 pub fn discover_newer(
     transport: &impl Transport,
@@ -113,12 +120,17 @@ pub fn discover_newer(
     major: u32,
     installed: &BTreeMap<String, String>,
 ) -> Result<Option<Manifest>> {
-    discover_inner(transport, channel, major, Some(installed))
+    discover_inner(
+        transport,
+        channel,
+        (std::env::consts::OS, std::env::consts::ARCH, major),
+        Some(installed),
+    )
 }
 fn discover_inner(
     transport: &impl Transport,
     channel: &str,
-    major: u32,
+    target: (&str, &str, u32),
     installed: Option<&BTreeMap<String, String>>,
 ) -> Result<Option<Manifest>> {
     if !matches!(channel, "stable" | "prerelease") {
@@ -153,7 +165,7 @@ fn discover_inner(
             if manifest.tag != tag || manifest.prerelease != prerelease {
                 return Err("Manager manifest release/channel mismatch".into());
             }
-            if manifest.compatible(std::env::consts::OS, std::env::consts::ARCH, major)
+            if manifest.compatible(target.0, target.1, target.2)
                 && installed.is_none_or(|baseline| eligible(&manifest, baseline))
             {
                 return Ok(Some(manifest));
@@ -237,7 +249,8 @@ pub fn verify(app: &Path, manifest: &Manifest) -> Result<()> {
     )
     .map_err(|_| "Manager signature verification failed".to_string())?;
     let actual = bootstrap_info(&app.join(HELPER))?;
-    if actual["text_interface"] != manifest.text_interface
+    if actual["component_format"] != manifest.component_format
+        || actual["text_interface"] != manifest.text_interface
         || actual["helper_protocol"] != manifest.helper_protocol
         || actual["bootstrap"]
             != serde_json::to_value(&manifest.bootstrap).map_err(|e| e.to_string())?
@@ -281,6 +294,7 @@ pub(super) fn fixture_manifest() -> Manifest {
             executable: helper.clone(),
         },
         launcher_version: 3,
+        component_format: FORMAT,
         text_interface: TEXT_INTERFACE,
         helper_protocol: HELPER_PROTOCOL,
         asset: Asset {
@@ -298,6 +312,18 @@ pub(super) fn fixture_manifest() -> Manifest {
 mod tests {
     use super::*;
     use std::cell::RefCell;
+    // Discovery fixtures describe the supported macOS target on every test host.
+    fn discover(t: &impl Transport, channel: &str, major: u32) -> Result<Option<Manifest>> {
+        discover_inner(t, channel, ("macos", "aarch64", major), None)
+    }
+    fn discover_newer(
+        t: &impl Transport,
+        channel: &str,
+        major: u32,
+        installed: &BTreeMap<String, String>,
+    ) -> Result<Option<Manifest>> {
+        discover_inner(t, channel, ("macos", "aarch64", major), Some(installed))
+    }
     struct Network {
         manifests: Vec<Manifest>,
         calls: RefCell<Vec<String>>,
@@ -338,6 +364,7 @@ mod tests {
         app
     }
     #[test]
+    #[cfg(all(target_os = "macos", target_arch = "aarch64"))]
     fn independent_discovery_ignores_incompatible_runtime_and_never_creates_settings() {
         let temp = tempfile::tempdir().unwrap();
         let root = temp.path().canonicalize().unwrap();

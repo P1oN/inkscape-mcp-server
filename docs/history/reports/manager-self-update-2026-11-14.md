@@ -14,7 +14,7 @@ files remain untouched. No release or tag is created.
   drive eligibility; an older latest publication cannot hide another eligible build.
 - Verified staging checks complete archive/inventory, bundle identity and trusted Developer
   ID Team `DN263AX69U` before a downloaded helper's isolated identity probe. Target text,
-  helper and launcher compatibility must preserve both current and rollback pairs before
+  helper, launcher and component/settings/selector format compatibility must preserve both current and rollback pairs before
   readiness/publication. Missing settings is not a dependency.
 - Review shows installed/target identities, destination, exact bootstrap changes and hashes,
   publisher, channel, compatibility and restart requirement. Explicit confirmation is
@@ -37,7 +37,7 @@ See [the operational contract](../../install/manager-self-update.md).
 Rust 1.99.0, current macOS Apple Silicon host, existing Inkscape CLI 1.4.3. Checks use
 synthetic profiles and owned output only:
 
-- Both locked Cargo graphs: 378 runtime tests passed (three opt-in ignored), 30 tooling tests
+- Both locked Cargo graphs: 381 runtime tests passed (three opt-in ignored), 30 tooling tests
   passed (one opt-in ignored), formatting and all-target Clippy with warnings denied.
   Runtime tests run serially locally because short subprocess deadlines are sensitive to
   concurrent compilation. The earlier complete suite passed. One final attempt alongside
@@ -68,18 +68,22 @@ synthetic profiles and owned output only:
 The locally qualified release package records source base `1b1b8f3` plus the unpublished
 working-tree build ID `be2265bb2a3dc3f7`; its DMG SHA-256 is
 `04b7f5305f634e2887ce8bfa716dc7d18766783f71bd73863ca09a5c15b0119b`.
-These local artifacts are not the subsequently committed/hosted CI final bytes.
+These local artifacts are not the subsequently committed/hosted CI final bytes. Final guard
+changes were additionally built as `90441ea2b0b8c269` from `229d4bf` plus the unpublished
+working tree and exercised by the native replacement fixture; matching six executables
+and their complete dSYM bundles are retained separately.
 
 ## Owned Developer ID native replacement
 
 The opt-in `native_signed_manager_replacement_restart_and_recovery` fixture passed in
-81.67 seconds with real Developer ID signatures from the trusted publisher. It signs only
+106.28 seconds on the final local build `90441ea2b0b8c269` with real Developer ID signatures from the trusted publisher. It signs only
 owned synthetic apps/helpers, not a new distribution. The signing subprocess uses the
 explicitly selected existing identity; app/profile operations use a separate HOME,
 CFFIXED_USER_HOME and nonstandard CODEX_HOME.
 
 The fixture exercises verified staging, coordinated bootstrap and Manager-only replacement,
-fresh/prepared-runtime/damaged roots without settings, competing running Managers, a failed
+fresh/prepared-runtime/damaged roots without settings, parseable but already unhealthy settings
+with a visible repair warning, actual-destination lock contention, competing running Managers, a failed
 restart followed by complete rollback and retry, actual Launch Services reopen and actual
 startup acknowledgment. It checks restored HOME/CODEX_HOME, installation and selected channel;
 complete synthetic secrets/configuration/custom conflicting skill bytes and runtime/selector/
@@ -100,14 +104,19 @@ record and subsequent passing logs remain retained. Native stream/process waits 
 A separate agent, uninvolved in writing the changes, reviewed the complete implementation
 and new fixtures repeatedly. Justified findings were corrected: later dangling links,
 pre-exit competitor checks, exact bootstrap Review, cross-volume staging, target compatibility,
-full stage durability, a publisher test that reaches verification and bounded native harness
-reads. Final re-review found no remaining actionable findings. This is static agent review;
+full stage durability, exact component/settings formats, old-actor versus target probe gating,
+a matching atomic acknowledgment, a publisher test that reaches verification and bounded native harness
+reads. Hosted review also identified actual-destination recovery locking, shared-admin
+directory locks, reopening after publication failure, nonblocking UTF-8 accumulation, portable
+discovery fixtures and exact final manifest/archive acceptance binding; all were corrected.
+Final re-review found no remaining actionable findings. This is static agent review;
 hosted required checks/review-thread resolution and merge status belong to the linked PR.
 
 Still unverified: interactive product Manager Review/confirmation GUI; a browser-downloaded,
 notarized final distribution and real Gatekeeper/offline first-open behavior; native
 `/Applications` administrator/permission interaction and cross-volume acceptance on another
-mounted filesystem; another Mac; app/bootstrap power-loss/media/ENOSPC qualification; a real
+mounted filesystem; two effective administrator users or network filesystems; another Mac;
+app/bootstrap power-loss/media/ENOSPC qualification; a real
 published Manager manifest served through GitHub (no release was authorized). Developer ID
 synthetic fixtures do not qualify those release gates. Existing user installations, profiles,
 skills, artwork, application sessions and system protection settings are unchanged.

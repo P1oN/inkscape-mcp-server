@@ -49,7 +49,7 @@ impl Fixture {
         self.write("CANDIDATE.json", &self.c);
         self.write("distribution-evidence.json", &self.e);
         self.write("inkscape-mcp-update.json", &self.m);
-        self.write("inkscape-mcp-manager-update-v1.json",&json!({"format":1,"tag":self.c["tag"],"prerelease":self.c["prerelease"],"publisher":TEAM,"bundle_identifier":"org.inkscape-mcp.manager","os":"macos","architecture":"aarch64","asset":self.m["launcher_asset"],"manager_revision":self.c["source_revision"],"bootstrap":{"build_id":self.c["package_build"]["build_id"],"source_revision":self.c["package_build"]["revision"],"executable":{"bytes":12,"sha256":"b".repeat(64)}},"files":{"Contents/Helpers/inkscape-mcp-launcher":{"bytes":12,"sha256":"b".repeat(64)}}}));
+        self.write("inkscape-mcp-manager-update-v1.json",&json!({"format":1,"component_format":1,"text_interface":1,"helper_protocol":5,"launcher_version":2,"tag":self.c["tag"],"prerelease":self.c["prerelease"],"publisher":TEAM,"bundle_identifier":"org.inkscape-mcp.manager","os":"macos","architecture":"aarch64","asset":self.m["launcher_asset"],"manager_build":"native-fixture","manager_revision":self.c["source_revision"],"bootstrap":{"build_id":self.c["package_build"]["build_id"],"source_revision":self.c["package_build"]["revision"],"executable":{"bytes":12,"sha256":"b".repeat(64)}},"files":{"Contents/Helpers/inkscape-mcp-launcher":{"bytes":12,"sha256":"b".repeat(64)}}}));
         for name in ASSETS.iter().filter(|n| n.ends_with(".sha256")) {
             let original = name.strip_suffix(".sha256").unwrap();
             fs::write(
@@ -238,9 +238,11 @@ fn recording_refuses_incomplete_gates_without_replacing_receipt() {
         installer[*gate] = json!(true);
     }
     let startup = json!({"passed":true,"sessions":128,"completed":128,"parallel":4,"binary_sha256":digest(&helper).unwrap()});
+    let manager = load(f.root(), "inkscape-mcp-manager-update-v1.json").unwrap();
+    let report = json!({"passed":true,"manifest_sha256":digest(&f.root().join("inkscape-mcp-manager-update-v1.json")).unwrap(),"archive":manager["asset"],"manager_build":manager["manager_build"],"bootstrap":manager["bootstrap"]});
     for (name, v) in [
         ("package/acceptance.json", json!({"passed":true})),
-        ("manager-update/report.json", json!({"passed":true})),
+        ("manager-update/report.json", report.clone()),
         ("installer/report.json", installer.clone()),
         (
             "updates/report.json",
@@ -255,6 +257,35 @@ fn recording_refuses_incomplete_gates_without_replacing_receipt() {
     record(f.root(), TEAM).unwrap();
     validate(f.root(), TEAM).unwrap();
     let old = fs::read(f.root().join("FINAL-ACCEPTANCE.json")).unwrap();
+    for key in ["archive", "manager_build", "bootstrap"] {
+        let mut changed = report.clone();
+        changed[key] = json!("different");
+        f.write("acceptance/manager-update/report.json", &changed);
+        assert!(record(f.root(), TEAM).is_err());
+        assert_eq!(
+            fs::read(f.root().join("FINAL-ACCEPTANCE.json")).unwrap(),
+            old
+        );
+    }
+    f.write("acceptance/manager-update/report.json", &report);
+    let mut altered_manifest = manager.clone();
+    altered_manifest["helper_protocol"] = json!(999);
+    f.write("inkscape-mcp-manager-update-v1.json", &altered_manifest);
+    assert!(record(f.root(), TEAM).is_err());
+    assert_eq!(
+        fs::read(f.root().join("FINAL-ACCEPTANCE.json")).unwrap(),
+        old
+    );
+    f.write("inkscape-mcp-manager-update-v1.json", &manager);
+    let archive = f.root().join("inkscape-mcp-launcher.tar.gz");
+    let bytes = fs::read(&archive).unwrap();
+    fs::write(&archive, b"changed after acceptance").unwrap();
+    assert!(record(f.root(), TEAM).is_err());
+    assert_eq!(
+        fs::read(f.root().join("FINAL-ACCEPTANCE.json")).unwrap(),
+        old
+    );
+    fs::write(&archive, bytes).unwrap();
     for (key, v) in [
         ("passed", json!(false)),
         ("completed", json!(127)),

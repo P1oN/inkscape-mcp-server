@@ -24,7 +24,8 @@ A system installation requires existing write permission; the updater reports a 
 failure and never escalates, changes system permissions or creates a competing installation.
 The app is staged beside its destination, including when the selected MCP root is on another
 volume. Application-wide and installation locks serialize different Manager instances and
-installation roots. Another process using the destination refuses activation before the
+installation roots. The app lock uses the validated destination directory inode, opened
+read-only, so it does not leave a private lock file in shared /Applications. Another process using the destination refuses activation before the
 confirming window exits; it is checked again after that instance exits. Nothing kills another
 Manager, client, Inkscape, or an existing MCP session.
 
@@ -38,7 +39,7 @@ archive remains `inkscape-mcp-launcher.tar.gz` with its existing top-level
 The Manager contract binds the immutable release tag/channel, macOS/aarch64 target and minimum
 OS, bundle ID `org.inkscape-mcp.manager`, trusted Developer ID Team `DN263AX69U`, native Manager
 build/source revision, separately measured bootstrap build/revision/length/SHA-256/compatibility,
-supported text/helper interfaces, archive identity and complete app file inventory. Native Manager build identity comes from
+supported component/settings/selector format and text/helper interfaces, archive identity and complete app file inventory. Native Manager build identity comes from
 its sealed Info.plist; it is not the Rust runtime or bootstrap build ID. The bootstrap's
 `bootstrap-info` command reads its own compiled identity without requiring settings or
 starting MCP. Release tooling verifies the publisher before invoking it with a cleared
@@ -52,13 +53,14 @@ entry/decompression guards, exact inventories and bundle/helper/Developer ID ver
 Ad-hoc development apps cannot opt into production trust. The complete prepared plan is
 hashed for Review; changed metadata, app bytes, bootstrap, profile or installation selection
 requires another review. The verified target bootstrap must support both retained current
-and rollback component contracts before readiness/publication; incompatible candidates refuse
+and rollback component contracts and saved selector/settings format before readiness/publication; incompatible candidates refuse
 without selecting other runtime/text. Activation uses the retained **current** helper, never an unchecked
 new helper. Signature verification precedes any downloaded bootstrap identity probe.
 
 The signed preparation path builds the separate manifest after final signing/stapling and
 archive creation. `verify-manager-update` re-extracts and verifies those final bytes before
-recording signed acceptance. Its report is a required gate. Runtime-only historical references
+recording signed acceptance bound to the full manifest SHA-256 and archive/build/bootstrap
+identities. Its report is a required gate. Runtime-only historical references
 remain distinct from the current Manager/bootstrap and the legacy manifest remains unchanged.
 
 ## Publication, restart and recovery
@@ -78,12 +80,19 @@ installation lock it journals the complete app/bootstrap plan, backs up the old 
 the new app, then publishes the two bootstrap executables and identity using the installer's
 existing durable file/backup machinery. This is a compensating transaction across locations,
 **not** an atomic multi-location rename. Existing sessions keep their original runtime/helper
-paths. A healthy retained runtime receives signer-bound verification and a real MCP probe.
+paths. Preparation records whether the existing runtime/settings pass a real MCP health probe.
+Review labels an incomplete or already damaged baseline explicitly. The old coordinator skips
+a probe it cannot support; the verified target checks the installation during startup.
+A previously healthy baseline must pass again before acknowledgment. An already broken
+baseline can complete the Manager update with a visible verification/repair message, preserving
+its runtime, settings and skills.
 
 Launch Services success alone does not commit activation. The new Manager's bundled helper
 verifies the published app and bootstrap, repairs a partially published bootstrap only when
 all identities still match old/new journal values, and acknowledges actual startup. Only then
-is `manager-last.json` written and `manager-journal.json` retired. A failed restart restores the
+is `manager-journal.json` atomically renamed to `manager-last.json` as the commit decision.
+The coordinator requires the complete matching reviewed record; journal disappearance after
+an offline rollback is never mistaken for successful startup. A failed restart restores the
 old app/bootstrap when the target is idle; a running unacknowledged Manager is preserved with
 concrete instructions. `manager-outcome.json` carries failures back into the next inspection.
 Backups, stages and helper paths remain available; no live executable is garbage-collected.

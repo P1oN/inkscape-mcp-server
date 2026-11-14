@@ -36,6 +36,7 @@ struct Online {
     observations: BTreeMap<PathBuf, Option<FileIdentity>>,
     bootstrap: Vec<installer::Change>,
     helper: FileIdentity,
+    baseline_healthy: bool,
 }
 fn parent() -> Result<PathBuf> {
     Ok(PathBuf::from(std::env::var_os("HOME").ok_or("HOME missing")?).join("Applications"))
@@ -83,7 +84,7 @@ fn profile() -> Result<BTreeMap<String, PathBuf>> {
     Ok(values)
 }
 fn observations(root: &Path) -> Result<BTreeMap<PathBuf, Option<FileIdentity>>> {
-    ["active.json", "settings.json"]
+    ["active.json", "settings.json", "manager-last.json"]
         .into_iter()
         .map(|name| {
             let path = root.join(name);
@@ -114,6 +115,80 @@ fn no_other_transaction(root: &Path) -> Result<()> {
         }
     }
     Ok(())
+}
+fn verify_last(root: &Path) -> Result<()> {
+    if present(&root.join("manager-last.json")) {
+        load(root, "manager-last.json")?;
+    }
+    Ok(())
+}
+fn commit_manager_journal(root: &Path) -> Result<()> {
+    verify_last(root)?;
+    // A single rename is the commit decision. Never leave a new success record
+    // beside a still-recoverable journal after a process/power interruption.
+    fs::rename(
+        root.join("manager-journal.json"),
+        root.join("manager-last.json"),
+    )
+    .map_err(|e| e.to_string())?;
+    sync_dir(root)
+}
+fn acknowledged(root: &Path, review: &str) -> bool {
+    json::<Plan>(&root.join("manager-last.json"))
+        .ok()
+        .and_then(|p| serde_json::to_vec(&p).ok())
+        .is_some_and(|bytes| FileIdentity::of(&bytes).sha256 == review)
+}
+fn actor_supports(pair: &super::install::Pair) -> bool {
+    pair.runtime.format == FORMAT
+        && pair.instructions.format == FORMAT
+        && pair.runtime.text_interface == TEXT_INTERFACE
+        && pair.instructions.text_interface == TEXT_INTERFACE
+        && pair.runtime.helper_protocol == HELPER_PROTOCOL
+        && pair.runtime.launcher_minimum <= LAUNCHER_VERSION
+        && pair.instructions.launcher_minimum <= LAUNCHER_VERSION
+}
+fn probe_with_current_actor(root: &Path) -> Result<()> {
+    if let Ok(selected) = super::install::selector(root)
+        && actor_supports(&selected.current)
+    {
+        runtime_health(root)?;
+    }
+    // An installation already requiring the target bootstrap is probed by that
+    // verified new helper during finish_online, before its mandatory acknowledgment.
+    Ok(())
+}
+fn runtime_health(root: &Path) -> Result<()> {
+    let selected = super::install::selector(root)?;
+    let settings: super::install::Settings = json(&root.join("settings.json"))?;
+    settings.validate()?;
+    if !actor_supports(&selected.current) {
+        return Err("selected runtime requires a different bootstrap".into());
+    }
+    #[cfg(target_os = "macos")]
+    if let Some(team) = crate::client_management::signature_team(
+        &std::env::current_exe().map_err(|e| e.to_string())?,
+    )
+    .map_err(|e| e.to_string())?
+    {
+        // A Manager-only review must not execute an unsigned/foreign legacy
+        // runtime discovered in a damaged root. Preserve it as unverified.
+        let executable = crate::runtime_layout::binary(
+            &crate::runtime_layout::library(&super::install::runtime_path(
+                root,
+                &selected.current,
+            )?),
+            "inkscape-mcp",
+        );
+        if crate::client_management::signature_team(&executable)
+            .map_err(|e| e.to_string())?
+            .as_deref()
+            != Some(team.as_str())
+        {
+            return Err("installed runtime publisher is unverified; health probe skipped".into());
+        }
+    }
+    super::install::probe(root, &selected.current, &settings)
 }
 fn sync_stage(app: &Path) -> Result<()> {
     use std::os::unix::fs::OpenOptionsExt;
@@ -150,7 +225,17 @@ fn sync_stage(app: &Path) -> Result<()> {
 }
 fn preserves_selection(root: &Path, manifest: &release::Manifest) -> Result<()> {
     // Missing/damaged metadata is never repaired or replaced by this check.
-    if let Ok(selected) = super::install::selector(root) {
+    for name in ["active.json", "settings.json"] {
+        if let Ok(metadata) = json::<Value>(&root.join(name))
+            && let Some(format) = metadata["format"].as_u64()
+            && format != u64::from(manifest.component_format)
+        {
+            return Err("The target Manager/bootstrap cannot preserve the saved component/settings/selector format. No components were changed.".into());
+        }
+    }
+    // Deserialize the retained contract without imposing the *old* coordinator's
+    // FORMAT. Compatibility must be decided by the verified target's format.
+    if let Ok(selected) = json::<super::install::Selector>(&root.join("active.json")) {
         manifest.preserves_pair(&selected.current)?;
         if let Some(previous) = &selected.previous {
             manifest.preserves_pair(previous)?;
@@ -206,8 +291,12 @@ fn prepare_online_verified(
     let _lock = Lock::acquire(root)?;
     let _app_lock = Lock::manager(parent)?;
     no_other_transaction(root)?;
+    verify_last(root)?;
     preserves_selection(root, &manifest)?;
     let observed = observations(root)?;
+    // A broken/incomplete installation must not prevent updating Manager. Review
+    // distinguishes its preserved state from a verified working baseline.
+    let baseline_healthy = runtime_health(root).is_ok();
     let before = inventory(source, 512 * 1024 * 1024)?;
     let id = uuid::Uuid::new_v4().to_string();
     let base = root.join("backups").join(&id);
@@ -294,6 +383,7 @@ fn prepare_online_verified(
             observations: observed,
             bootstrap,
             helper: FileIdentity::of(&helper),
+            baseline_healthy,
         }),
     };
     if observations(root)? != plan.online.as_ref().unwrap().observations
@@ -302,10 +392,14 @@ fn prepare_online_verified(
         return Err("Installation changed during Manager staging; review again.".into());
     }
     write_json(&root.join("manager-prepared.json"), &plan)?;
+    write_json(
+        &root.join("manager-outcome.json"),
+        &json!({"state":"prepared","preparation_id":plan.id}),
+    )?;
     // Bind all metadata and identities, not only a preparation UUID.
     let review = FileIdentity::of(&serde_json::to_vec(&plan).map_err(|e| e.to_string())?).sha256;
     Ok(
-        json!({"manager_online_prepared":true,"preparation_id":id,"review_id":review,"manager_application":source,"manager_stage":stage,"activation_helper":base.join("activation-helper"),"installed_manager":release::info(source)?,"installed_bootstrap":installed_bootstrap_identity(root),"target_manager":plan.online.as_ref().unwrap().manifest,"bootstrap_changes":plan.online.as_ref().unwrap().bootstrap.iter().map(|c|json!({"destination":c.destination,"from":c.before,"to":c.after})).collect::<Vec<_>>(),"restart_required":true}),
+        json!({"manager_online_prepared":true,"preparation_id":id,"review_id":review,"manager_application":source,"manager_stage":stage,"activation_helper":base.join("activation-helper"),"installed_manager":release::info(source)?,"installed_bootstrap":installed_bootstrap_identity(root),"target_manager":plan.online.as_ref().unwrap().manifest,"bootstrap_changes":plan.online.as_ref().unwrap().bootstrap.iter().map(|c|json!({"destination":c.destination,"from":c.before,"to":c.after})).collect::<Vec<_>>(),"baseline_healthy":baseline_healthy,"restart_required":true}),
     )
 }
 
@@ -314,6 +408,10 @@ fn verify_prepared(root: &Path, plan: &Plan, review: &str) -> Result<()> {
         return Err("Manager review changed; prepare again.".into());
     }
     let online = plan.online.as_ref().ok_or("not an online update")?;
+    if present(&plan.backup) {
+        return Err("Manager backup destination appeared after Review; preserved.".into());
+    }
+    verify_last(root)?;
     preserves_selection(root, &online.manifest)?;
     if online.profile != profile()? {
         return Err("Manager profile changed after review.".into());
@@ -336,16 +434,16 @@ fn verify_prepared(root: &Path, plan: &Plan, review: &str) -> Result<()> {
 
 /// A verified new Manager acknowledges actual startup. Launch Services success
 /// alone is not activation success. The old app/bootstrap remain available.
-fn finish_online(root: &Path, source: &Path) -> Result<bool> {
+fn finish_online(root: &Path, source: &Path) -> Result<Option<bool>> {
     if !root.join("manager-journal.json").exists() {
-        return Ok(false);
+        return Ok(None);
     }
     let plan = load(root, "manager-journal.json")?;
     let Some(online) = &plan.online else {
-        return Ok(false);
+        return Ok(None);
     };
     if source != plan.target {
-        return Ok(false);
+        return Ok(None);
     }
     let _app_lock = Lock::manager(source.parent().unwrap())?;
     release::verify(source, &online.manifest)?;
@@ -370,16 +468,13 @@ fn finish_online(root: &Path, source: &Path) -> Result<bool> {
             )?;
         }
     }
-    if let (Ok(selected), Ok(settings)) = (
-        super::install::selector(root),
-        json::<super::install::Settings>(&root.join("settings.json")),
-    ) {
-        super::install::probe(root, &selected.current, &settings)?;
+    let health = runtime_health(root);
+    if online.baseline_healthy {
+        health.as_ref().map_err(|e| e.clone())?;
     }
-    write_json(&root.join("manager-last.json"), &plan)?;
-    fs::remove_file(root.join("manager-journal.json")).map_err(|e| e.to_string())?;
-    sync_dir(root)?;
-    Ok(true)
+    let healthy = health.is_ok();
+    commit_manager_journal(root)?;
+    Ok(Some(healthy))
 }
 
 pub fn recover_online(root: &Path) -> Result<bool> {
@@ -398,6 +493,14 @@ fn publish_files(
     plan: &Plan,
     mut checkpoint: impl FnMut(&str) -> Result<()>,
 ) -> Result<()> {
+    if present(&plan.backup) {
+        return Err("Manager backup destination already exists; preserved.".into());
+    }
+    #[cfg(target_os = "macos")]
+    {
+        idle(&plan.target)?;
+        idle(&plan.stage)?;
+    }
     fs::rename(&plan.target, &plan.backup).map_err(|e| e.to_string())?;
     sync_dir(plan.target.parent().unwrap())?;
     checkpoint("app-backup")?;
@@ -455,6 +558,11 @@ pub fn activate_online(root: &Path, review: &str, parent_pid: i32) -> Result<Val
         }
         idle(&plan.target)?;
         verify_prepared(root, &plan, review)?;
+        if present(&plan.backup) {
+            return Err("Manager backup destination already exists; preserved.".into());
+        }
+        idle(&plan.target)?;
+        idle(&plan.stage)?;
         write_json(&root.join("manager-journal.json"), &plan)?;
         let publication = (|| {
             publish_files(root, &plan, |_| Ok(()))?;
@@ -462,16 +570,16 @@ pub fn activate_online(root: &Path, review: &str, parent_pid: i32) -> Result<Val
             release::verify(&plan.target, &online.manifest)?;
             // Authorize the new permanent bootstrap for the retained runtime, using
             // the existing signer-bound receipts and genuine MCP probe.
-            if let (Ok(selected), Ok(settings)) = (
-                super::install::selector(root),
-                json::<super::install::Settings>(&root.join("settings.json")),
-            ) {
-                super::install::probe(root, &selected.current, &settings)?;
+            if online.baseline_healthy {
+                probe_with_current_actor(root)?;
             }
             Ok(())
         })();
         if let Err(error) = publication {
             recover_plan(root, &plan)?;
+            drop(app_lock);
+            drop(lock);
+            let _ = reopen(root, &plan);
             return Err(error);
         }
         drop(app_lock);
@@ -480,14 +588,23 @@ pub fn activate_online(root: &Path, review: &str, parent_pid: i32) -> Result<Val
         if restart.is_ok() {
             let deadline = Instant::now() + Duration::from_secs(30);
             while root.join("manager-journal.json").exists() && Instant::now() < deadline {
+                if acknowledged(root, review) {
+                    return Ok(json!({"manager_ready":true,"manager_application":plan.target}));
+                }
                 std::thread::sleep(Duration::from_millis(100));
             }
-            if !root.join("manager-journal.json").exists() {
+            if acknowledged(root, review) {
                 return Ok(json!({"manager_ready":true,"manager_application":plan.target}));
+            }
+            if !root.join("manager-journal.json").exists() {
+                return Err("Manager update ended without its matching startup acknowledgment, possibly because offline recovery restored the previous app. Review the retained Manager outcome/backups before retrying.".into());
             }
         }
         let _lock = Lock::acquire(root)?;
         let _app_lock = Lock::manager(plan.target.parent().unwrap())?;
+        if acknowledged(root, review) {
+            return Ok(json!({"manager_ready":true,"manager_application":plan.target}));
+        }
         // Never roll back underneath a Manager that did start but could not ack.
         idle(&plan.target).map_err(|_| "The new Manager started but did not acknowledge activation. Close it and choose recovery; manager-journal.json and the previous app/bootstrap were retained.".to_string())?;
         recover_plan(root, &plan)?;
@@ -693,11 +810,11 @@ fn load(root: &Path, name: &str) -> Result<Plan> {
         {
             return Err("Manager activation helper changed".into());
         }
-        if online
-            .observations
-            .keys()
-            .any(|p| *p != root.join("active.json") && *p != root.join("settings.json"))
-        {
+        if online.observations.keys().any(|p| {
+            !["active.json", "settings.json", "manager-last.json"]
+                .iter()
+                .any(|name| *p == root.join(name))
+        }) {
             return Err("invalid Manager observations".into());
         }
     }
@@ -758,6 +875,11 @@ fn recover_plan_with(
                     "Manager changed after interruption; preserve it and recover manually".into(),
                 );
             }
+            #[cfg(target_os = "macos")]
+            {
+                idle(&plan.target)?;
+                idle(&plan.stage)?;
+            }
             fs::rename(&plan.target, &plan.stage).map_err(|e| e.to_string())?;
             sync_dir(plan.target.parent().unwrap())?;
             checkpoint("app-unpublish")?;
@@ -768,6 +890,11 @@ fn recover_plan_with(
     {
         if inventory(&plan.backup, 1024 * 1024 * 1024)? != *before {
             return Err("Manager backup changed; preserved".into());
+        }
+        #[cfg(target_os = "macos")]
+        {
+            idle(&plan.target)?;
+            idle(&plan.backup)?;
         }
         fs::rename(&plan.backup, &plan.target).map_err(|e| e.to_string())?;
         sync_dir(plan.target.parent().unwrap())?;
@@ -807,13 +934,15 @@ pub fn prepare(root: &Path) -> Result<Value> {
     mkdir(&parent)?;
     mkdir(root)?;
     let _lock = Lock::acquire(root)?;
-    if finish_online(root, &source)? {
+    if let Some(healthy) = finish_online(root, &source)? {
         return Ok(
-            json!({"manager_ready":true,"manager_application":source,"manager_update_completed":true}),
+            json!({"manager_ready":true,"manager_application":source,"manager_update_completed":true,"runtime_warning":if healthy {None} else {Some("Manager updated. The existing MCP installation needs verification or repair. Choose Review changes.")}}),
         );
     }
+    // The journal may target /Applications even when this distribution would
+    // relocate to ~/Applications. Recover under the journal's actual app lock.
+    recover_online(root)?;
     let _app_lock = Lock::manager(&parent)?;
-    recover(root)?;
     let target = parent.join(APP);
     if installed_location(&source, &parent) {
         return Ok(json!({"manager_ready":true,"manager_application":source}));
@@ -879,8 +1008,8 @@ pub fn activate(root: &Path, id: &str, parent_pid: i32) -> Result<Value> {
             std::thread::sleep(Duration::from_millis(50));
         }
         let _lock = Lock::acquire(root)?;
+        recover_online(root)?;
         let _app_lock = Lock::manager(plan.target.parent().unwrap())?;
-        recover(root)?;
         idle(&plan.target)?;
         if inventory(&plan.stage, 1024 * 1024 * 1024)? != plan.after
             || (if present(&plan.target) {
@@ -892,6 +1021,11 @@ pub fn activate(root: &Path, id: &str, parent_pid: i32) -> Result<Value> {
             return Err("Manager files changed after preparation; preserved".into());
         }
         verify(&plan.stage)?;
+        if present(&plan.backup) {
+            return Err("Manager backup destination already exists; preserved.".into());
+        }
+        idle(&plan.target)?;
+        idle(&plan.stage)?;
         write_json(&root.join("manager-journal.json"), &plan)?;
         let result = (|| {
             if plan.before.is_some() {
@@ -1050,6 +1184,7 @@ mod tests {
             observations: observations(&root).unwrap(),
             bootstrap: changes,
             helper: FileIdentity::of(b"test helper"),
+            baseline_healthy: false,
         });
         write_json(&root.join("manager-journal.json"), &plan).unwrap();
         (temp, root, plan)
@@ -1232,7 +1367,14 @@ mod tests {
     }
     #[test]
     fn manager_review_pins_metadata_selection_bootstrap_and_complete_destination() {
-        for changed in ["manifest", "settings", "active", "bootstrap", "app"] {
+        for changed in [
+            "manifest",
+            "settings",
+            "active",
+            "history",
+            "bootstrap",
+            "app",
+        ] {
             let (_temp, root, mut plan) = coordinated_fixture();
             let review = FileIdentity::of(&serde_json::to_vec(&plan).unwrap()).sha256;
             match changed {
@@ -1241,10 +1383,24 @@ mod tests {
                     write(&root.join(format!("{changed}.json")), b"later selection").unwrap()
                 }
                 "bootstrap" => write(&root.join("bin/inkscape-mcp"), b"later bootstrap").unwrap(),
+                "history" => {
+                    write(&root.join("manager-last.json"), b"foreign later history").unwrap()
+                }
                 _ => write(&plan.target.join("payload"), b"later app").unwrap(),
             }
             assert!(verify_prepared(&root, &plan, &review).is_err());
         }
+    }
+    #[test]
+    fn publication_preserves_a_backup_directory_created_after_review() {
+        let (_temp, root, plan) = coordinated_fixture();
+        mkdir(&plan.backup).unwrap();
+        let before = inventory(root.parent().unwrap(), 1024 * 1024).unwrap();
+        assert!(publish_files(&root, &plan, |_| Ok(())).is_err());
+        assert_eq!(
+            inventory(root.parent().unwrap(), 1024 * 1024).unwrap(),
+            before
+        );
     }
     #[test]
     fn target_bootstrap_refuses_incompatible_retained_components_without_settings_or_mutation() {
@@ -1280,10 +1436,14 @@ mod tests {
         write_json(&root.join("active.json"), &selected).unwrap();
         let before = inventory(&root, 1024 * 1024).unwrap();
         preserves_selection(&root, &manifest).unwrap();
-        for field in ["text", "helper", "launcher", "previous"] {
+        for field in [
+            "format", "selector", "text", "helper", "launcher", "previous",
+        ] {
             let mut incompatible = manifest.clone();
             let mut selection = selected.clone();
             match field {
+                "format" => incompatible.component_format += 1,
+                "selector" => selection.format += 1,
                 "text" => incompatible.text_interface += 1,
                 "helper" => incompatible.helper_protocol += 1,
                 "launcher" => incompatible.launcher_version = 0,
@@ -1297,6 +1457,49 @@ mod tests {
         write_json(&root.join("active.json"), &selected).unwrap();
         assert_eq!(inventory(&root, 1024 * 1024).unwrap(), before);
         assert!(!root.join("settings.json").exists());
+        let settings = super::super::install::Settings {
+            format: FORMAT,
+            legacy_skill_owner: root.clone(),
+            skills: vec![],
+            environment: BTreeMap::from([
+                (
+                    "INKSCAPE_MCP_WORKSPACE_ROOTS".into(),
+                    root.display().to_string(),
+                ),
+                ("PATH".into(), "/usr/bin:/bin".into()),
+                ("INKSCAPE_MCP_LIVE_ENABLED".into(), "false".into()),
+                ("INKSCAPE_MCP_ENGINE_MODE".into(), "per_call".into()),
+            ]),
+        };
+        write_json(&root.join("settings.json"), &settings).unwrap();
+        for field in ["launcher", "helper"] {
+            let mut future = selected.clone();
+            future.previous = None;
+            let mut target = manifest.clone();
+            if field == "launcher" {
+                future.current.runtime.launcher_minimum = LAUNCHER_VERSION + 1;
+                target.launcher_version = LAUNCHER_VERSION + 1;
+            } else {
+                future.current.runtime.helper_protocol = HELPER_PROTOCOL + 1;
+                target.helper_protocol = HELPER_PROTOCOL + 1;
+            }
+            write_json(&root.join("active.json"), &future).unwrap();
+            preserves_selection(&root, &target).unwrap();
+            assert!(!actor_supports(&future.current));
+            // No runtime files exist; an attempted old-actor probe would fail.
+            probe_with_current_actor(&root).unwrap();
+        }
+        fs::remove_file(root.join("active.json")).unwrap();
+        write_json(
+            &root.join("settings.json"),
+            &json!({"format":FORMAT,"preserved":"synthetic private setting"}),
+        )
+        .unwrap();
+        let saved = inventory(&root, 1024 * 1024).unwrap();
+        let mut target = manifest;
+        target.component_format += 1;
+        assert!(preserves_selection(&root, &target).is_err());
+        assert_eq!(inventory(&root, 1024 * 1024).unwrap(), saved);
     }
     #[cfg(unix)]
     #[test]
@@ -1309,6 +1512,30 @@ mod tests {
         std::os::unix::fs::symlink("missing", root.join("Contents/link")).unwrap();
         assert!(sync_stage(&root).is_err());
         assert!(root.join("Contents/link").is_symlink());
+    }
+    #[test]
+    fn startup_ack_requires_atomic_matching_commit_not_offline_rollback() {
+        let (_temp, root, plan) = coordinated_fixture();
+        let review = FileIdentity::of(&serde_json::to_vec(&plan).unwrap()).sha256;
+        publish_files(&root, &plan, |_| Ok(())).unwrap();
+        assert!(!acknowledged(&root, &review));
+        commit_manager_journal(&root).unwrap();
+        assert!(!root.join("manager-journal.json").exists());
+        assert!(acknowledged(&root, &review));
+        assert!(!recover_online(&root).unwrap());
+        assert_eq!(inventory(&plan.target, 1000).unwrap(), plan.after);
+        for c in &plan.online.as_ref().unwrap().bootstrap {
+            assert_eq!(
+                installer::optional(&c.destination).unwrap(),
+                Some(c.after.clone())
+            );
+        }
+        let (_temp, root, plan) = coordinated_fixture();
+        let review = FileIdentity::of(&serde_json::to_vec(&plan).unwrap()).sha256;
+        publish_files(&root, &plan, |_| Ok(())).unwrap();
+        recover_plan(&root, &plan).unwrap();
+        assert!(!root.join("manager-journal.json").exists());
+        assert!(!acknowledged(&root, &review));
     }
     #[test]
     fn destination_lock_serializes_managers_using_different_installations() {

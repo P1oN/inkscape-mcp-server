@@ -75,7 +75,7 @@ fn app(root: &Path, helper: &Path, identity: &str, build: &str) -> PathBuf {
         ])
         .arg(app.join(release::EXECUTABLE)));
     fs::copy(helper, app.join(release::HELPER)).unwrap();
-    write(&app.join("Contents/Info.plist"),format!(r#"<plist version="1.0"><dict><key>CFBundleIdentifier</key><string>org.inkscape-mcp.manager</string><key>CFBundleExecutable</key><string>inkscape-mcp-manager</string><key>CFBundlePackageType</key><string>APPL</string><key>InkscapeMCPDistribution</key><string>{}</string><key>InkscapeMCPBuildID</key><string>{build}</string><key>InkscapeMCPRevision</key><string>{}</string></dict></plist>"#,if build=="native-old"{"v1.0.0"}else if build=="native-only"{"v3.0.0"}else{"v2.0.0"},"a".repeat(40)).as_bytes()).unwrap();
+    write(&app.join("Contents/Info.plist"),format!(r#"<plist version="1.0"><dict><key>CFBundleIdentifier</key><string>org.inkscape-mcp.manager</string><key>CFBundleExecutable</key><string>inkscape-mcp-manager</string><key>CFBundlePackageType</key><string>APPL</string><key>InkscapeMCPDistribution</key><string>{}</string><key>InkscapeMCPBuildID</key><string>{build}</string><key>InkscapeMCPRevision</key><string>{}</string></dict></plist>"#,if build=="native-old"{"v1.0.0"}else if build=="native-only"{"v3.0.0"}else if build=="native-damaged"{"v4.0.0"}else{"v2.0.0"},"a".repeat(40)).as_bytes()).unwrap();
     sign(
         &app.join(release::EXECUTABLE),
         identity,
@@ -207,21 +207,21 @@ fn bounded_line(reader: &mut BufReader<ChildStdout>, timeout: Duration) -> Strin
         0
     );
     let deadline = Instant::now() + timeout;
-    let mut line = String::new();
+    let mut line = Vec::new();
     loop {
         assert!(
             Instant::now() < deadline,
             "owned native/MCP response timed out"
         );
-        match reader.read_line(&mut line) {
+        match reader.read_until(b'\n', &mut line) {
             Ok(0) => panic!("owned native/MCP stream closed before a complete response"),
             Ok(_) => {
                 assert!(
                     line.len() <= 2 * 1024 * 1024,
                     "native response exceeds limit"
                 );
-                if line.ends_with('\n') {
-                    return line;
+                if line.ends_with(b"\n") {
+                    return String::from_utf8(line).expect("invalid native/MCP UTF-8");
                 }
             }
             Err(error) => assert!(
@@ -458,6 +458,12 @@ fn native_signed_manager_replacement_restart_and_recovery() {
     let network = Network(archive(&candidate, &helper));
     manifest.asset.identity = FileIdentity::of(&network.0);
     release::verify(&candidate, &manifest).unwrap();
+    let mut wrong_compiler_format = manifest.clone();
+    wrong_compiler_format.component_format += 1;
+    assert_eq!(
+        release::verify(&candidate, &wrong_compiler_format).unwrap_err(),
+        "Manager helper compiled identity differs from manifest"
+    );
     // Complete custom profile, including secrets and conflicting skills, is byte-bound.
     let codex = PathBuf::from(std::env::var_os("CODEX_HOME").unwrap());
     mkdir(&codex.join("skills/inkscape-mcp")).unwrap();
@@ -470,6 +476,10 @@ fn native_signed_manager_replacement_restart_and_recovery() {
     .unwrap();
     let profile_before = inventory(&codex, 1024 * 1024).unwrap();
     let server = PathBuf::from(std::env::var_os("INKSCAPE_MCP_ACCEPTANCE_SERVER").unwrap());
+    let signed_server = root.join("signed-runtime-server");
+    fs::copy(&server, &signed_server).unwrap();
+    sign(&signed_server, &identity, "inkscape-mcp-runtime");
+    let server = signed_server;
     runtime(&root, &server, &old_helper);
     let retained = inventory(&root.join("runtime"), 512 * 1024 * 1024).unwrap();
     let settings = fs::read(root.join("settings.json")).unwrap();
@@ -505,6 +515,14 @@ fn native_signed_manager_replacement_restart_and_recovery() {
             })
             .is_err()
         );
+        let application_lock = Lock::manager(plan.target.parent().unwrap()).unwrap();
+        assert!(
+            recover_online(&root)
+                .unwrap_err()
+                .contains("another update/launch recovery is active")
+        );
+        assert!(root.join("manager-journal.json").is_file());
+        drop(application_lock);
         recover_online(&root).unwrap();
         assert!(!recover_online(&root).unwrap());
         Session::new(&root).verify();
@@ -642,6 +660,58 @@ fn native_signed_manager_replacement_restart_and_recovery() {
     existing.verify();
     fs::remove_file(root.join("native-no-ack")).unwrap();
     activate_prepared(&root, &old, &prepared_only, true);
+    Session::new(&root).verify();
+    existing.verify();
+    // A structurally parseable damaged installation must not gate Manager-only
+    // updates on its pre-existing MCP health. Its complete damaged state is kept.
+    let damaged = home.join("parseable-damaged-root");
+    mkdir(&damaged).unwrap();
+    runtime(&damaged, &server, &helper);
+    let mut broken: Value = json(&damaged.join("settings.json")).unwrap();
+    broken["environment"] = json!({});
+    write_json(&damaged.join("settings.json"), &broken).unwrap();
+    let damaged_before = inventory(&damaged.join("runtime"), 512 * 1024 * 1024).unwrap();
+    let saved_settings = fs::read(damaged.join("settings.json")).unwrap();
+    let saved_active = fs::read(damaged.join("active.json")).unwrap();
+    let repair_dir = root.join("damaged-manager-candidate");
+    mkdir(&repair_dir).unwrap();
+    let repair = app(&repair_dir, &helper, &identity, "native-damaged");
+    let mut repair_manifest = manifest.clone();
+    repair_manifest.tag = "v4.0.0".into();
+    repair_manifest.manager_build = "native-damaged".into();
+    repair_manifest.files = inventory(&repair, 128 * 1024 * 1024).unwrap();
+    let repair_network = Network(archive(&repair, &helper));
+    repair_manifest.asset.identity = FileIdentity::of(&repair_network.0);
+    let prepared_damaged = prepare_online_verified(
+        &damaged,
+        &old,
+        repair_manifest,
+        "prerelease",
+        &repair_network,
+        &helper,
+    )
+    .unwrap();
+    assert_eq!(prepared_damaged["baseline_healthy"], false);
+    assert!(
+        prepared_damaged["bootstrap_changes"]
+            .as_array()
+            .unwrap()
+            .is_empty()
+    );
+    activate_prepared(&damaged, &old, &prepared_damaged, true);
+    let startup: Value = json(&damaged.join("native-startup.json")).unwrap();
+    let response: Value = serde_json::from_str(startup["response"].as_str().unwrap()).unwrap();
+    assert!(response["runtime_warning"].is_string());
+    assert_eq!(startup["status"], 0);
+    assert_eq!(
+        fs::read(damaged.join("settings.json")).unwrap(),
+        saved_settings
+    );
+    assert_eq!(fs::read(damaged.join("active.json")).unwrap(), saved_active);
+    assert_eq!(
+        inventory(&damaged.join("runtime"), 512 * 1024 * 1024).unwrap(),
+        damaged_before
+    );
     Session::new(&root).verify();
     existing.verify();
     assert_eq!(inventory(&codex, 1024 * 1024).unwrap(), profile_before);
