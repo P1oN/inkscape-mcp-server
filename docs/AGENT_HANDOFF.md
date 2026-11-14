@@ -1,5 +1,17 @@
 # Agent handoff — current status
 
+## Compact Manager settings — 2026-11-15
+
+Approved Penpot boards 41–43 and the updated Settings states now have a native
+implementation: version/source above short IDs, compact app location, and a
+separate selectable full-value sheet with per-field Copy / Copy all, feedback,
+scrolling and Escape dismissal. Existing update/recovery routing is preserved.
+Strict native compilation, the extended AppKit regression in both appearances
+and narrow widths, both `manager_task` wrapper tests and isolated interactive
+frontend inspection pass. This is local source work on
+`codex/manager-compact-identities`, not an installed/signed release. See the
+[scoped report](history/reports/manager-compact-identities-2026-11-15.md).
+
 ## Manager update screens aligned with Penpot — 2026-11-14
 
 The update flow now has separate Settings/identities, preparation, compact Review,

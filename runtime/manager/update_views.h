@@ -7,7 +7,7 @@
 - (void)startupInspectionFailed:(NSString *)message {NSString *failure=self.startupFailure;self.startupFailure=nil;[self failManagerUpdate:[NSString stringWithFormat:@"%@\nInstallation inspection also failed: %@",failure,message]];}
 - (NSString *)managerVersion {return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"InkscapeMCPDistribution"] ?: @"development";}
 - (NSString *)displayValue:(id)value {return [value isKindOfClass:NSString.class] ? value : [value isKindOfClass:NSNumber.class] ? [value stringValue] : @"Not recorded";}
-- (NSString *)shortIdentity:(id)value {NSString *text=[self displayValue:value];return text.length>16 ? [text substringToIndex:16] : text;}
+- (NSString *)shortIdentity:(id)value {NSString *text=[self displayValue:value];return [value isKindOfClass:NSString.class] && text.length>8 ? [text substringToIndex:8] : text;}
 - (NSButton *)pageButton:(NSString *)title action:(SEL)action {
     NSButton *button=[NSButton buttonWithTitle:title target:self action:action];button.bezelStyle=NSBezelStyleRounded;
     [button setContentCompressionResistancePriority:NSLayoutPriorityRequired forOrientation:NSLayoutConstraintOrientationHorizontal];return button;
@@ -95,28 +95,24 @@
     for(NSView *view in self.managerPanel.subviews.copy)[view removeFromSuperview];self.pagePrimary=nil;self.pageSecondary=nil;self.pageManagerAction=nil;self.pageProgress=nil;
     if(!visible){self.summary.stringValue=self.hasInstallation ? [NSString stringWithFormat:@"Runtime installed · %@",self.installedComponents[@"distribution"] ?: @"Current runtime"] : @"Connect your SVG workspace to your AI tools.";return;}
     NSString *page=self.managerPage;BOOL settings=[page isEqual:@"settings"],review=[page isEqual:@"review"],preparing=[page isEqual:@"preparing"],handoff=[page isEqual:@"handoff"],recovery=[page isEqual:@"recovery"];
-    self.summary.stringValue=settings ? @"Application, runtime and instructions have separate identities" : review ? @"Review the application and launcher update together" : preparing ? @"Preparing a candidate; installed files are unchanged" : handoff ? @"The reviewed update is being handed off" : recovery ? @"An interrupted Manager update needs attention" : @"Update stopped before completion";
+    self.summary.stringValue=settings ? @"Your local SVG connection" : review ? @"Review the application and launcher update together" : preparing ? @"Preparing a candidate; installed files are unchanged" : handoff ? @"The reviewed update is being handed off" : recovery ? @"An interrupted Manager update needs attention" : @"Update stopped before completion";
     NSString *heading=settings ? @"Settings & versions" : review ? [NSString stringWithFormat:@"Update Manager to %@?",self.managerReview[@"target_manager"][@"tag"]] : preparing ? @"Preparing the Manager update" : handoff ? @"Restarting Manager to finish" : recovery ? @"The Manager update needs recovery" : @"Manager cannot update this copy";
-    NSString *subtitle=settings ? @"Review installed components and update Manager separately." : review ? @"Only Manager will restart. Existing MCP sessions keep running." : preparing ? @"Download and verification must finish before you can confirm." : handoff ? @"This window will close briefly. The updated Manager will reopen." : recovery ? @"The updater could not confirm the new Manager starting successfully." : @"Review the failure below before trying again.";
+    NSString *subtitle=settings ? @"Installed components and application updates." : review ? @"Only Manager will restart. Existing MCP sessions keep running." : preparing ? @"Download and verification must finish before you can confirm." : handoff ? @"This window will close briefly. The updated Manager will reopen." : recovery ? @"The updater could not confirm the new Manager starting successfully." : @"Review the failure below before trying again.";
     NSStackView *body=managerStack(@[],NSUserInterfaceLayoutOrientationVertical,20);body.translatesAutoresizingMaskIntoConstraints=NO;
     NSTextField *title=managerLabel(heading,24,NSColor.labelColor);title.font=[NSFont systemFontOfSize:24 weight:NSFontWeightSemibold];[self addUpdateView:title to:body];[self addUpdateView:[self updateParagraph:subtitle] to:body];
     NSString *footerTitle=nil,*footerDetail=nil,*primary=nil;SEL action=NULL;
     if(settings){
         NSString *banner=[self.managerOutcome isEqual:@"restored"] ? @"Previous Manager restored" : [self.managerOutcome isEqual:@"updated"] ? [NSString stringWithFormat:@"Manager %@ is installed",[self managerVersion]] : self.managerOffer ? [NSString stringWithFormat:@"Manager %@ is available",self.managerOffer[@"tag"]] : [NSString stringWithFormat:@"Manager %@",[self managerVersion]];
-        NSString *detail=[self.managerOutcome isEqual:@"restored"] ? @"The previous installed Manager and launcher were restored." : [self.managerOutcome isEqual:@"updated"] ? @"Manager reopened successfully. MCP sessions were left running." : self.managerOffer ? [NSString stringWithFormat:@"Installed: %@ · restarts Manager only",[self managerVersion]] : self.managerAvailable.stringValue;
+        NSString *detail=[self.managerOutcome isEqual:@"restored"] ? @"The previous installed Manager and launcher were restored." : [self.managerOutcome isEqual:@"updated"] ? @"Manager reopened. MCP sessions keep running." : self.managerOffer ? [NSString stringWithFormat:@"Installed: %@ · restarts Manager only",[self managerVersion]] : self.managerAvailable.stringValue;
         if(self.managerCheckTask && !self.managerOutcome){banner=@"Checking Manager updates…";detail=@"The check only reads metadata. Local setup remains available.";}
         self.pageManagerAction=[self pageButton:self.managerOffer ? @"Review Manager update" : @"Check Manager updates" action:@selector(settingsPrimary:)];
         NSTextField *bannerTitle=managerLabel(banner,14,NSColor.labelColor);bannerTitle.font=[NSFont systemFontOfSize:14 weight:NSFontWeightSemibold];
-        [self stylePrimary:self.pageManagerAction];
+        if(self.managerOffer)[self stylePrimary:self.pageManagerAction];
         NSView *bannerDetail=[self updateParagraph:detail];NSStackView *bannerText=managerStack(@[bannerTitle,bannerDetail],NSUserInterfaceLayoutOrientationVertical,10);managerFill(bannerDetail,bannerText);
         NSStackView *bannerRow=managerStack(@[bannerText,managerSpacer(),self.pageManagerAction],NSUserInterfaceLayoutOrientationHorizontal,16);
         [self addUpdateView:managerCard(bannerRow) to:body];
-        NSString *emptyIdentity=[self.state isEqual:@"not_installed"] ? @"Not installed" : @"Not verified";
-        NSDictionary *v=self.installedComponents;NSString *managerBuild=[[NSBundle mainBundle] objectForInfoDictionaryKey:@"InkscapeMCPBuildID"];
-        [self addUpdateView:[self identityTable:@[@[@"Component",@"Installed identity",@"Update scope"],@[@"Running Manager",[NSString stringWithFormat:@"%@ · build %@",[self managerVersion],[self shortIdentity:managerBuild]],@"Application"],@[@"Runtime",v ? [NSString stringWithFormat:@"Build %@ · from %@",[self shortIdentity:v[@"runtime_build"]],[self displayValue:v[@"runtime_distribution"] ?: v[@"distribution"]]] : emptyIdentity,@"Components"],@[@"Agent instructions & skill",v ? [NSString stringWithFormat:@"Content %@ · version %@",[self shortIdentity:v[@"instructions_content"] ?: v[@"instructions_version"]],[self displayValue:v[@"instructions_version"]]] : emptyIdentity,@"Components"],@[@"Launcher",v ? [NSString stringWithFormat:@"Build %@ · compatibility %@",[self shortIdentity:v[@"launcher_build"]],[self displayValue:v[@"launcher_version"]]] : emptyIdentity,@"If changed"]]] to:body];
-        NSView *location=[self updateParagraph:[NSString stringWithFormat:@"%@ · new monitoring off\nRunning Manager: %@",self.channel.titleOfSelectedItem,[NSBundle mainBundle].bundlePath]];
-        NSButton *technical=[self pageButton:@"Technical details" action:@selector(showTechnicalDetails:)];
-        [self addUpdateView:managerCard(managerStack(@[location,managerSpacer(),technical],NSUserInterfaceLayoutOrientationHorizontal,16)) to:body];
+        [self addUpdateView:[self installedComponentSummary] to:body];
+        [self addUpdateView:[self compactManagerLocation] to:body];
         if(self.managerWarning)[self addUpdateView:[self updateParagraph:self.managerWarning] to:body];
         footerTitle=[self.managerOutcome isEqual:@"restored"] ? @"Manager recovery complete" : [self.managerOutcome isEqual:@"updated"] ? @"Manager update complete" : @"Installed versions are independent";
         footerDetail=[self.managerOutcome isEqual:@"restored"] ? @"Runtime, instructions and existing MCP sessions were preserved." : [self.managerOutcome isEqual:@"updated"] ? @"No Codex reconnect is required for this Manager-only change." : @"Component rollback affects runtime and instructions only.";
@@ -161,7 +157,4 @@ NSString *launcherChange=[r[@"bootstrap_changes"] count] ? [NSString stringWithF
     NSStackView *footer=managerStack(@[footerCopy,managerSpacer(),actions],NSUserInterfaceLayoutOrientationHorizontal,16);footer.translatesAutoresizingMaskIntoConstraints=NO;[self.managerPanel addSubview:footer];
     [NSLayoutConstraint activateConstraints:@[[scroll.topAnchor constraintEqualToAnchor:self.managerPanel.topAnchor],[scroll.leadingAnchor constraintEqualToAnchor:self.managerPanel.leadingAnchor],[scroll.trailingAnchor constraintEqualToAnchor:self.managerPanel.trailingAnchor],[scroll.bottomAnchor constraintEqualToAnchor:footer.topAnchor constant:-24],[footer.leadingAnchor constraintEqualToAnchor:self.managerPanel.leadingAnchor],[footer.trailingAnchor constraintEqualToAnchor:self.managerPanel.trailingAnchor],[footer.bottomAnchor constraintEqualToAnchor:self.managerPanel.bottomAnchor]]];
     [self refreshControls];
-}
-- (void)showTechnicalDetails:(id)sender {
-    [self backToConnection:sender];self.advancedButton.state=NSControlStateValueOn;[self toggleAdvanced:nil];
 }

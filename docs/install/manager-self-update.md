@@ -1,5 +1,11 @@
 # Reviewed Manager updates
 
+**Settings & versions** shows each component's version/source separately from its
+short build/content ID. Open **Build IDs & paths** for selectable complete values,
+app/installation/Inkscape paths and bundled-helper signing status. **Copy** copies
+a field's full value; **Copy all details** copies the complete displayed inventory.
+The sheet supports scrolling and Escape / Done returns to Settings.
+
 Current sources implement Issue [#63](https://github.com/P1oN/inkscape-mcp-server/issues/63).
 The feature becomes available in a separately authorized signed distribution; historical
 release assets remain unchanged. An older Manager that lacks this feature still needs a
