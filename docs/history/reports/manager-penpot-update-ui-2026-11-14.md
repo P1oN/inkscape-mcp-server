@@ -66,8 +66,8 @@ controlled typed fixtures; they cannot replace real applications/bootstrap or re
 The run exercised Settings → preparation → Review → exact changes → Cancel → immediate
 Review retry; simulated permission failure and Back to settings; actual frontend startup
 error → inspection → recovery → restored; explicit consent → readiness → exit → automatic
-helper-driven reopen. The final handoff log records parent PID 51907 exiting before new
-owned PID 51969 appears, before CUA binds the reopened process. Profile, installation and
+helper-driven reopen. The final handoff log records parent PID 59239 exiting before new
+owned PID 59328 appears, before CUA binds the reopened process. Profile, installation and
 stable channel match. The fixture app is deliberately not replaced, so its completion
 banner correctly uses its actual v0.1.8 bundle identity instead of the sample target v0.1.9.
 
@@ -103,10 +103,14 @@ restored identity wording, malformed JSON, visible rollback results and refreshe
 component snapshots. Final review has no remaining actionable findings; strict native
 syntax, Rust formatting and diff checks also passed independently.
 
-The complete interactive run above passed before the final defensive review fixes.
-A final smoke check of those exact source bytes was interrupted by the host screen lock;
-manual unlock was requested. No automatic unlock/protection change is used. This last
-interactive step is pending separately from the passing automated checks. Automated AppKit/Launch Services and signed synthetic backend evidence
+After manual unlock, the exact code bytes of `1fd8778` passed the final interactive
+smoke: visible controlled rollback error, preparation/Review/full details, Cancel and
+immediate retry, startup-error recovery/restored and another confirmed readiness/exit/
+automatic reopen. The final new process was observed before CUA bound it. All four
+synthetic sentinels remain byte-identical. Only the owned GUI was closed and its own
+Launch Services registration withdrawn; the compact build-bound profile is retained.
+
+Automated AppKit/Launch Services and signed synthetic backend evidence
 remain separate from the interactive frontend fixture described above.
 
 ## Remaining qualification
