@@ -104,6 +104,12 @@ int main(void) {@autoreleasepool {
     require([manager.installedComponents[@"runtime_build"] isEqual:@"runtime-after-rollback"],@"Settings keeps an old snapshot after component operations");
     [manager startupManagerFailed:@"Original startup failure"];[manager startupInspectionFailed:@"Inspection timed out"];
     require([manager.managerPage isEqual:@"error"] && [manager.managerFailure containsString:@"Original startup failure"] && [manager.managerFailure containsString:@"Inspection timed out"],@"inspection timeout hides the original startup failure");
+    manager.lastArguments=@[@"navigation-marker"];[manager backToSettings:nil];
+    require([manager.managerPage isEqual:@"settings"] && [manager.lastArguments.firstObject isEqual:@"navigation-marker"],@"Back to settings retries a persistently failing inspection");
+    [manager backToConnection:nil];require(manager.managerPage==nil,@"inspection failure traps navigation away from Advanced");
+    [manager failManagerUpdate:@"Persistent inspection failure"];[manager retryManagerInspection:nil];require([manager.lastArguments.firstObject isEqual:@"install-inspect"],@"explicit inspection retry is not separate from navigation");
+    manager.managerOutcome=@"updated";[manager applyInspection:@{@"state":@"installed",@"installed":installed,@"manager_update_recovered":@NO,@"clients":@[],@"candidates":@[]}];
+    require([manager.managerOutcome isEqual:@"updated"],@"superseded recovery receipt replaces successful update outcome");
     NSString *originalRoot=manager.installation;manager.installation=@"/owned/another-installation";manager.managerWarning=@"Old root warning";
     [manager applyInspection:@{@"state":@"not_installed",@"clients":@[],@"candidates":@[]}];
     require(!manager.managerOutcome && !manager.managerWarning && !manager.managerPage,@"completion crosses installation roots");

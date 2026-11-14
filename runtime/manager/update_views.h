@@ -28,8 +28,9 @@
 - (void)backToConnection:(id)sender {if(!self.running && !self.managerReview)[self showManagerPage:nil];}
 - (void)backToSettings:(id)sender {
     if(self.running)return;
-    self.managerReview=nil;self.managerFailure=nil;self.managerFailureBeforeActivation=NO;[self showManagerPage:@"settings"];[self inspect];
+    self.managerReview=nil;self.managerFailure=nil;self.managerFailureBeforeActivation=NO;[self showManagerPage:@"settings"];
 }
+- (void)retryManagerInspection:(id)sender {if(self.running)return;[self backToSettings:sender];[self inspect];}
 - (void)settingsPrimary:(id)sender {if(self.managerOffer)[self updateManager:sender];else [self startUpdateCheck];}
 - (void)rollbackFromSettings:(id)sender {if(self.running || !self.rollbackAvailable || self.recoveryRequired || self.preparation)return;[self backToConnection:sender];[self rollback:sender];}
 - (void)presentManagerReview:(NSDictionary *)result {
@@ -110,8 +111,9 @@
         NSView *bannerDetail=[self updateParagraph:detail];NSStackView *bannerText=managerStack(@[bannerTitle,bannerDetail],NSUserInterfaceLayoutOrientationVertical,10);managerFill(bannerDetail,bannerText);
         NSStackView *bannerRow=managerStack(@[bannerText,managerSpacer(),self.pageManagerAction],NSUserInterfaceLayoutOrientationHorizontal,16);
         [self addUpdateView:managerCard(bannerRow) to:body];
+        NSString *emptyIdentity=[self.state isEqual:@"not_installed"] ? @"Not installed" : @"Not verified";
         NSDictionary *v=self.installedComponents;NSString *managerBuild=[[NSBundle mainBundle] objectForInfoDictionaryKey:@"InkscapeMCPBuildID"];
-        [self addUpdateView:[self identityTable:@[@[@"Component",@"Installed identity",@"Update scope"],@[@"Running Manager",[NSString stringWithFormat:@"%@ · build %@",[self managerVersion],[self shortIdentity:managerBuild]],@"Application"],@[@"Runtime",v ? [NSString stringWithFormat:@"Build %@ · from %@",[self shortIdentity:v[@"runtime_build"]],[self displayValue:v[@"runtime_distribution"] ?: v[@"distribution"]]] : @"Not installed",@"Components"],@[@"Agent instructions & skill",v ? [NSString stringWithFormat:@"Content %@ · version %@",[self shortIdentity:v[@"instructions_content"] ?: v[@"instructions_version"]],[self displayValue:v[@"instructions_version"]]] : @"Not installed",@"Components"],@[@"Launcher",v ? [NSString stringWithFormat:@"Build %@ · compatibility %@",[self shortIdentity:v[@"launcher_build"]],[self displayValue:v[@"launcher_version"]]] : @"Not installed",@"If changed"]]] to:body];
+        [self addUpdateView:[self identityTable:@[@[@"Component",@"Installed identity",@"Update scope"],@[@"Running Manager",[NSString stringWithFormat:@"%@ · build %@",[self managerVersion],[self shortIdentity:managerBuild]],@"Application"],@[@"Runtime",v ? [NSString stringWithFormat:@"Build %@ · from %@",[self shortIdentity:v[@"runtime_build"]],[self displayValue:v[@"runtime_distribution"] ?: v[@"distribution"]]] : emptyIdentity,@"Components"],@[@"Agent instructions & skill",v ? [NSString stringWithFormat:@"Content %@ · version %@",[self shortIdentity:v[@"instructions_content"] ?: v[@"instructions_version"]],[self displayValue:v[@"instructions_version"]]] : emptyIdentity,@"Components"],@[@"Launcher",v ? [NSString stringWithFormat:@"Build %@ · compatibility %@",[self shortIdentity:v[@"launcher_build"]],[self displayValue:v[@"launcher_version"]]] : emptyIdentity,@"If changed"]]] to:body];
         NSView *location=[self updateParagraph:[NSString stringWithFormat:@"%@ · new monitoring off\nRunning Manager: %@",self.channel.titleOfSelectedItem,[NSBundle mainBundle].bundlePath]];
         NSButton *technical=[self pageButton:@"Technical details" action:@selector(showTechnicalDetails:)];
         [self addUpdateView:managerCard(managerStack(@[location,managerSpacer(),technical],NSUserInterfaceLayoutOrientationHorizontal,16)) to:body];
@@ -144,7 +146,7 @@ NSString *launcherChange=[r[@"bootstrap_changes"] count] ? [NSString stringWithF
         footerTitle=@"Recover the app and launcher";footerDetail=@"Recovery rechecks destinations before making changes.";primary=@"Recover Manager";action=@selector(recover:);
     }else {
         [self addUpdateView:[self updateNotice:self.managerFailureBeforeActivation ? @"No installed files were changed" : @"Update was not completed" detail:self.managerFailure ?: @"Return to settings and review again." warning:YES] to:body];
-        [self addUpdateView:managerCard([self updateParagraph:@"Manager will not change system permissions or install a second copy elsewhere.\n\nIf this app location is not writable, quit Manager and ask an administrator to update this installed copy, or restore write access through your normal application management process.\n\nYou can keep using the current runtime and instructions. If activation was interrupted, recovery information is retained; return to settings to inspect it."]) to:body];
+        [self addUpdateView:managerCard([self updateParagraph:@"Manager will not change system permissions or install a second copy elsewhere.\n\nIf this app location is not writable, quit Manager and ask an administrator to update this installed copy, or restore write access through your normal application management process.\n\nYou can keep using the current runtime and instructions. If activation was interrupted, recovery information is retained. Choose Retry inspection to check it, or return to settings to choose another installation."]) to:body];
         footerTitle=self.managerFailureBeforeActivation ? @"Update was not applied" : @"Update was not confirmed";footerDetail=@"Resolve the reported problem before reviewing another update.";primary=@"Back to settings";action=@selector(backToSettings:);
     }
     NSScrollView *scroll=[NSScrollView new];scroll.drawsBackground=NO;scroll.hasVerticalScroller=YES;scroll.autohidesScrollers=YES;scroll.translatesAutoresizingMaskIntoConstraints=NO;[self.managerPanel addSubview:scroll];
@@ -154,6 +156,7 @@ NSString *launcherChange=[r[@"bootstrap_changes"] count] ? [NSString stringWithF
     self.pagePrimary=[self pageButton:primary action:action];self.pagePrimary.keyEquivalent=review ? @"\r" : @"";[self stylePrimary:self.pagePrimary];
     NSMutableArray *controls=[NSMutableArray arrayWithObject:self.pagePrimary];
     if(settings || review){self.pageSecondary=[self pageButton:review ? @"Cancel" : @"Rollback" action:review ? @selector(cancelManagerReview:) : @selector(rollbackFromSettings:)];[controls insertObject:self.pageSecondary atIndex:0];}
+    else if([page isEqual:@"error"]){self.pageSecondary=[self pageButton:@"Retry inspection" action:@selector(retryManagerInspection:)];[controls insertObject:self.pageSecondary atIndex:0];}
     NSStackView *actions=managerStack(controls,NSUserInterfaceLayoutOrientationHorizontal,12);
     NSStackView *footer=managerStack(@[footerCopy,managerSpacer(),actions],NSUserInterfaceLayoutOrientationHorizontal,16);footer.translatesAutoresizingMaskIntoConstraints=NO;[self.managerPanel addSubview:footer];
     [NSLayoutConstraint activateConstraints:@[[scroll.topAnchor constraintEqualToAnchor:self.managerPanel.topAnchor],[scroll.leadingAnchor constraintEqualToAnchor:self.managerPanel.leadingAnchor],[scroll.trailingAnchor constraintEqualToAnchor:self.managerPanel.trailingAnchor],[scroll.bottomAnchor constraintEqualToAnchor:footer.topAnchor constant:-24],[footer.leadingAnchor constraintEqualToAnchor:self.managerPanel.leadingAnchor],[footer.trailingAnchor constraintEqualToAnchor:self.managerPanel.trailingAnchor],[footer.bottomAnchor constraintEqualToAnchor:self.managerPanel.bottomAnchor]]];

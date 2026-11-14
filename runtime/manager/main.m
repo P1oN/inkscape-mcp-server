@@ -181,7 +181,7 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
     NSScrollView *scroll=[NSScrollView new];scroll.drawsBackground=NO;scroll.hasVerticalScroller=YES;scroll.autohidesScrollers=YES;scroll.translatesAutoresizingMaskIntoConstraints=NO;[content addSubview:scroll];
     NSView *document=[ManagerDocumentView new];document.translatesAutoresizingMaskIntoConstraints=NO;scroll.documentView=document;
     NSStackView *stack=managerStack(@[],NSUserInterfaceLayoutOrientationVertical,12);stack.translatesAutoresizingMaskIntoConstraints=NO;[document addSubview:stack];
-    self.installed=managerLabel(@"No runtime installed yet.",11,NSColor.secondaryLabelColor);self.installed.selectable=YES;
+    self.installed=managerLabel(@"Installation has not been verified yet.",11,NSColor.secondaryLabelColor);self.installed.selectable=YES;
     self.available=managerLabel(@"The bundled version is ready to install offline.",12,NSColor.secondaryLabelColor);
     self.status=managerLabel(@"Checking this installation…",12,NSColor.secondaryLabelColor);
     self.status.maximumNumberOfLines=0;self.status.lineBreakMode=NSLineBreakByWordWrapping;self.status.selectable=YES;

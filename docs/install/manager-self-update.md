@@ -21,7 +21,9 @@ restores the Review action; another review runs preparation again before asking 
 Settings & versions lists Manager, runtime, instruction content and permanent launcher
 separately. Full paths, revisions and hashes are available in **View exact file changes**,
 a scrollable view separate from the main confirmation. Preparation, handoff, permissions,
-recovery and completion each have readable dedicated views. The
+recovery and completion each have readable dedicated views. **Back to settings** only
+navigates; **Retry inspection** explicitly retries a failed inspection. Navigation back
+to connection and Advanced remains available when inspection keeps failing. The
 separate runtime/text update actions retain their own review and confirmation.
 
 The destination is the running installed Manager in `~/Applications` or `/Applications`.
@@ -111,7 +113,8 @@ before mutation. Later bytes, foreign files or dangling symlinks refuse recovery
 the journal. Interrupted recovery is repeatable; another recovery after success is a no-op.
 A separate `manager-recovery.json` receipt records confirmed restoration before the journal
 is retired; it is accepted only for the current prepared plan with no pending journal.
-It survives a coordinator reporting the original failure. The GUI labels its running
+It survives a coordinator reporting the original failure. A matching successful activation
+commit supersedes that receipt, including a successful retry of the same preparation. The GUI labels its running
 bundle separately from a restored installed destination. Do not delete the journal, retained app or `backups/<id>/activation-helper` to force recovery.
 If a process still uses the app, close only your own Manager and retry. No recovery launches
 an application from MCP startup.

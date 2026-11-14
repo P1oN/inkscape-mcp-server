@@ -202,6 +202,11 @@ pub(super) fn manager_recovery_complete(root: &Path) -> bool {
     ) else {
         return false;
     };
+    if let Ok(committed) = super::storage::json::<Value>(&root.join("manager-last.json"))
+        && committed["id"] == receipt["preparation_id"]
+    {
+        return false;
+    }
     receipt["state"] == "recovered"
         && receipt["preparation_id"].as_str().is_some()
         && receipt["preparation_id"] == prepared["id"]

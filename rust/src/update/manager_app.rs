@@ -1244,6 +1244,12 @@ mod tests {
         let bytes = fs::read(root.join("manager-recovery.json")).unwrap();
         recover_plan(&root, &plan).unwrap();
         assert_eq!(fs::read(root.join("manager-recovery.json")).unwrap(), bytes);
+        // A retry can reuse the same reviewed preparation. Its successful commit
+        // supersedes the earlier receipt even though both carry the same UUID.
+        write_json(&root.join("manager-journal.json"), &plan).unwrap();
+        publish_files(&root, &plan, |_| Ok(())).unwrap();
+        commit_manager_journal(&root).unwrap();
+        assert!(!installer::manager_recovery_complete(&root));
     }
     #[test]
     fn coordinated_app_bootstrap_publication_and_recovery_boundaries_are_idempotent() {

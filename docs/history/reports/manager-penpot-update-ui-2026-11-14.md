@@ -50,7 +50,7 @@ Malformed JSON roots normalize to no response before dictionary access.
 
 After actual Manager recovery, `manager-recovery.json` is durably written before retiring
 the journal. Inspection recognizes it only for the matching current prepared plan and
-with no remaining Manager journal. The coordinator can still report the original failure
+with no remaining Manager journal and no matching successful activation commit. The coordinator can still report the original failure
 in `manager-outcome.json` without overwriting this independent restoration fact. A failed
 receipt write retains the journal; retry is idempotent. Completion/warnings are scoped to
 the selected installation, so selecting another root cannot inherit an old success banner.
@@ -112,6 +112,25 @@ Launch Services registration withdrawn; the compact build-bound profile is retai
 
 Automated AppKit/Launch Services and signed synthetic backend evidence
 remain separate from the interactive frontend fixture described above.
+
+## PR review follow-up
+
+PR [#66](https://github.com/P1oN/inkscape-mcp-server/pull/66) received two additional
+CodeRabbit findings, both reproduced and fixed. **Back to settings** now only navigates;
+**Retry inspection** is a separate explicit action. A controlled persistent startup and
+inspection failure was exercised in the native frontend: one initial inspection and one
+requested retry are logged, while Settings → connection → Advanced invokes no helper.
+Unavailable component identities are labelled **Not verified**, rather than inventing an
+absent installation. The owned window was closed and its registration withdrawn again.
+
+A matching successful `manager-last.json` commit now supersedes an older recovery receipt,
+including successful reuse of the same preparation UUID. The regression actually recovers,
+republishes and commits that plan, then checks that inspection cannot label it restored;
+the UI regression retains the successful update outcome. All 16 Manager unit regressions,
+the full tooling graph and strict AppKit state/routing checks pass after these changes.
+Independent review was repeated on this final diff without remaining findings. The signed
+synthetic replacement/restart/recovery fixture was rebuilt and repeated on the fixed
+backend in 110.32 seconds, including retained-session and current-contract MCP probes.
 
 ## Remaining qualification
 
