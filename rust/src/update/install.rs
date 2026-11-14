@@ -311,7 +311,7 @@ pub fn report(active: &Selector) -> Value {
     } else {
         json!({"status":"not_applicable","team_id":null})
     };
-    json!({"launcher_version":LAUNCHER_VERSION,"launcher_build":env!("INKSCAPE_MCP_BUILD_ID"),"launcher_revision":env!("INKSCAPE_MCP_REVISION"),"channel":active.channel,"distribution":active.current.tag,"runtime_build":active.current.runtime.build_id,"runtime_revision":active.current.runtime.source_revision,"instructions_version":active.current.instructions.version,"instructions_content":active.current.instructions.content_id,"rollback_available":active.previous.is_some(),"manager_helper_signing":actor_signing,"notarization_assessment":"not_checked_on_this_host"})
+    json!({"launcher_version":LAUNCHER_VERSION,"launcher_build":env!("INKSCAPE_MCP_BUILD_ID"),"launcher_revision":env!("INKSCAPE_MCP_REVISION"),"channel":active.channel,"distribution":active.current.tag,"runtime_distribution":active.current.runtime.distribution_tag,"runtime_build":active.current.runtime.build_id,"runtime_revision":active.current.runtime.source_revision,"instructions_version":active.current.instructions.version,"instructions_content":active.current.instructions.content_id,"rollback_available":active.previous.is_some(),"manager_helper_signing":actor_signing,"notarization_assessment":"not_checked_on_this_host"})
 }
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]

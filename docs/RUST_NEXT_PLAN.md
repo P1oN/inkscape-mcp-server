@@ -2,7 +2,8 @@
 
 Manager self-update Issue [#63](https://github.com/P1oN/inkscape-mcp-server/issues/63) now has
 a separate release contract, verified reviewed staging and app/bootstrap restart recovery.
-The remaining delivery gate is interactive product-GUI and final signed-distribution
+The Penpot update screens and Cancel behavior have a [separate GUI follow-up](history/reports/manager-penpot-update-ui-2026-11-14.md).
+The remaining delivery gate is final signed-distribution
 qualification (including `/Applications` permissions, browser quarantine and another Mac),
 with the [contract and validation scope](install/manager-self-update.md). Publishing a new
 release remains a separately authorized action.

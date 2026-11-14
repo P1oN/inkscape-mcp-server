@@ -6,10 +6,12 @@
 @interface TestManager : Manager
 @property NSArray *lastArguments;
 @property NSUInteger checksStarted;
+@property NSDictionary *activatedReview;
 @end
 @implementation TestManager
 - (void)run:(NSArray *)arguments request:(NSDictionary *)request {self.lastArguments=arguments;}
 - (void)startUpdateCheck {self.checksStarted++;}
+- (void)beginManagerActivation:(NSDictionary *)result {self.activatedReview=result;}
 @end
 static void require(BOOL condition, NSString *message) {
     if(!condition){fprintf(stderr,"%s\n",message.UTF8String);exit(1);}
@@ -17,6 +19,7 @@ static void require(BOOL condition, NSString *message) {
 int main(void) {@autoreleasepool {
     [NSApplication sharedApplication];[NSApp setActivationPolicy:NSApplicationActivationPolicyProhibited];
     TestManager *manager=[TestManager new];[manager buildWindow];
+    for(NSString *json in @[@"[]",@"1",@"\"text\"",@"null",@"{broken"]){require(managerResponse([json dataUsingEncoding:NSUTF8StringEncoding])==nil,@"malformed helper root reaches dictionary subscripting");}
     [manager applyInspection:@{@"state":@"not_installed",@"clients":@[],@"candidates":@[]}];
     require(manager.codex.state==NSControlStateValueOn && manager.skills.state==NSControlStateValueOn,@"default registration changed");
     require(!manager.installButton.enabled && !manager.checkButton.hidden && manager.checkButton.enabled && !manager.rollbackButton.enabled,@"fresh install cannot check bundled updates");
@@ -70,6 +73,56 @@ int main(void) {@autoreleasepool {
     manager.preparation=@"review";[manager applyManagerCheck:managerUpdate error:nil generation:manager.generation installation:manager.installation channel:manager.channel.indexOfSelectedItem];require(manager.managerOffer==nil,@"Manager reply replaces prepared review");manager.preparation=nil;
     [manager applyManagerCheck:managerUpdate error:nil generation:manager.generation installation:@"/different-root" channel:manager.channel.indexOfSelectedItem];require(manager.managerOffer==nil,@"Manager reply crosses installation");
     [manager applyManagerCheck:managerUpdate error:nil generation:manager.generation installation:manager.installation channel:1-manager.channel.indexOfSelectedItem];require(manager.managerOffer==nil,@"Manager reply crosses channel");
+    manager.managerOffer=nil;[manager showSettings:nil];
+    require([manager.pageManagerAction.title isEqual:@"Check Manager updates"],@"settings lacks read-only check action");
+    [manager applyManagerCheck:managerUpdate error:nil generation:manager.generation installation:manager.installation channel:manager.channel.indexOfSelectedItem];
+    require([manager.pageManagerAction.title isEqual:@"Review Manager update"] && manager.pageManagerAction.enabled,@"accepted discovery leaves stale visible action");
+    [manager applyManagerCheck:@{@"manager_update_available":@NO} error:nil generation:manager.generation installation:manager.installation channel:manager.channel.indexOfSelectedItem];
+    require([manager.pageManagerAction.title isEqual:@"Check Manager updates"],@"no-update response leaves misleading Review action");
+    // Cancel restores a usable offer immediately, but never retains activation consent.
+    NSDictionary *review=@{@"review_id":@"reviewed-hash",@"manager_application":@"/owned/Applications/Manager.app",@"baseline_healthy":@YES,@"installed_manager":@{@"InkscapeMCPDistribution":@"v1.0.0",@"InkscapeMCPBuildID":@"manager-old",@"InkscapeMCPRevision":@"old-revision"},@"target_manager":@{@"tag":@"v2.0.0",@"manager_build":@"manager-new",@"manager_revision":@"new-revision",@"publisher":@"publisher",@"bootstrap":@{@"build_id":@"bootstrap-new",@"source_revision":@"new-source",@"executable":@{@"sha256":@"full-target-hash"}},@"launcher_version":@2,@"text_interface":@1,@"helper_protocol":@5,@"component_format":@1},@"bootstrap_changes":@[@{@"destination":@"/owned/custom profile/bin/inkscape-mcp",@"from":@{@"sha256":@"full-before-hash"},@"to":@{@"sha256":@"full-after-hash"}}]};
+    manager.reviewOffer=managerUpdate[@"manager_available"];[manager invalidateCheck];[manager presentManagerReview:review];
+    require([manager.managerPage isEqual:@"review"] && manager.pagePrimary.enabled && manager.connectionScroll.hidden,@"review is not a separate page");
+    require([[manager reviewDetails] containsString:@"full-before-hash"] && [[manager reviewDetails] containsString:@"full-after-hash"],@"exact changes lose full identities");
+    [manager applyManagerCheck:managerUpdate error:nil generation:manager.generation installation:manager.installation channel:manager.channel.indexOfSelectedItem];
+    require(manager.managerOffer==nil && manager.managerReview==review,@"background check replaces consent context");
+    [manager cancelManagerReview:nil];
+    require([manager.managerPage isEqual:@"settings"] && manager.managerReview==nil && manager.managerOffer!=nil && manager.pagePrimary.enabled && manager.managerUpdateButton.enabled && manager.activatedReview==nil,@"Cancel leaves stale offer or activation consent");
+    [manager updateManager:nil];require([manager.lastArguments.firstObject isEqual:@"manager-online-prepare"],@"retry after Cancel skips preparation");
+    [manager presentManagerReview:review];[manager confirmManagerReview:nil];
+    require(manager.activatedReview==review && manager.managerReview==nil,@"confirmation is not bound to the displayed plan");
+    manager.activatedReview=nil;[manager presentManagerReview:review];[manager changeOptions:manager.channel];[manager confirmManagerReview:nil];
+    require(manager.activatedReview==nil,@"context change keeps stale consent");
+    [manager startupManagerFailed:@"Actual startup acknowledgment failed"];require([manager.lastArguments.firstObject isEqual:@"install-inspect"],@"startup failure does not inspect recovery state");
+    [manager applyInspection:@{@"state":@"damaged",@"recovery_required":@YES,@"manager_recovery_required":@YES,@"manager_update_error":@"Owned Manager recovery details",@"clients":@[],@"candidates":@[]}];
+    require([manager.managerPage isEqual:@"recovery"] && [manager.pagePrimary.title isEqual:@"Recover Manager"],@"Manager recovery is hidden in a generic footer");
+    [manager applyInspection:@{@"state":@"installed",@"installed":installed,@"manager_update_recovered":@YES,@"clients":@[],@"candidates":@[]}];
+    require([manager.managerOutcome isEqual:@"restored"] && [manager.managerPage isEqual:@"settings"],@"verified restoration loses its outcome");
+    manager.rollbackAvailable=YES;manager.recoveryRequired=NO;[manager rollbackFromSettings:nil];
+    require(manager.managerPage==nil && [manager.lastArguments.firstObject isEqual:@"rollback"],@"rollback result or failure would be hidden behind Settings");
+    NSMutableDictionary *newVersions=[installed mutableCopy];newVersions[@"runtime_build"]=@"runtime-after-rollback";[manager showInstalled:newVersions];[manager showSettings:nil];
+    require([manager.installedComponents[@"runtime_build"] isEqual:@"runtime-after-rollback"],@"Settings keeps an old snapshot after component operations");
+    [manager startupManagerFailed:@"Original startup failure"];[manager startupInspectionFailed:@"Inspection timed out"];
+    require([manager.managerPage isEqual:@"error"] && [manager.managerFailure containsString:@"Original startup failure"] && [manager.managerFailure containsString:@"Inspection timed out"],@"inspection timeout hides the original startup failure");
+    manager.lastArguments=@[@"navigation-marker"];[manager backToSettings:nil];
+    require([manager.managerPage isEqual:@"settings"] && [manager.lastArguments.firstObject isEqual:@"navigation-marker"],@"Back to settings retries a persistently failing inspection");
+    [manager backToConnection:nil];require(manager.managerPage==nil,@"inspection failure traps navigation away from Advanced");
+    [manager failManagerUpdate:@"Persistent inspection failure"];[manager retryManagerInspection:nil];require([manager.lastArguments.firstObject isEqual:@"install-inspect"],@"explicit inspection retry is not separate from navigation");
+    manager.managerOutcome=@"updated";[manager applyInspection:@{@"state":@"installed",@"installed":installed,@"manager_update_recovered":@NO,@"clients":@[],@"candidates":@[]}];
+    require([manager.managerOutcome isEqual:@"updated"],@"superseded recovery receipt replaces successful update outcome");
+    NSString *originalRoot=manager.installation;manager.installation=@"/owned/another-installation";manager.managerWarning=@"Old root warning";
+    [manager applyInspection:@{@"state":@"not_installed",@"clients":@[],@"candidates":@[]}];
+    require(!manager.managerOutcome && !manager.managerWarning && !manager.managerPage,@"completion crosses installation roots");
+    manager.installation=originalRoot;[manager applyInspection:@{@"state":@"installed",@"installed":installed,@"clients":@[],@"candidates":@[]}];
+    [manager failManagerUpdate:@"A long permission failure remains available in the scrollable content instead of being truncated in the footer."];
+    require([manager.managerPage isEqual:@"error"] && [manager.pagePrimary.title isEqual:@"Back to settings"],@"permission failure offers generic destructive retry");
+    for(NSString *page in @[@"preparing",@"handoff",@"review",@"recovery",@"error",@"settings"]){
+        manager.managerReview=[page isEqual:@"review"] ? review : nil;
+        [manager showManagerPage:page];[manager.window setContentSize:NSMakeSize(620,600)];[manager.window.contentView layoutSubtreeIfNeeded];
+        require(NSContainsRect(manager.window.contentView.bounds,[manager.pagePrimary convertRect:manager.pagePrimary.bounds toView:manager.window.contentView]),@"update primary action leaves minimum window");
+        require(manager.pagePrimary.enabled==![@[@"preparing",@"handoff"] containsObject:page],@"preparing or handoff exposes an active confirmation");
+    }
+    manager.managerReview=nil;[manager backToConnection:nil];
     manager.advancedButton.state=NSControlStateValueOn;[manager toggleAdvanced:nil];
     [manager setPath:@"/owned/a deliberately long workspace directory with spaces/another long directory/drawings" label:manager.workspaceLabel];
     [manager.window setContentSize:NSMakeSize(620,600)];
