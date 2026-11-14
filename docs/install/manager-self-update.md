@@ -24,7 +24,10 @@ A system installation requires existing write permission; the updater reports a 
 failure and never escalates, changes system permissions or creates a competing installation.
 The app is staged beside its destination, including when the selected MCP root is on another
 volume. Application-wide and installation locks serialize different Manager instances and
-installation roots. The app lock uses the validated destination directory inode, opened
+installation roots. Slow downloading, signature checks and staging release the installation
+lock so offline MCP reconnects can continue; preparation reacquires it and repeats transaction,
+selection and identity checks before saving Review. The app lock uses the validated
+destination directory inode, opened
 read-only, so it does not leave a private lock file in shared /Applications. Another process using the destination refuses activation before the
 confirming window exits; it is checked again after that instance exits. Nothing kills another
 Manager, client, Inkscape, or an existing MCP session.

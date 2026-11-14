@@ -486,15 +486,68 @@ fn native_signed_manager_replacement_restart_and_recovery() {
     let selection = fs::read(root.join("active.json")).unwrap();
     let mut existing = Session::new(&root);
     existing.verify();
+    struct DuringDownload<'a> {
+        network: &'a Network,
+        root: &'a Path,
+        conflict: bool,
+        checked: std::cell::Cell<bool>,
+    }
+    impl super::super::download::Transport for DuringDownload<'_> {
+        fn get(&self, url: &str, limit: u64) -> Result<Vec<u8>> {
+            let lock = Lock::acquire(self.root).expect("download must not hold installation lock");
+            if self.conflict {
+                write(
+                    &self.root.join("transaction.json"),
+                    b"owned concurrent transaction",
+                )?;
+            }
+            drop(lock);
+            if !self.conflict {
+                // A real offline launcher must initialize while Manager is downloading.
+                Session::new(self.root).verify();
+            }
+            self.checked.set(true);
+            self.network.get(url, limit)
+        }
+    }
+    let concurrent = DuringDownload {
+        network: &network,
+        root: &root,
+        conflict: true,
+        checked: std::cell::Cell::new(false),
+    };
+    let error = prepare_online_verified(
+        &root,
+        &old,
+        manifest.clone(),
+        "prerelease",
+        &concurrent,
+        &helper,
+    )
+    .unwrap_err();
+    assert!(concurrent.checked.get());
+    assert!(error.contains("Recover transaction.json"), "{error}");
+    assert_eq!(
+        fs::read(root.join("transaction.json")).unwrap(),
+        b"owned concurrent transaction"
+    );
+    assert!(!root.join("manager-prepared.json").exists());
+    fs::remove_file(root.join("transaction.json")).unwrap();
+    let responsive = DuringDownload {
+        conflict: false,
+        checked: std::cell::Cell::new(false),
+        ..concurrent
+    };
     let prepared = prepare_online_verified(
         &root,
         &old,
         manifest.clone(),
         "prerelease",
-        &network,
+        &responsive,
         &helper,
     )
     .unwrap();
+    assert!(responsive.checked.get());
     let plan = load(&root, "manager-prepared.json").unwrap();
     assert_eq!(plan.online.as_ref().unwrap().bootstrap.len(), 3);
     // Real publication and rollback through each durable state, followed by actual
@@ -699,6 +752,11 @@ fn native_signed_manager_replacement_restart_and_recovery() {
             .is_empty()
     );
     activate_prepared(&damaged, &old, &prepared_damaged, true);
+    let deadline = Instant::now() + Duration::from_secs(5);
+    while !damaged.join("native-startup.json").exists() {
+        assert!(Instant::now() < deadline);
+        std::thread::sleep(Duration::from_millis(25));
+    }
     let startup: Value = json(&damaged.join("native-startup.json")).unwrap();
     let response: Value = serde_json::from_str(startup["response"].as_str().unwrap()).unwrap();
     assert!(response["runtime_warning"].is_string());

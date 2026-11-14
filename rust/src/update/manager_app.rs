@@ -288,12 +288,15 @@ fn prepare_online_verified(
     let parent = source.parent().ok_or("Manager parent missing")?;
     destination_parent(parent)?;
     mkdir(root)?;
-    let _lock = Lock::acquire(root)?;
+    let lock = Lock::acquire(root)?;
     let _app_lock = Lock::manager(parent)?;
     no_other_transaction(root)?;
     verify_last(root)?;
     preserves_selection(root, &manifest)?;
     let observed = observations(root)?;
+    // Network, code-signing and stage fsync must not starve offline MCP launches.
+    // The app lock still serializes competing preparations of this destination.
+    drop(lock);
     // A broken/incomplete installation must not prevent updating Manager. Review
     // distinguishes its preserved state from a verified working baseline.
     let baseline_healthy = runtime_health(root).is_ok();
@@ -341,6 +344,13 @@ fn prepare_online_verified(
         return Err("Manager changed during staging.".into());
     }
     sync_dir(parent)?;
+    let _lock = Lock::acquire(root)?;
+    no_other_transaction(root)?;
+    verify_last(root)?;
+    preserves_selection(root, &manifest)?;
+    if observations(root)? != observed || inventory(source, 512 * 1024 * 1024)? != before {
+        return Err("Installation changed during Manager staging; review again.".into());
+    }
     let mut bootstrap = Vec::new();
     // A fresh or runtime-only root has no permanent bootstrap to upgrade. Never
     // manufacture settings.json or select the offline runtime as a side effect.
