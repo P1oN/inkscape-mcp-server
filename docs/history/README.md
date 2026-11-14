@@ -98,3 +98,5 @@ without rewriting recorded JSON paths/hashes or duplicating binary artifacts.
 Markdown moves normalize links for the new location; record content and limitations are preserved.
 Exact original file bytes remain accessible at their original Git revisions. Historical commands
 may reference removed scripts and should not be executed as current development requirements.
+
+- [Manager update screens and Penpot acceptance (2026-11-14)](reports/manager-penpot-update-ui-2026-11-14.md)

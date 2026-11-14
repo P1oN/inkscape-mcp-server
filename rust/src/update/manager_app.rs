@@ -931,6 +931,14 @@ fn recover_plan_with(
             checkpoint(&format!("bootstrap-restore-{i}"))?;
         }
     }
+    // Record the restored outcome before retiring the journal. If this write fails,
+    // the journal stays retryable; inspection never announces success while it exists.
+    if plan.online.is_some() {
+        write_json(
+            &root.join("manager-recovery.json"),
+            &json!({"state":"recovered","preparation_id":plan.id}),
+        )?;
+    }
     fs::remove_file(root.join("manager-journal.json")).map_err(|e| e.to_string())?;
     sync_dir(root)
 }
@@ -1198,6 +1206,44 @@ mod tests {
         });
         write_json(&root.join("manager-journal.json"), &plan).unwrap();
         (temp, root, plan)
+    }
+    #[test]
+    fn restored_outcome_is_durable_before_journal_retirement_and_retryable() {
+        let (_temp, root, plan) = coordinated_fixture();
+        publish_files(&root, &plan, |_| Ok(())).unwrap();
+        fs::create_dir(root.join("manager-recovery.json")).unwrap();
+        assert!(recover_plan(&root, &plan).is_err());
+        assert!(root.join("manager-journal.json").is_file());
+        assert_eq!(
+            inventory(&plan.target, 1000).unwrap(),
+            *plan.before.as_ref().unwrap()
+        );
+        fs::remove_dir(root.join("manager-recovery.json")).unwrap();
+        recover_plan(&root, &plan).unwrap();
+        let outcome: Value = json(&root.join("manager-recovery.json")).unwrap();
+        assert_eq!(outcome["state"], "recovered");
+        assert_eq!(outcome["preparation_id"], plan.id);
+        assert!(!root.join("manager-journal.json").exists());
+        write_json(&root.join("manager-prepared.json"), &plan).unwrap();
+        write_json(
+            &root.join("manager-outcome.json"),
+            &json!({"error":"restart failed"}),
+        )
+        .unwrap();
+        assert!(installer::manager_recovery_complete(&root));
+        write_json(
+            &root.join("manager-prepared.json"),
+            &json!({"id":"later-plan"}),
+        )
+        .unwrap();
+        assert!(!installer::manager_recovery_complete(&root));
+        write_json(&root.join("manager-prepared.json"), &plan).unwrap();
+        write_json(&root.join("manager-journal.json"), &plan).unwrap();
+        assert!(!installer::manager_recovery_complete(&root));
+        fs::remove_file(root.join("manager-journal.json")).unwrap();
+        let bytes = fs::read(root.join("manager-recovery.json")).unwrap();
+        recover_plan(&root, &plan).unwrap();
+        assert_eq!(fs::read(root.join("manager-recovery.json")).unwrap(), bytes);
     }
     #[test]
     fn coordinated_app_bootstrap_publication_and_recovery_boundaries_are_idempotent() {

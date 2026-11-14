@@ -16,7 +16,12 @@ online update. MCP startup/reconnect stays offline and never opens Manager or In
 Choose **Review Manager update…** to download and verify the candidate. Review lists the
 installed and target Manager/bootstrap identities, exact destination, changed bootstrap files
 and hashes, publisher, and restart requirement. Only **Update Manager and restart** authorizes
-publication. Cancelling keeps the verified stage and leaves installed files unchanged. The
+publication. Cancelling keeps the verified stage and leaves installed files unchanged. Settings immediately
+restores the Review action; another review runs preparation again before asking for consent.
+Settings & versions lists Manager, runtime, instruction content and permanent launcher
+separately. Full paths, revisions and hashes are available in **View exact file changes**,
+a scrollable view separate from the main confirmation. Preparation, handoff, permissions,
+recovery and completion each have readable dedicated views. The
 separate runtime/text update actions retain their own review and confirmation.
 
 The destination is the running installed Manager in `~/Applications` or `/Applications`.
@@ -100,11 +105,14 @@ old app/bootstrap when the target is idle; a running unacknowledged Manager is p
 concrete instructions. `manager-outcome.json` carries failures back into the next inspection.
 Backups, stages and helper paths remain available; no live executable is garbage-collected.
 
-With no Manager using the target, **Recover / retry** (`install-recover`) or offline launcher
+With no Manager using the target, **Recover Manager** (or the connection view’s **Recover / retry**) (`install-recover`) or offline launcher
 recovery restores the previous app/bootstrap. It preflights all destinations and backups
 before mutation. Later bytes, foreign files or dangling symlinks refuse recovery and retain
 the journal. Interrupted recovery is repeatable; another recovery after success is a no-op.
-Do not delete the journal, retained app or `backups/<id>/activation-helper` to force recovery.
+A separate `manager-recovery.json` receipt records confirmed restoration before the journal
+is retired; it is accepted only for the current prepared plan with no pending journal.
+It survives a coordinator reporting the original failure. The GUI labels its running
+bundle separately from a restored installed destination. Do not delete the journal, retained app or `backups/<id>/activation-helper` to force recovery.
 If a process still uses the app, close only your own Manager and retry. No recovery launches
 an application from MCP startup.
 

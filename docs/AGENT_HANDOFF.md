@@ -1,5 +1,17 @@
 # Agent handoff — current status
 
+## Manager update screens aligned with Penpot — 2026-11-14
+
+The update flow now has separate Settings/identities, preparation, compact Review,
+full exact changes, handoff, failure, recovery and completion views from Penpot
+boards 33–40. Cancel immediately restores the offer while requiring a new verified
+preparation; asynchronous results refresh the visible action. Manager startup errors
+inspect recovery read-only. A separate plan-bound recovery receipt survives the
+coordinator's failure report and prevents stale or premature restored banners.
+See the [follow-up report](history/reports/manager-penpot-update-ui-2026-11-14.md) for
+regression, interactive fixture, independent review and remaining package/host limits.
+Real user installations/profiles/sessions and the original dirty checkout are preserved.
+
 ## Reviewed Manager self-update — 2026-11-14
 
 Issue [#63](https://github.com/P1oN/inkscape-mcp-server/issues/63) is implemented in an isolated

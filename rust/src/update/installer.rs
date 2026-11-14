@@ -191,6 +191,21 @@ fn repair_missing_engine(settings: &mut Settings, chosen: &Path) -> Result<()> {
     }
     settings.validate()
 }
+/// The coordinator's error report cannot overwrite this independent recovery fact.
+pub(super) fn manager_recovery_complete(root: &Path) -> bool {
+    if present(&root.join("manager-journal.json")) {
+        return false;
+    }
+    let (Ok(receipt), Ok(prepared)) = (
+        super::storage::json::<Value>(&root.join("manager-recovery.json")),
+        super::storage::json::<Value>(&root.join("manager-prepared.json")),
+    ) else {
+        return false;
+    };
+    receipt["state"] == "recovered"
+        && receipt["preparation_id"].as_str().is_some()
+        && receipt["preparation_id"] == prepared["id"]
+}
 pub fn inspect(root: &Path) -> Result<Value> {
     ancestor(root)?;
     let mut candidates = BTreeSet::new();
@@ -220,12 +235,13 @@ pub fn inspect(root: &Path) -> Result<Value> {
         }
         clients.push(json!({"name": name, "profile":config.parent(), "config":config, "binding":assessment, "available":client_available(&name), "error":error, "configured": entry.is_some(), "candidate": candidate, "command_exists": command.as_ref().is_some_and(|p| p.is_file()), "foreign_binding": assessment.status == "uncertain"}));
     }
-    let mut result = json!({"state":"not_installed","installation":root,"clients":clients,"candidates":candidates,"choice_required":candidates.len()>1,"recovery_required":present(&root.join("installation-journal.json")) || present(&root.join("transaction.json")) || present(&root.join("manager-journal.json"))});
+    let mut result = json!({"state":"not_installed","installation":root,"clients":clients,"candidates":candidates,"choice_required":candidates.len()>1,"manager_recovery_required":present(&root.join("manager-journal.json")),"recovery_required":present(&root.join("installation-journal.json")) || present(&root.join("transaction.json")) || present(&root.join("manager-journal.json"))});
     if let Ok(outcome) = super::storage::json::<Value>(&root.join("manager-outcome.json"))
         && let Some(error) = outcome["error"].as_str()
     {
         result["manager_update_error"] = json!(error);
     }
+    result["manager_update_recovered"] = json!(manager_recovery_complete(root));
     let mut configured_engine = None;
     if present(&root.join("active.json")) {
         match selector(root).and_then(|s| {
@@ -942,14 +958,15 @@ fn recover_locked(root: &Path) -> Result<bool> {
 }
 pub fn recover(root: &Path) -> Result<Value> {
     let _lock = Lock::acquire(root)?;
-    let mut changed = super::manager_app::recover_online(root)?;
+    let manager_recovered = super::manager_app::recover_online(root)?;
+    let mut changed = manager_recovered;
     changed |= recover_locked(root)?;
     if present(&root.join("transaction.json")) {
         let settings: Settings = super::storage::json(&root.join("settings.json"))?;
         settings.validate()?;
         changed |= transaction::recover(root, &settings)?;
     }
-    Ok(json!({"state":"recovered","changed":changed}))
+    Ok(json!({"state":"recovered","changed":changed,"manager_recovered":manager_recovered}))
 }
 /// Called under the launch/update lock before reading the active selector.
 pub fn recover_before_launch(root: &Path) -> Result<bool> {
