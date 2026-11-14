@@ -64,6 +64,7 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
 @property NSString *legacySource;
 @property NSString *preparation;
 @property NSString *state;
+@property NSString *pendingRuntimeWarning;
 @property NSTask *running;
 @property BOOL hasInstallation;
 @property BOOL recoveryRequired;
@@ -71,6 +72,10 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
 @property BOOL updateAvailable;
 @property BOOL configurationChanged;
 @property NSArray<NSDictionary *> *clientDiscovery;
+@property NSTextField *managerAvailable;
+@property NSButton *managerUpdateButton;
+@property NSTask *managerCheckTask;
+@property NSDictionary *managerOffer;
 @property NSTask *checkTask;
 @property NSUInteger generation;
 @property BOOL startupChecked;
@@ -98,7 +103,8 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
     self.installButton.title=self.preparation ? @"Install now" : self.hasInstallation && self.updateAvailable && !self.configurationChanged ? @"Review update" : self.hasInstallation || self.legacySource ? @"Review changes" : @"Review installation";
     self.installButton.enabled=idle && (self.preparation || (self.hasInstallation && self.updateAvailable && !self.configurationChanged) || (self.workspace && self.inkscape && (self.codex.state==NSControlStateValueOn || self.claude.state==NSControlStateValueOn)));
     self.cancelButton.hidden=self.preparation==nil;self.cancelButton.enabled=idle && self.preparation!=nil;
-    self.checkButton.hidden=NO;self.checkButton.enabled=idle && !self.recoveryRequired && !self.preparation;
+    self.managerUpdateButton.enabled=idle && self.managerOffer!=nil && !self.preparation;
+    self.checkButton.hidden=NO;self.checkButton.enabled=idle && !self.preparation;
     for(NSButton *button in self.updateButtons)button.enabled=idle && self.hasInstallation && !self.recoveryRequired && !self.preparation;
     self.rollbackButton.enabled=idle && self.hasInstallation && self.rollbackAvailable && !self.recoveryRequired && !self.preparation;
     self.recoverButton.hidden=!self.recoveryRequired && ![@[@"failed",@"damaged"] containsObject:self.state ?: @""];
@@ -170,8 +176,12 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
     self.channel.target=self;self.channel.action=@selector(changeOptions:);
     self.previewChannelButton=[self button:@"Use prereleases" action:@selector(usePrereleases:)];self.previewChannelButton.hidden=YES;
     self.channelHint=managerLabel(@"",11,NSColor.secondaryLabelColor);
-    NSStackView *updates=managerStack(@[managerStack(@[self.channel,self.previewChannelButton],NSUserInterfaceLayoutOrientationHorizontal,10),self.channelHint,self.available],NSUserInterfaceLayoutOrientationVertical,8);
-    managerFill(self.channelHint,updates);managerFill(self.available,updates);[self addSection:@"Updates" content:updates to:stack];
+    NSString *savedChannel=[[NSUserDefaults standardUserDefaults] stringForKey:@"UpdateChannel"] ?: [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedUpdateChannel"];
+    if(savedChannel)[self.channel selectItemAtIndex:[savedChannel isEqualToString:@"stable"] ? 0 : 1];
+    self.managerAvailable=managerLabel(@"Manager updates are checked separately.",12,NSColor.secondaryLabelColor);
+    self.managerUpdateButton=[self button:@"Review Manager update…" action:@selector(updateManager:)];self.managerUpdateButton.enabled=NO;
+    NSStackView *updates=managerStack(@[managerStack(@[self.channel,self.previewChannelButton],NSUserInterfaceLayoutOrientationHorizontal,10),self.channelHint,self.available,self.managerAvailable,self.managerUpdateButton],NSUserInterfaceLayoutOrientationVertical,8);
+    managerFill(self.managerAvailable,updates);managerFill(self.channelHint,updates);managerFill(self.available,updates);[self addSection:@"Updates" content:updates to:stack];
     self.advancedButton=[self button:@"Advanced" action:@selector(toggleAdvanced:)];self.advancedButton.bezelStyle=NSBezelStyleDisclosure;self.advancedButton.buttonType=NSButtonTypePushOnPushOff;
     self.advancedButton.accessibilityLabel=@"Advanced settings";
     [stack addArrangedSubview:managerStack(@[self.advancedButton,managerLabel(@"Advanced",12,NSColor.labelColor),managerLabel(@"Installation, versions & recovery",11,NSColor.secondaryLabelColor)],NSUserInterfaceLayoutOrientationHorizontal,8)];
@@ -211,7 +221,7 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
 - (void)changeOptions:(id)sender {
     [self invalidateCheck];
     self.preparation=nil;if(sender!=self.channel)self.configurationChanged=YES;
-    if(sender==self.channel){self.updateAvailable=NO;self.available.stringValue=self.hasInstallation ? @"Check for updates on the selected channel." : @"The bundled version is ready to install offline.";}
+    if(sender==self.channel){[[NSUserDefaults standardUserDefaults] setObject:self.channel.indexOfSelectedItem==0 ? @"stable" : @"prerelease" forKey:@"SelectedUpdateChannel"];self.updateAvailable=NO;self.available.stringValue=self.hasInstallation ? @"Check for updates on the selected channel." : @"The bundled version is ready to install offline.";}
     if(!self.recoveryRequired)[self setPhase:@"ready" message:self.codex.state!=NSControlStateValueOn && self.claude.state!=NSControlStateValueOn ? @"Select at least one client to continue." : !self.workspace ? @"Choose an SVG workspace to continue. Installation works offline." : !self.inkscape ? @"Choose Inkscape to continue." : @"Review your choices to verify the MCP connection before installing."];
     else [self refreshControls];
     if(sender==self.channel)[self startUpdateCheck];
@@ -264,6 +274,9 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
 - (void)recover:(id)sender {if([[NSFileManager defaultManager] fileExistsAtPath:self.installation])[self run:@[@"install-recover"] request:nil];else [self inspect];}
 - (void)update:(NSArray *)options {NSMutableArray *args=[NSMutableArray arrayWithObjects:@"update",@"--check",nil];[args addObjectsFromArray:options];[args addObjectsFromArray:@[@"--channel",self.channel.indexOfSelectedItem==0 ? @"stable" : @"prerelease"]];[self run:args request:nil];}
 - (void)invalidateCheck {
+    self.managerOffer=nil;
+    NSTask *managerTask=self.managerCheckTask;self.managerCheckTask=nil;
+    if(managerTask.running){[managerTask terminate];dispatch_after(dispatch_time(DISPATCH_TIME_NOW,2*NSEC_PER_SEC),dispatch_get_main_queue(),^{if(managerTask.running)kill(managerTask.processIdentifier,SIGKILL);});}
     self.generation++;NSTask *task=self.checkTask;self.checkTask=nil;
     if(task.running){[task terminate];dispatch_after(dispatch_time(DISPATCH_TIME_NOW,2*NSEC_PER_SEC),dispatch_get_main_queue(),^{if(task.running)kill(task.processIdentifier,SIGKILL);});}
 }
@@ -278,6 +291,7 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
     [self refreshControls];
 }
 - (void)startUpdateCheck {
+    [self startManagerCheck];
     if(self.checkTask || self.running || self.preparation || self.recoveryRequired)return;
     NSString *executable=[[NSBundle mainBundle].bundlePath stringByAppendingPathComponent:@"Contents/Helpers/inkscape-mcp-launcher"];
     NSTask *task=[NSTask new];task.executableURL=[NSURL fileURLWithPath:executable];
@@ -299,7 +313,58 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
         });
     });
 }
+- (BOOL)acceptsManagerCheck:(NSUInteger)generation installation:(NSString *)installation channel:(NSInteger)channel {
+    return generation==self.generation && [installation isEqual:self.installation] && channel==self.channel.indexOfSelectedItem && !self.running && !self.preparation;
+}
+- (void)applyManagerCheck:(NSDictionary *)result error:(NSString *)error generation:(NSUInteger)generation installation:(NSString *)installation channel:(NSInteger)channel {
+    if(![self acceptsManagerCheck:generation installation:installation channel:channel])return;
+    self.managerOffer=!error && [result[@"manager_update_available"] boolValue] ? result[@"manager_available"] : nil;
+    self.managerAvailable.stringValue=error ? [NSString stringWithFormat:@"Manager check unavailable: %@ Local setup remains available.",error] : self.managerOffer ? [NSString stringWithFormat:@"Manager %@ is available. Review the verified download before restarting.",self.managerOffer[@"tag"]] : @"No newer Manager on this channel.";
+    [self refreshControls];
+}
+- (void)startManagerCheck {
+    if(self.managerCheckTask || self.running || self.preparation)return;
+    NSTask *task=[NSTask new];task.executableURL=[NSURL fileURLWithPath:[[NSBundle mainBundle].bundlePath stringByAppendingPathComponent:@"Contents/Helpers/inkscape-mcp-launcher"]];
+    NSUInteger generation=self.generation;NSString *installation=[self.installation copy];NSInteger channel=self.channel.indexOfSelectedItem;
+    task.arguments=@[@"manager-online-check",@"--install-dir",installation,@"--channel",channel==0 ? @"stable" : @"prerelease",@"--json"];
+    NSPipe *output=[NSPipe pipe];task.standardOutput=output;task.standardError=[NSFileHandle fileHandleWithNullDevice];task.standardInput=[NSFileHandle fileHandleWithNullDevice];
+    NSError *error=nil;if(![task launchAndReturnError:&error]){[self applyManagerCheck:nil error:@"Unable to start Manager checker." generation:generation installation:installation channel:channel];return;}
+    self.managerCheckTask=task;self.managerAvailable.stringValue=@"Checking GitHub for Manager updates…";
+    __block BOOL timedOut=NO;NSTimeInterval deadline=NSProcessInfo.processInfo.systemUptime+22;
+    managerTaskDeadline(task,20,2,^BOOL{return self.managerCheckTask==task;},^{timedOut=YES;});
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY,0),^{
+        NSData *out=managerReadOutput(output.fileHandleForReading,task,deadline,nil);[task waitUntilExit];
+        dispatch_async(dispatch_get_main_queue(),^{
+            if(self.managerCheckTask!=task)return;self.managerCheckTask=nil;
+            NSDictionary *result=out.length ? [NSJSONSerialization JSONObjectWithData:out options:0 error:nil] : nil;if(![result isKindOfClass:NSDictionary.class])result=nil;
+            [self applyManagerCheck:result error:timedOut ? @"The request timed out." : task.terminationStatus!=0 || !result ? result[@"error"] ?: @"GitHub could not be reached." : nil generation:generation installation:installation channel:channel];
+        });
+    });
+}
+- (void)updateManager:(id)sender {
+    if(!self.managerOffer || self.running || self.preparation)return;
+    [self run:@[@"manager-online-prepare",@"--channel",self.channel.indexOfSelectedItem==0 ? @"stable" : @"prerelease"] request:nil];
+}
 - (void)usePrereleases:(id)sender {[self.channel selectItemAtIndex:1];self.previewChannelButton.hidden=YES;[self changeOptions:self.channel];[self setPhase:self.state message:@"Prereleases selected. Choose Check updates to review availability, then Update now to install."];}
+- (void)beginManagerActivation:(NSDictionary *)result {
+    NSTask *task=[NSTask new];task.executableURL=[NSURL fileURLWithPath:result[@"activation_helper"]];
+    task.arguments=@[@"manager-online-activate",@"--preparation",result[@"review_id"],@"--parent-pid",[NSString stringWithFormat:@"%d",getpid()],@"--install-dir",self.installation,@"--json"];
+    NSPipe *output=[NSPipe pipe];task.standardInput=[NSFileHandle fileHandleWithNullDevice];task.standardOutput=output;task.standardError=[NSFileHandle fileHandleWithNullDevice];
+    NSError *error=nil;if(![task launchAndReturnError:&error]){[self setPhase:@"failed" message:error.localizedDescription];return;}
+    self.running=task;[self setPhase:@"busy" message:@"Verifying the reviewed Manager update before restart…"];
+    managerTaskDeadline(task,20,2,^BOOL{return self.running==task;},^{});
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED,0),^{
+        NSData *out=managerReadOutput(output.fileHandleForReading,task,NSProcessInfo.processInfo.systemUptime+22,^(NSData *line){
+            NSDictionary *event=[NSJSONSerialization JSONObjectWithData:line options:0 error:nil];
+            if(![event isKindOfClass:NSDictionary.class] || ![event[@"manager_activation_ready"] boolValue] || ![event[@"review_id"] isEqual:result[@"review_id"]])return;
+            dispatch_async(dispatch_get_main_queue(),^{if(self.running!=task)return;self.running=nil;[self invalidateCheck];[[NSUserDefaults standardUserDefaults] synchronize];[NSApp terminate:nil];});
+        });
+        [task waitUntilExit];dispatch_async(dispatch_get_main_queue(),^{if(self.running!=task)return;self.running=nil;
+            NSDictionary *failure=out.length ? [NSJSONSerialization JSONObjectWithData:out options:0 error:nil] : nil;
+            [self setPhase:@"failed" message:[failure isKindOfClass:NSDictionary.class] ? failure[@"error"] ?: @"Manager activation did not reach a safe restart point; retry review." : @"Manager activation did not reach a safe restart point; retry review."];
+        });
+    });
+}
 - (void)run:(NSArray *)arguments request:(NSDictionary *)request {
     if(self.running)return;
     [self invalidateCheck];
@@ -334,8 +399,23 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
         if(task.terminationStatus!=0){
             if([arguments containsObject:@"update"] && self.channel.indexOfSelectedItem==0 && [result[@"error"] isEqualToString:@"no compatible update release found on the selected channel"]){self.previewChannelButton.hidden=NO;[self setPhase:@"installed" message:@"Stable releases currently have no eligible updates. Stay on Stable, or choose Use prereleases to check preview versions."];return;}
             [self setPhase:@"failed" message:result[@"error"] ?: @"Operation failed. Review the prerequisites and retry or recover."];return;}
+        if([result[@"manager_online_prepared"] boolValue]){
+            NSAlert *review=[NSAlert new];review.messageText=@"Review Manager update";
+            NSDictionary *target=result[@"target_manager"];
+            review.informativeText=[NSString stringWithFormat:@"Manager: %@ → %@\nDistribution: %@\nDestination: %@\nBootstrap: %@ (%lu reviewed file changes)\nPublisher: %@\nManager will restart with this profile and installation. Runtime, instructions, client settings and complete skills are preserved. Existing MCP sessions keep running.",result[@"installed_manager"][@"InkscapeMCPBuildID"],target[@"manager_build"],target[@"tag"],result[@"manager_application"],target[@"bootstrap"][@"build_id"],(unsigned long)[result[@"bootstrap_changes"] count],target[@"publisher"]];
+            NSDictionary *before=result[@"installed_bootstrap"];NSString *oldBootstrap=[before isKindOfClass:NSDictionary.class] ? [NSString stringWithFormat:@"%@ · %@ · SHA-256 %@",before[@"build_id"],before[@"source_revision"],before[@"executable"][@"sha256"]] : @"Not installed or damaged (unverified)";
+            NSMutableString *precise=[NSMutableString stringWithFormat:@"%@\nInstalled bootstrap: %@\nTarget bootstrap: %@ · %@ · SHA-256 %@\n",review.informativeText,oldBootstrap,target[@"bootstrap"][@"build_id"],target[@"bootstrap"][@"source_revision"],target[@"bootstrap"][@"executable"][@"sha256"]];
+            for(NSDictionary *change in result[@"bootstrap_changes"]){NSDictionary *from=change[@"from"];[precise appendFormat:@"\n%@\n%@ → %@",change[@"destination"],[from isKindOfClass:NSDictionary.class] ? from[@"sha256"] : @"absent",change[@"to"][@"sha256"]];}
+            if(![result[@"bootstrap_changes"] count])[precise appendString:@"Bootstrap: kept. Only Manager changes."];
+            [precise appendFormat:@"\nManager source: %@ → %@\nTarget launcher compatibility: %@; text interface: %@; helper protocol: %@; component/settings format: %@\nChannel: %@",result[@"installed_manager"][@"InkscapeMCPRevision"] ?: @"unknown",target[@"manager_revision"],target[@"launcher_version"],target[@"text_interface"],target[@"helper_protocol"],target[@"component_format"],[target[@"prerelease"] boolValue] ? @"prerelease" : @"stable"];
+            [precise appendString:[result[@"baseline_healthy"] boolValue] ? @"\nMCP baseline: verified before this update." : @"\nThe existing MCP installation is unverified or incomplete. This updates Manager while retaining that state; review the installation separately if needed."];
+            review.informativeText=precise;
+            [review addButtonWithTitle:@"Update Manager and restart"];[review addButtonWithTitle:@"Cancel"];
+            if([review runModal]!=NSAlertFirstButtonReturn){[self setPhase:@"ready" message:@"Manager update cancelled. The verified candidate is retained; no installed files changed."];return;}
+            [self beginManagerActivation:result];return;
+        }
         if([arguments containsObject:@"manager-prepare"]){
-            if([result[@"manager_ready"] boolValue]){[self inspect];return;}
+            if([result[@"manager_ready"] boolValue]){self.pendingRuntimeWarning=[result[@"runtime_warning"] isKindOfClass:NSString.class] ? result[@"runtime_warning"] : nil;[self inspect];return;}
             NSAlert *review=[NSAlert new];review.messageText=[result[@"replaces_existing_manager"] boolValue] ? @"Upgrade the Manager application?" : @"Install the Manager application?";
             review.informativeText=[NSString stringWithFormat:@"The verified application will be installed at %@ and reopened there. Existing runtime settings and drawings are preserved. A running destination Manager must be closed first.",result[@"manager_application"]];
             [review addButtonWithTitle:@"Install and reopen"];[review addButtonWithTitle:@"Cancel"];
@@ -383,8 +463,10 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
     else if(self.recoveryRequired)message=@"An interrupted installation needs recovery. Choose Recover / retry.";
     else if([result[@"state"] isEqualToString:@"damaged"])message=@"This installation could not be verified. Recover it or select another installation in Advanced.";
     else if([result[@"choice_required"] boolValue] && !self.legacySource){message=@"Multiple installations were found. Choose the one to upgrade in Advanced.";self.advancedButton.state=NSControlStateValueOn;self.advancedCard.hidden=NO;}
+    if(self.pendingRuntimeWarning){message=self.pendingRuntimeWarning;self.pendingRuntimeWarning=nil;}
+    if([result[@"manager_update_error"] isKindOfClass:NSString.class])message=[NSString stringWithFormat:@"Manager update: %@",result[@"manager_update_error"]];
     [self setPhase:self.recoveryRequired || [result[@"state"] isEqualToString:@"damaged"] ? @"damaged" : result[@"state"] ?: @"not_installed" message:message];
-    if(!self.startupChecked){self.startupChecked=YES;[self startUpdateCheck];}
+    if(!self.startupChecked){NSString *saved=[[NSUserDefaults standardUserDefaults] stringForKey:@"UpdateChannel"] ?: [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedUpdateChannel"];if(saved)[self.channel selectItemAtIndex:[saved isEqualToString:@"stable"] ? 0 : 1];self.startupChecked=YES;}[self startUpdateCheck];
 }
 - (void)showInstalled:(NSDictionary *)result {
     self.hasInstallation=YES;self.rollbackAvailable=[result[@"rollback_available"] boolValue];

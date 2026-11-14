@@ -54,7 +54,22 @@ int main(void) {@autoreleasepool {
     [manager applyCheck:available error:nil generation:manager.generation installation:manager.installation channel:1];[manager install:nil];
     require([manager.installButton.title isEqual:@"Review update"] && [manager.lastArguments.firstObject isEqual:@"update"] && [manager.lastArguments containsObject:@"--check"],@"channel update offer routes into offline installation");
     [manager applyInspection:@{@"state":@"damaged",@"recovery_required":@YES,@"clients":@[],@"candidates":@[]}];
-    require(!manager.checkButton.enabled && !manager.rollbackButton.enabled && !manager.recoverButton.hidden,@"interrupted installation hides recovery");
+    require(manager.checkButton.enabled && !manager.rollbackButton.enabled && !manager.recoverButton.hidden,@"interrupted installation hides recovery or independent Manager check");
+    NSDictionary *managerUpdate=@{@"manager_update_available":@YES,@"manager_available":@{@"tag":@"v100.0.0",@"manager_build":@"manager-new",@"bootstrap":@{@"build_id":@"bootstrap-new"}}};
+    [manager applyManagerCheck:managerUpdate error:nil generation:manager.generation installation:manager.installation channel:manager.channel.indexOfSelectedItem];
+    require(manager.managerOffer!=nil && manager.managerUpdateButton.enabled,@"incomplete/damaged runtime hides independent Manager offer");
+    [manager applyCheck:nil error:@"launcher upgrade required" generation:manager.generation installation:manager.installation channel:manager.channel.indexOfSelectedItem];
+    require(manager.managerOffer!=nil && manager.managerUpdateButton.enabled,@"runtime compatibility failure hides Manager update");
+    manager.recoveryRequired=NO;
+    [manager applyCheck:nil error:@"launcher upgrade required" generation:manager.generation installation:manager.installation channel:manager.channel.indexOfSelectedItem];
+    require(manager.managerOffer!=nil && manager.managerUpdateButton.enabled && [manager.available.stringValue containsString:@"launcher upgrade required"],@"accepted runtime compatibility failure hides Manager update");
+    [manager updateManager:nil];require([manager.lastArguments.firstObject isEqual:@"manager-online-prepare"],@"Manager action bypasses verified staging");
+    NSUInteger oldGeneration=manager.generation;[manager invalidateCheck];
+    [manager applyManagerCheck:managerUpdate error:nil generation:oldGeneration installation:manager.installation channel:manager.channel.indexOfSelectedItem];require(manager.managerOffer==nil,@"stale Manager offer accepted after review/context invalidation");
+    for(NSString *error in @[@"offline",@"The request timed out."]){[manager applyManagerCheck:nil error:error generation:manager.generation installation:manager.installation channel:manager.channel.indexOfSelectedItem];require(manager.managerOffer==nil && !manager.managerUpdateButton.enabled,@"failed Manager check keeps stale action");}
+    manager.preparation=@"review";[manager applyManagerCheck:managerUpdate error:nil generation:manager.generation installation:manager.installation channel:manager.channel.indexOfSelectedItem];require(manager.managerOffer==nil,@"Manager reply replaces prepared review");manager.preparation=nil;
+    [manager applyManagerCheck:managerUpdate error:nil generation:manager.generation installation:@"/different-root" channel:manager.channel.indexOfSelectedItem];require(manager.managerOffer==nil,@"Manager reply crosses installation");
+    [manager applyManagerCheck:managerUpdate error:nil generation:manager.generation installation:manager.installation channel:1-manager.channel.indexOfSelectedItem];require(manager.managerOffer==nil,@"Manager reply crosses channel");
     manager.advancedButton.state=NSControlStateValueOn;[manager toggleAdvanced:nil];
     [manager setPath:@"/owned/a deliberately long workspace directory with spaces/another long directory/drawings" label:manager.workspaceLabel];
     [manager.window setContentSize:NSMakeSize(620,600)];

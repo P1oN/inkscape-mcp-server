@@ -105,11 +105,39 @@ pub(super) fn bundled_manager_input(path: &Path) -> bool {
     std::env::current_exe().is_ok_and(|exe| manager_input(path, &exe))
 }
 pub(super) fn guarded_read(path: &Path) -> Result<()> {
+    let managed_system_app = path
+        .strip_prefix("/Applications")
+        .ok()
+        .and_then(|p| p.components().next())
+        .map(|c| Path::new("/Applications").join(c.as_os_str()))
+        .filter(|p| {
+            let name = p.file_name().and_then(|n| n.to_str()).unwrap_or("");
+            name == "Inkscape MCP Manager.app"
+                || [
+                    ".inkscape-mcp-manager-stage-",
+                    ".inkscape-mcp-manager-backup-",
+                ]
+                .iter()
+                .any(|prefix| {
+                    name.strip_prefix(prefix)
+                        .and_then(|s| s.strip_suffix(".app"))
+                        .is_some_and(|s| uuid::Uuid::parse_str(s).is_ok())
+                })
+        });
     let manager_app = std::env::current_exe()
         .ok()
         .as_deref()
         .and_then(system_manager_app)
-        .filter(|app| path.starts_with(app));
+        .filter(|app| path.starts_with(app))
+        // Self-update recovery also reads the fixed installed destination from a
+        // retained helper. This grants no write or arbitrary /Applications access.
+        .or({
+            if cfg!(target_os = "macos") {
+                managed_system_app.as_deref()
+            } else {
+                None
+            }
+        });
     guarded_with_source(path, manager_app)
 }
 #[cfg(unix)]

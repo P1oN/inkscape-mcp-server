@@ -60,6 +60,12 @@ Ready runtime packages need Inkscape and no user-installed compiler or Python.
 
 ## Update and remove
 
+Current-source Manager supports **Review Manager update… → Update Manager and restart**.
+It checks Manager separately from runtime compatibility and preserves the selected installation,
+profile, runtime/text and client settings. See [reviewed Manager updates](docs/install/manager-self-update.md)
+for the separate release contract, recovery and qualification limits. This source change is not a new release.
+
+
 Current-source setup refreshes an existing installation automatically: runtime selection,
 MCP registration and installed skill. Saved workspace/Inkscape/live/engine/Sentry choices
 and unrelated Codex/Claude configuration survive; missing optional settings receive defaults.
