@@ -177,8 +177,12 @@ int main(void) {@autoreleasepool {
     [pathCopy performClick:nil];require([[manager.testPasteboard stringForType:NSPasteboardTypeString] isEqual:longPath],@"Copy changes a full path or adds display line breaks");
     [allCopy performClick:nil];copied=[manager.testPasteboard stringForType:NSPasteboardTypeString];
     require([copied containsString:runtimeBuild] && [copied containsString:fullHash] && [copied containsString:longPath],@"Copy all drops full build, revision or path values");
+    NSScrollView *detailScroll=nil;for(NSView *view in details.contentView.subviews)if([view isKindOfClass:NSScrollView.class])detailScroll=(NSScrollView *)view;
+    require(detailScroll!=nil,@"technical details lack a scrollable body");
     for(NSAppearanceName appearance in @[NSAppearanceNameAqua,NSAppearanceNameDarkAqua]){
         details.appearance=[NSAppearance appearanceNamed:appearance];
+        for(NSNumber *style in @[@(NSScrollerStyleLegacy),@(NSScrollerStyleOverlay)]){
+        detailScroll.scrollerStyle=style.integerValue;
         for(NSNumber *width in @[@480,@700]){
             [details setContentSize:NSMakeSize(width.doubleValue,744)];[details.contentView layoutSubtreeIfNeeded];
             for(NSView *view in descendants(details.contentView)){
@@ -195,10 +199,12 @@ int main(void) {@autoreleasepool {
                     require(NSMinX(frame)>=0 && NSMaxX(frame)<=NSWidth(details.contentView.bounds),@"Copy leaves the narrow details sheet");
                     if([((ManagerCopyButton *)view).normalTitle isEqual:@"Copy"]){
                         NSRect aligned=[view.superview convertRect:[view alignmentRectForFrame:view.frame] toView:details.contentView];
-                        require(fabs(NSMaxX(aligned)-(NSWidth(details.contentView.bounds)-28))<1,@"field Copy buttons do not share the trailing edge");
+                        NSRect row=[view.superview convertRect:view.superview.bounds toView:details.contentView];
+                        require(fabs(NSMaxX(aligned)-NSMaxX(row))<1,@"field Copy buttons do not share the content trailing edge");
                     }
                 }
             }
+        }
         }
         captureView(details.contentView,[appearance isEqual:NSAppearanceNameAqua] ? @"details-light.png" : @"details-dark.png");
     }

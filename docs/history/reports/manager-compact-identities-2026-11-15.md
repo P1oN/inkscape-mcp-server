@@ -50,6 +50,10 @@ changes are involved; no MCP restart is needed.
 - Settings is checked at widths 620/800 and details at 480/700 in Aqua/Dark Aqua.
   Text frames, wrapped line heights and the shared Copy-button trailing edge are
   checked. A long path with spaces exercises wrapping and byte-preserving copying.
+  Both legacy and overlay scrollers are exercised. The first PR CI run reproduced
+  an assertion that incorrectly compared the content edge with the whole sheet,
+  ignoring the legacy scroller gutter on macOS 15. Explicit legacy scrollers
+  reproduced the failure locally; the corrected assertion uses the row content edge.
 - The repository wrapper passes both tests:
 
   ```sh
@@ -68,6 +72,12 @@ changes are involved; no MCP restart is needed.
   owned preview windows were closed after inspection. Interactive copy was not
   needed; private-pasteboard automated checks cover that action.
 - `git diff --check` passes.
+
+An independent read-only agent reviewed the complete product diff and the
+legacy/overlay-scroller follow-up before release. It found no actionable remaining
+correctness or regression issue and independently passed strict frontend syntax
+validation. Existing CodeRabbit review contained no concrete blocking finding or
+inline comment. The focused wrapper passes with both scroller styles.
 
 This is local source/UI validation, not a newly signed or installed release.
 No full package, notarization, Gatekeeper or another-Mac acceptance is claimed.
