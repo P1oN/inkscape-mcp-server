@@ -1,0 +1,991 @@
+{
+  "date": "2026-11-15",
+  "source_base": "c029f02d9f43532f6595433391057e0a9f927884",
+  "server": {
+    "inkscape_version": "1.4.3",
+    "runtime_build": "0a01a8b8f950cdd6",
+    "scope": "Configured headless MCP; no native GUI acceptance",
+    "font_check": "Unavailable; actual rendered text visually reviewed"
+  },
+  "artifacts": [
+    {
+      "doc_id": "d_f6cf3d15",
+      "name": "github-hero",
+      "width": 1440,
+      "quality": {
+        "doc_id": "d_f6cf3d15",
+        "ok": true,
+        "score": 90,
+        "findings": [
+          {
+            "code": "font_check_skipped",
+            "severity": "info",
+            "message": "font availability not checked: fontconfig unavailable",
+            "locator": null
+          }
+        ],
+        "error_count": 0,
+        "warning_count": 0,
+        "metrics": {
+          "object_count": 47,
+          "node_count": 49,
+          "layer_count": 0,
+          "embedded_raster_count": 0,
+          "embedded_raster_bytes": 0,
+          "font_coverage": {
+            "referenced": 1,
+            "installed": 0,
+            "missing": [],
+            "checked": false
+          },
+          "viewbox": {
+            "present": true,
+            "valid": true,
+            "width": 1440,
+            "height": 720
+          }
+        },
+        "opportunities": [
+          {
+            "code": "editor_metadata",
+            "count": 6,
+            "message": "editor-only metadata/attributes/comments can be stripped"
+          },
+          {
+            "code": "unreferenced_ids",
+            "count": 41,
+            "message": "id attributes nothing references can be dropped"
+          }
+        ],
+        "editability": {
+          "geometry": {
+            "findings": [],
+            "truncated": false,
+            "tolerance": 0,
+            "scope": "Path-local coordinates; no cross-object overlap inference or automatic cleanup. Z closing edges are not redundant-node findings."
+          },
+          "vector_content": {
+            "status": "passed",
+            "raster_resource_count": 0,
+            "unknown_count": 0,
+            "findings": [],
+            "truncated": false,
+            "scope": "Whole document, including hidden objects and defs. No resource fetching, image removal or tracing. Linked image content is unknown."
+          },
+          "authoring": {
+            "findings": [
+              {
+                "object_id": "bloom-coral",
+                "code": "scene_visibility_unknown",
+                "certainty": "unknown",
+                "reason": "Paint server/current/context paint transparency needs rendered review."
+              },
+              {
+                "object_id": "bloom-teal",
+                "code": "scene_visibility_unknown",
+                "certainty": "unknown",
+                "reason": "Paint server/current/context paint transparency needs rendered review."
+              }
+            ],
+            "truncated": false,
+            "scope": "Static supported CSS and explicit roles only. General occlusion and semantic silhouette quality require rendered/manual review; bounding-box overlap is not proof of coverage. No mutation or automatic cleanup."
+          },
+          "group_count": 6,
+          "layer_count": 0,
+          "max_group_depth": 2,
+          "single_child_groups": 1,
+          "advice": [
+            {
+              "code": "paint_order_risk",
+              "kind": "observation",
+              "object_id": null,
+              "message": "Reparenting can change paint order; preservation cannot be inferred from group names."
+            }
+          ],
+          "truncated": false,
+          "note": "Advice is optional; names/counts cannot establish semantics or tracing."
+        }
+      },
+      "save": {
+        "doc_id": "d_f6cf3d15",
+        "artifact": {
+          "root_id": "ed28cf280b9cd62090db4b30",
+          "uri": "inkscape://artifact/ed28cf280b9cd62090db4b30/bWNwLXNwcmludC0yMDI2LTExLTE1L2ZpbmFsL2dpdGh1Yi1oZXJvLnN2Zw",
+          "workspace_relative_path": "mcp-sprint-2026-11-15/final/github-hero.svg",
+          "location": "server"
+        },
+        "saved_path": "mcp-sprint-2026-11-15/final/github-hero.svg",
+        "operation_id": "op_6a8f6782",
+        "overwritten": false,
+        "pre_validation": {
+          "doc_id": "d_f6cf3d15",
+          "ok": true,
+          "findings": [
+            {
+              "code": "font_check_skipped",
+              "severity": "info",
+              "message": "font availability not checked: fontconfig unavailable",
+              "locator": null
+            }
+          ],
+          "error_count": 0,
+          "warning_count": 0
+        },
+        "post_validation": {
+          "doc_id": "d_f6cf3d15",
+          "ok": true,
+          "findings": [
+            {
+              "code": "font_check_skipped",
+              "severity": "info",
+              "message": "font availability not checked: fontconfig unavailable",
+              "locator": null
+            }
+          ],
+          "error_count": 0,
+          "warning_count": 0
+        }
+      },
+      "export": {
+        "doc_id": "d_f6cf3d15",
+        "artifact_path": "mcp-sprint-2026-11-15/verified/20261115T015033Z-github-hero-document-1440px-517aea45ed3648b4a985e6526ca0d599.png",
+        "workspace_relative_path": "mcp-sprint-2026-11-15/verified/20261115T015033Z-github-hero-document-1440px-517aea45ed3648b4a985e6526ca0d599.png",
+        "artifact": {
+          "root_id": "ed28cf280b9cd62090db4b30",
+          "uri": "inkscape://artifact/ed28cf280b9cd62090db4b30/bWNwLXNwcmludC0yMDI2LTExLTE1L3ZlcmlmaWVkLzIwMjYxMTE1VDAxNTAzM1otZ2l0aHViLWhlcm8tZG9jdW1lbnQtMTQ0MHB4LTUxN2FlYTQ1ZWQzNjQ4YjRhOTg1ZTY1MjZjYTBkNTk5LnBuZw",
+          "workspace_relative_path": "mcp-sprint-2026-11-15/verified/20261115T015033Z-github-hero-document-1440px-517aea45ed3648b4a985e6526ca0d599.png",
+          "location": "server"
+        },
+        "format": "png",
+        "width_px": 1440,
+        "height_px": 720,
+        "stale": false,
+        "opaque_px": 1036800,
+        "all_blank": false,
+        "is_vector": null,
+        "fonts_outlined": null
+      },
+      "visual_review": "Reviewed inline render; no clipping or unintended corners observed.",
+      "png_digest": {
+        "path": "mcp-sprint-2026-11-15/verified/20261115T015033Z-github-hero-document-1440px-517aea45ed3648b4a985e6526ca0d599.png",
+        "bytes": 94374,
+        "sha256": "ffe39d64f3245fe03674ee26969adfa94aa7d88e81e34f722fe04dfe5d232848"
+      },
+      "svg_digest": {
+        "path": "mcp-sprint-2026-11-15/final/github-hero.svg",
+        "bytes": 5159,
+        "sha256": "2d393b3c1fb125530fbb56915043df9b6478b8a3004b2b6f1f4a6eff62391675"
+      }
+    },
+    {
+      "doc_id": "d_ff11355c",
+      "name": "workflow",
+      "width": 1440,
+      "quality": {
+        "doc_id": "d_ff11355c",
+        "ok": true,
+        "score": 90,
+        "findings": [
+          {
+            "code": "font_check_skipped",
+            "severity": "info",
+            "message": "font availability not checked: fontconfig unavailable",
+            "locator": null
+          }
+        ],
+        "error_count": 0,
+        "warning_count": 0,
+        "metrics": {
+          "object_count": 32,
+          "node_count": 33,
+          "layer_count": 0,
+          "embedded_raster_count": 0,
+          "embedded_raster_bytes": 0,
+          "font_coverage": {
+            "referenced": 1,
+            "installed": 0,
+            "missing": [],
+            "checked": false
+          },
+          "viewbox": {
+            "present": true,
+            "valid": true,
+            "width": 1440,
+            "height": 600
+          }
+        },
+        "opportunities": [
+          {
+            "code": "editor_metadata",
+            "count": 7,
+            "message": "editor-only metadata/attributes/comments can be stripped"
+          },
+          {
+            "code": "unreferenced_ids",
+            "count": 32,
+            "message": "id attributes nothing references can be dropped"
+          }
+        ],
+        "editability": {
+          "geometry": {
+            "findings": [],
+            "truncated": false,
+            "tolerance": 0,
+            "scope": "Path-local coordinates; no cross-object overlap inference or automatic cleanup. Z closing edges are not redundant-node findings."
+          },
+          "vector_content": {
+            "status": "passed",
+            "raster_resource_count": 0,
+            "unknown_count": 0,
+            "findings": [],
+            "truncated": false,
+            "scope": "Whole document, including hidden objects and defs. No resource fetching, image removal or tracing. Linked image content is unknown."
+          },
+          "authoring": {
+            "findings": [],
+            "truncated": false,
+            "scope": "Static supported CSS and explicit roles only. General occlusion and semantic silhouette quality require rendered/manual review; bounding-box overlap is not proof of coverage. No mutation or automatic cleanup."
+          },
+          "group_count": 7,
+          "layer_count": 0,
+          "max_group_depth": 2,
+          "single_child_groups": 0,
+          "advice": [
+            {
+              "code": "paint_order_risk",
+              "kind": "observation",
+              "object_id": null,
+              "message": "Reparenting can change paint order; preservation cannot be inferred from group names."
+            }
+          ],
+          "truncated": false,
+          "note": "Advice is optional; names/counts cannot establish semantics or tracing."
+        }
+      },
+      "save": {
+        "doc_id": "d_ff11355c",
+        "artifact": {
+          "root_id": "ed28cf280b9cd62090db4b30",
+          "uri": "inkscape://artifact/ed28cf280b9cd62090db4b30/bWNwLXNwcmludC0yMDI2LTExLTE1L2ZpbmFsLXYyL3dvcmtmbG93LnN2Zw",
+          "workspace_relative_path": "mcp-sprint-2026-11-15/final-v2/workflow.svg",
+          "location": "server"
+        },
+        "saved_path": "mcp-sprint-2026-11-15/final-v2/workflow.svg",
+        "operation_id": "op_1472a368",
+        "overwritten": false,
+        "pre_validation": {
+          "doc_id": "d_ff11355c",
+          "ok": true,
+          "findings": [
+            {
+              "code": "font_check_skipped",
+              "severity": "info",
+              "message": "font availability not checked: fontconfig unavailable",
+              "locator": null
+            }
+          ],
+          "error_count": 0,
+          "warning_count": 0
+        },
+        "post_validation": {
+          "doc_id": "d_ff11355c",
+          "ok": true,
+          "findings": [
+            {
+              "code": "font_check_skipped",
+              "severity": "info",
+              "message": "font availability not checked: fontconfig unavailable",
+              "locator": null
+            }
+          ],
+          "error_count": 0,
+          "warning_count": 0
+        }
+      },
+      "export": {
+        "doc_id": "d_ff11355c",
+        "artifact_path": "mcp-sprint-2026-11-15/verified/20261115T015051Z-workflow-document-1440px-41a307211cf64af994dfa8ff682905c0.png",
+        "workspace_relative_path": "mcp-sprint-2026-11-15/verified/20261115T015051Z-workflow-document-1440px-41a307211cf64af994dfa8ff682905c0.png",
+        "artifact": {
+          "root_id": "ed28cf280b9cd62090db4b30",
+          "uri": "inkscape://artifact/ed28cf280b9cd62090db4b30/bWNwLXNwcmludC0yMDI2LTExLTE1L3ZlcmlmaWVkLzIwMjYxMTE1VDAxNTA1MVotd29ya2Zsb3ctZG9jdW1lbnQtMTQ0MHB4LTQxYTMwNzIxMWNmNjRhZjk5NGRmYThmZjY4MjkwNWMwLnBuZw",
+          "workspace_relative_path": "mcp-sprint-2026-11-15/verified/20261115T015051Z-workflow-document-1440px-41a307211cf64af994dfa8ff682905c0.png",
+          "location": "server"
+        },
+        "format": "png",
+        "width_px": 1440,
+        "height_px": 600,
+        "stale": false,
+        "opaque_px": 864000,
+        "all_blank": false,
+        "is_vector": null,
+        "fonts_outlined": null
+      },
+      "visual_review": "Shaft and arrowhead separated into named groups; rendered appearance preserved.",
+      "png_digest": {
+        "path": "mcp-sprint-2026-11-15/verified/20261115T015051Z-workflow-document-1440px-41a307211cf64af994dfa8ff682905c0.png",
+        "bytes": 90706,
+        "sha256": "fadea704f18d1e1ca13d22eeb0a22c032a4c4d95b5b49a2c110c4109905e4615"
+      },
+      "svg_digest": {
+        "path": "mcp-sprint-2026-11-15/final-v2/workflow.svg",
+        "bytes": 3724,
+        "sha256": "d06075f9bafb7c38813716d819ce4e8605b9f24cb05872fb8a014112bb61f181"
+      }
+    },
+    {
+      "doc_id": "d_d2d1f184",
+      "name": "editable-vectors",
+      "width": 1440,
+      "quality": {
+        "doc_id": "d_d2d1f184",
+        "ok": true,
+        "score": 92,
+        "findings": [
+          {
+            "code": "font_check_skipped",
+            "severity": "info",
+            "message": "font availability not checked: fontconfig unavailable",
+            "locator": null
+          }
+        ],
+        "error_count": 0,
+        "warning_count": 0,
+        "metrics": {
+          "object_count": 39,
+          "node_count": 42,
+          "layer_count": 0,
+          "embedded_raster_count": 0,
+          "embedded_raster_bytes": 0,
+          "font_coverage": {
+            "referenced": 1,
+            "installed": 0,
+            "missing": [],
+            "checked": false
+          },
+          "viewbox": {
+            "present": true,
+            "valid": true,
+            "width": 1440,
+            "height": 760
+          }
+        },
+        "opportunities": [
+          {
+            "code": "editor_metadata",
+            "count": 3,
+            "message": "editor-only metadata/attributes/comments can be stripped"
+          },
+          {
+            "code": "unreferenced_ids",
+            "count": 34,
+            "message": "id attributes nothing references can be dropped"
+          }
+        ],
+        "editability": {
+          "geometry": {
+            "findings": [],
+            "truncated": false,
+            "tolerance": 0,
+            "scope": "Path-local coordinates; no cross-object overlap inference or automatic cleanup. Z closing edges are not redundant-node findings."
+          },
+          "vector_content": {
+            "status": "passed",
+            "raster_resource_count": 0,
+            "unknown_count": 0,
+            "findings": [],
+            "truncated": false,
+            "scope": "Whole document, including hidden objects and defs. No resource fetching, image removal or tracing. Linked image content is unknown."
+          },
+          "authoring": {
+            "findings": [
+              {
+                "object_id": "petal-coral-3536a1",
+                "code": "scene_visibility_unknown",
+                "certainty": "unknown",
+                "reason": "Paint server/current/context paint transparency needs rendered review."
+              },
+              {
+                "object_id": "petal-teal-3536a1",
+                "code": "scene_visibility_unknown",
+                "certainty": "unknown",
+                "reason": "Paint server/current/context paint transparency needs rendered review."
+              }
+            ],
+            "truncated": false,
+            "scope": "Static supported CSS and explicit roles only. General occlusion and semantic silhouette quality require rendered/manual review; bounding-box overlap is not proof of coverage. No mutation or automatic cleanup."
+          },
+          "group_count": 4,
+          "layer_count": 0,
+          "max_group_depth": 2,
+          "single_child_groups": 1,
+          "advice": [
+            {
+              "code": "missing_group_label",
+              "kind": "recommendation",
+              "object_id": "placed-copy-3536a1",
+              "message": "Consider a readable label if this group represents a selectable object."
+            },
+            {
+              "code": "paint_order_risk",
+              "kind": "observation",
+              "object_id": null,
+              "message": "Reparenting can change paint order; preservation cannot be inferred from group names."
+            }
+          ],
+          "truncated": false,
+          "note": "Advice is optional; names/counts cannot establish semantics or tracing."
+        }
+      },
+      "save": {
+        "doc_id": "d_d2d1f184",
+        "artifact": {
+          "root_id": "ed28cf280b9cd62090db4b30",
+          "uri": "inkscape://artifact/ed28cf280b9cd62090db4b30/bWNwLXNwcmludC0yMDI2LTExLTE1L2ZpbmFsL2VkaXRhYmxlLXZlY3RvcnMuc3Zn",
+          "workspace_relative_path": "mcp-sprint-2026-11-15/final/editable-vectors.svg",
+          "location": "server"
+        },
+        "saved_path": "mcp-sprint-2026-11-15/final/editable-vectors.svg",
+        "operation_id": "op_acd13c87",
+        "overwritten": false,
+        "pre_validation": {
+          "doc_id": "d_d2d1f184",
+          "ok": true,
+          "findings": [
+            {
+              "code": "font_check_skipped",
+              "severity": "info",
+              "message": "font availability not checked: fontconfig unavailable",
+              "locator": null
+            }
+          ],
+          "error_count": 0,
+          "warning_count": 0
+        },
+        "post_validation": {
+          "doc_id": "d_d2d1f184",
+          "ok": true,
+          "findings": [
+            {
+              "code": "font_check_skipped",
+              "severity": "info",
+              "message": "font availability not checked: fontconfig unavailable",
+              "locator": null
+            }
+          ],
+          "error_count": 0,
+          "warning_count": 0
+        }
+      },
+      "export": {
+        "doc_id": "d_d2d1f184",
+        "artifact_path": "mcp-sprint-2026-11-15/verified/20261115T015051Z-editable-vectors-document-1440px-5bdaf5754d634e4c992692d87c618085.png",
+        "workspace_relative_path": "mcp-sprint-2026-11-15/verified/20261115T015051Z-editable-vectors-document-1440px-5bdaf5754d634e4c992692d87c618085.png",
+        "artifact": {
+          "root_id": "ed28cf280b9cd62090db4b30",
+          "uri": "inkscape://artifact/ed28cf280b9cd62090db4b30/bWNwLXNwcmludC0yMDI2LTExLTE1L3ZlcmlmaWVkLzIwMjYxMTE1VDAxNTA1MVotZWRpdGFibGUtdmVjdG9ycy1kb2N1bWVudC0xNDQwcHgtNWJkYWY1NzU0ZDYzNGU0Yzk5MjY5MmQ4N2M2MTgwODUucG5n",
+          "workspace_relative_path": "mcp-sprint-2026-11-15/verified/20261115T015051Z-editable-vectors-document-1440px-5bdaf5754d634e4c992692d87c618085.png",
+          "location": "server"
+        },
+        "format": "png",
+        "width_px": 1440,
+        "height_px": 760,
+        "stale": false,
+        "opaque_px": 1094400,
+        "all_blank": false,
+        "is_vector": null,
+        "fonts_outlined": null
+      },
+      "visual_review": "Reviewed inline render; no clipping or unintended corners observed.",
+      "png_digest": {
+        "path": "mcp-sprint-2026-11-15/verified/20261115T015051Z-editable-vectors-document-1440px-5bdaf5754d634e4c992692d87c618085.png",
+        "bytes": 113861,
+        "sha256": "6edfe64ac3ef3262d644deb3cf0e07cfe05bc06f849b753c394132c33352f83b"
+      },
+      "svg_digest": {
+        "path": "mcp-sprint-2026-11-15/final/editable-vectors.svg",
+        "bytes": 4698,
+        "sha256": "f4c3ce7136fe2c2b26268906787910b8d42bc51af22e2fd0038de7b44fa62f31"
+      }
+    },
+    {
+      "doc_id": "d_0706eb40",
+      "name": "quickstart",
+      "width": 1440,
+      "quality": {
+        "doc_id": "d_0706eb40",
+        "ok": true,
+        "score": 90,
+        "findings": [
+          {
+            "code": "font_check_skipped",
+            "severity": "info",
+            "message": "font availability not checked: fontconfig unavailable",
+            "locator": null
+          }
+        ],
+        "error_count": 0,
+        "warning_count": 0,
+        "metrics": {
+          "object_count": 35,
+          "node_count": 36,
+          "layer_count": 0,
+          "embedded_raster_count": 0,
+          "embedded_raster_bytes": 0,
+          "font_coverage": {
+            "referenced": 1,
+            "installed": 0,
+            "missing": [],
+            "checked": false
+          },
+          "viewbox": {
+            "present": true,
+            "valid": true,
+            "width": 1440,
+            "height": 660
+          }
+        },
+        "opportunities": [
+          {
+            "code": "editor_metadata",
+            "count": 5,
+            "message": "editor-only metadata/attributes/comments can be stripped"
+          },
+          {
+            "code": "unreferenced_ids",
+            "count": 35,
+            "message": "id attributes nothing references can be dropped"
+          }
+        ],
+        "editability": {
+          "geometry": {
+            "findings": [],
+            "truncated": false,
+            "tolerance": 0,
+            "scope": "Path-local coordinates; no cross-object overlap inference or automatic cleanup. Z closing edges are not redundant-node findings."
+          },
+          "vector_content": {
+            "status": "passed",
+            "raster_resource_count": 0,
+            "unknown_count": 0,
+            "findings": [],
+            "truncated": false,
+            "scope": "Whole document, including hidden objects and defs. No resource fetching, image removal or tracing. Linked image content is unknown."
+          },
+          "authoring": {
+            "findings": [],
+            "truncated": false,
+            "scope": "Static supported CSS and explicit roles only. General occlusion and semantic silhouette quality require rendered/manual review; bounding-box overlap is not proof of coverage. No mutation or automatic cleanup."
+          },
+          "group_count": 5,
+          "layer_count": 0,
+          "max_group_depth": 1,
+          "single_child_groups": 0,
+          "advice": [
+            {
+              "code": "paint_order_risk",
+              "kind": "observation",
+              "object_id": null,
+              "message": "Reparenting can change paint order; preservation cannot be inferred from group names."
+            }
+          ],
+          "truncated": false,
+          "note": "Advice is optional; names/counts cannot establish semantics or tracing."
+        }
+      },
+      "save": {
+        "doc_id": "d_0706eb40",
+        "artifact": {
+          "root_id": "ed28cf280b9cd62090db4b30",
+          "uri": "inkscape://artifact/ed28cf280b9cd62090db4b30/bWNwLXNwcmludC0yMDI2LTExLTE1L2ZpbmFsL3F1aWNrc3RhcnQuc3Zn",
+          "workspace_relative_path": "mcp-sprint-2026-11-15/final/quickstart.svg",
+          "location": "server"
+        },
+        "saved_path": "mcp-sprint-2026-11-15/final/quickstart.svg",
+        "operation_id": "op_c13cf89a",
+        "overwritten": false,
+        "pre_validation": {
+          "doc_id": "d_0706eb40",
+          "ok": true,
+          "findings": [
+            {
+              "code": "font_check_skipped",
+              "severity": "info",
+              "message": "font availability not checked: fontconfig unavailable",
+              "locator": null
+            }
+          ],
+          "error_count": 0,
+          "warning_count": 0
+        },
+        "post_validation": {
+          "doc_id": "d_0706eb40",
+          "ok": true,
+          "findings": [
+            {
+              "code": "font_check_skipped",
+              "severity": "info",
+              "message": "font availability not checked: fontconfig unavailable",
+              "locator": null
+            }
+          ],
+          "error_count": 0,
+          "warning_count": 0
+        }
+      },
+      "export": {
+        "doc_id": "d_0706eb40",
+        "artifact_path": "mcp-sprint-2026-11-15/verified/20261115T015052Z-quickstart-document-1440px-4c19e6669a6d4d39bbd3a54f5f2266cc.png",
+        "workspace_relative_path": "mcp-sprint-2026-11-15/verified/20261115T015052Z-quickstart-document-1440px-4c19e6669a6d4d39bbd3a54f5f2266cc.png",
+        "artifact": {
+          "root_id": "ed28cf280b9cd62090db4b30",
+          "uri": "inkscape://artifact/ed28cf280b9cd62090db4b30/bWNwLXNwcmludC0yMDI2LTExLTE1L3ZlcmlmaWVkLzIwMjYxMTE1VDAxNTA1MlotcXVpY2tzdGFydC1kb2N1bWVudC0xNDQwcHgtNGMxOWU2NjY5YTZkNGQzOWJiZDNhNTRmNWYyMjY2Y2MucG5n",
+          "workspace_relative_path": "mcp-sprint-2026-11-15/verified/20261115T015052Z-quickstart-document-1440px-4c19e6669a6d4d39bbd3a54f5f2266cc.png",
+          "location": "server"
+        },
+        "format": "png",
+        "width_px": 1440,
+        "height_px": 660,
+        "stale": false,
+        "opaque_px": 950400,
+        "all_blank": false,
+        "is_vector": null,
+        "fonts_outlined": null
+      },
+      "visual_review": "Reviewed inline render; no clipping or unintended corners observed.",
+      "png_digest": {
+        "path": "mcp-sprint-2026-11-15/verified/20261115T015052Z-quickstart-document-1440px-4c19e6669a6d4d39bbd3a54f5f2266cc.png",
+        "bytes": 105257,
+        "sha256": "02683b49c3c201bef1080f43f42d3c0cf738a4e893aef81ec69b95f0bcfb8fba"
+      },
+      "svg_digest": {
+        "path": "mcp-sprint-2026-11-15/final/quickstart.svg",
+        "bytes": 4354,
+        "sha256": "1d532c6ed6ca9515db843ade2107f3176b68723faa025b3f34fd77d61302fc59"
+      }
+    },
+    {
+      "doc_id": "d_6548dabb",
+      "name": "social-preview",
+      "width": 1280,
+      "quality": {
+        "doc_id": "d_6548dabb",
+        "ok": true,
+        "score": 91,
+        "findings": [
+          {
+            "code": "font_check_skipped",
+            "severity": "info",
+            "message": "font availability not checked: fontconfig unavailable",
+            "locator": null
+          }
+        ],
+        "error_count": 0,
+        "warning_count": 0,
+        "metrics": {
+          "object_count": 30,
+          "node_count": 33,
+          "layer_count": 0,
+          "embedded_raster_count": 0,
+          "embedded_raster_bytes": 0,
+          "font_coverage": {
+            "referenced": 1,
+            "installed": 0,
+            "missing": [],
+            "checked": false
+          },
+          "viewbox": {
+            "present": true,
+            "valid": true,
+            "width": 1280,
+            "height": 640
+          }
+        },
+        "opportunities": [
+          {
+            "code": "editor_metadata",
+            "count": 4,
+            "message": "editor-only metadata/attributes/comments can be stripped"
+          },
+          {
+            "code": "unreferenced_ids",
+            "count": 25,
+            "message": "id attributes nothing references can be dropped"
+          }
+        ],
+        "editability": {
+          "geometry": {
+            "findings": [],
+            "truncated": false,
+            "tolerance": 0,
+            "scope": "Path-local coordinates; no cross-object overlap inference or automatic cleanup. Z closing edges are not redundant-node findings."
+          },
+          "vector_content": {
+            "status": "passed",
+            "raster_resource_count": 0,
+            "unknown_count": 0,
+            "findings": [],
+            "truncated": false,
+            "scope": "Whole document, including hidden objects and defs. No resource fetching, image removal or tracing. Linked image content is unknown."
+          },
+          "authoring": {
+            "findings": [
+              {
+                "object_id": "petal-coral-c052ce",
+                "code": "scene_visibility_unknown",
+                "certainty": "unknown",
+                "reason": "Paint server/current/context paint transparency needs rendered review."
+              },
+              {
+                "object_id": "petal-teal-c052ce",
+                "code": "scene_visibility_unknown",
+                "certainty": "unknown",
+                "reason": "Paint server/current/context paint transparency needs rendered review."
+              }
+            ],
+            "truncated": false,
+            "scope": "Static supported CSS and explicit roles only. General occlusion and semantic silhouette quality require rendered/manual review; bounding-box overlap is not proof of coverage. No mutation or automatic cleanup."
+          },
+          "group_count": 5,
+          "layer_count": 0,
+          "max_group_depth": 2,
+          "single_child_groups": 1,
+          "advice": [
+            {
+              "code": "missing_group_label",
+              "kind": "recommendation",
+              "object_id": "placed-copy-c052ce",
+              "message": "Consider a readable label if this group represents a selectable object."
+            },
+            {
+              "code": "paint_order_risk",
+              "kind": "observation",
+              "object_id": null,
+              "message": "Reparenting can change paint order; preservation cannot be inferred from group names."
+            }
+          ],
+          "truncated": false,
+          "note": "Advice is optional; names/counts cannot establish semantics or tracing."
+        }
+      },
+      "save": {
+        "doc_id": "d_6548dabb",
+        "artifact": {
+          "root_id": "ed28cf280b9cd62090db4b30",
+          "uri": "inkscape://artifact/ed28cf280b9cd62090db4b30/bWNwLXNwcmludC0yMDI2LTExLTE1L2ZpbmFsL3NvY2lhbC1wcmV2aWV3LnN2Zw",
+          "workspace_relative_path": "mcp-sprint-2026-11-15/final/social-preview.svg",
+          "location": "server"
+        },
+        "saved_path": "mcp-sprint-2026-11-15/final/social-preview.svg",
+        "operation_id": "op_30f82013",
+        "overwritten": false,
+        "pre_validation": {
+          "doc_id": "d_6548dabb",
+          "ok": true,
+          "findings": [
+            {
+              "code": "font_check_skipped",
+              "severity": "info",
+              "message": "font availability not checked: fontconfig unavailable",
+              "locator": null
+            }
+          ],
+          "error_count": 0,
+          "warning_count": 0
+        },
+        "post_validation": {
+          "doc_id": "d_6548dabb",
+          "ok": true,
+          "findings": [
+            {
+              "code": "font_check_skipped",
+              "severity": "info",
+              "message": "font availability not checked: fontconfig unavailable",
+              "locator": null
+            }
+          ],
+          "error_count": 0,
+          "warning_count": 0
+        }
+      },
+      "export": {
+        "doc_id": "d_6548dabb",
+        "artifact_path": "mcp-sprint-2026-11-15/verified/20261115T015052Z-social-preview-document-1280px-a576177c8a0a419385e0190d6e4faee0.png",
+        "workspace_relative_path": "mcp-sprint-2026-11-15/verified/20261115T015052Z-social-preview-document-1280px-a576177c8a0a419385e0190d6e4faee0.png",
+        "artifact": {
+          "root_id": "ed28cf280b9cd62090db4b30",
+          "uri": "inkscape://artifact/ed28cf280b9cd62090db4b30/bWNwLXNwcmludC0yMDI2LTExLTE1L3ZlcmlmaWVkLzIwMjYxMTE1VDAxNTA1Mlotc29jaWFsLXByZXZpZXctZG9jdW1lbnQtMTI4MHB4LWE1NzYxNzdjOGEwYTQxOTM4NWUwMTkwZDZlNGZhZWUwLnBuZw",
+          "workspace_relative_path": "mcp-sprint-2026-11-15/verified/20261115T015052Z-social-preview-document-1280px-a576177c8a0a419385e0190d6e4faee0.png",
+          "location": "server"
+        },
+        "format": "png",
+        "width_px": 1280,
+        "height_px": 640,
+        "stale": false,
+        "opaque_px": 819200,
+        "all_blank": false,
+        "is_vector": null,
+        "fonts_outlined": null
+      },
+      "visual_review": "Reviewed inline render; no clipping or unintended corners observed.",
+      "png_digest": {
+        "path": "mcp-sprint-2026-11-15/verified/20261115T015052Z-social-preview-document-1280px-a576177c8a0a419385e0190d6e4faee0.png",
+        "bytes": 76374,
+        "sha256": "a1f80b68c38d95702c3d79cba9fa9cadae7818bcdc91f0e6514aeba8f0a9d51c"
+      },
+      "svg_digest": {
+        "path": "mcp-sprint-2026-11-15/final/social-preview.svg",
+        "bytes": 3561,
+        "sha256": "bc18ef791e0294d16c911d68f05f137821fdb79118251a16c91ceb896e487ef3"
+      }
+    },
+    {
+      "doc_id": "d_5431670f",
+      "name": "bezier-bloom",
+      "width": 640,
+      "quality": {
+        "doc_id": "d_5431670f",
+        "ok": true,
+        "score": 93,
+        "findings": [],
+        "error_count": 0,
+        "warning_count": 0,
+        "metrics": {
+          "object_count": 17,
+          "node_count": 19,
+          "layer_count": 0,
+          "embedded_raster_count": 0,
+          "embedded_raster_bytes": 0,
+          "font_coverage": {
+            "referenced": 0,
+            "installed": 0,
+            "missing": [],
+            "checked": false
+          },
+          "viewbox": {
+            "present": true,
+            "valid": true,
+            "width": 640,
+            "height": 480
+          }
+        },
+        "opportunities": [
+          {
+            "code": "editor_metadata",
+            "count": 2,
+            "message": "editor-only metadata/attributes/comments can be stripped"
+          },
+          {
+            "code": "unreferenced_ids",
+            "count": 11,
+            "message": "id attributes nothing references can be dropped"
+          }
+        ],
+        "editability": {
+          "geometry": {
+            "findings": [],
+            "truncated": false,
+            "tolerance": 0,
+            "scope": "Path-local coordinates; no cross-object overlap inference or automatic cleanup. Z closing edges are not redundant-node findings."
+          },
+          "vector_content": {
+            "status": "passed",
+            "raster_resource_count": 0,
+            "unknown_count": 0,
+            "findings": [],
+            "truncated": false,
+            "scope": "Whole document, including hidden objects and defs. No resource fetching, image removal or tracing. Linked image content is unknown."
+          },
+          "authoring": {
+            "findings": [
+              {
+                "object_id": "petal-coral",
+                "code": "scene_visibility_unknown",
+                "certainty": "unknown",
+                "reason": "Paint server/current/context paint transparency needs rendered review."
+              },
+              {
+                "object_id": "petal-teal",
+                "code": "scene_visibility_unknown",
+                "certainty": "unknown",
+                "reason": "Paint server/current/context paint transparency needs rendered review."
+              }
+            ],
+            "truncated": false,
+            "scope": "Static supported CSS and explicit roles only. General occlusion and semantic silhouette quality require rendered/manual review; bounding-box overlap is not proof of coverage. No mutation or automatic cleanup."
+          },
+          "group_count": 2,
+          "layer_count": 0,
+          "max_group_depth": 1,
+          "single_child_groups": 0,
+          "advice": [
+            {
+              "code": "paint_order_risk",
+              "kind": "observation",
+              "object_id": null,
+              "message": "Reparenting can change paint order; preservation cannot be inferred from group names."
+            }
+          ],
+          "truncated": false,
+          "note": "Advice is optional; names/counts cannot establish semantics or tracing."
+        }
+      },
+      "save": {
+        "doc_id": "d_5431670f",
+        "artifact": {
+          "root_id": "ed28cf280b9cd62090db4b30",
+          "uri": "inkscape://artifact/ed28cf280b9cd62090db4b30/bWNwLXNwcmludC0yMDI2LTExLTE1L2ZpbmFsL2Jlemllci1ibG9vbS5zdmc",
+          "workspace_relative_path": "mcp-sprint-2026-11-15/final/bezier-bloom.svg",
+          "location": "server"
+        },
+        "saved_path": "mcp-sprint-2026-11-15/final/bezier-bloom.svg",
+        "operation_id": "op_ccf65f03",
+        "overwritten": false,
+        "pre_validation": {
+          "doc_id": "d_5431670f",
+          "ok": true,
+          "findings": [],
+          "error_count": 0,
+          "warning_count": 0
+        },
+        "post_validation": {
+          "doc_id": "d_5431670f",
+          "ok": true,
+          "findings": [],
+          "error_count": 0,
+          "warning_count": 0
+        }
+      },
+      "export": {
+        "doc_id": "d_5431670f",
+        "artifact_path": "mcp-sprint-2026-11-15/verified/20261115T015052Z-bezier-bloom-document-640px-3032a7d7d40f4abc88e94f5b8434654a.png",
+        "workspace_relative_path": "mcp-sprint-2026-11-15/verified/20261115T015052Z-bezier-bloom-document-640px-3032a7d7d40f4abc88e94f5b8434654a.png",
+        "artifact": {
+          "root_id": "ed28cf280b9cd62090db4b30",
+          "uri": "inkscape://artifact/ed28cf280b9cd62090db4b30/bWNwLXNwcmludC0yMDI2LTExLTE1L3ZlcmlmaWVkLzIwMjYxMTE1VDAxNTA1MlotYmV6aWVyLWJsb29tLWRvY3VtZW50LTY0MHB4LTMwMzJhN2Q3ZDQwZjRhYmM4OGU5NGY1Yjg0MzQ2NTRhLnBuZw",
+          "workspace_relative_path": "mcp-sprint-2026-11-15/verified/20261115T015052Z-bezier-bloom-document-640px-3032a7d7d40f4abc88e94f5b8434654a.png",
+          "location": "server"
+        },
+        "format": "png",
+        "width_px": 640,
+        "height_px": 480,
+        "stale": false,
+        "opaque_px": 91098,
+        "all_blank": false,
+        "is_vector": null,
+        "fonts_outlined": null
+      },
+      "visual_review": "Reviewed inline render; no clipping or unintended corners observed.",
+      "png_digest": {
+        "path": "mcp-sprint-2026-11-15/verified/20261115T015052Z-bezier-bloom-document-640px-3032a7d7d40f4abc88e94f5b8434654a.png",
+        "bytes": 25904,
+        "sha256": "7b8ffd11204218c8e0c1e7357db6845b4284b23c6e72bddbcf5cbea54c297ff4"
+      },
+      "svg_digest": {
+        "path": "mcp-sprint-2026-11-15/final/bezier-bloom.svg",
+        "bytes": 1851,
+        "sha256": "c0df3ee622ad05af05cb2a31153d5e999ccec08e735659e970fa8987e1975c37"
+      }
+    }
+  ]
+}

@@ -1,181 +1,128 @@
-# Inkscape MCP server — Rust
+<p align="center">
+  <img src="docs/media/github-hero.png" alt="Inkscape MCP — from a prompt to editable vectors. A coral, teal and lime Bezier bloom with editable control points." width="100%">
+</p>
 
-[![M8ven verified publisher](https://m8ven.ai/badge/mcp/p1on/inkscape-mcp-server?variant=verified)](https://m8ven.ai/mcp/p1on/inkscape-mcp-server?s=readme)
+<h1 align="center">Inkscape MCP</h1>
 
-A native Rust STDIO MCP server for inspecting, authoring and editing SVG, rendering/exporting
-with Inkscape, and controlling bounded live operations. The full surface has 112 tools,
-7 prompts and 18 resources. Original files, workspace boundaries, snapshots, approvals,
-Operation Records, atomic rollback and genuine no-op behavior remain part of the design.
+<p align="center">Give your AI agent a vector workspace.</p>
 
-[Documentation index](docs/README.md) · [Current status](docs/AGENT_HANDOFF.md) ·
-[Backlog](docs/RUST_NEXT_PLAN.md) · [History](docs/history/README.md) · [ADRs](docs/adr/README.md)
+<p align="center">
+  <a href="https://github.com/P1oN/inkscape-mcp-server/releases"><img src="https://img.shields.io/github/v/release/P1oN/inkscape-mcp-server?include_prereleases&amp;label=prerelease&amp;color=196D67" alt="Latest prerelease"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-142C2B" alt="MIT license"></a>
+  <a href="rust/Cargo.toml"><img src="https://img.shields.io/badge/built_with-Rust-E86D4A" alt="Built with Rust"></a>
+  <a href="https://m8ven.ai/mcp/p1on/inkscape-mcp-server?s=readme"><img src="https://m8ven.ai/badge/mcp/p1on/inkscape-mcp-server?variant=verified" alt="M8ven verified publisher"></a>
+</p>
 
-## Install and run
+<p align="center">
+  <a href="https://github.com/P1oN/inkscape-mcp-server/releases">Download Manager</a> ·
+  <a href="docs/agent-usage-guide.md">Agent guide</a> ·
+  <a href="docs/README.md">Documentation</a> ·
+  <a href="docs/AGENT_HANDOFF.md">Project status</a>
+</p>
 
-For Apple Silicon macOS 15+ with Inkscape 1.4+, download the
-[v0.1.7 Manager DMG](https://github.com/P1oN/inkscape-mcp-server/releases/download/v0.1.7/Inkscape-MCP-Manager.dmg).
-Open the Manager, choose clients and an existing SVG workspace, review installation,
-then restart/reconnect Codex or Claude. The installer includes an offline runtime;
-ordinary installation needs no Terminal, compiler or Python. Existing settings and
-artwork are preserved. This is a Developer ID signed, notarized **prerelease** with
-passing final CI installation/update checks; browser-downloaded/another-Mac acceptance
-remains pending. See [release evidence](docs/history/reports/v0.1.7-signed-release.md)
-and the [distribution contract](docs/install/macos-manager-distribution.md).
+Create illustrations, diagrams and reusable SVG assets with Codex, Claude or another
+MCP client. Inkscape MCP is a native Rust server that connects typed vector tools to
+Inkscape's rendering engine. Draw, inspect, refine and export in one conversation.
 
-[v0.1.2](https://github.com/P1oN/inkscape-mcp-server/releases/tag/v0.1.2) provides historical
-source installation and a ready Apple Silicon package. It includes installation/client
-management, complete Python removal, reviewed live packages and vector-quality guards
-from PRs #8–11. Older v0.1.0/v0.1.1 previews retain their original behavior.
+**The artwork on this page was made through this MCP.** Editable SVG masters,
+PNG exports and the [five-task sprint report](docs/history/reports/mcp-showcase-2026-11-15.md)
+are included in the repository.
 
-For v0.1.2 sources or current sources on Apple Silicon macOS 15+, install Inkscape 1.4+
-and the client (v0.1.2 also needs its CLI),
-then run from the checkout:
+## What you can do
+
+| Workflow | What you get |
+| --- | --- |
+| **Author vectors** | Shapes, Bezier paths, text, gradients and named groups you can keep editing. |
+| **Inspect and refine** | Object discovery, focused previews, structural validation and vector-quality reports. |
+| **Work reversibly** | Working copies, snapshots and operation records; genuine no-ops leave history alone. |
+| **Export assets** | SVG masters, PNG previews and PDF output through Inkscape. |
+| **Edit a live drawing** | Bounded operations on an explicitly selected drawing in a supported managed session. |
+
+![An editable Bezier bloom alongside its named SVG object structure.](docs/media/editable-vectors.png)
+
+The sample bloom contains three closed paths, two gradients and separate control-handle
+objects. Its [standalone SVG](docs/media/bezier-bloom.svg) can be opened and edited in
+Inkscape. The [media guide](docs/media/README.md) lists all masters and exports.
+
+## Start drawing
+
+![Four installation steps: download the Manager, choose clients and a workspace, review and install, then reconnect.](docs/media/quickstart.png)
+
+**Requirements:** Apple Silicon macOS 15+, Inkscape 1.4+ and an MCP client.
+
+1. Open [GitHub Releases](https://github.com/P1oN/inkscape-mcp-server/releases) and download
+   **Inkscape-MCP-Manager.dmg** from the current prerelease.
+2. Open the Manager and choose your clients and an existing SVG workspace.
+3. Review the installation and install the bundled runtime.
+4. Restart or reconnect your MCP client, then ask it to draw.
+
+The Manager includes an offline runtime. Ordinary installation needs no Terminal,
+compiler or Python. Signed and notarized prereleases carry release-specific evidence;
+see the [distribution contract](docs/install/macos-manager-distribution.md) and
+[downloads and checksums](docs/install/github-builds.md).
+
+Try this in your connected client:
+
+> Create a small botanical illustration using three editable Bezier petals and a
+> warm coral, teal and lime palette. Put the petals in one named group. Render it,
+> inspect the result, then save a vector-only SVG and export a PNG in my workspace.
+
+For configuration, supported clients and recovery, see
+[installation](docs/install/install.md) and
+[client management](docs/install/client-management.md).
+
+## How it works
+
+![An MCP client sends typed requests to the local Rust server, which uses Inkscape to render and export. Working copies preserve the original source.](docs/media/workflow.png)
+
+The everyday loop is **create or open → inspect → edit → render → refine → save/export**.
+Edits land on a tracked working copy; saving is an explicit step. Workspace boundaries,
+approval gates and snapshots are part of the workflow. See the
+[agent guide](docs/agent-usage-guide.md) for the exact guarantees and limits.
+
+Headless authoring does not need an open Inkscape window. Live editing uses a separately
+managed, selected drawing; startup and reconnect never launch Inkscape. Native GUI
+acceptance and working-copy rendering are tracked separately in the
+[current status](docs/AGENT_HANDOFF.md).
+
+## Set up from source
+
+From a permanent checkout on a supported Mac with Inkscape installed:
 
 ```sh
 ./setup.sh --install-skill codex --connect-client codex
 ./run-mcp.sh --doctor
 ```
 
-Use `claude` for both client options to connect Claude Code. Setup asks for an existing
-SVG workspace and optional monitoring, prepares missing build tools privately and builds
-on first use. Keep the checkout in its permanent location: the client stores its absolute
-`run-mcp.sh` path. Apple Command Line Tools are required; if missing, complete Apple's
-installation dialog and rerun setup. Existing developer tools are preserved; source build/development tools use Rust and Bash; ready packages contain no Python runtime.
+Use `claude` for both client options to connect Claude Code. Source setup requires
+Apple Command Line Tools and builds the native runtime; see
+[source prerequisites](docs/install/local-bootstrap.md). The optional
+[agent skill](skills/inkscape-mcp/SKILL.md) teaches discovery, authoring, preview and export.
 
-Connection checks MCP initialization, required tools and a first workspace request before
-registering through the client CLI. In current sources, setup replaces the existing `inkscape` transport binding while
-preserving other client settings. v0.1.2 archives still refuse a differing entry. Restart/reconnect the client after installation. Default setup refreshes existing registrations and skills;
-`--connect-client` is required to register a new client.
+The Manager reviews runtime, instructions and Manager updates separately. Advanced
+source upgrades, skill merging, rollback and removal are documented in
+[independent updates](docs/install/independent-updates.md),
+[Manager updates](docs/install/manager-self-update.md),
+[skill installation](docs/install/agent-skill.md) and
+[client management](docs/install/client-management.md).
 
-For the published v0.1.1 source archive, use its original commands instead:
+## Develop and contribute
 
-```sh
-./setup.sh --bootstrap
-./run-mcp.sh --doctor
-```
+Start with [CONTRIBUTING.md](CONTRIBUTING.md). The project uses Rust regression tests,
+real STDIO checks and scoped package/native acceptance. The retired Python implementation
+remains available in Git history.
 
-See [downloads and checksums](docs/install/github-builds.md),
-[installation](docs/install/install.md) and [source build prerequisites](docs/install/local-bootstrap.md).
-Ready runtime packages need Inkscape and no user-installed compiler or Python.
+- [Architecture decisions](docs/adr/README.md) explain the typed, bounded tool design.
+- [Tool manifest](llms.txt) and [full reference](llms-full.txt) describe the exposed surface;
+  profiles and runtime gates can narrow discovery.
+- [Active backlog](docs/RUST_NEXT_PLAN.md) records unfinished work.
+- [Validation history](docs/history/README.md) keeps completed work and acceptance evidence.
+- [Optional monitoring](docs/operations/sentry.md) describes opt-in Sentry configuration.
 
-## Update and remove
+The project is **prerelease software**. Platform, clean-machine and native live acceptance
+have explicit limits recorded in the handoff; a rendered example does not establish them.
 
-Current-source Manager supports **Review Manager update… → Update Manager and restart**.
-It checks Manager separately from runtime compatibility and preserves the selected installation,
-profile, runtime/text and client settings. See [reviewed Manager updates](docs/install/manager-self-update.md)
-for the separate release contract, recovery and qualification limits. This source change is not a new release.
+## License
 
-
-Current-source setup refreshes an existing installation automatically: runtime selection,
-MCP registration and installed skill. Saved workspace/Inkscape/live/engine/Sentry choices
-and unrelated Codex/Claude configuration survive; missing optional settings receive defaults.
-This upgrade policy is not included in the already published v0.1.2 archives.
-
-```sh
-./setup.sh --version
-./setup.sh --rebuild
-./scripts/install-skill.sh --client codex --update
-./uninstall.sh --client codex
-```
-
-Setup reruns preserve workspace/Inkscape/live/engine and monitoring settings, and reuse a
-complete saved runtime when source revisions match. A changed committed revision triggers
-rebuilding; unknown revisions or local edits also trigger a rebuild in current sources.
-`--local-tools` builds offline using existing pinned prerequisites; `--build` is its alias.
-`--bootstrap` is the compatibility alias for automatic preparation/rebuild.
-Build options cannot be combined with `--package DIRECTORY`.
-
-Current setup replaces installed skill contents and archives the old tree outside skill discovery.
-The standalone `install-skill.sh --update` still merges customizations against the upstream baseline. Uninstall disconnects the matching client entry and archives local settings,
-builds and an owned default-location skill; drawings remain in the workspace.
-Client `config`, `check`, `connect`, `disconnect` and `uninstall` use the packaged native
-Rust CLI through `scripts/mcp-client.sh`. Management does not depend on Python;
-disconnect/uninstall remain available with a damaged helper runtime.
-See [client management and clean reinstall](docs/install/client-management.md) for
-manual configuration, standalone checks, legacy skill handling and recovery.
-
-Startup/reconnect/doctor never launch Inkscape. Explicit GUI launch requires a user request.
-Live operations use the selected open drawing; headless operations use working copies.
-Set `INKSCAPE_MCP_TOOL_PROFILE=compact` in the MCP server environment and reconnect
-for the [compact headless Boolean Difference workflow](docs/agent-usage-guide.md#compact-headless-profile).
-Clean-machine installation, authenticated real-client workspace interaction and broader
-native GUI checks remain follow-up work; [current status](docs/AGENT_HANDOFF.md) records validation scope.
-
-## Optional agent skill
-
-The repository includes [inkscape-mcp](skills/inkscape-mcp/SKILL.md), a portable skill
-for tool discovery, SVG authoring, live drawing edits, preview/refinement and export.
-Install it alongside server configuration:
-
-```sh
-./setup.sh --install-skill codex
-```
-
-Use `--install-skill claude` for Claude Code. New skill installation is optional. Current setup replaces an existing installed skill,
-archiving its complete previous tree; `--update-skill` remains a compatibility alias.
-Use standalone `install-skill.sh --update` to merge customizations instead. Skill installation alone does not register MCP.
-For an already configured server, run `./scripts/install-skill.sh --client codex`
-without rebuilding. See [skill installation](docs/install/agent-skill.md) for paths
-and other clients. These additions are included in v0.1.2 source and ready packages; the historical
-v0.1.1 archive does not include them.
-
-## Optional monitoring
-
-Sentry error capture and sampled tool tracing are available in rebuilt Rust binaries.
-`setup.sh` asks whether to enable reporting, reads the DSN without echo and saves a private
-Git-ignored local file. Choose an environment label such as `wife` to distinguish computers.
-See [configuration and release guidance](docs/operations/sentry.md).
-Revision and build IDs are compiled automatically into telemetry and package metadata;
-`--version` displays the installed values. Existing published archives remain unchanged.
-
-## Development
-
-The legacy Python MCP server, its tests and paired Python/Rust comparison scripts are retired.
-All Python sources, including the historical archive and obsolete eval runners, have been
-removed. Release validation uses the portable Rust guard and Bash fixtures; no Lua or
-Python interpreter is needed. Original Python sources remain available in Git history.
-Development now uses Rust regression/invariant tests, true STDIO and package/native acceptance.
-The managed GUI session now runs through a separate native Rust supervisor. The socket snapshot bridge now uses the Rust `inkscape-mcp-live` executable. Development and package tools now use Rust/Bash; ready packages contain no CPython or helper wheels. One-shot native insertion
-and the ten fixed selection edits run through the Rust `inkscape-mcp-inx` executable;
-shared SVG kernels prepare and apply bounded candidates. See
-[their semantics and limits](docs/live/live-helper-kernels.md). See [CONTRIBUTING.md](CONTRIBUTING.md), [runtime components](runtime/README.md),
-[remaining work](docs/RUST_NEXT_PLAN.md) and [handoff](docs/AGENT_HANDOFF.md).
-Historical migration reports and raw evidence are retained as history, not an active Python oracle.
-
-Use editable vector geometry and ordinary named groups for semantic objects; layers organize
-the scene. No bitmap tracing or embedded raster substitute. See
-[agent usage](docs/agent-usage-guide.md). Generated [llms.txt](llms.txt) and
-[llms-full.txt](llms-full.txt) describe the actual Rust MCP surface.
-
-## Status and license
-
-Current status and validation limits are maintained in [the handoff](docs/AGENT_HANDOFF.md);
-next work is in [the plan](docs/RUST_NEXT_PLAN.md). Checkpoint reports remain historical evidence.
-The project is MIT licensed; bundled dependency licenses are recorded separately.
-
-Editable vector authoring guidance is shared by initialization and `compose_artwork`.
-`quality_report` accepts explicit stroke/group roles and reports bounded read-only
-structural and hidden-geometry advice with uncertainty, independently of validity/score.
-See [the authoring guide](docs/agent-usage-guide.md#editable-vector-authoring-quality) and
-[the acceptance evidence](docs/history/reports/editable-vector-authoring.md); silhouettes and occlusion
-remain rendered/manual reviews, with existing approval gates for repairs.
-
-The full live profile adds bounded static computed paint/resource inspection and reviewed
-style/transform/text packages. See [reviewed live workflow](docs/live/reviewed-workflow.md)
-for guards, preview/refusal behavior and scoped native GUI Undo/Redo evidence and deferred artist acceptance.
-
-Explicit path-quality guards support closed silhouettes and exact zero-length segment
-refusal. `quality_report` adds closure/node diagnostics and conservative whole-document
-vector status; `save_document_as(vector_only=true)` refuses raster or unknown resource
-content. `replace_svg_fragment(dry_run=true)` returns a structural candidate without
-changing the drawing. See [usage and limits](docs/agent-usage-guide.md#closure-duplicate-path-nodes-and-vector-only-delivery).
-
-Current sources also support [independent instructions/runtime updates](docs/install/independent-updates.md) through a
-permanent native launcher and macOS management app. Opt in once with
-`./setup.sh --independent-updates`; published v0.1.2 archives retain their original behavior.
-Current-source Manager checks compatible updates asynchronously on launch and reviews
-component changes before activation. Its installation review can repair a confirmed stale
-legacy binding and transfer an owned skill with private backups and preserving merges.
-The effective Codex profile/configuration is visible, including CODEX_HOME overrides.
-Unknown ownership is preserved. These fixes require a new distribution; they do not alter
-the already published v0.1.7. MCP startup/reconnect stays offline.
+[MIT](LICENSE). Bundled dependency licenses and notices are recorded separately in the
+[runtime documentation](runtime/README.md).

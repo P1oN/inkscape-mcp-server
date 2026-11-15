@@ -1,5 +1,8 @@
 # History and acceptance evidence
 
+- [Five-task MCP showcase sprint, 2026-11-15](reports/mcp-showcase-2026-11-15.md):
+  MCP-authored repository artwork, line creation fix, real-STDIO and rendered validation.
+
 - [Compact Manager settings, 2026-11-15](reports/manager-compact-identities-2026-11-15.md):
   approved compact identities, full-value copy sheet and scoped native validation.
 

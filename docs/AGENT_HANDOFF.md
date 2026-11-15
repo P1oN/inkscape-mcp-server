@@ -1,5 +1,17 @@
 # Agent handoff — current status
 
+## MCP repository showcase — 2026-11-15
+
+Five real authoring tasks now supply the README cover, workflow diagram, editable-output
+illustration, quickstart and social-card candidate, plus a reusable bloom SVG. All were
+authored through the configured MCP and visually reviewed; final SVG/PNG copies match
+server digests. Newly created lines now explicitly use `fill:none`, including in batches,
+so inherited paint does not violate the stroke-role contract. Cargo tests/Clippy/format,
+ten server acceptance suites, both authoring engine modes and a two-mode STDIO line
+regression pass. The installed runtime and native GUI were not changed or qualified.
+See the [sprint report](history/reports/mcp-showcase-2026-11-15.md) for provenance,
+client binary-transfer limitations and exact validation scope.
+
 ## Compact Manager settings — 2026-11-15
 
 Approved Penpot boards 41–43 and the updated Settings states now have a native
