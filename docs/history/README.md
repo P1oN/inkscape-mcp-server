@@ -1,5 +1,8 @@
 # History and acceptance evidence
 
+- [Compact Manager settings, 2026-11-15](reports/manager-compact-identities-2026-11-15.md):
+  approved compact identities, full-value copy sheet and scoped native validation.
+
 - [Reviewed Manager self-update, 2026-11-14](reports/manager-self-update-2026-11-14.md):
   isolated implementation, independent review and automated/native acceptance scope.
 

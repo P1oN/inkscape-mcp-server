@@ -33,6 +33,14 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
 - (BOOL)isFlipped {return YES;}
 @end
 
+@interface ManagerCopyButton : NSButton
+@property NSString *clipboardValue;
+@property NSString *normalTitle;
+@property NSUInteger feedbackGeneration;
+@end
+@implementation ManagerCopyButton
+@end
+
 // Thin native UI. Discovery, verification, preservation and recovery belong to Rust.
 @interface Manager : NSObject <NSApplicationDelegate, NSWindowDelegate>
 @property NSWindow *window;
@@ -107,6 +115,7 @@ static void managerFill(NSView *view, NSView *parent) {[view.widthAnchor constra
 @end
 @implementation Manager
 #import "update_views.h"
+#import "technical_details.h"
 - (NSButton *)button:(NSString *)title action:(SEL)action {
     NSButton *button=[NSButton buttonWithTitle:title target:self action:action];
     button.bezelStyle=NSBezelStyleRounded;

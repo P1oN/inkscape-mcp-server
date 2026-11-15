@@ -7,14 +7,29 @@
 @property NSArray *lastArguments;
 @property NSUInteger checksStarted;
 @property NSDictionary *activatedReview;
+@property NSPasteboard *testPasteboard;
 @end
 @implementation TestManager
 - (void)run:(NSArray *)arguments request:(NSDictionary *)request {self.lastArguments=arguments;}
 - (void)startUpdateCheck {self.checksStarted++;}
 - (void)beginManagerActivation:(NSDictionary *)result {self.activatedReview=result;}
+- (NSPasteboard *)technicalPasteboard {return self.testPasteboard;}
 @end
 static void require(BOOL condition, NSString *message) {
     if(!condition){fprintf(stderr,"%s\n",message.UTF8String);exit(1);}
+}
+static NSArray<NSView *> *descendants(NSView *view) {
+    NSMutableArray *result=[NSMutableArray new];
+    for(NSView *child in view.subviews){[result addObject:child];[result addObjectsFromArray:descendants(child)];}return result;
+}
+static NSView *identifiedView(NSView *root, NSString *identifier) {
+    for(NSView *view in descendants(root))if([view.identifier isEqual:identifier])return view;return nil;
+}
+static void captureView(NSView *view, NSString *name) {
+    NSString *directory=NSProcessInfo.processInfo.environment[@"COMPACT_MANAGER_SNAPSHOTS"];if(!directory)return;
+    NSBitmapImageRep *bitmap=[view bitmapImageRepForCachingDisplayInRect:view.bounds];[view cacheDisplayInRect:view.bounds toBitmapImageRep:bitmap];
+    NSData *png=[bitmap representationUsingType:NSBitmapImageFileTypePNG properties:@{}];
+    require([png writeToFile:[directory stringByAppendingPathComponent:name] atomically:YES],@"cannot retain native layout snapshot");
 }
 int main(void) {@autoreleasepool {
     [NSApplication sharedApplication];[NSApp setActivationPolicy:NSApplicationActivationPolicyProhibited];
@@ -123,6 +138,84 @@ int main(void) {@autoreleasepool {
         require(manager.pagePrimary.enabled==![@[@"preparing",@"handoff"] containsObject:page],@"preparing or handoff exposes an active confirmation");
     }
     manager.managerReview=nil;[manager backToConnection:nil];
+    // Full technical values and copy actions never depend on the truncated overview.
+    NSString *fullHash=@"1b1b8f3b65f5378ac0df75dd8218e7d2c8a2fe82";
+    NSString *content=@"1bb8fc45fd410e26";NSString *runtimeBuild=@"a96273694fbec91a";
+    NSString *longPath=[@"/owned" stringByAppendingString:[@"/a long directory with spaces" stringByPaddingToLength:800 withString:@"/a long directory with spaces" startingAtIndex:0]];
+    manager.installation=longPath;manager.testPasteboard=[NSPasteboard pasteboardWithUniqueName];
+    [manager showInstalled:@{@"distribution":@"combined-pair",@"runtime_distribution":@"bundled",@"runtime_build":runtimeBuild,@"runtime_revision":fullHash,@"instructions_content":content,@"instructions_version":fullHash,@"launcher_build":@"6da567f34a7f2858",@"launcher_version":@2}];
+    [manager showSettings:nil];
+    require([[manager shortIdentity:fullHash] isEqual:@"1b1b8f3b"],@"overview does not use the approved eight-character preview");
+    require([[manager shortIdentity:nil] isEqual:@"Not recorded"],@"missing build metadata becomes a fake abbreviated identity");
+    require([[manager runtimeOrigin] isEqual:@"Bundled"],@"runtime incorrectly inherits the combined pair version");
+    NSView *overview=identifiedView(manager.managerPanel,@"component-summary");require(overview!=nil,@"compact component overview is missing");
+    for(NSView *view in descendants(overview))if([view isKindOfClass:NSTextField.class])require(![((NSTextField *)view).stringValue containsString:fullHash],@"full revision leaked back into the overview");
+    NSTextField *compactPath=(NSTextField *)identifiedView(manager.managerPanel,@"compact-manager-path");
+    require(compactPath.maximumNumberOfLines==1 && [compactPath.toolTip isEqual:NSBundle.mainBundle.bundlePath],@"overview app path is not compact or loses its full value");
+    for(NSAppearanceName appearance in @[NSAppearanceNameAqua,NSAppearanceNameDarkAqua]){
+        manager.window.appearance=[NSAppearance appearanceNamed:appearance];
+        for(NSNumber *width in @[@620,@800]){
+            [manager.window setContentSize:NSMakeSize(width.doubleValue,840)];[manager.window.contentView layoutSubtreeIfNeeded];
+            for(NSView *view in descendants(overview))if([view isKindOfClass:NSTextField.class])require(NSContainsRect(overview.bounds,[view.superview convertRect:[view alignmentRectForFrame:view.frame] toView:overview]),[NSString stringWithFormat:@"compact label %@ frame %@ leaves grid %@",((NSTextField *)view).stringValue,NSStringFromRect([view convertRect:view.bounds toView:overview]),NSStringFromRect(overview.bounds)]);
+        }
+        captureView(manager.window.contentView,[appearance isEqual:NSAppearanceNameAqua] ? @"settings-light.png" : @"settings-dark.png");
+    }
+    [manager showTechnicalDetails:nil];NSWindow *details=manager.detailsWindow;
+    require(details!=nil && [manager.managerPage isEqual:@"settings"],@"technical details unexpectedly navigates away from Settings");
+    [manager showTechnicalDetails:nil];require(manager.detailsWindow==details,@"technical details opened twice");
+    NSMutableArray<ManagerCopyButton *> *copies=[NSMutableArray new];ManagerCopyButton *instructionsCopy=nil,*pathCopy=nil,*allCopy=nil;
+    for(NSView *view in descendants(details.contentView))if([view isKindOfClass:ManagerCopyButton.class]){
+        ManagerCopyButton *button=(ManagerCopyButton *)view;[copies addObject:button];
+        if([button.clipboardValue containsString:content] && [button.normalTitle isEqual:@"Copy"])instructionsCopy=button;
+        if([button.clipboardValue isEqual:longPath])pathCopy=button;
+        if([button.normalTitle isEqual:@"Copy all details"])allCopy=button;
+    }
+    require(copies.count==10 && instructionsCopy && pathCopy && allCopy,@"details do not expose all individual values and Copy all");
+    [instructionsCopy performClick:nil];
+    NSString *copied=[manager.testPasteboard stringForType:NSPasteboardTypeString];
+    require([copied containsString:content] && [copied containsString:fullHash] && [instructionsCopy.title isEqual:@"Copied ✓"],@"Copy loses the complete instructions identity or feedback");
+    [pathCopy performClick:nil];require([[manager.testPasteboard stringForType:NSPasteboardTypeString] isEqual:longPath],@"Copy changes a full path or adds display line breaks");
+    [allCopy performClick:nil];copied=[manager.testPasteboard stringForType:NSPasteboardTypeString];
+    require([copied containsString:runtimeBuild] && [copied containsString:fullHash] && [copied containsString:longPath],@"Copy all drops full build, revision or path values");
+    NSScrollView *detailScroll=nil;for(NSView *view in details.contentView.subviews)if([view isKindOfClass:NSScrollView.class])detailScroll=(NSScrollView *)view;
+    require(detailScroll!=nil,@"technical details lack a scrollable body");
+    for(NSAppearanceName appearance in @[NSAppearanceNameAqua,NSAppearanceNameDarkAqua]){
+        details.appearance=[NSAppearance appearanceNamed:appearance];
+        for(NSNumber *style in @[@(NSScrollerStyleLegacy),@(NSScrollerStyleOverlay)]){
+        detailScroll.scrollerStyle=style.integerValue;
+        for(NSNumber *width in @[@480,@700]){
+            [details setContentSize:NSMakeSize(width.doubleValue,744)];[details.contentView layoutSubtreeIfNeeded];
+            for(NSView *view in descendants(details.contentView)){
+                if([view.identifier isEqual:@"technical-value"]){
+                    NSTextField *text=(NSTextField *)view;
+                    NSLineBreakMode wrapping=text.stringValue.isAbsolutePath ? NSLineBreakByWordWrapping : NSLineBreakByCharWrapping;
+                    require(text.selectable && text.maximumNumberOfLines==0 && text.lineBreakMode==wrapping,@"full technical value is clipped instead of wrapping");
+                    require(text.stringValue.length<40 || NSWidth(text.frame)>100,[NSString stringWithFormat:@"technical field %@ has frame %@, row %@",text.accessibilityLabel,NSStringFromRect(text.frame),NSStringFromRect(text.superview.frame)]);
+                    CGFloat required=[text.cell cellSizeForBounds:NSMakeRect(0,0,NSWidth(text.bounds),10000)].height;
+                    require(NSHeight(text.bounds)+1>=required,@"wrapped technical value loses visible lines");
+                }
+                if([view isKindOfClass:ManagerCopyButton.class]){
+                    NSRect frame=[view convertRect:view.bounds toView:details.contentView];
+                    require(NSMinX(frame)>=0 && NSMaxX(frame)<=NSWidth(details.contentView.bounds),@"Copy leaves the narrow details sheet");
+                    if([((ManagerCopyButton *)view).normalTitle isEqual:@"Copy"]){
+                        NSRect aligned=[view.superview convertRect:[view alignmentRectForFrame:view.frame] toView:details.contentView];
+                        NSRect row=[view.superview convertRect:view.superview.bounds toView:details.contentView];
+                        require(fabs(NSMaxX(aligned)-NSMaxX(row))<1,@"field Copy buttons do not share the content trailing edge");
+                    }
+                }
+            }
+        }
+        }
+        captureView(details.contentView,[appearance isEqual:NSAppearanceNameAqua] ? @"details-light.png" : @"details-dark.png");
+    }
+    NSDate *feedbackDeadline=[NSDate dateWithTimeIntervalSinceNow:2.1];while(feedbackDeadline.timeIntervalSinceNow>0)[NSRunLoop.currentRunLoop runMode:NSDefaultRunLoopMode beforeDate:feedbackDeadline];
+    require([instructionsCopy.title isEqual:@"Copy"] && [allCopy.title isEqual:@"Copy all details"],@"copy feedback does not restore the original button titles");
+    [manager closeExactChanges:nil];require(manager.detailsWindow==nil && [manager.managerPage isEqual:@"settings"],@"Done loses the Settings context");
+    [manager.testPasteboard releaseGlobally];manager.testPasteboard=nil;
+    manager.installation=originalRoot;manager.installedComponents=nil;manager.state=@"damaged";
+    require([[[manager technicalFields][1] objectForKey:@"value"] isEqual:@"Not verified"],@"damaged installation invents absent component identities");
+    manager.state=@"not_installed";require([[[manager technicalFields][1] objectForKey:@"value"] isEqual:@"Not installed"],@"fresh installation invents installed component identities");
+    [manager backToConnection:nil];
     manager.advancedButton.state=NSControlStateValueOn;[manager toggleAdvanced:nil];
     [manager setPath:@"/owned/a deliberately long workspace directory with spaces/another long directory/drawings" label:manager.workspaceLabel];
     [manager.window setContentSize:NSMakeSize(620,600)];
