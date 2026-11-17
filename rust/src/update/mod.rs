@@ -6,6 +6,7 @@ pub mod installer;
 pub mod instructions;
 pub mod manager;
 pub mod manager_app;
+pub mod manager_release;
 pub mod manifests;
 pub mod storage;
 pub mod transaction;

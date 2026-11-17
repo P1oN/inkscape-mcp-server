@@ -1,5 +1,14 @@
 # History and acceptance evidence
 
+- [Five-task MCP showcase sprint, 2026-11-15](reports/mcp-showcase-2026-11-15.md):
+  MCP-authored repository artwork, line creation fix, real-STDIO and rendered validation.
+
+- [Compact Manager settings, 2026-11-15](reports/manager-compact-identities-2026-11-15.md):
+  approved compact identities, full-value copy sheet and scoped native validation.
+
+- [Reviewed Manager self-update, 2026-11-14](reports/manager-self-update-2026-11-14.md):
+  isolated implementation, independent review and automated/native acceptance scope.
+
 This is the single index for narrative history. Records retain their checkpoint scope:
 “current”, “next”, “uncommitted”, counts, commands and package paths describe their original
 builds. Use [current status](../AGENT_HANDOFF.md), [active backlog](../RUST_NEXT_PLAN.md) and
@@ -95,3 +104,5 @@ without rewriting recorded JSON paths/hashes or duplicating binary artifacts.
 Markdown moves normalize links for the new location; record content and limitations are preserved.
 Exact original file bytes remain accessible at their original Git revisions. Historical commands
 may reference removed scripts and should not be executed as current development requirements.
+
+- [Manager update screens and Penpot acceptance (2026-11-14)](reports/manager-penpot-update-ui-2026-11-14.md)

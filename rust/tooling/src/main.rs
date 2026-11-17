@@ -53,6 +53,8 @@ fn run() -> Result<()> {
         "resume-notarization" => distribution::resume(&args),
         "installer-acceptance" => installer_acceptance::run(&args),
         "update-acceptance" => update_acceptance::run(&args),
+        "verify-manager-update" => update_assets::verify_manager(&args),
+        "build-manager-manifest" => update_assets::manager(&args),
         "build-update-manifest" => update_assets::distribution(&args),
         "build-instructions" => update_assets::run(&args),
         "live-workflow-acceptance" => live_workflow::run(&args),

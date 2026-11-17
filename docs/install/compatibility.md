@@ -25,3 +25,9 @@ Recorded archives and their GUI/performance evidence are historical and remain b
 those bytes. Later headless passes do not transfer native results to a new binary.
 See [current status](../AGENT_HANDOFF.md), [installation](install.md) and
 [historical migration report](../history/reports/RUST_MIGRATION_REPORT.md).
+
+Manager self-update has its own [versioned contract](manager-self-update.md) and independent
+discovery, so a newer runtime's launcher requirement does not hide the Manager upgrade.
+A target bootstrap must support the retained current/rollback runtime and text interfaces
+before publication. Automated owned Developer ID app replacement/restart is separate from
+interactive GUI, notarized final-byte `/Applications` and another-Mac qualification.

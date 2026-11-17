@@ -75,3 +75,8 @@ updates and clean reinstall. See [client management](client-management.md).
 Current sources also support [independent instructions/runtime updates](independent-updates.md) through a
 permanent native launcher and macOS management app. Opt in once with
 `./setup.sh --independent-updates`; published v0.1.2 archives retain their original behavior.
+
+Current-source Manager also supports [reviewed Manager self-update](manager-self-update.md):
+separate read-only discovery, verified staging, **Update Manager and restart**, and journaled
+app/bootstrap recovery. This requires a future signed distribution containing the new
+Manager contract; historical downloaded Managers and manual installation remain supported.

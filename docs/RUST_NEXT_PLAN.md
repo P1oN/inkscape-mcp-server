@@ -1,5 +1,13 @@
 # Active backlog
 
+Manager self-update Issue [#63](https://github.com/P1oN/inkscape-mcp-server/issues/63) now has
+a separate release contract, verified reviewed staging and app/bootstrap restart recovery.
+The Penpot update screens and Cancel behavior have a [separate GUI follow-up](history/reports/manager-penpot-update-ui-2026-11-14.md).
+The remaining delivery gate is final signed-distribution
+qualification (including `/Applications` permissions, browser quarantine and another Mac),
+with the [contract and validation scope](install/manager-self-update.md). Publishing a new
+release remains a separately authorized action.
+
 Updated **2026-10-12** with the requested macOS installation and signed-release plan.
 This file contains only
 unfinished work. Implemented Python removal and authoring plans are in

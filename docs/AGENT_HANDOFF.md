@@ -1,5 +1,60 @@
 # Agent handoff — current status
 
+## MCP repository showcase — 2026-11-15
+
+Five real authoring tasks now supply the README cover, workflow diagram, editable-output
+illustration, quickstart and social-card candidate, plus a reusable bloom SVG. All were
+authored through the configured MCP and visually reviewed; final SVG/PNG copies match
+server digests. Newly created lines now explicitly use `fill:none`, including in batches,
+so inherited paint does not violate the stroke-role contract. Cargo tests/Clippy/format,
+ten server acceptance suites, both authoring engine modes and a two-mode STDIO line
+regression pass. The installed runtime and native GUI were not changed or qualified.
+See the [sprint report](history/reports/mcp-showcase-2026-11-15.md) for provenance,
+client binary-transfer limitations and exact validation scope.
+
+## Compact Manager settings — 2026-11-15
+
+Approved Penpot boards 41–43 and the updated Settings states now have a native
+implementation: version/source above short IDs, compact app location, and a
+separate selectable full-value sheet with per-field Copy / Copy all, feedback,
+scrolling and Escape dismissal. Existing update/recovery routing is preserved.
+Strict native compilation, the extended AppKit regression in both appearances
+and narrow widths, both `manager_task` wrapper tests and isolated interactive
+frontend inspection pass. This is local source work on
+`codex/manager-compact-identities`, not an installed/signed release. See the
+[scoped report](history/reports/manager-compact-identities-2026-11-15.md).
+
+## Manager update screens aligned with Penpot — 2026-11-14
+
+The update flow now has separate Settings/identities, preparation, compact Review,
+full exact changes, handoff, failure, recovery and completion views from Penpot
+boards 33–40. Cancel immediately restores the offer while requiring a new verified
+preparation; asynchronous results refresh the visible action. Manager startup errors
+inspect recovery read-only. A separate plan-bound recovery receipt survives the
+coordinator's failure report and prevents stale or premature restored banners.
+See the [follow-up report](history/reports/manager-penpot-update-ui-2026-11-14.md) for
+regression, interactive fixture, independent review and remaining package/host limits.
+Real user installations/profiles/sessions and the original dirty checkout are preserved.
+
+## Reviewed Manager self-update — 2026-11-14
+
+Issue [#63](https://github.com/P1oN/inkscape-mcp-server/issues/63) is implemented in an isolated
+worktree from `origin/main` (`1b1b8f3`). Manager discovery is separate from component checks,
+uses its own backward-compatible immutable-release asset and does not need settings.json.
+Verified staging, precise Review and an explicit **Update Manager and restart** confirmation
+feed the existing Manager replacement/backup journal and installer file machinery.
+Application and installation locks, a pre-exit readiness handshake and actual startup
+acknowledgment with an atomic matching commit record protect coordinated app/bootstrap
+replacement. Directory-inode locks coordinate the actual app destination; damaged baseline
+installations can upgrade Manager with an explicit repair warning. Runtime/text, complete
+profiles/skills and existing sessions remain selected and intact.
+
+See the [update contract and recovery guide](install/manager-self-update.md) and
+[validation report](history/reports/manager-self-update-2026-11-14.md). Automated/native
+checks and independent final-diff review are recorded there with their actual scope.
+Interactive product GUI, notarized final-byte/Gatekeeper and another-Mac qualification
+remain separate; no release/tag or real user installation/profile/session is changed.
+
 ## Manager recovery and launch checks — 2026-11-13
 
 Issue [#61](https://github.com/P1oN/inkscape-mcp-server/issues/61) adds evidence-based

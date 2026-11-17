@@ -258,7 +258,13 @@ impl Mutation {
             }
             _ => (),
         }
-        let mut paint = Vec::new();
+        // Lines are stroke-only geometry. Make this explicit even under a filled
+        // parent, so newly authored lines satisfy the shared stroke-role contract.
+        let mut paint = if local == "line" {
+            vec![("fill".into(), "none".into())]
+        } else {
+            Vec::new()
+        };
         for (key, property) in [
             ("fill", "fill"),
             ("stroke", "stroke"),
@@ -349,6 +355,42 @@ pub fn apply(registry: &Registry, tool: &str, args: &Value) -> Result<Value, Str
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn new_lines_override_inherited_fill_and_pass_stroke_review() {
+        let mut document = crate::xml::parse(
+            br#"<svg xmlns="http://www.w3.org/2000/svg"><g id="painted" fill="red"/></svg>"#,
+            4096,
+        )
+        .unwrap();
+        Mutation::build(
+            "create_line",
+            &json!({"x1":0,"y1":0,"x2":10,"y2":10,"object_id":"line","parent_id":"painted","stroke":"black"}),
+        )
+        .unwrap()
+        .mutate(&mut document)
+        .unwrap();
+        let target = elements(document.get_root_element().unwrap())
+            .into_iter()
+            .find(|n| n.get_property_no_ns("id").as_deref() == Some("line"))
+            .unwrap();
+        assert_eq!(
+            style::declarations(&target).get("fill").map(String::as_str),
+            Some("none")
+        );
+        let report = crate::authoring_analysis::analyze(
+            &elements(document.get_root_element().unwrap()),
+            &[("line".into(), "stroke_only".into())],
+        );
+        assert!(
+            !report["findings"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .any(|finding| {
+                    finding["object_id"] == "line" && finding["code"] == "stroke_fill"
+                })
+        );
+    }
     #[test]
     fn path_guards_refuse_before_mutation_and_batch_history() {
         let temp = tempfile::tempdir().unwrap();

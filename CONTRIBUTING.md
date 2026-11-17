@@ -245,3 +245,8 @@ limitations. Both require a verified package and a new output directory. These c
 do not publish or change the user's installation. Native Manager window acceptance
 requires an explicitly authorized isolated profile. Ad-hoc checkpoints do not establish
 Developer ID, notarization, Gatekeeper or clean-host acceptance.
+
+For Manager self-update changes, run the ordinary Manager/release regressions and both Cargo
+graphs above. The optional owned Developer ID replacement/restart fixture and its separate
+interactive/final-package qualification limits are documented in
+[Manager update validation](docs/install/manager-self-update.md#validation-scope).

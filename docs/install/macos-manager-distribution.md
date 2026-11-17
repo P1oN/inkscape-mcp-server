@@ -1,5 +1,10 @@
 # macOS Manager distribution contract
 
+Current-source [reviewed Manager self-update](manager-self-update.md) adds the separate
+`inkscape-mcp-manager-update-v1.json` asset, verified online staging, explicit restart
+confirmation and coordinated app/bootstrap recovery. Signed preparation and final native
+acceptance generate and verify this contract without changing the legacy runtime manifest.
+
 **Known v0.1.8 installation issue:** copying Manager to `/Applications` can produce
 `managed path is writable by other users` before Inkscape discovery or installation.
 The installer incorrectly applies its managed-state permission rules to immutable

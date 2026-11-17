@@ -6,6 +6,8 @@ The handoff records current implementation and validation; `docs/RUST_NEXT_PLAN.
 single unfinished-work backlog and `docs/history/README.md` indexes completed plans/evidence.
 Check current code and Git status before relying on recorded counts or validation results.
 
+- For Manager UI work or Penpot design tasks, use `penpot_mcp` with the
+  [project's document/session binding](docs/agents/penpot.md) before editing UI code.
 - Preserve existing uncommitted work. Do not reset, clean or restore files from HEAD to discard it.
 - Keep tools typed and bounded; reuse the edit pipeline, snapshots, Operation Records, no-op
   handling and existing approval gates. Do not add arbitrary code, shell or extension execution.

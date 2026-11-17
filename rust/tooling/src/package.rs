@@ -633,8 +633,8 @@ fn build(out: &Path, binary: &Path) -> Result<()> {
             info.replace(
                 "</dict></plist>",
                 &format!(
-                    "<key>CFBundleIconFile</key><string>Manager.icns</string><key>InkscapeMCPBuildID</key><string>{}</string></dict></plist>",
-                    &build[..16]
+                    "<key>CFBundleIconFile</key><string>Manager.icns</string><key>InkscapeMCPBuildID</key><string>{}</string><key>InkscapeMCPRevision</key><string>{}</string></dict></plist>",
+                    &build[..16], manifest["build_info"]["revision"].as_str().ok_or("missing revision")?
                 ),
             ),
         )?;
