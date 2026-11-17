@@ -73,7 +73,7 @@ jobs:
             printf '%s\n' 'Candidate workflows differ from current main. Use a successful current-main candidate; GITHUB_TOKEN cannot authorize workflow changes through the release API.' >&2
             exit 1
           fi
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: signed-candidate
           path: |
@@ -118,7 +118,7 @@ jobs:
           COPYFILE_DISABLE=1 tar -czf prepared.tar.gz prepared
           shasum -a 256 prepared.tar.gz > prepared.tar.gz.sha256
           cp -R validated/baseline-input baseline-input
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: signed-prepared
           path: |
@@ -140,7 +140,7 @@ jobs:
       - name: Preserve archive for explicit notarization recovery
         if: always() && (failure() || cancelled())
         timeout-minutes: 3
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: signed-preparation-failure
           path: preparation-recovery.tar
@@ -184,7 +184,7 @@ jobs:
           while IFS= read -r name; do cp "final/prepared/$name" publication/; done < <(jq -r 'keys[]' publication-inventory.json)
           COPYFILE_DISABLE=1 tar -czf publication.tar.gz publication
           shasum -a 256 publication.tar.gz > publication.tar.gz.sha256
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: signed-verified
           path: |
